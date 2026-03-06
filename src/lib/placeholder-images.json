@@ -1,3 +1,118 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Main hero section background image",
+      "imageUrl": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=2000",
+      "imageHint": "modern kitchen"
+    },
+    {
+      "id": "service-1",
+      "description": "Diseño de Cocinas",
+      "imageUrl": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "kitchen design"
+    },
+    {
+      "id": "service-2",
+      "description": "Topes de Cuarzo y Granito",
+      "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "quartz countertop"
+    },
+    {
+      "id": "service-3",
+      "description": "Clósets y Vestidores",
+      "imageUrl": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "walk-in closet"
+    },
+    {
+      "id": "service-4",
+      "description": "Construcción y Remodelación",
+      "imageUrl": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "home remodeling"
+    },
+    {
+      "id": "service-5",
+      "description": "Muebles de Baño (Vanities)",
+      "imageUrl": "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "bathroom vanity"
+    },
+    {
+      "id": "service-6",
+      "description": "Centros de Entretenimiento",
+      "imageUrl": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "entertainment center"
+    },
+    {
+      "id": "service-7",
+      "description": "Pisos Flotantes y SPC",
+      "imageUrl": "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "laminate flooring"
+    },
+    {
+      "id": "service-8",
+      "description": "Asesoría y Diseño 3D",
+      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "3d design"
+    },
+    {
+      "id": "product-101",
+      "description": "Cocina Modular Básica (Metro Lineal)",
+      "imageUrl": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "modular kitchen"
+    },
+    {
+      "id": "product-102",
+      "description": "Isla de Cocina con Tope de Cuarzo",
+      "imageUrl": "https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "kitchen island"
+    },
+    {
+      "id": "product-103",
+      "description": "Mueble de Baño Flotante (Vanity)",
+      "imageUrl": "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "bathroom vanity"
+    },
+    {
+      "id": "product-104",
+      "description": "Centro de Entretenimiento TV 65\"",
+      "imageUrl": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "tv center"
+    },
+    {
+      "id": "product-105",
+      "description": "Clóset Modular Estándar (Metro Lineal)",
+      "imageUrl": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "modular closet"
+    },
+    {
+      "id": "product-106",
+      "description": "Walk-in Closet Premium",
+      "imageUrl": "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "premium closet"
+    },
+    {
+      "id": "product-107",
+      "description": "Escritorio Corporativo Minimalista",
+      "imageUrl": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "minimalist desk"
+    },
+    {
+      "id": "product-108",
+      "description": "Mesa de Centro Estilo Industrial",
+      "imageUrl": "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "industrial table"
+    },
+    {
+      "id": "product-109",
+      "description": "Set de 3 Repisas Flotantes",
+      "imageUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "floating shelves"
+    },
+    {
+      "id": "product-110",
+      "description": "Barra Desayunadora Moderna",
+      "imageUrl": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800",
+      "imageHint": "breakfast bar"
+    }
+  ]
 }
