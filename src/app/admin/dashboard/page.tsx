@@ -23,8 +23,6 @@ async function getSiteContent(): Promise<SiteContent> {
         socialUrls: data.socialUrls ? { ...defaultSiteContent.socialUrls, ...data.socialUrls } : defaultSiteContent.socialUrls,
       };
     }
-    // If doc doesn't exist, create it with default content
-    await setDoc(contentRef, defaultSiteContent);
     return defaultSiteContent;
   } catch (error) {
     console.error("Error fetching site content, returning default.", error);
