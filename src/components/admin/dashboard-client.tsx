@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   FileCode,
   LayoutGrid,
@@ -30,6 +30,11 @@ import { CmsBrandsStatsForm } from './cms-brands-stats-form';
 import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
 import { logout } from '@/lib/actions';
+import { defaultSiteContent } from '@/lib/data';
+import { db } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { appId } from '@/lib/config';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type AdminTab = 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
 
@@ -42,24 +47,72 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },
 ];
 
-export function AdminDashboardClient({
-  initialSiteContent,
-}: {
-  initialSiteContent: SiteContent;
-}) {
+export function AdminDashboardClient() {
   const [activeTab, setActiveTab] = useState<AdminTab>('general');
-  const [siteContent, setSiteContent] = useState<SiteContent>(initialSiteContent);
+  const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchSiteContent() {
+      try {
+        const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
+        const docSnap = await getDoc(contentRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data() as SiteContent;
+          setSiteContent({
+            ...defaultSiteContent,
+            ...data,
+            services: data.services && data.services.length > 0 ? data.services : defaultSiteContent.services,
+            brands: data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands,
+            stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
+            products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
+            seo: data.seo ? { ...defaultSiteContent.seo, ...data.seo } : defaultSiteContent.seo,
+            socialUrls: data.socialUrls ? { ...defaultSiteContent.socialUrls, ...data.socialUrls } : defaultSiteContent.socialUrls,
+          });
+        } else {
+          setSiteContent(defaultSiteContent);
+        }
+      } catch (error) {
+        console.error("Error fetching site content, returning default.", error);
+        setSiteContent(defaultSiteContent);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSiteContent();
+  }, []);
 
   const renderContent = () => {
+    if (loading || !siteContent) {
+        return (
+          <div className="space-y-6">
+            <div className="flex justify-end">
+              <Skeleton className="h-10 w-32" />
+            </div>
+            <Skeleton className="h-96 w-full" />
+            <Skeleton className="h-64 w-full" />
+          </div>
+        );
+    }
+    
+    const setSiteContentWrapper = (value: React.SetStateAction<SiteContent>) => {
+        setSiteContent(prev => {
+            if (typeof value === 'function') {
+                return value(prev || defaultSiteContent);
+            }
+            return value;
+        });
+    };
+
     switch (activeTab) {
       case 'general':
-        return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContent} />;
+        return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'services':
-        return <CmsServicesForm siteContent={siteContent} setSiteContent={setSiteContent} />;
+        return <CmsServicesForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'products':
-        return <CmsProductsForm siteContent={siteContent} setSiteContent={setSiteContent} />;
+        return <CmsProductsForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'brands':
-        return <CmsBrandsStatsForm siteContent={siteContent} setSiteContent={setSiteContent} />;
+        return <CmsBrandsStatsForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'leads':
         return <LeadsManager />;
       case 'orders':
