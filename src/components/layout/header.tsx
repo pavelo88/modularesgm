@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import {
   Lock,
@@ -23,6 +23,11 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const { getCartCount, setIsCartOpen } = useCart();
   const cartCount = getCartCount();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const navLinks = [
     { href: '/#top', label: 'Inicio', publicOnly: false },
@@ -122,27 +127,33 @@ export function Header() {
             )}
           </Button>
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu size={28} />
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <nav className="flex flex-col gap-4 mt-8">
-                 {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
-
-                 <Button asChild className="w-full mt-4">
-                  <Link href="/admin"><Lock size={16} /> Admin</Link>
+          {isClient ? (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu size={28} />
                 </Button>
+              </SheetTrigger>
+              <SheetContent>
+                <nav className="flex flex-col gap-4 mt-8">
+                  {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
 
-                 <Button variant="outline" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="w-full">
-                   {theme === 'dark' ? <Sun className="mr-2" /> : <Moon className="mr-2" />}
-                   Cambiar Tema
-                 </Button>
-              </nav>
-            </SheetContent>
-          </Sheet>
+                  <Button asChild className="w-full mt-4">
+                    <Link href="/admin"><Lock size={16} /> Admin</Link>
+                  </Button>
+
+                  <Button variant="outline" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="w-full">
+                    {theme === 'dark' ? <Sun className="mr-2" /> : <Moon className="mr-2" />}
+                    Cambiar Tema
+                  </Button>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          ) : (
+             <Button variant="ghost" size="icon">
+                <Menu size={28} />
+            </Button>
+          )}
         </div>
       </div>
     </header>
