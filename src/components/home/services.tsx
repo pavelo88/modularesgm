@@ -17,7 +17,7 @@ export function Services({ services }: { services: Service[] }) {
   }
 
   return (
-    <section id="soluciones" className="px-6 py-24 max-w-7xl mx-auto relative z-10">
+    <section id="soluciones" className="px-6 py-16 max-w-7xl mx-auto relative z-10">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-headline font-bold mb-6">
           Diseños a <span className="text-primary">Medida</span>
@@ -42,10 +42,10 @@ export function Services({ services }: { services: Service[] }) {
                 src={service.imgUrl}
                 alt={service.title}
                 fill
-                className="object-cover transition-all duration-700 group-hover:scale-105 opacity-50 group-hover:opacity-100"
+                className="object-cover transition-all duration-700 group-hover:scale-105"
                 data-ai-hint="interior design"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
               <CardContent className="relative z-10 p-6 h-full flex flex-col justify-end">
                 <div className="w-12 h-12 rounded-lg bg-card shadow-md border border-secondary/50 flex items-center justify-center mb-4 text-secondary group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
                   {getIconComponent(service.icon as IconName, { size: 24 })}

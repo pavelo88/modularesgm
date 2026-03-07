@@ -61,13 +61,10 @@ export function Header() {
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="flex flex-col items-start leading-none">
-            <span className="text-[10px] tracking-[0.2em] text-secondary font-bold">
-              MUEBLES • DISEÑO • CONSTRUCCIÓN
-            </span>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground mt-1">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
               MODULARES <span className="text-primary">GM</span>
             </h1>
             <span className="text-[10px] tracking-widest text-primary mt-1">

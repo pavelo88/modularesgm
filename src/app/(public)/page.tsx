@@ -12,7 +12,7 @@ export default function HomePage() {
 
   if (loading || !siteContent) {
     return (
-      <div className="pt-24">
+      <div className="pt-20">
         <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center py-20">
             <div className="flex flex-col gap-4">
                 <Skeleton className="h-8 w-1/2" />
@@ -33,7 +33,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div id="top" className="h-0 pt-24"></div>
+      <div id="top" className="h-0 pt-20"></div>
       <Hero
         heroTitle={siteContent.heroTitle}
         heroSubtitle={siteContent.heroSubtitle}
