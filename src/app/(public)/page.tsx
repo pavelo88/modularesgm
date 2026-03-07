@@ -1,48 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Hero } from '@/components/home/hero';
 import { BrandsCarousel } from '@/components/home/brands-carousel';
 import { Services } from '@/components/home/services';
 import { ContactSection } from '@/components/home/contact/contact-section';
-import { defaultSiteContent } from '@/lib/data';
-import { db } from '@/lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import type { SiteContent } from '@/lib/types';
-import { appId } from '@/lib/config';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSiteContent } from '@/context/site-content-provider';
 
 export default function HomePage() {
-  const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchSiteContent() {
-      try {
-        const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
-        const docSnap = await getDoc(contentRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data() as SiteContent;
-           setSiteContent({
-            ...defaultSiteContent,
-            ...data,
-            services: data.services && data.services.length > 0 ? data.services : defaultSiteContent.services,
-            brands: data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands,
-            stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
-            products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
-          });
-        } else {
-          setSiteContent(defaultSiteContent);
-        }
-      } catch (error) {
-        console.error("Error fetching site content, returning default.", error);
-        setSiteContent(defaultSiteContent);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchSiteContent();
-  }, []);
+  const { siteContent, loading } = useSiteContent();
 
   if (loading || !siteContent) {
     return (

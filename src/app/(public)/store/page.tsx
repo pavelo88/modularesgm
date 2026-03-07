@@ -1,39 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ShoppingCart, Store as StoreIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/store/product-card';
 import { CartSidebar } from '@/components/store/cart-sidebar';
 import { CheckoutModal } from '@/components/store/checkout-modal';
-import type { Product } from '@/lib/types';
 import { useCart } from '@/context/cart-provider';
-import { db } from '@/lib/firebase';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { appId } from '@/lib/config';
-import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSiteContent } from '@/context/site-content-provider';
 
 export default function StorePage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { siteContent, loading } = useSiteContent();
+  const products = siteContent?.products || [];
   const { getCartCount, setIsCartOpen } = useCart();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const cartCount = getCartCount();
-
-  useEffect(() => {
-    const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
-    const unsubscribe = onSnapshot(contentRef, (docSnap) => {
-      if (docSnap.exists()) {
-        setProducts(docSnap.data().products || defaultSiteContent.products);
-      } else {
-        setProducts(defaultSiteContent.products);
-      }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
 
   return (
     <>
