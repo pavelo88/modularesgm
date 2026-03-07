@@ -26,7 +26,7 @@ export function Services({ services }: { services: Service[] }) {
           Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-[280px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {services.map((service, index) => {
           const isLarge = index === 0 || index === 3 || index === 6;
           return (
@@ -34,8 +34,8 @@ export function Services({ services }: { services: Service[] }) {
               key={service.id}
               onClick={() => handleServiceClick(service)}
               className={cn(
-                'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10',
-                isLarge ? 'md:col-span-2 md:row-span-2' : 'col-span-1'
+                'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]',
+                isLarge ? 'lg:col-span-2' : 'col-span-1'
               )}
             >
               <Image
