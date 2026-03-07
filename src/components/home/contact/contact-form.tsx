@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useTransition, useState } from 'react';
+import { useTransition, useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,6 +20,7 @@ import { useToast } from '@/hooks/use-toast';
 import { handleLeadSubmit } from '@/lib/actions';
 import { Info, Loader2 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'El nombre es requerido.' }),
@@ -30,7 +31,12 @@ const formSchema = z.object({
 
 export function ContactForm() {
   const [isPending, startTransition] = useTransition();
+  const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,6 +65,14 @@ export function ContactForm() {
         });
       }
     });
+  }
+  
+  if (!isClient) {
+    return (
+        <div className="bg-background/50 backdrop-blur-xl h-full flex flex-col rounded-2xl p-6 md:p-8 shadow-xl border min-h-[500px]">
+            <Skeleton className="h-full w-full" />
+        </div>
+    );
   }
 
   return (

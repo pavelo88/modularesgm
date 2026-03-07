@@ -2,12 +2,13 @@
 
 import type { Brand } from '@/lib/types';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function BrandsCarousel({ brands }: { brands: Brand[] }) {
   if (!brands || brands.length === 0) return null;
 
   const trackRef = useRef<HTMLDivElement>(null);
+  const [erroredUrls, setErroredUrls] = useState<string[]>([]);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -37,6 +38,12 @@ export function BrandsCarousel({ brands }: { brands: Brand[] }) {
 
   const allBrands = [...brands, ...brands, ...brands, ...brands];
 
+  const handleImageError = (url: string) => {
+    if (!erroredUrls.includes(url)) {
+      setErroredUrls(prev => [...prev, url]);
+    }
+  }
+
   return (
     <section className="py-12 border-y bg-muted/30 relative z-10 flex flex-col gap-6">
       <div className="text-center px-6">
@@ -53,13 +60,14 @@ export function BrandsCarousel({ brands }: { brands: Brand[] }) {
               key={idx}
               className="brand-item w-[220px] flex-shrink-0 flex items-center justify-center p-4 transition-all duration-500 ease-out will-change-transform"
             >
-              {brand.url ? (
+              {brand.url && !erroredUrls.includes(brand.url) ? (
                 <Image
                   src={brand.url}
                   alt={brand.name}
                   width={160}
                   height={56}
                   className="max-h-14 object-contain filter dark:brightness-0 dark:invert opacity-70 hover:opacity-100"
+                  onError={() => handleImageError(brand.url)}
                 />
               ) : (
                 <span className="text-muted-foreground font-bold tracking-widest text-2xl">

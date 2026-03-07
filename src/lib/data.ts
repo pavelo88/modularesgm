@@ -11,7 +11,8 @@ export const defaultServices: Service[] = [
   { id: 5, title: 'Muebles de Baño (Vanities)', desc: 'Muebles resistentes a la humedad, lavabos y espejos modernos para renovar tu cuarto de baño.', imgUrl: getImage('service-5'), icon: 'Briefcase', catalogUrl: '' },
   { id: 6, title: 'Centros de Entretenimiento', desc: 'Paneles de TV a medida con iluminación LED integrada, repisas flotantes y paso de cables oculto.', imgUrl: getImage('service-6'), icon: 'MonitorPlay', catalogUrl: '' },
   { id: 7, title: 'Pisos Flotantes y SPC', desc: 'Suministro e instalación de pisos laminados, vinílicos y SPC de alto tráfico y resistencia al agua.', imgUrl: getImage('service-7'), icon: 'Palette', catalogUrl: '' },
-  { id: 8, title: 'Asesoría y Diseño 3D', desc: 'Renders fotorrealistas y planos técnicos para visualizar tu proyecto antes de la fabricación.', imgUrl: getImage('service-8'), icon: 'Sofa', catalogUrl: '' }
+  { id: 8, title: 'Asesoría y Diseño 3D', desc: 'Renders fotorrealistas y planos técnicos para visualizar tu proyecto antes de la fabricación.', imgUrl: getImage('service-8'), icon: 'Sofa', catalogUrl: '' },
+  { id: 9, title: 'Mobiliario Comercial', desc: 'Soluciones para locales, oficinas y restaurantes: mostradores, estanterías y estaciones de trabajo.', imgUrl: getImage('service-9'), icon: 'Store', catalogUrl: '' }
 ];
 
 export const defaultProducts: Product[] = [
