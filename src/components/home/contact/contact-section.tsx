@@ -6,7 +6,7 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
   return (
     <section
       id="contacto"
-      className="px-4 sm:px-6 py-24 relative z-10 bg-gradient-to-b from-transparent to-muted/30 pt-28"
+      className="px-4 sm:px-6 py-24 relative z-10 bg-gradient-to-b from-transparent to-muted/30"
     >
       <div className="max-w-7xl mx-auto rounded-3xl p-6 md:p-12 border shadow-2xl relative overflow-hidden bg-card">
         <div className="absolute top-[-100px] right-[-100px] w-[300px] h-[300px] bg-primary blur-[150px] opacity-10 pointer-events-none"></div>

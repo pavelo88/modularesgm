@@ -42,7 +42,7 @@ export function Services({ services }: { services: Service[] }) {
                 src={service.imgUrl}
                 alt={service.title}
                 fill
-                className="object-cover transition-all duration-700 group-hover:scale-105 opacity-60 dark:opacity-40 dark:mix-blend-luminosity group-hover:opacity-80 dark:group-hover:mix-blend-normal"
+                className="object-cover transition-all duration-700 group-hover:scale-105 opacity-50 group-hover:opacity-100"
                 data-ai-hint="interior design"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
