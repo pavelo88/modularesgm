@@ -43,7 +43,7 @@ const checkoutSchema = z.object({
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
-  const { cart, getCartTotal, clearCart } = useCart();
+  const { cart, getCartTotal, clearCart, setIsCartOpen } = useCart();
   const { siteContent } = useSiteContent();
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
             <h2 className="text-3xl font-bold mb-4">¡Pedido Registrado con Éxito!</h2>
             <p className="text-muted-foreground mb-6">Gracias por tu compra. Nos pondremos en contacto contigo pronto para coordinar los detalles.</p>
             <Button asChild>
-                <Link href="/store">Seguir Comprando</Link>
+                <Link href="/store" onClick={() => setIsCartOpen(false)}>Seguir Comprando</Link>
             </Button>
         </div>
     )
