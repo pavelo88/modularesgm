@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   FileCode,
   LayoutGrid,
@@ -35,6 +36,8 @@ import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { appId } from '@/lib/config';
 import { Skeleton } from '@/components/ui/skeleton';
+import logo from '@/app/logo.jpg';
+import logo2 from '@/app/logo2.jpg';
 
 type AdminTab = 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
 
@@ -126,10 +129,9 @@ export function AdminDashboardClient() {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <div className="flex items-center gap-2 p-2">
-            <div className="w-8 h-8 bg-primary text-primary-foreground rounded-md flex items-center justify-center">
-              <span className="font-bold text-lg">GM</span>
-            </div>
+          <div className="flex items-center gap-3 p-2">
+            <Image src={logo} alt="Modulares GM Logo" width={32} height={32} className="rounded-md dark:hidden"/>
+            <Image src={logo2} alt="Modulares GM Logo" width={32} height={32} className="rounded-md hidden dark:block"/>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
               <span className="text-lg font-bold">Modulares GM</span>
               <span className="text-xs text-muted-foreground">Admin Panel</span>

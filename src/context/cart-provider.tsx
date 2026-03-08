@@ -14,6 +14,8 @@ interface CartContextType {
   getCartCount: () => number;
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
+  selectedCategory: string;
+  setSelectedCategory: (category: string) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -22,6 +24,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { toast } = useToast();
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -86,6 +89,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         getCartCount,
         isCartOpen,
         setIsCartOpen,
+        selectedCategory,
+        setSelectedCategory,
       }}
     >
       {children}

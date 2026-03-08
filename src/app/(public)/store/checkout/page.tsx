@@ -3,10 +3,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Banknote, CreditCard, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft } from 'lucide-react';
+import { Banknote, CreditCard, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft, CheckCircle2 } from 'lucide-react';
 
 import { useCart } from '@/context/cart-provider';
 import { useSiteContent } from '@/context/site-content-provider';
@@ -20,7 +20,6 @@ import { handleCheckout } from '@/lib/actions';
 import { Alert } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ProductCard } from '@/components/store/product-card';
-import { Separator } from '@/components/ui/separator';
 
 const checkoutSchema = z.object({
   name: z.string().min(2, { message: 'Nombre es requerido' }),
@@ -30,6 +29,15 @@ const checkoutSchema = z.object({
   paymentMethod: z.enum(['transferencia', 'tarjeta', 'efectivo'], {
     required_error: 'Debe seleccionar un método de pago',
   }),
+  transferRef: z.string().optional(),
+}).refine((data) => {
+    if (data.paymentMethod === 'transferencia') {
+        return !!data.transferRef && data.transferRef.length > 3;
+    }
+    return true;
+}, {
+    message: "El número de referencia es requerido y debe ser válido.",
+    path: ["transferRef"],
 });
 
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
@@ -38,6 +46,7 @@ export default function CheckoutPage() {
   const { cart, getCartTotal, clearCart } = useCart();
   const { siteContent } = useSiteContent();
   const [isPending, startTransition] = useTransition();
+  const [isSuccess, setIsSuccess] = useState(false);
   const { toast } = useToast();
   
   const form = useForm<CheckoutFormValues>({
@@ -49,12 +58,9 @@ export default function CheckoutPage() {
     startTransition(async () => {
       const result = await handleCheckout(data, cart);
       if (result.success) {
-        toast({
-          title: '¡Pedido Registrado!',
-          description: 'Gracias por tu compra. Nos contactaremos pronto.',
-        });
         clearCart();
         form.reset();
+        setIsSuccess(true);
       } else {
         toast({
           variant: 'destructive',
@@ -69,6 +75,19 @@ export default function CheckoutPage() {
   const suggestedProducts = siteContent?.products
     .filter(p => !cart.some(item => item.product.id === p.id))
     .slice(0, 3) || [];
+
+  if (isSuccess) {
+    return (
+        <div className="max-w-2xl mx-auto px-6 py-20 text-center flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
+            <CheckCircle2 size={64} className="text-green-500 mb-6"/>
+            <h2 className="text-3xl font-bold mb-4">¡Pedido Registrado con Éxito!</h2>
+            <p className="text-muted-foreground mb-6">Gracias por tu compra. Nos pondremos en contacto contigo pronto para coordinar los detalles.</p>
+            <Button asChild>
+                <Link href="/store">Seguir Comprando</Link>
+            </Button>
+        </div>
+    )
+  }
 
   if (cart.length === 0 && !isPending) {
     return (
@@ -92,8 +111,8 @@ export default function CheckoutPage() {
             <ChevronLeft size={16} /> Volver a la Tienda
             </Link>
         </Button>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="lg:col-span-3">
                 <h2 className="text-3xl font-bold mb-8">Finalizar Compra</h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -146,10 +165,18 @@ export default function CheckoutPage() {
                                     <span className="font-bold flex items-center gap-2"><Banknote size={16} className="text-primary" /> Transferencia o Depósito</span>
                                 </div>
                                 {paymentMethod === 'transferencia' && (
-                                    <Alert variant="default" className="mt-3 ml-7 p-3 bg-secondary/10 border-secondary/30 text-sm font-headline">
-                                    <p><strong>Banco:</strong> Pichincha</p><p><strong>Titular:</strong> Pablo García</p><p><strong>Cuenta Ahorros:</strong> 2204511945</p>
-                                    <p className="text-xs text-muted-foreground mt-2">Un asesor te contactará para validar el comprobante.</p>
-                                    </Alert>
+                                    <div className="ml-7 space-y-3">
+                                        <Alert variant="default" className="mt-3 p-3 bg-secondary/10 border-secondary/30 text-sm font-headline">
+                                            <p><strong>Banco:</strong> Pichincha</p><p><strong>Titular:</strong> Pablo García</p><p><strong>Cuenta Ahorros:</strong> 2204511945</p>
+                                        </Alert>
+                                        <FormField control={form.control} name="transferRef" render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Número de Referencia</FormLabel>
+                                                <FormControl><Input {...field} placeholder="0123456789" /></FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )} />
+                                    </div>
                                 )}
                                 </Label>
                                 <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'tarjeta' ? 'border-primary bg-primary/5' : 'border-border'}`}>
@@ -178,7 +205,7 @@ export default function CheckoutPage() {
                     </form>
                 </Form>
             </div>
-            <aside className="lg:col-span-1 space-y-8">
+            <aside className="lg:col-span-2 space-y-8">
                 <div className="p-6 rounded-2xl border bg-card sticky top-24">
                     <h3 className="font-bold mb-4 flex items-center gap-2 text-lg">
                     <Package size={18} /> Resumen del Pedido
@@ -205,17 +232,16 @@ export default function CheckoutPage() {
                         <span>${getCartTotal().toFixed(2)}</span>
                     </div>
                 </div>
-
-                {suggestedProducts.length > 0 && (
-                    <div className="space-y-4 mt-8">
-                        <h3 className="text-lg font-bold">También te podría interesar</h3>
-                        <div className="grid grid-cols-1 gap-4">
-                            {suggestedProducts.map(p => <ProductCard key={p.id} product={p} />)}
-                        </div>
-                    </div>
-                )}
             </aside>
         </div>
+        {suggestedProducts.length > 0 && (
+            <div className="mt-16">
+                <h3 className="text-2xl font-bold text-center mb-8">También te podría interesar</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {suggestedProducts.map(p => <ProductCard key={p.id} product={p} />)}
+                </div>
+            </div>
+        )}
     </div>
     </>
   );

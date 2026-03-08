@@ -10,15 +10,16 @@ import { useCart } from '@/context/cart-provider';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSiteContent } from '@/context/site-content-provider';
 import { cn } from '@/lib/utils';
+import { Card } from '@/components/ui/card';
 
 export default function StorePage() {
   const { siteContent, loading } = useSiteContent();
+  const { getCartCount, setIsCartOpen, selectedCategory, setSelectedCategory } = useCart();
+  
   const products = siteContent?.products || [];
-  const { getCartCount, setIsCartOpen } = useCart();
   const cartCount = getCartCount();
   
   const categories = ['Todos', ...Array.from(new Set(products.map(p => p.category)))];
-  const [selectedCategory, setSelectedCategory] = useState('Todos');
 
   const filteredProducts = selectedCategory === 'Todos'
     ? products
@@ -54,30 +55,32 @@ export default function StorePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Sidebar */}
-          <aside className="md:col-span-1">
-            <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-              <LayoutGrid size={20} className="text-primary"/>
-              Categorías
-            </h3>
-            <div className="flex flex-col items-start gap-2">
-              {loading ? (
-                Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-8 w-3/4" />)
-              ) : (
-                categories.map(category => (
-                  <Button
-                    key={category}
-                    variant="link"
-                    onClick={() => setSelectedCategory(category)}
-                    className={cn(
-                      "text-muted-foreground p-0 h-auto hover:text-primary",
-                      selectedCategory === category && "text-primary font-bold"
-                    )}
-                  >
-                    {category}
-                  </Button>
-                ))
-              )}
-            </div>
+          <aside className="md:col-span-1 hidden md:block">
+            <Card className="p-4 sticky top-24">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2 px-2">
+                <LayoutGrid size={20} className="text-primary"/>
+                Categorías
+              </h3>
+              <div className="flex flex-col items-start gap-1">
+                {loading ? (
+                  Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-10 w-full" />)
+                ) : (
+                  categories.map(category => (
+                    <Button
+                      key={category}
+                      variant="ghost"
+                      onClick={() => setSelectedCategory(category)}
+                      className={cn(
+                        "w-full justify-start text-base",
+                        selectedCategory === category && "bg-muted font-bold text-primary"
+                      )}
+                    >
+                      {category}
+                    </Button>
+                  ))
+                )}
+              </div>
+            </Card>
           </aside>
 
           {/* Products Grid */}

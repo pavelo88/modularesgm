@@ -11,12 +11,12 @@ import {
   Moon,
   ShoppingCart,
   Store,
-  Sun,
   Home,
   LayoutGrid,
   MessageSquare,
   Facebook,
   Instagram,
+  Sun,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -30,11 +30,13 @@ import {
 } from '@/components/ui/sheet';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
+import { useSiteContent } from '@/context/site-content-provider';
 
 export function Header() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const { getCartCount, setIsCartOpen } = useCart();
+  const { getCartCount, setIsCartOpen, selectedCategory, setSelectedCategory } = useCart();
+  const { siteContent } = useSiteContent();
   const cartCount = getCartCount();
   const [isClient, setIsClient] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,6 +44,11 @@ export function Header() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const isStorePage = pathname.startsWith('/store');
+
+  const products = siteContent?.products || [];
+  const storeCategories = ['Todos', ...Array.from(new Set(products.map(p => p.category)))];
 
   const navLinks = [
     { href: '/#top', label: 'Inicio', publicOnly: false, icon: <Home size={20} /> },
@@ -105,11 +112,11 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3 group">
           <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
           <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
-          <div>
-            <h2 className="text-base font-bold tracking-tight text-primary">
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
               MODULARES GM
             </h2>
-             <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
+             <p className="text-[10px] font-light text-secondary -mt-1 leading-tight hidden sm:block">
               Cocinas y Cuarzos
             </p>
           </div>
@@ -157,7 +164,7 @@ export function Header() {
             )}
           </Button>
           
-          {isClient && <ThemeToggleButton />}
+          {isClient && <ThemeToggleButton className="hidden sm:inline-flex" />}
 
           {isClient ? (
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -168,11 +175,12 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0">
                 <SheetHeader className="border-b p-4">
+                  <SheetTitle className="sr-only">Menu</SheetTitle>
                   <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
                     <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
                     <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
                     <div>
-                      <h2 className="text-base font-bold tracking-tight text-primary">
+                      <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
                         MODULARES GM
                       </h2>
                       <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
@@ -182,7 +190,30 @@ export function Header() {
                   </Link>
                 </SheetHeader>
                 <nav className="flex flex-col gap-1 p-4 flex-1">
-                  {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
+                  {isStorePage ? (
+                     <>
+                      <p className="px-3 text-sm font-semibold text-muted-foreground">Categorías</p>
+                      {storeCategories.map(category => (
+                        <Link
+                          href="/store"
+                          key={category}
+                          onClick={() => {
+                            setSelectedCategory(category);
+                            setIsMenuOpen(false);
+                          }}
+                          className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base",
+                            selectedCategory === category ? "bg-muted text-primary" : "text-foreground hover:bg-muted"
+                          )}
+                        >
+                          <span>{category}</span>
+                        </Link>
+                      ))}
+                      <div className="my-2 border-t"></div>
+                      <MobileNavLink href="/#top" label="Volver al Inicio" icon={<Home size={20} />} />
+                    </>
+                  ) : (
+                    navLinks.map(link => <MobileNavLink key={link.href} {...link} />)
+                  )}
                 </nav>
                 <div className="mt-auto border-t p-4 space-y-4">
                     <div className="flex gap-2 justify-center">

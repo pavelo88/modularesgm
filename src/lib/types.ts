@@ -82,6 +82,7 @@ export interface Order {
   phone: string;
   address: string;
   paymentMethod: 'transferencia' | 'tarjeta' | 'efectivo';
+  transferRef?: string;
   items: CartItem[];
   total: number;
   status: 'Pendiente' | 'En proceso' | 'Enviado' | 'Completado' | 'Cancelado';
