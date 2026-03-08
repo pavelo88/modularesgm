@@ -4,7 +4,6 @@ import { useEffect, useState, useTransition, useMemo } from 'react';
 import type { Order } from '@/lib/types';
 import { db } from '@/lib/firebase';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { appId } from '@/lib/config';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -29,7 +28,7 @@ export function OrdersManager() {
   const [updatingStatusId, startUpdatingStatus] = useTransition();
 
   useEffect(() => {
-    const ordersRef = collection(db, 'artifacts', appId, 'public', 'data', 'ordersGM_v3');
+    const ordersRef = collection(db, 'orders');
     const q = query(ordersRef, orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedOrders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Order));

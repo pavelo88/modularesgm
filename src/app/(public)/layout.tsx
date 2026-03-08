@@ -1,6 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { appId } from '@/lib/config';
 import { defaultSiteContent } from '@/lib/data';
 import type { SiteContent } from '@/lib/types';
 import { PublicLayoutClient } from './layout-client';
@@ -14,7 +13,7 @@ export default async function PublicLayout({
   let initialSiteContent: SiteContent;
 
   try {
-    const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
+    const contentRef = doc(db, 'siteContent', 'main');
     const docSnap = await getDoc(contentRef);
 
     if (docSnap.exists()) {

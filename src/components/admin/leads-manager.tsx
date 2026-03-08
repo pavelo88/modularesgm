@@ -4,7 +4,6 @@ import { useEffect, useState, useTransition } from 'react';
 import type { Lead } from '@/lib/types';
 import { db } from '@/lib/firebase';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { appId } from '@/lib/config';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -27,7 +26,7 @@ export function LeadsManager() {
   const [generatingId, startGenerating] = useTransition();
 
   useEffect(() => {
-    const leadsRef = collection(db, 'artifacts', appId, 'public', 'data', 'leadsGM_v3');
+    const leadsRef = collection(db, 'leads');
     const q = query(leadsRef, orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedLeads = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Lead));

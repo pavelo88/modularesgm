@@ -34,7 +34,6 @@ import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { appId } from '@/lib/config';
 import { Skeleton } from '@/components/ui/skeleton';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
@@ -58,7 +57,7 @@ export function AdminDashboardClient() {
   useEffect(() => {
     async function fetchSiteContent() {
       try {
-        const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
+        const contentRef = doc(db, 'siteContent', 'main');
         const docSnap = await getDoc(contentRef);
         if (docSnap.exists()) {
           const data = docSnap.data() as SiteContent;

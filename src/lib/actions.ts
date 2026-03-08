@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { appId, ADMIN_PASSWORD } from '@/lib/config';
+import { ADMIN_PASSWORD } from '@/lib/config';
 import type { CartItem, SiteContent } from './types';
 
 // AI Flow Imports
@@ -55,7 +55,7 @@ const LeadSchema = z.object({
 
 export async function handleLeadSubmit(values: z.infer<typeof LeadSchema>) {
   try {
-    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'leadsGM_v3'), {
+    await addDoc(collection(db, 'leads'), {
       ...values,
       status: 'Nuevo',
       createdAt: Date.now(),
@@ -109,7 +109,7 @@ export async function handleCheckout(
   };
 
   try {
-    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'ordersGM_v3'), orderData);
+    await addDoc(collection(db, 'orders'), orderData);
     return { success: true };
   } catch (error) {
     console.error(error);
@@ -148,7 +148,7 @@ async function protectedAction() {
 export async function saveSiteContent(content: SiteContent) {
   await protectedAction();
   try {
-    const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
+    const contentRef = doc(db, 'siteContent', 'main');
     await setDoc(contentRef, content);
     revalidatePath('/');
     revalidatePath('/store');
@@ -162,7 +162,7 @@ export async function saveSiteContent(content: SiteContent) {
 export async function updateOrderStatus(orderId: string, status: string) {
   await protectedAction();
   try {
-    const orderRef = doc(db, 'artifacts', appId, 'public', 'data', 'ordersGM_v3', orderId);
+    const orderRef = doc(db, 'orders', orderId);
     await setDoc(orderRef, { status }, { merge: true });
     return { success: true };
   } catch (error) {

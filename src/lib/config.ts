@@ -10,6 +10,7 @@ export const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// This value is not used anymore but kept for reference.
 export const appId = 'mgm-68c65-v1';
 
 // IMPORTANT: In a production environment, use a secure way to store and access secrets.

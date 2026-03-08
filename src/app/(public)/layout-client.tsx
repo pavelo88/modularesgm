@@ -9,7 +9,6 @@ import { ChatbotWidget } from '@/components/shared/chatbot/chatbot-widget';
 import { db } from '@/lib/firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import type { SiteContent } from '@/lib/types';
-import { appId } from '@/lib/config';
 import { SiteContentContext } from '@/context/site-content-provider';
 import { defaultSiteContent } from '@/lib/data';
 
@@ -23,7 +22,7 @@ export function PublicLayoutClient({
   const [siteContent, setSiteContent] = useState<SiteContent>(initialSiteContent);
 
   useEffect(() => {
-    const contentRef = doc(db, 'artifacts', appId, 'public', 'data', 'siteContent', 'mainGM_v3');
+    const contentRef = doc(db, 'siteContent', 'main');
     const unsubscribe = onSnapshot(contentRef, (docSnap) => {
       if (docSnap.exists()) {
         const data = docSnap.data() as SiteContent;
