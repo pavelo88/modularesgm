@@ -77,13 +77,6 @@ export function ContactForm() {
 
   return (
     <div className="bg-background/50 backdrop-blur-xl h-full flex flex-col rounded-2xl p-6 md:p-8 shadow-xl border">
-      <Alert className="bg-secondary/10 border-secondary/30 text-secondary-foreground mb-6">
-        <Info className="h-4 w-4 text-secondary" />
-        <AlertTitle className="font-headline font-bold text-secondary">Visita Técnica</AlertTitle>
-        <AlertDescription className="font-headline text-sm leading-relaxed">
-          Las valoraciones en sitio tienen un costo de $20. Si concretamos el trabajo, este valor formará parte del anticipo.
-        </AlertDescription>
-      </Alert>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField

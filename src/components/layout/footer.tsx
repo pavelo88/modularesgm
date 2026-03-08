@@ -20,7 +20,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
              <Image src={logo} alt="Modulares GM Logo" width={48} height={48} />
             <div>
                 <h2 className="text-xl font-bold tracking-tight text-primary">
-                    MODULARES
+                    MODULARES GM
                 </h2>
                  <p className="text-xs font-light text-secondary -mt-1 leading-tight">
                     Cocinas y Cuarzos

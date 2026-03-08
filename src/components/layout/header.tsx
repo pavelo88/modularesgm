@@ -16,7 +16,13 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/cart-provider';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import logo from '@/app/logo.jpg';
 
 export function Header() {
@@ -78,45 +84,43 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src={logo} alt="Modulares GM Logo" width={48} height={48} />
+          <Image src={logo} alt="Modulares GM Logo" width={40} height={40} />
           <div>
-            <h2 className="text-xl font-bold tracking-tight text-primary">
-                MODULARES
+            <h2 className="text-lg font-bold tracking-tight text-primary">
+              MODULARES GM
             </h2>
-             <p className="text-xs font-light text-secondary -mt-1 leading-tight">
-                Cocinas y Cuarzos
+             <p className="text-[11px] font-light text-secondary -mt-1 leading-tight">
+              Cocinas y Cuarzos
             </p>
           </div>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-4 font-sans text-sm font-medium">
           {navLinks.map(link => <NavLink key={link.href} {...link}/>)}
-          
-          <div className="h-6 w-px bg-border mx-2"></div>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsCartOpen(true)}
-            className="relative"
-            aria-label="Open shopping cart"
-          >
-            <ShoppingCart size={20} />
-            {cartCount > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-secondary text-secondary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
-                {cartCount}
-              </span>
-            )}
-          </Button>
-
-          <ThemeToggleButton />
-
-          <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
-            <Link href="/admin">
-              <Lock size={16} /> Admin
-            </Link>
-          </Button>
         </nav>
-        <div className="md:hidden flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2">
+            <div className="h-6 w-px bg-border mx-2"></div>
+            <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsCartOpen(true)}
+                className="relative"
+                aria-label="Open shopping cart"
+            >
+                <ShoppingCart size={20} />
+                {cartCount > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-secondary text-secondary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
+                    {cartCount}
+                </span>
+                )}
+            </Button>
+            <ThemeToggleButton />
+            <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
+                <Link href="/admin">
+                <Lock size={16} /> Admin
+                </Link>
+            </Button>
+        </div>
+        <div className="md:hidden flex items-center gap-1">
           <Button
             variant="ghost"
             size="icon"
@@ -143,7 +147,7 @@ export function Header() {
               </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
-                  <SheetTitle className="sr-only">Menú Principal</SheetTitle>
+                   <SheetTitle className="sr-only">Menú Principal</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-4 mt-8">
                   {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}

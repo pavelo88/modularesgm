@@ -37,7 +37,7 @@ const publicAIChatbotPrompt = ai.definePrompt({
   system: 'Eres el ✨ Asistente Virtual Inteligente de MODULARES GM, expertos en cocinas, clósets, cuarzo y muebles en Ecuador.',
   prompt: `Usuario: "{{{userMessage}}}"
 
-Responde como asistente de Modulares GM. Conciso, amable (max 2 párrafos). Menciona que la visita técnica tiene un costo de $20 que es descontable del anticipo.
+Responde como asistente de Modulares GM. Sé conciso y amable (máximo 2 párrafos).
 Servicios que ofrece la empresa: {{{servicesContext}}}.
 Productos en tienda: {{{productsContext}}}`,
 });

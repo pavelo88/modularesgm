@@ -33,7 +33,7 @@ Genera una propuesta formal y profesional para el siguiente requerimiento del cl
 
 1.  **Resumen del Proyecto**: Una breve descripción del requerimiento del cliente.
 2.  **Diseño y Materiales Sugeridos**: Propuestas de diseño y los materiales (ej. melamina, cuarzo) que se podrían utilizar para el proyecto. Sé específico con ejemplos si es posible.
-3.  **Siguientes Pasos**: Claros siguientes pasos para el cliente, incluyendo la visita de medición (menciona que tiene un costo de $20 y es deducible del anticipo si se concreta el trabajo).
+3.  **Siguientes Pasos**: Claros siguientes pasos para el cliente.
 
 Requerimiento del cliente: """{{{leadMessage}}}"""`,
 });

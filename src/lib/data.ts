@@ -51,7 +51,7 @@ export const defaultSiteContent: SiteContent = {
   heroTitle: 'Diseño y Construcción de Espacios Únicos',
   heroSubtitle: 'Expertos en muebles modulares, cocinas modernas y topes de cuarzo. Transformamos tus ideas en realidad con calidad y elegancia en todo el Ecuador.',
   heroMediaUrl: getImage('hero'),
-  ctaText: 'Agendar Visita Técnica',
+  ctaText: 'Solicitar Cotización',
   formTitle: 'Cotiza tu Proyecto a Medida',
   formSubtitle: 'Déjenos sus datos y un experto se pondrá en contacto para asesorarle en su próximo proyecto.',
   whatsappNumber: '593999999999',

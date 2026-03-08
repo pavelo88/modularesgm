@@ -18,7 +18,7 @@ export type AdminLeadAnalysisInput = z.infer<typeof AdminLeadAnalysisInputSchema
 const AdminLeadAnalysisOutputSchema = z.object({
   category: z.string().describe('The category of the lead (e.g., "Cocinas", "Baños", "Remodelación").'),
   intent: z.string().describe('The customer\'s primary intent (e.g., "Solicitar Cotización", "Pregunta General", "Agendar Visita").'),
-  draftResponse: z.string().describe('A draft response to the customer, subtly reminding them about the $20 technical visit fee that is applicable to the down payment.'),
+  draftResponse: z.string().describe('A draft response to the customer.'),
 });
 export type AdminLeadAnalysisOutput = z.infer<typeof AdminLeadAnalysisOutputSchema>;
 
@@ -31,7 +31,7 @@ const prompt = ai.definePrompt({
   input: { schema: AdminLeadAnalysisInputSchema },
   output: { schema: AdminLeadAnalysisOutputSchema },
   system: 'You are an experienced Commercial Analyst for Modulares GM. Your task is to analyze customer lead messages.',
-  prompt: 'Analiza el siguiente requerimiento del cliente y extrae la categoría, la intención, y genera un borrador de respuesta. \n\nRequerimiento: "{{{message}}}"\n\nRecuerda sutilmente en el borrador de respuesta que la visita técnica tiene un costo de $20, el cual será deducido del anticipo si se concreta el proyecto.'
+  prompt: 'Analiza el siguiente requerimiento del cliente y extrae la categoría, la intención, y genera un borrador de respuesta. \n\nRequerimiento: "{{{message}}}"'
 });
 
 const adminLeadAnalysisFlow = ai.defineFlow(

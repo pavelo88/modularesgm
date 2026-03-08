@@ -4,30 +4,19 @@ import { Card, CardContent } from '@/components/ui/card';
 import { getIconComponent, IconName } from '@/lib/icons';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
 export function Services({ services }: { services: Service[] }) {
-  const { toast } = useToast();
-  
   const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [
     Autoplay({ delay: 2500, stopOnInteraction: true }),
   ]);
 
-  const handleServiceClick = (service: Service) => {
-    toast({
-      title: 'Función en desarrollo',
-      description: `La interacción con el chatbot para "${service.title}" estará disponible pronto.`,
-    })
-  }
-
   const ServiceCard = ({ service, isLarge = false }: { service: Service, isLarge?: boolean }) => (
     <Card
-      onClick={() => handleServiceClick(service)}
       className={cn(
-        'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]',
-        isLarge ? 'lg:col-span-2' : 'col-span-1'
+        'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]'
       )}
     >
       <Image
@@ -72,7 +61,11 @@ export function Services({ services }: { services: Service[] }) {
       <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6">
         {services.map((service, index) => {
           const isLarge = index === 0 || index === 3 || index === 6;
-          return <ServiceCard key={service.id} service={service} isLarge={isLarge} />;
+          return (
+            <Link href="/store" key={service.id} className={cn(isLarge && 'lg:col-span-2')}>
+              <ServiceCard service={service} isLarge={isLarge} />
+            </Link>
+          );
         })}
       </div>
       
@@ -81,7 +74,9 @@ export function Services({ services }: { services: Service[] }) {
         <div className="flex">
           {services.map((service) => (
             <div key={service.id} className="flex-grow-0 flex-shrink-0 basis-4/5 min-w-0 pl-4">
-              <ServiceCard service={service} />
+              <Link href="/store">
+                <ServiceCard service={service} />
+              </Link>
             </div>
           ))}
         </div>
