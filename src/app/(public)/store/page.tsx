@@ -29,32 +29,12 @@ export default function StorePage() {
     <>
       <div id="top" className="h-0 pt-20"></div>
       <div className="max-w-7xl mx-auto px-6 py-12 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-border pb-6">
-          <div>
-            <Button asChild variant="link" className="p-0 text-primary mb-4">
-              <Link href="/">
-                <ChevronLeft size={16} /> Volver al Inicio
-              </Link>
-            </Button>
-            <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">
-              Nuestra <span className="text-primary">Tienda</span>
-            </h2>
-            <p className="text-muted-foreground font-headline text-lg max-w-2xl">
-              Descubre nuestra selección de muebles modulares listos para instalar, fabricados con precisión y materiales premium.
-            </p>
-          </div>
-          <Button
-            onClick={() => setIsCartOpen(true)}
-            variant="outline"
-            className="mt-6 md:mt-0 font-bold py-3 px-6 rounded-lg hover:border-primary transition-all flex items-center gap-2 group"
-          >
-            <ShoppingCart size={18} className="text-primary group-hover:scale-110 transition-transform" />
-            Ver Carrito ({cartCount})
-          </Button>
-        </div>
-
+        <Button asChild variant="link" className="p-0 text-primary mb-6">
+          <Link href="/">
+            <ChevronLeft size={16} /> Volver al Inicio
+          </Link>
+        </Button>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Sidebar */}
           <aside className="md:col-span-1 hidden md:block">
             <Card className="p-4 sticky top-24">
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2 px-2">
@@ -83,10 +63,28 @@ export default function StorePage() {
             </Card>
           </aside>
 
-          {/* Products Grid */}
           <main className="md:col-span-3">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-border pb-6">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">
+                  Nuestra <span className="text-primary">Tienda</span>
+                </h2>
+                <p className="text-muted-foreground font-headline text-lg max-w-2xl">
+                  Descubre nuestra selección de muebles modulares listos para instalar, fabricados con precisión y materiales premium.
+                </p>
+              </div>
+              <Button
+                onClick={() => setIsCartOpen(true)}
+                variant="outline"
+                className="mt-6 md:mt-0 font-bold py-3 px-6 rounded-lg hover:border-primary transition-all flex items-center gap-2 group"
+              >
+                <ShoppingCart size={18} className="text-primary group-hover:scale-110 transition-transform" />
+                Ver Carrito ({cartCount})
+              </Button>
+            </div>
+            
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="flex flex-col space-y-3">
                     <Skeleton className="h-[224px] w-full rounded-xl" />
@@ -102,7 +100,7 @@ export default function StorePage() {
                 ))}
               </div>
             ) : filteredProducts && filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
