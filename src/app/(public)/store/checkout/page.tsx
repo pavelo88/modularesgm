@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                                     <RadioGroupItem value="tarjeta" id="tarjeta" />
                                     <span className="font-bold flex items-center gap-2"><CreditCard size={16} className="text-primary" /> Tarjeta de Crédito / Débito</span>
                                 </div>
-                                {paymentMethod === 'tarjeta' && <p className="mt-2 ml-7 text-xs text-muted-foreground">Un asesor te enviará un Link de Pagos Seguro por WhatsApp.</p>}
+                                {paymentMethod === 'tarjeta' && <p className="mt-2 ml-7 text-xs text-muted-foreground">Un asesor se contactará contigo para enviarte un enlace de pago seguro. Aceptamos todas las tarjetas.</p>}
                                 </Label>
                                 <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'efectivo' ? 'border-primary bg-primary/5' : 'border-border'}`}>
                                 <div className="flex items-center gap-3">

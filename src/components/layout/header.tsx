@@ -27,6 +27,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetDescription,
 } from '@/components/ui/sheet';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
@@ -112,11 +113,11 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3 group">
           <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
           <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col">
             <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
               MODULARES GM
             </h2>
-             <p className="text-[10px] font-light text-secondary -mt-1 leading-tight hidden sm:block">
+            <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
               Cocinas y Cuarzos
             </p>
           </div>
@@ -164,7 +165,7 @@ export function Header() {
             )}
           </Button>
           
-          {isClient && <ThemeToggleButton className="hidden sm:inline-flex" />}
+          {isClient && <ThemeToggleButton />}
 
           {isClient ? (
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -176,10 +177,11 @@ export function Header() {
               <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0">
                 <SheetHeader className="border-b p-4">
                   <SheetTitle className="sr-only">Menu</SheetTitle>
+                   <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
                   <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
                     <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
                     <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
-                    <div>
+                    <div className="flex flex-col">
                       <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
                         MODULARES GM
                       </h2>

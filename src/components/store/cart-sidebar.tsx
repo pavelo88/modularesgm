@@ -11,6 +11,7 @@ import {
   SheetTitle,
   SheetFooter,
   SheetClose,
+  SheetDescription,
 } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
@@ -32,6 +33,7 @@ export function CartSidebar() {
           <SheetTitle className="flex items-center gap-2">
             <ShoppingCart /> Tu Carrito
           </SheetTitle>
+          <SheetDescription className="sr-only">Resumen de tu carrito de compras.</SheetDescription>
         </SheetHeader>
         <div className="flex-1 overflow-y-auto">
           <ScrollArea className="h-full pr-4">

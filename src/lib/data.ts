@@ -31,12 +31,12 @@ export const defaultProducts: Product[] = [
 export const defaultBrands: Brand[] = [
   { id: 1, name: 'NOVOPAN', url: 'https://images.squarespace-cdn.com/content/v1/657a358b4134183f81a43eab/1722361668270-YQ7R06OODR20I2P5P4P6/Logo_Novopan_Color.png' },
   { id: 2, name: 'PELIKANO', url: 'https://www.pelikano.com/wp-content/uploads/2021/09/logo-pelikano.png' },
-  { id: 3, name: 'BLUM', url: 'https://media.blum.com/asset/unofficial/layout/logo_blum.svg' },
+  { id: 3, name: 'BLUM', url: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Blum_logo.svg' },
   { id: 4, name: 'HAFELE', url: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/H%C3%A4fele_GmbH_%26_Co_KG_Logo.svg' },
   { id: 5, name: 'SILESTONE', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg' },
   { id: 6, name: 'DEKTON', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg' },
   { id: 7, name: 'TEKA', url: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_Teka_svg.svg' },
-  { id: 8, name: 'BRIGGS', url: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Case%2C_Briggs_logo_%28plumbing_fixtures%29.svg' },
+  { id: 8, name: 'BRIGGS', url: 'https://www.briggsec.com/wp-content/uploads/2020/12/logo-briggs-web-01-e1608316773418.png' },
   { id: 9, name: 'COSENTINO', url: 'https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg' }
 ];
 
@@ -56,7 +56,7 @@ export const defaultSiteContent: SiteContent = {
   formSubtitle: 'Déjenos sus datos y un experto se pondrá en contacto para asesorarle en su próximo proyecto.',
   whatsappNumber: '0963064374',
   address: 'Rosa Yeira 420 y Serpaio Japeravi, Quito, Ecuador',
-  mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.814674112109!2d-78.4716!3d-0.0911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d58fbc8d6263e1%3A0xc3b44b9d3b45167a!2sQuito!5e0!3m2!1sen!2sec!4v1680000000000!5m2!1sen!2sec',
+  mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7796588557444!2d-78.5347701!3d-0.2522322999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5991c8015c583%3A0x4766de73906f7d5f!2sRosa%20Yeira%20420%2C%20Quito%20170148!5e0!3m2!1ses-419!2sec!4v1772991627819!5m2!1ses-419!2sec',
   socialUrls: {
     facebook: 'https://facebook.com/modularesgm',
     instagram: 'https://instagram.com/modularesgm',

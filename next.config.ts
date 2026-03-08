@@ -54,13 +54,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'media.blum.com',
+        hostname: 'www.cosentino.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'www.cosentino.com',
+        hostname: 'www.briggsec.com',
         port: '',
         pathname: '/**',
       },

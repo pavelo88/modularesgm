@@ -20,9 +20,9 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
            <div className="flex items-center gap-3 mb-4">
-             <Image src={logo} alt="Modulares GM Logo" width={48} height={48} className="dark:hidden" />
-             <Image src={logo2} alt="Modulares GM Logo" width={48} height={48} className="hidden dark:block" />
-            <div>
+             <Image src={logo} alt="Modulares GM Logo" width={48} height={48} className="rounded-md dark:hidden" />
+             <Image src={logo2} alt="Modulares GM Logo" width={48} height={48} className="rounded-md hidden dark:block" />
+            <div className="flex flex-col">
                 <h2 className="text-xl font-bold tracking-tight text-primary">
                     MODULARES GM
                 </h2>
