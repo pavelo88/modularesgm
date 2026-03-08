@@ -13,7 +13,7 @@ export function Services({ services }: { services: Service[] }) {
     Autoplay({ delay: 2500, stopOnInteraction: true }),
   ]);
 
-  const ServiceCard = ({ service, isLarge = false }: { service: Service, isLarge?: boolean }) => (
+  const ServiceCard = ({ service }: { service: Service }) => (
     <Card
       className={cn(
         'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]'
@@ -32,10 +32,7 @@ export function Services({ services }: { services: Service[] }) {
           {getIconComponent(service.icon as IconName, { size: 24 })}
         </div>
         <h3
-          className={cn(
-            'font-bold mb-2 group-hover:text-primary transition-colors text-card-foreground',
-            isLarge ? 'text-3xl font-headline' : 'text-xl font-headline'
-          )}
+          className='font-bold mb-2 group-hover:text-primary transition-colors text-card-foreground text-xl font-headline'
         >
           {service.title}
         </h3>
@@ -58,15 +55,12 @@ export function Services({ services }: { services: Service[] }) {
       </div>
 
       {/* Desktop Grid */}
-      <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6">
-        {services.map((service, index) => {
-          const isLarge = index === 0 || index === 3 || index === 6;
-          return (
-            <Link href="/store" key={service.id} className={cn(isLarge && 'lg:col-span-2')}>
-              <ServiceCard service={service} isLarge={isLarge} />
-            </Link>
-          );
-        })}
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
+        {services.map((service) => (
+          <Link href="/store" key={service.id}>
+            <ServiceCard service={service} />
+          </Link>
+        ))}
       </div>
       
       {/* Mobile Carousel */}

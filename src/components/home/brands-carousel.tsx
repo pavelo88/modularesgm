@@ -20,7 +20,7 @@ export function BrandsCarousel({ brands }: { brands: Brand[] }) {
         const rect = item.getBoundingClientRect();
         const itemCenter = rect.left + rect.width / 2;
         const dist = Math.abs(centerX - itemCenter);
-        if (dist < 180) {
+        if (dist < 100) {
           item.style.filter = 'grayscale(0%) opacity(1)';
           item.style.transform = 'scale(1.15)';
         } else {

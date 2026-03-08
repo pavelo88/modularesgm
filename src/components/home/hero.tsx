@@ -49,7 +49,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           {stats.map((stat) => (
             <Card
               key={stat.id}
-              className="p-4 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group hover:border-primary/50 shadow-lg bg-white/[.07] dark:bg-card/40 backdrop-blur-sm aspect-square max-w-36 mx-auto"
+              className="p-4 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group hover:border-primary/50 shadow-lg bg-white/[.07] dark:bg-card/40 backdrop-blur-sm aspect-square w-full max-w-40 mx-auto"
             >
               <CardContent className="p-0 flex flex-col items-center justify-center">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted border border-secondary/30 flex items-center justify-center mb-4 text-secondary group-hover:scale-110 group-hover:bg-secondary group-hover:text-secondary-foreground transition-all">
