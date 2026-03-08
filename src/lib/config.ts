@@ -10,7 +10,7 @@ export const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-export const appId = 'modulares-gm-app-v3';
+export const appId = 'mgm-68c65-v1';
 
 // IMPORTANT: In a production environment, use a secure way to store and access secrets.
 // Do not hardcode passwords. This is for demonstration purposes only.
