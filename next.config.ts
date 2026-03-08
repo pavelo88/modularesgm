@@ -48,7 +48,19 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '1000logos.net',
+        hostname: 'www.pelikano.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.blum.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.cosentino.com',
         port: '',
         pathname: '/**',
       },

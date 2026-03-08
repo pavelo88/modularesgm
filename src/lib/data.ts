@@ -30,13 +30,14 @@ export const defaultProducts: Product[] = [
 
 export const defaultBrands: Brand[] = [
   { id: 1, name: 'NOVOPAN', url: 'https://images.squarespace-cdn.com/content/v1/657a358b4134183f81a43eab/1722361668270-YQ7R06OODR20I2P5P4P6/Logo_Novopan_Color.png' },
-  { id: 2, name: 'PELIKANO', url: 'https://logo.clearbit.com/pelikano.com' },
-  { id: 3, name: 'BLUM', url: 'https://logo.clearbit.com/blum.com' },
-  { id: 4, name: 'HAFELE', url: 'https://upload.wikimedia.org/wikipedia/commons/0/05/H%C3%A4fele_GmbH_%26_Co_KG_Logo.svg' },
-  { id: 5, name: 'SILESTONE', url: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Silestone.svg' },
-  { id: 6, name: 'DEKTON', url: 'https://logo.clearbit.com/dekton.com' },
-  { id: 7, name: 'TEKA', url: 'https://1000logos.net/wp-content/uploads/2021/05/Teka-logo.png' },
-  { id: 8, name: 'BRIGGS', url: 'https://logo.clearbit.com/briggsplumbing.com' }
+  { id: 2, name: 'PELIKANO', url: 'https://www.pelikano.com/wp-content/uploads/2021/09/logo-pelikano.png' },
+  { id: 3, name: 'BLUM', url: 'https://media.blum.com/asset/unofficial/layout/logo_blum.svg' },
+  { id: 4, name: 'HAFELE', url: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/H%C3%A4fele_GmbH_%26_Co_KG_Logo.svg' },
+  { id: 5, name: 'SILESTONE', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg' },
+  { id: 6, name: 'DEKTON', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg' },
+  { id: 7, name: 'TEKA', url: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_Teka_svg.svg' },
+  { id: 8, name: 'BRIGGS', url: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Case%2C_Briggs_logo_%28plumbing_fixtures%29.svg' },
+  { id: 9, name: 'COSENTINO', url: 'https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg' }
 ];
 
 export const defaultStats: Stat[] = [
