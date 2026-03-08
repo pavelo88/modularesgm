@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
@@ -62,14 +63,12 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-card text-primary rounded-lg flex items-center justify-center flex-shrink-0 border border-primary/50">
-            <span className="font-bold text-xl tracking-tighter">GM</span>
-          </div>
+          <Image src="/logo.jpg" alt="Modulares GM Logo" width={48} height={48} />
           <div>
             <h1 className="text-xl font-bold tracking-tight text-primary leading-tight">
               MODULARES
             </h1>
-            <p className="text-xs font-light text-foreground/80 -mt-1 leading-tight">
+            <p className="text-xs font-light text-secondary -mt-1 leading-tight">
               Cocinas y Cuarzos
             </p>
           </div>
@@ -139,11 +138,6 @@ export function Header() {
 
                   <Button asChild className="w-full mt-4">
                     <Link href="/admin"><Lock size={16} /> Admin</Link>
-                  </Button>
-
-                  <Button variant="outline" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="w-full">
-                    {theme === 'dark' ? <Sun className="mr-2" /> : <Moon className="mr-2" />}
-                    Cambiar Tema
                   </Button>
                 </nav>
               </SheetContent>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Home, Instagram, Linkedin } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -15,14 +16,12 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
            <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-card text-primary rounded-lg flex items-center justify-center flex-shrink-0 border border-primary/50">
-              <span className="font-bold text-xl tracking-tighter">GM</span>
-            </div>
+             <Image src="/logo.jpg" alt="Modulares GM Logo" width={48} height={48} />
             <div>
                 <h2 className="text-xl font-bold tracking-tight text-primary">
                     MODULARES
                 </h2>
-                 <p className="text-xs font-light text-foreground/80 -mt-1 leading-tight">
+                 <p className="text-xs font-light text-secondary -mt-1 leading-tight">
                     Cocinas y Cuarzos
                 </p>
             </div>
