@@ -32,3 +32,5 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
     </section>
   );
 }
+Paso Siguiente: Integración de Pagos
+página en construcción
