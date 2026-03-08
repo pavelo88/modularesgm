@@ -24,6 +24,7 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
             whatsappNumber={siteContent.whatsappNumber}
             address={siteContent.address}
             mapUrl={siteContent.mapUrl}
+            socialUrls={siteContent.socialUrls}
           />
           <ContactForm />
         </div>

@@ -1,34 +1,56 @@
-import { getIconComponent, IconName } from '@/lib/icons';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Facebook, Instagram, Linkedin, Phone } from 'lucide-react';
+import type { SocialURLs } from '@/lib/types';
 
 interface ContactInfoProps {
   whatsappNumber: string;
   address: string;
   mapUrl: string;
+  socialUrls: SocialURLs;
 }
 
-const InfoCard = ({ icon, title, value }: { icon: IconName; title: string; value: string }) => (
-  <div className="flex items-center gap-4 p-4 rounded-xl border hover:border-primary/50 transition-colors bg-background/60">
-    <div className="w-12 h-12 rounded flex-shrink-0 flex items-center justify-center text-primary bg-muted">
-      {getIconComponent(icon, { size: 24 })}
-    </div>
-    <div className="overflow-hidden">
-      <p className="text-xs uppercase tracking-wider font-bold text-muted-foreground">{title}</p>
-      <p className="font-bold text-base md:text-lg truncate">{value}</p>
-    </div>
-  </div>
-);
-
-export function ContactInfo({ whatsappNumber, address, mapUrl }: ContactInfoProps) {
+export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: ContactInfoProps) {
   return (
-    <div className="flex flex-col h-full">
-      <div className="space-y-4 mb-8">
-        <InfoCard icon="MessageCircle" title="Asesoría & Ventas" value="Contacto Directo" />
-        <InfoCard icon="Settings" title="Línea Telefónica" value={`+${whatsappNumber}`} />
-        <InfoCard icon="Map" title="Ubicación" value={address} />
+    <div className="flex flex-col h-full space-y-8">
+      {/* Phone & Socials */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <a
+          href={`https://wa.me/${whatsappNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 font-bold text-lg hover:underline"
+        >
+          <Phone size={20} className="text-primary" />
+          +{whatsappNumber}
+        </a>
+        <div className="flex gap-2">
+          {socialUrls?.facebook && (
+            <Button asChild variant="outline" size="icon" className="rounded-full">
+              <a href={socialUrls.facebook} target="_blank" rel="noreferrer" aria-label="Facebook">
+                <Facebook size={18} />
+              </a>
+            </Button>
+          )}
+          {socialUrls?.instagram && (
+            <Button asChild variant="outline" size="icon" className="rounded-full">
+              <a href={socialUrls.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+                <Instagram size={18} />
+              </a>
+            </Button>
+          )}
+          {socialUrls?.linkedin && (
+            <Button asChild variant="outline" size="icon" className="rounded-full">
+              <a href={socialUrls.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <Linkedin size={18} />
+              </a>
+            </Button>
+          )}
+        </div>
       </div>
+
+      {/* Map */}
       {mapUrl && (
-        <div className="w-full h-64 md:flex-1 min-h-[250px] rounded-2xl overflow-hidden border border-primary/20 opacity-90 hover:opacity-100 transition-opacity shadow-lg">
+        <div className="w-full h-64 md:flex-1 min-h-[300px] rounded-2xl overflow-hidden border border-primary/20 opacity-90 hover:opacity-100 transition-opacity shadow-lg">
           <iframe
             src={mapUrl}
             width="100%"
@@ -42,6 +64,11 @@ export function ContactInfo({ whatsappNumber, address, mapUrl }: ContactInfoProp
           ></iframe>
         </div>
       )}
+
+      {/* Address */}
+      <div className="text-center">
+        <p className="font-semibold text-muted-foreground">{address}</p>
+      </div>
     </div>
   );
 }
