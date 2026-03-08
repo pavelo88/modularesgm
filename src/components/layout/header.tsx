@@ -62,12 +62,17 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-primary text-primary-foreground rounded-lg flex items-center justify-center transition-all duration-300 group-hover:bg-secondary">
-              <span className="font-bold text-xl tracking-tighter">GM</span>
+          <div className="w-10 h-10 bg-card text-primary rounded-lg flex items-center justify-center flex-shrink-0 border border-primary/50">
+            <span className="font-bold text-xl tracking-tighter">GM</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              MODULARES <span className="font-light text-secondary">GM</span>
-          </h1>
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-primary leading-tight">
+              MODULARES
+            </h1>
+            <p className="text-xs font-light text-foreground/80 -mt-1 leading-tight">
+              Cocinas y Cuarzos
+            </p>
+          </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
           {navLinks.map(link => <NavLink key={link.href} {...link}/>)}

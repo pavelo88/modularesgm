@@ -15,12 +15,17 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
            <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-primary text-primary-foreground rounded-lg flex items-center justify-center">
-                <span className="font-bold text-base tracking-tighter">GM</span>
+            <div className="w-10 h-10 bg-card text-primary rounded-lg flex items-center justify-center flex-shrink-0 border border-primary/50">
+              <span className="font-bold text-xl tracking-tighter">GM</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight">
-                MODULARES <span className="font-light text-secondary">GM</span>
-            </h2>
+            <div>
+                <h2 className="text-xl font-bold tracking-tight text-primary">
+                    MODULARES
+                </h2>
+                 <p className="text-xs font-light text-foreground/80 -mt-1 leading-tight">
+                    Cocinas y Cuarzos
+                </p>
+            </div>
           </div>
           <p className="text-muted-foreground text-sm font-headline max-w-xs">
             Muebles • Diseño • Construcción. Creando espacios excepcionales.
