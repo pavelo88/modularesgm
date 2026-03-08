@@ -16,7 +16,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/cart-provider';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import logo from '@/app/logo.jpg';
 
 export function Header() {
@@ -60,6 +60,20 @@ export function Header() {
      return <Link href={href} className="block py-2 text-lg text-muted-foreground border-b border-border">{label}</Link>
   }
 
+  const ThemeToggleButton = ({className}: {className?: string}) => (
+    <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        title="Toggle theme"
+        className={className}
+      >
+        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <span className="sr-only">Toggle theme</span>
+    </Button>
+  )
+
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -94,16 +108,7 @@ export function Header() {
             )}
           </Button>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            title="Toggle theme"
-          >
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
+          <ThemeToggleButton />
 
           <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
             <Link href="/admin">
@@ -117,6 +122,7 @@ export function Header() {
             size="icon"
             onClick={() => setIsCartOpen(true)}
             className="relative"
+            aria-label="Open shopping cart"
           >
             <ShoppingCart size={24} />
             {cartCount > 0 && (
@@ -125,6 +131,8 @@ export function Header() {
               </span>
             )}
           </Button>
+          
+          {isClient && <ThemeToggleButton />}
 
           {isClient ? (
             <Sheet>
@@ -134,6 +142,9 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent>
+                <SheetHeader>
+                  <SheetTitle className="sr-only">Menú Principal</SheetTitle>
+                </SheetHeader>
                 <nav className="flex flex-col gap-4 mt-8">
                   {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
 
