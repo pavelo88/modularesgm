@@ -54,7 +54,7 @@ export const defaultSiteContent: SiteContent = {
   ctaText: 'Solicitar Cotización',
   formTitle: 'Cotiza tu Proyecto a Medida',
   formSubtitle: 'Déjenos sus datos y un experto se pondrá en contacto para asesorarle en su próximo proyecto.',
-  whatsappNumber: '593999999999',
+  whatsappNumber: '0963064374',
   address: 'Rosa Yeira 420 y Serpaio Japeravi, Quito, Ecuador',
   mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.814674112109!2d-78.4716!3d-0.0911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d58fbc8d6263e1%3A0xc3b44b9d3b45167a!2sQuito!5e0!3m2!1sen!2sec!4v1680000000000!5m2!1sen!2sec',
   socialUrls: {

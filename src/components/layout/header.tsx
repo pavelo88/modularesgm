@@ -12,6 +12,11 @@ import {
   ShoppingCart,
   Store,
   Sun,
+  Home,
+  LayoutGrid,
+  MessageSquare,
+  Facebook,
+  Instagram,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -32,16 +37,17 @@ export function Header() {
   const { getCartCount, setIsCartOpen } = useCart();
   const cartCount = getCartCount();
   const [isClient, setIsClient] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   const navLinks = [
-    { href: '/#top', label: 'Inicio', publicOnly: false },
-    { href: '/#soluciones', label: 'Diseños', publicOnly: true },
-    { href: '/#contacto', label: 'Contacto', publicOnly: true },
-    { href: '/store', label: 'Tienda', publicOnly: false, icon: <Store size={16} /> },
+    { href: '/#top', label: 'Inicio', publicOnly: false, icon: <Home size={20} /> },
+    { href: '/#soluciones', label: 'Diseños', publicOnly: true, icon: <LayoutGrid size={20} /> },
+    { href: '/#contacto', label: 'Contacto', publicOnly: true, icon: <MessageSquare size={20} /> },
+    { href: '/store', label: 'Tienda', publicOnly: false, icon: <Store size={20} /> },
   ];
 
   const NavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
@@ -62,9 +68,18 @@ export function Header() {
     );
   };
   
-  const MobileNavLink = ({ href, label, publicOnly }: (typeof navLinks)[0]) => {
+  const MobileNavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
      if (publicOnly && pathname !== '/') return null;
-     return <Link href={href} className="block py-2 text-lg text-muted-foreground border-b border-border">{label}</Link>
+     return (
+       <Link
+         href={href}
+         onClick={() => setIsMenuOpen(false)}
+         className="flex items-center gap-4 p-3 -mx-3 rounded-lg hover:bg-muted font-medium text-lg"
+       >
+        {icon}
+        <span>{label}</span>
+       </Link>
+     );
   }
 
   const ThemeToggleButton = ({className}: {className?: string}) => (
@@ -110,7 +125,7 @@ export function Header() {
             >
                 <ShoppingCart size={20} />
                 {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-4 h-4 bg-secondary text-secondary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
+                <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
                     {cartCount}
                 </span>
                 )}
@@ -122,6 +137,7 @@ export function Header() {
                 </Link>
             </Button>
         </div>
+
         <div className="md:hidden flex items-center gap-1">
           <Button
             variant="ghost"
@@ -132,7 +148,7 @@ export function Header() {
           >
             <ShoppingCart size={24} />
             {cartCount > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-secondary text-secondary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
+              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
                 {cartCount}
               </span>
             )}
@@ -141,23 +157,47 @@ export function Header() {
           {isClient && <ThemeToggleButton />}
 
           {isClient ? (
-            <Sheet>
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <Menu size={28} />
                 </Button>
               </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                   <SheetTitle className="sr-only">Menú Principal</SheetTitle>
+              <SheetContent className="w-full max-w-sm flex flex-col">
+                <SheetHeader className="border-b pb-4">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
+                    <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="dark:hidden"/>
+                    <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="hidden dark:block"/>
+                    <div>
+                      <h2 className="text-base font-bold tracking-tight text-primary">
+                        MODULARES GM
+                      </h2>
+                      <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
+                        Cocinas y Cuarzos
+                      </p>
+                    </div>
+                  </Link>
                 </SheetHeader>
-                <nav className="flex flex-col gap-4 mt-8">
+                <nav className="flex flex-col gap-2 mt-8 flex-1">
                   {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
-
-                  <Button asChild className="w-full mt-4">
-                    <Link href="/admin"><Lock size={16} /> Admin</Link>
-                  </Button>
                 </nav>
+                <div className="mt-auto border-t pt-4 space-y-4">
+                    <div className="flex gap-2 justify-center">
+                        <Button asChild variant="outline" size="icon" className="rounded-full">
+                            <a href={'https://facebook.com/modularesgm'} target="_blank" rel="noreferrer" aria-label="Facebook">
+                                <Facebook size={18} />
+                            </a>
+                        </Button>
+                        <Button asChild variant="outline" size="icon" className="rounded-full">
+                            <a href={'https://instagram.com/modularesgm'} target="_blank" rel="noreferrer" aria-label="Instagram">
+                                <Instagram size={18} />
+                            </a>
+                        </Button>
+                    </div>
+                    <Button asChild className="w-full" variant="outline">
+                        <Link href="/admin" onClick={() => setIsMenuOpen(false)}><Lock size={16} /> Admin</Link>
+                    </Button>
+                </div>
               </SheetContent>
             </Sheet>
           ) : (
