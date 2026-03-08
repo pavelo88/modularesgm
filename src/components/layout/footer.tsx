@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Facebook, Home, Instagram, Linkedin } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { Button } from '@/components/ui/button';
+import logo from '@/app/logo.jpg';
 
 interface FooterProps {
   address: string;
@@ -16,7 +17,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
            <div className="flex items-center gap-3 mb-4">
-             <Image src="/logo.jpg" alt="Modulares GM Logo" width={48} height={48} />
+             <Image src={logo} alt="Modulares GM Logo" width={48} height={48} />
             <div>
                 <h2 className="text-xl font-bold tracking-tight text-primary">
                     MODULARES

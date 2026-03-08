@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/cart-provider';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import logo from '@/app/logo.jpg';
 
 export function Header() {
   const pathname = usePathname();
@@ -63,13 +64,13 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src="/logo.jpg" alt="Modulares GM Logo" width={48} height={48} />
+          <Image src={logo} alt="Modulares GM Logo" width={48} height={48} />
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-primary leading-tight">
-              MODULARES
-            </h1>
-            <p className="text-xs font-light text-secondary -mt-1 leading-tight">
-              Cocinas y Cuarzos
+            <h2 className="text-xl font-bold tracking-tight text-primary">
+                MODULARES
+            </h2>
+             <p className="text-xs font-light text-secondary -mt-1 leading-tight">
+                Cocinas y Cuarzos
             </p>
           </div>
         </Link>
