@@ -15,11 +15,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
 
-export function CartSidebar({
-  onCheckout,
-}: {
-  onCheckout: () => void;
-}) {
+export function CartSidebar() {
   const {
     cart,
     isCartOpen,
@@ -28,11 +24,6 @@ export function CartSidebar({
     updateQuantity,
     getCartTotal,
   } = useCart();
-
-  const handleCheckoutClick = () => {
-    setIsCartOpen(false);
-    onCheckout();
-  };
 
   return (
     <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
@@ -120,12 +111,10 @@ export function CartSidebar({
                   ${getCartTotal().toFixed(2)}
                 </span>
               </div>
-              <Button
-                onClick={handleCheckoutClick}
-                className="w-full bg-secondary text-secondary-foreground"
-                size="lg"
-              >
-                Proceder al Pago
+              <Button asChild size="lg" className="w-full bg-secondary text-secondary-foreground">
+                <Link href="/store/checkout" onClick={() => setIsCartOpen(false)}>
+                  Proceder al Pago
+                </Link>
               </Button>
             </div>
           </SheetFooter>

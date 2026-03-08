@@ -6,7 +6,6 @@ import { ChevronLeft, ShoppingCart, LayoutGrid, Store as StoreIcon } from 'lucid
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/store/product-card';
 import { CartSidebar } from '@/components/store/cart-sidebar';
-import { CheckoutModal } from '@/components/store/checkout-modal';
 import { useCart } from '@/context/cart-provider';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSiteContent } from '@/context/site-content-provider';
@@ -16,7 +15,6 @@ export default function StorePage() {
   const { siteContent, loading } = useSiteContent();
   const products = siteContent?.products || [];
   const { getCartCount, setIsCartOpen } = useCart();
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const cartCount = getCartCount();
   
   const categories = ['Todos', ...Array.from(new Set(products.map(p => p.category)))];
@@ -115,8 +113,7 @@ export default function StorePage() {
           </main>
         </div>
       </div>
-      <CartSidebar onCheckout={() => setIsCheckoutOpen(true)} />
-      <CheckoutModal isOpen={isCheckoutOpen} onOpenChange={setIsCheckoutOpen} />
+      <CartSidebar />
     </>
   );
 }

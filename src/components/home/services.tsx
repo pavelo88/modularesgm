@@ -36,7 +36,7 @@ export function Services({ services }: { services: Service[] }) {
         >
           {service.title}
         </h3>
-        <p className="text-muted-foreground text-sm font-headline line-clamp-3 group-hover:text-primary transition-colors">
+        <p className="text-muted-foreground text-sm font-headline line-clamp-3 transition-colors">
           {service.desc}
         </p>
       </CardContent>

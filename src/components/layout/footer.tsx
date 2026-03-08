@@ -68,7 +68,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
         <div className="flex flex-col items-center md:items-end text-sm space-y-2 font-headline text-muted-foreground">
           <p>{address}</p>
           <p>Ecuador</p>
-          <p>+{whatsappNumber}</p>
+          <p>{whatsappNumber}</p>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 text-center border-t pt-8 text-muted-foreground">

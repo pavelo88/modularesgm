@@ -2,6 +2,7 @@
 
 import type { CartItem, Product } from '@/lib/types';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 interface CartContextType {
   cart: CartItem[];
@@ -20,6 +21,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { toast } = useToast();
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -33,7 +35,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
       return [...prev, { product, quantity: 1 }];
     });
-    setIsCartOpen(true);
+    toast({
+      title: "Producto añadido",
+      description: `${product.title} fue añadido a tu carrito.`,
+    })
   };
 
   const removeFromCart = (productId: number) => {

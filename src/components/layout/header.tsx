@@ -52,7 +52,7 @@ export function Header() {
 
   const NavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
     if (publicOnly && pathname !== '/') return null;
-    const isActive = href === '/store' ? pathname === '/store' : false;
+    const isActive = href === '/store' ? pathname.startsWith('/store') : false;
 
     return (
       <Link
@@ -70,11 +70,14 @@ export function Header() {
   
   const MobileNavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
      if (publicOnly && pathname !== '/') return null;
+     const isActive = href === '/store' ? pathname.startsWith('/store') : (href === '/#top' && pathname === '/');
      return (
        <Link
          href={href}
          onClick={() => setIsMenuOpen(false)}
-         className="flex items-center gap-4 p-3 -mx-3 rounded-lg hover:bg-muted font-medium text-lg"
+         className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base",
+            isActive ? "bg-muted text-primary" : "text-foreground hover:bg-muted"
+         )}
        >
         {icon}
         <span>{label}</span>
@@ -100,13 +103,13 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="dark:hidden"/>
-          <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="hidden dark:block"/>
+          <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
+          <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
           <div>
-            <h2 className="text-lg font-bold tracking-tight text-primary">
+            <h2 className="text-base font-bold tracking-tight text-primary">
               MODULARES GM
             </h2>
-             <p className="text-[11px] font-light text-secondary -mt-1 leading-tight">
+             <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
               Cocinas y Cuarzos
             </p>
           </div>
@@ -163,11 +166,11 @@ export function Header() {
                   <Menu size={28} />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-full max-w-sm flex flex-col">
-                <SheetHeader className="border-b pb-4">
+              <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0">
+                <SheetHeader className="border-b p-4">
                   <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
-                    <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="dark:hidden"/>
-                    <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="hidden dark:block"/>
+                    <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
+                    <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
                     <div>
                       <h2 className="text-base font-bold tracking-tight text-primary">
                         MODULARES GM
@@ -178,10 +181,10 @@ export function Header() {
                     </div>
                   </Link>
                 </SheetHeader>
-                <nav className="flex flex-col gap-2 mt-8 flex-1">
+                <nav className="flex flex-col gap-1 p-4 flex-1">
                   {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
                 </nav>
-                <div className="mt-auto border-t pt-4 space-y-4">
+                <div className="mt-auto border-t p-4 space-y-4">
                     <div className="flex gap-2 justify-center">
                         <Button asChild variant="outline" size="icon" className="rounded-full">
                             <a href={'https://facebook.com/modularesgm'} target="_blank" rel="noreferrer" aria-label="Facebook">
