@@ -24,6 +24,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import logo from '@/app/logo.jpg';
+import logo2 from '@/app/logo2.jpg';
 
 export function Header() {
   const pathname = usePathname();
@@ -84,7 +85,8 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src={logo} alt="Modulares GM Logo" width={40} height={40} />
+          <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="dark:hidden"/>
+          <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="hidden dark:block"/>
           <div>
             <h2 className="text-lg font-bold tracking-tight text-primary">
               MODULARES GM

@@ -23,14 +23,14 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
             <Activity size={16} />
             Muebles Modulares y Acabados Premium
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-headline font-bold mb-6 tracking-tight leading-[1.1] drop-shadow-lg">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-6 tracking-tight leading-[1.1] drop-shadow-lg">
             {heroTitle.split(' ').map((word, i) => (
               <span key={i} className={i % 3 === 0 ? 'text-primary' : ''}>
                 {word}{' '}
               </span>
             ))}
           </h1>
-          <p className="text-lg md:text-xl font-headline text-muted-foreground max-w-xl mb-10 leading-relaxed">
+          <p className="text-base md:text-lg font-headline text-muted-foreground/90 max-w-xl mb-10 leading-relaxed">
             {heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -49,16 +49,16 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           {stats.map((stat) => (
             <Card
               key={stat.id}
-              className="p-6 md:p-8 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group hover:border-primary/50 shadow-lg"
+              className="p-4 md:p-6 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group hover:border-primary/50 shadow-lg bg-card/90 dark:bg-card/70 backdrop-blur-sm"
             >
               <CardContent className="p-0 flex flex-col items-center justify-center">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted border border-secondary/30 flex items-center justify-center mb-4 text-secondary group-hover:scale-110 group-hover:bg-secondary group-hover:text-secondary-foreground transition-all">
                   {getIconComponent(stat.icon as any, { size: 24 })}
                 </div>
-                <h3 className="text-3xl md:text-5xl font-bold font-sans mb-2">
+                <h3 className="text-3xl md:text-4xl font-bold font-sans mb-2">
                   {stat.value}
                 </h3>
-                <p className="text-[10px] md:text-xs font-bold tracking-widest text-secondary uppercase">
+                <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                   {stat.label}
                 </p>
               </CardContent>
