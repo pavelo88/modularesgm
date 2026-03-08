@@ -14,7 +14,6 @@ import { publicAIChatbot } from '@/ai/flows/public-ai-chatbot-flow';
 import { adminLeadAnalysis } from '@/ai/flows/admin-lead-analysis-flow';
 import { generateProposal } from '@/ai/flows/admin-proposal-generation-flow';
 import { generateProductDescription } from '@/ai/flows/admin-product-description-drafting-flow';
-import { generateAdminOrderEmail } from '@/ai/flows/admin-order-email-generation-flow';
 import { generateAdminSEO } from '@/ai/flows/admin-seo-generation-flow';
 
 // --- Authentication Actions ---
@@ -68,16 +67,28 @@ export async function handleLeadSubmit(values: z.infer<typeof LeadSchema>) {
   }
 }
 
-const CheckoutSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().min(7),
-  address: z.string().min(5),
-  paymentMethod: z.enum(['transferencia', 'tarjeta', 'efectivo']),
+const checkoutSchema = z.object({
+  name: z.string().min(2, { message: 'Nombre es requerido' }),
+  email: z.string().email({ message: 'Email inválido' }),
+  phone: z.string().min(7, { message: 'Teléfono es requerido' }),
+  address: z.string().min(5, { message: 'Dirección es requerida' }),
+  paymentMethod: z.enum(['transferencia', 'tarjeta', 'efectivo'], {
+    required_error: 'Debe seleccionar un método de pago',
+  }),
+  transferRef: z.string().optional(),
+}).refine((data) => {
+    if (data.paymentMethod === 'transferencia') {
+        return !!data.transferRef && data.transferRef.length > 3;
+    }
+    return true;
+}, {
+    message: "El número de referencia es requerido y debe ser válido.",
+    path: ["transferRef"],
 });
 
+
 export async function handleCheckout(
-  values: z.infer<typeof CheckoutSchema>,
+  values: z.infer<typeof checkoutSchema>,
   cart: CartItem[]
 ) {
   if (cart.length === 0) {
@@ -193,16 +204,6 @@ export async function getProductDescription(productTitle: string, productCategor
     return { success: true, data: result.description };
   } catch (error) {
     return { success: false, error: 'AI description generation failed.' };
-  }
-}
-
-export async function getOrderEmail(orderName: string, orderStatus: string, orderTotal: number) {
-  await protectedAction();
-  try {
-    const result = await generateAdminOrderEmail({ orderName, orderStatus, orderTotal });
-    return { success: true, data: result };
-  } catch (error) {
-    return { success: false, error: 'AI email generation failed.' };
   }
 }
 

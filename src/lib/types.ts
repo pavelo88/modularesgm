@@ -85,7 +85,7 @@ export interface Order {
   transferRef?: string;
   items: CartItem[];
   total: number;
-  status: 'Pendiente' | 'En proceso' | 'Enviado' | 'Completado' | 'Cancelado';
+  status: 'Pendiente' | 'Pago Verificado' | 'Cliente Contactado' | 'En proceso' | 'Enviado' | 'Completado' | 'Cancelado';
   createdAt: number;
 }
 
