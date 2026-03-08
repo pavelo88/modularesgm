@@ -11,7 +11,6 @@ import {
   ShoppingCart,
   Store,
   Sun,
-  X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -63,14 +62,12 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex flex-col items-start leading-none">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">
-              MODULARES <span className="text-primary">GM</span>
-            </h1>
-            <span className="text-[10px] tracking-widest text-primary mt-1">
-              — COCINAS & CUARZOS —
-            </span>
+          <div className="w-10 h-10 bg-primary text-primary-foreground rounded-lg flex items-center justify-center transition-all duration-300 group-hover:bg-secondary">
+              <span className="font-bold text-xl tracking-tighter">GM</span>
           </div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              MODULARES <span className="font-light text-secondary">GM</span>
+          </h1>
         </Link>
         <nav className="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
           {navLinks.map(link => <NavLink key={link.href} {...link}/>)}
