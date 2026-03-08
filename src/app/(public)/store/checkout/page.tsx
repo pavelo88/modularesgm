@@ -6,7 +6,7 @@ import * as z from 'zod';
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Banknote, CreditCard, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft, CheckCircle2 } from 'lucide-react';
+import { Banknote, CreditCard, Info, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft, CheckCircle2 } from 'lucide-react';
 
 import { useCart } from '@/context/cart-provider';
 import { useSiteContent } from '@/context/site-content-provider';
@@ -17,7 +17,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { handleCheckout } from '@/lib/actions';
-import { Alert } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ProductCard } from '@/components/store/product-card';
 
@@ -30,7 +30,12 @@ const checkoutSchema = z.object({
     required_error: 'Debe seleccionar un método de pago',
   }),
   transferRef: z.string().optional(),
-}).refine((data) => {
+  cardName: z.string().optional(),
+  cardNumber: z.string().optional(),
+  cardExpiry: z.string().optional(),
+  cardCvc: z.string().optional(),
+})
+.refine((data) => {
     if (data.paymentMethod === 'transferencia') {
         return !!data.transferRef && data.transferRef.length > 3;
     }
@@ -38,7 +43,24 @@ const checkoutSchema = z.object({
 }, {
     message: "El número de referencia es requerido y debe ser válido.",
     path: ["transferRef"],
+})
+.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardName || data.cardName.trim() === '')), {
+    message: 'Nombre en la tarjeta es requerido.',
+    path: ['cardName'],
+})
+.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardNumber || data.cardNumber.replace(/\s/g, '').length !== 16)), {
+    message: 'Número de tarjeta debe tener 16 dígitos.',
+    path: ['cardNumber'],
+})
+.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardExpiry || !/^(0[1-9]|1[0-2])\s*\/\s*\d{2}$/.test(data.cardExpiry))), {
+    message: 'Fecha debe ser MM/AA.',
+    path: ['cardExpiry'],
+})
+.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardCvc || data.cardCvc.length < 3 || data.cardCvc.length > 4)), {
+    message: 'CVC debe tener 3 o 4 dígitos.',
+    path: ['cardCvc'],
 });
+
 
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
@@ -51,10 +73,19 @@ export default function CheckoutPage() {
   
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
-    defaultValues: { name: '', email: '', phone: '', address: '', paymentMethod: 'transferencia' },
+    defaultValues: { name: '', email: '', phone: '', address: '', paymentMethod: 'transferencia', cardName: '', cardNumber: '', cardExpiry: '', cardCvc: '' },
   });
 
   const onSubmit = (data: CheckoutFormValues) => {
+    if (data.paymentMethod === 'tarjeta') {
+        toast({
+            variant: 'destructive',
+            title: 'Función no Implementada',
+            description: 'El pago con tarjeta aún no está conectado. Por favor, selecciona otro método de pago.',
+        });
+        return;
+    }
+
     startTransition(async () => {
       const result = await handleCheckout(data, cart);
       if (result.success) {
@@ -180,11 +211,52 @@ export default function CheckoutPage() {
                                 )}
                                 </Label>
                                 <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'tarjeta' ? 'border-primary bg-primary/5' : 'border-border'}`}>
-                                <div className="flex items-center gap-3">
-                                    <RadioGroupItem value="tarjeta" id="tarjeta" />
-                                    <span className="font-bold flex items-center gap-2"><CreditCard size={16} className="text-primary" /> Tarjeta de Crédito / Débito</span>
-                                </div>
-                                {paymentMethod === 'tarjeta' && <p className="mt-2 ml-7 text-xs text-muted-foreground">Un asesor se contactará contigo para enviarte un enlace de pago seguro. Aceptamos todas las tarjetas.</p>}
+                                    <div className="flex items-center gap-3">
+                                        <RadioGroupItem value="tarjeta" id="tarjeta" />
+                                        <span className="font-bold flex items-center gap-2"><CreditCard size={16} className="text-primary" /> Tarjeta de Crédito / Débito</span>
+                                    </div>
+                                    {paymentMethod === 'tarjeta' && (
+                                        <div className="ml-7 space-y-4 pt-4">
+                                            <Alert variant="default" className="bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-200">
+                                                <Info className="h-4 w-4 !text-blue-600" />
+                                                <AlertTitle className="font-bold">Paso Siguiente: Integración de Pagos</AlertTitle>
+                                                <AlertDescription>
+                                                    Este es un formulario de demostración. Para aceptar pagos reales, necesitarás integrar un proveedor como Stripe o Mercado Pago.
+                                                </AlertDescription>
+                                            </Alert>
+
+                                            <FormField control={form.control} name="cardName" render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Nombre en la Tarjeta</FormLabel>
+                                                    <FormControl><Input {...field} autoComplete="cc-name" placeholder="Juan Pérez" disabled /></FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )} />
+                                            <FormField control={form.control} name="cardNumber" render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Número de Tarjeta</FormLabel>
+                                                    <FormControl><Input {...field} autoComplete="cc-number" placeholder="•••• •••• •••• ••••" disabled /></FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )} />
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <FormField control={form.control} name="cardExpiry" render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel>Expiración (MM/AA)</FormLabel>
+                                                        <FormControl><Input {...field} autoComplete="cc-exp" placeholder="MM/AA" disabled /></FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )} />
+                                                <FormField control={form.control} name="cardCvc" render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel>CVC</FormLabel>
+                                                        <FormControl><Input {...field} autoComplete="cc-csc" placeholder="•••" disabled /></FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )} />
+                                            </div>
+                                        </div>
+                                    )}
                                 </Label>
                                 <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'efectivo' ? 'border-primary bg-primary/5' : 'border-border'}`}>
                                 <div className="flex items-center gap-3">
