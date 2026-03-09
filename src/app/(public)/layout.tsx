@@ -1,5 +1,3 @@
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import { defaultSiteContent } from '@/lib/data';
 import type { SiteContent } from '@/lib/types';
 import { PublicLayoutClient } from './layout-client';
@@ -10,32 +8,9 @@ export default async function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let initialSiteContent: SiteContent;
-
-  try {
-    const contentRef = doc(db, 'siteContent', 'main');
-    const docSnap = await getDoc(contentRef);
-
-    if (docSnap.exists()) {
-      const data = docSnap.data() as SiteContent;
-      // Merge fetched data with defaults to avoid missing properties
-      initialSiteContent = {
-        ...defaultSiteContent,
-        ...data,
-        services: data.services && data.services.length > 0 ? data.services : defaultSiteContent.services,
-        brands: data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands,
-        stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
-        products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
-        seo: data.seo ? { ...defaultSiteContent.seo, ...data.seo } : defaultSiteContent.seo,
-        socialUrls: data.socialUrls ? { ...defaultSiteContent.socialUrls, ...data.socialUrls } : defaultSiteContent.socialUrls,
-      };
-    } else {
-      initialSiteContent = defaultSiteContent;
-    }
-  } catch (error) {
-    console.error("Error fetching initial site content on server, returning default.", error);
-    initialSiteContent = defaultSiteContent;
-  }
+  // Temporarily using default site content to bring the site back online.
+  // The Firebase connection needs to be re-established.
+  const initialSiteContent: SiteContent = defaultSiteContent;
 
   return (
     <PublicLayoutClient initialSiteContent={initialSiteContent}>

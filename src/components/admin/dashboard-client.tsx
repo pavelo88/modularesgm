@@ -32,8 +32,6 @@ import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
 import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
-import { db } from '@/lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
@@ -51,38 +49,14 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
 
 export function AdminDashboardClient() {
   const [activeTab, setActiveTab] = useState<AdminTab>('general');
-  const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Temporarily using defaultSiteContent to allow the admin panel to load.
+  // Data saving will not work until the Firebase connection is restored.
+  const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchSiteContent() {
-      try {
-        const contentRef = doc(db, 'siteContent', 'main');
-        const docSnap = await getDoc(contentRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data() as SiteContent;
-          setSiteContent({
-            ...defaultSiteContent,
-            ...data,
-            services: data.services && data.services.length > 0 ? data.services : defaultSiteContent.services,
-            brands: data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands,
-            stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
-            products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
-            seo: data.seo ? { ...defaultSiteContent.seo, ...data.seo } : defaultSiteContent.seo,
-            socialUrls: data.socialUrls ? { ...defaultSiteContent.socialUrls, ...data.socialUrls } : defaultSiteContent.socialUrls,
-          });
-        } else {
-          setSiteContent(defaultSiteContent);
-        }
-      } catch (error) {
-        console.error("Error fetching site content, returning default.", error);
-        setSiteContent(defaultSiteContent);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchSiteContent();
-  }, []);
+  // NOTE: Firebase fetching logic removed to prevent app crash due to permission errors.
+  // The admin panel will load with local default data.
+  // Any changes made will not be saved until the DB connection is fixed.
 
   const renderContent = () => {
     if (loading || !siteContent) {
