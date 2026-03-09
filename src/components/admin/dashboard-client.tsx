@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -12,6 +11,7 @@ import {
   Settings,
   ShoppingBag,
   Zap,
+  Palette,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -30,6 +30,7 @@ import { CmsGeneralForm } from './cms-general-form';
 import { CmsServicesForm } from './cms-services-form';
 import { CmsProductsForm } from './cms-products-form';
 import { CmsBrandsStatsForm } from './cms-brands-stats-form';
+import { CmsThemeForm } from './cms-theme-form';
 import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
 import { logout } from '@/lib/actions';
@@ -40,10 +41,11 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
 
-type AdminTab = 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
+type AdminTab = 'general' | 'theme' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
 
 const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'general', label: 'Inicio y Contacto', icon: <Settings /> },
+  { id: 'theme', label: 'Apariencia y Colores', icon: <Palette /> },
   { id: 'services', label: 'Servicios', icon: <LayoutGrid /> },
   { id: 'products', label: 'Tienda Online', icon: <ShoppingBag /> },
   { id: 'brands', label: 'Marcas y Stats', icon: <Zap /> },
@@ -68,6 +70,7 @@ export function AdminDashboardClient() {
           brands: data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands,
           stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
           products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
+          theme: data.theme ? { ...defaultSiteContent.theme, ...data.theme } : defaultSiteContent.theme,
         });
       }
       setLoading(false);
@@ -104,6 +107,8 @@ export function AdminDashboardClient() {
     switch (activeTab) {
       case 'general':
         return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
+      case 'theme':
+        return <CmsThemeForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'services':
         return <CmsServicesForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'products':
@@ -163,15 +168,15 @@ export function AdminDashboardClient() {
           </form>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="bg-muted/40">
+      <SidebarInset className="bg-muted/40 overflow-hidden">
         <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-4 border-b bg-background/95 backdrop-blur-sm">
            <SidebarTrigger />
            <h1 className="text-xl font-semibold">
               {menuItems.find(item => item.id === activeTab)?.label}
            </h1>
         </header>
-        <main className="h-[calc(100vh-3.5rem)] overflow-y-auto">
-          <div className="max-w-7xl mx-auto p-4 md:p-8">
+        <main className="h-[calc(100vh-3.5rem)] overflow-hidden">
+          <div className="max-w-7xl mx-auto p-4 md:p-8 h-full">
             {renderContent()}
           </div>
         </main>

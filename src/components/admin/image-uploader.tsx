@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -8,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Trash2, UploadCloud, ImageIcon } from 'lucide-react';
-import Image from 'next/image';
 
 interface ImageUploaderProps {
   currentUrl: string;
@@ -40,21 +38,26 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
 
   return (
     <div className="space-y-3">
-      {label && <Label className="text-xs font-bold uppercase">{label}</Label>}
+      {label && <Label className="text-[10px] font-bold uppercase text-muted-foreground">{label}</Label>}
       <div className="relative group aspect-video rounded-xl overflow-hidden border bg-muted flex items-center justify-center">
         {currentUrl ? (
           <>
-            <Image src={currentUrl} alt="Preview" fill className="object-cover transition-opacity group-hover:opacity-40" />
+            {/* Use standard img for more reliable preview in admin bypasses next/image hostname checks */}
+            <img 
+                src={currentUrl} 
+                alt="Preview" 
+                className="w-full h-full object-cover transition-opacity group-hover:opacity-40" 
+            />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button variant="destructive" size="sm" onClick={onRemove}>
-                    <Trash2 className="mr-2 h-4 w-4" /> Quitar Imagen
+                <Button variant="destructive" size="sm" onClick={(e) => { e.preventDefault(); onRemove(); }} className="h-8 text-xs">
+                    <Trash2 className="mr-2 h-3 w-3" /> Quitar
                 </Button>
             </div>
           </>
         ) : (
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <ImageIcon size={32} strokeWidth={1.5} />
-            <span className="text-xs">Sin imagen seleccionada</span>
+            <ImageIcon size={24} strokeWidth={1.5} />
+            <span className="text-[10px]">Sin imagen</span>
           </div>
         )}
       </div>
@@ -62,7 +65,7 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
         <Input
           type="file"
           accept="image/*"
-          id={`file-${label}`}
+          id={`file-${label}-${folder}`}
           className="hidden"
           onChange={handleFileChange}
           disabled={isUploading}
@@ -70,16 +73,16 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
         <Button
           asChild
           variant="outline"
-          className="w-full h-9 cursor-pointer"
+          className="w-full h-8 cursor-pointer text-xs"
           disabled={isUploading}
         >
-          <label htmlFor={`file-${label}`} className="flex items-center justify-center">
+          <label htmlFor={`file-${label}-${folder}`} className="flex items-center justify-center">
             {isUploading ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 h-3 w-3 animate-spin" />
             ) : (
-              <UploadCloud className="mr-2 h-4 w-4" />
+              <UploadCloud className="mr-2 h-3 w-3" />
             )}
-            {isUploading ? 'Subiendo...' : 'Cambiar Imagen'}
+            {isUploading ? 'Subiendo...' : 'Cargar'}
           </label>
         </Button>
       </div>

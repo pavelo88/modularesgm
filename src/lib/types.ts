@@ -42,6 +42,14 @@ export interface SocialURLs {
   linkedin: string;
 }
 
+export interface ThemeColors {
+  primary: string;
+  secondary: string;
+  background: string;
+  foreground: string;
+  accent: string;
+}
+
 export interface SiteContent {
   heroTitle: string;
   heroSubtitle: string;
@@ -54,6 +62,7 @@ export interface SiteContent {
   mapUrl: string;
   socialUrls: SocialURLs;
   seo: SEO;
+  theme: ThemeColors;
   services: Service[];
   stats: Stat[];
   brands: Brand[];

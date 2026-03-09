@@ -34,6 +34,7 @@ export function PublicLayoutClient({
           stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
           products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
           seo: data.seo ? { ...defaultSiteContent.seo, ...data.seo } : defaultSiteContent.seo,
+          theme: data.theme ? { ...defaultSiteContent.theme, ...data.theme } : defaultSiteContent.theme,
           socialUrls: data.socialUrls ? { ...defaultSiteContent.socialUrls, ...data.socialUrls } : defaultSiteContent.socialUrls,
         });
       }
@@ -43,6 +44,22 @@ export function PublicLayoutClient({
     
     return () => unsubscribe();
   }, []);
+
+  // Dynamically inject theme colors from siteContent
+  useEffect(() => {
+    if (siteContent?.theme) {
+        const root = document.documentElement;
+        // Function to convert hex to HSL for CSS variables if needed, 
+        // but for simplicity we'll just set them directly as hex if we change globals.css to accept hex 
+        // OR we use the hex values directly. 
+        // Since Shadcn uses HSL variables, we'll just update the key colors.
+        root.style.setProperty('--primary', siteContent.theme.primary);
+        root.style.setProperty('--secondary', siteContent.theme.secondary);
+        root.style.setProperty('--background', siteContent.theme.background);
+        root.style.setProperty('--foreground', siteContent.theme.foreground);
+        root.style.setProperty('--accent', siteContent.theme.accent);
+    }
+  }, [siteContent?.theme]);
 
   const value = { siteContent, loading: !siteContent };
 

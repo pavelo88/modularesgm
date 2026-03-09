@@ -62,6 +62,13 @@ export const defaultSiteContent: SiteContent = {
     instagram: 'https://instagram.com/modularesgm',
     linkedin: ''
   },
+  theme: {
+    primary: '#1d2a3a',
+    secondary: '#1c93be',
+    background: '#ece9dd',
+    foreground: '#212d3c',
+    accent: '#d7d0ba'
+  },
   seo: {
     title: 'Modulares GM | Muebles, Diseño y Construcción',
     description: 'Expertos en cocinas modulares, cuarzos, clósets y remodelación en Quito y todo el Ecuador.',

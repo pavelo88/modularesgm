@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useTransition } from 'react';
@@ -10,9 +9,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Plus, Save, Trash2 } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Loader2, Plus, Save, Trash2, GripVertical } from 'lucide-react';
 import { ImageUploader } from './image-uploader';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface CmsServicesFormProps {
   siteContent: SiteContent;
@@ -39,7 +38,7 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
       icon: 'Grid',
       catalogUrl: ''
     };
-    setSiteContent(prev => ({ ...prev, services: [...prev.services, newService] }));
+    setSiteContent(prev => ({ ...prev, services: [newService, ...prev.services] }));
   };
 
   const handleDeleteService = (id: number) => {
@@ -60,11 +59,11 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 h-full flex flex-col">
        <div className="flex justify-between items-center bg-card p-4 rounded-xl border">
         <div>
             <h1 className="text-xl font-bold">Gestión de Servicios</h1>
-            <p className="text-xs text-muted-foreground">Administra los servicios que aparecen en la web.</p>
+            <p className="text-xs text-muted-foreground">{siteContent.services.length} servicios activos en la web.</p>
         </div>
         <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={handleAddService}><Plus className="mr-2 h-4 w-4" /> Añadir</Button>
@@ -75,57 +74,55 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
         </div>
       </div>
       
-      <Accordion type="single" collapsible className="w-full space-y-4">
-        {siteContent.services.map((service) => (
-          <AccordionItem value={String(service.id)} key={service.id} className="border-none">
-             <Card className="overflow-hidden">
-                <AccordionTrigger className="p-4 hover:no-underline">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 relative rounded-md overflow-hidden border">
-                            <img src={service.imgUrl || ''} alt={service.title || ''} className="object-cover w-full h-full"/>
-                        </div>
-                        <div className="text-left">
-                            <span className="font-semibold block">{service.title || 'Servicio Sin Título'}</span>
-                            <span className="text-xs text-muted-foreground truncate max-w-[200px] block">{service.desc}</span>
-                        </div>
+      <ScrollArea className="flex-1 pr-4">
+        <div className="grid grid-cols-1 gap-6 pb-20">
+          {siteContent.services.map((service) => (
+            <Card key={service.id} className="group overflow-hidden border-2 hover:border-primary/20 transition-all">
+              <div className="flex flex-col md:flex-row gap-6 p-6">
+                <div className="w-full md:w-64 shrink-0">
+                  <ImageUploader
+                    label="Imagen Principal"
+                    currentUrl={service.imgUrl}
+                    onUpload={(url) => handleServiceChange(service.id, 'imgUrl', url)}
+                    onRemove={() => handleServiceChange(service.id, 'imgUrl', 'https://picsum.photos/seed/service/800/800')}
+                    folder="services"
+                  />
+                </div>
+                <div className="flex-1 space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-[10px] font-bold uppercase text-muted-foreground">Título del Servicio</Label>
+                      <Input 
+                        value={service.title || ''} 
+                        onChange={(e) => handleServiceChange(service.id, 'title', e.target.value)}
+                        className="font-bold"
+                      />
                     </div>
-                </AccordionTrigger>
-                <AccordionContent className="p-6 pt-0 border-t">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                        <div className="space-y-4">
-                            <div className="space-y-2">
-                                <Label>Título</Label>
-                                <Input value={service.title || ''} onChange={(e) => handleServiceChange(service.id, 'title', e.target.value)} />
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Icono (Lucide name)</Label>
-                                <Input value={service.icon || ''} onChange={(e) => handleServiceChange(service.id, 'icon', e.target.value)} />
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Descripción</Label>
-                                <Textarea value={service.desc || ''} onChange={(e) => handleServiceChange(service.id, 'desc', e.target.value)} className="h-32" />
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <ImageUploader
-                                label="Imagen del Servicio"
-                                currentUrl={service.imgUrl}
-                                onUpload={(url) => handleServiceChange(service.id, 'imgUrl', url)}
-                                onRemove={() => handleServiceChange(service.id, 'imgUrl', 'https://picsum.photos/seed/service/800/800')}
-                                folder="services"
-                            />
-                            <div className="flex justify-end pt-4">
-                                <Button variant="destructive" size="sm" onClick={() => handleDeleteService(service.id)}>
-                                    <Trash2 className="mr-2 h-4 w-4" /> Eliminar Servicio
-                                </Button>
-                            </div>
-                        </div>
+                    <div className="space-y-2">
+                      <Label className="text-[10px] font-bold uppercase text-muted-foreground">Icono (Lucide name)</Label>
+                      <Input value={service.icon || ''} onChange={(e) => handleServiceChange(service.id, 'icon', e.target.value)} />
                     </div>
-                </AccordionContent>
-             </Card>
-          </AccordionItem>
-        ))}
-      </Accordion>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[10px] font-bold uppercase text-muted-foreground">Descripción Detallada</Label>
+                    <Textarea 
+                        value={service.desc || ''} 
+                        onChange={(e) => handleServiceChange(service.id, 'desc', e.target.value)} 
+                        className="h-24 resize-none"
+                    />
+                  </div>
+                  <div className="flex justify-between items-center pt-2">
+                    <p className="text-[10px] text-muted-foreground italic">ID: {service.id}</p>
+                    <Button variant="ghost" size="sm" className="text-destructive hover:bg-destructive/10" onClick={() => handleDeleteService(service.id)}>
+                        <Trash2 className="mr-2 h-4 w-4" /> Eliminar
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 }

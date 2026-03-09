@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* Base HSL values for fallback */
     --background: 43 44% 93%;
     --foreground: 215 28% 18%;
     --card: 0 0% 100%;
@@ -23,6 +24,7 @@
     --border: 43 20% 85%;
     --input: 43 20% 85%;
     --ring: 215 28% 28%;
+    --radius: 0.75rem;
 
     --sidebar-background: 43 44% 93%;
     --sidebar-foreground: 215 28% 18%;
@@ -74,7 +76,9 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Use direct colors if set as variables in root */
+    background-color: var(--background);
+    color: var(--foreground);
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
@@ -82,14 +86,14 @@
 @layer utilities {
   .tech-grid-bg-dark {
     background-size: 50px 50px;
-    background-image: linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--primary) / 0.05 1px, transparent 1px),
+      linear-gradient(to bottom, var(--primary) / 0.05 1px, transparent 1px);
     mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
   }
   .tech-grid-bg-light {
     background-size: 50px 50px;
-    background-image: linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--primary) / 0.1 1px, transparent 1px),
+      linear-gradient(to bottom, var(--primary) / 0.1 1px, transparent 1px);
     mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
   }
 
@@ -113,6 +117,6 @@
   width: 6px;
 }
 .chat-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary));
+  background: var(--primary);
   border-radius: 10px;
 }
