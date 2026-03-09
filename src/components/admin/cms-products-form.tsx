@@ -91,27 +91,27 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
              <Card>
                 <AccordionTrigger className="p-4 hover:no-underline">
                     <div className="flex items-center gap-4">
-                        <Image src={product.imgUrl} alt={product.title} width={40} height={40} className="rounded-md h-10 w-10 object-cover"/>
-                        <span className="font-semibold">{product.title}</span>
+                        <Image src={product.imgUrl || ''} alt={product.title || ''} width={40} height={40} className="rounded-md h-10 w-10 object-cover"/>
+                        <span className="font-semibold">{product.title || 'Producto Sin Título'}</span>
                     </div>
                 </AccordionTrigger>
                 <AccordionContent className="p-6 pt-0 space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label>Título</Label>
-                            <Input value={product.title} onChange={(e) => handleProductChange(product.id, 'title', e.target.value)} />
+                            <Input value={product.title || ''} onChange={(e) => handleProductChange(product.id, 'title', e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label>Categoría</Label>
-                            <Input value={product.category} onChange={(e) => handleProductChange(product.id, 'category', e.target.value)} />
+                            <Input value={product.category || ''} onChange={(e) => handleProductChange(product.id, 'category', e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label>Precio</Label>
-                            <Input type="number" value={product.price} onChange={(e) => handleProductChange(product.id, 'price', parseFloat(e.target.value))} />
+                            <Input type="number" value={product.price ?? 0} onChange={(e) => handleProductChange(product.id, 'price', parseFloat(e.target.value) || 0)} />
                         </div>
                         <div className="space-y-2">
                             <Label>Precio con Descuento (opcional)</Label>
-                            <Input type="number" value={product.discountPrice || ''} onChange={(e) => handleProductChange(product.id, 'discountPrice', e.target.value ? parseFloat(e.target.value) : null)} />
+                            <Input type="number" value={product.discountPrice ?? ''} onChange={(e) => handleProductChange(product.id, 'discountPrice', e.target.value ? parseFloat(e.target.value) : null)} />
                         </div>
                     </div>
                     <div className="space-y-2">
@@ -122,7 +122,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
                                 Generar con IA
                             </Button>
                         </div>
-                        <Textarea value={product.desc} onChange={(e) => handleProductChange(product.id, 'desc', e.target.value)} />
+                        <Textarea value={product.desc || ''} onChange={(e) => handleProductChange(product.id, 'desc', e.target.value)} />
                     </div>
                     <div className="flex justify-end">
                         <Button variant="destructive" size="sm" onClick={() => handleDeleteProduct(product.id)}>

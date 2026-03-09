@@ -77,8 +77,8 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
              <Card>
                 <AccordionTrigger className="p-4 hover:no-underline">
                     <div className="flex items-center gap-4">
-                        <Image src={service.imgUrl} alt={service.title} width={40} height={40} className="rounded-md h-10 w-10 object-cover"/>
-                        <span className="font-semibold">{service.title}</span>
+                        <Image src={service.imgUrl || ''} alt={service.title || ''} width={40} height={40} className="rounded-md h-10 w-10 object-cover"/>
+                        <span className="font-semibold">{service.title || 'Servicio Sin Título'}</span>
                     </div>
                 </AccordionTrigger>
                 <AccordionContent>
@@ -86,16 +86,16 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label>Título</Label>
-                                <Input value={service.title} onChange={(e) => handleServiceChange(service.id, 'title', e.target.value)} />
+                                <Input value={service.title || ''} onChange={(e) => handleServiceChange(service.id, 'title', e.target.value)} />
                             </div>
                              <div className="space-y-2">
                                 <Label>Icono</Label>
-                                <Input value={service.icon} onChange={(e) => handleServiceChange(service.id, 'icon', e.target.value)} />
+                                <Input value={service.icon || ''} onChange={(e) => handleServiceChange(service.id, 'icon', e.target.value)} />
                             </div>
                         </div>
                         <div className="space-y-2">
                             <Label>Descripción</Label>
-                            <Textarea value={service.desc} onChange={(e) => handleServiceChange(service.id, 'desc', e.target.value)} />
+                            <Textarea value={service.desc || ''} onChange={(e) => handleServiceChange(service.id, 'desc', e.target.value)} />
                         </div>
                         <div className="flex justify-end">
                             <Button variant="destructive" size="sm" onClick={() => handleDeleteService(service.id)}>

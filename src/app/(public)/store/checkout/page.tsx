@@ -73,7 +73,18 @@ export default function CheckoutPage() {
   
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
-    defaultValues: { name: '', email: '', phone: '', address: '', paymentMethod: 'transferencia', cardName: '', cardNumber: '', cardExpiry: '', cardCvc: '' },
+    defaultValues: { 
+      name: '', 
+      email: '', 
+      phone: '', 
+      address: '', 
+      paymentMethod: 'transferencia', 
+      transferRef: '',
+      cardName: '', 
+      cardNumber: '', 
+      cardExpiry: '', 
+      cardCvc: '' 
+    },
   });
 
   const onSubmit = (data: CheckoutFormValues) => {
