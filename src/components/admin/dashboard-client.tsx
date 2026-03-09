@@ -11,8 +11,7 @@ import {
   MessageSquare,
   Settings,
   ShoppingBag,
-  Eye,
-  Edit3,
+  Zap,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -33,7 +32,6 @@ import { CmsProductsForm } from './cms-products-form';
 import { CmsBrandsStatsForm } from './cms-brands-stats-form';
 import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
-import { VisualEditor } from './visual-editor';
 import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -42,20 +40,19 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
 
-type AdminTab = 'visual' | 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
+type AdminTab = 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
 
 const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
-  { id: 'visual', label: 'Editor Visual', icon: <Eye /> },
-  { id: 'general', label: 'General & SEO', icon: <Settings /> },
+  { id: 'general', label: 'Inicio y Contacto', icon: <Settings /> },
   { id: 'services', label: 'Servicios', icon: <LayoutGrid /> },
-  { id: 'products', label: 'Productos Tienda', icon: <ShoppingBag /> },
-  { id: 'brands', label: 'Marcas & Stats', icon: <List /> },
+  { id: 'products', label: 'Tienda Online', icon: <ShoppingBag /> },
+  { id: 'brands', label: 'Marcas y Stats', icon: <Zap /> },
   { id: 'leads', label: 'Leads (Contactos)', icon: <MessageSquare /> },
   { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },
 ];
 
 export function AdminDashboardClient() {
-  const [activeTab, setActiveTab] = useState<AdminTab>('visual');
+  const [activeTab, setActiveTab] = useState<AdminTab>('general');
   const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
   const [loading, setLoading] = useState(true);
 
@@ -86,7 +83,8 @@ export function AdminDashboardClient() {
     if (loading) {
         return (
           <div className="space-y-6">
-            <div className="flex justify-end">
+            <div className="flex justify-between items-center">
+              <Skeleton className="h-10 w-48" />
               <Skeleton className="h-10 w-32" />
             </div>
             <Skeleton className="h-96 w-full" />
@@ -104,8 +102,6 @@ export function AdminDashboardClient() {
     };
 
     switch (activeTab) {
-      case 'visual':
-        return <VisualEditor siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'general':
         return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'services':
@@ -134,7 +130,7 @@ export function AdminDashboardClient() {
             </div>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
               <span className="text-lg font-bold">Modulares GM</span>
-              <span className="text-xs text-muted-foreground">Admin Panel</span>
+              <span className="text-xs text-muted-foreground">Panel Administrativo</span>
             </div>
           </div>
         </SidebarHeader>
@@ -167,15 +163,15 @@ export function AdminDashboardClient() {
           </form>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="bg-muted/40 overflow-hidden">
-        <header className="sticky top-0 z-10 flex items-center justify-between h-14 px-4 border-b bg-background/95 backdrop-blur-sm">
+      <SidebarInset className="bg-muted/40">
+        <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-4 border-b bg-background/95 backdrop-blur-sm">
            <SidebarTrigger />
            <h1 className="text-xl font-semibold">
               {menuItems.find(item => item.id === activeTab)?.label}
            </h1>
         </header>
         <main className="h-[calc(100vh-3.5rem)] overflow-y-auto">
-          <div className="max-w-7xl mx-auto p-4 md:p-6">
+          <div className="max-w-7xl mx-auto p-4 md:p-8">
             {renderContent()}
           </div>
         </main>
