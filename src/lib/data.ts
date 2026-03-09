@@ -1,3 +1,4 @@
+
 import type { Service, Product, Brand, Stat, SiteContent } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
@@ -63,11 +64,11 @@ export const defaultSiteContent: SiteContent = {
     linkedin: ''
   },
   theme: {
-    primary: '#1d2a3a',
-    secondary: '#1c93be',
-    background: '#ece9dd',
-    foreground: '#212d3c',
-    accent: '#d7d0ba'
+    primary: '#0ea5e9', // Sky blue accent
+    secondary: '#38bdf8',
+    background: '#0f172a', // Deep slate/blue background (Dark Theme)
+    foreground: '#f8fafc', // Near white text
+    accent: '#1e293b'
   },
   seo: {
     title: 'Modulares GM | Muebles, Diseño y Construcción',
