@@ -8,9 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { saveSiteContent, getProductDescription } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Plus, Save, Sparkles, Trash2 } from 'lucide-react';
+import { Loader2, Plus, Save, Sparkles, Trash2, RotateCcw } from 'lucide-react';
 import { Card } from '../ui/card';
 import { ImageUploader } from './image-uploader';
+import { defaultSiteContent } from '@/lib/data';
 
 interface CmsProductsFormProps {
   siteContent: SiteContent;
@@ -36,7 +37,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
       desc: '',
       price: 0,
       discountPrice: null,
-      imgUrl: '',
+      imgUrl: defaultSiteContent.products[0]?.imgUrl || '',
       category: 'General'
     };
     setSiteContent(prev => ({ ...prev, products: [newProduct, ...prev.products] }));
@@ -48,6 +49,12 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     }
   };
   
+  const handleRestoreDefaults = () => {
+    if (confirm('¿Restaurar todos los productos de la tienda a los valores por defecto?')) {
+      setSiteContent(prev => ({ ...prev, products: defaultSiteContent.products }));
+    }
+  };
+
   const handleSave = () => {
     startSaving(async () => {
       const result = await saveSiteContent(siteContent);
@@ -79,6 +86,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
             <p className="text-xs text-muted-foreground">{siteContent.products.length} productos listos para la venta.</p>
         </div>
         <div className="flex gap-2">
+            <Button variant="outline" size="sm" onClick={handleRestoreDefaults}><RotateCcw className="mr-2 h-4 w-4" /> Restaurar</Button>
             <Button variant="outline" size="sm" onClick={handleAddProduct}><Plus className="mr-2 h-4 w-4" /> Añadir</Button>
             <Button size="sm" onClick={handleSave} disabled={isSaving}>
             {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
@@ -87,7 +95,6 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
         </div>
       </div>
       
-      {/* REDESIGN: 2 elements per row on larger screens */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
         {siteContent.products.map((product) => (
           <Card key={product.id} className="group overflow-hidden border-2 hover:border-primary/20 transition-all">
@@ -97,7 +104,10 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
                   label="Foto del Producto"
                   currentUrl={product.imgUrl}
                   onUpload={(url) => handleProductChange(product.id, 'imgUrl', url)}
-                  onRemove={() => handleProductChange(product.id, 'imgUrl', '')}
+                  onRemove={() => {
+                    const defaultImg = defaultSiteContent.products.find(p => p.id === product.id)?.imgUrl || defaultSiteContent.products[0].imgUrl;
+                    handleProductChange(product.id, 'imgUrl', defaultImg);
+                  }}
                   folder="products"
                 />
               </div>

@@ -8,9 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Plus, Save, Trash2 } from 'lucide-react';
+import { Loader2, Plus, Save, Trash2, RotateCcw } from 'lucide-react';
 import { ImageUploader } from './image-uploader';
 import { getIconComponent } from '@/lib/icons';
+import { defaultSiteContent } from '@/lib/data';
 
 interface CmsBrandsStatsFormProps {
   siteContent: SiteContent;
@@ -36,7 +37,7 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
   };
 
   const handleAddBrand = () => {
-    const newBrand: Brand = { id: Date.now(), name: 'Nueva Marca', url: '' };
+    const newBrand: Brand = { id: Date.now(), name: 'Nueva Marca', url: defaultSiteContent.brands[0]?.url || '' };
     setSiteContent(prev => ({ ...prev, brands: [...prev.brands, newBrand] }));
   };
 
@@ -50,6 +51,16 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
       setSiteContent(prev => ({
         ...prev,
         [arrayName]: (prev[arrayName] as any[]).filter(item => item.id !== id),
+      }));
+    }
+  };
+  
+  const handleRestoreDefaults = () => {
+    if (confirm('¿Restaurar Marcas y Estadísticas a los valores por defecto?')) {
+      setSiteContent(prev => ({
+        ...prev,
+        brands: defaultSiteContent.brands,
+        stats: defaultSiteContent.stats,
       }));
     }
   };
@@ -72,10 +83,15 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
           <h2 className="text-xl font-bold">Marcas y Experiencia</h2>
           <p className="text-sm text-muted-foreground">Gestiona logos de proveedores y datos del Hero.</p>
         </div>
-        <Button onClick={handleSave} disabled={isSaving}>
-          {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-          Guardar Cambios
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
+            <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
+          </Button>
+          <Button onClick={handleSave} disabled={isSaving}>
+            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
+            Guardar Cambios
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-8">
@@ -90,17 +106,22 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
             </Button>
           </CardHeader>
           <CardContent>
-            {/* REDESIGN: Grid layout for brands to avoid long vertical lists */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {siteContent.brands.map(brand => (
                 <div key={brand.id} className="flex flex-col gap-4 p-4 rounded-xl border bg-muted/20">
-                  <ImageUploader
-                    currentUrl={brand.url}
-                    onUpload={(url) => handleBrandChange(brand.id, 'url', url)}
-                    onRemove={() => handleBrandChange(brand.id, 'url', '')}
-                    folder="brands"
-                    label="Logo de la Marca"
-                  />
+                  {/* REDESIGN: Using object-contain and white background for logos to ensure visibility */}
+                  <div className="bg-white rounded-lg p-2 border shadow-inner">
+                    <ImageUploader
+                      currentUrl={brand.url}
+                      onUpload={(url) => handleBrandChange(brand.id, 'url', url)}
+                      onRemove={() => {
+                        const defaultUrl = defaultSiteContent.brands.find(b => b.id === brand.id)?.url || defaultSiteContent.brands[0].url;
+                        handleBrandChange(brand.id, 'url', defaultUrl);
+                      }}
+                      folder="brands"
+                      label="Logo de la Marca"
+                    />
+                  </div>
                   <div className="space-y-3">
                     <div className="space-y-1">
                       <Label className="text-[10px] uppercase font-bold text-muted-foreground">Nombre</Label>

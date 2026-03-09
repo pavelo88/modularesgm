@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useTransition } from 'react';
@@ -10,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { getSeoSuggestions, saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Save, Sparkles, Phone, MapPin, Share2, Search } from 'lucide-react';
+import { Loader2, Save, Sparkles, Phone, MapPin, Share2, Search, RotateCcw } from 'lucide-react';
 import { ImageUploader } from './image-uploader';
 import { defaultSiteContent } from '@/lib/data';
 
@@ -48,6 +47,23 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
     });
   };
 
+  const handleRestoreDefaults = () => {
+    if (confirm('¿Restaurar los valores por defecto de la sección Inicio y Contacto?')) {
+      setSiteContent(prev => ({
+        ...prev,
+        heroTitle: defaultSiteContent.heroTitle,
+        heroSubtitle: defaultSiteContent.heroSubtitle,
+        heroMediaUrl: defaultSiteContent.heroMediaUrl,
+        ctaText: defaultSiteContent.ctaText,
+        whatsappNumber: defaultSiteContent.whatsappNumber,
+        address: defaultSiteContent.address,
+        mapUrl: defaultSiteContent.mapUrl,
+        socialUrls: defaultSiteContent.socialUrls,
+        seo: defaultSiteContent.seo,
+      }));
+    }
+  };
+
   const handleGenerateSeo = () => {
     startGeneratingSeo(async () => {
         const result = await getSeoSuggestions(siteContent.heroTitle, siteContent.heroSubtitle);
@@ -67,10 +83,15 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
             <h2 className="text-xl font-bold">Configuración de Inicio</h2>
             <p className="text-sm text-muted-foreground">Modifica el Hero, contacto y SEO del sitio.</p>
         </div>
-        <Button onClick={handleSave} disabled={isSaving}>
-          {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-          Guardar Cambios
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
+            <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
+          </Button>
+          <Button onClick={handleSave} disabled={isSaving}>
+            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
+            Guardar Cambios
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

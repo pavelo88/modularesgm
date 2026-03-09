@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Trash2, UploadCloud, ImageIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ImageUploaderProps {
   currentUrl: string;
@@ -14,9 +15,10 @@ interface ImageUploaderProps {
   onRemove: () => void;
   label?: string;
   folder?: string;
+  className?: string;
 }
 
-export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 'cms' }: ImageUploaderProps) {
+export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 'cms', className }: ImageUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,19 +39,22 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
   };
 
   return (
-    <div className="space-y-3">
+    <div className={cn("space-y-3", className)}>
       {label && <Label className="text-[10px] font-bold uppercase text-muted-foreground">{label}</Label>}
       <div className="relative group aspect-video rounded-xl overflow-hidden border bg-muted flex items-center justify-center">
         {currentUrl ? (
           <>
-            {/* Use standard img for more reliable preview in admin bypasses next/image hostname checks */}
+            {/* IMPROVEMENT: Using object-contain for logos to avoid cropping issues */}
             <img 
                 src={currentUrl} 
                 alt="Preview" 
-                className="w-full h-full object-cover transition-opacity group-hover:opacity-40" 
+                className={cn(
+                    "w-full h-full transition-opacity group-hover:opacity-40",
+                    folder === 'brands' ? "object-contain" : "object-cover"
+                )}
             />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button variant="destructive" size="sm" onClick={(e) => { e.preventDefault(); onRemove(); }} className="h-8 text-xs">
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                <Button variant="destructive" size="sm" onClick={(e) => { e.preventDefault(); onRemove(); }} className="h-8 text-xs shadow-xl">
                     <Trash2 className="mr-2 h-3 w-3" /> Quitar
                 </Button>
             </div>
@@ -65,7 +70,7 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
         <Input
           type="file"
           accept="image/*"
-          id={`file-${label}-${folder}`}
+          id={`file-${label}-${folder}-${Math.random()}`}
           className="hidden"
           onChange={handleFileChange}
           disabled={isUploading}
@@ -76,13 +81,13 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
           className="w-full h-8 cursor-pointer text-xs"
           disabled={isUploading}
         >
-          <label htmlFor={`file-${label}-${folder}`} className="flex items-center justify-center">
+          <label htmlFor={`file-${label}-${folder}-${Math.random()}`} className="flex items-center justify-center cursor-pointer">
             {isUploading ? (
               <Loader2 className="mr-2 h-3 w-3 animate-spin" />
             ) : (
               <UploadCloud className="mr-2 h-3 w-3" />
             )}
-            {isUploading ? 'Subiendo...' : 'Cargar'}
+            {isUploading ? 'Subiendo...' : 'Cargar Nueva'}
           </label>
         </Button>
       </div>

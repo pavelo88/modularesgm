@@ -9,8 +9,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Plus, Save, Trash2 } from 'lucide-react';
+import { Loader2, Plus, Save, Trash2, RotateCcw } from 'lucide-react';
 import { ImageUploader } from './image-uploader';
+import { defaultSiteContent } from '@/lib/data';
 
 interface CmsServicesFormProps {
   siteContent: SiteContent;
@@ -33,7 +34,7 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
       id: Date.now(),
       title: 'Nuevo Servicio',
       desc: '',
-      imgUrl: '',
+      imgUrl: defaultSiteContent.services[0]?.imgUrl || '',
       icon: 'Grid',
       catalogUrl: ''
     };
@@ -46,6 +47,12 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
     }
   };
   
+  const handleRestoreDefaults = () => {
+    if (confirm('¿Restaurar todos los servicios a los valores por defecto?')) {
+      setSiteContent(prev => ({ ...prev, services: defaultSiteContent.services }));
+    }
+  };
+
   const handleSave = () => {
     startSaving(async () => {
       const result = await saveSiteContent(siteContent);
@@ -65,6 +72,7 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
             <p className="text-xs text-muted-foreground">{siteContent.services.length} servicios activos en la web.</p>
         </div>
         <div className="flex gap-2">
+            <Button variant="outline" size="sm" onClick={handleRestoreDefaults}><RotateCcw className="mr-2 h-4 w-4" /> Restaurar</Button>
             <Button variant="outline" size="sm" onClick={handleAddService}><Plus className="mr-2 h-4 w-4" /> Añadir</Button>
             <Button size="sm" onClick={handleSave} disabled={isSaving}>
             {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
@@ -73,7 +81,6 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
         </div>
       </div>
       
-      {/* REDESIGN: 2 elements per row on larger screens */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-20">
         {siteContent.services.map((service) => (
           <Card key={service.id} className="group overflow-hidden border-2 hover:border-primary/20 transition-all">
@@ -83,7 +90,10 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
                   label="Imagen Principal"
                   currentUrl={service.imgUrl}
                   onUpload={(url) => handleServiceChange(service.id, 'imgUrl', url)}
-                  onRemove={() => handleServiceChange(service.id, 'imgUrl', '')}
+                  onRemove={() => {
+                    const defaultImg = defaultSiteContent.services.find(s => s.id === service.id)?.imgUrl || defaultSiteContent.services[0].imgUrl;
+                    handleServiceChange(service.id, 'imgUrl', defaultImg);
+                  }}
                   folder="services"
                 />
               </div>
