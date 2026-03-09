@@ -175,8 +175,9 @@ export function AdminDashboardClient() {
               {menuItems.find(item => item.id === activeTab)?.label}
            </h1>
         </header>
-        <main className="h-[calc(100vh-3.5rem)] overflow-hidden">
-          <div className="max-w-7xl mx-auto p-4 md:p-8 h-full">
+        {/* FIX: Changed overflow-hidden to overflow-y-auto to allow scrolling */}
+        <main className="h-[calc(100vh-3.5rem)] overflow-y-auto">
+          <div className="max-w-7xl mx-auto p-4 md:p-8">
             {renderContent()}
           </div>
         </main>
