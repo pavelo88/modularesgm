@@ -36,7 +36,7 @@ export const defaultBrands: Brand[] = [
   { id: 5, name: 'SILESTONE', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg' },
   { id: 6, name: 'DEKTON', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg' },
   { id: 7, name: 'TEKA', url: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_Teka_svg.svg' },
-  { id: 8, name: 'BRIGGS', url: 'https://www.briggsec.com/wp-content/uploads/2020/12/logo-briggs-web-01-e1608316773418.png' },
+  { id: 8, name: 'BRIGGS', url: 'https://logo.clearbit.com/briggsec.com' },
   { id: 9, name: 'COSENTINO', url: 'https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg' }
 ];
 

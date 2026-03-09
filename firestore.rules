@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // WARNING: These rules are permissive for development and should be
+    // secured before going to production.
+    
+    // Site content, readable by anyone, writable by admin (currently anyone).
+    match /siteContent/{docId} {
+      allow read, write: if true;
+    }
+
+    // Leads can be created by anyone. Admin needs to read.
+    match /leads/{leadId} {
+      allow create, read: if true;
+      allow update, delete: if false;
+    }
+
+    // Orders can be created by anyone. Admin needs to read and update status.
+    match /orders/{orderId} {
+      allow read, create, update: if true;
+      allow delete: if false;
+    }
+  }
+}
