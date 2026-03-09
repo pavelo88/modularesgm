@@ -33,6 +33,8 @@ import { OrdersManager } from './orders-manager';
 import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
+import { db } from '@/lib/firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
 
@@ -49,24 +51,36 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
 
 export function AdminDashboardClient() {
   const [activeTab, setActiveTab] = useState<AdminTab>('general');
-  // Temporarily using defaultSiteContent to allow the admin panel to load.
-  // Data saving will not work until the Firebase connection is restored.
   const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // NOTE: Firebase fetching logic removed to prevent app crash due to permission errors.
-  // The admin panel will load with local default data.
-  // Any changes made will not be saved until the DB connection is fixed.
+  useEffect(() => {
+    const contentRef = doc(db, 'siteContent', 'main');
+    const unsubscribe = onSnapshot(contentRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data() as SiteContent;
+        setSiteContent({
+          ...defaultSiteContent,
+          ...data,
+        });
+      }
+      setLoading(false);
+    }, (error) => {
+      console.error("Error loading admin content:", error);
+      setLoading(false);
+    });
+    
+    return () => unsubscribe();
+  }, []);
 
   const renderContent = () => {
-    if (loading || !siteContent) {
+    if (loading) {
         return (
           <div className="space-y-6">
             <div className="flex justify-end">
               <Skeleton className="h-10 w-32" />
             </div>
             <Skeleton className="h-96 w-full" />
-            <Skeleton className="h-64 w-full" />
           </div>
         );
     }
@@ -103,8 +117,10 @@ export function AdminDashboardClient() {
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-3 p-2">
-            <Image src={logo} alt="Modulares GM Logo" width={32} height={32} className="rounded-md dark:hidden"/>
-            <Image src={logo2} alt="Modulares GM Logo" width={32} height={32} className="rounded-md hidden dark:block"/>
+            <div className="relative w-8 h-8 overflow-hidden rounded-md">
+                <Image src={logo} alt="Modulares GM" fill className="object-cover dark:hidden"/>
+                <Image src={logo2} alt="Modulares GM" fill className="object-cover hidden dark:block"/>
+            </div>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
               <span className="text-lg font-bold">Modulares GM</span>
               <span className="text-xs text-muted-foreground">Admin Panel</span>
