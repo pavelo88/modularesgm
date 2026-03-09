@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useTransition } from 'react';
@@ -10,7 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { getSeoSuggestions, saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Save, Sparkles } from 'lucide-react';
-import Image from 'next/image';
+import { ImageUploader } from './image-uploader';
+import { defaultSiteContent } from '@/lib/data';
 
 interface CmsGeneralFormProps {
   siteContent: SiteContent;
@@ -67,60 +69,64 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
         </Button>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Sección Hero</CardTitle>
-          <CardDescription>Contenido principal de la página de inicio.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="heroTitle">Título Principal</Label>
-            <Input id="heroTitle" name="heroTitle" value={siteContent.heroTitle || ''} onChange={handleInputChange} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="heroSubtitle">Subtítulo</Label>
-            <Textarea id="heroSubtitle" name="heroSubtitle" value={siteContent.heroSubtitle || ''} onChange={handleInputChange} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="ctaText">Texto del Botón (CTA)</Label>
-            <Input id="ctaText" name="ctaText" value={siteContent.ctaText || ''} onChange={handleInputChange} />
-          </div>
-          <div className="space-y-2">
-            <Label>Imagen de Fondo</Label>
-            <Image src={siteContent.heroMediaUrl || ''} alt="Hero Background" width={200} height={100} className="rounded-md object-cover" />
-            <Input type="file" disabled />
-            <p className="text-xs text-muted-foreground">La carga de archivos está deshabilitada en esta demo.</p>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Contacto y Redes</CardTitle>
-        </CardHeader>
-        <CardContent className="grid md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="whatsappNumber">Número de WhatsApp</Label>
-            <Input id="whatsappNumber" name="whatsappNumber" value={siteContent.whatsappNumber || ''} onChange={handleInputChange} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="address">Dirección</Label>
-            <Input id="address" name="address" value={siteContent.address || ''} onChange={handleInputChange} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="socialUrls.facebook">Facebook URL</Label>
-            <Input id="socialUrls.facebook" name="socialUrls.facebook" value={siteContent.socialUrls?.facebook || ''} onChange={handleInputChange} />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="socialUrls.instagram">Instagram URL</Label>
-            <Input id="socialUrls.instagram" name="socialUrls.instagram" value={siteContent.socialUrls?.instagram || ''} onChange={handleInputChange} />
-          </div>
-           <div className="md:col-span-2 space-y-2">
-            <Label htmlFor="mapUrl">Google Maps Embed URL</Label>
-            <Textarea id="mapUrl" name="mapUrl" value={siteContent.mapUrl || ''} onChange={handleInputChange} />
-          </div>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card>
+            <CardHeader>
+            <CardTitle>Sección Hero</CardTitle>
+            <CardDescription>Contenido principal de la página de inicio.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+            <div className="space-y-2">
+                <Label htmlFor="heroTitle">Título Principal</Label>
+                <Input id="heroTitle" name="heroTitle" value={siteContent.heroTitle || ''} onChange={handleInputChange} />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="heroSubtitle">Subtítulo</Label>
+                <Textarea id="heroSubtitle" name="heroSubtitle" value={siteContent.heroSubtitle || ''} onChange={handleInputChange} />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="ctaText">Texto del Botón (CTA)</Label>
+                <Input id="ctaText" name="ctaText" value={siteContent.ctaText || ''} onChange={handleInputChange} />
+            </div>
+            <ImageUploader
+                label="Imagen de Fondo"
+                currentUrl={siteContent.heroMediaUrl}
+                onUpload={(url) => setSiteContent(prev => ({...prev, heroMediaUrl: url}))}
+                onRemove={() => setSiteContent(prev => ({...prev, heroMediaUrl: defaultSiteContent.heroMediaUrl}))}
+            />
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+            <CardTitle>Contacto y Redes</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="whatsappNumber">Número de WhatsApp</Label>
+                        <Input id="whatsappNumber" name="whatsappNumber" value={siteContent.whatsappNumber || ''} onChange={handleInputChange} />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="address">Dirección</Label>
+                        <Input id="address" name="address" value={siteContent.address || ''} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="socialUrls.facebook">Facebook URL</Label>
+                    <Input id="socialUrls.facebook" name="socialUrls.facebook" value={siteContent.socialUrls?.facebook || ''} onChange={handleInputChange} />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="socialUrls.instagram">Instagram URL</Label>
+                    <Input id="socialUrls.instagram" name="socialUrls.instagram" value={siteContent.socialUrls?.instagram || ''} onChange={handleInputChange} />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="mapUrl">Google Maps Embed URL</Label>
+                    <Textarea id="mapUrl" name="mapUrl" value={siteContent.mapUrl || ''} onChange={handleInputChange} className="h-32"/>
+                </div>
+            </CardContent>
+        </Card>
+      </div>
 
       <Card>
         <CardHeader>

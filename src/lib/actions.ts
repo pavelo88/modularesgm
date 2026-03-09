@@ -1,3 +1,4 @@
+
 'use server';
 
 import { z } from 'zod';
@@ -149,7 +150,9 @@ export async function saveSiteContent(content: SiteContent) {
   await protectedAction();
   try {
     const contentRef = doc(db, 'siteContent', 'main');
-    await setDoc(contentRef, content);
+    // Ensure nested objects aren't lost if they are undefined
+    const cleanContent = JSON.parse(JSON.stringify(content));
+    await setDoc(contentRef, cleanContent);
     revalidatePath('/');
     revalidatePath('/store');
     return { success: true };

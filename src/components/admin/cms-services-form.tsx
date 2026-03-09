@@ -1,17 +1,18 @@
+
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import type { SiteContent, Service } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Plus, Save, Trash2 } from 'lucide-react';
-import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { ImageUploader } from './image-uploader';
 
 interface CmsServicesFormProps {
   siteContent: SiteContent;
@@ -60,47 +61,64 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
 
   return (
     <div className="space-y-6">
-       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Gestionar Servicios</h1>
+       <div className="flex justify-between items-center bg-card p-4 rounded-xl border">
+        <div>
+            <h1 className="text-xl font-bold">Gestión de Servicios</h1>
+            <p className="text-xs text-muted-foreground">Administra los servicios que aparecen en la web.</p>
+        </div>
         <div className="flex gap-2">
-            <Button variant="outline" onClick={handleAddService}><Plus className="mr-2 h-4 w-4" /> Añadir Servicio</Button>
-            <Button onClick={handleSave} disabled={isSaving}>
+            <Button variant="outline" size="sm" onClick={handleAddService}><Plus className="mr-2 h-4 w-4" /> Añadir</Button>
+            <Button size="sm" onClick={handleSave} disabled={isSaving}>
             {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            Guardar Cambios
+            Guardar
             </Button>
         </div>
       </div>
       
       <Accordion type="single" collapsible className="w-full space-y-4">
         {siteContent.services.map((service) => (
-          <AccordionItem value={String(service.id)} key={service.id} className="border-b-0">
-             <Card>
+          <AccordionItem value={String(service.id)} key={service.id} className="border-none">
+             <Card className="overflow-hidden">
                 <AccordionTrigger className="p-4 hover:no-underline">
                     <div className="flex items-center gap-4">
-                        <Image src={service.imgUrl || ''} alt={service.title || ''} width={40} height={40} className="rounded-md h-10 w-10 object-cover"/>
-                        <span className="font-semibold">{service.title || 'Servicio Sin Título'}</span>
+                        <div className="w-12 h-12 relative rounded-md overflow-hidden border">
+                            <img src={service.imgUrl || ''} alt={service.title || ''} className="object-cover w-full h-full"/>
+                        </div>
+                        <div className="text-left">
+                            <span className="font-semibold block">{service.title || 'Servicio Sin Título'}</span>
+                            <span className="text-xs text-muted-foreground truncate max-w-[200px] block">{service.desc}</span>
+                        </div>
                     </div>
                 </AccordionTrigger>
-                <AccordionContent>
-                    <div className="p-6 pt-0 space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <AccordionContent className="p-6 pt-0 border-t">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                        <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label>Título</Label>
                                 <Input value={service.title || ''} onChange={(e) => handleServiceChange(service.id, 'title', e.target.value)} />
                             </div>
-                             <div className="space-y-2">
-                                <Label>Icono</Label>
+                            <div className="space-y-2">
+                                <Label>Icono (Lucide name)</Label>
                                 <Input value={service.icon || ''} onChange={(e) => handleServiceChange(service.id, 'icon', e.target.value)} />
                             </div>
+                            <div className="space-y-2">
+                                <Label>Descripción</Label>
+                                <Textarea value={service.desc || ''} onChange={(e) => handleServiceChange(service.id, 'desc', e.target.value)} className="h-32" />
+                            </div>
                         </div>
-                        <div className="space-y-2">
-                            <Label>Descripción</Label>
-                            <Textarea value={service.desc || ''} onChange={(e) => handleServiceChange(service.id, 'desc', e.target.value)} />
-                        </div>
-                        <div className="flex justify-end">
-                            <Button variant="destructive" size="sm" onClick={() => handleDeleteService(service.id)}>
-                                <Trash2 className="mr-2 h-4 w-4" /> Eliminar
-                            </Button>
+                        <div className="space-y-4">
+                            <ImageUploader
+                                label="Imagen del Servicio"
+                                currentUrl={service.imgUrl}
+                                onUpload={(url) => handleServiceChange(service.id, 'imgUrl', url)}
+                                onRemove={() => handleServiceChange(service.id, 'imgUrl', 'https://picsum.photos/seed/service/800/800')}
+                                folder="services"
+                            />
+                            <div className="flex justify-end pt-4">
+                                <Button variant="destructive" size="sm" onClick={() => handleDeleteService(service.id)}>
+                                    <Trash2 className="mr-2 h-4 w-4" /> Eliminar Servicio
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </AccordionContent>

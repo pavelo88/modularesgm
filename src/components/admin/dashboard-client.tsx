@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -10,6 +11,8 @@ import {
   MessageSquare,
   Settings,
   ShoppingBag,
+  Eye,
+  Edit3,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -30,6 +33,7 @@ import { CmsProductsForm } from './cms-products-form';
 import { CmsBrandsStatsForm } from './cms-brands-stats-form';
 import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
+import { VisualEditor } from './visual-editor';
 import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -38,9 +42,10 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import logo from '@/app/logo.jpg';
 import logo2 from '@/app/logo2.jpg';
 
-type AdminTab = 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
+type AdminTab = 'visual' | 'general' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
 
 const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
+  { id: 'visual', label: 'Editor Visual', icon: <Eye /> },
   { id: 'general', label: 'General & SEO', icon: <Settings /> },
   { id: 'services', label: 'Servicios', icon: <LayoutGrid /> },
   { id: 'products', label: 'Productos Tienda', icon: <ShoppingBag /> },
@@ -50,7 +55,7 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
 ];
 
 export function AdminDashboardClient() {
-  const [activeTab, setActiveTab] = useState<AdminTab>('general');
+  const [activeTab, setActiveTab] = useState<AdminTab>('visual');
   const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
   const [loading, setLoading] = useState(true);
 
@@ -62,6 +67,10 @@ export function AdminDashboardClient() {
         setSiteContent({
           ...defaultSiteContent,
           ...data,
+          services: data.services && data.services.length > 0 ? data.services : defaultSiteContent.services,
+          brands: data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands,
+          stats: data.stats && data.stats.length > 0 ? data.stats : defaultSiteContent.stats,
+          products: data.products && data.products.length > 0 ? data.products : defaultSiteContent.products,
         });
       }
       setLoading(false);
@@ -95,6 +104,8 @@ export function AdminDashboardClient() {
     };
 
     switch (activeTab) {
+      case 'visual':
+        return <VisualEditor siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'general':
         return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'services':
@@ -156,14 +167,18 @@ export function AdminDashboardClient() {
           </form>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset>
+      <SidebarInset className="bg-muted/40 overflow-hidden">
         <header className="sticky top-0 z-10 flex items-center justify-between h-14 px-4 border-b bg-background/95 backdrop-blur-sm">
            <SidebarTrigger />
            <h1 className="text-xl font-semibold">
               {menuItems.find(item => item.id === activeTab)?.label}
            </h1>
         </header>
-        <main className="p-4 md:p-6">{renderContent()}</main>
+        <main className="h-[calc(100vh-3.5rem)] overflow-y-auto">
+          <div className="max-w-7xl mx-auto p-4 md:p-6">
+            {renderContent()}
+          </div>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );
