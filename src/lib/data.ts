@@ -1,4 +1,3 @@
-
 import type { Service, Product, Brand, Stat, SiteContent } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
@@ -64,10 +63,10 @@ export const defaultSiteContent: SiteContent = {
     linkedin: ''
   },
   theme: {
-    primary: '#0ea5e9', // Sky blue accent
+    primary: '#0ea5e9',
     secondary: '#38bdf8',
-    background: '#0f172a', // Deep slate/blue background (Dark Theme)
-    foreground: '#f8fafc', // Near white text
+    background: '#0f172a',
+    foreground: '#f8fafc',
     accent: '#1e293b'
   },
   seo: {
