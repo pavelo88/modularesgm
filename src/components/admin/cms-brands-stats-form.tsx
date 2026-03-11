@@ -37,26 +37,53 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
   };
 
   const handleAddBrand = () => {
-    const newBrand: Brand = { id: Date.now(), name: 'Nueva Marca', url: defaultSiteContent.brands[0]?.url || '' };
-    setSiteContent(prev => ({ ...prev, brands: [...prev.brands, newBrand] }));
+    const newBrand: Brand = { 
+      id: Date.now(), 
+      name: 'Nueva Marca', 
+      url: defaultSiteContent.brands[0]?.url || '' 
+    };
+    setSiteContent(prev => ({ 
+      ...prev, 
+      brands: [newBrand, ...prev.brands] 
+    }));
+    toast({
+      title: "Marca añadida",
+      description: "Recuerda subir el logo y guardar.",
+    });
   };
 
   const handleAddStat = () => {
-    const newStat: Stat = { id: Date.now(), value: '0', label: 'Nuevo Dato', icon: 'Activity' };
-    setSiteContent(prev => ({ ...prev, stats: [...prev.stats, newStat] }));
+    const newStat: Stat = { 
+      id: Date.now(), 
+      value: '0', 
+      label: 'Nuevo Dato', 
+      icon: 'Activity' 
+    };
+    setSiteContent(prev => ({ 
+      ...prev, 
+      stats: [...prev.stats, newStat] 
+    }));
+    toast({
+      title: "Estadística añadida",
+      description: "Edita el valor y el icono.",
+    });
   };
 
   const handleDeleteItem = (arrayName: 'brands' | 'stats', id: number) => {
-    if (confirm('¿Estás seguro de que quieres eliminar este elemento?')) {
+    if (confirm('¿Estás seguro de que quieres eliminar este elemento definitivamente?')) {
       setSiteContent(prev => ({
         ...prev,
         [arrayName]: (prev[arrayName] as any[]).filter(item => item.id !== id),
       }));
+      toast({
+        title: "Elemento eliminado",
+        description: "No olvides guardar para confirmar la acción.",
+      });
     }
   };
   
   const handleRestoreDefaults = () => {
-    if (confirm('¿Restaurar Marcas y Estadísticas a los valores por defecto?')) {
+    if (confirm('¿Restaurar Marcas y Estadísticas a los valores originales?')) {
       setSiteContent(prev => ({
         ...prev,
         brands: defaultSiteContent.brands,
@@ -109,7 +136,6 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {siteContent.brands.map(brand => (
                 <div key={brand.id} className="flex flex-col gap-4 p-4 rounded-xl border bg-muted/20">
-                  {/* REDESIGN: Using object-contain and white background for logos to ensure visibility */}
                   <div className="bg-white rounded-lg p-2 border shadow-inner">
                     <ImageUploader
                       currentUrl={brand.url}
@@ -126,7 +152,7 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
                     <div className="space-y-1">
                       <Label className="text-[10px] uppercase font-bold text-muted-foreground">Nombre</Label>
                       <Input 
-                        value={brand.name} 
+                        value={brand.name || ''} 
                         onChange={e => handleBrandChange(brand.id, 'name', e.target.value)} 
                         placeholder="Ej: Novopan"
                       />
@@ -137,7 +163,7 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
                       className="text-destructive w-full hover:bg-destructive/10" 
                       onClick={() => handleDeleteItem('brands', brand.id)}
                     >
-                      <Trash2 className="mr-2 h-4 w-4" /> Eliminar
+                      <Trash2 className="mr-2 h-4 w-4" /> Eliminar Marca
                     </Button>
                   </div>
                 </div>
@@ -172,16 +198,16 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
                     <div className="grid grid-cols-2 gap-2">
                       <div className="space-y-1">
                         <Label className="text-[10px] uppercase font-bold text-muted-foreground">Valor</Label>
-                        <Input value={stat.value} onChange={e => handleStatChange(stat.id, 'value', e.target.value)} />
+                        <Input value={stat.value || ''} onChange={e => handleStatChange(stat.id, 'value', e.target.value)} />
                       </div>
                       <div className="space-y-1">
                         <Label className="text-[10px] uppercase font-bold text-muted-foreground">Icono</Label>
-                        <Input value={stat.icon} onChange={e => handleStatChange(stat.id, 'icon', e.target.value)} />
+                        <Input value={stat.icon || ''} onChange={e => handleStatChange(stat.id, 'icon', e.target.value)} />
                       </div>
                     </div>
                     <div className="space-y-1">
                       <Label className="text-[10px] uppercase font-bold text-muted-foreground">Etiqueta</Label>
-                      <Input value={stat.label} onChange={e => handleStatChange(stat.id, 'label', e.target.value)} />
+                      <Input value={stat.label || ''} onChange={e => handleStatChange(stat.id, 'label', e.target.value)} />
                     </div>
                   </div>
                 </div>

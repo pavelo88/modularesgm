@@ -34,24 +34,41 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     const newProduct: Product = {
       id: Date.now(),
       title: 'Nuevo Producto',
-      desc: '',
+      desc: 'Descripción comercial del producto...',
       price: 0,
       discountPrice: null,
       imgUrl: defaultSiteContent.products[0]?.imgUrl || '',
       category: 'General'
     };
-    setSiteContent(prev => ({ ...prev, products: [newProduct, ...prev.products] }));
+    setSiteContent(prev => ({
+      ...prev,
+      products: [newProduct, ...prev.products]
+    }));
+    toast({
+      title: "Producto añadido",
+      description: "Recuerda completar los datos y guardar los cambios.",
+    });
   };
 
   const handleDeleteProduct = (id: number) => {
-    if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-      setSiteContent(prev => ({ ...prev, products: prev.products.filter(p => p.id !== id) }));
+    if (confirm('¿Estás seguro de que quieres eliminar este producto definitivamente de la tienda?')) {
+      setSiteContent(prev => ({
+        ...prev,
+        products: prev.products.filter(p => p.id !== id)
+      }));
+      toast({
+        title: "Producto removido",
+        description: "No olvides guardar para aplicar los cambios.",
+      });
     }
   };
   
   const handleRestoreDefaults = () => {
     if (confirm('¿Restaurar todos los productos de la tienda a los valores por defecto?')) {
-      setSiteContent(prev => ({ ...prev, products: defaultSiteContent.products }));
+      setSiteContent(prev => ({
+        ...prev,
+        products: defaultSiteContent.products
+      }));
     }
   };
 

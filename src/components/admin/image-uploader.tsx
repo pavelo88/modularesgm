@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Trash2, UploadCloud, ImageIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 interface ImageUploaderProps {
   currentUrl: string;
@@ -20,19 +21,38 @@ interface ImageUploaderProps {
 
 export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 'cms', className }: ImageUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
+  const { toast } = useToast();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file || !storage) return;
+    if (!file) return;
+    
+    if (!storage) {
+      toast({
+        variant: "destructive",
+        title: "Error de Configuración",
+        description: "Firebase Storage no está inicializado. Verifica tu configuración.",
+      });
+      return;
+    }
 
     setIsUploading(true);
     try {
-      const storageRef = ref(storage, `${folder}/${Date.now()}-${file.name}`);
+      const storageRef = ref(storage, `${folder}/${Date.now()}-${file.name.replace(/\s+/g, '_')}`);
       const snapshot = await uploadBytes(storageRef, file);
       const url = await getDownloadURL(snapshot.ref);
       onUpload(url);
+      toast({
+        title: "Imagen cargada",
+        description: "La imagen se ha subido correctamente al servidor.",
+      });
     } catch (error) {
       console.error("Error uploading image:", error);
+      toast({
+        variant: "destructive",
+        title: "Error al subir",
+        description: "No se pudo subir la imagen. Inténtalo de nuevo.",
+      });
     } finally {
       setIsUploading(false);
     }
@@ -44,7 +64,6 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
       <div className="relative group aspect-video rounded-xl overflow-hidden border bg-muted flex items-center justify-center">
         {currentUrl ? (
           <>
-            {/* IMPROVEMENT: Using object-contain for logos to avoid cropping issues */}
             <img 
                 src={currentUrl} 
                 alt="Preview" 
@@ -54,7 +73,17 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
                 )}
             />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                <Button variant="destructive" size="sm" onClick={(e) => { e.preventDefault(); onRemove(); }} className="h-8 text-xs shadow-xl">
+                <Button 
+                  variant="destructive" 
+                  size="sm" 
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    if (confirm('¿Restablecer esta imagen a la predeterminada?')) {
+                      onRemove();
+                    }
+                  }} 
+                  className="h-8 text-xs shadow-xl"
+                >
                     <Trash2 className="mr-2 h-3 w-3" /> Quitar
                 </Button>
             </div>
@@ -70,7 +99,7 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
         <Input
           type="file"
           accept="image/*"
-          id={`file-${label}-${folder}-${Math.random()}`}
+          id={`file-${label}-${folder}`}
           className="hidden"
           onChange={handleFileChange}
           disabled={isUploading}
@@ -81,7 +110,7 @@ export function ImageUploader({ currentUrl, onUpload, onRemove, label, folder = 
           className="w-full h-8 cursor-pointer text-xs"
           disabled={isUploading}
         >
-          <label htmlFor={`file-${label}-${folder}-${Math.random()}`} className="flex items-center justify-center cursor-pointer">
+          <label htmlFor={`file-${label}-${folder}`} className="flex items-center justify-center cursor-pointer">
             {isUploading ? (
               <Loader2 className="mr-2 h-3 w-3 animate-spin" />
             ) : (

@@ -33,23 +33,40 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
     const newService: Service = {
       id: Date.now(),
       title: 'Nuevo Servicio',
-      desc: '',
+      desc: 'Descripción del nuevo servicio...',
       imgUrl: defaultSiteContent.services[0]?.imgUrl || '',
       icon: 'Grid',
       catalogUrl: ''
     };
-    setSiteContent(prev => ({ ...prev, services: [newService, ...prev.services] }));
+    setSiteContent(prev => ({
+      ...prev,
+      services: [newService, ...prev.services]
+    }));
+    toast({
+      title: "Servicio añadido",
+      description: "Recuerda guardar los cambios para publicarlo.",
+    });
   };
 
   const handleDeleteService = (id: number) => {
-    if (confirm('¿Estás seguro de que quieres eliminar este servicio?')) {
-      setSiteContent(prev => ({ ...prev, services: prev.services.filter(s => s.id !== id) }));
+    if (confirm('¿Estás seguro de que quieres eliminar este servicio por completo?')) {
+      setSiteContent(prev => ({
+        ...prev,
+        services: prev.services.filter(s => s.id !== id)
+      }));
+      toast({
+        title: "Servicio eliminado de la lista",
+        description: "Guarda los cambios para confirmar la eliminación.",
+      });
     }
   };
   
   const handleRestoreDefaults = () => {
-    if (confirm('¿Restaurar todos los servicios a los valores por defecto?')) {
-      setSiteContent(prev => ({ ...prev, services: defaultSiteContent.services }));
+    if (confirm('¿Restaurar todos los servicios a los valores originales de fábrica?')) {
+      setSiteContent(prev => ({
+        ...prev,
+        services: defaultSiteContent.services
+      }));
     }
   };
 
@@ -123,7 +140,7 @@ export function CmsServicesForm({ siteContent, setSiteContent }: CmsServicesForm
                 <div className="flex justify-between items-center pt-2">
                   <p className="text-[10px] text-muted-foreground italic">ID: {service.id}</p>
                   <Button variant="ghost" size="sm" className="text-destructive hover:bg-destructive/10" onClick={() => handleDeleteService(service.id)}>
-                      <Trash2 className="mr-2 h-4 w-4" /> Eliminar
+                      <Trash2 className="mr-2 h-4 w-4" /> Eliminar Servicio
                   </Button>
                 </div>
               </div>
