@@ -211,7 +211,7 @@ export function Header() {
                         </Link>
                       ))}
                       <div className="my-2 border-t"></div>
-                      <MobileNavLink href="/#top" label="Volver al Inicio" icon={<Home size={20} />} />
+                      <MobileNavLink href="/#top" label="Volver al Inicio" publicOnly={false} icon={<Home size={20} />} />
                     </>
                   ) : (
                     navLinks.map(link => <MobileNavLink key={link.href} {...link} />)

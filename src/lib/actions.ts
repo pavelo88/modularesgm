@@ -1,4 +1,3 @@
-
 'use server';
 
 import { z } from 'zod';
@@ -23,7 +22,8 @@ const SESSION_COOKIE = 'modulares-gm-session';
 
 export async function login(password: string) {
   if (password === ADMIN_PASSWORD) {
-    cookies().set(SESSION_COOKIE, 'authenticated', {
+    const cookieStore = await cookies();
+    cookieStore.set(SESSION_COOKIE, 'authenticated', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24, // 1 day
@@ -35,12 +35,14 @@ export async function login(password: string) {
 }
 
 export async function logout() {
-  cookies().delete(SESSION_COOKIE);
+  const cookieStore = await cookies();
+  cookieStore.delete(SESSION_COOKIE);
   redirect('/admin');
 }
 
 export async function verifySession() {
-  const cookie = cookies().get(SESSION_COOKIE);
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get(SESSION_COOKIE);
   return !!cookie;
 }
 

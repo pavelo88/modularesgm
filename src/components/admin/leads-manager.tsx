@@ -8,7 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Bot, Copy, FileText, Loader2, Search } from 'lucide-react';
+import { Bot, Copy, FileText, Loader2, Search, MessageSquare } from 'lucide-react';
 import { Textarea } from '../ui/textarea';
 import { getLeadAnalysis, getProposal } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';

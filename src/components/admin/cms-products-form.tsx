@@ -136,7 +136,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
                   <div className="flex justify-between items-center mb-1">
                       <Label className="text-[10px] font-bold uppercase text-muted-foreground">Descripción del Producto</Label>
                       <Button 
-                          size="xs" 
+                          size="sm" 
                           variant="ghost" 
                           className="h-6 text-[9px] bg-primary/5 hover:bg-primary/10" 
                           onClick={() => handleGenerateDesc(product)} 
