@@ -16,16 +16,16 @@ export const defaultServices: Service[] = [
 ];
 
 export const defaultProducts: Product[] = [
-  { id: 101, title: 'Cocina Modular Básica (Metro Lineal)', desc: 'Muebles altos y bajos en melamina RH, incluye bisagras estándar y tiradores de aluminio.', price: 250, discountPrice: null, imgUrl: getImage('product-101'), category: 'Cocinas' },
-  { id: 102, title: 'Isla de Cocina con Tope de Cuarzo', desc: 'Isla central de 1.5m x 0.9m con almacenamiento inferior y tope de cuarzo blanco estelar.', price: 950, discountPrice: 850, imgUrl: getImage('product-102'), category: 'Cocinas' },
-  { id: 103, title: 'Mueble de Baño Flotante (Vanity)', desc: 'Mueble resistente a la humedad de 80cm con tope de cuarzo blanco y lavabo sobrepuesto.', price: 350, discountPrice: 290, imgUrl: getImage('product-103'), category: 'Baños' },
-  { id: 104, title: 'Centro de Entretenimiento TV 65"', desc: 'Panel ranurado MDF Pelikano con luces LED integradas y repisa flotante inferior. (200x180cm).', price: 480, discountPrice: 420, imgUrl: getImage('product-104'), category: 'Salas' },
-  { id: 105, title: 'Clóset Modular Estándar (Metro Lineal)', desc: 'Módulo interno para clóset con cajoneras, tubos colgadores y maletero. Sin puertas.', price: 180, discountPrice: 150, imgUrl: getImage('product-105'), category: 'Dormitorios' },
-  { id: 106, title: 'Walk-in Closet Premium', desc: 'Diseño en "L" para espacios amplios. Incluye iluminación LED en cajones y herrajes Blum.', price: 1500, discountPrice: 1200, imgUrl: getImage('product-106'), category: 'Dormitorios' },
-  { id: 107, title: 'Escritorio Corporativo Minimalista', desc: 'Escritorio de 120x60cm en melamina texturizada con estructura metálica electrostática.', price: 180, discountPrice: 150, imgUrl: getImage('product-107'), category: 'Oficina' },
-  { id: 108, title: 'Mesa de Centro Estilo Industrial', desc: 'Mesa de 80x80cm. Superficie de madera rústica y bases de acero negro mate.', price: 120, discountPrice: 90, imgUrl: getImage('product-108'), category: 'Salas' },
-  { id: 109, title: 'Set de 3 Repisas Flotantes', desc: 'Repisas de 60cm de largo con soportes invisibles. Ideales para decoración y libros.', price: 60, discountPrice: 45, imgUrl: getImage('product-109'), category: 'Decoración' },
-  { id: 110, title: 'Barra Desayunadora Moderna', desc: 'Mueble de 1.2m ideal para dividir espacios. Incluye espacio para 2 taburetes y luces LED.', price: 400, discountPrice: 350, imgUrl: getImage('product-110'), category: 'Cocinas' }
+  { id: 101, title: 'Cocina Modular Básica (Metro Lineal)', desc: 'Muebles altos y bajos en melamina RH, incluye herrajes estándar.', price: 250, discountPrice: null, imgUrl: getImage('product-101'), category: 'Cocinas' },
+  { id: 102, title: 'Isla de Cocina con Tope de Cuarzo', desc: 'Isla central con almacenamiento inferior y acabado premium.', price: 950, discountPrice: 850, imgUrl: getImage('product-102'), category: 'Cocinas' },
+  { id: 103, title: 'Mueble de Baño Flotante (Vanity)', desc: 'Mueble resistente a la humedad con tope de cuarzo moderno.', price: 350, discountPrice: 290, imgUrl: getImage('product-103'), category: 'Baños' },
+  { id: 104, title: 'Centro de Entretenimiento TV 65"', desc: 'Panel ranurado Pelikano con iluminación LED integrada.', price: 480, discountPrice: 420, imgUrl: getImage('product-104'), category: 'Salas' },
+  { id: 105, title: 'Clóset Modular Estándar', desc: 'Módulo interno con cajoneras y tubos colgadores.', price: 180, discountPrice: 150, imgUrl: getImage('product-105'), category: 'Dormitorios' },
+  { id: 106, title: 'Walk-in Closet Premium', desc: 'Diseño amplio con herrajes Blum y cajones iluminados.', price: 1500, discountPrice: 1200, imgUrl: getImage('product-106'), category: 'Dormitorios' },
+  { id: 107, title: 'Escritorio Corporativo', desc: 'Escritorio minimalista con estructura metálica.', price: 180, discountPrice: 150, imgUrl: getImage('product-107'), category: 'Oficina' },
+  { id: 108, title: 'Mesa de Centro Industrial', desc: 'Mesa rústica con bases de acero negro mate.', price: 120, discountPrice: 90, imgUrl: getImage('product-108'), category: 'Salas' },
+  { id: 109, title: 'Set de Repisas Flotantes', desc: 'Repisas con soportes invisibles ideales para decoración.', price: 60, discountPrice: 45, imgUrl: getImage('product-109'), category: 'Decoración' },
+  { id: 110, title: 'Barra Desayunadora Moderna', desc: 'Ideal para dividir espacios con elegancia.', price: 400, discountPrice: 350, imgUrl: getImage('product-110'), category: 'Cocinas' }
 ];
 
 export const defaultBrands: Brand[] = [
@@ -63,9 +63,9 @@ export const defaultSiteContent: SiteContent = {
     linkedin: ''
   },
   theme: {
-    primary: '#2C5F6D', /* Azul Teal del logo */
-    secondary: '#B88E44', /* Dorado del logo */
-    background: '#0a0a0a',
+    primary: '#2C5F6D',
+    secondary: '#B88E44',
+    background: '#19242D',
     foreground: '#F5F1E5',
     accent: '#B88E44'
   },

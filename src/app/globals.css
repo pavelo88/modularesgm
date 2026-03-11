@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    /* Basado en la versión clara del logo */
-    --background: 43 44% 93%; /* Crema del fondo */
-    --foreground: 193 42% 15%; /* Azul Teal muy oscuro para texto */
+    /* Colores basados en el nuevo logo (Versión Light) */
+    --background: 43 44% 93%; /* Fondo Crema #F5F1E5 */
+    --foreground: 193 42% 15%; /* Azul Teal muy oscuro para contraste */
     --card: 0 0% 100%;
     --card-foreground: 193 42% 15%;
     --popover: 0 0% 100%;
     --popover-foreground: 193 42% 15%;
-    --primary: 193 42% 30%; /* Azul Teal del logo */
+    --primary: 193 42% 30%; /* Azul Teal del logo #2C5F6D */
     --primary-foreground: 43 44% 93%;
-    --secondary: 38 46% 49%; /* Dorado/Bronce del logo */
+    --secondary: 38 46% 49%; /* Dorado/Bronce del logo #B88E44 */
     --secondary-foreground: 43 44% 93%;
     --muted: 43 30% 88%;
     --muted-foreground: 193 20% 40%;
@@ -37,34 +37,34 @@
   }
 
   .dark {
-    /* Basado en la versión oscura del logo */
-    --background: 215 30% 10%; /* Carbón oscuro */
-    --foreground: 43 44% 93%; /* Texto crema */
-    --card: 215 28% 14%;
+    /* Colores basados en el nuevo logo (Versión Dark) */
+    --background: 207 28% 14%; /* Carbón oscuro del logo #19242D */
+    --foreground: 43 44% 93%; /* Texto Crema */
+    --card: 207 28% 18%;
     --card-foreground: 43 44% 93%;
-    --popover: 215 28% 12%;
+    --popover: 207 28% 16%;
     --popover-foreground: 43 44% 93%;
     --primary: 38 46% 49%; /* En modo oscuro, el Dorado resalta mejor como primario */
-    --primary-foreground: 215 30% 10%;
+    --primary-foreground: 207 28% 10%;
     --secondary: 193 42% 40%; /* Teal como secundario */
     --secondary-foreground: 43 44% 93%;
-    --muted: 215 28% 18%;
-    --muted-foreground: 215 15% 70%;
+    --muted: 207 28% 22%;
+    --muted-foreground: 207 15% 70%;
     --accent: 38 46% 49%;
-    --accent-foreground: 215 30% 10%;
+    --accent-foreground: 207 28% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 43 44% 93%;
-    --border: 215 28% 20%;
-    --input: 215 28% 20%;
+    --border: 207 28% 25%;
+    --input: 207 28% 25%;
     --ring: 38 46% 49%;
 
-    --sidebar-background: 215 30% 10%;
+    --sidebar-background: 207 28% 14%;
     --sidebar-foreground: 43 44% 93%;
     --sidebar-primary: 38 46% 49%;
-    --sidebar-primary-foreground: 215 30% 10%;
-    --sidebar-accent: 215 28% 18%;
+    --sidebar-primary-foreground: 207 28% 10%;
+    --sidebar-accent: 207 28% 22%;
     --sidebar-accent-foreground: 43 44% 93%;
-    --sidebar-border: 215 28% 20%;
+    --sidebar-border: 207 28% 25%;
     --sidebar-ring: 38 46% 49%;
   }
 }
