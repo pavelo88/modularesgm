@@ -4,67 +4,68 @@
 
 @layer base {
   :root {
-    /* Base HSL values for fallback */
-    --background: 43 44% 93%;
-    --foreground: 215 28% 18%;
+    /* Basado en la versión clara del logo */
+    --background: 43 44% 93%; /* Crema del fondo */
+    --foreground: 193 42% 15%; /* Azul Teal muy oscuro para texto */
     --card: 0 0% 100%;
-    --card-foreground: 215 28% 18%;
+    --card-foreground: 193 42% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 18%;
-    --primary: 215 28% 28%;
+    --popover-foreground: 193 42% 15%;
+    --primary: 193 42% 30%; /* Azul Teal del logo */
     --primary-foreground: 43 44% 93%;
-    --secondary: 195 75% 45%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 38 46% 49%; /* Dorado/Bronce del logo */
+    --secondary-foreground: 43 44% 93%;
     --muted: 43 30% 88%;
-    --muted-foreground: 210 8% 45%;
-    --accent: 43 30% 88%;
-    --accent-foreground: 215 28% 28%;
+    --muted-foreground: 193 20% 40%;
+    --accent: 38 46% 49%;
+    --accent-foreground: 43 44% 93%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 43 20% 85%;
-    --input: 43 20% 85%;
-    --ring: 215 28% 28%;
+    --border: 193 20% 85%;
+    --input: 193 20% 85%;
+    --ring: 193 42% 30%;
     --radius: 0.75rem;
 
     --sidebar-background: 43 44% 93%;
-    --sidebar-foreground: 215 28% 18%;
-    --sidebar-primary: 215 28% 28%;
+    --sidebar-foreground: 193 42% 15%;
+    --sidebar-primary: 193 42% 30%;
     --sidebar-primary-foreground: 43 44% 93%;
-    --sidebar-accent: 43 30% 88%;
-    --sidebar-accent-foreground: 215 28% 28%;
-    --sidebar-border: 43 20% 85%;
-    --sidebar-ring: 215 28% 28%;
+    --sidebar-accent: 38 46% 49%;
+    --sidebar-accent-foreground: 43 44% 93%;
+    --sidebar-border: 193 20% 85%;
+    --sidebar-ring: 193 42% 30%;
   }
 
   .dark {
-    --background: 215 30% 15%;
-    --foreground: 43 30% 95%;
-    --card: 215 28% 19%;
-    --card-foreground: 43 30% 95%;
-    --popover: 215 28% 15%;
-    --popover-foreground: 43 30% 95%;
-    --primary: 195 75% 50%;
-    --primary-foreground: 215 30% 15%;
-    --secondary: 195 75% 45%;
-    --secondary-foreground: 215 30% 15%;
-    --muted: 215 28% 22%;
-    --muted-foreground: 215 15% 75%;
-    --accent: 215 28% 25%;
-    --accent-foreground: 43 30% 95%;
+    /* Basado en la versión oscura del logo */
+    --background: 215 30% 10%; /* Carbón oscuro */
+    --foreground: 43 44% 93%; /* Texto crema */
+    --card: 215 28% 14%;
+    --card-foreground: 43 44% 93%;
+    --popover: 215 28% 12%;
+    --popover-foreground: 43 44% 93%;
+    --primary: 38 46% 49%; /* En modo oscuro, el Dorado resalta mejor como primario */
+    --primary-foreground: 215 30% 10%;
+    --secondary: 193 42% 40%; /* Teal como secundario */
+    --secondary-foreground: 43 44% 93%;
+    --muted: 215 28% 18%;
+    --muted-foreground: 215 15% 70%;
+    --accent: 38 46% 49%;
+    --accent-foreground: 215 30% 10%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 43 30% 95%;
-    --border: 215 28% 25%;
-    --input: 215 28% 25%;
-    --ring: 195 75% 50%;
+    --destructive-foreground: 43 44% 93%;
+    --border: 215 28% 20%;
+    --input: 215 28% 20%;
+    --ring: 38 46% 49%;
 
-    --sidebar-background: 215 30% 15%;
-    --sidebar-foreground: 43 30% 95%;
-    --sidebar-primary: 195 75% 50%;
-    --sidebar-primary-foreground: 215 30% 15%;
-    --sidebar-accent: 215 28% 25%;
-    --sidebar-accent-foreground: 43 30% 95%;
-    --sidebar-border: 215 28% 25%;
-    --sidebar-ring: 195 75% 50%;
+    --sidebar-background: 215 30% 10%;
+    --sidebar-foreground: 43 44% 93%;
+    --sidebar-primary: 38 46% 49%;
+    --sidebar-primary-foreground: 215 30% 10%;
+    --sidebar-accent: 215 28% 18%;
+    --sidebar-accent-foreground: 43 44% 93%;
+    --sidebar-border: 215 28% 20%;
+    --sidebar-ring: 38 46% 49%;
   }
 }
 
@@ -76,7 +77,6 @@
     scroll-behavior: smooth;
   }
   body {
-    /* Use direct colors if set as variables in root */
     background-color: var(--background);
     color: var(--foreground);
     font-feature-settings: 'rlig' 1, 'calt' 1;
@@ -86,14 +86,14 @@
 @layer utilities {
   .tech-grid-bg-dark {
     background-size: 50px 50px;
-    background-image: linear-gradient(to right, var(--primary) / 0.05 1px, transparent 1px),
-      linear-gradient(to bottom, var(--primary) / 0.05 1px, transparent 1px);
+    background-image: linear-gradient(to right, hsl(var(--primary)) / 0.05 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary)) / 0.05 1px, transparent 1px);
     mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
   }
   .tech-grid-bg-light {
     background-size: 50px 50px;
-    background-image: linear-gradient(to right, var(--primary) / 0.1 1px, transparent 1px),
-      linear-gradient(to bottom, var(--primary) / 0.1 1px, transparent 1px);
+    background-image: linear-gradient(to right, hsl(var(--primary)) / 0.1 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary)) / 0.1 1px, transparent 1px);
     mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
   }
 
@@ -117,6 +117,6 @@
   width: 6px;
 }
 .chat-scroll::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: hsl(var(--primary));
   border-radius: 10px;
 }
