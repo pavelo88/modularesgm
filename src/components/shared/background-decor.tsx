@@ -19,11 +19,11 @@ export function HeroBackground({ heroMediaUrl }: { heroMediaUrl: string }) {
                 <img
                     src={heroMediaUrl}
                     alt="Background"
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-500 opacity-90 dark:opacity-25"
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-90 dark:opacity-25"
                 />
             )}
-            {/* Eliminado el degradado blanco que lavaba la imagen. Usamos uno oscuro sutil solo arriba */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent dark:to-background" />
+            {/* Degradado superior sutil para no lavar la imagen en modo claro */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent dark:to-background" />
         </div>
     );
 }

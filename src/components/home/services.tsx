@@ -17,8 +17,7 @@ export function Services({ services }: { services: Service[] }) {
     <Card
       className={cn(
         'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]',
-        // Las tarjetas son SIEMPRE Carbón Sólido
-        'bg-[#19242D] border-white/5'
+        'bg-[#19242D] border-white/5' // Mantenido Sólido Carbón
       )}
     >
       <Image
@@ -33,9 +32,7 @@ export function Services({ services }: { services: Service[] }) {
         <div className="w-12 h-12 rounded-lg bg-white/10 backdrop-blur-md shadow-md border border-secondary/50 flex items-center justify-center mb-4 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
           {getIconComponent(service.icon as IconName, { size: 24 })}
         </div>
-        <h3
-          className='font-bold mb-2 group-hover:text-secondary transition-colors text-[#F5F1E5] text-xl font-headline'
-        >
+        <h3 className='font-bold mb-2 group-hover:text-secondary transition-colors text-[#F5F1E5] text-xl font-headline'>
           {service.title}
         </h3>
         <p className="text-[#F5F1E5]/70 text-sm font-headline line-clamp-3 transition-colors">
@@ -46,22 +43,32 @@ export function Services({ services }: { services: Service[] }) {
   );
 
   return (
-    <section id="soluciones" className="py-12 relative z-10">
-      {/* Fondo de la sección en modo claro: Cristal Azul muy bajito */}
-      <div className="absolute inset-0 -z-10 bg-primary/5 backdrop-blur-sm dark:bg-transparent dark:backdrop-blur-none" />
-      
-      <div className="max-w-7xl mx-auto">
+    <section id="soluciones" className="py-20 relative z-10 px-4 md:px-0">
+      {/* Contenedor de Cristal Azul Bajito para la sección */}
+      <div className={cn(
+        "max-w-7xl mx-auto rounded-[2.5rem] py-16 border transition-all duration-500",
+        "bg-primary/15 backdrop-blur-2xl border-white/20 shadow-2xl",
+        "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
+      )}>
         <div className="text-center mb-12 px-6">
-          <h2 className="text-4xl md:text-5xl font-headline font-bold mb-6">
-            Diseños a <span className="text-primary">Medida</span>
+          <h2 className={cn(
+            "text-4xl md:text-5xl font-headline font-bold mb-6 transition-all",
+            "text-primary drop-shadow-md",
+            "dark:text-white"
+          )}>
+            Diseños a <span className="dark:text-primary">Medida</span>
           </h2>
-          <p className="text-muted-foreground font-headline text-lg max-w-2xl mx-auto">
+          <p className={cn(
+            "font-headline text-lg max-w-2xl mx-auto font-bold transition-all",
+            "text-primary/80",
+            "dark:text-muted-foreground"
+          )}>
             Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.
           </p>
         </div>
 
         {/* Desktop Grid */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 lg:px-12">
           {services.map((service) => (
             <Link href="/store" key={service.id}>
               <ServiceCard service={service} />
@@ -73,7 +80,7 @@ export function Services({ services }: { services: Service[] }) {
         <div className="md:hidden overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {services.map((service) => (
-              <div key={service.id} className="flex-grow-0 flex-shrink-0 basis-4/5 min-w-0 pl-4">
+              <div key={service.id} className="flex-grow-0 flex-shrink-0 basis-[85%] min-w-0 pl-4">
                 <Link href="/store">
                   <ServiceCard service={service} />
                 </Link>

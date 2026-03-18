@@ -66,8 +66,8 @@ export function Header() {
       <Link
         href={href}
         className={cn(
-          'flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors',
-          isActive && 'font-bold text-primary'
+          'flex items-center gap-1 transition-colors font-medium',
+          isActive ? 'text-primary font-bold' : 'text-primary/70 hover:text-primary dark:text-muted-foreground dark:hover:text-primary'
         )}
       >
         {icon}
@@ -109,7 +109,7 @@ export function Header() {
 
   return (
     <header className={cn(
-      "fixed top-0 w-full z-50 border-b transition-all duration-300 h-20 flex items-center",
+      "fixed top-0 w-full z-50 transition-all duration-300 h-20 flex items-center border-b",
       // MODO CLARO: Blanco Cristal (Vidrio esmerilado blanco). MODO OSCURO: Carbón Sólido.
       "bg-white/60 backdrop-blur-xl border-white/20 dark:bg-[#19242D] dark:border-white/10 dark:backdrop-blur-none"
     )}>
@@ -126,7 +126,7 @@ export function Header() {
             </p>
           </div>
         </Link>
-        <nav className="hidden md:flex items-center gap-4 font-sans text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
           {navLinks.map(link => <NavLink key={link.href} {...link}/>)}
         </nav>
         <div className="hidden md:flex items-center gap-2">
@@ -146,7 +146,7 @@ export function Header() {
                 )}
             </Button>
             <ThemeToggleButton className="text-primary" />
-            <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
+            <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
                 <Link href="/admin">
                 <Lock size={16} /> Admin
                 </Link>
