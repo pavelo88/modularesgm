@@ -16,27 +16,29 @@ export function Services({ services }: { services: Service[] }) {
   const ServiceCard = ({ service }: { service: Service }) => (
     <Card
       className={cn(
-        'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]'
+        'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]',
+        // Forzamos el estilo oscuro siempre para que se vea idéntico al modo dark
+        'bg-[#19242D] border-white/5'
       )}
     >
       <Image
         src={service.imgUrl}
         alt={service.title}
         fill
-        className="object-cover transition-all duration-700 group-hover:scale-105"
+        className="object-cover transition-all duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-80"
         data-ai-hint="interior design"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/40 to-transparent"></div>
       <CardContent className="relative z-10 p-6 h-full flex flex-col justify-end">
-        <div className="w-12 h-12 rounded-lg bg-card shadow-md border border-secondary/50 flex items-center justify-center mb-4 text-secondary group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
+        <div className="w-12 h-12 rounded-lg bg-white/10 backdrop-blur-md shadow-md border border-secondary/50 flex items-center justify-center mb-4 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
           {getIconComponent(service.icon as IconName, { size: 24 })}
         </div>
         <h3
-          className='font-bold mb-2 group-hover:text-primary transition-colors text-card-foreground text-xl font-headline'
+          className='font-bold mb-2 group-hover:text-secondary transition-colors text-[#F5F1E5] text-xl font-headline'
         >
           {service.title}
         </h3>
-        <p className="text-muted-foreground text-sm font-headline line-clamp-3 transition-colors">
+        <p className="text-[#F5F1E5]/70 text-sm font-headline line-clamp-3 transition-colors">
           {service.desc}
         </p>
       </CardContent>

@@ -23,14 +23,14 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
             <Activity size={16} />
             Muebles Modulares y Acabados Premium
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-6 tracking-tight leading-[1.1] drop-shadow-lg">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-6 tracking-tight leading-[1.1] drop-shadow-lg text-foreground">
             {heroTitle.split(' ').map((word, i) => (
               <span key={i} className={i % 3 === 0 ? 'text-primary' : ''}>
                 {word}{' '}
               </span>
             ))}
           </h1>
-          <p className="text-base md:text-lg font-headline text-muted-foreground/90 max-w-xl mb-10 leading-relaxed">
+          <p className="text-base md:text-lg font-headline text-primary/90 dark:text-muted-foreground/90 max-w-xl mb-10 leading-relaxed font-semibold">
             {heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
