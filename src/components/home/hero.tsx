@@ -17,17 +17,17 @@ interface HeroProps {
 
 export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
   return (
-    <section className="relative min-h-[85vh] pt-24 pb-20 flex flex-col justify-center overflow-hidden z-10">
-      {/* Contenedor de Cristal Azul Bajito y Transparente en Modo Claro */}
+    <section className="relative min-h-[90vh] pt-20 pb-20 flex flex-col justify-center overflow-hidden z-10">
+      {/* Contenedor de Cristal con Azul Teal Suave */}
       <div className={cn(
         "max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 w-full grid lg:grid-cols-2 gap-16 items-center rounded-[2.5rem] border transition-all duration-500",
-        "bg-primary/20 backdrop-blur-xl border-white/30 shadow-2xl",
+        "bg-primary/10 backdrop-blur-xl border-white/20 shadow-2xl",
         "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
       )}>
         <div className="flex flex-col items-start text-left">
           <div className={cn(
             "inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold mb-8 transition-all",
-            "bg-primary/30 backdrop-blur-2xl border-primary/40 text-primary",
+            "bg-primary/40 backdrop-blur-2xl border-primary/50 text-white drop-shadow-md",
             "dark:bg-white/10 dark:border-white/20 dark:text-white"
           )}>
             <Activity size={16} />
@@ -36,7 +36,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           
           <h1 className={cn(
             "text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-6 tracking-tight leading-[1.1] transition-all",
-            "text-primary drop-shadow-2xl", // Texto Teal Intenso con sombra para legibilidad
+            "text-primary drop-shadow-2xl", 
             "dark:text-white dark:drop-shadow-none"
           )}>
             {heroTitle.split(' ').map((word, i) => (
@@ -48,8 +48,8 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           
           <p className={cn(
             "text-base md:text-lg font-headline max-w-xl mb-10 leading-relaxed font-bold transition-all",
-            "text-primary/90 drop-shadow-md", // Texto Teal Oscuro
-            "dark:text-muted-foreground/90"
+            "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]", 
+            "dark:text-muted-foreground/90 dark:drop-shadow-none"
           )}>
             {heroSubtitle}
           </p>
@@ -81,7 +81,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
               key={stat.id}
               className={cn(
                 "p-4 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-all duration-300 group shadow-xl w-full max-w-[224px] h-[176px] mx-auto border",
-                "bg-primary/25 backdrop-blur-xl border-white/40",
+                "bg-primary/20 backdrop-blur-xl border-white/30",
                 "dark:bg-[#19242D] dark:border-[#B88E44]/30 dark:backdrop-blur-none"
               )}
             >

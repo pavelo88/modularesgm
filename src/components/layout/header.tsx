@@ -109,8 +109,8 @@ export function Header() {
 
   return (
     <header className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-300 h-20 flex items-center border-b",
-      "bg-white/60 backdrop-blur-xl border-white/30 dark:bg-[#19242D] dark:border-white/10 dark:backdrop-blur-none shadow-sm"
+      "fixed top-0 w-full z-50 transition-all duration-300 h-20 flex items-center",
+      "bg-white/30 backdrop-blur-xl border-none dark:bg-[#19242D] dark:backdrop-blur-none shadow-none"
     )}>
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
