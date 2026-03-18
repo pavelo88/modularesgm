@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    /* Colores basados en el nuevo logo (Versión Light) - LIMPIOS */
-    --background: 43 15% 98%; /* Crema muy claro y limpio #FDFCF8 */
+    /* Colores basados en el nuevo logo (Versión Light) - EXTREMADAMENTE LIMPIOS */
+    --background: 43 15% 99%; /* Blanco con un toque mínimo de crema #FDFDFB */
     --foreground: 193 42% 10%; /* Azul Teal casi negro para máxima nitidez */
     --card: 0 0% 100%;
     --card-foreground: 193 42% 10%;
@@ -15,24 +15,24 @@
     --primary-foreground: 43 15% 98%;
     --secondary: 38 46% 49%; /* Dorado/Bronce del logo #B88E44 */
     --secondary-foreground: 43 15% 98%;
-    --muted: 43 10% 94%;
+    --muted: 43 10% 96%;
     --muted-foreground: 193 15% 40%;
     --accent: 38 46% 49%;
     --accent-foreground: 43 15% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 193 15% 92%;
-    --input: 193 15% 92%;
+    --border: 193 15% 94%;
+    --input: 193 15% 94%;
     --ring: 193 42% 30%;
     --radius: 0.75rem;
 
-    --sidebar-background: 43 15% 98%;
+    --sidebar-background: 43 15% 99%;
     --sidebar-foreground: 193 42% 10%;
     --sidebar-primary: 193 42% 30%;
     --sidebar-primary-foreground: 43 15% 98%;
     --sidebar-accent: 38 46% 49%;
     --sidebar-accent-foreground: 43 15% 98%;
-    --sidebar-border: 193 15% 92%;
+    --sidebar-border: 193 15% 94%;
     --sidebar-ring: 193 42% 30%;
   }
 
@@ -44,7 +44,7 @@
     --card-foreground: 43 44% 93%;
     --popover: 207 28% 16%;
     --popover-foreground: 43 44% 93%;
-    --primary: 38 46% 49%; /* En modo oscuro, el Dorado resalta mejor como primario */
+    --primary: 38 46% 49%; /* Dorado como primario en modo oscuro */
     --primary-foreground: 207 28% 10%;
     --secondary: 193 42% 40%; /* Teal como secundario */
     --secondary-foreground: 43 44% 93%;
@@ -91,10 +91,10 @@
     mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
   }
   .tech-grid-bg-light {
-    background-size: 50px 50px;
-    background-image: linear-gradient(to right, hsl(var(--primary)) / 0.04 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--primary)) / 0.04 1px, transparent 1px);
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
+    background-size: 60px 60px;
+    background-image: linear-gradient(to right, hsl(var(--primary)) / 0.02 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary)) / 0.02 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 0%, black 30%, transparent 100%);
   }
 
   .brand-carousel-track {
