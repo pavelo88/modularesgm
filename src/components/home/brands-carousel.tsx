@@ -45,15 +45,16 @@ export function BrandsCarousel({ brands }: { brands: Brand[] }) {
   }
 
   return (
-    <section className="py-12 border-y bg-muted/30 relative z-10 flex flex-col gap-6">
+    <section className="py-12 border-y border-white/5 bg-[#19242D] relative z-10 flex flex-col gap-6">
       <div className="text-center px-6">
-        <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
+        <p className="text-xs font-bold tracking-widest text-[#F5F1E5]/60 uppercase">
           Materiales y Herrajes de Calidad Certificada
         </p>
       </div>
       <div className="relative w-full overflow-hidden max-w-7xl mx-auto py-4">
-        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-muted/30 to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-muted/30 to-transparent z-10 pointer-events-none"></div>
+        {/* Degradados forzados a oscuro para el carrusel */}
+        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[#19242D] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[#19242D] to-transparent z-10 pointer-events-none"></div>
         <div className="brand-carousel-track items-center" ref={trackRef}>
           {allBrands.map((brand, idx) => (
             <div
@@ -66,11 +67,11 @@ export function BrandsCarousel({ brands }: { brands: Brand[] }) {
                   alt={brand.name}
                   width={160}
                   height={56}
-                  className="max-h-14 object-contain filter dark:brightness-0 dark:invert opacity-70 hover:opacity-100"
+                  className="max-h-14 object-contain filter brightness-0 invert opacity-70 hover:opacity-100"
                   onError={() => handleImageError(brand.url)}
                 />
               ) : (
-                <span className="text-muted-foreground font-bold tracking-widest text-2xl">
+                <span className="text-[#F5F1E5]/70 font-bold tracking-widest text-2xl">
                   {brand.name}
                 </span>
               )}
