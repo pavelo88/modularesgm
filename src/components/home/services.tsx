@@ -44,10 +44,10 @@ export function Services({ services }: { services: Service[] }) {
 
   return (
     <section id="soluciones" className="py-20 relative z-10 px-4 md:px-0">
-      {/* Contenedor de Cristal Azul Suave para la sección */}
+      {/* Contenedor Casi Transparente en Claro */}
       <div className={cn(
-        "max-w-7xl mx-auto rounded-[2.5rem] py-16 border transition-all duration-500",
-        "bg-primary/10 backdrop-blur-xl border-white/20 shadow-2xl",
+        "max-w-7xl mx-auto rounded-[2.5rem] py-16 transition-all duration-500",
+        "bg-primary/5 backdrop-blur-sm border-none shadow-none",
         "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
       )}>
         <div className="text-center mb-12 px-6">
@@ -60,7 +60,7 @@ export function Services({ services }: { services: Service[] }) {
           </h2>
           <p className={cn(
             "font-headline text-lg max-w-2xl mx-auto font-bold transition-all",
-            "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
+            "text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]",
             "dark:text-muted-foreground dark:drop-shadow-none"
           )}>
             Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.

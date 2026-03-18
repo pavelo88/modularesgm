@@ -18,10 +18,10 @@ interface HeroProps {
 export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
   return (
     <section className="relative min-h-[90vh] pt-20 pb-20 flex flex-col justify-center overflow-hidden z-10">
-      {/* Contenedor de Cristal con Azul Teal Suave - MÁS TRANSPARENTE (bg-primary/5) */}
+      {/* Contenedor Casi Totalmente Transparente en Claro */}
       <div className={cn(
-        "max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 w-full grid lg:grid-cols-2 gap-16 items-center rounded-[2.5rem] border transition-all duration-500",
-        "bg-primary/5 backdrop-blur-2xl border-white/10 shadow-2xl",
+        "max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 w-full grid lg:grid-cols-2 gap-16 items-center rounded-[2.5rem] transition-all duration-500",
+        "bg-transparent backdrop-blur-none border-none shadow-none",
         "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
       )}>
         <div className="flex flex-col items-start text-left">
@@ -48,7 +48,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           
           <p className={cn(
             "text-base md:text-lg font-headline max-w-xl mb-10 leading-relaxed font-bold transition-all",
-            "text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]", 
+            "text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]", 
             "dark:text-muted-foreground/90 dark:drop-shadow-none"
           )}>
             {heroSubtitle}
@@ -80,31 +80,31 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
             <Card
               key={stat.id}
               className={cn(
-                "p-4 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-all duration-300 group shadow-xl w-full max-w-[224px] h-[176px] mx-auto border",
-                "bg-primary/20 backdrop-blur-xl border-white/30",
-                "dark:bg-[#19242D] dark:border-[#B88E44]/30 dark:backdrop-blur-none"
+                "p-4 rounded-3xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-all duration-300 group w-full max-w-[224px] h-[176px] mx-auto border",
+                "bg-primary/5 backdrop-blur-sm border-white/10 shadow-xl",
+                "dark:bg-[#19242D] dark:border-[#B88E44]/30 dark:backdrop-blur-none dark:shadow-none"
               )}
             >
               <CardContent className="p-0 flex flex-col items-center justify-center">
                 <div className={cn(
                   "w-12 h-12 md:w-14 md:h-14 rounded-full border flex items-center justify-center mb-2 transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white",
-                  "bg-white/30 border-white/40 text-white",
+                  "bg-white/20 border-white/30 text-white",
                   "dark:bg-white/20 dark:border-primary/30 dark:text-primary"
                 )}>
                   {getIconComponent(stat.icon as any, { size: 24 })}
                 </div>
-                {/* VALORES GRANDES CON SOMBRA TIPO BORDE */}
+                {/* VALORES GRANDES CON SOMBRA DE ALTO CONTRASTE */}
                 <h3 className={cn(
                   "text-3xl md:text-4xl font-bold font-sans mb-1 transition-all",
-                  "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
+                  "text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]",
                   "dark:text-primary dark:drop-shadow-none"
                 )}>
                   {stat.value}
                 </h3>
-                {/* ETIQUETAS PEQUEÑAS EN BLANCO INTENSO */}
+                {/* ETIQUETAS EN BLANCO INTENSO */}
                 <p className={cn(
                   "text-[10px] md:text-xs font-bold tracking-wide uppercase transition-all",
-                  "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] opacity-100",
+                  "text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]",
                   "dark:text-primary dark:drop-shadow-none"
                 )}>
                   {stat.label}
