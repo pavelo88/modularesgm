@@ -6,6 +6,7 @@ import type { Stat } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getIconComponent } from '@/lib/icons';
+import { cn } from '@/lib/utils';
 
 interface HeroProps {
   heroTitle: string;
@@ -49,7 +50,11 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           {stats.map((stat) => (
             <Card
               key={stat.id}
-              className="p-4 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group shadow-xl bg-primary/25 backdrop-blur-2xl border border-primary/40 w-full max-w-[224px] h-[176px] mx-auto"
+              className={cn(
+                "p-4 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group shadow-xl w-full max-w-[224px] h-[176px] mx-auto border",
+                // OSCURO: Carbón Sólido y Dorado. CLARO: Cristal Azul Intenso.
+                "bg-primary/25 backdrop-blur-2xl border-primary/40 dark:bg-[#19242D] dark:border-[#B88E44]/30 dark:backdrop-blur-none"
+              )}
             >
               <CardContent className="p-0 flex flex-col items-center justify-center">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/20 border border-primary/30 flex items-center justify-center mb-2 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all">

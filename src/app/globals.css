@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    /* Colores basados en el nuevo logo (Versión Light) - EXTREMADAMENTE LIMPIOS */
-    --background: 43 15% 99%; /* Blanco con un toque mínimo de crema #FDFDFB */
-    --foreground: 193 42% 10%; /* Azul Teal casi negro para máxima nitidez */
+    /* MODO CLARO - LIMPIO Y CRISTALINO */
+    --background: 43 15% 99%; /* Blanco puro #FDFCF8 */
+    --foreground: 193 42% 10%; /* Azul Teal casi negro */
     --card: 0 0% 100%;
     --card-foreground: 193 42% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 193 42% 10%;
-    --primary: 193 42% 30%; /* Azul Teal del logo #2C5F6D */
+    --primary: 193 42% 30%; /* Azul Teal Intenso */
     --primary-foreground: 43 15% 98%;
-    --secondary: 38 46% 49%; /* Dorado/Bronce del logo #B88E44 */
+    --secondary: 38 46% 49%; /* Dorado/Bronce */
     --secondary-foreground: 43 15% 98%;
-    --muted: 43 10% 96%;
+    --muted: 193 15% 96%;
     --muted-foreground: 193 15% 40%;
-    --accent: 38 46% 49%;
+    --accent: 193 42% 30%;
     --accent-foreground: 43 15% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -37,14 +37,14 @@
   }
 
   .dark {
-    /* Colores basados en el nuevo logo (Versión Dark) */
-    --background: 207 28% 14%; /* Carbón oscuro del logo #19242D */
-    --foreground: 43 44% 93%; /* Texto Crema */
+    /* MODO OSCURO - CARBÓN SÓLIDO Y DORADO (RESTAURADO) */
+    --background: 207 28% 14%; /* Carbón oscuro #19242D */
+    --foreground: 43 44% 93%; /* Crema */
     --card: 207 28% 18%;
     --card-foreground: 43 44% 93%;
     --popover: 207 28% 16%;
     --popover-foreground: 43 44% 93%;
-    --primary: 38 46% 49%; /* Dorado como primario en modo oscuro */
+    --primary: 38 46% 49%; /* Dorado como primario en oscuro */
     --primary-foreground: 207 28% 10%;
     --secondary: 193 42% 40%; /* Teal como secundario */
     --secondary-foreground: 43 44% 93%;
@@ -105,18 +105,9 @@
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.chat-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-.chat-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary));
-  border-radius: 10px;
-}
+.chat-scroll::-webkit-scrollbar { width: 6px; }
+.chat-scroll::-webkit-scrollbar-thumb { background: hsl(var(--primary)); border-radius: 10px; }
