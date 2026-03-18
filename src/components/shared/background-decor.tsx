@@ -19,10 +19,10 @@ export function HeroBackground({ heroMediaUrl }: { heroMediaUrl: string }) {
                 <img
                     src={heroMediaUrl}
                     alt="Background"
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-[0.12] dark:opacity-25 dark:mix-blend-luminosity grayscale-[30%] dark:grayscale-0"
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-[0.35] dark:opacity-25 dark:mix-blend-luminosity grayscale-0"
                 />
             )}
-            <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/20 to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
         </div>
     );
 }
