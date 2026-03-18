@@ -16,7 +16,7 @@ interface FooterProps {
 
 export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
   return (
-    <footer className="bg-muted/30 border-t pt-16 pb-8 relative z-10">
+    <footer className="bg-white/85 backdrop-blur-md pt-16 pb-8 relative z-10">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
            <div className="flex items-center gap-3 mb-4">
@@ -71,7 +71,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
           <p>{whatsappNumber}</p>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 text-center border-t pt-8 text-muted-foreground">
+      <div className="max-w-7xl mx-auto px-6 text-center border-t border-primary/10 pt-8 text-muted-foreground">
         <p className="text-xs font-sans">
           &copy; {new Date().getFullYear()} MODULARES GM. Todos los derechos reservados.
         </p>

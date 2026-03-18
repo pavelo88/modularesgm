@@ -108,7 +108,7 @@ export function Header() {
   )
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b transition-all duration-300">
+    <header className="fixed top-0 w-full z-50 bg-primary/25 backdrop-blur-2xl border-b border-primary/30 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
           <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
@@ -126,12 +126,12 @@ export function Header() {
           {navLinks.map(link => <NavLink key={link.href} {...link}/>)}
         </nav>
         <div className="hidden md:flex items-center gap-2">
-            <div className="h-6 w-px bg-border mx-2"></div>
+            <div className="h-6 w-px bg-primary/20 mx-2"></div>
             <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsCartOpen(true)}
-                className="relative"
+                className="relative text-primary"
                 aria-label="Open shopping cart"
             >
                 <ShoppingCart size={20} />
@@ -141,7 +141,7 @@ export function Header() {
                 </span>
                 )}
             </Button>
-            <ThemeToggleButton />
+            <ThemeToggleButton className="text-primary" />
             <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground">
                 <Link href="/admin">
                 <Lock size={16} /> Admin
@@ -154,7 +154,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             onClick={() => setIsCartOpen(true)}
-            className="relative"
+            className="relative text-primary"
             aria-label="Open shopping cart"
           >
             <ShoppingCart size={24} />
@@ -165,12 +165,12 @@ export function Header() {
             )}
           </Button>
           
-          {isClient && <ThemeToggleButton />}
+          {isClient && <ThemeToggleButton className="text-primary" />}
 
           {isClient ? (
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="text-primary">
                   <Menu size={28} />
                 </Button>
               </SheetTrigger>

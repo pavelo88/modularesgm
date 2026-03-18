@@ -12,13 +12,13 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
         <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4 leading-tight">
             {siteContent.formTitle}
         </h2>
-        <p className="text-muted-foreground font-headline text-lg max-w-3xl mx-auto">
+        <p className="text-primary font-headline text-lg max-w-3xl mx-auto font-bold">
             {siteContent.formSubtitle}
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto rounded-3xl p-6 md:p-12 border shadow-2xl relative overflow-hidden bg-card">
-        <div className="absolute top-[-100px] right-[-100px] w-[300px] h-[300px] bg-primary/20 blur-[150px] opacity-20 dark:opacity-10 pointer-events-none"></div>
+      <div className="max-w-7xl mx-auto rounded-3xl p-6 md:p-12 border border-primary/40 shadow-2xl relative overflow-hidden bg-primary/25 backdrop-blur-2xl">
+        <div className="absolute top-[-100px] right-[-100px] w-[300px] h-[300px] bg-primary/40 blur-[150px] opacity-30 pointer-events-none"></div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start relative">
           <ContactInfo
             whatsappNumber={siteContent.whatsappNumber}
