@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 
 export function BackgroundDecor() {
@@ -19,11 +21,11 @@ export function HeroBackground({ heroMediaUrl }: { heroMediaUrl: string }) {
                 <img
                     src={heroMediaUrl}
                     alt="Background"
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-90 dark:opacity-25"
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-100 dark:opacity-25"
                 />
             )}
-            {/* Degradado superior sutil para no lavar la imagen en modo claro */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent dark:to-background" />
+            {/* Degradado superior sutil solo para ayudar a la lectura en el header */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent dark:to-background" />
         </div>
     );
 }

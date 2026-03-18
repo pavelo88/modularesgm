@@ -17,7 +17,7 @@ export function Services({ services }: { services: Service[] }) {
     <Card
       className={cn(
         'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]',
-        'bg-[#19242D] border-white/5' // Mantenido Sólido Carbón
+        'bg-[#19242D] border-white/5 shadow-2xl'
       )}
     >
       <Image
@@ -47,20 +47,20 @@ export function Services({ services }: { services: Service[] }) {
       {/* Contenedor de Cristal Azul Bajito para la sección */}
       <div className={cn(
         "max-w-7xl mx-auto rounded-[2.5rem] py-16 border transition-all duration-500",
-        "bg-primary/15 backdrop-blur-2xl border-white/20 shadow-2xl",
+        "bg-primary/20 backdrop-blur-xl border-white/20 shadow-2xl",
         "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
       )}>
         <div className="text-center mb-12 px-6">
           <h2 className={cn(
             "text-4xl md:text-5xl font-headline font-bold mb-6 transition-all",
-            "text-primary drop-shadow-md",
+            "text-primary drop-shadow-xl",
             "dark:text-white"
           )}>
             Diseños a <span className="dark:text-primary">Medida</span>
           </h2>
           <p className={cn(
             "font-headline text-lg max-w-2xl mx-auto font-bold transition-all",
-            "text-primary/80",
+            "text-primary/90",
             "dark:text-muted-foreground"
           )}>
             Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.
