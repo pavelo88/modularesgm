@@ -18,16 +18,16 @@ interface HeroProps {
 export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
   return (
     <section className="relative min-h-[90vh] pt-20 pb-20 flex flex-col justify-center overflow-hidden z-10">
-      {/* Contenedor de Cristal con Azul Teal Suave */}
+      {/* Contenedor de Cristal con Azul Teal Suave - MÁS TRANSPARENTE (bg-primary/5) */}
       <div className={cn(
         "max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 w-full grid lg:grid-cols-2 gap-16 items-center rounded-[2.5rem] border transition-all duration-500",
-        "bg-primary/10 backdrop-blur-xl border-white/20 shadow-2xl",
+        "bg-primary/5 backdrop-blur-2xl border-white/10 shadow-2xl",
         "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
       )}>
         <div className="flex flex-col items-start text-left">
           <div className={cn(
             "inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold mb-8 transition-all",
-            "bg-primary/40 backdrop-blur-2xl border-primary/50 text-white drop-shadow-md",
+            "bg-primary/40 backdrop-blur-2xl border-primary/50 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]",
             "dark:bg-white/10 dark:border-white/20 dark:text-white"
           )}>
             <Activity size={16} />
@@ -36,7 +36,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           
           <h1 className={cn(
             "text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-6 tracking-tight leading-[1.1] transition-all",
-            "text-primary drop-shadow-2xl", 
+            "text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]", 
             "dark:text-white dark:drop-shadow-none"
           )}>
             {heroTitle.split(' ').map((word, i) => (
@@ -48,7 +48,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
           
           <p className={cn(
             "text-base md:text-lg font-headline max-w-xl mb-10 leading-relaxed font-bold transition-all",
-            "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]", 
+            "text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]", 
             "dark:text-muted-foreground/90 dark:drop-shadow-none"
           )}>
             {heroSubtitle}
@@ -64,7 +64,7 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
               variant="secondary" 
               className={cn(
                 "h-14 px-8 text-base backdrop-blur-md transition-all border-2",
-                "bg-white/40 text-primary border-primary/60 hover:bg-primary hover:text-white",
+                "bg-white/40 text-white border-white/60 hover:bg-primary hover:text-white drop-shadow-md",
                 "dark:bg-white/80 dark:text-primary dark:border-primary/30 dark:hover:bg-accent dark:hover:text-white"
               )}
             >
@@ -88,15 +88,25 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
               <CardContent className="p-0 flex flex-col items-center justify-center">
                 <div className={cn(
                   "w-12 h-12 md:w-14 md:h-14 rounded-full border flex items-center justify-center mb-2 transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white",
-                  "bg-white/30 border-primary/40 text-primary",
+                  "bg-white/30 border-white/40 text-white",
                   "dark:bg-white/20 dark:border-primary/30 dark:text-primary"
                 )}>
                   {getIconComponent(stat.icon as any, { size: 24 })}
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold font-sans mb-1 text-primary">
+                {/* VALORES GRANDES CON SOMBRA TIPO BORDE */}
+                <h3 className={cn(
+                  "text-3xl md:text-4xl font-bold font-sans mb-1 transition-all",
+                  "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
+                  "dark:text-primary dark:drop-shadow-none"
+                )}>
                   {stat.value}
                 </h3>
-                <p className="text-[10px] md:text-xs font-bold tracking-wide text-primary uppercase">
+                {/* ETIQUETAS PEQUEÑAS EN BLANCO INTENSO */}
+                <p className={cn(
+                  "text-[10px] md:text-xs font-bold tracking-wide uppercase transition-all",
+                  "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] opacity-100",
+                  "dark:text-primary dark:drop-shadow-none"
+                )}>
                   {stat.label}
                 </p>
               </CardContent>
