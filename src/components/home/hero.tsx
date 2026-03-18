@@ -52,8 +52,8 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
               key={stat.id}
               className={cn(
                 "p-4 rounded-2xl flex flex-col items-center justify-center text-center hover:-translate-y-2 transition-transform duration-300 group shadow-xl w-full max-w-[224px] h-[176px] mx-auto border",
-                // OSCURO: Carbón Sólido y Dorado. CLARO: Cristal Azul Intenso.
-                "bg-primary/25 backdrop-blur-2xl border-primary/40 dark:bg-[#19242D] dark:border-[#B88E44]/30 dark:backdrop-blur-none"
+                // MODO CLARO: Azul bajito transparente (cristal suave). MODO OSCURO: Carbón Sólido.
+                "bg-primary/10 backdrop-blur-md border-primary/20 dark:bg-[#19242D] dark:border-[#B88E44]/30 dark:backdrop-blur-none"
               )}
             >
               <CardContent className="p-0 flex flex-col items-center justify-center">

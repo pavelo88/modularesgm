@@ -17,7 +17,7 @@ export function Services({ services }: { services: Service[] }) {
     <Card
       className={cn(
         'group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 h-[320px]',
-        // Forzamos el estilo oscuro siempre para que se vea idéntico al modo dark
+        // Las tarjetas son SIEMPRE Carbón Sólido
         'bg-[#19242D] border-white/5'
       )}
     >
@@ -46,35 +46,40 @@ export function Services({ services }: { services: Service[] }) {
   );
 
   return (
-    <section id="soluciones" className="py-12 max-w-7xl mx-auto relative z-10">
-      <div className="text-center mb-12 px-6">
-        <h2 className="text-4xl md:text-5xl font-headline font-bold mb-6">
-          Diseños a <span className="text-primary">Medida</span>
-        </h2>
-        <p className="text-muted-foreground font-headline text-lg max-w-2xl mx-auto">
-          Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.
-        </p>
-      </div>
-
-      {/* Desktop Grid */}
-      <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
-        {services.map((service) => (
-          <Link href="/store" key={service.id}>
-            <ServiceCard service={service} />
-          </Link>
-        ))}
-      </div>
+    <section id="soluciones" className="py-12 relative z-10">
+      {/* Fondo de la sección en modo claro: Cristal Azul muy bajito */}
+      <div className="absolute inset-0 -z-10 bg-primary/5 backdrop-blur-sm dark:bg-transparent dark:backdrop-blur-none" />
       
-      {/* Mobile Carousel */}
-      <div className="md:hidden overflow-hidden" ref={emblaRef}>
-        <div className="flex">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 px-6">
+          <h2 className="text-4xl md:text-5xl font-headline font-bold mb-6">
+            Diseños a <span className="text-primary">Medida</span>
+          </h2>
+          <p className="text-muted-foreground font-headline text-lg max-w-2xl mx-auto">
+            Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.
+          </p>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
           {services.map((service) => (
-            <div key={service.id} className="flex-grow-0 flex-shrink-0 basis-4/5 min-w-0 pl-4">
-              <Link href="/store">
-                <ServiceCard service={service} />
-              </Link>
-            </div>
+            <Link href="/store" key={service.id}>
+              <ServiceCard service={service} />
+            </Link>
           ))}
+        </div>
+        
+        {/* Mobile Carousel */}
+        <div className="md:hidden overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {services.map((service) => (
+              <div key={service.id} className="flex-grow-0 flex-shrink-0 basis-4/5 min-w-0 pl-4">
+                <Link href="/store">
+                  <ServiceCard service={service} />
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

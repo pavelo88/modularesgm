@@ -20,8 +20,8 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
 
       <div className={cn(
         "max-w-7xl mx-auto rounded-3xl p-6 md:p-12 border shadow-2xl relative overflow-hidden",
-        // OSCURO: Carbón Sólido. CLARO: Cristal Azul Intenso.
-        "bg-primary/25 backdrop-blur-2xl border-primary/40 dark:bg-[#19242D] dark:border-[#B88E44]/40 dark:backdrop-blur-none"
+        // MODO CLARO: Cristal Azul suave y transparente. MODO OSCURO: Carbón Sólido.
+        "bg-primary/15 backdrop-blur-xl border-primary/20 dark:bg-[#19242D] dark:border-[#B88E44]/40 dark:backdrop-blur-none"
       )}>
         <div className="absolute top-[-100px] right-[-100px] w-[300px] h-[300px] bg-primary/40 blur-[150px] opacity-30 pointer-events-none"></div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start relative">

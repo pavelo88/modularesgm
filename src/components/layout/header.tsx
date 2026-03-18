@@ -110,8 +110,8 @@ export function Header() {
   return (
     <header className={cn(
       "fixed top-0 w-full z-50 border-b transition-all duration-300 h-20 flex items-center",
-      // OSCURO: Carbón Sólido. CLARO: Cristal Azul Intenso.
-      "bg-primary/25 backdrop-blur-2xl border-primary/30 dark:bg-[#19242D] dark:border-white/10 dark:backdrop-blur-none"
+      // MODO CLARO: Blanco Cristal (Vidrio esmerilado blanco). MODO OSCURO: Carbón Sólido.
+      "bg-white/60 backdrop-blur-xl border-white/20 dark:bg-[#19242D] dark:border-white/10 dark:backdrop-blur-none"
     )}>
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
