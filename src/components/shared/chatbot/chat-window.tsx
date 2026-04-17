@@ -39,9 +39,16 @@ export function ChatWindow({
     setInput('');
 
     startTransition(async () => {
+      // Mapear historial al formato genkit (user/model)
+      const history = messages.map(m => ({
+        role: m.role === 'bot' ? 'model' as const : 'user' as const,
+        content: m.text
+      }));
+
       const result = await handleSendChatMessage(
         userMessage.text,
-        siteContent
+        siteContent,
+        history
       );
       if (result.success && result.data) {
         setMessages((prev) => [...prev, { role: 'bot', text: result.data }]);

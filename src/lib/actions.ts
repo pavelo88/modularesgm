@@ -120,16 +120,31 @@ export async function handleCheckout(
   }
 }
 
-export async function handleSendChatMessage(userMessage: string, siteContent: SiteContent) {
+export async function handleSendChatMessage(userMessage: string, siteContent: SiteContent, history: any[] = []) {
   try {
     const servicesContext = siteContent.services.map(s => s.title).join(', ');
     const productsContext = siteContent.products.map(p => `${p.title} ($${p.price})`).join(', ');
 
     const response = await publicAIChatbot({
       userMessage,
+      history,
       servicesContext,
       productsContext
     });
+
+    // --- GUARDADO AUTOMÁTICO DE LEADS ---
+    if (response.extractedLead && (response.extractedLead.name || response.extractedLead.phone)) {
+       console.log("📍 Lead detectado por SofIA:", response.extractedLead);
+       await addDoc(collection(db, 'leads'), {
+         name: response.extractedLead.name || 'Desconocido',
+         email: 'ia-auto-captured@modularesgm.com',
+         phone: response.extractedLead.phone || 'Pendiente',
+         message: `PROYECTO: ${response.extractedLead.project || 'No especificado'} | CITA: ${response.extractedLead.appointmentDate || 'No agendada'}`,
+         address: response.extractedLead.address || 'No proporcionada',
+         status: 'Nuevo (IA)',
+         createdAt: Date.now(),
+       });
+    }
 
     return { success: true, data: response.botResponse };
   } catch (error) {
