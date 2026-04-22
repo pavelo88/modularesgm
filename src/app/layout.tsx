@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/context/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/cart-provider';
+import { SEOStructuredData } from '@/components/shared/seo-structured-data';
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -12,8 +13,38 @@ const fontBody = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Modulares GM | Muebles, Diseño y Construcción',
-  description: 'Expertos en cocinas modulares, cuarzos, clósets y remodelación en Quito y todo el Ecuador.',
+  title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
+  description: 'Líderes en diseño y fabricación de cocinas modulares, mobiliario de oficina, góndolas comerciales y remodelaciones integrales en Quito y todo el Ecuador. Calidad premium en cuarzo, granito y madera.',
+  keywords: [
+    'Modulares GM', 'cocinas modulares quito', 'muebles de oficina ecuador', 
+    'góndolas comerciales', 'estanterías para locales', 'adecuaciones de oficinas', 
+    'remodelaciones quito', 'reparación de muebles', 'mesones de cuarzo quito', 
+    'granito para cocinas', 'clósets y vestidores', 'construcción de casas ecuador',
+    'construcción de colegios', 'construcción de piscinas quito', 'cerámica y acabados',
+    'remodelación de baños', 'muebles de cocina a medida', 'vestidores modernos',
+    'centros de entretenimiento tv', 'muebles para farmacias', 'mobiliario corporativo', 
+    'adecuaciones comerciales quito', 'reparaciones técnicas muebles', 
+    'diseño de interiores ecuador', 'producción de mobiliario modular'
+  ],
+  authors: [{ name: 'Modulares GM' }],
+  creator: 'Modulares GM',
+  publisher: 'Modulares GM',
+  formatDetection: {
+    email: false,
+    address: true,
+    telephone: true,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -44,6 +75,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <CartProvider>
+            <SEOStructuredData />
             {children}
             <Toaster />
           </CartProvider>
