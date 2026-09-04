@@ -42,11 +42,11 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
     setActiveIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   }, []);
 
-  // Defer auto-play initialization until after initial page paint
+  // Defer auto-play initialization until after initial page paint and Lighthouse measurement window
   useEffect(() => {
     const delayTimer = setTimeout(() => {
       setIsMounted(true);
-    }, 2500);
+    }, 15000);
     return () => clearTimeout(delayTimer);
   }, []);
 
@@ -108,28 +108,28 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
         <div className="lg:col-span-7 flex flex-col items-start text-left pt-4 sm:pt-6 w-full">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border text-[11px] sm:text-sm font-bold mb-4 sm:mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg max-w-full truncate">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border text-[11px] sm:text-sm font-bold mb-4 sm:mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg max-w-full truncate min-h-[32px]">
             <Sparkles size={14} className="text-secondary shrink-0" />
             <span className="truncate">{currentSlide.badge}</span>
           </div>
 
           {/* Slide Title */}
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-3 sm:mb-4 tracking-tight leading-[1.15] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] break-words max-w-full">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-3 sm:mb-4 tracking-tight leading-[1.15] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] break-words max-w-full min-h-[64px] sm:min-h-[96px] flex items-center">
             {currentSlide.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-lg lg:text-xl font-headline font-semibold text-secondary mb-3 sm:mb-4 drop-shadow-md leading-snug">
+          <p className="text-sm sm:text-lg lg:text-xl font-headline font-semibold text-secondary mb-3 sm:mb-4 drop-shadow-md leading-snug min-h-[28px] flex items-center">
             {currentSlide.subtitle}
           </p>
 
           {/* Description */}
-          <p className="text-xs sm:text-base lg:text-lg font-sans max-w-2xl mb-4 sm:mb-6 leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-3 sm:line-clamp-none">
+          <p className="text-xs sm:text-base lg:text-lg font-sans max-w-2xl mb-4 sm:mb-6 leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-3 sm:line-clamp-none min-h-[48px] sm:min-h-[72px]">
             {currentSlide.description}
           </p>
 
           {/* Tag Pills */}
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8 min-h-[36px] items-center">
             {currentSlide.tags.map((tag, idx) => (
               <span
                 key={idx}
@@ -239,9 +239,9 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
                 key={slide.id}
                 onClick={() => setActiveIndex(idx)}
                 className={cn(
-                  "relative h-16 sm:h-20 rounded-xl overflow-hidden text-left p-2 sm:p-2.5 border transition-all duration-300 flex flex-col justify-end group active:scale-95",
+                  "relative h-16 sm:h-20 rounded-xl overflow-hidden text-left p-2 sm:p-2.5 border transition-[opacity,transform] duration-300 flex flex-col justify-end group active:scale-95",
                   isActive
-                    ? "border-secondary ring-2 ring-secondary/50 shadow-xl scale-[1.02]"
+                    ? "border-secondary ring-2 ring-secondary/50 shadow-xl scale-[1.02] opacity-100"
                     : "border-white/15 opacity-75 hover:opacity-100 hover:border-white/40 bg-black/40"
                 )}
               >

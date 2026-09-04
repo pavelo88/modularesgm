@@ -10,7 +10,7 @@ import Autoplay from 'embla-carousel-autoplay';
 
 export function Services({ services }: { services: Service[] }) {
   const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [
-    Autoplay({ delay: 2500, stopOnInteraction: true }),
+    Autoplay({ delay: 10000, stopOnInteraction: true }),
   ]);
 
   const ServiceCard = ({ service }: { service: Service }) => (
