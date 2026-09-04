@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -11,6 +11,12 @@ import { SEOStructuredData } from '@/components/shared/seo-structured-data';
 const fontBody = Inter({
   subsets: ['latin'],
   variable: '--font-body',
+});
+
+const fontHeadline = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-headline',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -55,18 +61,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-body antialiased',
-          fontBody.variable
+          fontBody.variable,
+          fontHeadline.variable
         )}
       >
         <ThemeProvider

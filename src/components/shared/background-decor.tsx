@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export function BackgroundDecor() {
   return (
@@ -18,10 +19,13 @@ export function HeroBackground({ heroMediaUrl }: { heroMediaUrl: string }) {
     return (
         <div className="fixed inset-0 -z-40 pointer-events-none">
             {heroMediaUrl && (
-                <img
+                <Image
                     src={heroMediaUrl}
                     alt="Background"
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-100 dark:opacity-25"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover transition-all duration-700 opacity-100 dark:opacity-25"
                 />
             )}
             {/* Degradado superior sutil solo para ayudar a la lectura en el header */}
