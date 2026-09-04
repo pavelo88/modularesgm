@@ -1,5 +1,8 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Facebook, Instagram, Linkedin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Phone, MapPin } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 
 interface ContactInfoProps {
@@ -10,6 +13,27 @@ interface ContactInfoProps {
 }
 
 export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: ContactInfoProps) {
+  const [showMap, setShowMap] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShowMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (mapRef.current) {
+      observer.observe(mapRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="flex flex-col h-full space-y-8">
       {/* Phone & Socials */}
@@ -18,7 +42,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
           href={`https://wa.me/${whatsappNumber}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 font-bold text-lg hover:underline"
+          className="flex items-center gap-2 font-bold text-lg hover:underline text-white"
         >
           <Phone size={20} className="text-primary" />
           +{whatsappNumber}
@@ -50,17 +74,27 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
 
       {/* Map */}
       {mapUrl && (
-        <div className="w-full h-64 md:flex-1 min-h-[300px] rounded-2xl overflow-hidden border border-primary/20 opacity-90 hover:opacity-100 transition-opacity shadow-lg">
-          <iframe
-            src={mapUrl}
-            width="100%"
-            height="100%"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Location"
-            className="border-0 dark:grayscale hover:grayscale-0 transition-all duration-500"
-          ></iframe>
+        <div 
+          ref={mapRef}
+          className="w-full h-64 md:flex-1 min-h-[300px] rounded-2xl overflow-hidden border border-primary/20 bg-background/50 relative shadow-lg flex items-center justify-center"
+        >
+          {showMap ? (
+            <iframe
+              src={mapUrl}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Location"
+              className="border-0 dark:grayscale hover:grayscale-0 transition-all duration-500"
+            ></iframe>
+          ) : (
+            <div className="flex flex-col items-center justify-center p-6 text-center text-muted-foreground gap-3">
+              <MapPin size={32} className="text-primary animate-bounce" />
+              <p className="text-sm font-semibold">Cargando ubicación en Google Maps...</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -71,3 +105,4 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
     </div>
   );
 }
+

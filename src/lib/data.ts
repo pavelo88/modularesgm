@@ -29,16 +29,17 @@ export const defaultProducts: Product[] = [
 ];
 
 export const defaultBrands: Brand[] = [
-  { id: 1, name: 'NOVOPAN', url: 'https://images.squarespace-cdn.com/content/v1/657a358b4134183f81a43eab/1722361668270-YQ7R06OODR20I2P5P4P6/Logo_Novopan_Color.png' },
-  { id: 2, name: 'PELIKANO', url: 'https://www.pelikano.com/wp-content/uploads/2021/09/logo-pelikano.png' },
-  { id: 3, name: 'BLUM', url: 'https://logo.clearbit.com/blum.com' },
-  { id: 4, name: 'HAFELE', url: 'https://logo.clearbit.com/hafele.com' },
+  { id: 1, name: 'NOVOPAN', url: '' },
+  { id: 2, name: 'PELIKANO', url: '' },
+  { id: 3, name: 'BLUM', url: '' },
+  { id: 4, name: 'HAFELE', url: '' },
   { id: 5, name: 'SILESTONE', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg' },
   { id: 6, name: 'DEKTON', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg' },
-  { id: 7, name: 'TEKA', url: 'https://logo.clearbit.com/teka.com' },
-  { id: 8, name: 'BRIGGS', url: 'https://www.briggsec.com/wp-content/uploads/2020/12/logo-briggs-web-01-e1608316773418.png' },
+  { id: 7, name: 'TEKA', url: '' },
+  { id: 8, name: 'BRIGGS', url: '' },
   { id: 9, name: 'COSENTINO', url: 'https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg' }
 ];
+
 
 export const defaultStats: Stat[] = [
   { id: 1, value: '10+', label: 'AÑOS EXP.', icon: 'Globe' },
