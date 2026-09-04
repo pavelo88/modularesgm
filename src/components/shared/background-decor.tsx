@@ -15,21 +15,12 @@ export function BackgroundDecor() {
   );
 }
 
-export function HeroBackground({ heroMediaUrl }: { heroMediaUrl: string }) {
+export function HeroBackground({ heroMediaUrl }: { heroMediaUrl?: string }) {
     return (
         <div className="fixed inset-0 -z-40 pointer-events-none">
-            {heroMediaUrl && (
-                <Image
-                    src={heroMediaUrl}
-                    alt="Background"
-                    fill
-                    priority
-                    sizes="100vw"
-                    className="object-cover transition-all duration-700 opacity-100 dark:opacity-25"
-                />
-            )}
-            {/* Degradado superior sutil solo para ayudar a la lectura en el header */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent dark:to-background" />
+            {/* Dark gradient backdrop to prevent image flickering */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#19242D]/80 via-transparent to-[#19242D]" />
         </div>
     );
 }
+

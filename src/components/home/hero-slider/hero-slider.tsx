@@ -13,7 +13,7 @@ import {
   Play, 
   CheckCircle2 
 } from 'lucide-react';
-import { HERO_SLIDES, type HeroSlide } from './hero-slider-data';
+import { HERO_SLIDES } from './hero-slider-data';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { Stat } from '@/lib/types';
@@ -29,6 +29,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const currentSlide = HERO_SLIDES[activeIndex];
@@ -41,53 +42,64 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
     setActiveIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   }, []);
 
+  // Defer auto-play initialization until after initial page paint
   useEffect(() => {
-    if (isPlaying && !isHovered) {
+    const delayTimer = setTimeout(() => {
+      setIsMounted(true);
+    }, 2500);
+    return () => clearTimeout(delayTimer);
+  }, []);
+
+  useEffect(() => {
+    if (isMounted && isPlaying && !isHovered) {
       timerRef.current = setInterval(() => {
         nextSlide();
-      }, 6000);
+      }, 7000);
     }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPlaying, isHovered, nextSlide]);
+  }, [isMounted, isPlaying, isHovered, nextSlide]);
 
   return (
     <section 
-      className="relative w-full min-h-[92vh] lg:min-h-screen flex flex-col justify-between overflow-hidden pt-24 pb-12 select-none z-10"
+      className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[720px] flex flex-col justify-between overflow-hidden pt-20 sm:pt-24 pb-10 select-none z-10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       aria-label="Destacados de Servicios"
     >
-      {/* 1. Dynamic Background Image Cross-Fade */}
+      {/* 1. Dynamic Background Image Cross-Fade (Composited) */}
       <div className="absolute inset-0 -z-30 pointer-events-none overflow-hidden">
-        {HERO_SLIDES.map((slide, idx) => (
-          <div
-            key={slide.id}
-            className={cn(
-              "absolute inset-0 transition-all duration-1000 ease-out transform",
-              idx === activeIndex
-                ? "opacity-100 scale-100 z-10"
-                : "opacity-0 scale-105 z-0"
-            )}
-          >
-            <Image
-              src={slide.imageUrl}
-              alt={slide.title}
-              fill
-              priority={idx === 0}
-              sizes="100vw"
-              className="object-cover object-center transition-transform duration-1000 scale-100"
-            />
-            {/* Subtle Gradient Overlays - Optimized for image vibrancy & text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/20 to-black/20 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent pointer-events-none" />
-          </div>
-        ))}
+        {HERO_SLIDES.map((slide, idx) => {
+          const isCurrent = idx === activeIndex;
+          return (
+            <div
+              key={slide.id}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-700 ease-in-out will-change-opacity",
+                isCurrent ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              )}
+            >
+              <Image
+                src={slide.imageUrl}
+                alt={slide.title}
+                fill
+                priority={idx === 0}
+                fetchPriority={idx === 0 ? "high" : "low"}
+                loading={idx === 0 ? "eager" : "lazy"}
+                sizes="(max-width: 768px) 100vw, 900px"
+                className="object-cover object-center"
+              />
+              {/* Subtle Gradient Overlays for legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/20 to-black/20 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent pointer-events-none" />
+            </div>
+          );
+        })}
       </div>
 
       {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 tech-grid-bg-dark opacity-40 pointer-events-none -z-20" />
+      <div className="absolute inset-0 tech-grid-bg-dark opacity-30 pointer-events-none -z-20" />
 
       {/* 2. Main Hero Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto relative z-20">
@@ -96,8 +108,8 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
         <div className="lg:col-span-7 flex flex-col items-start text-left pt-4 sm:pt-6 w-full">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border text-[11px] sm:text-sm font-bold mb-4 sm:mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg animate-in fade-in slide-in-from-top-4 duration-500 max-w-full truncate">
-            <Sparkles size={14} className="text-secondary animate-pulse shrink-0" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border text-[11px] sm:text-sm font-bold mb-4 sm:mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg max-w-full truncate">
+            <Sparkles size={14} className="text-secondary shrink-0" />
             <span className="truncate">{currentSlide.badge}</span>
           </div>
 
@@ -134,7 +146,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
             <Button 
               asChild 
               size="lg" 
-              className="shadow-[0_0_30px_hsl(var(--primary)/0.6)] h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold gap-2 active:scale-95 transition-all w-full sm:w-auto"
+              className="shadow-[0_0_30px_hsl(var(--primary)/0.6)] h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold gap-2 active:scale-95 transition-transform w-full sm:w-auto"
             >
               <Link href={currentSlide.ctaPrimary.href}>
                 {ctaText || currentSlide.ctaPrimary.text}
@@ -145,7 +157,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
               asChild
               size="lg"
               variant="secondary"
-              className="h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 backdrop-blur-md shadow-lg gap-2 active:scale-95 transition-all w-full sm:w-auto"
+              className="h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 backdrop-blur-md shadow-lg gap-2 active:scale-95 transition-transform w-full sm:w-auto"
             >
               <Link href={currentSlide.ctaSecondary.href}>
                 <Store size={16} />
@@ -155,12 +167,12 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
           </div>
         </div>
 
-        {/* Right Column: Mini Stats Grid & Quick Nav */}
+        {/* Right Column: Mini Stats Grid */}
         <div className="lg:col-span-5 hidden lg:grid grid-cols-2 gap-4">
           {(stats || []).map((stat) => (
             <div
               key={stat.id}
-              className="p-5 rounded-2xl flex flex-col items-center justify-center text-center bg-black/40 backdrop-blur-md border border-white/15 shadow-2xl hover:border-secondary/50 transition-all duration-300 group"
+              className="p-5 rounded-2xl flex flex-col items-center justify-center text-center bg-black/40 backdrop-blur-md border border-white/15 shadow-2xl hover:border-secondary/50 transition-colors duration-300 group"
             >
               <p className="text-3xl font-bold font-sans text-secondary drop-shadow-md mb-1">
                 {stat.value}
@@ -173,8 +185,8 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
         </div>
       </div>
 
-      {/* 3. Bottom HUD & Thumbnail Carousel */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full mt-8 grid lg:grid-cols-12 items-end gap-6 relative z-20">
+      {/* 3. Bottom HUD & Thumbnail Carousel (Composited) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full mt-6 grid lg:grid-cols-12 items-end gap-4 sm:gap-6 relative z-20">
         
         {/* Navigation Controls HUD */}
         <div className="lg:col-span-5 flex items-center justify-between bg-black/50 backdrop-blur-md border border-white/15 p-3 rounded-2xl shadow-2xl">
@@ -190,11 +202,11 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
               <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
                 Servicio {activeIndex + 1} / {HERO_SLIDES.length}
               </span>
-              {/* Progress bar */}
-              <div className="w-28 h-1.5 bg-white/20 rounded-full overflow-hidden mt-1">
+              {/* Progress bar using composited transform */}
+              <div className="w-28 h-1.5 bg-white/20 rounded-full overflow-hidden mt-1 relative">
                 <div 
-                  className="h-full bg-secondary transition-all duration-500 ease-out"
-                  style={{ width: `${((activeIndex + 1) / HERO_SLIDES.length) * 100}%` }}
+                  className="h-full w-full bg-secondary transition-transform duration-500 ease-out origin-left"
+                  style={{ transform: `scaleX(${(activeIndex + 1) / HERO_SLIDES.length})` }}
                 />
               </div>
             </div>
@@ -203,14 +215,14 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
           <div className="flex items-center gap-2">
             <button
               onClick={prevSlide}
-              className="p-3 rounded-xl bg-white/10 hover:bg-secondary text-white transition-all active:scale-95"
+              className="p-3 rounded-xl bg-white/10 hover:bg-secondary text-white transition-transform active:scale-95"
               aria-label="Servicio anterior"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={nextSlide}
-              className="p-3 rounded-xl bg-white/10 hover:bg-secondary text-white transition-all active:scale-95"
+              className="p-3 rounded-xl bg-white/10 hover:bg-secondary text-white transition-transform active:scale-95"
               aria-label="Siguiente servicio"
             >
               <ChevronRight size={20} />
@@ -219,7 +231,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
         </div>
 
         {/* Interactive Thumbnail Previews */}
-        <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
           {HERO_SLIDES.map((slide, idx) => {
             const isActive = idx === activeIndex;
             return (
@@ -227,24 +239,25 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
                 key={slide.id}
                 onClick={() => setActiveIndex(idx)}
                 className={cn(
-                  "relative h-20 rounded-xl overflow-hidden text-left p-2.5 border transition-all duration-300 flex flex-col justify-end group active:scale-95",
+                  "relative h-16 sm:h-20 rounded-xl overflow-hidden text-left p-2 sm:p-2.5 border transition-all duration-300 flex flex-col justify-end group active:scale-95",
                   isActive
                     ? "border-secondary ring-2 ring-secondary/50 shadow-xl scale-[1.02]"
-                    : "border-white/15 opacity-70 hover:opacity-100 hover:border-white/40 bg-black/40"
+                    : "border-white/15 opacity-75 hover:opacity-100 hover:border-white/40 bg-black/40"
                 )}
               >
                 <Image
                   src={slide.imageUrl}
                   alt={slide.title}
                   fill
-                  sizes="200px"
+                  loading="lazy"
+                  sizes="180px"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-                <span className="relative z-10 text-[10px] font-bold uppercase tracking-wider text-secondary">
+                <span className="relative z-10 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-secondary">
                   0{idx + 1}
                 </span>
-                <span className="relative z-10 text-xs font-bold text-white truncate font-headline">
+                <span className="relative z-10 text-[11px] sm:text-xs font-bold text-white truncate font-headline">
                   {slide.title.split(' ')[0]} {slide.title.split(' ')[1] || ''}
                 </span>
               </button>
@@ -255,3 +268,4 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
     </section>
   );
 }
+

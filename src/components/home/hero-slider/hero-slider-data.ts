@@ -25,7 +25,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Cocinas Modulares de Alta Gama',
     subtitle: 'Diseño Fotorrealista 3D y Herrajes Cierre Lento',
     description: 'Transformamos tu cocina en el corazón de tu hogar con diseños ergonómicos, melamina RH resistente a la humedad y acabados en cuarzo.',
-    imageUrl: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=75&w=1400&fm=webp',
+    imageUrl: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=65&w=900&fm=webp',
     tags: ['Cierre Lento Blum/Hafele', 'Resistente a Humedad', 'Medición Gratis'],
     ctaPrimary: {
       text: 'Cotizar Mi Cocina',
@@ -43,7 +43,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Topes de Cuarzo, Granito y Mármol',
     subtitle: 'Cortes CNC de Alta Precisión e Instalación Limpia',
     description: 'Mesones de cocina y baño con pulidos perfectos, alta resistencia a manchas, rayones y calor extremo. Garantía extendida.',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=75&w=1400&fm=webp',
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=65&w=900&fm=webp',
     tags: ['Silestone & Dekton', 'Antibacteriano', 'Instalación 48h'],
     ctaPrimary: {
       text: 'Solicitar Muestras',
@@ -61,7 +61,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Clósets & Walk-in Closets',
     subtitle: 'Iluminación LED Integrada y Espacios Optimizados',
     description: 'Maximizamos cada centímetro de tu dormitorio con pantaloneras extraíbles, zapateras retroiluminadas y cajones organizadores.',
-    imageUrl: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&q=75&w=1400&fm=webp',
+    imageUrl: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&q=65&w=900&fm=webp',
     tags: ['Diseño Personalizado', 'Luces LED Ocultas', 'Accesorios Premium'],
     ctaPrimary: {
       text: 'Cotizar Clóset',
@@ -79,7 +79,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Remodelación Integral de Espacios',
     subtitle: 'Gypsum, Pintura, Pisos SPC y Electricidad',
     description: 'Nos encargamos de tu proyecto llave en mano. Desde la demolición hasta los últimos detalles de acabado sin estrés ni sobrecostos.',
-    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=75&w=1400&fm=webp',
+    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=65&w=900&fm=webp',
     tags: ['Llave en Mano', 'Personal Calificado', 'Entrega a Tiempo'],
     ctaPrimary: {
       text: 'Asesoría Gratuita',
