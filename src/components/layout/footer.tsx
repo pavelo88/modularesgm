@@ -30,7 +30,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
                 <h2 className="text-xl font-bold tracking-tight text-primary">
                     MODULARES GM
                 </h2>
-                 <p className="text-xs font-light text-secondary -mt-1 leading-tight">
+                 <p className="text-xs font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
                     Cocinas y Cuarzos
                 </p>
             </div>

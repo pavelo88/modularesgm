@@ -120,7 +120,7 @@ export function Header() {
             <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
               MODULARES GM
             </h2>
-            <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
+            <p className="text-[10px] font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
               Cocinas y Cuarzos
             </p>
           </div>
@@ -173,7 +173,7 @@ export function Header() {
           {isClient ? (
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-primary">
+                <Button variant="ghost" size="icon" className="text-primary" aria-label="Toggle menu">
                   <Menu size={28} />
                 </Button>
               </SheetTrigger>
@@ -188,7 +188,7 @@ export function Header() {
                       <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
                         MODULARES GM
                       </h2>
-                      <p className="text-[10px] font-light text-secondary -mt-1 leading-tight">
+                      <p className="text-[10px] font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
                         Cocinas y Cuarzos
                       </p>
                     </div>
@@ -240,7 +240,7 @@ export function Header() {
               </SheetContent>
             </Sheet>
           ) : (
-             <Button variant="ghost" size="icon">
+             <Button variant="ghost" size="icon" aria-label="Toggle menu">
                 <Menu size={28} />
             </Button>
           )}

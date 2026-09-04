@@ -94,13 +94,13 @@ export function Hero({ heroTitle, heroSubtitle, ctaText, stats }: HeroProps) {
                   {getIconComponent(stat.icon as any, { size: 24 })}
                 </div>
                 {/* VALORES GRANDES CON SOMBRA DE ALTO CONTRASTE */}
-                <h3 className={cn(
+                <p className={cn(
                   "text-3xl md:text-4xl font-bold font-sans mb-1 transition-all",
                   "text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]",
                   "dark:text-primary dark:drop-shadow-none"
                 )}>
                   {stat.value}
-                </h3>
+                </p>
                 {/* ETIQUETAS EN BLANCO INTENSO */}
                 <p className={cn(
                   "text-[10px] md:text-xs font-bold tracking-wide uppercase transition-all",

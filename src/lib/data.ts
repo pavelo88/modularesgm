@@ -31,11 +31,11 @@ export const defaultProducts: Product[] = [
 export const defaultBrands: Brand[] = [
   { id: 1, name: 'NOVOPAN', url: 'https://images.squarespace-cdn.com/content/v1/657a358b4134183f81a43eab/1722361668270-YQ7R06OODR20I2P5P4P6/Logo_Novopan_Color.png' },
   { id: 2, name: 'PELIKANO', url: 'https://www.pelikano.com/wp-content/uploads/2021/09/logo-pelikano.png' },
-  { id: 3, name: 'BLUM', url: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Blum_logo.svg' },
-  { id: 4, name: 'HAFELE', url: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/H%C3%A4fele_GmbH_%26_Co_KG_Logo.svg' },
+  { id: 3, name: 'BLUM', url: 'https://logo.clearbit.com/blum.com' },
+  { id: 4, name: 'HAFELE', url: 'https://logo.clearbit.com/hafele.com' },
   { id: 5, name: 'SILESTONE', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg' },
   { id: 6, name: 'DEKTON', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg' },
-  { id: 7, name: 'TEKA', url: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_Teka_svg.svg' },
+  { id: 7, name: 'TEKA', url: 'https://logo.clearbit.com/teka.com' },
   { id: 8, name: 'BRIGGS', url: 'https://www.briggsec.com/wp-content/uploads/2020/12/logo-briggs-web-01-e1608316773418.png' },
   { id: 9, name: 'COSENTINO', url: 'https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg' }
 ];
