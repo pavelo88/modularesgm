@@ -33,7 +33,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div id="top" className="h-0 pt-20"></div>
+      <div id="top" />
       <Hero
         heroTitle={siteContent.heroTitle}
         heroSubtitle={siteContent.heroSubtitle}
@@ -46,3 +46,4 @@ export default function HomePage() {
     </>
   );
 }
+
