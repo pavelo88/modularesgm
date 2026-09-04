@@ -73,6 +73,11 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
           <p>{address}</p>
           <p>Ecuador</p>
           <p>{whatsappNumber}</p>
+          <div className="text-sm font-sans flex items-center justify-center gap-[2px]">
+            <span>info</span>
+            <span className="text-primary">&#64;</span>
+            <span>modularesgm.com</span>
+          </div>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 text-center border-t border-primary/10 pt-8 text-primary/50 dark:text-muted-foreground">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/context/theme-provider';
@@ -14,7 +15,7 @@ const fontBody = Inter({
 
 export const metadata: Metadata = {
   title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
-  description: 'Líderes en diseño y fabricación de cocinas modulares, mobiliario de oficina, góndolas comerciales y remodelaciones integrales en Quito y todo el Ecuador. Calidad premium en cuarzo, granito y madera.',
+  description: 'Líderes en cocinas modulares, mobiliario de oficina y remodelaciones en Quito. Calidad premium en cuarzo y madera. Servicio técnico 24/7 en Ecuador.',
   keywords: [
     'Modulares GM', 'cocinas modulares quito', 'muebles de oficina ecuador', 
     'góndolas comerciales', 'estanterías para locales', 'adecuaciones de oficinas', 
@@ -80,6 +81,22 @@ export default function RootLayout({
             <Toaster />
           </CartProvider>
         </ThemeProvider>
+        
+        {/* Analytics Diferida (Zero-Blocking) */}
+        <Script
+          id="google-analytics"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
       </body>
     </html>
   );

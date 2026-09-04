@@ -55,12 +55,11 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
             src={mapUrl}
             width="100%"
             height="100%"
-            style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             title="Location"
-            className="dark:grayscale hover:grayscale-0 transition-all duration-500"
+            className="border-0 dark:grayscale hover:grayscale-0 transition-all duration-500"
           ></iframe>
         </div>
       )}
