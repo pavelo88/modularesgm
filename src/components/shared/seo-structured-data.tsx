@@ -3,54 +3,57 @@ import React from 'react';
 export function SEOStructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Modulares GM",
-    "image": "https://modularesgm.com/logo.jpg", // Assuming logo is at root based on src/app/logo.jpg
-    "@id": "https://modularesgm.com",
-    "url": "https://modularesgm.com",
-    "telephone": "+593963064374",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Rosa Yeira 420 y Serpaio Japeravi",
-      "addressLocality": "Quito",
-      "addressRegion": "Pichincha",
-      "addressCountry": "EC"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -0.252232,
-      "longitude": -78.534770
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "sameAs": [
-      "https://facebook.com/modularesgm",
-      "https://instagram.com/modularesgm"
-    ],
-    "knowsAbout": [
-      "Diseño y Producción de Cocinas Modulares",
-      "Fabricación de Clósets, Vestidores y Armarios",
-      "Instalación de Mesones de Cuarzo, Granito y Mármol",
-      "Remodelación Integral de Baños y Cocinas",
-      "Construcción de Casas Residenciales",
-      "Construcción y Adecuación de Colegios y Oficinas",
-      "Diseño y Construcción de Piscinas",
-      "Acabados en Cerámica y Porcelanato",
-      "Mobiliario Comercial, Góndolas y Estanterías",
-      "Reparación y Mantenimiento de Mobiliario",
-      "Muebles a Medida para Farmacias y Tiendas",
-      "Centros de Entretenimiento y Paneles de TV",
-      "Diseño de Interiores y Renders 3D Profesionales"
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.modularesgm.com/#business",
+        "name": "Modulares GM",
+        "url": "https://www.modularesgm.com",
+        "image": "https://www.modularesgm.com/logo.svg",
+        "logo": "https://www.modularesgm.com/logo.svg",
+        "telephone": "+593963064374",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rosa Yeira 420 y Serpaio Japeravi",
+          "addressLocality": "Quito",
+          "addressRegion": "Pichincha",
+          "addressCountry": "EC"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -0.252232,
+          "longitude": -78.534770
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:30",
+          "closes": "18:30"
+        },
+        "sameAs": [
+          "https://facebook.com/modularesgm",
+          "https://instagram.com/modularesgm"
+        ],
+        "knowsAbout": [
+          "Diseño y Producción de Cocinas Modulares de Alta Gama",
+          "Fabricación de Clósets, Vestidores y Armarios a Medida",
+          "Instalación de Mesones de Cuarzo, Granito y Mármol",
+          "Remodelación Integral de Espacios y Obra Civil",
+          "Diseño de Interiores y Planos Renders 3D"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.modularesgm.com/#website",
+        "url": "https://www.modularesgm.com",
+        "name": "Modulares GM",
+        "description": "Expertos en cocinas modulares, cuarzos, clósets y remodelación en Quito y todo el Ecuador.",
+        "publisher": {
+          "@id": "https://www.modularesgm.com/#business"
+        },
+        "inLanguage": "es-EC"
+      }
     ]
   };
 

@@ -58,9 +58,9 @@ export default function StorePage() {
 
           <main className="md:col-span-3">
             <div className="mb-12 border-b border-border pb-6">
-              <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4">
+              <h1 className="text-4xl md:text-5xl font-headline font-bold mb-4">
                 Nuestra <span className="text-primary">Tienda</span>
-              </h2>
+              </h1>
               <p className="text-muted-foreground font-headline text-lg max-w-2xl">
                 Descubre nuestra selección de muebles modulares listos para instalar, fabricados con precisión y materiales premium.
               </p>

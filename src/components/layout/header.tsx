@@ -114,8 +114,7 @@ export function Header() {
     )}>
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
-          <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
+          <Image src="/logo.svg" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" priority />
           <div className="flex flex-col">
             <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
               MODULARES GM
@@ -182,8 +181,7 @@ export function Header() {
                   <SheetTitle className="sr-only">Menu</SheetTitle>
                    <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
                   <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
-                    <Image src={logo} alt="Modulares GM Logo" width={40} height={40} className="rounded-md dark:hidden"/>
-                    <Image src={logo2} alt="Modulares GM Logo" width={40} height={40} className="rounded-md hidden dark:block"/>
+                    <Image src="/logo.svg" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" />
                     <div className="flex flex-col">
                       <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
                         MODULARES GM

@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
               <Lock size={24} />
             </div>
           </div>
-          <CardTitle className="text-2xl">Panel de Administración</CardTitle>
+          <h1 className="text-2xl font-bold font-headline">Panel de Administración</h1>
           <CardDescription>Ingrese su contraseña para continuar</CardDescription>
         </CardHeader>
         <CardContent>
