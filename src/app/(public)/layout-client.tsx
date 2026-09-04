@@ -9,7 +9,7 @@ import { ChatbotWidget } from '@/components/shared/chatbot/chatbot-widget';
 import type { SiteContent } from '@/lib/types';
 import { SiteContentContext } from '@/context/site-content-provider';
 import { db } from '@/lib/firebase';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { defaultSiteContent } from '@/lib/data';
 
 export function PublicLayoutClient({
@@ -22,9 +22,12 @@ export function PublicLayoutClient({
   const [siteContent, setSiteContent] = useState<SiteContent>(initialSiteContent);
 
   useEffect(() => {
+    let isMounted = true;
     const contentRef = doc(db, 'siteContent', 'main');
-    const unsubscribe = onSnapshot(contentRef, (docSnap) => {
-      if (docSnap.exists()) {
+    
+    getDoc(contentRef)
+      .then((docSnap) => {
+        if (!isMounted || !docSnap.exists()) return;
         const data = docSnap.data() as SiteContent;
         
         const rawBrands = data.brands && data.brands.length > 0 ? data.brands : defaultSiteContent.brands;
@@ -64,12 +67,14 @@ export function PublicLayoutClient({
           theme: data.theme ? { ...defaultSiteContent.theme, ...data.theme } : defaultSiteContent.theme,
           socialUrls: data.socialUrls ? { ...defaultSiteContent.socialUrls, ...data.socialUrls } : defaultSiteContent.socialUrls,
         });
-      }
-    }, (error) => {
-      console.warn("Using initial server data. Firestore real-time updates may be restricted by rules.", error);
-    });
-    
-    return () => unsubscribe();
+      })
+      .catch((error) => {
+        console.warn("Using initial server data.", error);
+      });
+      
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const value = { siteContent, loading: !siteContent };

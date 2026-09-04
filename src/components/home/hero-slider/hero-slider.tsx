@@ -77,11 +77,11 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
               fill
               priority={idx === 0}
               sizes="100vw"
-              className="object-cover object-center filter brightness-[0.75] contrast-[1.05]"
+              className="object-cover object-center transition-transform duration-1000 scale-100"
             />
-            {/* Multi-layer Overlays for perfect legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/60 to-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#19242D]/90 via-[#19242D]/50 to-transparent" />
+            {/* Subtle Gradient Overlays - Optimized for image vibrancy & text contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/20 to-black/20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent pointer-events-none" />
           </div>
         ))}
       </div>
@@ -90,65 +90,65 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
       <div className="absolute inset-0 tech-grid-bg-dark opacity-40 pointer-events-none -z-20" />
 
       {/* 2. Main Hero Content Container */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid lg:grid-cols-12 gap-12 items-center my-auto relative z-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto relative z-20">
         
         {/* Left Column: Details Panel */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left pt-6">
+        <div className="lg:col-span-7 flex flex-col items-start text-left pt-4 sm:pt-6 w-full">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs sm:text-sm font-bold mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg animate-in fade-in slide-in-from-top-4 duration-500">
-            <Sparkles size={16} className="text-secondary animate-pulse" />
-            <span>{currentSlide.badge}</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border text-[11px] sm:text-sm font-bold mb-4 sm:mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg animate-in fade-in slide-in-from-top-4 duration-500 max-w-full truncate">
+            <Sparkles size={14} className="text-secondary animate-pulse shrink-0" />
+            <span className="truncate">{currentSlide.badge}</span>
           </div>
 
           {/* Slide Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline font-bold mb-4 tracking-tight leading-[1.1] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-3 sm:mb-4 tracking-tight leading-[1.15] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] break-words max-w-full">
             {currentSlide.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl font-headline font-semibold text-secondary mb-4 drop-shadow-md">
+          <p className="text-sm sm:text-lg lg:text-xl font-headline font-semibold text-secondary mb-3 sm:mb-4 drop-shadow-md leading-snug">
             {currentSlide.subtitle}
           </p>
 
           {/* Description */}
-          <p className="text-base sm:text-lg font-sans max-w-2xl mb-6 leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+          <p className="text-xs sm:text-base lg:text-lg font-sans max-w-2xl mb-4 sm:mb-6 leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-3 sm:line-clamp-none">
             {currentSlide.description}
           </p>
 
           {/* Tag Pills */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
             {currentSlide.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black/40 backdrop-blur-md border border-white/15 text-xs font-semibold text-white/90 shadow-md"
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs font-semibold text-white/90 shadow-md"
               >
-                <CheckCircle2 size={13} className="text-secondary" />
+                <CheckCircle2 size={12} className="text-secondary shrink-0" />
                 {tag}
               </span>
             ))}
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
             <Button 
               asChild 
               size="lg" 
-              className="shadow-[0_0_30px_hsl(var(--primary)/0.6)] h-14 px-8 text-base font-bold gap-2 active:scale-95 transition-all"
+              className="shadow-[0_0_30px_hsl(var(--primary)/0.6)] h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold gap-2 active:scale-95 transition-all w-full sm:w-auto"
             >
               <Link href={currentSlide.ctaPrimary.href}>
                 {ctaText || currentSlide.ctaPrimary.text}
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="secondary"
-              className="h-14 px-8 text-base font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 backdrop-blur-md shadow-lg gap-2 active:scale-95 transition-all"
+              className="h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 backdrop-blur-md shadow-lg gap-2 active:scale-95 transition-all w-full sm:w-auto"
             >
               <Link href={currentSlide.ctaSecondary.href}>
-                <Store size={18} />
+                <Store size={16} />
                 {currentSlide.ctaSecondary.text}
               </Link>
             </Button>
@@ -238,9 +238,9 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
                   alt={slide.title}
                   fill
                   sizes="200px"
-                  className="object-cover filter brightness-[0.6] group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
                 <span className="relative z-10 text-[10px] font-bold uppercase tracking-wider text-secondary">
                   0{idx + 1}
                 </span>
