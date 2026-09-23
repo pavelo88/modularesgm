@@ -111,3 +111,6 @@
 
 .chat-scroll::-webkit-scrollbar { width: 6px; }
 .chat-scroll::-webkit-scrollbar-thumb { background: hsl(var(--primary)); border-radius: 10px; }
+/* Header sobre hero oscuro: texto claro mientras es transparente */
+header[data-over-hero="true"] .hdr-fg { color: #fff; }
+header[data-over-hero="true"] .hdr-fg svg { color: inherit; }

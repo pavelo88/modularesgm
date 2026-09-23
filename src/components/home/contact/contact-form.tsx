@@ -61,11 +61,11 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-background/50 backdrop-blur-xl h-full flex flex-col rounded-2xl p-6 md:p-8 shadow-xl border">
+    <div className="flex h-full flex-col rounded-[2rem] border border-white/20 bg-white/60 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl dark:border-white/10 dark:bg-black/40 md:p-10 lg:p-12">
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(onSubmit)} 
-          className="space-y-5"
+          className="space-y-6"
           data-webmcp-name="ContactForm"
           data-webmcp-description="Formulario oficial de cotización para cocinas modulares, cuarzos, clósets y remodelación integral en Ecuador"
         >
@@ -74,25 +74,35 @@ export function ContactForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs font-bold uppercase tracking-wider">Nombre Completo</FormLabel>
+                <FormLabel className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Nombre Completo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Tu nombre" data-webmcp-input="fullName" {...field} />
+                  <Input 
+                    placeholder="Ej. Ana María Pérez" 
+                    className="h-14 rounded-xl border-zinc-200 bg-white/50 px-4 text-zinc-900 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary dark:border-zinc-800 dark:bg-black/50 dark:text-white dark:focus-visible:border-secondary dark:focus-visible:bg-black dark:focus-visible:ring-secondary" 
+                    data-webmcp-input="fullName" 
+                    {...field} 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs text-red-500" />
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-wider">Correo Electrónico</FormLabel>
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Correo Electrónico</FormLabel>
                   <FormControl>
-                    <Input placeholder="tu@correo.com" data-webmcp-input="emailAddress" {...field} />
+                    <Input 
+                      placeholder="tu@correo.com" 
+                      className="h-14 rounded-xl border-zinc-200 bg-white/50 px-4 text-zinc-900 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary dark:border-zinc-800 dark:bg-black/50 dark:text-white dark:focus-visible:border-secondary dark:focus-visible:bg-black dark:focus-visible:ring-secondary" 
+                      data-webmcp-input="emailAddress" 
+                      {...field} 
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-500" />
                 </FormItem>
               )}
             />
@@ -101,11 +111,16 @@ export function ContactForm() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-wider">Teléfono</FormLabel>
+                  <FormLabel className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Teléfono o WhatsApp</FormLabel>
                   <FormControl>
-                    <Input placeholder="Tu número de teléfono" data-webmcp-input="phoneNumber" {...field} />
+                    <Input 
+                      placeholder="099 123 4567" 
+                      className="h-14 rounded-xl border-zinc-200 bg-white/50 px-4 text-zinc-900 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary dark:border-zinc-800 dark:bg-black/50 dark:text-white dark:focus-visible:border-secondary dark:focus-visible:bg-black dark:focus-visible:ring-secondary" 
+                      data-webmcp-input="phoneNumber" 
+                      {...field} 
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red-500" />
                 </FormItem>
               )}
             />
@@ -115,18 +130,29 @@ export function ContactForm() {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs font-bold uppercase tracking-wider">Detalle su Proyecto</FormLabel>
+                <FormLabel className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Detalle su Proyecto</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Ej: Necesito remodelar mi cocina..." data-webmcp-input="projectDetails" {...field} />
+                  <Textarea 
+                    placeholder="Ej. Me gustaría remodelar la cocina de mi departamento. Necesito mesones de cuarzo y cajones amplios..." 
+                    className="min-h-[120px] resize-none rounded-xl border-zinc-200 bg-white/50 p-4 text-zinc-900 transition-all focus-visible:border-primary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-primary dark:border-zinc-800 dark:bg-black/50 dark:text-white dark:focus-visible:border-secondary dark:focus-visible:bg-black dark:focus-visible:ring-secondary" 
+                    data-webmcp-input="projectDetails" 
+                    {...field} 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs text-red-500" />
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isPending} className="w-full" size="lg">
-            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isPending ? 'Procesando...' : 'Solicitar Cotización'}
-          </Button>
+          <div className="pt-2">
+            <Button 
+              type="submit" 
+              disabled={isPending} 
+              className="h-14 w-full rounded-xl bg-primary text-base font-bold text-white shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl active:scale-[0.98] dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/90"
+            >
+              {isPending && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {isPending ? 'Enviando solicitud...' : 'Solicitar Cotización sin Costo'}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

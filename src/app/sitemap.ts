@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://modularesgm.com';
+  const baseUrl = 'https://www.modularesgm.com';
   
   return [
     {
@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/afiliados`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
   ];
 }

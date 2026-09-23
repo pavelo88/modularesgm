@@ -60,7 +60,7 @@ export const defaultSiteContent: SiteContent = {
   mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7796588557444!2d-78.5347701!3d-0.2522322999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5991c8015c583%3A0x4766de73906f7d5f!2sRosa%20Yeira%20420%2C%20Quito%20170148!5e0!3m2!1ses-419!2sec!4v1772991627819!5m2!1ses-419!2sec',
   socialUrls: {
     facebook: 'https://facebook.com/modularesgm',
-    instagram: 'https://instagram.com/modularesgm',
+    instagram: 'https://www.instagram.com/modularesgm2020/',
     linkedin: ''
   },
   theme: {

@@ -9,8 +9,8 @@ export function SEOStructuredData() {
         "@id": "https://www.modularesgm.com/#business",
         "name": "Modulares GM",
         "url": "https://www.modularesgm.com",
-        "image": "https://www.modularesgm.com/logo.svg",
-        "logo": "https://www.modularesgm.com/logo.svg",
+        "image": "https://www.modularesgm.com/logo.png",
+        "logo": "https://www.modularesgm.com/logo.png",
         "telephone": "+593963064374",
         "priceRange": "$$",
         "address": {
@@ -33,7 +33,7 @@ export function SEOStructuredData() {
         },
         "sameAs": [
           "https://facebook.com/modularesgm",
-          "https://instagram.com/modularesgm"
+          "https://www.instagram.com/modularesgm2020/"
         ],
         "knowsAbout": [
           "Diseño y Producción de Cocinas Modulares de Alta Gama",

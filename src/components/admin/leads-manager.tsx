@@ -16,7 +16,13 @@ import { Skeleton } from '../ui/skeleton';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-const allStatuses = ['Todos', 'Nuevo', 'Contactado', 'Cerrado'];
+const allStatuses = ['Todos', 'Nuevo', 'Contactado', 'Atendido', 'Cerrado'];
+
+function formatDate(val: any) {
+  if (!val) return 'Sin fecha';
+  const d = new Date(val);
+  return isNaN(d.getTime()) ? String(val) : d.toLocaleString('es-EC', { dateStyle: 'medium', timeStyle: 'short' });
+}
 
 export function LeadsManager() {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -30,6 +36,18 @@ export function LeadsManager() {
 
   const [analyzingId, startAnalyzing] = useTransition();
   const [generatingId, startGenerating] = useTransition();
+
+  const handleStatusChange = async (leadId: string, newStatus: string, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    try {
+      const { doc, updateDoc } = await import('firebase/firestore');
+      await updateDoc(doc(db, 'leads', leadId), { status: newStatus });
+      toast({ title: 'Estado actualizado', description: `Lead marcado como "${newStatus}".` });
+    } catch (err: any) {
+      console.error(err);
+      toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cambiar el estado.' });
+    }
+  };
 
   useEffect(() => {
     const leadsRef = collection(db, 'leads');
@@ -120,29 +138,52 @@ export function LeadsManager() {
             {filteredLeads.length > 0 ? filteredLeads.map((lead) => (
               <AccordionItem value={lead.id} key={lead.id} className="border rounded-lg overflow-hidden data-[state=open]:shadow-md transition-all">
                 <AccordionTrigger className="p-4 hover:no-underline text-left data-[state=open]:bg-muted/30">
-                  <div className="flex justify-between items-center w-full">
-                    <div className="flex flex-col">
-                      <span className="font-semibold">{lead.name}</span>
-                      <span className="text-xs text-muted-foreground">{lead.email}</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <Badge variant={lead.status === 'Nuevo' ? 'default' : 'secondary'}>{lead.status}</Badge>
-                      <span className="text-xs text-muted-foreground hidden sm:inline-block">
-                        {new Date(lead.createdAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="p-6 pt-4 space-y-6">
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-xs font-bold uppercase text-muted-foreground mb-2">Mensaje del Cliente:</h4>
-                      <p className="text-sm p-4 border rounded-xl bg-muted/50 leading-relaxed">{lead.message}</p>
-                      <div className="mt-2 text-[10px] text-muted-foreground flex gap-4">
-                        <span><strong>Teléfono:</strong> {lead.phone}</span>
-                        <span><strong>Fecha:</strong> {new Date(lead.createdAt).toLocaleString()}</span>
+                    <div className="flex justify-between items-center w-full">
+                      <div className="flex flex-col">
+                        <span className="font-semibold">{lead.name}</span>
+                        <span className="text-xs text-muted-foreground">{lead.email}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Badge 
+                          variant={lead.status === 'Nuevo' ? 'default' : lead.status === 'Atendido' || lead.status === 'Contactado' ? 'outline' : 'secondary'}
+                          className={lead.status === 'Atendido' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40' : ''}
+                        >
+                          {lead.status || 'Nuevo'}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground hidden sm:inline-block">
+                          {formatDate(lead.createdAt)}
+                        </span>
                       </div>
                     </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="p-6 pt-4 space-y-6">
+                    <div className="space-y-6">
+                      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold uppercase text-muted-foreground">Cambiar Estado:</span>
+                          {['Nuevo', 'Atendido', 'Contactado', 'Cerrado'].map((s) => (
+                            <Button
+                              key={s}
+                              size="sm"
+                              variant={lead.status === s ? 'default' : 'outline'}
+                              className="h-7 text-xs px-2.5 rounded-lg"
+                              onClick={(e) => handleStatusChange(lead.id, s, e)}
+                            >
+                              {s}
+                            </Button>
+                          ))}
+                        </div>
+                        <span className="text-xs text-muted-foreground"><strong>Fecha de Registro:</strong> {formatDate(lead.createdAt)}</span>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-bold uppercase text-muted-foreground mb-2">Mensaje del Cliente:</h4>
+                        <p className="text-sm p-4 border rounded-xl bg-muted/50 leading-relaxed">{lead.message}</p>
+                        <div className="mt-2 text-xs text-muted-foreground flex flex-wrap gap-4">
+                          <span><strong>Teléfono / WhatsApp:</strong> {lead.phone}</span>
+                          <span><strong>Correo:</strong> {lead.email}</span>
+                        </div>
+                      </div>
                     
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-4">

@@ -1,18 +1,16 @@
 'use client';
 
 import { MessageCircle } from 'lucide-react';
+import { whatsappHref } from '@/lib/site';
 
 export function WhatsAppFAB({ phoneNumber }: { phoneNumber: string }) {
   if (!phoneNumber) return null;
 
-  const message = encodeURIComponent(
-    'Hola Modulares GM, solicito información sobre sus servicios de muebles y diseño.'
-  );
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <a
-        href={`https://wa.me/${phoneNumber}?text=${message}`}
+        href={whatsappHref(phoneNumber, 'Hola Modulares GM, solicito información sobre sus servicios de muebles y diseño.')}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"

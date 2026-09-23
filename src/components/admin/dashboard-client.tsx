@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   Zap,
   Palette,
+  Handshake,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -33,15 +34,16 @@ import { CmsBrandsStatsForm } from './cms-brands-stats-form';
 import { CmsThemeForm } from './cms-theme-form';
 import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
+import { AffiliatesManager } from './affiliates-manager';
 import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
-import { db } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import { doc, onSnapshot } from 'firebase/firestore';
-import logo from '@/app/logo.jpg';
-import logo2 from '@/app/logo2.jpg';
 
-type AdminTab = 'general' | 'theme' | 'services' | 'products' | 'brands' | 'leads' | 'orders';
+type AdminTab = 'general' | 'theme' | 'services' | 'products' | 'brands' | 'leads' | 'orders' | 'affiliates';
 
 const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'general', label: 'Inicio y Contacto', icon: <Settings /> },
@@ -51,12 +53,23 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'brands', label: 'Marcas y Stats', icon: <Zap /> },
   { id: 'leads', label: 'Leads (Contactos)', icon: <MessageSquare /> },
   { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },
+  { id: 'affiliates', label: 'Afiliados', icon: <Handshake /> },
 ];
 
 export function AdminDashboardClient() {
   const [activeTab, setActiveTab] = useState<AdminTab>('general');
   const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
   const [loading, setLoading] = useState(true);
+  const [authReady, setAuthReady] = useState(false);
+  const router = useRouter();
+
+  // Las reglas de Firestore exigen sesión de Firebase: sin ella volvemos al login.
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (!user) router.replace('/admin');
+      else setAuthReady(true);
+    });
+  }, [router]);
 
   useEffect(() => {
     const contentRef = doc(db, 'siteContent', 'main');
@@ -83,7 +96,7 @@ export function AdminDashboardClient() {
   }, []);
 
   const renderContent = () => {
-    if (loading) {
+    if (loading || !authReady) {
         return (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -119,6 +132,8 @@ export function AdminDashboardClient() {
         return <LeadsManager />;
       case 'orders':
         return <OrdersManager />;
+      case 'affiliates':
+        return <AffiliatesManager />;
       default:
         return null;
     }
@@ -130,8 +145,7 @@ export function AdminDashboardClient() {
         <SidebarHeader>
           <div className="flex items-center gap-3 p-2">
             <div className="relative w-8 h-8 overflow-hidden rounded-md">
-                <Image src={logo} alt="Modulares GM" fill className="object-cover dark:hidden"/>
-                <Image src={logo2} alt="Modulares GM" fill className="object-cover hidden dark:block"/>
+                <Image src="/logo.png" alt="Modulares GM" fill className="object-contain" />
             </div>
             <div className="flex flex-col group-data-[collapsible=icon]:hidden">
               <span className="text-lg font-bold">Modulares GM</span>
@@ -156,7 +170,7 @@ export function AdminDashboardClient() {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-          <form action={logout} className="w-full">
+          <form action={logout} onSubmit={() => { signOut(auth); }} className="w-full">
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton tooltip="Cerrar Sesión" type="submit">

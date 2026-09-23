@@ -27,9 +27,12 @@ const PublicAIChatbotOutputSchema = z.object({
     phone: z.string().optional(),
     project: z.string().optional(),
     appointmentDate: z.string().optional(),
-    address: z.string().optional()
+    address: z.string().optional(),
   }).optional().describe('Información del lead detectada en la charla.')
 });
+
+export type PublicAIChatbotInput = z.infer<typeof PublicAIChatbotInputSchema>;
+export type PublicAIChatbotOutput = z.infer<typeof PublicAIChatbotOutputSchema>;
 
 export async function publicAIChatbot(input: PublicAIChatbotInput): Promise<PublicAIChatbotOutput> {
   return publicAIChatbotFlow(input);

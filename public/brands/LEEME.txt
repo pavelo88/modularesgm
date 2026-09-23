@@ -1,0 +1,8 @@
+Logos de marcas (Materiales y Herrajes de Calidad Certificada)
+
+Coloca aquí el logo de cada marca con este nombre (minúsculas, sin espacios):
+  novopan, pelikano, blum, hafele, silestone, dekton, teka, briggs, cosentino
+
+Formatos aceptados: .svg, .png o .webp  (ej.: blum.svg, novopan.webp)
+Ideal: logo con fondo transparente. La web los muestra automáticamente en BLANCO,
+tanto en modo claro como oscuro. Si falta el archivo, se muestra el nombre en texto.

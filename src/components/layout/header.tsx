@@ -17,6 +17,7 @@ import {
   Facebook,
   Instagram,
   Sun,
+  Handshake,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -34,40 +35,52 @@ import logo2 from '@/app/logo2.jpg';
 import { useSiteContent } from '@/context/site-content-provider';
 
 export function Header() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
   const { theme, setTheme } = useTheme();
   const { getCartCount, setIsCartOpen, selectedCategory, setSelectedCategory } = useCart();
   const { siteContent } = useSiteContent();
   const cartCount = getCartCount();
-  const [isClient, setIsClient] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [topOffset, setTopOffset] = useState(36);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    setIsClient(true);
+    const onScroll = () => {
+      setTopOffset(Math.max(0, 36 - window.scrollY));
+      setScrolled(window.scrollY > 24);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const isStorePage = pathname.startsWith('/store');
+  const isAffiliatesPage = pathname.startsWith('/afiliados');
+  // Solo las páginas con hero oscuro arrancan transparentes; el resto usa cristal desde el inicio.
+  const overHero = (pathname === '/' || pathname === '/afiliados') && !scrolled;
 
   const products = siteContent?.products || [];
   const storeCategories = ['Todos', ...Array.from(new Set(products.map(p => p.category)))];
 
   const navLinks = [
     { href: '/#top', label: 'Inicio', publicOnly: false, icon: <Home size={20} /> },
-    { href: '/#soluciones', label: 'Diseños', publicOnly: true, icon: <LayoutGrid size={20} /> },
+    { href: '/#catalogo', label: 'Catálogo', publicOnly: true, icon: <LayoutGrid size={20} /> },
     { href: '/#contacto', label: 'Contacto', publicOnly: true, icon: <MessageSquare size={20} /> },
     { href: '/store', label: 'Tienda', publicOnly: false, icon: <Store size={20} /> },
+    { href: '/afiliados', label: 'Trabaja con nosotros', publicOnly: false, icon: <Handshake size={20} /> },
   ];
 
   const NavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
     if (publicOnly && pathname !== '/') return null;
-    const isActive = href === '/store' ? pathname.startsWith('/store') : false;
+    const isActive = href === '/afiliados' ? pathname.startsWith('/afiliados') : href === '/store' ? pathname.startsWith('/store') : false;
 
     return (
       <Link
         href={href}
         className={cn(
           'flex items-center gap-1 transition-colors font-medium',
-          isActive ? 'text-primary font-extrabold' : 'text-primary font-bold hover:text-primary dark:text-muted-foreground dark:hover:text-primary'
+          isActive ? 'text-primary hdr-fg font-extrabold' : 'text-primary hdr-fg font-bold hover:text-primary dark:text-muted-foreground dark:hover:text-primary'
         )}
       >
         {icon}
@@ -78,7 +91,7 @@ export function Header() {
   
   const MobileNavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
      if (publicOnly && pathname !== '/') return null;
-     const isActive = href === '/store' ? pathname.startsWith('/store') : (href === '/#top' && pathname === '/');
+     const isActive = href === '/store' ? pathname.startsWith('/store') : href === '/afiliados' ? pathname.startsWith('/afiliados') : (href === '/#top' && pathname === '/');
      return (
        <Link
          href={href}
@@ -108,24 +121,33 @@ export function Header() {
   )
 
   return (
-    <header className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-300 h-20 flex items-center",
-      "bg-white/30 backdrop-blur-xl border-none dark:bg-[#19242D] dark:backdrop-blur-none shadow-none"
-    )}>
+    <header
+      style={{ top: topOffset }}
+      data-over-hero={overHero}
+      className={cn(
+        'fixed w-full z-50 h-20 flex items-center transition-[background-color,box-shadow,backdrop-filter] duration-300',
+        overHero
+          ? 'bg-transparent'
+          : 'bg-white/70 dark:bg-[#111c24]/70 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.08)]'
+      )}>
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src="/logo.svg" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" priority />
+          <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" priority />
           <div className="flex flex-col">
-            <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
+            <span className="block text-base font-bold tracking-tight text-primary hdr-fg dark:text-white">
               MODULARES GM
-            </h2>
-            <p className="text-[10px] font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
+            </span>
+            <p className="text-[10px] font-medium text-primary hdr-fg/80 dark:text-muted-foreground -mt-1 leading-tight">
               Cocinas y Cuarzos
             </p>
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
-          {navLinks.map(link => <NavLink key={link.href} {...link}/>)}
+          {isAffiliatesPage ? (
+            <NavLink href="/store" label="Ir a la Tienda" publicOnly={false} icon={<Store size={20} />} />
+          ) : (
+            navLinks.map(link => <NavLink key={link.href} {...link}/>)
+          )}
         </nav>
         <div className="hidden md:flex items-center gap-2">
             <div className="h-6 w-px bg-primary/20 mx-2"></div>
@@ -133,7 +155,7 @@ export function Header() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsCartOpen(true)}
-                className="relative text-primary"
+                className="relative text-primary hdr-fg"
                 aria-label="Open shopping cart"
             >
                 <ShoppingCart size={20} />
@@ -143,8 +165,8 @@ export function Header() {
                 </span>
                 )}
             </Button>
-            <ThemeToggleButton className="text-primary" />
-            <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
+            <ThemeToggleButton className="text-primary hdr-fg" />
+            <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hdr-fg hover:bg-primary hover:text-primary-foreground transition-all">
                 <Link href="/admin">
                 <Lock size={16} /> Admin
                 </Link>
@@ -156,7 +178,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             onClick={() => setIsCartOpen(true)}
-            className="relative text-primary"
+            className="relative text-primary hdr-fg"
             aria-label="Open shopping cart"
           >
             <ShoppingCart size={24} />
@@ -167,81 +189,80 @@ export function Header() {
             )}
           </Button>
           
-          {isClient && <ThemeToggleButton className="text-primary" />}
+          <ThemeToggleButton className="text-primary hdr-fg" />
 
-          {isClient ? (
-            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-primary" aria-label="Toggle menu">
-                  <Menu size={28} />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0">
-                <SheetHeader className="border-b p-4">
-                  <SheetTitle className="sr-only">Menu</SheetTitle>
-                   <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
-                  <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
-                    <Image src="/logo.svg" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" />
-                    <div className="flex flex-col">
-                      <h2 className="text-base font-bold tracking-tight text-primary dark:text-white">
-                        MODULARES GM
-                      </h2>
-                      <p className="text-[10px] font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
-                        Cocinas y Cuarzos
-                      </p>
-                    </div>
-                  </Link>
-                </SheetHeader>
-                <nav className="flex flex-col gap-1 p-4 flex-1">
-                  {isStorePage ? (
-                     <>
-                      <p className="px-3 text-sm font-semibold text-muted-foreground">Categorías</p>
-                      {storeCategories.map(category => (
-                        <Link
-                          href="/store"
-                          key={category}
-                          onClick={() => {
-                            setSelectedCategory(category);
-                            setIsMenuOpen(false);
-                          }}
-                          className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base",
-                            selectedCategory === category ? "bg-muted text-primary" : "text-foreground hover:bg-muted"
-                          )}
-                        >
-                          <span>{category}</span>
-                        </Link>
-                      ))}
-                      <div className="my-2 border-t"></div>
-                      <MobileNavLink href="/#top" label="Volver al Inicio" publicOnly={false} icon={<Home size={20} />} />
-                    </>
-                  ) : (
-                    navLinks.map(link => <MobileNavLink key={link.href} {...link} />)
-                  )}
-                </nav>
-                <div className="mt-auto border-t p-4 space-y-4">
-                    <div className="flex gap-2 justify-center">
-                        <Button asChild variant="outline" size="icon" className="rounded-full">
-                            <a href={'https://facebook.com/modularesgm'} target="_blank" rel="noreferrer" aria-label="Facebook">
-                                <Facebook size={18} />
-                            </a>
-                        </Button>
-                        <Button asChild variant="outline" size="icon" className="rounded-full">
-                            <a href={'https://instagram.com/modularesgm'} target="_blank" rel="noreferrer" aria-label="Instagram">
-                                <Instagram size={18} />
-                            </a>
-                        </Button>
-                    </div>
-                    <Button asChild className="w-full" variant="outline">
-                        <Link href="/admin" onClick={() => setIsMenuOpen(false)}><Lock size={16} /> Admin</Link>
-                    </Button>
-                </div>
-              </SheetContent>
-            </Sheet>
-          ) : (
-             <Button variant="ghost" size="icon" aria-label="Toggle menu">
+          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-primary hdr-fg" aria-label="Toggle menu">
                 <Menu size={28} />
-            </Button>
-          )}
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0">
+              <SheetHeader className="border-b p-4">
+                <SheetTitle className="sr-only">Menu</SheetTitle>
+                 <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
+                  <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" />
+                  <div className="flex flex-col">
+                    <span className="block text-base font-bold tracking-tight text-primary hdr-fg dark:text-white">
+                      MODULARES GM
+                    </span>
+                    <p className="text-[10px] font-medium text-primary hdr-fg/80 dark:text-muted-foreground -mt-1 leading-tight">
+                      Cocinas y Cuarzos
+                    </p>
+                  </div>
+                </Link>
+              </SheetHeader>
+              <nav className="flex flex-col gap-1 p-4 flex-1">
+                {isStorePage ? (
+                   <>
+                    <p className="px-3 text-sm font-semibold text-muted-foreground">Categorías</p>
+                    {storeCategories.map(category => (
+                      <Link
+                        href="/store"
+                        key={category}
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          setIsMenuOpen(false);
+                        }}
+                        className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base",
+                          selectedCategory === category ? "bg-muted text-primary hdr-fg" : "text-foreground hover:bg-muted"
+                        )}
+                      >
+                        <span>{category}</span>
+                      </Link>
+                    ))}
+                    <div className="my-2 border-t"></div>
+                    <MobileNavLink href="/#top" label="Volver al Inicio" publicOnly={false} icon={<Home size={20} />} />
+                    <MobileNavLink href="/afiliados" label="Trabaja con nosotros" publicOnly={false} icon={<Handshake size={20} />} />
+                  </>
+                ) : isAffiliatesPage ? (
+                  <>
+                    <MobileNavLink href="/store" label="Ir a la Tienda" publicOnly={false} icon={<Store size={20} />} />
+                  </>
+                ) : (
+                  navLinks.map(link => <MobileNavLink key={link.href} {...link} />)
+                )}
+              </nav>
+              <div className="mt-auto border-t p-4 space-y-4">
+                  <div className="flex gap-2 justify-center">
+                      <Button asChild variant="outline" size="icon" className="rounded-full">
+                          <a href={'https://facebook.com/modularesgm'} target="_blank" rel="noreferrer" aria-label="Facebook">
+                              <Facebook size={18} />
+                          </a>
+                      </Button>
+                      <Button asChild variant="outline" size="icon" className="rounded-full">
+                          <a href={'https://www.instagram.com/modularesgm2020/'} target="_blank" rel="noreferrer" aria-label="Instagram">
+                              <Instagram size={18} />
+                          </a>
+                      </Button>
+                  </div>
+                  <Button asChild className="w-full" variant="outline">
+                      <Link href="/admin" onClick={() => setIsMenuOpen(false)}><Lock size={16} /> Admin</Link>
+                  </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { TopBar } from '@/components/layout/top-bar';
+import { AffiliateProvider } from '@/context/affiliate-provider';
 import { BackgroundDecor, HeroBackground } from '@/components/shared/background-decor';
 import { WhatsAppFAB } from '@/components/shared/whatsapp-fab';
 import { ChatbotWidget } from '@/components/shared/chatbot/chatbot-widget';
@@ -81,10 +84,26 @@ export function PublicLayoutClient({
     };
   }, []);
 
+  const pathname = usePathname() ?? '';
+  const isAuthPage = pathname.startsWith('/afiliados/acceso');
   const value = { siteContent, loading: !siteContent };
+
+  if (isAuthPage) {
+    return (
+      <SiteContentContext.Provider value={value}>
+        <AffiliateProvider>
+          <main className="min-h-screen relative">
+            {children}
+          </main>
+        </AffiliateProvider>
+      </SiteContentContext.Provider>
+    );
+  }
 
   return (
     <SiteContentContext.Provider value={value}>
+     <AffiliateProvider>
+      <TopBar />
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow relative">
@@ -100,6 +119,7 @@ export function PublicLayoutClient({
         <WhatsAppFAB phoneNumber={siteContent.whatsappNumber} />
         {siteContent && <ChatbotWidget siteContent={siteContent} />}
       </div>
+     </AffiliateProvider>
     </SiteContentContext.Provider>
   );
 }

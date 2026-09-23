@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
         />
         {product.discountPrice && (
           <Badge variant="destructive" className="absolute top-4 right-4 shadow-lg">
-            OFERTA
+            -{Math.round((1 - product.discountPrice / product.price) * 100)}%
           </Badge>
         )}
         <Badge className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white">

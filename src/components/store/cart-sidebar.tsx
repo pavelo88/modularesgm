@@ -15,8 +15,10 @@ import {
 } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
+import { useAffiliate } from '@/context/affiliate-provider';
 
 export function CartSidebar() {
+  const { code, discountPercent } = useAffiliate();
   const {
     cart,
     isCartOpen,
@@ -107,10 +109,22 @@ export function CartSidebar() {
         {cart.length > 0 && (
           <SheetFooter className="bg-muted/50 p-6 -m-6 mt-6">
             <div className="w-full">
+              {discountPercent > 0 && (
+                <div className="mb-3 space-y-1 text-sm">
+                  <div className="flex justify-between text-muted-foreground">
+                    <span>Subtotal</span>
+                    <span>${getCartTotal().toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-green-600 font-medium">
+                    <span>Código {code} (-{discountPercent}%)</span>
+                    <span>-${(getCartTotal() * discountPercent / 100).toFixed(2)}</span>
+                  </div>
+                </div>
+              )}
               <div className="flex justify-between items-center mb-6">
                 <span className="font-bold text-muted-foreground">Total:</span>
                 <span className="text-2xl font-bold text-primary">
-                  ${getCartTotal().toFixed(2)}
+                  ${(getCartTotal() * (1 - discountPercent / 100)).toFixed(2)}
                 </span>
               </div>
               <Button asChild size="lg" className="w-full bg-secondary text-secondary-foreground">

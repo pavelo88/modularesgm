@@ -11,10 +11,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (pathname === '/admin' && sessionCookie) {
-    return NextResponse.redirect(new URL('/admin/dashboard', request.url));
-  }
-
   return NextResponse.next();
 }
 

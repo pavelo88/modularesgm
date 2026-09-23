@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     canonical: './',
   },
   icons: {
-    icon: '/icon.svg',
-    shortcut: '/icon.svg',
-    apple: '/icon.svg',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
   openGraph: {
     title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
@@ -92,6 +92,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link 
+          rel="preload" 
+          as="image" 
+          href="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=65&w=900&fm=webp" 
+          fetchPriority="high" 
+        />
+      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-body antialiased',

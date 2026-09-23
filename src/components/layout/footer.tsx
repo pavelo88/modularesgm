@@ -24,11 +24,11 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
            <div className="flex items-center gap-3 mb-4">
-             <Image src="/logo.svg" alt="Modulares GM Logo" width={48} height={48} className="w-12 h-12 object-contain drop-shadow-md" />
+             <Image src="/logo.png" alt="Modulares GM Logo" width={48} height={48} className="w-12 h-12 object-contain drop-shadow-md" />
             <div className="flex flex-col">
-                <h2 className="text-xl font-bold tracking-tight text-primary">
+                <span className="block text-xl font-bold tracking-tight text-primary">
                     MODULARES GM
-                </h2>
+                </span>
                  <p className="text-xs font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
                     Cocinas y Cuarzos
                 </p>
@@ -40,6 +40,9 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
         </div>
 
         <div className="flex flex-col items-center">
+          <Link href="/afiliados" className="mb-6 text-sm font-bold text-primary underline underline-offset-4">
+            Trabaja con nosotros · Programa de afiliados
+          </Link>
           <p className="text-xs font-bold uppercase tracking-widest mb-4 text-primary/60 dark:text-muted-foreground">
             Síguenos
           </p>

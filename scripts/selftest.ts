@@ -1,0 +1,11 @@
+import { computePayouts, DEFAULT_AFFILIATE_SETTINGS as S, priceWithDiscount } from '../src/lib/affiliate-core';
+import { isValidEcuadorId } from '../src/lib/ecuador-id';
+const eq = (a: unknown, b: unknown, m: string) => { if (JSON.stringify(a) !== JSON.stringify(b)) { console.error('FAIL', m, a, b); process.exit(1); } };
+const p = computePayouts(1000, { username: 'ana', parentId: 'luis', granId: 'eva' }, S);
+eq(p.map(x => [x.affiliateUsername, x.amountUsd]), [['ana',80],['luis',20],['eva',10]], 'cadena completa');
+const o = computePayouts(1000, { username: 'pablofgarciaf' }, S);
+eq(o.every(x => x.affiliateUsername === 'pablofgarciaf') && o.reduce((t,x)=>t+x.amountUsd,0), 110, 'orgánica -> root 11%');
+eq(priceWithDiscount(200, true, S), { discountAmount: 10, total: 190 }, 'descuento 5%');
+eq(priceWithDiscount(200, false, S), { discountAmount: 0, total: 200 }, 'sin código');
+console.log('cedula 1721790721:', isValidEcuadorId('1721790721'));
+console.log('OK');

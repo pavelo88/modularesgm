@@ -18,8 +18,8 @@ export function BackgroundDecor() {
 export function HeroBackground({ heroMediaUrl }: { heroMediaUrl?: string }) {
     return (
         <div className="fixed inset-0 -z-40 pointer-events-none">
-            {/* Dark gradient backdrop to prevent image flickering */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#19242D]/80 via-transparent to-[#19242D]" />
+            {/* Dark gradient backdrop strictly in dark mode */}
+            <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-[#19242D]/80 dark:via-transparent dark:to-[#19242D]" />
         </div>
     );
 }

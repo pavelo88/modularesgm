@@ -2,11 +2,11 @@
 
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
-import { ADMIN_PASSWORD } from '@/lib/config';
+import { adminDb } from '@/lib/firebase-admin';
+import { clearAdminSession, createAdminSession, requireAdmin } from '@/lib/admin-session';
+import { applyOrderStatus, getSettings, priceCart, resolveAttribution } from '@/lib/affiliate-server';
+import { priceWithDiscount } from '@/lib/affiliate-core';
 import type { CartItem, SiteContent } from './types';
 
 // AI Flow Imports
@@ -16,36 +16,23 @@ import { generateProposal } from '@/ai/flows/admin-proposal-generation-flow';
 import { generateProductDescription } from '@/ai/flows/admin-product-description-drafting-flow';
 import { generateAdminSEO } from '@/ai/flows/admin-seo-generation-flow';
 
-// --- Authentication Actions ---
+// --- Authentication Actions (Firebase Auth + cookie de sesión verificada) ---
 
-const SESSION_COOKIE = 'modulares-gm-session';
-
-export async function login(password: string) {
-  if (password === ADMIN_PASSWORD) {
-    const cookieStore = await cookies();
-    cookieStore.set(SESSION_COOKIE, 'authenticated', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24, // 1 day
-      path: '/',
-    });
-    redirect('/admin/dashboard');
+export async function loginAdmin(idToken: string) {
+  try {
+    const identity = await createAdminSession(idToken);
+    if (!identity) return { error: 'Tu cuenta no tiene acceso al panel.' };
+    return { success: true as const };
+  } catch (error) {
+    console.error('[admin-login]', error);
+    return { error: 'No se pudo validar la sesión. Intenta nuevamente.' };
   }
-  return { error: 'Contraseña incorrecta.' };
 }
 
 export async function logout() {
-  const cookieStore = await cookies();
-  cookieStore.delete(SESSION_COOKIE);
+  await clearAdminSession();
   redirect('/admin');
 }
-
-export async function verifySession() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get(SESSION_COOKIE);
-  return !!cookie;
-}
-
 
 // --- Public Actions ---
 
@@ -57,9 +44,11 @@ const LeadSchema = z.object({
 });
 
 export async function handleLeadSubmit(values: z.infer<typeof LeadSchema>) {
+  const parsed = LeadSchema.safeParse(values);
+  if (!parsed.success) return { success: false, error: 'Datos inválidos.' };
   try {
-    await addDoc(collection(db, 'leads'), {
-      ...values,
+    await adminDb().collection('leads').add({
+      ...parsed.data,
       status: 'Nuevo',
       createdAt: Date.now(),
     });
@@ -75,45 +64,50 @@ const checkoutSchema = z.object({
   email: z.string().email({ message: 'Email inválido' }),
   phone: z.string().min(7, { message: 'Teléfono es requerido' }),
   address: z.string().min(5, { message: 'Dirección es requerida' }),
-  paymentMethod: z.enum(['transferencia', 'tarjeta', 'efectivo'], {
-    required_error: 'Debe seleccionar un método de pago',
-  }),
+  paymentMethod: z.enum(['transferencia', 'paypal', 'efectivo']),
   transferRef: z.string().optional(),
-}).refine((data) => {
-    if (data.paymentMethod === 'transferencia') {
-        return !!data.transferRef && data.transferRef.length > 3;
-    }
-    return true;
-}, {
-    message: "El número de referencia es requerido y debe ser válido.",
-    path: ["transferRef"],
 });
 
-
+/**
+ * Crea el pedido. Los precios se recalculan en el servidor a partir del catálogo;
+ * el descuento y la atribución del afiliado también se resuelven aquí.
+ */
 export async function handleCheckout(
   values: z.infer<typeof checkoutSchema>,
-  cart: CartItem[]
+  cart: CartItem[],
+  affiliateCode?: string
 ) {
-  if (cart.length === 0) {
-    return { success: false, error: 'El carrito está vacío.' };
+  const parsed = checkoutSchema.safeParse(values);
+  if (!parsed.success) return { success: false, error: parsed.error.issues[0]?.message || 'Datos inválidos.' };
+  const data = parsed.data;
+  if (data.paymentMethod === 'transferencia' && (!data.transferRef || data.transferRef.length < 4)) {
+    return { success: false, error: 'El número de referencia es requerido.' };
   }
 
-  const total = cart.reduce((sum, item) => {
-    const price = item.product.discountPrice || item.product.price;
-    return sum + price * item.quantity;
-  }, 0);
-
-  const orderData = {
-    ...values,
-    items: cart,
-    total: total,
-    status: 'Pendiente',
-    createdAt: Date.now(),
-  };
+  const { items, subtotal } = await priceCart(cart);
+  if (items.length === 0) return { success: false, error: 'El carrito está vacío.' };
 
   try {
-    await addDoc(collection(db, 'orders'), orderData);
-    return { success: true };
+    const settings = await getSettings();
+    const attribution = await resolveAttribution(affiliateCode, data.email);
+    const { discountAmount, total } = priceWithDiscount(subtotal, !!attribution, settings);
+
+    const ref = await adminDb().collection('orders').add({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      paymentMethod: data.paymentMethod,
+      transferRef: data.transferRef || '',
+      items,
+      subtotal,
+      discountAmount,
+      total,
+      affiliateCode: attribution?.username || '',
+      status: 'Pendiente',
+      createdAt: Date.now(),
+    });
+    return { success: true, orderId: ref.id, total };
   } catch (error) {
     console.error(error);
     return { success: false, error: 'Error al registrar el pedido.' };
@@ -134,8 +128,7 @@ export async function handleSendChatMessage(userMessage: string, siteContent: Si
 
     // --- GUARDADO AUTOMÁTICO DE LEADS ---
     if (response.extractedLead && (response.extractedLead.name || response.extractedLead.phone)) {
-       console.log("📍 Lead detectado por SofIA:", response.extractedLead);
-       await addDoc(collection(db, 'leads'), {
+       await adminDb().collection('leads').add({
          name: response.extractedLead.name || 'Desconocido',
          email: 'ia-auto-captured@modularesgm.com',
          phone: response.extractedLead.phone || 'Pendiente',
@@ -154,22 +147,14 @@ export async function handleSendChatMessage(userMessage: string, siteContent: Si
 }
 
 
-// --- Admin Actions (protected) ---
-
-async function protectedAction() {
-  const isAuthenticated = await verifySession();
-  if (!isAuthenticated) {
-    throw new Error('Not authenticated');
-  }
-}
+// --- Admin Actions (protegidas con sesión verificada) ---
 
 export async function saveSiteContent(content: SiteContent) {
-  await protectedAction();
+  await requireAdmin();
   try {
-    const contentRef = doc(db, 'siteContent', 'main');
     // Ensure nested objects aren't lost if they are undefined
     const cleanContent = JSON.parse(JSON.stringify(content));
-    await setDoc(contentRef, cleanContent);
+    await adminDb().doc('siteContent/main').set(cleanContent);
     revalidatePath('/');
     revalidatePath('/store');
     return { success: true };
@@ -180,13 +165,13 @@ export async function saveSiteContent(content: SiteContent) {
 }
 
 export async function updateOrderStatus(orderId: string, status: string) {
-  await protectedAction();
+  await requireAdmin();
   try {
-    const orderRef = doc(db, 'orders', orderId);
-    await setDoc(orderRef, { status }, { merge: true });
+    await applyOrderStatus(orderId, status);
     return { success: true };
   } catch (error) {
-    return { success: false, error: 'Failed to update status.' };
+    console.error(error);
+    return { success: false, error: 'No se pudo actualizar el estado.' };
   }
 }
 
@@ -194,7 +179,7 @@ export async function updateOrderStatus(orderId: string, status: string) {
 // --- Admin AI Actions ---
 
 export async function getLeadAnalysis(message: string) {
-  await protectedAction();
+  await requireAdmin();
   try {
     const result = await adminLeadAnalysis({ message });
     return { success: true, data: result };
@@ -204,7 +189,7 @@ export async function getLeadAnalysis(message: string) {
 }
 
 export async function getProposal(leadMessage: string) {
-  await protectedAction();
+  await requireAdmin();
   try {
     const result = await generateProposal({ leadMessage });
     return { success: true, data: result };
@@ -214,7 +199,7 @@ export async function getProposal(leadMessage: string) {
 }
 
 export async function getProductDescription(productTitle: string, productCategory: string) {
-  await protectedAction();
+  await requireAdmin();
   try {
     const result = await generateProductDescription({
       productId: '', // Not strictly needed by the prompt
@@ -228,7 +213,7 @@ export async function getProductDescription(productTitle: string, productCategor
 }
 
 export async function getSeoSuggestions(heroTitle: string, heroSubtitle: string) {
-  await protectedAction();
+  await requireAdmin();
   try {
     const result = await generateAdminSEO({ heroTitle, heroSubtitle });
     return { success: true, data: result };

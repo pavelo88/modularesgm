@@ -3,12 +3,13 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useState, useTransition } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Banknote, CreditCard, Info, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft, CheckCircle2 } from 'lucide-react';
+import { Banknote, CreditCard, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft, CheckCircle2, Tag } from 'lucide-react';
 
 import { useCart } from '@/context/cart-provider';
+import { useAffiliate } from '@/context/affiliate-provider';
 import { useSiteContent } from '@/context/site-content-provider';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -17,48 +18,24 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { handleCheckout } from '@/lib/actions';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Alert } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ProductCard } from '@/components/store/product-card';
+import { PayPalButton } from '@/components/store/paypal-button';
 
 const checkoutSchema = z.object({
   name: z.string().min(2, { message: 'Nombre es requerido' }),
   email: z.string().email({ message: 'Email inválido' }),
   phone: z.string().min(7, { message: 'Teléfono es requerido' }),
   address: z.string().min(5, { message: 'Dirección es requerida' }),
-  paymentMethod: z.enum(['transferencia', 'tarjeta', 'efectivo'], {
+  paymentMethod: z.enum(['transferencia', 'paypal', 'efectivo'], {
     required_error: 'Debe seleccionar un método de pago',
   }),
   transferRef: z.string().optional(),
-  cardName: z.string().optional(),
-  cardNumber: z.string().optional(),
-  cardExpiry: z.string().optional(),
-  cardCvc: z.string().optional(),
 })
-.refine((data) => {
-    if (data.paymentMethod === 'transferencia') {
-        return !!data.transferRef && data.transferRef.length > 3;
-    }
-    return true;
-}, {
+.refine((data) => data.paymentMethod !== 'transferencia' || (!!data.transferRef && data.transferRef.length > 3), {
     message: "El número de referencia es requerido y debe ser válido.",
     path: ["transferRef"],
-})
-.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardName || data.cardName.trim() === '')), {
-    message: 'Nombre en la tarjeta es requerido.',
-    path: ['cardName'],
-})
-.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardNumber || data.cardNumber.replace(/\s/g, '').length !== 16)), {
-    message: 'Número de tarjeta debe tener 16 dígitos.',
-    path: ['cardNumber'],
-})
-.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardExpiry || !/^(0[1-9]|1[0-2])\s*\/\s*\d{2}$/.test(data.cardExpiry))), {
-    message: 'Fecha debe ser MM/AA.',
-    path: ['cardExpiry'],
-})
-.refine(data => !(data.paymentMethod === 'tarjeta' && (!data.cardCvc || data.cardCvc.length < 3 || data.cardCvc.length > 4)), {
-    message: 'CVC debe tener 3 o 4 dígitos.',
-    path: ['cardCvc'],
 });
 
 
@@ -69,8 +46,22 @@ export default function CheckoutPage() {
   const { siteContent } = useSiteContent();
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
+  const [payOrder, setPayOrder] = useState<{ id: string; total: number } | null>(null);
   const { toast } = useToast();
-  
+  const { code, discountPercent, applyCode, clearCode } = useAffiliate();
+  const [codeInput, setCodeInput] = useState('');
+  const [codeError, setCodeError] = useState('');
+  const subtotal = getCartTotal();
+  const discount = subtotal * discountPercent / 100;
+  const finalTotal = subtotal - discount;
+
+  const onApplyCode = async () => {
+    setCodeError('');
+    const ok = await applyCode(codeInput);
+    if (ok) setCodeInput('');
+    else setCodeError('Código inválido.');
+  };
+
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: { 
@@ -79,39 +70,41 @@ export default function CheckoutPage() {
       phone: '', 
       address: '', 
       paymentMethod: 'transferencia', 
-      transferRef: '',
-      cardName: '', 
-      cardNumber: '', 
-      cardExpiry: '', 
-      cardCvc: '' 
+      transferRef: ''
     },
   });
 
   const onSubmit = (data: CheckoutFormValues) => {
-    if (data.paymentMethod === 'tarjeta') {
-        toast({
-            variant: 'destructive',
-            title: 'Función no Implementada',
-            description: 'El pago con tarjeta aún no está conectado. Por favor, selecciona otro método de pago.',
-        });
-        return;
-    }
-
     startTransition(async () => {
-      const result = await handleCheckout(data, cart);
-      if (result.success) {
-        clearCart();
-        form.reset();
-        setIsSuccess(true);
-      } else {
+      const result = await handleCheckout(data, cart, code || undefined);
+      if (!result.success) {
         toast({
           variant: 'destructive',
           title: 'Error en el Pedido',
           description: result.error || 'Hubo un problema al procesar tu pedido.',
         });
+        return;
       }
+      if (data.paymentMethod === 'paypal' && result.orderId) {
+        setPayOrder({ id: result.orderId, total: result.total ?? 0 });
+        return;
+      }
+      clearCart();
+      form.reset();
+      setIsSuccess(true);
     });
   };
+
+  const handlePaid = useCallback(() => {
+    clearCart();
+    form.reset();
+    setPayOrder(null);
+    setIsSuccess(true);
+  }, [clearCart, form]);
+
+  const handlePayError = useCallback((description: string) => {
+    toast({ variant: 'destructive', title: 'Pago no completado', description });
+  }, [toast]);
 
   const paymentMethod = form.watch('paymentMethod');
   const suggestedProducts = siteContent?.products
@@ -142,6 +135,17 @@ export default function CheckoutPage() {
             </Button>
         </div>
     )
+  }
+
+  if (payOrder) {
+    return (
+      <div className="max-w-lg mx-auto px-6 pt-32 pb-20 relative z-10">
+        <h2 className="text-3xl font-bold mb-2">Completa tu pago</h2>
+        <p className="text-muted-foreground mb-6">Pedido registrado por <strong>${payOrder.total.toFixed(2)}</strong>. Elige tarjeta o PayPal para finalizar.</p>
+        <PayPalButton orderId={payOrder.id} onPaid={handlePaid} onError={handlePayError} />
+        <Button variant="link" className="mt-6 px-0" onClick={() => setPayOrder(null)}>Cambiar método de pago</Button>
+      </div>
+    );
   }
 
   return (
@@ -221,52 +225,13 @@ export default function CheckoutPage() {
                                     </div>
                                 )}
                                 </Label>
-                                <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'tarjeta' ? 'border-primary bg-primary/5' : 'border-border'}`}>
+                                <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'paypal' ? 'border-primary bg-primary/5' : 'border-border'}`}>
                                     <div className="flex items-center gap-3">
-                                        <RadioGroupItem value="tarjeta" id="tarjeta" />
-                                        <span className="font-bold flex items-center gap-2"><CreditCard size={16} className="text-primary" /> Tarjeta de Crédito / Débito</span>
+                                        <RadioGroupItem value="paypal" id="paypal" />
+                                        <span className="font-bold flex items-center gap-2"><CreditCard size={16} className="text-primary" /> Tarjeta de crédito / débito o PayPal</span>
                                     </div>
-                                    {paymentMethod === 'tarjeta' && (
-                                        <div className="ml-7 space-y-4 pt-4">
-                                            <Alert variant="default" className="bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-200">
-                                                <Info className="h-4 w-4 !text-blue-600" />
-                                                <AlertTitle className="font-bold">Paso Siguiente: Integración de Pagos</AlertTitle>
-                                                <AlertDescription>
-                                                    Este es un formulario de demostración. Para aceptar pagos reales, necesitarás integrar un proveedor como Stripe o Mercado Pago.
-                                                </AlertDescription>
-                                            </Alert>
-
-                                            <FormField control={form.control} name="cardName" render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Nombre en la Tarjeta</FormLabel>
-                                                    <FormControl><Input {...field} autoComplete="cc-name" placeholder="Juan Pérez" disabled /></FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )} />
-                                            <FormField control={form.control} name="cardNumber" render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>Número de Tarjeta</FormLabel>
-                                                    <FormControl><Input {...field} autoComplete="cc-number" placeholder="•••• •••• •••• ••••" disabled /></FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )} />
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <FormField control={form.control} name="cardExpiry" render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel>Expiración (MM/AA)</FormLabel>
-                                                        <FormControl><Input {...field} autoComplete="cc-exp" placeholder="MM/AA" disabled /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                                <FormField control={form.control} name="cardCvc" render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel>CVC</FormLabel>
-                                                        <FormControl><Input {...field} autoComplete="cc-csc" placeholder="•••" disabled /></FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )} />
-                                            </div>
-                                        </div>
+                                    {paymentMethod === 'paypal' && (
+                                        <p className="mt-2 ml-7 text-xs text-muted-foreground">Pagas de forma segura con PayPal; no necesitas cuenta para pagar con tarjeta.</p>
                                     )}
                                 </Label>
                                 <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'efectivo' ? 'border-primary bg-primary/5' : 'border-border'}`}>
@@ -283,7 +248,7 @@ export default function CheckoutPage() {
                     />
                     <Button type="submit" disabled={isPending || cart.length === 0} className="w-full text-lg" size="lg">
                         {isPending ? (<Loader2 className="mr-2 h-5 w-5 animate-spin" />) : (<Lock size={18} className="mr-2" />)}
-                        {isPending ? 'Procesando...' : `Confirmar Pedido de $${getCartTotal().toFixed(2)}`}
+                        {isPending ? 'Procesando...' : `Confirmar Pedido de $${finalTotal.toFixed(2)}`}
                     </Button>
                     </form>
                 </Form>
@@ -310,9 +275,31 @@ export default function CheckoutPage() {
                         })}
                         </div>
                     </ScrollArea>
-                    <div className="flex justify-between items-center text-xl font-bold text-primary mt-4 pt-4 border-t">
-                        <span>Total:</span>
-                        <span>${getCartTotal().toFixed(2)}</span>
+                    <div className="mt-4 pt-4 border-t space-y-3">
+                        {code ? (
+                            <div className="flex items-center justify-between rounded-lg bg-green-500/10 border border-green-500/30 px-3 py-2 text-sm">
+                                <span className="flex items-center gap-2 font-medium text-green-700 dark:text-green-400"><Tag size={14} /> {code} · {discountPercent}% dto.</span>
+                                <button type="button" onClick={clearCode} className="text-xs underline text-muted-foreground">Quitar</button>
+                            </div>
+                        ) : (
+                            <div>
+                                <div className="flex gap-2">
+                                    <Input value={codeInput} onChange={(e) => setCodeInput(e.target.value)} placeholder="Código de descuento" className="uppercase" />
+                                    <Button type="button" variant="outline" onClick={onApplyCode} disabled={!codeInput.trim()}>Aplicar</Button>
+                                </div>
+                                {codeError && <p className="text-xs text-destructive mt-1">{codeError}</p>}
+                            </div>
+                        )}
+                        {discountPercent > 0 && (
+                            <>
+                                <div className="flex justify-between text-sm text-muted-foreground"><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
+                                <div className="flex justify-between text-sm text-green-600 font-medium"><span>Descuento</span><span>-${discount.toFixed(2)}</span></div>
+                            </>
+                        )}
+                        <div className="flex justify-between items-center text-xl font-bold text-primary">
+                            <span>Total:</span>
+                            <span>${finalTotal.toFixed(2)}</span>
+                        </div>
                     </div>
                 </div>
             </aside>

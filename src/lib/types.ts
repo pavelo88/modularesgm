@@ -75,8 +75,8 @@ export interface Lead {
   email: string;
   phone: string;
   message: string;
-  status: 'Nuevo' | 'Contactado' | 'Cerrado';
-  createdAt: number;
+  status: 'Nuevo' | 'Atendido' | 'Contactado' | 'Cerrado' | string;
+  createdAt: number | string;
 }
 
 export interface CartItem {
@@ -93,7 +93,14 @@ export interface Order {
   paymentMethod: 'transferencia' | 'tarjeta' | 'efectivo';
   transferRef?: string;
   items: CartItem[];
+  subtotal?: number;
+  discountAmount?: number;
   total: number;
+  affiliateCode?: string;
+  affiliateUid?: string;
+  commissionRate?: number;
+  commissionAmount?: number;
+  commissionStatus?: 'pendiente' | 'pagada';
   status: 'Pendiente' | 'Pago Verificado' | 'Cliente Contactado' | 'En proceso' | 'Enviado' | 'Completado' | 'Cancelado';
   createdAt: number;
 }
@@ -104,3 +111,18 @@ export type ChatMessage = {
   catalogUrl?: string;
   serviceTitle?: string;
 };
+
+export interface AffiliateSettings {
+  commissionRate: number;
+  customerDiscount: number;
+  cookieDays: number;
+}
+
+export interface Affiliate {
+  uid: string;
+  name: string;
+  email: string;
+  phone: string;
+  code: string;
+  createdAt: number;
+}

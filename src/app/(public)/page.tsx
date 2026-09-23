@@ -2,7 +2,8 @@
 
 import { Hero } from '@/components/home/hero';
 import { BrandsCarousel } from '@/components/home/brands-carousel';
-import { Services } from '@/components/home/services';
+import { HomeSeoContent } from '@/components/home/home-seo-content';
+import { AffiliateBand, CatalogSection, FeaturedProducts } from '@/components/home/storefront-sections';
 import { ContactSection } from '@/components/home/contact/contact-section';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSiteContent } from '@/context/site-content-provider';
@@ -40,8 +41,11 @@ export default function HomePage() {
         ctaText={siteContent.ctaText}
         stats={siteContent.stats}
       />
+      <CatalogSection services={siteContent.services} products={siteContent.products} />
       <BrandsCarousel brands={siteContent.brands} />
-      <Services services={siteContent.services} />
+      <FeaturedProducts products={siteContent.products} />
+      <HomeSeoContent />
+      <AffiliateBand />
       <ContactSection siteContent={siteContent} />
     </>
   );

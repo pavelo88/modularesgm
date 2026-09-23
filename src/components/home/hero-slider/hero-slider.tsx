@@ -1,20 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  Sparkles, 
-  ChevronLeft, 
-  ChevronRight, 
-  ArrowRight, 
-  Store, 
-  Pause, 
-  Play, 
-  CheckCircle2 
-} from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles, Store } from 'lucide-react';
 import { HERO_SLIDES } from './hero-slider-data';
-import { Button } from '@/components/ui/button';
+import { HeroCardRail, RailControls, useRail, type RailItem } from '@/components/shared/hero-card-rail';
 import { cn } from '@/lib/utils';
 import type { Stat } from '@/lib/types';
 
@@ -25,247 +15,102 @@ interface HeroSliderProps {
   stats?: Stat[];
 }
 
-export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSliderProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+const hiRes = (url: string) => url.replace('w=900', 'w=1600').replace('q=65', 'q=72');
 
-  const currentSlide = HERO_SLIDES[activeIndex];
+const RAIL_ITEMS: RailItem[] = HERO_SLIDES.map((s) => ({
+  id: String(s.id),
+  title: s.title,
+  image: s.imageUrl,
+  caption: s.subtitle,
+  href: s.ctaPrimary.href,
+  cta: 'Cotizar',
+}));
 
-  const nextSlide = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  }, []);
-
-  // Defer auto-play initialization until after initial page paint and Lighthouse measurement window
-  useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      setIsMounted(true);
-    }, 15000);
-    return () => clearTimeout(delayTimer);
-  }, []);
-
-  useEffect(() => {
-    if (isMounted && isPlaying && !isHovered) {
-      timerRef.current = setInterval(() => {
-        nextSlide();
-      }, 7000);
-    }
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [isMounted, isPlaying, isHovered, nextSlide]);
+/**
+ * Hero + franja de estadísticas en una sola pantalla.
+ * El H1 es estático (SEO); lo que cambia con cada tarjeta es el fondo, la frase y las etiquetas.
+ */
+export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
+  const rail = useRail(HERO_SLIDES.length);
+  const slide = HERO_SLIDES[rail.active];
 
   return (
-    <section 
-      className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[720px] flex flex-col justify-between overflow-hidden pt-20 sm:pt-24 pb-10 select-none z-10"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      aria-label="Destacados de Servicios"
-    >
-      {/* 1. Dynamic Background Image Cross-Fade (Composited) */}
-      <div className="absolute inset-0 -z-30 pointer-events-none overflow-hidden">
-        {HERO_SLIDES.map((slide, idx) => {
-          const isCurrent = idx === activeIndex;
-          return (
-            <div
-              key={slide.id}
-              className={cn(
-                "absolute inset-0 transition-opacity duration-700 ease-in-out will-change-opacity",
-                isCurrent ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              )}
-            >
-              <Image
-                src={slide.imageUrl}
-                alt={slide.title}
-                fill
-                priority={idx === 0}
-                fetchPriority={idx === 0 ? "high" : "low"}
-                loading={idx === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 768px) 100vw, 900px"
-                className="object-cover object-center"
-              />
-              {/* Subtle Gradient Overlays for legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/20 to-black/20 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent pointer-events-none" />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 tech-grid-bg-dark opacity-30 pointer-events-none -z-20" />
-
-      {/* 2. Main Hero Content Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto relative z-20">
-        
-        {/* Left Column: Details Panel */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left pt-4 sm:pt-6 w-full">
-          
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border text-[11px] sm:text-sm font-bold mb-4 sm:mb-6 backdrop-blur-md bg-secondary/20 border-secondary/50 text-secondary shadow-lg max-w-full truncate min-h-[32px]">
-            <Sparkles size={14} className="text-secondary shrink-0" />
-            <span className="truncate">{currentSlide.badge}</span>
-          </div>
-
-          {/* Slide Title */}
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-bold mb-3 sm:mb-4 tracking-tight leading-[1.15] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] break-words max-w-full min-h-[64px] sm:min-h-[96px] flex items-center">
-            {currentSlide.title}
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-sm sm:text-lg lg:text-xl font-headline font-semibold text-secondary mb-3 sm:mb-4 drop-shadow-md leading-snug min-h-[28px] flex items-center">
-            {currentSlide.subtitle}
-          </p>
-
-          {/* Description */}
-          <p className="text-xs sm:text-base lg:text-lg font-sans max-w-2xl mb-4 sm:mb-6 leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-3 sm:line-clamp-none min-h-[48px] sm:min-h-[72px]">
-            {currentSlide.description}
-          </p>
-
-          {/* Tag Pills */}
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8 min-h-[36px] items-center">
-            {currentSlide.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs font-semibold text-white/90 shadow-md"
-              >
-                <CheckCircle2 size={12} className="text-secondary shrink-0" />
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-            <Button 
-              asChild 
-              size="lg" 
-              className="shadow-[0_0_30px_hsl(var(--primary)/0.6)] h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold gap-2 active:scale-95 transition-transform w-full sm:w-auto"
-            >
-              <Link href={currentSlide.ctaPrimary.href}>
-                {ctaText || currentSlide.ctaPrimary.text}
-                <ArrowRight size={16} />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="secondary"
-              className="h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 backdrop-blur-md shadow-lg gap-2 active:scale-95 transition-transform w-full sm:w-auto"
-            >
-              <Link href={currentSlide.ctaSecondary.href}>
-                <Store size={16} />
-                {currentSlide.ctaSecondary.text}
-              </Link>
-            </Button>
-          </div>
-        </div>
-
-        {/* Right Column: Mini Stats Grid */}
-        <div className="lg:col-span-5 hidden lg:grid grid-cols-2 gap-4">
-          {(stats || []).map((stat) => (
-            <div
-              key={stat.id}
-              className="p-5 rounded-2xl flex flex-col items-center justify-center text-center bg-black/40 backdrop-blur-md border border-white/15 shadow-2xl hover:border-secondary/50 transition-colors duration-300 group"
-            >
-              <p className="text-3xl font-bold font-sans text-secondary drop-shadow-md mb-1">
-                {stat.value}
-              </p>
-              <p className="text-xs font-bold tracking-wider uppercase text-zinc-300">
-                {stat.label}
-              </p>
-            </div>
+    <section className="relative z-10 select-none" aria-label="Servicios destacados de Modulares GM">
+      {/* Hero: ocupa la pantalla menos la barra superior (36px) y la franja de stats (~92px) */}
+      <div className="relative isolate flex min-h-[calc(100svh-36px-92px)] items-center overflow-hidden bg-black pt-28 pb-10 lg:pt-24">
+        <div className="absolute inset-0 -z-20">
+          {HERO_SLIDES.map((s, i) => (
+            <Image
+              key={s.id}
+              src={hiRes(s.imageUrl)}
+              alt=""
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className={cn('object-cover transition-opacity duration-1000', i === rail.active ? 'opacity-100' : 'opacity-0')}
+            />
           ))}
         </div>
-      </div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/25" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-black/50" />
 
-      {/* 3. Bottom HUD & Thumbnail Carousel (Composited) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full mt-6 grid lg:grid-cols-12 items-end gap-4 sm:gap-6 relative z-20">
-        
-        {/* Navigation Controls HUD */}
-        <div className="lg:col-span-5 flex items-center justify-between bg-black/50 backdrop-blur-md border border-white/15 p-3 rounded-2xl shadow-2xl">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="p-2.5 rounded-xl bg-white/10 hover:bg-secondary text-white transition-colors"
-              aria-label={isPlaying ? "Pausar presentación" : "Reproducir presentación"}
-            >
-              {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-            </button>
-            <div className="flex flex-col">
-              <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
-                Servicio {activeIndex + 1} / {HERO_SLIDES.length}
-              </span>
-              {/* Progress bar using composited transform */}
-              <div className="w-28 h-1.5 bg-white/20 rounded-full overflow-hidden mt-1 relative">
-                <div 
-                  className="h-full w-full bg-secondary transition-transform duration-500 ease-out origin-left"
-                  style={{ transform: `scaleX(${(activeIndex + 1) / HERO_SLIDES.length})` }}
-                />
-              </div>
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
+          <div className="lg:col-span-6">
+            <p className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:text-xs">
+              <Sparkles size={14} className="shrink-0 text-secondary" />
+              <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
+            </p>
+
+            <h1 className="font-headline text-4xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] sm:text-5xl xl:text-6xl">
+              Cocinas modulares, cuarzo y muebles a medida en Ecuador
+            </h1>
+
+            <div key={slide.id} className="mt-5 animate-in fade-in slide-in-from-bottom-2 duration-700">
+              <p className="font-headline text-xl font-semibold text-secondary sm:text-2xl">{slide.title}</p>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base">{slide.description || heroSubtitle}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {slide.tags.map((tag) => (
+                  <li key={tag} className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md sm:text-xs">
+                    <CheckCircle2 size={12} className="text-secondary" /> {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={slide.ctaPrimary.href}
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active:scale-95"
+              >
+                {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
+              </Link>
+              <Link
+                href={slide.ctaSecondary.href}
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+              >
+                <Store size={18} /> {slide.ctaSecondary.text}
+              </Link>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={prevSlide}
-              className="p-3 rounded-xl bg-white/10 hover:bg-secondary text-white transition-transform active:scale-95"
-              aria-label="Servicio anterior"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="p-3 rounded-xl bg-white/10 hover:bg-secondary text-white transition-transform active:scale-95"
-              aria-label="Siguiente servicio"
-            >
-              <ChevronRight size={20} />
-            </button>
+          <div className="hidden flex-col items-end justify-end gap-3 md:flex lg:col-span-6 lg:self-end">
+            <HeroCardRail items={RAIL_ITEMS} active={rail.active} onSelect={rail.setActive} />
+            <RailControls active={rail.active} total={HERO_SLIDES.length} playing={rail.playing} onToggle={rail.togglePlay} onPrev={rail.prev} onNext={rail.next} />
           </div>
         </div>
+      </div>
 
-        {/* Interactive Thumbnail Previews */}
-        <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-          {HERO_SLIDES.map((slide, idx) => {
-            const isActive = idx === activeIndex;
-            return (
-              <button
-                key={slide.id}
-                onClick={() => setActiveIndex(idx)}
-                className={cn(
-                  "relative h-16 sm:h-20 rounded-xl overflow-hidden text-left p-2 sm:p-2.5 border transition-[opacity,transform] duration-300 flex flex-col justify-end group active:scale-95",
-                  isActive
-                    ? "border-secondary ring-2 ring-secondary/50 shadow-xl scale-[1.02] opacity-100"
-                    : "border-white/15 opacity-75 hover:opacity-100 hover:border-white/40 bg-black/40"
-                )}
-              >
-                <Image
-                  src={slide.imageUrl}
-                  alt={slide.title}
-                  fill
-                  loading="lazy"
-                  sizes="180px"
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-                <span className="relative z-10 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-secondary">
-                  0{idx + 1}
-                </span>
-                <span className="relative z-10 text-[11px] sm:text-xs font-bold text-white truncate font-headline">
-                  {slide.title.split(' ')[0]} {slide.title.split(' ')[1] || ''}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+      {/* Franja de estadísticas justo bajo el hero */}
+      <div className="border-t border-white/10 bg-[#0f1a21] text-white">
+        <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-white/10 sm:grid-cols-4 sm:divide-x">
+          {(stats || []).map((stat) => (
+            <div key={stat.id} className="flex flex-col items-center justify-center px-4 py-4 text-center sm:h-[91px]">
+              <dd className="order-1 font-sans text-2xl font-bold leading-none text-secondary sm:text-3xl">{stat.value}</dd>
+              <dt className="order-2 mt-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400 sm:text-xs">{stat.label}</dt>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
 }
-
