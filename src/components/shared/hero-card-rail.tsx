@@ -70,7 +70,7 @@ export function HeroCardRail({ items, active, onSelect, className }: RailProps) 
   const upcoming = Array.from({ length: Math.min(items.length - 1, 4) }, (_, k) => (active + 1 + k) % items.length);
 
   return (
-    <ul className={cn('hidden items-end justify-end gap-3 md:flex', className)} aria-label="Próximos servicios">
+    <ul className={cn('hidden items-end justify-end gap-2 md:flex', className)} aria-label="Próximos servicios">
       {upcoming.map((index, pos) => {
         const item = items[index];
         const isNext = pos === 0;
@@ -119,7 +119,7 @@ export function RailControls({ active, total, playing, onToggle, onPrev, onNext,
           {playing ? <Pause size={16} /> : <Play size={16} />}
         </button>
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-widest text-zinc-300">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-300">
             {label} {active + 1} / {total}
           </p>
           <div className="mt-1 h-1 w-24 overflow-hidden rounded-full bg-white/20">
