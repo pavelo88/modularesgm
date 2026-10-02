@@ -18,8 +18,8 @@ try {
     app = initializeApp({ credential: applicationDefault() });
   }
 } catch (error) {
-  console.error("❌ Error inicializando Firebase Admin.");
-  console.error("Asegúrate de haber ejecutado 'npx firebase login' o tener FIREBASE_SERVICE_ACCOUNT_JSON en tu .env.local");
+  console.error("❌ Error inicializando Firebase Admin:");
+  console.error(error);
   process.exit(1);
 }
 
