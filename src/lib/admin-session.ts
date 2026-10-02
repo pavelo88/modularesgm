@@ -21,7 +21,9 @@ export interface AdminIdentity {
 async function resolveAdmin(uid: string, email: string | undefined): Promise<AdminIdentity | null> {
   const mail = (email || '').toLowerCase();
   if (mail && founderEmails().includes(mail)) return { uid, email: mail, role: 'super' };
-  const snap = await adminDb().collection('usuarios').doc(uid).get();
+  
+  if (!mail) return null;
+  const snap = await adminDb().collection('usuarios').doc(mail).get();
   const role = String(snap.data()?.role || '').toLowerCase();
   if (snap.exists && STAFF_ROLES.includes(role) && snap.data()?.active !== false) {
     return { uid, email: mail, role };
