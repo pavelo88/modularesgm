@@ -128,10 +128,10 @@ export function RailControls({ active, total, playing, onToggle, onPrev, onNext,
         </div>
       </div>
       <div className="flex gap-2">
-        <button type="button" onClick={onPrev} aria-label="Anterior" className="rounded-xl bg-white/10 p-2.5 text-white transition hover:bg-secondary active:scale-95">
+        <button type="button" onClick={onPrev} aria-label="Anterior" className="rounded-xl bg-white/10 p-2.5 text-white transition hover:bg-secondary active-press">
           <ChevronLeft size={18} />
         </button>
-        <button type="button" onClick={onNext} aria-label="Siguiente" className="rounded-xl bg-white/10 p-2.5 text-white transition hover:bg-secondary active:scale-95">
+        <button type="button" onClick={onNext} aria-label="Siguiente" className="rounded-xl bg-white/10 p-2.5 text-white transition hover:bg-secondary active-press">
           <ChevronRight size={18} />
         </button>
       </div>

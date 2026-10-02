@@ -76,7 +76,7 @@ export function PublicLayoutClient({
         .catch((error) => {
           console.warn("Using initial server data.", error);
         });
-    }, 10000);
+    }, 500); // Deferred slightly to protect LCP
       
     return () => {
       isMounted = false;

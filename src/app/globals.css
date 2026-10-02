@@ -34,6 +34,11 @@
     --sidebar-accent-foreground: 43 15% 98%;
     --sidebar-border: 193 15% 94%;
     --sidebar-ring: 193 42% 30%;
+
+    /* ANIMATION & EASING TOKENS */
+    --ease-out-emil: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out-emil: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .dark {
@@ -114,3 +119,12 @@
 /* Header sobre hero oscuro: texto claro mientras es transparente */
 header[data-over-hero="true"] .hdr-fg { color: #fff; }
 header[data-over-hero="true"] .hdr-fg svg { color: inherit; }
+
+@layer utilities {
+  .active-press {
+    transition: transform 160ms var(--ease-out-emil), filter 200ms ease, opacity 200ms ease;
+  }
+  .active-press:active {
+    transform: scale(0.97);
+  }
+}

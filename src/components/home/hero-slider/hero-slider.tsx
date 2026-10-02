@@ -47,7 +47,7 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
               fill
               priority={i === 0}
               sizes="100vw"
-              className={cn('object-cover transition-opacity duration-1000', i === rail.active ? 'opacity-100' : 'opacity-0')}
+              className={cn('object-cover transition-all duration-[1200ms] ease-emil-in-out', i === rail.active ? 'opacity-100' : 'opacity-0')}
             />
           ))}
         </div>
@@ -69,8 +69,8 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
               <p className="font-headline text-xl font-semibold text-secondary sm:text-2xl">{slide.title}</p>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base">{slide.description || heroSubtitle}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
-                {slide.tags.map((tag) => (
-                  <li key={tag} className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md sm:text-xs">
+                {slide.tags.map((tag, i) => (
+                  <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className="animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md sm:text-xs">
                     <CheckCircle2 size={12} className="text-secondary" /> {tag}
                   </li>
                 ))}
@@ -80,13 +80,13 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active:scale-95"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active-press"
               >
                 {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
               </Link>
               <Link
                 href={slide.ctaSecondary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press"
               >
                 <Store size={18} /> {slide.ctaSecondary.text}
               </Link>

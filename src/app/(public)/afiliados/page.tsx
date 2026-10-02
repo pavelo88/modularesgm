@@ -155,7 +155,7 @@ export default function AffiliatesLandingPage() {
           <p className="relative mx-auto mt-4 max-w-xl opacity-90">Crear tu cuenta toma un minuto y no tiene costo.</p>
           <Link
             href="/afiliados/acceso?tab=registro"
-            className="relative mt-8 inline-flex h-14 items-center gap-2 rounded-xl bg-secondary px-8 font-bold text-secondary-foreground transition hover:brightness-110 active:scale-95"
+            className="relative mt-8 inline-flex h-14 items-center gap-2 rounded-xl bg-secondary px-8 font-bold text-secondary-foreground transition hover:brightness-110 active-press"
           >
             Crear mi cuenta de afiliado <ArrowRight size={18} />
           </Link>

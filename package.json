@@ -61,13 +61,24 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@napi-rs/canvas": "^1.0.10",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.2.1",
     "@types/react-dom": "^19.2.1",
+    "canvas": "^3.2.3",
     "genkit-cli": "^1.28.0",
+    "pdf-to-img": "^7.0.0",
+    "pdfjs-dist": "^6.3.289",
     "postcss": "^8",
+    "sharp": "^0.35.5",
+    "skia-canvas": "^3.0.8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "canvas@3.2.3": true,
+    "sharp@0.34.5": true,
+    "skia-canvas@3.0.8": true
   }
 }

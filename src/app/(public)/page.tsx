@@ -5,49 +5,28 @@ import { BrandsCarousel } from '@/components/home/brands-carousel';
 import { HomeSeoContent } from '@/components/home/home-seo-content';
 import { AffiliateBand, CatalogSection, FeaturedProducts } from '@/components/home/storefront-sections';
 import { ContactSection } from '@/components/home/contact/contact-section';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useSiteContent } from '@/context/site-content-provider';
+import { defaultSiteContent } from '@/lib/data';
 
 export default function HomePage() {
-  const { siteContent, loading } = useSiteContent();
-
-  if (loading || !siteContent) {
-    return (
-      <div className="pt-20">
-        <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center py-20">
-            <div className="flex flex-col gap-4">
-                <Skeleton className="h-8 w-1/2" />
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="h-12 w-3/4" />
-                <Skeleton className="h-10 w-1/2" />
-            </div>
-            <div className="grid grid-cols-2 gap-6">
-                <Skeleton className="h-40 w-full" />
-                <Skeleton className="h-40 w-full" />
-                <Skeleton className="h-40 w-full" />
-                <Skeleton className="h-40 w-full" />
-            </div>
-        </div>
-      </div>
-    );
-  }
+  const { siteContent } = useSiteContent();
+  const content = siteContent || defaultSiteContent;
 
   return (
     <>
       <div id="top" />
       <Hero
-        heroTitle={siteContent.heroTitle}
-        heroSubtitle={siteContent.heroSubtitle}
-        ctaText={siteContent.ctaText}
-        stats={siteContent.stats}
+        heroTitle={content.heroTitle}
+        heroSubtitle={content.heroSubtitle}
+        ctaText={content.ctaText}
+        stats={content.stats}
       />
-      <CatalogSection services={siteContent.services} products={siteContent.products} />
-      <BrandsCarousel brands={siteContent.brands} />
-      <FeaturedProducts products={siteContent.products} />
+      <CatalogSection services={content.services} products={content.products} />
+      <BrandsCarousel brands={content.brands} />
+      <FeaturedProducts products={content.products} />
       <HomeSeoContent />
       <AffiliateBand />
-      <ContactSection siteContent={siteContent} />
+      <ContactSection siteContent={content} />
     </>
   );
 }
-

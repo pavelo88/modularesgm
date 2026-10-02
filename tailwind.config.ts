@@ -67,6 +67,11 @@ const config = {
           ring: 'hsl(var(--sidebar-ring))',
         },
       },
+      transitionTimingFunction: {
+        'emil-out': 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'emil-in-out': 'cubic-bezier(0.77, 0, 0.175, 1)',
+        'emil-spring': 'cubic-bezier(0.32, 0.72, 0, 1)',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

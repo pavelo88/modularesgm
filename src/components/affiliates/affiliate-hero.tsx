@@ -55,13 +55,13 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/afiliados/acceso?tab=registro"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active:scale-95"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active-press"
             >
               Quiero ser afiliado <ArrowRight size={18} />
             </Link>
             <Link
               href="/afiliados/acceso"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold backdrop-blur-md transition hover:bg-white/20 active-press"
             >
               <LogIn size={18} /> Ya tengo cuenta
             </Link>

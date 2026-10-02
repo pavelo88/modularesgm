@@ -16,16 +16,16 @@ export const defaultServices: Service[] = [
 ];
 
 export const defaultProducts: Product[] = [
-  { id: 101, title: 'Cocina Modular Básica (Metro Lineal)', desc: 'Muebles altos y bajos en melamina RH, incluye herrajes estándar.', price: 250, discountPrice: null, imgUrl: getImage('product-101'), category: 'Cocinas' },
-  { id: 102, title: 'Isla de Cocina con Tope de Cuarzo', desc: 'Isla central con almacenamiento inferior y acabado premium.', price: 950, discountPrice: 850, imgUrl: getImage('product-102'), category: 'Cocinas' },
-  { id: 103, title: 'Mueble de Baño Flotante (Vanity)', desc: 'Mueble resistente a la humedad con tope de cuarzo moderno.', price: 350, discountPrice: 290, imgUrl: getImage('product-103'), category: 'Baños' },
-  { id: 104, title: 'Centro de Entretenimiento TV 65"', desc: 'Panel ranurado Pelikano con iluminación LED integrada.', price: 480, discountPrice: 420, imgUrl: getImage('product-104'), category: 'Salas' },
-  { id: 105, title: 'Clóset Modular Estándar', desc: 'Módulo interno con cajoneras y tubos colgadores.', price: 180, discountPrice: 150, imgUrl: getImage('product-105'), category: 'Dormitorios' },
-  { id: 106, title: 'Walk-in Closet Premium', desc: 'Diseño amplio con herrajes Blum y cajones iluminados.', price: 1500, discountPrice: 1200, imgUrl: getImage('product-106'), category: 'Dormitorios' },
-  { id: 107, title: 'Escritorio Corporativo', desc: 'Escritorio minimalista con estructura metálica.', price: 180, discountPrice: 150, imgUrl: getImage('product-107'), category: 'Oficina' },
-  { id: 108, title: 'Mesa de Centro Industrial', desc: 'Mesa rústica con bases de acero negro mate.', price: 120, discountPrice: 90, imgUrl: getImage('product-108'), category: 'Salas' },
-  { id: 109, title: 'Set de Repisas Flotantes', desc: 'Repisas con soportes invisibles ideales para decoración.', price: 60, discountPrice: 45, imgUrl: getImage('product-109'), category: 'Decoración' },
-  { id: 110, title: 'Barra Desayunadora Moderna', desc: 'Ideal para dividir espacios con elegancia.', price: 400, discountPrice: 350, imgUrl: getImage('product-110'), category: 'Cocinas' }
+  { id: 101, title: 'Cocina Modular Básica', desc: 'Muebles altos y bajos en melamina RH, incluye herrajes estándar.', price: 250, discountPrice: null, imgUrl: getImage('product-101'), category: 'Cocinas', priceUnit: 'metro_lineal', inStock: true, featured: true },
+  { id: 102, title: 'Isla de Cocina con Tope de Cuarzo', desc: 'Isla central con almacenamiento inferior y acabado premium.', price: 950, discountPrice: 850, imgUrl: getImage('product-102'), category: 'Cocinas', priceUnit: 'unidad', inStock: true, featured: false },
+  { id: 103, title: 'Mueble de Baño Flotante (Vanity)', desc: 'Mueble resistente a la humedad con tope de cuarzo moderno.', price: 350, discountPrice: 290, imgUrl: getImage('product-103'), category: 'Baño', priceUnit: 'unidad', inStock: true, featured: false },
+  { id: 104, title: 'Centro de Entretenimiento TV 65"', desc: 'Panel ranurado Pelikano con iluminación LED integrada.', price: 480, discountPrice: 420, imgUrl: getImage('product-104'), category: 'Oficina', priceUnit: 'unidad', inStock: true, featured: false },
+  { id: 105, title: 'Clóset Modular Estándar', desc: 'Módulo interno con cajoneras y tubos colgadores.', price: 180, discountPrice: 150, imgUrl: getImage('product-105'), category: 'Closets', priceUnit: 'metro_lineal', inStock: true, featured: true },
+  { id: 106, title: 'Walk-in Closet Premium', desc: 'Diseño amplio con herrajes Blum y cajones iluminados.', price: 1500, discountPrice: 1200, imgUrl: getImage('product-106'), category: 'Closets', priceUnit: 'metro_cuadrado', inStock: true, featured: true },
+  { id: 107, title: 'Escritorio Corporativo', desc: 'Escritorio minimalista con estructura metálica.', price: 180, discountPrice: 150, imgUrl: getImage('product-107'), category: 'Oficina', priceUnit: 'unidad', inStock: true, featured: false },
+  { id: 108, title: 'Silla Gamer Profesional', desc: 'Silla ergonómica con soporte lumbar y reposabrazos 4D.', price: 120, discountPrice: 90, imgUrl: getImage('product-108'), category: 'Gamer', priceUnit: 'unidad', inStock: true, featured: false },
+  { id: 109, title: 'Escritorio Estudiantil Compacto', desc: 'Escritorio con estante superior ideal para habitaciones pequeñas.', price: 60, discountPrice: 45, imgUrl: getImage('product-109'), category: 'Escritorios', priceUnit: 'unidad', inStock: true, featured: false },
+  { id: 110, title: 'Puerta Lacada Premium', desc: 'Puerta interior en MDF lacado blanco o colores con herrajes silenciosos.', price: 400, discountPrice: 350, imgUrl: getImage('product-110'), category: 'Puertas', priceUnit: 'unidad', inStock: true, featured: false },
 ];
 
 export const defaultBrands: Brand[] = [

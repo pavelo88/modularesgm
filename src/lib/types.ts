@@ -14,7 +14,14 @@ export interface Product {
   price: number;
   discountPrice: number | null;
   imgUrl: string;
+  images?: string[];           // galería de imágenes adicionales
   category: string;
+  subcategory?: string;        // ej: "Closet Moderno", "Cocina en L"
+  dimensions?: string;         // ej: "2.40m x 0.60m x 2.10m"
+  priceUnit?: 'unidad' | 'metro_lineal' | 'metro_cuadrado';
+  material?: string;           // ej: "MDF 18mm, melamina blanca"
+  inStock?: boolean;
+  featured?: boolean;
 }
 
 export interface Brand {

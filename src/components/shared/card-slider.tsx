@@ -86,7 +86,7 @@ export function CardSlider({
             type="button"
             onClick={() => emblaApi?.scrollPrev()}
             aria-label="Anterior"
-            className="grid h-11 w-11 place-items-center rounded-xl border border-foreground/10 bg-background/70 backdrop-blur-md transition hover:bg-secondary hover:text-secondary-foreground active:scale-95"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-foreground/10 bg-background/70 backdrop-blur-md transition hover:bg-secondary hover:text-secondary-foreground active-press"
           >
             <ChevronLeft size={20} />
           </button>
@@ -94,7 +94,7 @@ export function CardSlider({
             type="button"
             onClick={() => emblaApi?.scrollNext()}
             aria-label="Siguiente"
-            className="grid h-11 w-11 place-items-center rounded-xl border border-foreground/10 bg-background/70 backdrop-blur-md transition hover:bg-secondary hover:text-secondary-foreground active:scale-95"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-foreground/10 bg-background/70 backdrop-blur-md transition hover:bg-secondary hover:text-secondary-foreground active-press"
           >
             <ChevronRight size={20} />
           </button>

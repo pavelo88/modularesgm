@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
 
       <div className="relative z-10 w-full max-w-[420px]">
         <div className="mb-8 flex flex-col items-center">
-          <Link href="/" className="group relative mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/5 border border-white/10 shadow-2xl backdrop-blur-xl transition-transform hover:scale-105 active:scale-95">
+          <Link href="/" className="group relative mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/5 border border-white/10 shadow-2xl backdrop-blur-xl transition-transform hover:scale-105 active-press">
              <Image src="/logo.png" alt="Modulares GM" width={48} height={48} className="object-contain drop-shadow-md" priority />
           </Link>
           <h1 className="font-headline text-3xl font-bold tracking-tight text-white drop-shadow-sm">Panel Privado</h1>
