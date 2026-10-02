@@ -25,6 +25,7 @@ import {
   SidebarFooter,
   SidebarInset,
   SidebarTrigger,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import type { SiteContent } from '@/lib/types';
 import { CmsGeneralForm } from './cms-general-form';
@@ -52,9 +53,28 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'products', label: 'Tienda Online', icon: <ShoppingBag /> },
   { id: 'brands', label: 'Marcas y Stats', icon: <Zap /> },
   { id: 'leads', label: 'Leads (Contactos)', icon: <MessageSquare /> },
-  { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },
-  { id: 'affiliates', label: 'Afiliados', icon: <Handshake /> },
+  { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },  { id: 'affiliates', label: 'Afiliados', icon: <Handshake /> },
 ];
+
+function NavItem({ item, activeTab, setActiveTab }: { item: any, activeTab: AdminTab, setActiveTab: (tab: AdminTab) => void }) {
+  const { setOpenMobile } = useSidebar();
+  
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuButton
+        onClick={() => {
+          setActiveTab(item.id);
+          setOpenMobile(false);
+        }}
+        isActive={activeTab === item.id}
+        tooltip={item.label}
+      >
+        {item.icon}
+        <span>{item.label}</span>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  );
+}
 
 export function AdminDashboardClient() {
   const [activeTab, setActiveTab] = useState<AdminTab>('general');
@@ -63,7 +83,7 @@ export function AdminDashboardClient() {
   const [authReady, setAuthReady] = useState(false);
   const router = useRouter();
 
-  // Las reglas de Firestore exigen sesión de Firebase: sin ella volvemos al login.
+  // Las reglas de Firestore exigen sesiA3n de Firebase: sin ella volvemos al login.
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
       if (!user) router.replace('/admin');
@@ -156,16 +176,7 @@ export function AdminDashboardClient() {
         <SidebarContent>
           <SidebarMenu>
             {menuItems.map((item) => (
-              <SidebarMenuItem key={item.id}>
-                <SidebarMenuButton
-                  onClick={() => setActiveTab(item.id)}
-                  isActive={activeTab === item.id}
-                  tooltip={item.label}
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <NavItem key={item.id} item={item} activeTab={activeTab} setActiveTab={setActiveTab} />
             ))}
           </SidebarMenu>
         </SidebarContent>
