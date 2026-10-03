@@ -33,42 +33,78 @@ export function AffiliateSessionProvider({ children }: { children: React.ReactNo
   });
 
   useEffect(() => {
+    let unsubIndex: (() => void) | undefined;
     let unsubProfile: (() => void) | undefined;
+    let graceTimer: ReturnType<typeof setTimeout> | undefined;
+    let currentUsername: string | undefined;
+
+    const clearGrace = () => {
+      if (graceTimer) {
+        clearTimeout(graceTimer);
+        graceTimer = undefined;
+      }
+    };
 
     const unsubAuth = onAuthStateChanged(auth, async (user) => {
+      unsubIndex?.();
       unsubProfile?.();
+      clearGrace();
+      currentUsername = undefined;
       if (!user) {
         setValue((v) => ({ ...v, status: 'anon', user: null, affiliate: null }));
         return;
       }
+
+      let settings = DEFAULT_AFFILIATE_SETTINGS;
       try {
-        const [index, settingsSnap] = await Promise.all([
-          getDoc(doc(db, USER_INDEX_COLLECTION, user.uid)),
-          getDoc(doc(db, 'siteContent', 'affiliate')).catch(() => null),
-        ]);
-        const settings = { ...DEFAULT_AFFILIATE_SETTINGS, ...(settingsSnap?.data() || {}) } as AffiliateSettings;
-        const username = index.data()?.username as string | undefined;
-        if (!username) {
-          setValue({ status: 'no_profile', user, affiliate: null, settings });
-          return;
-        }
-        unsubProfile = onSnapshot(
-          doc(db, AFFILIATES_COLLECTION, username),
-          (snap) => {
-            const affiliate = snap.exists() ? (snap.data() as AffiliateAccount) : null;
-            const status: Status = !affiliate ? 'no_profile' : affiliate.status === 'suspended' ? 'suspended' : 'ready';
-            setValue({ status, user, affiliate, settings });
-          },
-          () => setValue({ status: 'no_profile', user, affiliate: null, settings })
-        );
-      } catch {
-        setValue((v) => ({ ...v, status: 'no_profile', user }));
-      }
+        const settingsSnap = await getDoc(doc(db, 'siteContent', 'affiliate')).catch(() => null);
+        settings = { ...DEFAULT_AFFILIATE_SETTINGS, ...(settingsSnap?.data() || {}) } as AffiliateSettings;
+      } catch {}
+
+      // Se escucha el índice del usuario (no solo el perfil): si el afiliado cambia su usuario,
+      // el documento del perfil cambia de ID y hay que seguirlo en lugar de cerrar la sesión.
+      unsubIndex = onSnapshot(
+        doc(db, USER_INDEX_COLLECTION, user.uid),
+        (idx) => {
+          const username = idx.data()?.username as string | undefined;
+          if (!username) {
+            clearGrace();
+            unsubProfile?.();
+            currentUsername = undefined;
+            setValue({ status: 'no_profile', user, affiliate: null, settings });
+            return;
+          }
+          if (username === currentUsername) return;
+          currentUsername = username;
+          clearGrace();
+          unsubProfile?.();
+          unsubProfile = onSnapshot(
+            doc(db, AFFILIATES_COLLECTION, username),
+            (snap) => {
+              if (!snap.exists()) {
+                // Durante un cambio de usuario el documento viejo desaparece un instante antes de
+                // que llegue el índice nuevo: se espera un momento antes de dar el perfil por perdido.
+                clearGrace();
+                graceTimer = setTimeout(() => setValue({ status: 'no_profile', user, affiliate: null, settings }), 1500);
+                return;
+              }
+              clearGrace();
+              const affiliate = snap.data() as AffiliateAccount;
+              const status: Status = affiliate.status === 'suspended' ? 'suspended' : 'ready';
+              setValue({ status, user, affiliate, settings });
+            },
+            () => setValue({ status: 'no_profile', user, affiliate: null, settings })
+          );
+        },
+        () => setValue({ status: 'no_profile', user, affiliate: null, settings })
+      );
     });
 
     return () => {
       unsubAuth();
+      unsubIndex?.();
       unsubProfile?.();
+      clearGrace();
     };
   }, []);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -17,7 +17,7 @@ import {
   UserCircle,
 } from 'lucide-react';
 import { AffiliateSessionProvider, affiliateSignOut, useAffiliateSession } from '@/context/affiliate-session';
-import { ForcePasswordModal } from '@/components/affiliates/force-password-modal';
+import { PasswordSetupDialog } from '@/components/affiliates/password-setup-dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
@@ -35,6 +35,12 @@ function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? '';
   const { theme, setTheme } = useTheme();
   const { status, user, affiliate } = useAffiliateSession();
+  // Se guarda aparte: al cambiar la clave el perfil se actualiza al instante y, sin esto, el cuadro
+  // se desmontaría antes de mostrar la confirmación.
+  const [pwOpen, setPwOpen] = useState(false);
+  useEffect(() => {
+    if (affiliate?.forcePasswordChange) setPwOpen(true);
+  }, [affiliate?.forcePasswordChange]);
 
   // Guardas: sin sesión, sin perfil o suspendido → de vuelta al formulario con un motivo genérico.
   useEffect(() => {
@@ -74,8 +80,11 @@ function PortalShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium whitespace-nowrap transition-colors',
-                  active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium whitespace-nowrap',
+                  'transition-[background-color,color,transform] duration-150 ease-emil-out active:scale-[0.98] motion-reduce:transition-none',
+                  active
+                    ? 'bg-primary text-primary-foreground shadow-[0_8px_20px_-10px_hsl(var(--primary)/0.7)]'
+                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                 )}
               >
                 <item.icon size={18} /> {item.label}
@@ -88,7 +97,7 @@ function PortalShell({ children }: { children: React.ReactNode }) {
             type="button"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             aria-label="Cambiar tema"
-            className="rounded-lg p-2.5 text-muted-foreground hover:bg-muted"
+            className="rounded-xl p-2.5 text-muted-foreground transition-[background-color,transform] duration-150 hover:bg-muted active:scale-95"
           >
             <Sun size={18} className="hidden dark:block" />
             <Moon size={18} className="dark:hidden" />
@@ -96,14 +105,14 @@ function PortalShell({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={() => affiliateSignOut().then(() => router.push('/afiliados'))}
-            className="flex-1 flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted"
+            className="flex flex-1 items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-[background-color,transform] duration-150 hover:bg-muted active:scale-[0.98]"
           >
             <LogOut size={18} /> Cerrar sesión
           </button>
         </div>
       </aside>
       <main className="flex-1 p-4 md:p-10 max-w-6xl">{children}</main>
-      {affiliate.forcePasswordChange && <ForcePasswordModal user={user} />}
+      <PasswordSetupDialog open={pwOpen} user={user} askCurrent onDone={() => setPwOpen(false)} />
     </div>
   );
 }

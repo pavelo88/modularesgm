@@ -8,6 +8,7 @@ import { applyGlobalPools, getAffiliate, getSettings, planGlobalPools } from '@/
 import {
   AFFILIATES_COLLECTION,
   CLICKS_COLLECTION,
+  COMMISSIONS_COLLECTION,
   ROOT_USERNAME,
   USER_INDEX_COLLECTION,
   WITHDRAWALS_COLLECTION,
@@ -148,6 +149,83 @@ export async function markPasswordChanged(idToken: string) {
   if (!username) return { success: false };
   await adminDb().collection(AFFILIATES_COLLECTION).doc(username).update({ forcePasswordChange: false });
   return { success: true };
+}
+
+/**
+ * Cambia el usuario (y por tanto el enlace/código) de un afiliado.
+ * El ID del documento ES el usuario, así que se migra de forma atómica en una transacción:
+ * perfil nuevo + índice del usuario + referencias de sus referidos (parentId/granId).
+ * Solo se permite mientras no haya movimientos de dinero asociados al usuario actual.
+ */
+export async function changeAffiliateUsername(idToken: string, rawNew: string) {
+  try {
+    const { uid, username: old } = await verifyAffiliateToken(idToken);
+    if (!old) return { success: false as const, error: 'No encontramos tu perfil de afiliado.' };
+
+    const username = normalizeUsername(rawNew || '');
+    if (username.length < 3) {
+      return { success: false as const, error: 'El usuario debe tener al menos 3 caracteres (letras, números, punto, guion o guion bajo).' };
+    }
+    if (username === old) return { success: false as const, error: 'Ese ya es tu usuario.' };
+    if (RESERVED.has(username)) return { success: false as const, error: 'Ese nombre de usuario no está disponible.' };
+
+    const db = adminDb();
+    const [asEarner, asSeller, withdrawals] = await Promise.all([
+      db.collection(COMMISSIONS_COLLECTION).where('affiliateUsername', '==', old).limit(1).get(),
+      db.collection(COMMISSIONS_COLLECTION).where('sellerUsername', '==', old).limit(1).get(),
+      db.collection(WITHDRAWALS_COLLECTION).where('affiliateUsername', '==', old).limit(1).get(),
+    ]);
+    if (!asEarner.empty || !asSeller.empty || !withdrawals.empty) {
+      return {
+        success: false as const,
+        error: 'Tu usuario ya tiene ventas, comisiones o retiros asociados y no se puede cambiar. Escribe a soporte si lo necesitas.',
+      };
+    }
+
+    const oldRef = db.collection(AFFILIATES_COLLECTION).doc(old);
+    const newRef = db.collection(AFFILIATES_COLLECTION).doc(username);
+
+    await db.runTransaction(async (tx) => {
+      const [oldSnap, newSnap, kids, grandkids] = await Promise.all([
+        tx.get(oldRef),
+        tx.get(newRef),
+        tx.get(db.collection(AFFILIATES_COLLECTION).where('parentId', '==', old)),
+        tx.get(db.collection(AFFILIATES_COLLECTION).where('granId', '==', old)),
+      ]);
+      if (!oldSnap.exists) throw new Error('NO_PROFILE');
+      if (newSnap.exists) throw new Error('TAKEN');
+      if (kids.size + grandkids.size > 400) throw new Error('TOO_MANY');
+
+      const now = new Date().toISOString();
+      tx.create(newRef, { ...oldSnap.data(), id: username, username, referralCode: username, updatedAt: now });
+      tx.delete(oldRef);
+      tx.set(db.collection(USER_INDEX_COLLECTION).doc(uid), { username });
+      kids.docs.forEach((d) => tx.update(d.ref, { parentId: username }));
+      grandkids.docs.forEach((d) => tx.update(d.ref, { granId: username }));
+    });
+
+    // Los clics ya registrados siguen contando para el nuevo usuario (mejor esfuerzo, fuera de la transacción).
+    try {
+      for (let round = 0; round < 5; round++) {
+        const clicks = await db.collection(CLICKS_COLLECTION).where('username', '==', old).limit(400).get();
+        if (clicks.empty) break;
+        const batch = db.batch();
+        clicks.docs.forEach((d) => batch.update(d.ref, { username }));
+        await batch.commit();
+      }
+    } catch (clickErr) {
+      console.warn('[change-username] no se pudieron migrar los clics', clickErr);
+    }
+
+    return { success: true as const, username };
+  } catch (error: any) {
+    const msg = String(error?.message || '');
+    if (msg === 'TAKEN' || error?.code === 6) return { success: false as const, error: 'Ese nombre de usuario ya está en uso.' };
+    if (msg === 'TOO_MANY') return { success: false as const, error: 'Tu red es muy grande para cambiar el usuario automáticamente. Escribe a soporte.' };
+    if (msg === 'NO_PROFILE') return { success: false as const, error: 'No encontramos tu perfil de afiliado.' };
+    console.error('[change-username]', error);
+    return { success: false as const, error: 'No se pudo cambiar el usuario. Intenta nuevamente.' };
+  }
 }
 
 export async function sendCustomVerificationEmail(toEmail: string, link: string) {

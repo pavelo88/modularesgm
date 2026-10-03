@@ -37,7 +37,7 @@ import {
 } from '@/lib/affiliate-actions';
 import { normalizeUsername } from '@/lib/affiliate-core';
 import { REF_STORAGE_KEY } from '@/context/affiliate-provider';
-import { ForcePasswordChangeModal } from '@/components/auth/force-password-change-modal';
+import { PasswordSetupDialog } from '@/components/affiliates/password-setup-dialog';
 
 function AffiliatesAuthContent() {
   const router = useRouter();
@@ -686,7 +686,13 @@ function AffiliatesAuthContent() {
       </footer>
 
       {/* MODAL DE PRIMER CAMBIO DE CLAVE */}
-      <ForcePasswordChangeModal isOpen={showForcePasswordModal} />
+      <PasswordSetupDialog
+        open={showForcePasswordModal}
+        onDone={() => {
+          setShowForcePasswordModal(false);
+          router.replace('/afiliados/portal');
+        }}
+      />
 
     </div>
   );
