@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { Switch } from '@/components/ui/switch';
 
 const CATALOG_CATEGORIES = [
-  'Todos', 'Closets', 'Cocinas', 'Oficina', 'Gamer', 'BaÃ±o', 'Puertas', 'EstimulaciÃ³n', 'Escritorios', 'General'
+  'Todos', 'Closets', 'Cocinas', 'Oficina', 'Gamer', 'Baño', 'Puertas', 'Estimulación', 'Escritorios', 'General'
 ];
 
 const PRICE_UNIT_OPTIONS = [
@@ -48,7 +48,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     const newProduct: Product = {
       id: Date.now(),
       title: 'Nuevo Producto',
-      desc: 'DescripciÃ³n comercial del producto...',
+      desc: 'Descripción comercial del producto...',
       price: 0,
       discountPrice: null,
       imgUrl: defaultSiteContent.products[0]?.imgUrl || '',
@@ -62,11 +62,11 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
       products: [newProduct, ...prev.products]
     }));
     setActiveCategory(newProduct.category);
-    toast({ title: 'Producto aÃ±adido', description: 'Completa los datos y guarda los cambios.' });
+    toast({ title: 'Producto añadido', description: 'Completa los datos y guarda los cambios.' });
   };
 
   const handleDeleteProduct = (id: number) => {
-    if (confirm('Â¿Eliminar este producto definitivamente de la tienda?')) {
+    if (confirm('¿Eliminar este producto definitivamente de la tienda?')) {
       setSiteContent(prev => ({
         ...prev,
         products: prev.products.filter(p => p.id !== id)
@@ -76,7 +76,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
   };
 
   const handleRestoreDefaults = () => {
-    if (confirm('Â¿Restaurar todos los productos a los valores por defecto?')) {
+    if (confirm('¿Restaurar todos los productos a los valores por defecto?')) {
       setSiteContent(prev => ({ ...prev, products: defaultSiteContent.products }));
     }
   };
@@ -85,7 +85,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     startSaving(async () => {
       const result = await saveSiteContent(siteContent);
       if (result.success) {
-        toast({ title: 'Ã‰xito', description: 'CatÃ¡logo de productos actualizado.' });
+        toast({ title: 'Éxito', description: 'Catálogo de productos actualizado.' });
       } else {
         toast({ variant: 'destructive', title: 'Error', description: result.error });
       }
@@ -97,14 +97,14 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     const result = await getProductDescription(product.title, product.category);
     if (result.success && result.data) {
       handleProductChange(product.id, 'desc', result.data);
-      toast({ title: 'Ã‰xito', description: 'DescripciÃ³n generada con IA.' });
+      toast({ title: 'Éxito', description: 'Descripción generada con IA.' });
     } else {
       toast({ variant: 'destructive', title: 'Error de IA', description: result.error });
     }
     setGeneratingDescId(null);
   };
 
-  // Contadores por categorÃ­a
+  // Contadores por categoría
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { Todos: siteContent.products.length };
     siteContent.products.forEach(p => {
@@ -113,7 +113,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     return counts;
   }, [siteContent.products]);
 
-  // Filtrado combinado: categorÃ­a + bÃºsqueda
+  // Filtrado combinado: categoría + búsqueda
   const filteredProducts = useMemo(() => {
     let list = siteContent.products;
     if (activeCategory !== 'Todos') list = list.filter(p => p.category === activeCategory);
@@ -129,9 +129,9 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
       {/* Header sticky */}
       <div className="flex justify-between items-center bg-card p-4 rounded-xl border sticky top-0 z-10 gap-4">
         <div>
-          <h1 className="text-xl font-bold">CatÃ¡logo de la Tienda</h1>
+          <h1 className="text-xl font-bold">Catálogo de la Tienda</h1>
           <p className="text-xs text-muted-foreground">
-            {siteContent.products.length} productos Â· {filteredProducts.length} visibles
+            {siteContent.products.length} productos · {filteredProducts.length} visibles
           </p>
         </div>
         <div className="flex gap-2">
@@ -139,7 +139,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
             <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
           </Button>
           <Button variant="outline" size="sm" onClick={handleAddProduct}>
-            <Plus className="mr-2 h-4 w-4" /> AÃ±adir
+            <Plus className="mr-2 h-4 w-4" /> Añadir
           </Button>
           <Button size="sm" onClick={handleSave} disabled={isSaving}>
             {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
@@ -148,12 +148,12 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
         </div>
       </div>
 
-      {/* Filtro por categorÃ­a + bÃºsqueda */}
+      {/* Filtro por categoría + búsqueda */}
       <div className="space-y-3">
         <div className="relative">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Buscar producto por nombre o categorÃ­a..."
+            placeholder="Buscar producto por nombre o categoría..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             className="pl-9 h-9 text-sm"
@@ -185,7 +185,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
         {filteredProducts.length === 0 && (
           <div className="col-span-2 py-16 text-center text-muted-foreground">
             <Package size={40} className="mx-auto mb-3 opacity-20" />
-            <p>No se encontraron productos en esta categorÃ­a.</p>
+            <p>No se encontraron productos en esta categoría.</p>
           </div>
         )}
         {filteredProducts.map((product) => (
@@ -207,14 +207,14 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
                 folder="products"
               />
 
-              {/* TÃ­tulo + CategorÃ­a */}
+              {/* Título + Categoría */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">TÃ­tulo</Label>
+                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Título</Label>
                   <Input value={product.title || ''} onChange={e => handleProductChange(product.id, 'title', e.target.value)} />
                 </div>
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">CategorÃ­a</Label>
+                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Categoría</Label>
                   <select
                     value={product.category || ''}
                     onChange={e => handleProductChange(product.id, 'category', e.target.value)}
@@ -227,10 +227,10 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
                 </div>
               </div>
 
-              {/* SubcategorÃ­a + Material */}
+              {/* Subcategoría + Material */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">SubcategorÃ­a</Label>
+                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Subcategoría</Label>
                   <Input
                     placeholder="ej: Closet Moderno, Cocina en L..."
                     value={product.subcategory || ''}
@@ -289,10 +289,10 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
                 </div>
               </div>
 
-              {/* DescripciÃ³n con IA */}
+              {/* Descripción con IA */}
               <div className="space-y-1">
                 <div className="flex justify-between items-center mb-1">
-                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">DescripciÃ³n</Label>
+                  <Label className="text-[10px] font-bold uppercase text-muted-foreground">Descripción</Label>
                   <Button
                     size="sm"
                     variant="ghost"

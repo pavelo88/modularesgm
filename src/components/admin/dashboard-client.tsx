@@ -83,7 +83,7 @@ export function AdminDashboardClient() {
   const [authReady, setAuthReady] = useState(false);
   const router = useRouter();
 
-  // Las reglas de Firestore exigen sesiA3n de Firebase: sin ella volvemos al login.
+  // Las reglas de Firestore exigen sesión de Firebase: sin ella volvemos al login.
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
       if (!user) router.replace('/admin');
