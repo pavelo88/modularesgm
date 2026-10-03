@@ -1,4 +1,4 @@
-﻿/**
+/**
  * upload-catalog.mjs
  * Sube las imagenes extraidas del catalogo GM a Firebase Storage.
  * Uso: node scripts/upload-catalog.mjs
@@ -44,10 +44,18 @@ console.log(`Bucket de destino: ${STORAGE_BUCKET}`);
 // (requiere que hayas hecho: firebase login o gcloud auth application-default login)
 let app;
 try {
-  app = initializeApp({
-    projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: STORAGE_BUCKET,
-  });
+  const raw = env.FIREBASE_SERVICE_ACCOUNT_JSON;
+  if (raw) {
+    app = initializeApp({
+      credential: cert(JSON.parse(raw)),
+      storageBucket: STORAGE_BUCKET,
+    });
+  } else {
+    app = initializeApp({
+      projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+      storageBucket: STORAGE_BUCKET,
+    });
+  }
 } catch (e) {
   // Ya inicializado
   const { getApps } = await import("firebase-admin/app");
