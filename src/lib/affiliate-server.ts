@@ -43,9 +43,12 @@ export async function priceCart(cart: CartItem[]) {
   for (const line of cart) {
     const product = catalog.find((p) => p.id === line.product.id);
     const qty = Math.min(Math.max(Math.floor(line.quantity), 1), 99);
-    if (!product) continue;
+    // Nunca se vende un producto sin precio (p. ej. los modelos del catálogo "a cotizar"),
+    // aunque alguien arme la petición a mano: evitaría pedidos de $0.
+    const unitPrice = product ? product.discountPrice || product.price : 0;
+    if (!product || !(unitPrice > 0) || product.inStock === false) continue;
     items.push({ product, quantity: qty });
-    subtotal += (product.discountPrice || product.price) * qty;
+    subtotal += unitPrice * qty;
   }
   return { items, subtotal: roundMoney(subtotal) };
 }

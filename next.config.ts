@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
+        // Imágenes del catálogo GM subidas a Storage como objetos públicos (catalog/...).
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/mgm-68c65.firebasestorage.app/**',
+      },
+      {
         protocol: 'https',
         hostname: 'placehold.co',
         port: '',
