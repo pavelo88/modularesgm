@@ -90,7 +90,12 @@ export async function handleCheckout(
   try {
     const settings = await getSettings();
     const attribution = await resolveAttribution(affiliateCode, data.email);
-    const { discountAmount, total } = priceWithDiscount(subtotal, !!attribution, settings);
+    const { discountAmount, codeDiscountAmount, transferDiscountAmount, total } = priceWithDiscount(
+      subtotal,
+      !!attribution,
+      settings,
+      data.paymentMethod
+    );
 
     const ref = await adminDb().collection('orders').add({
       name: data.name,
@@ -102,6 +107,8 @@ export async function handleCheckout(
       items,
       subtotal,
       discountAmount,
+      codeDiscountAmount,
+      transferDiscountAmount,
       total,
       affiliateCode: attribution?.username || '',
       status: 'Pendiente',

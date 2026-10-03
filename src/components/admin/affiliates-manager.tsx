@@ -7,6 +7,7 @@ import { db } from '@/lib/firebase';
 import { DEFAULT_AFFILIATE_SETTINGS, ROOT_USERNAME, roundMoney, type AffiliateAccount, type AffiliateSettings } from '@/lib/affiliate-core';
 import { processWithdrawal, saveAffiliateSettings, setAffiliateStatus } from '@/lib/affiliate-actions';
 import { useToast } from '@/hooks/use-toast';
+import { GlobalPoolsCard } from '@/components/admin/global-pools-card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -265,7 +266,7 @@ export function AffiliatesManager() {
         </Card>
       </TabsContent>
 
-      <TabsContent value="reglas">
+      <TabsContent value="reglas" className="space-y-6">
         <Card>
           <CardHeader>
             <CardTitle>Reglas del plan 10-3-2</CardTitle>
@@ -276,16 +277,18 @@ export function AffiliatesManager() {
               {field('sellerRate', 'Vendedor directo', '%')}
               {field('parentRate', 'Patrocinador (nivel 1)', '%')}
               {field('grandparentRate', 'Nivel 2', '%')}
-              {field('customerDiscount', 'Descuento al cliente', '%')}
+              {field('customerDiscount', 'Descuento al cliente (con código)', '%')}
+              {field('transferDiscount', 'Descuento extra por transferencia', '%')}
               {field('cookieDays', 'Vigencia del enlace', 'días')}
               {field('minWithdrawal', 'Retiro mínimo', 'USD')}
             </div>
-            <p className="text-xs text-muted-foreground">Total repartido por venta: {settings.sellerRate + settings.parentRate + settings.grandparentRate}% del valor cobrado. Lo que no tenga beneficiario en la cadena se acredita al fundador.</p>
+            <p className="text-xs text-muted-foreground">Total repartido por venta: {settings.sellerRate + settings.parentRate + settings.grandparentRate}% del valor cobrado. Lo que no tenga beneficiario en la cadena, o exceda el tope (padre: primeros $10.000 de cada hijo; abuelo: $1.000 y hasta $5.000 si está activo), se acredita al fundador.</p>
             <Button disabled={pending} onClick={() => run(() => saveAffiliateSettings(settings), 'Reglas guardadas')}>
               {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Guardar reglas
             </Button>
           </CardContent>
         </Card>
+        <GlobalPoolsCard />
       </TabsContent>
     </Tabs>
   );

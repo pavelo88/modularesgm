@@ -3,13 +3,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useCallback, useState, useTransition } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Banknote, CreditCard, Loader2, Lock, MapPin, Package, Users, Wallet, ChevronLeft, CheckCircle2, Tag } from 'lucide-react';
 
 import { useCart } from '@/context/cart-provider';
 import { useAffiliate } from '@/context/affiliate-provider';
+import { getTransferDiscount } from '@/lib/affiliate-actions';
 import { useSiteContent } from '@/context/site-content-provider';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -53,7 +54,11 @@ export default function CheckoutPage() {
   const [codeError, setCodeError] = useState('');
   const subtotal = getCartTotal();
   const discount = subtotal * discountPercent / 100;
-  const finalTotal = subtotal - discount;
+  // % de descuento extra por transferencia (lo define el admin; el servidor lo recalcula al crear el pedido)
+  const [transferPct, setTransferPct] = useState(0);
+  useEffect(() => {
+    getTransferDiscount().then(setTransferPct).catch(() => setTransferPct(0));
+  }, []);
 
   const onApplyCode = async () => {
     setCodeError('');
@@ -107,6 +112,9 @@ export default function CheckoutPage() {
   }, [toast]);
 
   const paymentMethod = form.watch('paymentMethod');
+  const round2 = (n: number) => Math.round(n * 100) / 100;
+  const transferDiscount = paymentMethod === 'transferencia' ? round2(subtotal * transferPct / 100) : 0;
+  const payableTotal = round2(subtotal - round2(discount) - transferDiscount);
   const suggestedProducts = siteContent?.products
     .filter(p => !cart.some(item => item.product.id === p.id))
     .slice(0, 3) || [];
@@ -208,7 +216,7 @@ export default function CheckoutPage() {
                                 <Label className={`flex flex-col border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'transferencia' ? 'border-primary bg-primary/5' : 'border-border'}`}>
                                 <div className="flex items-center gap-3">
                                     <RadioGroupItem value="transferencia" id="transferencia" />
-                                    <span className="font-bold flex items-center gap-2"><Banknote size={16} className="text-primary" /> Transferencia o Depósito</span>
+                                    <span className="font-bold flex items-center gap-2"><Banknote size={16} className="text-primary" /> Transferencia o Depósito{transferPct > 0 && <span className="ml-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">-{transferPct}% extra</span>}</span>
                                 </div>
                                 {paymentMethod === 'transferencia' && (
                                     <div className="ml-7 space-y-3">
@@ -248,7 +256,7 @@ export default function CheckoutPage() {
                     />
                     <Button type="submit" disabled={isPending || cart.length === 0} className="w-full text-lg" size="lg">
                         {isPending ? (<Loader2 className="mr-2 h-5 w-5 animate-spin" />) : (<Lock size={18} className="mr-2" />)}
-                        {isPending ? 'Procesando...' : `Confirmar Pedido de $${finalTotal.toFixed(2)}`}
+                        {isPending ? 'Procesando...' : `Confirmar Pedido de $${payableTotal.toFixed(2)}`}
                     </Button>
                     </form>
                 </Form>
@@ -290,15 +298,20 @@ export default function CheckoutPage() {
                                 {codeError && <p className="text-xs text-destructive mt-1">{codeError}</p>}
                             </div>
                         )}
-                        {discountPercent > 0 && (
+                        {(discountPercent > 0 || transferDiscount > 0) && (
                             <>
                                 <div className="flex justify-between text-sm text-muted-foreground"><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
-                                <div className="flex justify-between text-sm text-green-600 font-medium"><span>Descuento</span><span>-${discount.toFixed(2)}</span></div>
+                                {discountPercent > 0 && (
+                                    <div className="flex justify-between text-sm text-green-600 font-medium"><span>Descuento por código ({discountPercent}%)</span><span>-${round2(discount).toFixed(2)}</span></div>
+                                )}
+                                {transferDiscount > 0 && (
+                                    <div className="flex justify-between text-sm text-green-600 font-medium"><span>Pago por transferencia ({transferPct}%)</span><span>-${transferDiscount.toFixed(2)}</span></div>
+                                )}
                             </>
                         )}
                         <div className="flex justify-between items-center text-xl font-bold text-primary">
                             <span>Total:</span>
-                            <span>${finalTotal.toFixed(2)}</span>
+                            <span>${payableTotal.toFixed(2)}</span>
                         </div>
                     </div>
                 </div>

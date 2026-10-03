@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { FieldValue } from 'firebase-admin/firestore';
 import { adminAuth, adminDb } from '@/lib/firebase-admin';
 import { requireAdmin } from '@/lib/admin-session';
-import { getAffiliate, getSettings } from '@/lib/affiliate-server';
+import { applyGlobalPools, getAffiliate, getSettings, planGlobalPools } from '@/lib/affiliate-server';
 import {
   AFFILIATES_COLLECTION,
   CLICKS_COLLECTION,
@@ -273,6 +273,7 @@ export async function saveAffiliateSettings(settings: AffiliateSettings) {
       parentRate: num,
       grandparentRate: num,
       customerDiscount: num,
+      transferDiscount: num,
       cookieDays: z.number().min(1).max(365),
       minWithdrawal: z.number().min(0),
     })
@@ -280,6 +281,41 @@ export async function saveAffiliateSettings(settings: AffiliateSettings) {
   if (!parsed.success) return { success: false, error: 'Valores inválidos.' };
   await adminDb().doc('siteContent/affiliate').set(parsed.data, { merge: true });
   return { success: true };
+}
+
+/** % de descuento extra por pagar con transferencia (público: lo muestra el checkout). */
+export async function getTransferDiscount() {
+  const settings = await getSettings();
+  return settings.transferDiscount;
+}
+
+// --- Fondos globales mensuales (solo super / admin: mueve dinero) -----------
+
+async function requireMoneyAdmin() {
+  const identity = await requireAdmin();
+  if (!['super', 'admin'].includes(identity.role)) throw new Error('Forbidden');
+}
+
+/** Calcula cómo se repartirían los fondos de un mes (AAAA-MM) sin escribir nada. */
+export async function previewGlobalPoolsAction(month: string) {
+  try {
+    await requireMoneyAdmin();
+    return { success: true as const, plan: await planGlobalPools(month) };
+  } catch (error) {
+    return { success: false as const, error: error instanceof Error ? error.message : 'No se pudo calcular.' };
+  }
+}
+
+/** Paga los fondos globales del mes. Irreversible desde la interfaz; una sola vez por mes. */
+export async function payGlobalPoolsAction(month: string) {
+  try {
+    await requireMoneyAdmin();
+    const result = await applyGlobalPools(month);
+    if (!result.success) return { success: false as const, error: result.error, plan: result.plan };
+    return { success: true as const, plan: result.plan };
+  } catch (error) {
+    return { success: false as const, error: error instanceof Error ? error.message : 'No se pudo pagar.' };
+  }
 }
 
 export async function setAffiliateStatus(username: string, status: 'active' | 'suspended') {

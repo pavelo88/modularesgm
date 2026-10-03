@@ -2,8 +2,10 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { adminDb } from './firebase-admin';
 import {
   AFFILIATES_COLLECTION,
+  CAPS,
   COMMISSIONS_COLLECTION,
   DEFAULT_AFFILIATE_SETTINGS,
+  GLOBAL_POOLS,
   ROOT_USERNAME,
   computePayouts,
   normalizeUsername,
@@ -59,6 +61,27 @@ export async function resolveAttribution(rawCode: string | undefined, buyerEmail
 }
 
 /**
+ * Volumen de ventas de `sellerUsername` ya comisionado a `beneficiary` en el nivel dado.
+ * Solo filtros de igualdad (no requiere índice compuesto). Ignora comisiones revertidas.
+ */
+async function creditedVolume(beneficiary: string, level: 1 | 2, sellerUsername: string) {
+  if (beneficiary === ROOT_USERNAME) return 0; // el fundador no tiene tope
+  const snap = await adminDb()
+    .collection(COMMISSIONS_COLLECTION)
+    .where('affiliateUsername', '==', beneficiary)
+    .where('level', '==', level)
+    .where('sellerUsername', '==', sellerUsername)
+    .where('status', '==', 'credited')
+    .get();
+  return roundMoney(
+    snap.docs.reduce((sum, d) => {
+      const c = d.data();
+      return sum + (Number(c.volumeCredited ?? c.saleAmount) || 0);
+    }, 0)
+  );
+}
+
+/**
  * Acredita las comisiones de un pedido pagado. Idempotente por dos vías:
  * marca en el pedido y documentos de comisión con id determinístico (create falla si existe).
  */
@@ -79,25 +102,42 @@ export async function distributeCommissions(orderId: string) {
   // Si el pedido se revirtió antes, los ids nuevos evitan chocar con los documentos históricos.
   const idSuffix = order.commissionsReversedAt ? `_${Date.now()}` : '';
   const total = Number(order.total) || 0;
-  const payouts = computePayouts(total, seller, settings);
+
+  // Historial para los topes: cuánto volumen de ESTE vendedor ya se comisionó a su padre/abuelo.
+  // Si el vendedor es el fundador (venta orgánica) o no hay padre/abuelo reales, no hay tope.
+  const parentName = seller.parentId && seller.parentId !== seller.username ? seller.parentId : ROOT_USERNAME;
+  const grandName = seller.granId && seller.granId !== seller.username ? seller.granId : ROOT_USERNAME;
+  const [parentVolume, grandVolume, grandAff] = await Promise.all([
+    creditedVolume(parentName, 1, seller.username),
+    creditedVolume(grandName, 2, seller.username),
+    grandName === ROOT_USERNAME ? Promise.resolve(null) : getAffiliate(grandName),
+  ]);
+  const grandActive = Number(grandAff?.cumulativePersonalVolume || 0) >= CAPS.activeMinPersonalVolume;
+  const payouts = computePayouts(total, seller, settings, { parentVolume, grandVolume, grandActive });
   const now = new Date().toISOString();
   const batch = db.batch();
 
   const perUser = new Map<string, number>();
   for (const p of payouts) {
     perUser.set(p.affiliateUsername, roundMoney((perUser.get(p.affiliateUsername) || 0) + p.amountUsd));
-    batch.create(db.collection(COMMISSIONS_COLLECTION).doc(`${orderId}_L${p.level}${idSuffix}`), {
-      orderId,
-      saleAmount: total,
-      affiliateUsername: p.affiliateUsername,
-      level: p.level,
-      percentage: p.percentage,
-      commissionAmount: p.amountUsd,
-      role: p.role,
-      customerFirstName: String(order.name || '').split(' ')[0],
-      status: 'credited',
-      createdAt: now,
-    });
+    batch.create(
+      db.collection(COMMISSIONS_COLLECTION).doc(`${orderId}_L${p.level}${p.overflow ? 'x' : ''}${idSuffix}`),
+      {
+        orderId,
+        saleAmount: total,
+        sellerUsername: seller.username,
+        volumeCredited: p.overflow ? 0 : (p.eligibleVolume ?? total),
+        overflow: !!p.overflow,
+        affiliateUsername: p.affiliateUsername,
+        level: p.level,
+        percentage: p.percentage,
+        commissionAmount: p.amountUsd,
+        role: p.role,
+        customerFirstName: String(order.name || '').split(' ')[0],
+        status: 'credited',
+        createdAt: now,
+      }
+    );
   }
   for (const [username, amount] of perUser) {
     const isSeller = username === seller.username;
@@ -172,4 +212,146 @@ export async function applyOrderStatus(orderId: string, status: string) {
   await adminDb().collection('orders').doc(orderId).update({ status });
   if (CREDIT_STATUSES.includes(status)) await distributeCommissions(orderId);
   else if (status === 'Cancelado') await reverseCommissions(orderId);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Fondos globales mensuales (6% de las ventas de la empresa: 2% por piscina)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const POOL_RUNS_COLLECTION = 'affiliate_pool_runs';
+
+export interface PoolPayoutRow {
+  pool: string;
+  poolName: string;
+  username: string;
+  shares: number;
+  amountUsd: number;
+  note?: string;
+}
+
+export interface PoolPlan {
+  month: string; // YYYY-MM
+  totalSales: number;
+  budgets: { pool: string; poolName: string; target: number; budgetUsd: number; totalShares: number }[];
+  rows: PoolPayoutRow[];
+  alreadyRun: boolean;
+}
+
+/** Calcula (sin escribir) cómo se repartirían los fondos globales de un mes. */
+export async function planGlobalPools(month: string): Promise<PoolPlan> {
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) throw new Error('Mes inválido (usa AAAA-MM).');
+  const db = adminDb();
+  const [y, m] = month.split('-').map(Number);
+  const start = new Date(Date.UTC(y, m - 1, 1)).toISOString();
+  const end = new Date(Date.UTC(y, m, 1)).toISOString();
+
+  const alreadyRun = (await db.collection(POOL_RUNS_COLLECTION).doc(month).get()).exists;
+
+  // Solo filtro de rango por fecha (índice simple); el resto se filtra en memoria.
+  const snap = await db.collection(COMMISSIONS_COLLECTION).where('createdAt', '>=', start).where('createdAt', '<', end).get();
+
+  let totalSales = 0;
+  const personal = new Map<string, number>();
+  const network = new Map<string, number>();
+  for (const d of snap.docs) {
+    const c = d.data();
+    if (c.status !== 'credited' || c.kind === 'pool' || c.overflow) continue;
+    const sale = Number(c.saleAmount) || 0;
+    if (c.level === 0) {
+      totalSales += sale; // un documento de nivel 0 por pedido
+      personal.set(c.affiliateUsername, (personal.get(c.affiliateUsername) || 0) + sale);
+    } else if (c.level === 1 || c.level === 2) {
+      network.set(c.affiliateUsername, (network.get(c.affiliateUsername) || 0) + sale);
+    }
+  }
+  totalSales = roundMoney(totalSales);
+
+  const affSnap = await db.collection(AFFILIATES_COLLECTION).get();
+  const eligible = new Set(affSnap.docs.filter((a) => a.data().status !== 'suspended').map((a) => a.id));
+  const volume = (u: string) => (personal.get(u) || 0) + (network.get(u) || 0);
+
+  const rows: PoolPayoutRow[] = [];
+  const budgets: PoolPlan['budgets'] = [];
+  for (const pool of GLOBAL_POOLS) {
+    const budgetUsd = roundMoney((totalSales * pool.percent) / 100);
+    const qualified = [...eligible]
+      .map((u) => ({ username: u, shares: Math.floor(volume(u) / pool.target) }))
+      .filter((q) => q.shares > 0)
+      .sort((a, b) => a.username.localeCompare(b.username));
+    const totalShares = qualified.reduce((s, q) => s + q.shares, 0);
+    budgets.push({ pool: pool.key, poolName: pool.name, target: pool.target, budgetUsd, totalShares });
+    if (budgetUsd <= 0) continue;
+
+    if (totalShares === 0) {
+      // Nadie califica: el fondo completo pasa al fundador.
+      rows.push({ pool: pool.key, poolName: pool.name, username: ROOT_USERNAME, shares: 0, amountUsd: budgetUsd, note: 'Sin calificados → fundador' });
+      continue;
+    }
+    let paid = 0;
+    qualified.forEach((q, i) => {
+      // El último recibe el resto para que la suma sea exacta al centavo.
+      const amountUsd = i === qualified.length - 1 ? roundMoney(budgetUsd - paid) : roundMoney((budgetUsd * q.shares) / totalShares);
+      paid = roundMoney(paid + amountUsd);
+      rows.push({ pool: pool.key, poolName: pool.name, username: q.username, shares: q.shares, amountUsd });
+    });
+  }
+  return { month, totalSales, budgets, rows, alreadyRun };
+}
+
+/** Paga los fondos globales de un mes. No se puede ejecutar dos veces el mismo mes. */
+export async function applyGlobalPools(month: string) {
+  const plan = await planGlobalPools(month);
+  if (plan.alreadyRun) return { success: false as const, error: `Los fondos de ${month} ya se distribuyeron.`, plan };
+  if (plan.rows.length === 0) return { success: false as const, error: `No hubo ventas acreditadas en ${month}.`, plan };
+
+  const db = adminDb();
+  const now = new Date().toISOString();
+  const perUser = new Map<string, number>();
+  const ops: Array<(b: FirebaseFirestore.WriteBatch) => void> = [];
+
+  for (const r of plan.rows) {
+    perUser.set(r.username, roundMoney((perUser.get(r.username) || 0) + r.amountUsd));
+    ops.push((b) =>
+      b.create(db.collection(COMMISSIONS_COLLECTION).doc(`pool_${month}_${r.pool}_${r.username}`), {
+        kind: 'pool',
+        month,
+        orderId: '',
+        saleAmount: plan.totalSales,
+        volumeCredited: 0,
+        affiliateUsername: r.username,
+        level: 3,
+        percentage: 2,
+        commissionAmount: r.amountUsd,
+        role: `Fondo global ${month} · ${r.poolName}${r.shares ? ` (${r.shares} acc.)` : ''}`,
+        customerFirstName: '',
+        status: 'credited',
+        createdAt: now,
+      })
+    );
+  }
+  for (const [username, amount] of perUser) {
+    ops.push((b) =>
+      b.set(
+        db.collection(AFFILIATES_COLLECTION).doc(username),
+        { availableBalance: FieldValue.increment(amount), totalEarnings: FieldValue.increment(amount), updatedAt: now },
+        { merge: true }
+      )
+    );
+  }
+  // La marca del mes va al final: si algo falla antes, los ids determinísticos evitan pagar doble al reintentar.
+  ops.push((b) =>
+    b.create(db.collection(POOL_RUNS_COLLECTION).doc(month), {
+      month,
+      totalSales: plan.totalSales,
+      totalPaid: roundMoney(plan.rows.reduce((s, r) => s + r.amountUsd, 0)),
+      createdAt: now,
+    })
+  );
+
+  for (let i = 0; i < ops.length; i += 400) {
+    const batch = db.batch();
+    ops.slice(i, i + 400).forEach((op) => op(batch));
+    await batch.commit();
+  }
+  return { success: true as const, plan };
 }
