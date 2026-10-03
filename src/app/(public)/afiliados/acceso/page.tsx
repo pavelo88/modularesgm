@@ -264,21 +264,47 @@ function AffiliatesAuthContent() {
       const cleanEmail = regEmail.trim().toLowerCase();
       const cleanCedula = regCedula.trim();
 
-      // 1. Crear usuario en Firebase Auth con la cédula como contraseña provisional
-      const userCred = await createUserWithEmailAndPassword(auth, cleanEmail, cleanCedula);
+      // 1. Crear usuario en Firebase Auth con la cédula como contraseña provisional.
+      //    Si el correo ya existe, puede ser un registro anterior que quedó a medias (usuario
+      //    creado pero sin perfil): entrar con la misma cédula demuestra que es la misma persona
+      //    y permite completar el perfil en lugar de dejarla atascada.
+      let userCred;
+      let createdNow = true;
+      try {
+        userCred = await createUserWithEmailAndPassword(auth, cleanEmail, cleanCedula);
+      } catch (createErr: any) {
+        if (createErr?.code !== 'auth/email-already-in-use') throw createErr;
+        try {
+          userCred = await signInWithEmailAndPassword(auth, cleanEmail, cleanCedula);
+          createdNow = false;
+        } catch {
+          setErrorMsg('Ese correo ya está registrado. Por favor inicia sesión (tu clave inicial es tu cédula).');
+          setLoading(false);
+          return;
+        }
+      }
       const idToken = await userCred.user.getIdToken();
 
-      // 2. Crear perfil en Firestore
-      const res = await registerAffiliateAccount(idToken, {
-        name: regFullName.trim(),
-        username: regUsername.trim().toLowerCase(),
-        cedula: cleanCedula,
-        phone: regPhone.trim(),
-        sponsor: regSponsor.trim() || undefined,
-      });
+      // 2. Crear perfil en Firestore. Si la llamada al servidor se cae (no solo si responde con
+      //    error), se trata igual: así nunca queda un usuario en Auth sin perfil.
+      let res: { success: boolean; error?: string };
+      try {
+        res = await registerAffiliateAccount(idToken, {
+          name: regFullName.trim(),
+          username: regUsername.trim().toLowerCase(),
+          cedula: cleanCedula,
+          phone: regPhone.trim(),
+          sponsor: regSponsor.trim() || undefined,
+        });
+      } catch (serverErr) {
+        console.error('[Register Error] el servidor no respondió', serverErr);
+        res = { success: false, error: 'El servidor no pudo crear tu perfil. Intenta de nuevo en unos minutos.' };
+      }
 
       if (!res.success) {
-        await userCred.user.delete().catch(() => signOut(auth));
+        // Cuenta recién creada: se revierte. Cuenta recuperada: se conserva para reintentar.
+        if (createdNow) await userCred.user.delete().catch(() => signOut(auth));
+        else await signOut(auth).catch(() => {});
         setErrorMsg(res.error || 'Error al registrar el perfil.');
         setLoading(false);
         return;
