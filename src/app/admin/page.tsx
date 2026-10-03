@@ -35,8 +35,16 @@ export default function AdminLoginPage() {
           return;
         }
         router.push('/admin/dashboard');
-      } catch {
-        setError('Correo o contraseña incorrectos.');
+      } catch (err) {
+        // Solo los errores de Firebase Auth significan credenciales malas; cualquier
+        // otro fallo (p. ej. el servidor al abrir la sesión) se informa como lo que es.
+        const code = (err as { code?: string })?.code ?? '';
+        console.error('[admin-login]', err);
+        setError(
+          code.startsWith('auth/')
+            ? 'Correo o contraseña incorrectos.'
+            : 'Tus credenciales son correctas, pero el servidor no pudo abrir la sesión. Avisa al administrador técnico.'
+        );
       }
     });
   };
