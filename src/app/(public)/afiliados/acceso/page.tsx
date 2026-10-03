@@ -156,6 +156,33 @@ function AffiliatesAuthContent() {
     }
   };
 
+  /**
+   * Una sola puerta para afiliados y equipo (como en Vermilion):
+   * - afiliado con perfil -> portal (si su rol no es affiliate/founder, se deniega);
+   * - cuenta del equipo (documento usuarios/{correo} con rol de staff) -> panel /admin;
+   * - cualquier otro caso conserva el comportamiento anterior (portal).
+   */
+  const routeAfterLogin = async (uid: string, email: string): Promise<'portal' | 'admin' | 'denied'> => {
+    try {
+      const idx = await getDoc(doc(db, 'userIndex', uid));
+      const username = idx.exists() ? (idx.data()?.username as string | undefined) : undefined;
+      if (username) {
+        const aff = await getDoc(doc(db, 'affiliates', username));
+        const role = String(aff.data()?.role || 'affiliate').toLowerCase().trim();
+        if (aff.exists() && role !== 'affiliate' && role !== 'founder') return 'denied';
+        return 'portal';
+      }
+      const staff = await getDoc(doc(db, 'usuarios', email.trim().toLowerCase()));
+      const staffRole = String(staff.data()?.role || '').toLowerCase().trim();
+      if (staff.exists() && staff.data()?.active !== false && ['super', 'admin', 'financial', 'sales'].includes(staffRole)) {
+        return 'admin';
+      }
+    } catch (err) {
+      console.warn('No se pudo resolver el destino del acceso:', err);
+    }
+    return 'portal';
+  };
+
   // ── 1. LOGIN HANDLER ──────────────────────────────────────────────────────
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -175,11 +202,24 @@ function AffiliatesAuthContent() {
         throw new Error('No encontramos una cuenta con ese usuario o correo.');
       }
 
+      let destination: 'portal' | 'admin' | 'denied' = 'portal';
       if (auth) {
         try {
           await setPersistence(auth, browserLocalPersistence);
         } catch {}
-        await signInWithEmailAndPassword(auth, resolvedEmail, loginPassword.trim());
+        const cred = await signInWithEmailAndPassword(auth, resolvedEmail, loginPassword.trim());
+        destination = await routeAfterLogin(cred.user.uid, resolvedEmail);
+      }
+
+      if (destination === 'denied') {
+        if (auth) await signOut(auth).catch(() => {});
+        setErrorMsg('ACCESO DENEGADO (403): Tu cuenta no dispone de permisos para ingresar a este portal.');
+        return;
+      }
+      if (destination === 'admin') {
+        setSuccessMsg('Cuenta del equipo detectada. Te llevamos al panel de administración…');
+        router.push('/admin');
+        return;
       }
 
       router.push('/afiliados/portal');
