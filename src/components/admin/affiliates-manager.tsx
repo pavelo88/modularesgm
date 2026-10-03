@@ -144,7 +144,7 @@ export function AffiliatesManager() {
         </div>
 
         <Card>
-          <CardHeader className="flex-row items-start justify-between space-y-0">
+          <CardHeader className="flex-col gap-3 sm:flex-row sm:items-start sm:justify-between space-y-0">
             <div>
               <CardTitle>Pedidos y su comisión</CardTitle>
               <CardDescription>Las comisiones se acreditan al verificar el pago y se revierten si el pedido se cancela.</CardDescription>

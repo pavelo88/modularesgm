@@ -78,12 +78,12 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center bg-card p-4 rounded-xl border">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-card p-4 rounded-xl border">
         <div>
             <h2 className="text-xl font-bold">Configuración de Inicio</h2>
             <p className="text-sm text-muted-foreground">Modifica el Hero, contacto y SEO del sitio.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 [&>button]:flex-1 sm:[&>button]:flex-none">
           <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
             <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
           </Button>
