@@ -1,6 +1,7 @@
 /**
  * Núcleo puro del plan de compensación (sin Firebase): fácil de probar.
- * Plan "8-2-1": vendedor directo, padre y abuelo. Todo porcentaje es editable
+ * Plan "10-3-2" (igual al motor de pagos de Vermilion): vendedor directo 10%,
+ * padre 3% y abuelo 2%, planos sobre el valor cobrado. Todo porcentaje es editable
  * desde el admin (siteContent/affiliate). Lo que no tiene beneficiario en la
  * cadena cae al fundador (ROOT).
  */
@@ -18,11 +19,11 @@ export const ROOT_EMAIL = 'pablofgarciaf@gmail.com';
 export const ROOT_NAME = 'Pablo Fabricio García Flores';
 
 export interface AffiliateSettings {
-  /** % que gana el vendedor directo (por defecto 8) */
+  /** % que gana el vendedor directo (por defecto 10) */
   sellerRate: number;
-  /** % del patrocinador directo (por defecto 2) */
+  /** % del patrocinador directo (por defecto 3) */
   parentRate: number;
-  /** % del patrocinador del patrocinador (por defecto 1) */
+  /** % del patrocinador del patrocinador (por defecto 2) */
   grandparentRate: number;
   /** % de descuento al comprador que usa un enlace/código (por defecto 5) */
   customerDiscount: number;
@@ -33,9 +34,9 @@ export interface AffiliateSettings {
 }
 
 export const DEFAULT_AFFILIATE_SETTINGS: AffiliateSettings = {
-  sellerRate: 8,
-  parentRate: 2,
-  grandparentRate: 1,
+  sellerRate: 10,
+  parentRate: 3,
+  grandparentRate: 2,
   customerDiscount: 5,
   cookieDays: 30,
   minWithdrawal: 50,

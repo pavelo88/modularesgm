@@ -268,7 +268,7 @@ export function AffiliatesManager() {
       <TabsContent value="reglas">
         <Card>
           <CardHeader>
-            <CardTitle>Reglas del plan 8-2-1</CardTitle>
+            <CardTitle>Reglas del plan 10-3-2</CardTitle>
             <CardDescription>Se aplican a las ventas nuevas. Estos porcentajes no se muestran en el sitio público.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
