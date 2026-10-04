@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+/** `.portal-scope` fija la paleta del portal desde el primer pintado (claro y oscuro). */
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
-  return <PortalShellLayout>{children}</PortalShellLayout>;
+  return (
+    <div className="portal-scope min-h-screen bg-background text-foreground antialiased">
+      <PortalShellLayout>{children}</PortalShellLayout>
+    </div>
+  );
 }

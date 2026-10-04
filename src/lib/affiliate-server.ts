@@ -2,6 +2,7 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { adminDb } from './firebase-admin';
 import {
   AFFILIATES_COLLECTION,
+  ALIASES_COLLECTION,
   CAPS,
   COMMISSIONS_COLLECTION,
   DEFAULT_AFFILIATE_SETTINGS,
@@ -55,12 +56,32 @@ export async function priceCart(cart: CartItem[]) {
 
 /** Valida un código de afiliado para una compra. Devuelve null si no aplica. */
 export async function resolveAttribution(rawCode: string | undefined, buyerEmail: string) {
-  const username = normalizeUsername(rawCode || '');
-  if (!username || username === ROOT_USERNAME) return null;
-  const aff = await getAffiliate(username);
-  if (!aff || aff.status === 'suspended') return null;
+  const resolved = await resolveAffiliateCode(rawCode || '');
+  if (!resolved || resolved.username === ROOT_USERNAME) return null;
+  const { username, aff } = resolved;
+  if (aff.status === 'suspended') return null;
   if (String(aff.email).toLowerCase() === buyerEmail.trim().toLowerCase()) return null; // sin autocompra
   return { username, name: String(aff.name || username) };
+}
+
+/**
+ * Resuelve un código de afiliado. Si el afiliado cambió su usuario, el código viejo sigue
+ * llevando a su perfil actual (así los enlaces ya compartidos no se rompen).
+ */
+export async function resolveAffiliateCode(rawCode: string) {
+  const username = normalizeUsername(rawCode || '');
+  if (!username) return null;
+  let finalName = username;
+  let aff = await getAffiliate(username);
+  if (!aff) {
+    const alias = await adminDb().collection(ALIASES_COLLECTION).doc(username).get();
+    const target = alias.data()?.username as string | undefined;
+    if (target) {
+      finalName = target;
+      aff = await getAffiliate(target);
+    }
+  }
+  return aff ? { username: finalName, aff } : null;
 }
 
 /**

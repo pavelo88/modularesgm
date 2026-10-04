@@ -1,15 +1,26 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { CheckCircle2, Clock, Loader2, Wallet } from 'lucide-react';
+import { ArrowDownToLine, CheckCircle2, Clock, History, Loader2, Wallet, XCircle } from 'lucide-react';
 import { useAffiliateAccount } from '@/context/affiliate-session';
 import { requestWithdrawal } from '@/lib/affiliate-actions';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { EmptyState, PageHeader, StatCard, money, shortDate, useUserDocs } from '@/components/affiliates/portal-ui';
+import {
+  EmptyState,
+  PageHeader,
+  Segmented,
+  SectionTitle,
+  StatCard,
+  StatusPill,
+  TextField,
+  enter,
+  fieldLabel,
+  money,
+  shortDate,
+  surface,
+  useUserDocs,
+} from '@/components/affiliates/portal-ui';
+import { cn } from '@/lib/utils';
 
 interface Withdrawal {
   id: string;
@@ -21,7 +32,19 @@ interface Withdrawal {
 }
 
 const METHODS = ['Transferencia bancaria', 'PayPal', 'Efectivo en oficina'] as const;
-const STATUS_LABEL = { pending: 'En revisión', paid: 'Pagado', rejected: 'Rechazado' } as const;
+type Method = (typeof METHODS)[number];
+
+const STATUS = {
+  pending: { label: 'En revisión', tone: 'warn', icon: Clock },
+  paid: { label: 'Pagado', tone: 'success', icon: CheckCircle2 },
+  rejected: { label: 'Rechazado', tone: 'danger', icon: XCircle },
+} as const;
+
+const DETAIL_HINT: Record<Method, { label: string; placeholder: string }> = {
+  'Transferencia bancaria': { label: 'Datos de la cuenta', placeholder: 'Banco, tipo y número de cuenta, titular' },
+  PayPal: { label: 'Correo de PayPal', placeholder: 'tu-correo@ejemplo.com' },
+  'Efectivo en oficina': { label: 'Quién retira', placeholder: 'Nombre y cédula de quien retirará' },
+};
 
 export default function WithdrawalsPage() {
   const { affiliate, settings, user } = useAffiliateAccount();
@@ -29,7 +52,7 @@ export default function WithdrawalsPage() {
   const rows = useMemo(() => [...docs].sort((a, b) => b.createdAt.localeCompare(a.createdAt)), [docs]);
 
   const [amount, setAmount] = useState('');
-  const [method, setMethod] = useState<(typeof METHODS)[number]>('Transferencia bancaria');
+  const [method, setMethod] = useState<Method>('Transferencia bancaria');
   const [details, setDetails] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -57,61 +80,101 @@ export default function WithdrawalsPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Finanzas" title="Retiros" />
-      <div className="grid sm:grid-cols-2 gap-4 mb-8">
-        <StatCard tone="primary" icon={Wallet} label="Disponible para retirar" value={money(affiliate.availableBalance)} />
-        <StatCard icon={Clock} label="En revisión" value={money(affiliate.pendingBalance)} />
+      <PageHeader eyebrow="Finanzas" title="Retiros" subtitle={`Retira tus ganancias cuando quieras. El mínimo es ${money(settings.minWithdrawal)}.`} />
+
+      <div className="mb-6 grid gap-3 sm:grid-cols-2 md:mb-8 md:gap-4">
+        <StatCard tone="primary" delay={60} icon={Wallet} label="Disponible para retirar" value={money(affiliate.availableBalance)} />
+        <StatCard delay={100} icon={Clock} label="En revisión" value={money(affiliate.pendingBalance)} hint="Solicitudes pendientes de pago" />
       </div>
 
-      <div className="grid lg:grid-cols-5 gap-8">
-        <Card className="lg:col-span-2 p-6 rounded-2xl self-start">
-          <h2 className="font-bold mb-4">Solicitar retiro</h2>
+      <div className="grid items-start gap-6 lg:grid-cols-5">
+        <section style={{ animationDelay: '140ms' }} className={cn(surface, enter, 'min-w-0 p-5 md:p-6 lg:col-span-2')}>
+          <SectionTitle icon={ArrowDownToLine} title="Solicitar retiro" hint="Revisamos cada solicitud y te avisamos al pagarla." />
           <form onSubmit={submit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="w-amount">Monto (USD)</Label>
-              <Input id="w-amount" type="number" inputMode="decimal" min={settings.minWithdrawal} step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder={`Mínimo ${settings.minWithdrawal}`} required />
+            <TextField
+              label="Monto (USD)"
+              type="number"
+              inputMode="decimal"
+              min={settings.minWithdrawal}
+              step="0.01"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder={`Mínimo ${settings.minWithdrawal}`}
+              required
+            />
+            <div className="space-y-1.5">
+              <span className={fieldLabel}>Método</span>
+              <div>
+                <Segmented label="Método de pago" value={method} onChange={setMethod} options={METHODS.map((m) => ({ value: m, label: m.split(' ')[0] }))} />
+              </div>
+              <p className="text-xs text-muted-foreground">{method}</p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="w-method">Método</Label>
-              <select id="w-method" value={method} onChange={(e) => setMethod(e.target.value as (typeof METHODS)[number])} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm">
-                {METHODS.map((m) => <option key={m}>{m}</option>)}
-              </select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="w-details">Datos para el pago</Label>
-              <Input id="w-details" value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Banco, tipo y número de cuenta, titular" required />
-            </div>
-            {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
-            {sent && <p className="text-sm text-green-600 flex items-center gap-2"><CheckCircle2 size={16} /> Solicitud enviada. La revisaremos pronto.</p>}
-            <Button type="submit" className="w-full" disabled={busy}>
-              {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Solicitar retiro
+            <TextField
+              label={DETAIL_HINT[method].label}
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+              placeholder={DETAIL_HINT[method].placeholder}
+              required
+            />
+            {error && (
+              <p role="alert" className="rounded-xl bg-destructive/10 px-3.5 py-2.5 text-[13px] leading-snug text-destructive shadow-[inset_0_0_0_1px_hsl(var(--destructive)/0.25)]">
+                {error}
+              </p>
+            )}
+            {sent && (
+              <p role="status" className="flex items-center gap-2 rounded-xl bg-emerald-500/10 px-3.5 py-2.5 text-[13px] leading-snug text-emerald-700 shadow-[inset_0_0_0_1px_hsl(152_60%_40%/0.25)] dark:text-emerald-300">
+                <CheckCircle2 size={16} className="shrink-0" /> Solicitud enviada. La revisaremos pronto.
+              </p>
+            )}
+            <Button type="submit" className="h-11 w-full rounded-xl text-[15px] font-semibold" disabled={busy}>
+              {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {busy ? 'Enviando…' : 'Solicitar retiro'}
             </Button>
           </form>
-        </Card>
+        </section>
 
-        <Card className="lg:col-span-3 rounded-2xl overflow-hidden self-start">
-          <div className="p-5 border-b"><h2 className="font-bold">Historial</h2></div>
+        <section style={{ animationDelay: '180ms' }} className={cn(surface, enter, 'min-w-0 overflow-hidden lg:col-span-3')}>
+          <div className="flex items-center gap-2.5 px-5 py-4 shadow-[0_1px_0_hsl(var(--border)/0.7)]">
+            <History size={16} className="text-primary" />
+            <h2 className="font-semibold">Historial</h2>
+          </div>
           {loading ? (
-            <EmptyState>Cargando…</EmptyState>
+            <p className="px-5 py-12 text-center text-sm text-muted-foreground">Cargando…</p>
           ) : rows.length === 0 ? (
-            <EmptyState>Aún no has solicitado retiros.</EmptyState>
+            <EmptyState icon={ArrowDownToLine}>Aún no has solicitado retiros.</EmptyState>
           ) : (
-            <ul className="divide-y">
-              {rows.map((w) => (
-                <li key={w.id} className="flex items-center justify-between gap-4 p-4 text-sm">
-                  <div>
-                    <p className="font-medium">{w.method}</p>
-                    <p className="text-xs text-muted-foreground">{shortDate(w.createdAt)}{w.note ? ` · ${w.note}` : ''}</p>
-                  </div>
-                  <div className="text-right space-y-1">
-                    <p className="font-bold">{money(w.amountUsd)}</p>
-                    <Badge variant={w.status === 'paid' ? 'default' : w.status === 'rejected' ? 'destructive' : 'secondary'}>{STATUS_LABEL[w.status]}</Badge>
-                  </div>
-                </li>
-              ))}
+            <ul className="divide-y divide-border/60">
+              {rows.map((w) => {
+                const st = STATUS[w.status];
+                return (
+                  <li key={w.id} className="flex items-center gap-3 px-5 py-3.5 transition-colors duration-150 hover:bg-muted/40">
+                    <span
+                      className={cn(
+                        'grid h-9 w-9 shrink-0 place-items-center rounded-xl',
+                        w.status === 'paid' && 'bg-emerald-500/12 text-emerald-600 dark:text-emerald-400',
+                        w.status === 'pending' && 'bg-amber-500/14 text-amber-700 dark:text-amber-400',
+                        w.status === 'rejected' && 'bg-red-500/12 text-red-600 dark:text-red-400'
+                      )}
+                    >
+                      <st.icon size={17} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{w.method}</p>
+                      <p className="truncate text-xs text-muted-foreground">
+                        {shortDate(w.createdAt)}
+                        {w.note ? ` · ${w.note}` : ''}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <p className="text-sm font-bold tabular-nums">{money(w.amountUsd)}</p>
+                      <StatusPill tone={st.tone}>{st.label}</StatusPill>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
-        </Card>
+        </section>
       </div>
     </>
   );

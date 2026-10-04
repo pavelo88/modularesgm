@@ -74,6 +74,65 @@
   }
 }
 
+/* ═════════════════════════════════════════════════════════════════════════════
+   PORTAL DE AFILIADOS — paleta propia (claro y oscuro)
+   Se aplica en el contenedor `.portal-scope` (primer pintado, sin parpadeo) y en
+   `html.portal-theme` mientras el portal está abierto, para que diálogos y avisos
+   (que se pintan fuera del contenedor) usen los mismos colores.
+   Oscuro: tinta azulada + dorado champán. Claro: papel cálido + ámbar profundo.
+   ═════════════════════════════════════════════════════════════════════════════ */
+@layer base {
+  html.portal-theme,
+  .portal-scope {
+    --background: 40 30% 96%;
+    --foreground: 224 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 30% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 30% 12%;
+    --primary: 33 84% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 183 55% 26%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 38 22% 92%;
+    --muted-foreground: 224 9% 40%;
+    --accent: 38 22% 92%;
+    --accent-foreground: 224 30% 12%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 36 16% 84%;
+    --input: 36 16% 84%;
+    --ring: 33 84% 33%;
+    --portal-shadow: 0 14px 34px -24px rgb(40 30 10 / 0.35);
+    --portal-glow: 33 84% 33%;
+  }
+
+  html.portal-theme.dark,
+  .dark .portal-scope {
+    --background: 224 28% 8%;
+    --foreground: 40 28% 94%;
+    --card: 224 24% 12%;
+    --card-foreground: 40 28% 94%;
+    --popover: 224 24% 13%;
+    --popover-foreground: 40 28% 94%;
+    --primary: 41 72% 58%;
+    --primary-foreground: 224 32% 8%;
+    --secondary: 178 52% 44%;
+    --secondary-foreground: 224 32% 8%;
+    --muted: 224 20% 16%;
+    --muted-foreground: 223 11% 66%;
+    --accent: 224 20% 17%;
+    --accent-foreground: 40 28% 94%;
+    --destructive: 0 78% 64%;
+    --destructive-foreground: 224 32% 8%;
+    --border: 224 18% 21%;
+    --input: 224 18% 21%;
+    --ring: 41 72% 58%;
+    --portal-shadow: 0 16px 40px -26px rgb(0 0 0 / 0.75);
+    --portal-glow: 41 72% 58%;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

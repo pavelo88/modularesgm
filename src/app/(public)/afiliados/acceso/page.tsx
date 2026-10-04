@@ -28,6 +28,8 @@ import {
   ShieldCheck,
   CreditCard,
   Phone,
+  Loader2,
+  Users,
 } from 'lucide-react';
 import {
   isUsernameAvailable,
@@ -38,8 +40,13 @@ import {
 import { normalizeUsername } from '@/lib/affiliate-core';
 import { REF_STORAGE_KEY } from '@/context/affiliate-provider';
 import { PasswordSetupDialog } from '@/components/affiliates/password-setup-dialog';
+import { Segmented, enter, fieldClass, fieldLabel, surface } from '@/components/affiliates/portal-ui';
+import { ThemeToggle, usePortalTheme } from '@/components/affiliates/portal-theme';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 function AffiliatesAuthContent() {
+  usePortalTheme();
   const router = useRouter();
 
   // Tabs: 'login' | 'register' | 'forgot'
@@ -359,232 +366,215 @@ function AffiliatesAuthContent() {
     }
   };
 
+  const clearMessages = () => {
+    setErrorMsg('');
+    setSuccessMsg('');
+  };
+
   return (
-    <div className="min-h-screen bg-[#0B131E] text-zinc-100 flex flex-col justify-between selection:bg-amber-500 selection:text-black relative overflow-hidden font-sans">
-      
-      {/* Ambient background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/10 blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[300px] bg-slate-700/20 blur-[120px] pointer-events-none rounded-full" />
+    <div className="portal-scope relative flex min-h-screen flex-col overflow-x-clip bg-background text-foreground antialiased">
+      {/* Luz ambiental */}
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[-12rem] h-[26rem] w-[52rem] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 h-80 w-80 rounded-full bg-secondary/10 blur-[110px]" />
 
-      {/* Top Header */}
-      <header className="p-6 flex items-center justify-between max-w-6xl mx-auto w-full z-10">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/10">
-            <div className="w-full h-full bg-[#0F172A] rounded-[14px] flex items-center justify-center">
-              <Image src="/logo.png" alt="Modulares GM" width={24} height={24} className="object-contain" priority />
-            </div>
-          </div>
-          <div>
-            <span className="font-bold text-lg tracking-tight text-white block">
-              MODULARES GM <span className="text-amber-400 font-normal">AFILIADOS</span>
-            </span>
-            <span className="text-[10px] text-zinc-400 uppercase tracking-widest block">
-              Portal Oficial de Afiliación & Ventas
-            </span>
-          </div>
+      {/* Encabezado */}
+      <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
+        <Link href="/" className="flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Image src="/logo.png" alt="Modulares GM" width={40} height={40} className="h-10 w-10 object-contain" priority />
+          <span className="leading-tight">
+            <span className="block text-sm font-bold tracking-tight">Modulares GM</span>
+            <span className="block text-[11px] text-muted-foreground">Programa de afiliados</span>
+          </span>
         </Link>
-
-        <Link
-          href="/"
-          className="text-xs text-zinc-400 hover:text-amber-400 transition-colors uppercase tracking-wider font-semibold"
-        >
-          ← Volver al Sitio
-        </Link>
+        <div className="flex items-center gap-1">
+          <Link
+            href="/"
+            className="rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-[background-color,color,transform] duration-150 hover:bg-muted hover:text-foreground active:scale-95"
+          >
+            ← Volver al sitio
+          </Link>
+          <ThemeToggle />
+        </div>
       </header>
 
-      {/* Main Card */}
-      <main className="flex-1 flex items-center justify-center p-4 z-10">
-        <div className="w-full max-w-md bg-[#131E2B]/80 backdrop-blur-2xl border border-[#233549] rounded-[32px] p-8 sm:p-10 shadow-2xl shadow-slate-950/60 space-y-6">
-          
-          {/* Brand Icon Header */}
-          <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto p-2.5 shadow-lg shadow-amber-500/10">
-              <Image src="/logo.png" alt="Modulares GM Icon" width={36} height={36} className="object-contain" />
-            </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">
-              {tab === 'login' && 'Acceso de Afiliados'}
-              {tab === 'register' && 'Únete como Afiliado'}
-              {tab === 'forgot' && 'Recuperar Contraseña'}
+      {/* Tarjeta principal */}
+      <main className="relative z-10 flex flex-1 items-center justify-center px-4 pb-10 pt-2">
+        <div className={cn(surface, enter, 'w-full max-w-[26rem] p-6 sm:p-8')}>
+          <div className="text-center">
+            <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-primary/12 shadow-[inset_0_0_0_1px_hsl(var(--primary)/0.25)]">
+              <Image src="/logo.png" alt="" width={34} height={34} className="object-contain" />
+            </span>
+            <h1 className="mt-4 font-headline text-[1.7rem] font-bold leading-tight tracking-tight">
+              {tab === 'login' && 'Acceso de afiliados'}
+              {tab === 'register' && 'Únete como afiliado'}
+              {tab === 'forgot' && 'Recuperar contraseña'}
             </h1>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              {tab === 'login' && 'Ingresa tus credenciales para acceder a tu panel y comisiones.'}
-              {tab === 'register' && 'Sin contraseña inicial. Tu cédula será tu clave temporal.'}
-              {tab === 'forgot' && 'Te enviaremos un enlace seguro a tu correo verificado.'}
+            <p className="mx-auto mt-1.5 max-w-[19rem] text-[13px] leading-relaxed text-muted-foreground">
+              {tab === 'login' && 'Entra a tu panel para ver tus ventas, tu red y tus comisiones.'}
+              {tab === 'register' && 'Sin contraseña inicial: tu cédula será tu clave temporal.'}
+              {tab === 'forgot' && 'Te enviaremos un enlace seguro a tu correo.'}
             </p>
           </div>
 
-          {/* Tab Selector Buttons */}
           {tab !== 'forgot' && (
-            <div className="flex rounded-2xl bg-black/40 p-1 border border-zinc-800 text-xs font-semibold">
-              <button
-                type="button"
-                onClick={() => { setTab('login'); setErrorMsg(''); setSuccessMsg(''); }}
-                className={`flex-1 py-2.5 rounded-xl transition-all ${
-                  tab === 'login'
-                    ? 'bg-amber-500 text-black shadow-md font-bold'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Iniciar Sesión
-              </button>
-              <button
-                type="button"
-                onClick={() => { setTab('register'); setErrorMsg(''); setSuccessMsg(''); }}
-                className={`flex-1 py-2.5 rounded-xl transition-all ${
-                  tab === 'register'
-                    ? 'bg-amber-500 text-black shadow-md font-bold'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Crear Cuenta
-              </button>
+            <div className="mt-6 [&>div]:flex [&>div]:w-full [&>div>button]:flex-1 [&>div>button]:py-2.5">
+              <Segmented
+                label="Iniciar sesión o crear cuenta"
+                value={tab}
+                onChange={(v) => {
+                  setTab(v as 'login' | 'register');
+                  clearMessages();
+                }}
+                options={[
+                  { value: 'login', label: 'Iniciar sesión' },
+                  { value: 'register', label: 'Crear cuenta' },
+                ]}
+              />
             </div>
           )}
 
-          {/* Feedback messages */}
+          {/* Mensajes */}
           {errorMsg && (
-            <div className="p-3.5 rounded-xl bg-rose-950/50 border border-rose-600/40 text-rose-300 text-xs flex items-start gap-2 animate-in fade-in">
-              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+            <p
+              role="alert"
+              className="mt-5 flex items-start gap-2.5 rounded-xl bg-destructive/10 px-3.5 py-3 text-[13px] leading-snug text-destructive shadow-[inset_0_0_0_1px_hsl(var(--destructive)/0.25)] animate-in fade-in-0 duration-200"
+            >
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{errorMsg}</span>
-            </div>
+            </p>
           )}
-
           {successMsg && (
-            <div className="p-3.5 rounded-xl bg-emerald-950/50 border border-emerald-600/40 text-emerald-300 text-xs flex items-start gap-2 animate-in fade-in">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+            <p
+              role="status"
+              className="mt-5 flex items-start gap-2.5 rounded-xl bg-emerald-500/10 px-3.5 py-3 text-[13px] leading-snug text-emerald-700 shadow-[inset_0_0_0_1px_hsl(152_60%_40%/0.25)] animate-in fade-in-0 duration-200 dark:text-emerald-300"
+            >
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{successMsg}</span>
-            </div>
+            </p>
           )}
 
-          {/* ── TAB 1: LOGIN FORM ────────────────────────────────────────── */}
+          {/* ── Iniciar sesión ── */}
           {tab === 'login' && (
-            <form onSubmit={handleLogin} className="space-y-4 text-xs">
+            <form onSubmit={handleLogin} className="mt-6 space-y-4">
               <div className="space-y-1.5">
-                <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Correo Electrónico (o Usuario) *</span>
+                <label htmlFor="login-user" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                  <Mail size={13} className="text-primary" /> Correo o usuario
                 </label>
                 <input
+                  id="login-user"
                   type="text"
                   required
                   name="username"
                   autoComplete="username"
                   value={loginEmailOrUser}
                   onChange={(e) => setLoginEmailOrUser(e.target.value)}
-                  placeholder="ej: correo@ejemplo.com o tu_usuario"
-                  className="w-full px-4 py-3 bg-black/40 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400"
+                  placeholder="correo@ejemplo.com o tu_usuario"
+                  className={fieldClass}
                 />
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                    <Lock className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Contraseña o Cédula *</span>
+                <div className="flex items-center justify-between gap-2">
+                  <label htmlFor="login-pass" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                    <Lock size={13} className="text-primary" /> Contraseña
                   </label>
                   <button
                     type="button"
-                    onClick={() => { setTab('forgot'); setErrorMsg(''); setSuccessMsg(''); }}
-                    className="text-[11px] text-amber-400/90 hover:text-amber-300 underline font-semibold transition-colors cursor-pointer"
+                    onClick={() => {
+                      setTab('forgot');
+                      clearMessages();
+                    }}
+                    className="rounded text-xs font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     ¿Olvidaste tu contraseña?
                   </button>
                 </div>
-
                 <div className="relative">
                   <input
+                    id="login-pass"
                     type={showLoginPassword ? 'text' : 'password'}
                     required
                     name="password"
                     autoComplete="current-password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    placeholder="Tu contraseña (o cédula si es tu 1er ingreso)"
-                    className="w-full px-4 py-3 bg-black/40 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400 pr-10"
+                    placeholder="Tu contraseña"
+                    className={cn(fieldClass, 'pr-11')}
                   />
                   <button
                     type="button"
                     onClick={() => setShowLoginPassword(!showLoginPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                    aria-label={showLoginPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                    className="absolute right-0.5 top-0.5 grid h-10 w-10 place-items-center rounded-lg text-muted-foreground transition-[color,transform] duration-150 hover:text-foreground active:scale-95"
                   >
-                    {showLoginPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    {showLoginPassword ? <EyeOff size={17} /> : <Eye size={17} />}
                   </button>
                 </div>
-                <span className="text-[10px] text-zinc-500 block">
-                  💡 Nota: Si aún no has cambiado tu contraseña, tu clave de acceso es tu Cédula.
-                </span>
+                <p className="text-xs leading-relaxed text-muted-foreground">Si aún no la cambiaste, tu clave de acceso es tu cédula.</p>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold uppercase tracking-wider text-xs shadow-lg shadow-amber-500/20 transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-2"
-              >
-                {loading ? (
-                  <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <>
-                    <span>Entrar a mi Panel</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
+              <Button type="submit" disabled={loading} className="h-12 w-full rounded-xl text-[15px] font-semibold">
+                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <>Entrar a mi panel <ArrowRight size={17} className="ml-2" /></>}
+              </Button>
             </form>
           )}
 
-          {/* ── TAB 2: REGISTER FORM ────────────────────────────────────────── */}
+          {/* ── Crear cuenta ── */}
           {tab === 'register' && (
-            <form onSubmit={handleRegister} className="space-y-3.5 text-xs">
-              {/* 1. Nombre Completo */}
-              <div className="space-y-1">
-                <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Nombre Completo *</span>
+            <form onSubmit={handleRegister} className="mt-6 space-y-4">
+              {regSponsor && (
+                <p className="flex items-center gap-2 rounded-xl bg-primary/10 px-3.5 py-2.5 text-[13px] text-primary shadow-[inset_0_0_0_1px_hsl(var(--primary)/0.25)]">
+                  <Users size={15} className="shrink-0" /> Te invitó <strong className="font-semibold">@{normalizeUsername(regSponsor)}</strong>
+                </p>
+              )}
+
+              <div className="space-y-1.5">
+                <label htmlFor="reg-name" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                  <User size={13} className="text-primary" /> Nombre completo
                 </label>
                 <input
+                  id="reg-name"
                   type="text"
                   required
                   name="name"
                   autoComplete="name"
                   value={regFullName}
                   onChange={(e) => setRegFullName(e.target.value)}
-                  placeholder="ej: Maria Lopez"
-                  className="w-full px-3.5 py-2.5 bg-black/40 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400"
+                  placeholder="María López"
+                  className={fieldClass}
                 />
               </div>
 
-              {/* 2. Correo Electrónico */}
-              <div className="space-y-1">
-                <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Correo Electrónico *</span>
+              <div className="space-y-1.5">
+                <label htmlFor="reg-email" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                  <Mail size={13} className="text-primary" /> Correo electrónico
                 </label>
                 <input
+                  id="reg-email"
                   type="email"
                   required
                   name="email"
                   autoComplete="email"
                   value={regEmail}
                   onChange={(e) => handleEmailChange(e.target.value)}
-                  placeholder="ej: tu_correo@gmail.com"
-                  className="w-full px-3.5 py-2.5 bg-black/40 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400"
+                  placeholder="tu_correo@gmail.com"
+                  className={fieldClass}
                 />
               </div>
 
-              {/* 3. Usuario Único */}
-              <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                    <AtSign className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Usuario Único (tu código) *</span>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <label htmlFor="reg-user" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                    <AtSign size={13} className="text-primary" /> Tu usuario (será tu código)
                   </label>
-                  {usernameStatus === 'checking' && <span className="text-[10px] text-zinc-500">Comprobando...</span>}
-                  {usernameStatus === 'available' && <span className="text-[10px] text-emerald-400 font-bold">✓ Disponible</span>}
-                  {usernameStatus === 'taken' && <span className="text-[10px] text-rose-400 font-bold">✕ En uso</span>}
+                  {usernameStatus === 'checking' && <span className="text-[11px] text-muted-foreground">Comprobando…</span>}
+                  {usernameStatus === 'available' && <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">✓ Disponible</span>}
+                  {usernameStatus === 'taken' && <span className="text-[11px] font-semibold text-destructive">✕ En uso</span>}
                 </div>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 font-mono">@</span>
+                  <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-sm text-muted-foreground">@</span>
                   <input
+                    id="reg-user"
                     type="text"
                     required
                     name="username"
@@ -596,96 +586,101 @@ function AffiliatesAuthContent() {
                       checkUsername(val);
                     }}
                     placeholder="maria.lopez"
-                    className="w-full pl-8 pr-3.5 py-2.5 bg-black/40 border border-zinc-700 rounded-xl text-white font-mono placeholder:text-zinc-600 focus:outline-none focus:border-amber-400"
+                    className={cn(
+                      fieldClass,
+                      'pl-8 font-mono',
+                      usernameStatus === 'taken' && 'shadow-[0_0_0_1px_hsl(var(--destructive))] focus:shadow-[0_0_0_2px_hsl(var(--destructive))]',
+                      usernameStatus === 'available' && 'shadow-[0_0_0_1px_hsl(152_60%_40%/0.8)] focus:shadow-[0_0_0_2px_hsl(152_60%_40%)]'
+                    )}
                   />
                 </div>
               </div>
 
-              {/* 4. Cédula */}
-              <div className="space-y-1">
-                <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <CreditCard className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Cédula *</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  name="cedula"
-                  autoComplete="off"
-                  value={regCedula}
-                  onChange={(e) => setRegCedula(e.target.value)}
-                  placeholder="172179..."
-                  className="w-full px-3.5 py-2.5 bg-black/40 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400"
-                />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-1.5">
+                  <label htmlFor="reg-id" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                    <CreditCard size={13} className="text-primary" /> Cédula
+                  </label>
+                  <input
+                    id="reg-id"
+                    type="text"
+                    required
+                    name="cedula"
+                    autoComplete="off"
+                    inputMode="numeric"
+                    value={regCedula}
+                    onChange={(e) => setRegCedula(e.target.value)}
+                    placeholder="172179…"
+                    className={fieldClass}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label htmlFor="reg-phone" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                    <Phone size={13} className="text-primary" /> Teléfono <span className="normal-case tracking-normal opacity-70">(opcional)</span>
+                  </label>
+                  <input
+                    id="reg-phone"
+                    type="tel"
+                    name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    value={regPhone}
+                    onChange={(e) => setRegPhone(e.target.value)}
+                    placeholder="099 123 4567"
+                    className={fieldClass}
+                  />
+                </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold uppercase tracking-wider text-xs shadow-lg shadow-amber-500/20 transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-3"
-              >
-                {loading ? (
-                  <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <span>CREAR MI CUENTA AHORA</span>
-                )}
-              </button>
+              <Button type="submit" disabled={loading} className="h-12 w-full rounded-xl text-[15px] font-semibold">
+                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Crear mi cuenta'}
+              </Button>
+              <p className="text-center text-xs leading-relaxed text-muted-foreground">
+                Al crear tu cuenta aceptas recibir comunicaciones sobre tus comisiones y tu red.
+              </p>
             </form>
           )}
 
-          {/* ── TAB 3: FORGOT PASSWORD ───────────────────────────────────── */}
+          {/* ── Recuperar contraseña ── */}
           {tab === 'forgot' && (
-            <form onSubmit={handleResetPassword} className="space-y-4 text-xs">
+            <form onSubmit={handleResetPassword} className="mt-6 space-y-4">
               <div className="space-y-1.5">
-                <label className="font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Correo Electrónico Registrado *</span>
+                <label htmlFor="forgot-email" className={cn(fieldLabel, 'flex items-center gap-1.5')}>
+                  <Mail size={13} className="text-primary" /> Correo registrado
                 </label>
                 <input
+                  id="forgot-email"
                   type="email"
                   required
                   name="email"
                   autoComplete="email"
                   value={forgotEmail}
                   onChange={(e) => setForgotEmail(e.target.value)}
-                  placeholder="ej: tu_correo@gmail.com"
-                  className="w-full px-4 py-3 bg-black/40 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400"
+                  placeholder="tu_correo@gmail.com"
+                  className={fieldClass}
                 />
               </div>
-
-              <div className="flex items-center justify-between pt-2">
-                <button
-                  type="button"
-                  onClick={() => { setTab('login'); setErrorMsg(''); setSuccessMsg(''); }}
-                  className="text-zinc-400 hover:text-white underline cursor-pointer"
-                >
-                  ← Volver al Login
-                </button>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold uppercase tracking-wider text-xs shadow-lg shadow-amber-500/20 transition-all disabled:opacity-50 cursor-pointer"
-                >
-                  {loading ? (
-                    <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <span>Enviar Enlace</span>
-                  )}
-                </button>
-              </div>
+              <Button type="submit" disabled={loading} className="h-12 w-full rounded-xl text-[15px] font-semibold">
+                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Enviar enlace'}
+              </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  setTab('login');
+                  clearMessages();
+                }}
+                className="mx-auto block rounded text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                ← Volver a iniciar sesión
+              </button>
             </form>
           )}
-
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="p-6 text-center text-[10px] text-zinc-500 z-10">
-        © 2026 Modulares GM. Todos los derechos reservados.
-      </footer>
+      <footer className="relative z-10 px-4 pb-6 text-center text-[11px] text-muted-foreground">© 2026 Modulares GM. Todos los derechos reservados.</footer>
 
-      {/* MODAL DE PRIMER CAMBIO DE CLAVE */}
+      {/* Primer cambio de clave */}
       <PasswordSetupDialog
         open={showForcePasswordModal}
         onDone={() => {
@@ -693,7 +688,6 @@ function AffiliatesAuthContent() {
           router.replace('/afiliados/portal');
         }}
       />
-
     </div>
   );
 }
@@ -702,8 +696,8 @@ export default function AffiliateAccessPage() {
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-screen bg-[#0B131E] flex items-center justify-center">
-          <div className="w-10 h-10 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+        <div className="portal-scope grid min-h-screen place-items-center bg-background">
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
         </div>
       }
     >

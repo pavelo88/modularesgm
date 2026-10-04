@@ -11,6 +11,8 @@ export const COMMISSIONS_COLLECTION = 'affiliate_commissions';
 export const WITHDRAWALS_COLLECTION = 'affiliate_withdrawals';
 export const CLICKS_COLLECTION = 'affiliateClicks';
 export const USER_INDEX_COLLECTION = 'userIndex';
+/** Usuarios anteriores -> usuario actual: los enlaces viejos siguen funcionando y nadie más puede reclamar ese nombre. */
+export const ALIASES_COLLECTION = 'affiliate_aliases';
 export const SETTINGS_PATH = ['siteContent', 'affiliate'] as const;
 
 /** Usuario raíz: recibe las ventas orgánicas (sin enlace) y los bonos sin beneficiario. */
@@ -68,6 +70,9 @@ export interface AffiliateAccount {
   forcePasswordChange: boolean;
   authUid: string;
   createdAt: string;
+  /** Fecha en que cambió su usuario. El cambio solo se permite una vez. */
+  usernameChangedAt?: string;
+  previousUsername?: string;
 }
 
 export interface Payout {

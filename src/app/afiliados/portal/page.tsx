@@ -1,13 +1,25 @@
 'use client';
 
-import { MousePointerClick, PiggyBank, ShoppingBag, TrendingUp, Users, Wallet } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowUpRight, Award, Link2, MessageCircle, MousePointerClick, PiggyBank, Share2, ShoppingBag, TrendingUp, Users, Wallet } from 'lucide-react';
 import { useAffiliateAccount } from '@/context/affiliate-session';
 import { buildAffiliateLink } from '@/lib/affiliate-core';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { CopyButton, EmptyState, PageHeader, StatCard, money, shortDate, useClickCount, useUserDocs } from '@/components/affiliates/portal-ui';
+import {
+  CopyButton,
+  Initials,
+  LinkField,
+  PageHeader,
+  StatCard,
+  StatusPill,
+  enter,
+  money,
+  shortDate,
+  surface,
+  useClickCount,
+  useUserDocs,
+} from '@/components/affiliates/portal-ui';
+import { cn } from '@/lib/utils';
 
 interface Commission {
   id: string;
@@ -31,62 +43,149 @@ export default function PortalDashboardPage() {
     `Cocinas, clósets y muebles a medida con Modulares GM. Compra con mi enlace y obtén ${settings.customerDiscount}% de descuento: ${link}`
   )}`;
 
+  const steps = [
+    { icon: Link2, title: 'Copia tu enlace', text: 'Es único y lleva tu usuario: todo lo que se compre con él cuenta para ti.' },
+    { icon: Share2, title: 'Compártelo', text: 'WhatsApp, redes, correo o en persona. Hay textos listos en Recursos.' },
+    { icon: PiggyBank, title: 'Gana por cada venta', text: `Recibes ${settings.sellerRate}% de cada venta pagada, y más por tu red.` },
+  ];
+
   return (
     <>
-      <PageHeader eyebrow="Resumen" title={`Hola, ${affiliate.name.split(' ')[0]}`}>
-        <Badge variant="outline" className="text-xs">{affiliate.rank}</Badge>
+      <PageHeader
+        eyebrow="Resumen"
+        title={`Hola, ${affiliate.name.split(' ')[0]}`}
+        subtitle="Así va tu negocio hoy. Comparte tu enlace y gana por cada venta."
+      >
+        <StatusPill tone="brand" icon={Award} className="px-3 py-1 text-xs">
+          {affiliate.rank}
+        </StatusPill>
       </PageHeader>
 
-      <Card className="p-6 md:p-8 rounded-3xl mb-8 bg-primary text-primary-foreground">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] opacity-80">Tu enlace personal</p>
-        <p className="mt-3 font-mono text-sm md:text-base break-all rounded-xl bg-primary-foreground/10 px-4 py-3">{link}</p>
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <CopyButton text={link} label="Copiar enlace" variant="secondary" />
-          <CopyButton text={affiliate.username} label={`Copiar código · ${affiliate.username}`} variant="secondary" />
-          <Button asChild size="sm" variant="secondary">
-            <a href={whatsapp} target="_blank" rel="noopener noreferrer">Compartir por WhatsApp</a>
-          </Button>
-        </div>
-        <p className="mt-4 text-sm opacity-90">
-          Tus clientes reciben {settings.customerDiscount}% de descuento y tú ganas {settings.sellerRate}% de cada venta pagada.
-        </p>
-      </Card>
+      {/* ───────── Enlace personal ───────── */}
+      <section style={{ animationDelay: '60ms' }} className={cn(surface, enter, 'relative mb-6 overflow-hidden p-5 md:mb-8 md:p-8')}>
+        <div aria-hidden className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-32 -left-20 h-64 w-64 rounded-full bg-secondary/10 blur-3xl" />
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <StatCard tone="primary" icon={Wallet} label="Disponible para retirar" value={money(affiliate.availableBalance)} hint={affiliate.pendingBalance ? `${money(affiliate.pendingBalance)} en proceso de retiro` : undefined} />
-        <StatCard icon={PiggyBank} label="Ganancias totales" value={money(affiliate.totalEarnings)} />
-        <StatCard icon={ShoppingBag} label="Ventas propias" value={String(affiliate.salesCount)} hint={`Volumen personal ${money(affiliate.monthlyVolume)}`} />
-        <StatCard icon={MousePointerClick} label="Clics en tu enlace" value={String(clicks)} hint={`Conversión ${conversion}%`} />
-        <StatCard icon={Users} label="Volumen de tu red" value={money(affiliate.networkVolume)} />
-        <StatCard icon={TrendingUp} label="Rango" value={affiliate.rank} />
+        <div className="relative">
+          <div className="flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary/12 text-primary shadow-[inset_0_0_0_1px_hsl(var(--primary)/0.22)]">
+              <Link2 size={16} />
+            </span>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Tu enlace personal</p>
+          </div>
+
+          <div className="mt-4">
+            <LinkField value={link} />
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-2">
+            <CopyButton text={affiliate.username} label={`Código · ${affiliate.username}`} variant="outline" className="w-full sm:w-auto" />
+            <Button asChild variant="outline" className="h-10 w-full rounded-xl px-4 font-medium sm:w-auto">
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={15} className="mr-2 text-emerald-600 dark:text-emerald-400" /> Compartir por WhatsApp
+              </a>
+            </Button>
+          </div>
+
+          <ul className="mt-5 flex flex-wrap gap-2">
+            <li>
+              <StatusPill tone="success">Tu cliente recibe {settings.customerDiscount}% de descuento</StatusPill>
+            </li>
+            {settings.transferDiscount > 0 && (
+              <li>
+                <StatusPill tone="warn">+{settings.transferDiscount}% extra si paga por transferencia</StatusPill>
+              </li>
+            )}
+            <li>
+              <StatusPill tone="brand">Tú ganas {settings.sellerRate}% por venta</StatusPill>
+            </li>
+            <li>
+              <StatusPill>
+                +{settings.parentRate}% y +{settings.grandparentRate}% por tu red
+              </StatusPill>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ───────── Métricas ───────── */}
+      <div className="mb-6 grid grid-cols-2 gap-3 md:mb-8 md:gap-4 lg:grid-cols-3">
+        <StatCard
+          tone="primary"
+          delay={100}
+          className="col-span-2 lg:col-span-1"
+          icon={Wallet}
+          label="Disponible para retirar"
+          value={money(affiliate.availableBalance)}
+          hint={affiliate.pendingBalance ? `${money(affiliate.pendingBalance)} en proceso de retiro` : undefined}
+          action={
+            <Link
+              href="/afiliados/portal/retiros"
+              className="flex items-center gap-1 rounded-lg bg-primary px-2.5 py-1.5 text-xs font-semibold text-primary-foreground transition-[transform,filter] duration-150 hover:brightness-110 active:scale-95"
+            >
+              Retirar <ArrowUpRight size={13} />
+            </Link>
+          }
+        />
+        <StatCard delay={140} icon={PiggyBank} label="Ganancias totales" value={money(affiliate.totalEarnings)} />
+        <StatCard delay={180} icon={ShoppingBag} label="Ventas propias" value={String(affiliate.salesCount)} hint={`Volumen personal ${money(affiliate.monthlyVolume)}`} />
+        <StatCard delay={220} icon={MousePointerClick} label="Clics en tu enlace" value={String(clicks)} hint={`Conversión ${conversion}%`} />
+        <StatCard delay={260} icon={Users} label="Volumen de tu red" value={money(affiliate.networkVolume)} />
+        <StatCard delay={300} icon={TrendingUp} label="Rango" value={affiliate.rank} className="col-span-2 lg:col-span-1" />
       </div>
 
-      <Card className="rounded-2xl overflow-hidden">
-        <div className="p-5 border-b flex items-center justify-between">
-          <h2 className="font-bold">Últimas comisiones</h2>
-          <Button asChild variant="link" size="sm"><Link href="/afiliados/portal/ganancias">Ver todas</Link></Button>
+      {/* ───────── Últimas comisiones ───────── */}
+      <section style={{ animationDelay: '340ms' }} className={cn(surface, enter, 'overflow-hidden')}>
+        <div className="flex items-center justify-between gap-3 px-5 py-4 shadow-[0_1px_0_hsl(var(--border)/0.7)]">
+          <h2 className="font-semibold">Últimas comisiones</h2>
+          <Link href="/afiliados/portal/ganancias" className="flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+            Ver todas <ArrowUpRight size={14} />
+          </Link>
         </div>
+
         {loading ? (
-          <EmptyState>Cargando…</EmptyState>
+          <p className="px-5 py-10 text-center text-sm text-muted-foreground">Cargando…</p>
         ) : recent.length === 0 ? (
-          <EmptyState>Aún no tienes comisiones. Comparte tu enlace para empezar.</EmptyState>
+          <div className="p-5">
+            <p className="mb-4 text-sm text-muted-foreground">Aún no tienes comisiones. Así empiezas:</p>
+            <ol className="grid gap-3 sm:grid-cols-3">
+              {steps.map((s, i) => (
+                <li key={s.title} className="rounded-xl bg-muted/50 p-4 shadow-[inset_0_0_0_1px_hsl(var(--border)/0.6)]">
+                  <div className="flex items-center gap-2.5">
+                    <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary/12 text-primary">
+                      <s.icon size={16} />
+                    </span>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Paso {i + 1}</span>
+                  </div>
+                  <p className="mt-3 text-sm font-semibold">{s.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         ) : (
-          <ul className="divide-y">
+          <ul className="divide-y divide-border/60">
             {recent.map((c) => (
-              <li key={c.id} className="flex items-center justify-between gap-4 p-4 text-sm">
-                <div>
-                  <p className="font-medium">{c.role}</p>
-                  <p className="text-xs text-muted-foreground">{shortDate(c.createdAt)}{c.customerFirstName ? ` · ${c.customerFirstName}` : ''}</p>
+              <li key={c.id} className="flex items-center gap-3 px-5 py-3.5 transition-colors duration-150 hover:bg-muted/40">
+                <Initials name={c.customerFirstName || 'Venta'} size={36} />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium">{c.role}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {shortDate(c.createdAt)}
+                    {c.customerFirstName ? ` · ${c.customerFirstName}` : ''}
+                  </p>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold">{money(c.commissionAmount)}</p>
-                  {c.status === 'reversed' && <Badge variant="destructive" className="text-[10px]">Revertida</Badge>}
+                <div className="flex flex-col items-end gap-1">
+                  <p className={cn('text-sm font-bold tabular-nums', c.status === 'credited' ? 'text-emerald-600 dark:text-emerald-400' : 'text-muted-foreground line-through')}>
+                    +{money(c.commissionAmount)}
+                  </p>
+                  {c.status === 'reversed' && <StatusPill tone="danger">Revertida</StatusPill>}
                 </div>
               </li>
             ))}
           </ul>
         )}
-      </Card>
+      </section>
     </>
   );
 }

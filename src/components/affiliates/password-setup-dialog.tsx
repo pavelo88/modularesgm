@@ -115,7 +115,7 @@ export function StrengthMeter({ value }: { value: string }) {
           return (
             <li
               key={r.id}
-              className={cn('flex items-center gap-1.5 text-[11px] transition-colors duration-150', ok ? 'text-emerald-400' : 'text-muted-foreground')}
+              className={cn('flex items-center gap-1.5 text-[11px] transition-colors duration-150', ok ? 'text-emerald-600 dark:text-emerald-400' : 'text-muted-foreground')}
             >
               <Check size={12} strokeWidth={3} className={cn('transition-opacity duration-150', ok ? 'opacity-100' : 'opacity-30')} />
               {r.label}
@@ -202,7 +202,7 @@ export function PasswordSetupDialog({ open, user, askCurrent = false, onDone }: 
 
         {done ? (
           <div className="grid place-items-center px-7 pb-9 pt-5">
-            <span className="grid h-14 w-14 place-items-center rounded-full bg-emerald-500/15 text-emerald-400 animate-in zoom-in-75 fade-in-0 duration-300 motion-reduce:animate-none">
+            <span className="grid h-14 w-14 place-items-center rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 animate-in zoom-in-75 fade-in-0 duration-300 motion-reduce:animate-none">
               <Check size={28} strokeWidth={2.5} />
             </span>
           </div>

@@ -22,7 +22,7 @@ interface SessionValue {
   settings: AffiliateSettings;
 }
 
-const SessionContext = createContext<SessionValue | undefined>(undefined);
+export const SessionContext = createContext<SessionValue | undefined>(undefined);
 
 export function AffiliateSessionProvider({ children }: { children: React.ReactNode }) {
   const [value, setValue] = useState<SessionValue>({

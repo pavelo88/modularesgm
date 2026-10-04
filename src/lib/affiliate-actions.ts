@@ -4,9 +4,10 @@ import { z } from 'zod';
 import { FieldValue } from 'firebase-admin/firestore';
 import { adminAuth, adminDb } from '@/lib/firebase-admin';
 import { requireAdmin } from '@/lib/admin-session';
-import { applyGlobalPools, getAffiliate, getSettings, planGlobalPools } from '@/lib/affiliate-server';
+import { applyGlobalPools, getAffiliate, getSettings, planGlobalPools, resolveAffiliateCode } from '@/lib/affiliate-server';
 import {
   AFFILIATES_COLLECTION,
+  ALIASES_COLLECTION,
   CLICKS_COLLECTION,
   COMMISSIONS_COLLECTION,
   ROOT_USERNAME,
@@ -31,10 +32,10 @@ async function verifyAffiliateToken(idToken: string) {
 
 /** Valida un código de referido y (opcionalmente) registra el clic. Nunca revela comisiones. */
 export async function validateReferral(rawCode: string, trackClick: boolean) {
-  const username = normalizeUsername(rawCode || '');
-  if (!username) return { valid: false as const };
-  const aff = await getAffiliate(username);
-  if (!aff || aff.status === 'suspended') return { valid: false as const };
+  const resolved = await resolveAffiliateCode(rawCode || '');
+  if (!resolved) return { valid: false as const };
+  const { username, aff } = resolved;
+  if (aff.status === 'suspended') return { valid: false as const };
   const settings = await getSettings();
   if (trackClick) {
     await adminDb().collection(CLICKS_COLLECTION).add({ username, createdAt: Date.now() }).catch(() => {});
@@ -54,8 +55,11 @@ export async function isUsernameAvailable(rawUsername: string) {
   try {
     const username = normalizeUsername(rawUsername);
     if (username.length < 3 || RESERVED.has(username)) return false;
-    const snap = await adminDb().collection(AFFILIATES_COLLECTION).doc(username).get();
-    return !snap.exists;
+    const [snap, alias] = await Promise.all([
+      adminDb().collection(AFFILIATES_COLLECTION).doc(username).get(),
+      adminDb().collection(ALIASES_COLLECTION).doc(username).get(),
+    ]);
+    return !snap.exists && !alias.exists;
   } catch (error) {
     console.warn('isUsernameAvailable warning (skipping admin check):', error);
     return true;
@@ -85,6 +89,9 @@ export async function registerAffiliateAccount(idToken: string, values: z.infer<
 
     const username = normalizeUsername(data.username);
     if (username.length < 3 || RESERVED.has(username)) {
+      return { success: false as const, error: 'Ese nombre de usuario no está disponible.' };
+    }
+    if ((await adminDb().collection(ALIASES_COLLECTION).doc(username).get()).exists) {
       return { success: false as const, error: 'Ese nombre de usuario no está disponible.' };
     }
 
@@ -152,10 +159,14 @@ export async function markPasswordChanged(idToken: string) {
 }
 
 /**
- * Cambia el usuario (y por tanto el enlace/código) de un afiliado.
- * El ID del documento ES el usuario, así que se migra de forma atómica en una transacción:
- * perfil nuevo + índice del usuario + referencias de sus referidos (parentId/granId).
- * Solo se permite mientras no haya movimientos de dinero asociados al usuario actual.
+ * Cambia el usuario (y por tanto el enlace/código) de un afiliado. Reglas:
+ *  - Solo se puede UNA vez por cuenta (`usernameChangedAt`).
+ *  - El nombre nuevo debe estar libre (no existir como afiliado ni como alias de otro).
+ *
+ * Firestore no permite renombrar el ID de un documento: se crea el perfil nuevo (copia de todos los
+ * datos) y se borra el anterior. Pasos: (1) transacción: perfil nuevo + índice + referidos;
+ * (2) migrar historial (comisiones, retiros, clics); (3) alias para que el enlace viejo siga
+ * funcionando; (4) borrar el perfil anterior. Si (2) falla, el perfil anterior se conserva.
  */
 export async function changeAffiliateUsername(idToken: string, rawNew: string) {
   try {
@@ -170,57 +181,90 @@ export async function changeAffiliateUsername(idToken: string, rawNew: string) {
     if (RESERVED.has(username)) return { success: false as const, error: 'Ese nombre de usuario no está disponible.' };
 
     const db = adminDb();
-    const [asEarner, asSeller, withdrawals] = await Promise.all([
-      db.collection(COMMISSIONS_COLLECTION).where('affiliateUsername', '==', old).limit(1).get(),
-      db.collection(COMMISSIONS_COLLECTION).where('sellerUsername', '==', old).limit(1).get(),
-      db.collection(WITHDRAWALS_COLLECTION).where('affiliateUsername', '==', old).limit(1).get(),
-    ]);
-    if (!asEarner.empty || !asSeller.empty || !withdrawals.empty) {
-      return {
-        success: false as const,
-        error: 'Tu usuario ya tiene ventas, comisiones o retiros asociados y no se puede cambiar. Escribe a soporte si lo necesitas.',
-      };
-    }
-
     const oldRef = db.collection(AFFILIATES_COLLECTION).doc(old);
     const newRef = db.collection(AFFILIATES_COLLECTION).doc(username);
+    const aliasNewRef = db.collection(ALIASES_COLLECTION).doc(username);
 
+    const pre = await oldRef.get();
+    if (!pre.exists) return { success: false as const, error: 'No encontramos tu perfil de afiliado.' };
+    if (pre.data()?.usernameChangedAt) {
+      return { success: false as const, error: 'Ya cambiaste tu usuario una vez. Si necesitas otro cambio, escribe a soporte.' };
+    }
+
+    const now = new Date().toISOString();
+
+    // (1) Perfil nuevo + índice + referidos, de forma atómica. El perfil anterior aún no se borra.
     await db.runTransaction(async (tx) => {
-      const [oldSnap, newSnap, kids, grandkids] = await Promise.all([
+      const [oldSnap, newSnap, aliasSnap, kids, grandkids] = await Promise.all([
         tx.get(oldRef),
         tx.get(newRef),
+        tx.get(aliasNewRef),
         tx.get(db.collection(AFFILIATES_COLLECTION).where('parentId', '==', old)),
         tx.get(db.collection(AFFILIATES_COLLECTION).where('granId', '==', old)),
       ]);
       if (!oldSnap.exists) throw new Error('NO_PROFILE');
-      if (newSnap.exists) throw new Error('TAKEN');
+      if (oldSnap.data()?.usernameChangedAt) throw new Error('ONCE');
+      if (newSnap.exists || aliasSnap.exists) throw new Error('TAKEN');
       if (kids.size + grandkids.size > 400) throw new Error('TOO_MANY');
 
-      const now = new Date().toISOString();
-      tx.create(newRef, { ...oldSnap.data(), id: username, username, referralCode: username, updatedAt: now });
-      tx.delete(oldRef);
+      tx.create(newRef, {
+        ...oldSnap.data(),
+        id: username,
+        username,
+        referralCode: username,
+        previousUsername: old,
+        usernameChangedAt: now,
+        renameFrom: old, // marca temporal: se quita al terminar la migración
+        updatedAt: now,
+      });
       tx.set(db.collection(USER_INDEX_COLLECTION).doc(uid), { username });
       kids.docs.forEach((d) => tx.update(d.ref, { parentId: username }));
       grandkids.docs.forEach((d) => tx.update(d.ref, { granId: username }));
     });
 
-    // Los clics ya registrados siguen contando para el nuevo usuario (mejor esfuerzo, fuera de la transacción).
-    try {
-      for (let round = 0; round < 5; round++) {
-        const clicks = await db.collection(CLICKS_COLLECTION).where('username', '==', old).limit(400).get();
-        if (clicks.empty) break;
-        const batch = db.batch();
-        clicks.docs.forEach((d) => batch.update(d.ref, { username }));
-        await batch.commit();
+    // (2) Historial: todo lo que apuntaba al usuario anterior pasa al nuevo (reintentable).
+    const moves: [string, string][] = [
+      [COMMISSIONS_COLLECTION, 'affiliateUsername'],
+      [COMMISSIONS_COLLECTION, 'sellerUsername'],
+      [WITHDRAWALS_COLLECTION, 'affiliateUsername'],
+      [CLICKS_COLLECTION, 'username'],
+    ];
+    let migrated = true;
+    for (const [col, field] of moves) {
+      try {
+        for (let round = 0; round < 100; round++) {
+          const snap = await db.collection(col).where(field, '==', old).limit(400).get();
+          if (snap.empty) break;
+          const batch = db.batch();
+          snap.docs.forEach((d) => batch.update(d.ref, { [field]: username }));
+          await batch.commit();
+        }
+      } catch (moveErr) {
+        migrated = false;
+        console.error(`[change-username] no se pudo migrar ${col}.${field}`, moveErr);
       }
-    } catch (clickErr) {
-      console.warn('[change-username] no se pudieron migrar los clics', clickErr);
     }
+
+    if (!migrated) {
+      return {
+        success: false as const,
+        error: `Tu usuario ya es @${username}, pero no pudimos mover todo tu historial. Escribe a soporte indicando que cambiaste de @${old} a @${username}.`,
+      };
+    }
+
+    // (3) Alias + registro de auditoría, y (4) se borra el perfil anterior.
+    const batch = db.batch();
+    batch.set(db.collection(ALIASES_COLLECTION).doc(old), { username, at: now });
+    batch.set(db.collection('affiliate_username_changes').doc(), { from: old, to: username, uid, at: now });
+    batch.update(newRef, { renameFrom: FieldValue.delete() });
+    batch.delete(oldRef);
+    await batch.commit();
 
     return { success: true as const, username };
   } catch (error: any) {
     const msg = String(error?.message || '');
     if (msg === 'TAKEN' || error?.code === 6) return { success: false as const, error: 'Ese nombre de usuario ya está en uso.' };
+    if (msg === 'ONCE') return { success: false as const, error: 'Ya cambiaste tu usuario una vez. Si necesitas otro cambio, escribe a soporte.' };
     if (msg === 'TOO_MANY') return { success: false as const, error: 'Tu red es muy grande para cambiar el usuario automáticamente. Escribe a soporte.' };
     if (msg === 'NO_PROFILE') return { success: false as const, error: 'No encontramos tu perfil de afiliado.' };
     console.error('[change-username]', error);
