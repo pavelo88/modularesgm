@@ -65,7 +65,7 @@ export function Header() {
 
   const navLinks = [
     { href: '/#top', label: 'Inicio', publicOnly: false, icon: <Home size={20} /> },
-    { href: '/#catalogo', label: 'Catálogo', publicOnly: true, icon: <LayoutGrid size={20} /> },
+    { href: '/catalogo', label: 'Catálogo', publicOnly: false, icon: <LayoutGrid size={20} /> },
     { href: '/#contacto', label: 'Contacto', publicOnly: true, icon: <MessageSquare size={20} /> },
     { href: '/store', label: 'Tienda', publicOnly: false, icon: <Store size={20} /> },
     { href: '/afiliados', label: 'Trabaja con nosotros', publicOnly: false, icon: <Handshake size={20} /> },

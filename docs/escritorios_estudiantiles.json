@@ -1,0 +1,134 @@
+[
+  {
+    "sku": "DLM-0100",
+    "title": "Escritorio Estudiantil DLM-0100",
+    "category": "Escritorios Estudiantiles",
+    "price": 165,
+    "dimensions": "140x170",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/DLM-0100.jpg"
+    ]
+  },
+  {
+    "sku": "EDL-0200",
+    "title": "Escritorio Estudiantil EDL-0200",
+    "category": "Escritorios Estudiantiles",
+    "price": 160,
+    "dimensions": "140x55",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/EDL-0200.jpg"
+    ]
+  },
+  {
+    "sku": "DLM-0300",
+    "title": "Escritorio Estudiantil DLM-0300",
+    "category": "Escritorios Estudiantiles",
+    "price": 145,
+    "dimensions": "140x55",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/DLM-0300.jpg"
+    ]
+  },
+  {
+    "sku": "DLF-1000",
+    "title": "Escritorio Estudiantil DLF-1000",
+    "category": "Escritorios Estudiantiles",
+    "price": 165,
+    "dimensions": "140x120",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/DLF-1000.jpg"
+    ]
+  },
+  {
+    "sku": "ELM-400",
+    "title": "Escritorio Estudiantil ELM-400",
+    "category": "Escritorios Estudiantiles",
+    "price": 160,
+    "dimensions": "140x55",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ELM-400.jpg"
+    ]
+  },
+  {
+    "sku": "ECL-500",
+    "title": "Escritorio Estudiantil ECL-500",
+    "category": "Escritorios Estudiantiles",
+    "price": 220,
+    "dimensions": "140x140",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ECL-500.jpg"
+    ]
+  },
+  {
+    "sku": "ELC-600",
+    "title": "Escritorio Estudiantil ELC-600",
+    "category": "Escritorios Estudiantiles",
+    "price": 220,
+    "dimensions": "140x140",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ELC-600.jpg"
+    ]
+  },
+  {
+    "sku": "ELO-700",
+    "title": "Escritorio Estudiantil ELO-700",
+    "category": "Escritorios Estudiantiles",
+    "price": 180,
+    "dimensions": "140x140",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ELO-700.jpg"
+    ]
+  },
+  {
+    "sku": "ECC-800",
+    "title": "Escritorio Estudiantil ECC-800",
+    "category": "Escritorios Estudiantiles",
+    "price": 185,
+    "dimensions": "140x55",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ECC-800.jpg"
+    ]
+  },
+  {
+    "sku": "ECR-900",
+    "title": "Escritorio Estudiantil ECR-900",
+    "category": "Escritorios Estudiantiles",
+    "price": 165,
+    "dimensions": "140x55",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ECR-900.jpg"
+    ]
+  },
+  {
+    "sku": "ECJR-1000",
+    "title": "Escritorio Estudiantil ECJR-1000",
+    "category": "Escritorios Estudiantiles",
+    "price": 185,
+    "dimensions": "140x55",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/ECJR-1000.jpg"
+    ]
+  },
+  {
+    "sku": "EL1100",
+    "title": "Escritorio Estudiantil EL1100",
+    "category": "Escritorios Estudiantiles",
+    "price": 220,
+    "dimensions": "140x140",
+    "isCustom": false,
+    "images": [
+      "/images/catalog/escritorios-estudiantiles/EL1100.jpg"
+    ]
+  }
+]
