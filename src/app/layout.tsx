@@ -150,6 +150,13 @@ export default function RootLayout({
             }}
           />
         )}
+        {/* Ahrefs Web Analytics (proyecto modularesgm.com) */}
+        <Script
+          id="ahrefs-analytics"
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="nxZ46GgcTfj/BPSFcmmgKw"
+          strategy="afterInteractive"
+        />
         {/* Píxel de Meta: necesario para optimizar anuncios de Facebook/Instagram por conversiones */}
         {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
           <Script
