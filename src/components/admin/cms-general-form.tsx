@@ -163,6 +163,74 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
                     </div>
                 </CardContent>
             </Card>
+
+            {/* Marquesina de Anuncios y Promociones Superior */}
+            <Card className="border-amber-500/30 bg-amber-500/5">
+                <CardHeader className="bg-amber-500/10 border-b">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-amber-500"/> Marquesina de Anuncios (TopBar)
+                    </CardTitle>
+                    <CardDescription>
+                      Mensajes promocionales que rotan en la cinta superior del sitio web.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  {(siteContent.tickerMessages || [
+                    { id: '1', text: '🎉 5% de descuento en tus compras si alguien te recomendó la web', href: '/afiliados' },
+                    { id: '2', text: '💵 5% de descuento por pagos en efectivo', href: '/store' },
+                    { id: '3', text: '✨ 5% de descuento inmediato al registrarte en nuestra plataforma', href: '/store' },
+                    { id: '4', text: '🤝 ¿Eres instalador o arquitecto? Visita Trabaja con nosotros', href: '/afiliados' },
+                  ]).map((msg, idx) => (
+                    <div key={idx} className="p-3 bg-background rounded-lg border space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <Label className="text-xs font-bold">Mensaje #{idx + 1}</Label>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 text-xs text-red-500 hover:text-red-700 hover:bg-red-50"
+                          onClick={() => {
+                            const newTicker = [...(siteContent.tickerMessages || [])];
+                            newTicker.splice(idx, 1);
+                            setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                          }}
+                        >
+                          Eliminar
+                        </Button>
+                      </div>
+                      <Input
+                        value={msg.text}
+                        onChange={(e) => {
+                          const newTicker = [...(siteContent.tickerMessages || [])];
+                          newTicker[idx] = { ...newTicker[idx], text: e.target.value };
+                          setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                        }}
+                        placeholder="Texto del anuncio..."
+                      />
+                      <Input
+                        value={msg.href || ''}
+                        onChange={(e) => {
+                          const newTicker = [...(siteContent.tickerMessages || [])];
+                          newTicker[idx] = { ...newTicker[idx], href: e.target.value };
+                          setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                        }}
+                        placeholder="Enlace (ej. /afiliados o /store)"
+                        className="text-xs font-mono"
+                      />
+                    </div>
+                  ))}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => {
+                      const newTicker = [...(siteContent.tickerMessages || []), { id: String(Date.now()), text: 'Nuevo Anuncio Promocional', href: '/store' }];
+                      setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                    }}
+                  >
+                    + Agregar Nuevo Anuncio
+                  </Button>
+                </CardContent>
+            </Card>
         </div>
       </div>
 

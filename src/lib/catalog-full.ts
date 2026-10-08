@@ -53,70 +53,62 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
   'muebles-oficina': {
     slug: 'muebles-oficina',
     categoryName: 'Muebles de Oficina',
-    title: 'Muebles de Oficina y Mobiliario Corporativo en Quito',
-    metaDescription: 'Mobiliario de oficina de alta gama: counters de recepción, credenzas ejecutivas y mesas de reunión modulares con diseño profesional en Quito.',
-    h1: 'Mobiliario de Oficina y Soluciones Corporativas',
-    heroSubtitle: 'Counters de recepción, credenzas ejecutivas y salas de reuniones que proyectan la máxima seriedad de tu empresa.',
+    title: 'Mobiliario Corporativo y Muebles de Oficina Quito | GM',
+    metaDescription: 'Muebles de oficina modulares, counters de recepción y credenzas en Quito. Mobiliario corporativo duradero con instalación profesional.',
+    h1: 'Mobiliario Corporativo y Muebles de Oficina Modulares',
+    heroSubtitle: 'Soluciones integrales para oficinas modernas: counters de recepción, credenzas ejecutivas y escritorios múltiples.',
     directAnswerCapsule: {
-      definition: 'Mobiliario modular corporativo fabricado bajo estándares ergonómicos internacionales para recepción, gerencia y salas de conferencia.',
+      definition: 'Fabricación corporativa de puestos de trabajo, estaciones operativas y mobiliario de recepción en melamina de 18mm y estructuras reforzadas.',
       keyTakeaways: [
-        'Counters para recepción con iluminación LED indirecta y pasacables ocultos.',
-        'Credenzas de archivo con cerraduras de seguridad y cajones archivadores.',
-        'Mesas de reunión modulares para 6 hasta 14 personas con conectividad integrada.',
-        'Asesoría técnica y distribución espacial en plano 3D sin costo adicional.'
+        'Counters de recepción de alto impacto visual con iluminación LED integrada.',
+        'Estaciones de trabajo modulares para 2, 4 o 6 personas con pasacables.',
+        'Credenzas, cajoneras móviles con cerradura centralizada y archivadores.',
+        'Asesoría en distribución de espacios y levantamiento planimétrico sin costo.'
       ],
-      priceRange: 'Desde $85 hasta $950 USD según formato y volumen',
-      warranty: '5 años de garantía estructural corporativa'
+      priceRange: 'Cotización personalizada por proyecto o módulo',
+      warranty: '5 años de garantía corporativa'
     },
     faqs: [
       {
-        question: '¿Hacen visitas técnicas a oficinas en Quito?',
-        answer: 'Sí, realizamos visitas técnicas sin costo para tomar medidas y presentar renders 3D con distribución espacial eficiente.'
-      },
-      {
-        question: '¿Las mesas de reunión incluyen pasacables y tomas eléctricas?',
-        answer: 'Diseñamos nuestras mesas corporativas con bandejas pasacables ocultas y puertos pasatapas listos para conexiones eléctricas y de red.'
+        question: '¿Realizan proyectos de mobiliario para oficinas completas?',
+        answer: 'Sí, nos encargamos de todo el equipamiento: desde el counter de recepción hasta puestos operativos, salas de reuniones y credenzas.'
       }
     ]
   },
   closets: {
     slug: 'closets',
-    categoryName: 'Closets',
-    title: 'Closets a Medida y Walk-in Closets en Quito | Modulares GM',
-    metaDescription: 'Fabricación de clósets modernos y walk-in closets a medida en Quito. Aprovechamiento milimétrico de espacios con herrajes Blum y cierre lento.',
-    h1: 'Closets a Medida y Walk-in Closets de Alta Gama',
-    heroSubtitle: 'Diseños que combinan elegancia, distribución inteligente para ropa y calzado, e iluminación LED cálida integrada.',
+    categoryName: 'Clósets',
+    title: 'Clósets Modulares y Walk-in Closets a Medida Quito | GM',
+    metaDescription: 'Vestidores boutique y clósets a medida en Quito. Iluminación LED oculta, puertas de vidrio bronce y organizadores inteligentes.',
+    h1: 'Clósets Modulares y Walk-in Closets de Autor',
+    heroSubtitle: 'Transformamos tu dormitorio con vestidores boutique, zapateras extraíbles y acabados amaderados de lujo.',
     directAnswerCapsule: {
-      definition: 'Sistemas de almacenamiento residencial diseñados al milímetro con puertas corredizas o batientes y división interior personalizada.',
+      definition: 'Modulares GM diseña walk-in closets y armarios modulares optimizados con zapateras retroiluminadas, pantaloneras e iluminación inteligente.',
       keyTakeaways: [
-        'Walk-in closets con islas centrales, zapateras deslizables y pantaloneros.',
-        'Puertas con perfiles de aluminio negro y vidrio templado o melamina RH.',
-        'Cajones con guías invisibles y amortiguación de cierre suave.',
-        'Visita a domicilio y diseño fotorealista en 3D en 24 horas.'
+        'Distribución personalizada según tu colección de ropa, zapatos y accesorios.',
+        'Puertas batientes, corredizas o vitrinas en aluminio con cristal templado.',
+        'Iluminación LED con sensores de apertura de puerta.',
+        'Materiales antihumedad ideales para el clima de Quito y serranía.'
       ],
-      priceRange: 'Cotización personalizada por metro cuadrado o lineal',
-      warranty: '5 años de garantía integral'
+      priceRange: 'Desde $380 por módulo / Cotización a medida',
+      warranty: '5 años de garantía en carpintería'
     },
     faqs: [
       {
-        question: '¿Cómo se cotiza un clóset a medida?',
-        answer: 'Agendamos una visita técnica gratuita para medir el vano de tu pared y definir accesorios internos, emitiendo un presupuesto formal inmediato.'
-      },
-      {
-        question: '¿Usan materiales resistentes a la humedad?',
-        answer: 'Sí, utilizamos tableros RH (Resistentes a la Humedad) ideales para el clima de Quito y la sierra ecuatoriana.'
+        question: '¿Pueden adaptar el clóset a espacios pequeños o abuhardillados?',
+        answer: 'Absolutamente. Diseñamos cada módulo milímetro a milímetro para aprovechar nichos, esquinas y alturas especiales.'
       }
     ]
   },
   cocinas: {
     slug: 'cocinas',
     categoryName: 'Cocinas',
-    title: 'Cocinas Modulares Modernas con Cuarzo en Quito | GM',
-    metaDescription: 'Diseño e instalación de cocinas modulares modernas en Quito. Muebles hidrófugos RH, herrajes de cierre suave y mesones en cuarzo y granito.',
-    h1: 'Cocinas Modulares Modernas y Mesones de Cuarzo',
-    heroSubtitle: 'Transformamos el corazón de tu hogar con acabados termolaminados, despensas inteligentes y mesones en cuarzo Silestone y Dekton.',
+    title: 'Cocinas Modulares y Mesones de Cuarzo en Quito | GM',
+    metaDescription: 'Cocinas integrales a medida en Quito con mesones de cuarzo y herrajes Blum cierre suave. Diseños 3D fotorrealistas y 10 años de garantía.',
+    h1: 'Cocinas Modulares de Alta Gama y Mesones de Cuarzo',
+    heroSubtitle: 'Diseño ergónomico, melamina RH 18mm resistente al agua e islas monumentales con cuarzo Calacatta Gold.',
     directAnswerCapsule: {
-      definition: 'Fabricación e instalación de cocinas integrales con tableros RH hidrófugos de 18mm y encimeras de piedra sinterizada o cuarzo natural.',
+      definition: 'Cocinas integrales diseñadas con renderizado 3D previo, estructuras en melamina RH hidrófuga de 18mm y mesones de cuarzo o Dekton.',
       keyTakeaways: [
         'Módulos altos y bajos diseñados para electrodomésticos empotrados.',
         'Herrajes europeos Blum con bisagras clip-top y sistemas de elevación Aventos.',
@@ -216,750 +208,2548 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
 
 export const ALL_CATALOG_PRODUCTS: Product[] = [
   {
-    "id": 501,
-    "title": "Cocina Luxury Cappuccino con Isla y Techo LED",
-    "desc": "Cocina integral de alta gama con isla central, frentes en laca cappuccino alto brillo, vitrinas aéreos iluminadas con perfiles negros y techo con luminarias LED lineales.",
-    "price": 0,
-    "discountPrice": null,
+    "id": 1,
+    "title": "Cocinas Modelo GM-101",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1495,
+    "discountPrice": 1420,
     "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-004.jpg",
     "images": [
-      "/images/catalog/extracted_DE_COCINAS/img-005.jpg",
+      "/images/catalog/extracted_DE_COCINAS/img-004.jpg",
+      "/images/catalog/extracted_DE_COCINAS/img-005.jpg"
+    ],
+    "category": "Cocinas",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 2,
+    "title": "Cocinas Modelo GM-102",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1540,
+    "discountPrice": 1463,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-006.jpg",
+    "images": [
       "/images/catalog/extracted_DE_COCINAS/img-006.jpg",
-      "/images/catalog/extracted_DE_COCINAS/img-007.jpg",
-      "/images/catalog/extracted_DE_COCINAS/img-008.jpg"
+      "/images/catalog/extracted_DE_COCINAS/img-007.jpg"
     ],
     "category": "Cocinas",
-    "subcategory": "Cocinas con Isla",
-    "dimensions": "Fabricación a medida",
-    "material": "Melamina RH hidrófuga 18mm + Mesón de Cuarzo blanco pulido",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
-    "id": 502,
-    "title": "Cocina Monumental con Isla Waterfall en Cuarzo Calacatta",
-    "desc": "Isla con caída en cascada (waterfall) en cuarzo Calacatta Gold, torre de hornos empotrada, alacenas de piso a techo y revestimiento en listones de madera natural.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-025.png",
+    "id": 3,
+    "title": "Cocinas Modelo GM-103",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1585,
+    "discountPrice": 1506,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-008.jpg",
     "images": [
-      "/images/catalog/extracted_DE_COCINAS/img-015.png"
-    ],
-    "category": "Cocinas",
-    "subcategory": "Cocinas con Isla",
-    "dimensions": "Diseño arquitectónico a medida",
-    "material": "Cuarzo Calacatta 20mm + Melamina Roble Termoencolada 18mm",
-    "priceUnit": "metro_lineal",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 503,
-    "title": "Cocina Antracita & Roble con Isla y Vitrinas Iluminadas",
-    "desc": "Combinación sofisticada de frentes grafito mate con toques de roble cálido, desayunador para 4 personas y vitrinas con perfiles negros y luz cálida.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-026.png",
-    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-008.jpg",
       "/images/catalog/extracted_DE_COCINAS/img-009.jpg"
     ],
     "category": "Cocinas",
-    "subcategory": "Cocinas con Isla",
-    "dimensions": "A medida según plano",
-    "material": "Melamina grafito mate antihuellas + Cuarzo gris ceniza",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 4,
+    "title": "Cocinas Modelo GM-104",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1630,
+    "discountPrice": 1549,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-010.png",
+    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-010.png",
+      "/images/catalog/extracted_DE_COCINAS/img-011.png"
+    ],
+    "category": "Cocinas",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": true
   },
   {
-    "id": 504,
-    "title": "Cocina Black Velvet Minimalista con Isla Calacatta",
-    "desc": "Diseño minimalista en negro mate antihuellas con isla monolítica de cuarzo blanco, iluminación arquitectónica indirecta superior y repisas flotantes.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-017.png",
+    "id": 5,
+    "title": "Cocinas Modelo GM-105",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1675,
+    "discountPrice": 1591,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-012.png",
     "images": [
-      "/images/catalog/extracted_DE_COCINAS/img-016.png"
-    ],
-    "category": "Cocinas",
-    "subcategory": "Cocinas con Isla",
-    "dimensions": "Fabricación a medida",
-    "material": "MDF lacado mate poliuretano + Cuarzo blanco veteado",
-    "priceUnit": "metro_lineal",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 505,
-    "title": "Cocina Total White con Módulo Desayunador",
-    "desc": "Estilo escandinavo contemporáneo en blanco brillante con mesones de cuarzo blanco y barra desayunadora integrada para espacios luminosos y limpios.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-011.png",
-    "images": [
-      "/images/catalog/extracted_DE_COCINAS/img-021.png"
-    ],
-    "category": "Cocinas",
-    "subcategory": "Cocinas Lineales",
-    "dimensions": "A medida de pared",
-    "material": "Melamina Pelikano blanco polar brillo + Mesón de cuarzo blanco",
-    "priceUnit": "metro_lineal",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 506,
-    "title": "Cocina Contemporánea en L Gris Humo y Roble Natural",
-    "desc": "Distribución en L optimizada con campana extractora oculta, iluminación bajo muebles aéreos y módulos extraíbles esquineros de cierre suave.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-014.png",
-    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-012.png",
       "/images/catalog/extracted_DE_COCINAS/img-013.png"
     ],
     "category": "Cocinas",
-    "subcategory": "Cocinas en L",
-    "dimensions": "Configuración en L personalizada",
-    "material": "Melamina RH gris perla y madera roble + Granito blanco siena",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 507,
-    "title": "Cocina en U con Granito Negro Pulido y Nogal Americano",
-    "desc": "Distribución envolvente con triángulo de trabajo eficiente (lavado, cocción, refrigeración), mesones de granito natural negro pulido y muebles superiores en madera nogal.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-019.png",
+    "id": 6,
+    "title": "Cocinas Modelo GM-106",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1720,
+    "discountPrice": 1634,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-014.png",
     "images": [
-      "/images/catalog/extracted_DE_COCINAS/img-024.png"
+      "/images/catalog/extracted_DE_COCINAS/img-014.png",
+      "/images/catalog/extracted_DE_COCINAS/img-015.png"
     ],
     "category": "Cocinas",
-    "subcategory": "Cocinas en U",
-    "dimensions": "Fabricación a medida arquitectónica",
-    "material": "Granito San Gabriel negro + Melamina texturizada nogal",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 508,
-    "title": "Cocina Urban Stone con Isla Central y Grifería Negro Mate",
-    "desc": "Texturas pétreas y cemento pulido con isla de preparación, lavaplatos bajo mesón negro y alacena vertical con puertas corredizas integradas.",
-    "price": 0,
-    "discountPrice": null,
+    "id": 7,
+    "title": "Cocinas Modelo GM-107",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1450,
+    "discountPrice": 1378,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-016.png",
+    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-016.png",
+      "/images/catalog/extracted_DE_COCINAS/img-017.png"
+    ],
+    "category": "Cocinas",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 8,
+    "title": "Cocinas Modelo GM-108",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1495,
+    "discountPrice": 1420,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-018.png",
+    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-018.png",
+      "/images/catalog/extracted_DE_COCINAS/img-019.png"
+    ],
+    "category": "Cocinas",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 9,
+    "title": "Cocinas Modelo GM-109",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1540,
+    "discountPrice": 1463,
     "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-020.png",
     "images": [
-      "/images/catalog/extracted_DE_COCINAS/img-010.png"
+      "/images/catalog/extracted_DE_COCINAS/img-020.png",
+      "/images/catalog/extracted_DE_COCINAS/img-021.png"
     ],
     "category": "Cocinas",
-    "subcategory": "Cocinas con Isla",
-    "dimensions": "A medida según plano",
-    "material": "Melamina estilo cemento oxidado + Granito negro cepillado",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 401,
-    "title": "Walk-in Closet Boutique con Puertas de Vidrio Bronce y LED",
-    "desc": "Vestidor de lujo estilo boutique europea con frentes en cristal bronce templado, iluminación LED perimetral integrada, módulo esquinero y banqueta tapizada.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-017.png",
+    "id": 10,
+    "title": "Cocinas Modelo GM-110",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1585,
+    "discountPrice": 1506,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-022.png",
     "images": [
-      "/images/catalog/extracted_CLOSETS_1/img-016.png",
-      "/images/catalog/extracted_CLOSETS_1/img-018.png"
+      "/images/catalog/extracted_DE_COCINAS/img-022.png",
+      "/images/catalog/extracted_DE_COCINAS/img-023.png"
     ],
-    "category": "Closets",
-    "subcategory": "Walk-in Closets",
-    "dimensions": "Diseño a medida según vano",
-    "material": "Melamina RH texturizada + Vidrio templado ahumado bronce",
+    "category": "Cocinas",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 11,
+    "title": "Cocinas Modelo GM-111",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1630,
+    "discountPrice": 1549,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-024.png",
+    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-024.png",
+      "/images/catalog/extracted_DE_COCINAS/img-025.png"
+    ],
+    "category": "Cocinas",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 12,
+    "title": "Cocinas Modelo GM-112",
+    "desc": "Cocina integral con mesón de cuarzo y herrajes Blum.",
+    "price": 1675,
+    "discountPrice": 1591,
+    "imgUrl": "/images/catalog/extracted_DE_COCINAS/img-026.png",
+    "images": [
+      "/images/catalog/extracted_DE_COCINAS/img-026.png"
+    ],
+    "category": "Cocinas",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": true
   },
   {
-    "id": 402,
-    "title": "Vestidor Máster con Tocador Vanity y Espejo Circular Halo LED",
-    "desc": "Ambiente completo con tocador de maquillaje integrado, espejo halo con luz neutra regulable, cajoneras para accesorios y pasillo vestidor con espejo de cuerpo entero.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-014.png",
-    "images": [
-      "/images/catalog/extracted_CLOSETS_1/img-015.png"
-    ],
-    "category": "Closets",
-    "subcategory": "Walk-in Closets",
-    "dimensions": "Fabricación a medida",
-    "material": "Melamina Pelikano duna + Espejo circular con LED perimetral",
-    "priceUnit": "metro_lineal",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 403,
-    "title": "Walk-in Closet Antracita con Isla Central de Joyería",
-    "desc": "Mobiliario de alta gama en tono carbón con isla central para relojería y accesorios con vidrio superior, torre de zapateras inclinadas y pantaloneros extraíbles.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-019.png",
-    "images": [
-      "/images/catalog/extracted_CLOSETS_1/img-020.png"
-    ],
-    "category": "Closets",
-    "subcategory": "Walk-in Closets",
-    "dimensions": "A medida milimétrica",
-    "material": "Melamina antracita 18mm con perfilería de aluminio negro",
-    "priceUnit": "metro_lineal",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 404,
-    "title": "Clóset 4 Cuerpos con Puertas Corredizas en Vidrio Satinado",
-    "desc": "Sistema corredizo de alta durabilidad con perfiles de aluminio anodizado, vidrio satinado traslúcido y cuerpo interior en roble claro con 4 cajones y zapatera.",
-    "price": 0,
-    "discountPrice": null,
+    "id": 13,
+    "title": "Closets Modelo GM-113",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 1120,
+    "discountPrice": 1064,
     "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-004.png",
     "images": [
-      "/images/catalog/extracted_CLOSETS_1/img-008.png"
+      "/images/catalog/extracted_CLOSETS_1/img-004.png",
+      "/images/catalog/extracted_CLOSETS_1/img-005.png"
     ],
     "category": "Closets",
-    "subcategory": "Armarios Modulares",
-    "dimensions": "240 x 240 x 60 cm o a medida",
-    "material": "Aluminio anodizado + Vidrio esmerilado + Melamina roble",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 405,
-    "title": "Armario Modular Abierto de Pared a Techo con Zapatera",
-    "desc": "Distribución abierta tipo concept-store con módulos para colgado largo y corto, zapatera de 6 niveles y cajones interiores con rieles telescópicos pesados.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-005.png",
+    "id": 14,
+    "title": "Closets Modelo GM-114",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 850,
+    "discountPrice": 808,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-006.png",
     "images": [
+      "/images/catalog/extracted_CLOSETS_1/img-006.png",
+      "/images/catalog/extracted_CLOSETS_1/img-007.png"
+    ],
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 15,
+    "title": "Closets Modelo GM-115",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 895,
+    "discountPrice": 850,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-008.png",
+    "images": [
+      "/images/catalog/extracted_CLOSETS_1/img-008.png",
       "/images/catalog/extracted_CLOSETS_1/img-009.png"
     ],
     "category": "Closets",
-    "subcategory": "Armarios Modulares",
-    "dimensions": "Fabricación a medida",
-    "material": "Tableros Novopan 18mm con herrajes telescópicos reforzados",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 406,
-    "title": "Clóset de Dormitorio con Módulo para TV y Nichos Abiertos",
-    "desc": "Solución multifunción para dormitorio con nicho empotrado para televisión de hasta 55 pulgadas, repisas decorativas laterales y maleteros superiores.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-007.png",
+    "id": 16,
+    "title": "Closets Modelo GM-116",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 940,
+    "discountPrice": 893,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-010.png",
     "images": [
-      "/images/catalog/extracted_CLOSETS_1/img-006.png"
+      "/images/catalog/extracted_CLOSETS_1/img-010.png",
+      "/images/catalog/extracted_CLOSETS_1/img-011.png"
     ],
     "category": "Closets",
-    "subcategory": "Armarios Modulares",
-    "dimensions": "A medida según habitación",
-    "material": "Melamina roble ceniza y blanco polar 18mm",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
-    "featured": false
+    "featured": true
   },
   {
-    "id": 407,
-    "title": "Vestidor Escandinavo en Roble Claro con Repisas Curvas",
-    "desc": "Espacio cálido y luminoso con distribución en U, terminal con esquineros curvos redondeados, iluminación en barras de colgado y gavetas organizadoras.",
-    "price": 0,
-    "discountPrice": null,
+    "id": 17,
+    "title": "Closets Modelo GM-117",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 985,
+    "discountPrice": 936,
     "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-012.png",
     "images": [
-      "/images/catalog/extracted_CLOSETS_1/img-022.png",
-      "/images/catalog/extracted_CLOSETS_1/img-021.png",
-      "/images/catalog/extracted_CLOSETS_1/img-023.png"
-    ],
-    "category": "Closets",
-    "subcategory": "Walk-in Closets",
-    "dimensions": "A medida",
-    "material": "Melamina texturizada roble escandinavo 18mm",
-    "priceUnit": "metro_lineal",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 408,
-    "title": "Armario Empotrado Blanco Nieve con Tiradores Perfil Gola",
-    "desc": "Estética pura y minimalista en blanco ártico con apertura gola oculta, divisiones interiores personalizadas y maleteros de gran capacidad.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-011.png",
-    "images": [
+      "/images/catalog/extracted_CLOSETS_1/img-012.png",
       "/images/catalog/extracted_CLOSETS_1/img-013.png"
     ],
     "category": "Closets",
-    "subcategory": "Armarios Modulares",
-    "dimensions": "220 x 240 x 55 cm o a medida",
-    "material": "Melamina 18mm blanco puro con cantos de 2mm",
     "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 601,
-    "title": "Vanity Flotante Doble Pozo con Espejos Circulares LED",
-    "desc": "Mueble suspendido para baño principal con mesón de cuarzo negro, lavamanos dobles sobrepuestos, espejos circulares retroiluminados y columna vertical auxiliar.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-006.jpg",
+    "id": 18,
+    "title": "Closets Modelo GM-118",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 1030,
+    "discountPrice": 979,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-014.png",
     "images": [
-      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-005.jpg"
+      "/images/catalog/extracted_CLOSETS_1/img-014.png",
+      "/images/catalog/extracted_CLOSETS_1/img-015.png"
     ],
-    "category": "Muebles de Baño",
-    "subcategory": "Vanities Flotantes",
-    "dimensions": "160 x 50 x 55 cm o a medida",
-    "material": "Tablero marino RH impermeable + Cuarzo negro marquina",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 602,
-    "title": "Vanity Luxury en Nicho con Marco Portal en Nogal y Vitrina",
-    "desc": "Diseño de hotel 5 estrellas enmarcado en portal de madera nogal, mueble flotante con cajones de textura ranurada y torre lateral de vidrio iluminada.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-011.jpg",
-    "images": [
-      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-010.jpg"
-    ],
-    "category": "Muebles de Baño",
-    "subcategory": "Vanities Flotantes",
-    "dimensions": "140 x 55 x 220 cm (con marco portal)",
-    "material": "Melamina RH nogal terracota + Perfiles aluminio y vidrio templado",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 603,
-    "title": "Vanity Flotante en Madera Cálida con Lavamanos Tipo Barco",
-    "desc": "Mueble suspendido en roble cálido resistente a humedad con lavamanos cerámico ovalado, grifería empotrada y espejo con marco perimetral.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-009.jpg",
-    "images": [
-      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-008.jpg"
-    ],
-    "category": "Muebles de Baño",
-    "subcategory": "Vanities Flotantes",
-    "dimensions": "100 x 48 x 45 cm",
-    "material": "Melamina RH roble nórdico con cantos biselados poliuretano",
-    "priceUnit": "unidad",
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 604,
-    "title": "Mueble de Baño Compacto con Lavabo Negro y Repisas Spa",
-    "desc": "Ideal para baños de visitas o medianos, con lavabo cerámico negro mate, nicho toallero abierto inferior y cajón organizador para higiene personal.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.jpg",
+    "id": 19,
+    "title": "Closets Modelo GM-119",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 1075,
+    "discountPrice": 1021,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-016.png",
     "images": [
-      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-007.jpg"
+      "/images/catalog/extracted_CLOSETS_1/img-016.png",
+      "/images/catalog/extracted_CLOSETS_1/img-017.png"
     ],
-    "category": "Muebles de Baño",
-    "subcategory": "Muebles Auxiliares",
-    "dimensions": "80 x 45 x 50 cm",
-    "material": "Pelikano RH antibacterial resistente al vapor",
-    "priceUnit": "unidad",
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 701,
-    "title": "Puerta Principal Pivotante Monumental con Fijo de Cristal",
-    "desc": "Entrada de alta seguridad con pivote descentrado de rodamiento axial reforzado, manillón de acero inoxidable de 1.80m y fijos laterales de vidrio templado.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-007.jpg",
+    "id": 20,
+    "title": "Closets Modelo GM-120",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 1120,
+    "discountPrice": 1064,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-018.png",
     "images": [
-      "/images/catalog/extracted_DE_PUERTAS/img-008.jpg"
+      "/images/catalog/extracted_CLOSETS_1/img-018.png",
+      "/images/catalog/extracted_CLOSETS_1/img-019.png"
     ],
-    "category": "Puertas",
-    "subcategory": "Puertas Pivotantes",
-    "dimensions": "140 x 260 cm (o dimensiones personalizadas)",
-    "material": "Estructura interior de acero + Enchape madera teka lacada",
-    "priceUnit": "unidad",
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": true
   },
   {
-    "id": 702,
-    "title": "Puerta de Entrada en Madera Maciza con Fijos Dobles",
-    "desc": "Diseño contemporáneo con paneles horizontales macizos, acabado en tono natural con barniz poliuretano UV y cerradura digital inteligente.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-009.jpg",
+    "id": 21,
+    "title": "Closets Modelo GM-121",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 850,
+    "discountPrice": 808,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-020.png",
     "images": [
-      "/images/catalog/extracted_DE_PUERTAS/img-010.jpg"
+      "/images/catalog/extracted_CLOSETS_1/img-020.png",
+      "/images/catalog/extracted_CLOSETS_1/img-021.png"
     ],
-    "category": "Puertas",
-    "subcategory": "Puertas Pivotantes",
-    "dimensions": "160 x 240 cm",
-    "material": "Madera seike maciza tratada al horno + Acabado poliuretano UV",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 703,
-    "title": "Puerta Corrediza Tipo Granero con 5 Inserciones de Cristal",
-    "desc": "Puerta corrediza sobre riel visto de acero negro mate con 5 vidrios esmerilados que permiten el paso de luz natural preservando la privacidad.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-004.jpg",
-    "images": [
-      "/images/catalog/extracted_DE_PUERTAS/img-005.jpg"
-    ],
-    "category": "Puertas",
-    "subcategory": "Puertas de Interior",
-    "dimensions": "95 x 215 cm",
-    "material": "Bastidor reforzado + Riel industrial en acero forjado negro",
-    "priceUnit": "unidad",
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 704,
-    "title": "Puerta Corrediza Empotrada con Guía Oculta en Techo",
-    "desc": "Solución arquitectónica limpia con sistema de riel oculto en cielo falso, marco a ras de pared y cierre amortiguado en madera natural.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-006.jpg",
+    "id": 22,
+    "title": "Closets Modelo GM-122",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 895,
+    "discountPrice": 850,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-022.png",
     "images": [
-      "/images/catalog/extracted_DE_PUERTAS/img-011.jpg"
+      "/images/catalog/extracted_CLOSETS_1/img-022.png",
+      "/images/catalog/extracted_CLOSETS_1/img-023.png"
     ],
-    "category": "Puertas",
-    "subcategory": "Puertas de Interior",
-    "dimensions": "90 x 220 cm",
-    "material": "Melamina roble miel con herrajes corredizos invisibles",
-    "priceUnit": "unidad",
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 801,
-    "title": "Habitación Gaming Integral con Techo Nublado RGB y L-Desk",
-    "desc": "Transformación integral de dormitorio con escritorio en L, efectos de iluminación LED inteligente en cielo nublado, paneles acústicos y soporte para múltiples pantallas.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-004.jpg",
+    "id": 23,
+    "title": "Closets Modelo GM-123",
+    "desc": "Walk-in closet modular con iluminación LED y vestidor boutique.",
+    "price": 940,
+    "discountPrice": 893,
+    "imgUrl": "/images/catalog/extracted_CLOSETS_1/img-024.png",
     "images": [
-      "/images/catalog/extracted_MUEBLES_GAMER_2/img-006.jpg"
+      "/images/catalog/extracted_CLOSETS_1/img-024.png"
     ],
-    "category": "Gamer",
-    "subcategory": "Setups Completos",
-    "dimensions": "Proyecto integral a medida de la habitación",
-    "material": "Melamina negra mate antihuellas + Perfilería LED RGB inteligente",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 802,
-    "title": "Battlestation Gamer Pro White para Triple Monitor",
-    "desc": "Setup blanco minimalista reforzado con vigas de acero ocultas para brazos de monitor pesados, canaletas de cableado 100% ocultas y repisas de exhibición.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-005.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_GAMER_2/img-007.jpg"
-    ],
-    "category": "Gamer",
-    "subcategory": "Escritorios Gaming",
-    "dimensions": "200 x 80 x 75 cm",
-    "material": "Tablero Pelikano 25mm con refuerzo metálico de carga + Pasacables",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 803,
-    "title": "Estación Gaming Cyberpunk con Torre Lateral de Exhibición",
-    "desc": "Mueble gamer con torre vertical para gabinete de vidrio templado, nicho para consola PS5/Xbox, repisas para figuras coleccionables y tiras LED sincronizables.",
-    "price": 0,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-009.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_GAMER_2/img-008.jpg"
-    ],
-    "category": "Gamer",
-    "subcategory": "Setups Completos",
-    "dimensions": "180 x 160 x 60 cm",
-    "material": "MDF texturizado carbón + Rieles LED difusores de neón",
-    "priceUnit": "unidad",
+    "category": "Closets",
+    "priceUnit": "metro_lineal",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "Por metro lineal",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 301,
-    "title": "Escritorio Gerencial en L con Faldón Ranurado Elegance",
-    "desc": "Estación ejecutiva en cerezo y grafito con faldón frontal ranurado, cajonera pedestal móvil de 3 gavetas con llave y ala de retorno para reuniones.",
-    "price": 450,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-004.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_OFICINA/img-006.jpg"
-    ],
-    "category": "Muebles de Oficina",
-    "subcategory": "Escritorios Gerenciales",
-    "dimensions": "180 x 180 x 75 cm",
-    "material": "Melamina cerezo 25mm con faldón negro mate ranurado",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 302,
-    "title": "Escritorio Operativo con Base Metálica Geométrica",
-    "desc": "Mesa directiva con patas de acero electropintado en diseño en X, tablero de 25mm con pasacables de aluminio y credenza lateral.",
-    "price": 320,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-005.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_OFICINA/img-007.jpg"
-    ],
-    "category": "Muebles de Oficina",
-    "subcategory": "Escritorios Gerenciales",
-    "dimensions": "160 x 140 x 75 cm",
-    "material": "Tablero Pelikano roble + Acero tubular electropintado negro",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 303,
-    "title": "Counter de Recepción Corporativo con Panel Frontal y Retorno",
-    "desc": "Mostrador de atención al público con frontal decorativo para logotipo institucional y zona interior de trabajo con cajonera archivadora y pasacables.",
-    "price": 380,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-077.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_OFICINA/img-076.jpg"
-    ],
-    "category": "Muebles de Oficina",
-    "subcategory": "Counters y Recepción",
-    "dimensions": "180 x 110 x 60 cm",
-    "material": "Melamina 18mm roble y blanco con doble nivel de atención",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 304,
-    "title": "Escritorio Ejecutivo Panorámico con Superficie de Cristal y Metal",
-    "desc": "Estación directiva de diseño contemporáneo con estructura metálica blanca de alta resistencia, faldón perforado y credenza de apoyo con llave.",
-    "price": 420,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-053.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_OFICINA/img-058.jpg"
-    ],
-    "category": "Muebles de Oficina",
-    "subcategory": "Escritorios Gerenciales",
-    "dimensions": "180 x 160 x 75 cm",
-    "material": "Perfilería de acero blanco + Tablero templado y melamina",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 305,
-    "title": "Mesa de Directorio Ejecutiva para 14 Personas con Conectividad",
-    "desc": "Mesa de conferencias de gran envergadura con cajas integradas pasacables para conexiones HDMI/red y bases robustas con canalización interior de cables.",
-    "price": 680,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-089.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_OFICINA/img-088.jpg"
-    ],
-    "category": "Muebles de Oficina",
-    "subcategory": "Salas de Reunión",
-    "dimensions": "360 x 120 x 75 cm",
-    "material": "Tablero reforzado 36mm con cajas pasacables de aluminio",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 306,
-    "title": "Mesa de Reuniones para 8 Personas con Patas en A",
-    "desc": "Mesa de sala de juntas con estructura en caballete metálico y tablero amaderado de 36mm con bordes antichoque.",
-    "price": 390,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-092.jpg",
-    "images": [
-      "/images/catalog/extracted_MUEBLES_OFICINA/img-091.jpg"
-    ],
-    "category": "Muebles de Oficina",
-    "subcategory": "Salas de Reunión",
-    "dimensions": "220 x 100 x 75 cm",
-    "material": "Estructura metálica en A + Tablero amaderado 36mm",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 307,
-    "title": "Credenza Archivadora Ejecutiva con Cerradura Central",
-    "desc": "Mueble bajo para archivo y almacenamiento de documentos con puertas batientes con cerradura, gavetas para carpetas colgantes y repisas interiores.",
-    "price": 160,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-014.jpg",
-    "images": [],
-    "category": "Muebles de Oficina",
-    "subcategory": "Archivadores y Credenzas",
-    "dimensions": "120 x 75 x 45 cm",
-    "material": "Melamina 18mm con cerradura de seguridad frontal",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 201,
-    "title": "Escritorio Juvenil con Librero DLM-0100",
-    "desc": "Escritorio con estantería vertical integrada, repisas organizadoras y cajonera doble. Ideal para estudio y teletrabajo en espacios optimizados.",
-    "price": 165,
-    "discountPrice": null,
+    "id": 24,
+    "title": "Escritorios Modelo GM-124",
+    "desc": "Escritorio estudiantil ergonómico en melamina Pelikano 18mm.",
+    "price": 355,
+    "discountPrice": 337,
     "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-000.png",
     "images": [
-      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-001.png",
-      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-002.png"
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-000.png",
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-001.png"
     ],
     "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "140 x 170 x 55 cm",
-    "material": "Melamina Pelikano 18mm RH blanco y amaderado",
     "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
     "inStock": true,
     "featured": true
   },
   {
-    "id": 202,
-    "title": "Escritorio Compacto con Gavetero EDL-0200",
-    "desc": "Diseño moderno con cajonera archivadora profunda y espacio para CPU o mochila escolar. Tablero resistente a ralladuras.",
-    "price": 160,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-001.png",
-    "images": [
-      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-000.png"
-    ],
-    "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "140 x 55 cm",
-    "material": "Melamina Wengué 18mm con herrajes niquelados",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 203,
-    "title": "Escritorio Minimalista de Estudio DLM-0300",
-    "desc": "Escritorio funcional con nicho abierto y cajón lateral discreto. Perfecto para laptop y tareas de estudiantes.",
-    "price": 145,
-    "discountPrice": null,
+    "id": 25,
+    "title": "Escritorios Modelo GM-125",
+    "desc": "Escritorio estudiantil ergonómico en melamina Pelikano 18mm.",
+    "price": 400,
+    "discountPrice": 380,
     "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-002.png",
     "images": [
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-002.png",
       "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-003.png"
     ],
     "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "140 x 55 cm",
-    "material": "Melamina Rovere con cantos PVC 2mm",
     "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 204,
-    "title": "Escritorio con Repisa Superior DLF-1000",
-    "desc": "Estructura vertical con torre de repisas laterales para libros y útiles. Optimiza el espacio de dormitorios juveniles.",
-    "price": 165,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-003.png",
-    "images": [
-      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-002.png"
-    ],
-    "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "140 x 120 x 55 cm",
-    "material": "Melamina texturizada roble claro",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 205,
-    "title": "Escritorio Escolar con Módulo de Archivo ELM-400",
-    "desc": "Escritorio robusto con gaveta superior y puerta inferior con bisagras de cierre suave para almacenamiento seguro.",
-    "price": 160,
-    "discountPrice": null,
+    "id": 26,
+    "title": "Escritorios Modelo GM-126",
+    "desc": "Escritorio estudiantil ergonómico en melamina Pelikano 18mm.",
+    "price": 445,
+    "discountPrice": 423,
     "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-004.png",
     "images": [
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-004.png",
       "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-005.png"
     ],
     "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "120 x 50 cm",
-    "material": "Melamina haya con tapacantos termofusionados",
     "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
     "inStock": true,
     "featured": false
   },
   {
-    "id": 206,
-    "title": "Escritorio Ergonómico Infantil CRECE-01",
-    "desc": "Diseño anatómico con bandeja retráctil y cajón portalápices. Favorece la correcta postura durante horas de estudio.",
-    "price": 175,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-005.png",
+    "id": 27,
+    "title": "Escritorios Modelo GM-127",
+    "desc": "Escritorio estudiantil ergonómico en melamina Pelikano 18mm.",
+    "price": 490,
+    "discountPrice": 466,
+    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-006.png",
     "images": [
-      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-004.png"
-    ],
-    "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "110 x 55 cm",
-    "material": "Melamina antibacterial resistente al derrame de líquidos",
-    "priceUnit": "unidad",
-    "inStock": true,
-    "featured": false
-  },
-  {
-    "id": 207,
-    "title": "Estación de Estudio Doble DUO-STUDY",
-    "desc": "Mueble para dos personas con divisor central organizador y cajoneras independientes. Solución ideal para hermanos.",
-    "price": 260,
-    "discountPrice": null,
-    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-012.png",
-    "images": [
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-006.png",
       "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-009.png"
     ],
     "category": "Escritorios",
-    "subcategory": "Línea Estudiantil",
-    "dimensions": "200 x 55 cm",
-    "material": "Melamina 18mm con doble estructura reforzada",
     "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 28,
+    "title": "Escritorios Modelo GM-128",
+    "desc": "Escritorio estudiantil ergonómico en melamina Pelikano 18mm.",
+    "price": 220,
+    "discountPrice": 209,
+    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-012.png",
+    "images": [
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-012.png",
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-015.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
     "inStock": true,
     "featured": true
+  },
+  {
+    "id": 29,
+    "title": "Escritorios Modelo GM-129",
+    "desc": "Escritorio estudiantil ergonómico en melamina Pelikano 18mm.",
+    "price": 265,
+    "discountPrice": 252,
+    "imgUrl": "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-018.png",
+    "images": [
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-018.png",
+      "/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-021.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 30,
+    "title": "Muebles de Oficina Modelo GM-130",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 570,
+    "discountPrice": 542,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-004.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-004.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-005.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 31,
+    "title": "Muebles de Oficina Modelo GM-131",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 615,
+    "discountPrice": 584,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-006.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-006.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-007.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 32,
+    "title": "Muebles de Oficina Modelo GM-132",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 660,
+    "discountPrice": 627,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-010.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-010.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-011.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 33,
+    "title": "Muebles de Oficina Modelo GM-133",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 705,
+    "discountPrice": 670,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-012.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-012.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-014.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 34,
+    "title": "Muebles de Oficina Modelo GM-134",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 750,
+    "discountPrice": 713,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-015.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-015.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-016.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 35,
+    "title": "Muebles de Oficina Modelo GM-135",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 480,
+    "discountPrice": 456,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-017.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-017.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-019.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 36,
+    "title": "Muebles de Oficina Modelo GM-136",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 525,
+    "discountPrice": 499,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-020.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-020.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-021.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 37,
+    "title": "Muebles de Oficina Modelo GM-137",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 570,
+    "discountPrice": 542,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-023.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-023.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-024.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 38,
+    "title": "Muebles de Oficina Modelo GM-138",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 615,
+    "discountPrice": 584,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-025.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-025.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-026.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 39,
+    "title": "Muebles de Oficina Modelo GM-139",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 660,
+    "discountPrice": 627,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-028.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-028.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-029.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 40,
+    "title": "Muebles de Oficina Modelo GM-140",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 705,
+    "discountPrice": 670,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-030.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-030.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-031.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 41,
+    "title": "Muebles de Oficina Modelo GM-141",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 750,
+    "discountPrice": 713,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-033.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-033.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-034.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 42,
+    "title": "Muebles de Oficina Modelo GM-142",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 480,
+    "discountPrice": 456,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-035.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-035.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-036.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 43,
+    "title": "Muebles de Oficina Modelo GM-143",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 525,
+    "discountPrice": 499,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-037.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-037.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-039.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 44,
+    "title": "Muebles de Oficina Modelo GM-144",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 570,
+    "discountPrice": 542,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-040.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-040.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-041.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 45,
+    "title": "Muebles de Oficina Modelo GM-145",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 615,
+    "discountPrice": 584,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-043.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-043.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-044.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 46,
+    "title": "Muebles de Oficina Modelo GM-146",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 660,
+    "discountPrice": 627,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-045.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-045.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-046.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 47,
+    "title": "Muebles de Oficina Modelo GM-147",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 705,
+    "discountPrice": 670,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-048.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-048.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-049.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 48,
+    "title": "Muebles de Oficina Modelo GM-148",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 750,
+    "discountPrice": 713,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-050.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-050.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-053.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 49,
+    "title": "Muebles de Oficina Modelo GM-149",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 480,
+    "discountPrice": 456,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-054.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-054.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-055.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 50,
+    "title": "Muebles de Oficina Modelo GM-150",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 525,
+    "discountPrice": 499,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-057.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-057.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-058.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 51,
+    "title": "Muebles de Oficina Modelo GM-151",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 570,
+    "discountPrice": 542,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-059.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-059.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-060.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 52,
+    "title": "Muebles de Oficina Modelo GM-152",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 615,
+    "discountPrice": 584,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-061.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-061.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-063.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 53,
+    "title": "Muebles de Oficina Modelo GM-153",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 660,
+    "discountPrice": 627,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-064.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-064.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-065.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 54,
+    "title": "Muebles de Oficina Modelo GM-154",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 705,
+    "discountPrice": 670,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-067.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-067.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-068.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 55,
+    "title": "Muebles de Oficina Modelo GM-155",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 750,
+    "discountPrice": 713,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-069.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-069.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-071.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 56,
+    "title": "Muebles de Oficina Modelo GM-156",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 480,
+    "discountPrice": 456,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-072.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-072.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-074.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 57,
+    "title": "Muebles de Oficina Modelo GM-157",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 525,
+    "discountPrice": 499,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-075.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-075.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-076.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 58,
+    "title": "Muebles de Oficina Modelo GM-158",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 570,
+    "discountPrice": 542,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-077.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-077.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-079.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 59,
+    "title": "Muebles de Oficina Modelo GM-159",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 615,
+    "discountPrice": 584,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-080.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-080.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-081.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 60,
+    "title": "Muebles de Oficina Modelo GM-160",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 660,
+    "discountPrice": 627,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-084.png",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-084.png",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-085.png"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 61,
+    "title": "Muebles de Oficina Modelo GM-161",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 705,
+    "discountPrice": 670,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-086.png",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-086.png",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-088.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 62,
+    "title": "Muebles de Oficina Modelo GM-162",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 750,
+    "discountPrice": 713,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-089.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-089.jpg",
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-091.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 63,
+    "title": "Muebles de Oficina Modelo GM-163",
+    "desc": "Credenza ejecutiva y counter de recepción modular.",
+    "price": 480,
+    "discountPrice": 456,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_OFICINA/img-092.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_OFICINA/img-092.jpg"
+    ],
+    "category": "Muebles de Oficina",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 64,
+    "title": "Baños Modelo GM-164",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 425,
+    "discountPrice": 404,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-005.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 65,
+    "title": "Baños Modelo GM-165",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 470,
+    "discountPrice": 447,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-006.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-006.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-007.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 66,
+    "title": "Baños Modelo GM-166",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 515,
+    "discountPrice": 489,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-008.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-008.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-009.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 67,
+    "title": "Baños Modelo GM-167",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 560,
+    "discountPrice": 532,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-010.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-010.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-011.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 68,
+    "title": "Baños Modelo GM-168",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 605,
+    "discountPrice": 575,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-012.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-012.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-013.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 69,
+    "title": "Baños Modelo GM-169",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 650,
+    "discountPrice": 618,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-014.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-014.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-015.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 70,
+    "title": "Baños Modelo GM-170",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 380,
+    "discountPrice": 361,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-016.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-016.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-017.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 71,
+    "title": "Baños Modelo GM-171",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 425,
+    "discountPrice": 404,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-018.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-018.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-019.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 72,
+    "title": "Baños Modelo GM-172",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 470,
+    "discountPrice": 447,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-020.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-020.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-021.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 73,
+    "title": "Baños Modelo GM-173",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 515,
+    "discountPrice": 489,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-022.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-022.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-023.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 74,
+    "title": "Baños Modelo GM-174",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 560,
+    "discountPrice": 532,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-024.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-024.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-025.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 75,
+    "title": "Baños Modelo GM-175",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 605,
+    "discountPrice": 575,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-026.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-026.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-027.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 76,
+    "title": "Baños Modelo GM-176",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 650,
+    "discountPrice": 618,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-028.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-028.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-029.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 77,
+    "title": "Baños Modelo GM-177",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 380,
+    "discountPrice": 361,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-030.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-030.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-031.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 78,
+    "title": "Baños Modelo GM-178",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 425,
+    "discountPrice": 404,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-032.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-032.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-033.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 79,
+    "title": "Baños Modelo GM-179",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 470,
+    "discountPrice": 447,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-034.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-034.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-035.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 80,
+    "title": "Baños Modelo GM-180",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 515,
+    "discountPrice": 489,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-036.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-036.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-037.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 81,
+    "title": "Baños Modelo GM-181",
+    "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
+    "price": 560,
+    "discountPrice": 532,
+    "imgUrl": "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-038.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-038.jpg",
+      "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-039.jpg"
+    ],
+    "category": "Baños",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 82,
+    "title": "Puertas Modelo GM-182",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 875,
+    "discountPrice": 831,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-004.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-004.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-005.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 83,
+    "title": "Puertas Modelo GM-183",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 920,
+    "discountPrice": 874,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-006.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-006.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-007.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 84,
+    "title": "Puertas Modelo GM-184",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 650,
+    "discountPrice": 618,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-008.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-008.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-009.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 85,
+    "title": "Puertas Modelo GM-185",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 695,
+    "discountPrice": 660,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-010.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-010.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-011.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 86,
+    "title": "Puertas Modelo GM-186",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 740,
+    "discountPrice": 703,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-012.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-012.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-013.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 87,
+    "title": "Puertas Modelo GM-187",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 785,
+    "discountPrice": 746,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-014.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-014.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-015.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 88,
+    "title": "Puertas Modelo GM-188",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 830,
+    "discountPrice": 789,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-016.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-016.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-017.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 89,
+    "title": "Puertas Modelo GM-189",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 875,
+    "discountPrice": 831,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-018.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-018.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-019.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 90,
+    "title": "Puertas Modelo GM-190",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 920,
+    "discountPrice": 874,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-020.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-020.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-021.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 91,
+    "title": "Puertas Modelo GM-191",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 650,
+    "discountPrice": 618,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-022.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-022.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-023.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 92,
+    "title": "Puertas Modelo GM-192",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 695,
+    "discountPrice": 660,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-024.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-024.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-025.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 93,
+    "title": "Puertas Modelo GM-193",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 740,
+    "discountPrice": 703,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-026.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-026.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-027.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 94,
+    "title": "Puertas Modelo GM-194",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 785,
+    "discountPrice": 746,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-028.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-028.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-029.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 95,
+    "title": "Puertas Modelo GM-195",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 830,
+    "discountPrice": 789,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-030.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-030.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-031.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 96,
+    "title": "Puertas Modelo GM-196",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 875,
+    "discountPrice": 831,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-032.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-032.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-033.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 97,
+    "title": "Puertas Modelo GM-197",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 920,
+    "discountPrice": 874,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-034.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-034.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-035.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 98,
+    "title": "Puertas Modelo GM-198",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 650,
+    "discountPrice": 618,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-036.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-036.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-037.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 99,
+    "title": "Puertas Modelo GM-199",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 695,
+    "discountPrice": 660,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-038.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-038.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-039.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 100,
+    "title": "Puertas Modelo GM-200",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 740,
+    "discountPrice": 703,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-040.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-040.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-041.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 101,
+    "title": "Puertas Modelo GM-201",
+    "desc": "Puerta pivotante monumental de 3m con cerrojo digital.",
+    "price": 785,
+    "discountPrice": 746,
+    "imgUrl": "/images/catalog/extracted_DE_PUERTAS/img-042.jpg",
+    "images": [
+      "/images/catalog/extracted_DE_PUERTAS/img-042.jpg",
+      "/images/catalog/extracted_DE_PUERTAS/img-043.jpg"
+    ],
+    "category": "Puertas",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 102,
+    "title": "Gamer Modelo GM-202",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 520,
+    "discountPrice": 494,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-004.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-004.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-005.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 103,
+    "title": "Gamer Modelo GM-203",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 565,
+    "discountPrice": 537,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-006.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-006.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-007.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 104,
+    "title": "Gamer Modelo GM-204",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 610,
+    "discountPrice": 580,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-008.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-008.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-009.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 105,
+    "title": "Gamer Modelo GM-205",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 340,
+    "discountPrice": 323,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-010.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-010.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-011.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 106,
+    "title": "Gamer Modelo GM-206",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 385,
+    "discountPrice": 366,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-012.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-012.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-013.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 107,
+    "title": "Gamer Modelo GM-207",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 430,
+    "discountPrice": 409,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-014.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-014.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-015.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 108,
+    "title": "Gamer Modelo GM-208",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 475,
+    "discountPrice": 451,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-016.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-016.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-017.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 109,
+    "title": "Gamer Modelo GM-209",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 520,
+    "discountPrice": 494,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-018.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-018.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-019.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 110,
+    "title": "Gamer Modelo GM-210",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 565,
+    "discountPrice": 537,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-020.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-020.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-021.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 111,
+    "title": "Gamer Modelo GM-211",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 610,
+    "discountPrice": 580,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-022.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-022.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-023.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 112,
+    "title": "Gamer Modelo GM-212",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 340,
+    "discountPrice": 323,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-024.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-024.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-025.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 113,
+    "title": "Gamer Modelo GM-213",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 385,
+    "discountPrice": 366,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-026.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-026.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-027.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 114,
+    "title": "Gamer Modelo GM-214",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 430,
+    "discountPrice": 409,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-028.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-028.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-029.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 115,
+    "title": "Gamer Modelo GM-215",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 475,
+    "discountPrice": 451,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-030.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-030.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-031.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 116,
+    "title": "Gamer Modelo GM-216",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 520,
+    "discountPrice": 494,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-032.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-032.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-033.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 117,
+    "title": "Gamer Modelo GM-217",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 565,
+    "discountPrice": 537,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-034.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-034.jpg",
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-035.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 118,
+    "title": "Gamer Modelo GM-218",
+    "desc": "Setup gamer con ruteo de cables oculto y perfiles LED.",
+    "price": 610,
+    "discountPrice": 580,
+    "imgUrl": "/images/catalog/extracted_MUEBLES_GAMER_2/img-036.jpg",
+    "images": [
+      "/images/catalog/extracted_MUEBLES_GAMER_2/img-036.jpg"
+    ],
+    "category": "Gamer",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 119,
+    "title": "Circuitos Modelo GM-219",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 180,
+    "discountPrice": 171,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-004.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 120,
+    "title": "Circuitos Modelo GM-220",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 225,
+    "discountPrice": 214,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-008.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-008.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-012.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 121,
+    "title": "Circuitos Modelo GM-221",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 270,
+    "discountPrice": 257,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-016.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-016.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-020.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 122,
+    "title": "Circuitos Modelo GM-222",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 315,
+    "discountPrice": 299,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-024.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-024.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-028.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 123,
+    "title": "Circuitos Modelo GM-223",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 360,
+    "discountPrice": 342,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-032.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-032.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-036.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 124,
+    "title": "Circuitos Modelo GM-224",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 405,
+    "discountPrice": 385,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-040.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-040.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-044.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 125,
+    "title": "Circuitos Modelo GM-225",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 450,
+    "discountPrice": 428,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-048.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-048.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-052.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 126,
+    "title": "Circuitos Modelo GM-226",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 180,
+    "discountPrice": 171,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-056.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-056.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-060.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 127,
+    "title": "Circuitos Modelo GM-227",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 225,
+    "discountPrice": 214,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-064.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-064.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-068.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 128,
+    "title": "Circuitos Modelo GM-228",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 270,
+    "discountPrice": 257,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-072.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-072.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-076.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 129,
+    "title": "Circuitos Modelo GM-229",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 315,
+    "discountPrice": 299,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-080.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-080.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-084.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 130,
+    "title": "Circuitos Modelo GM-230",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 360,
+    "discountPrice": 342,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-088.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-088.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-092.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 131,
+    "title": "Circuitos Modelo GM-231",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 405,
+    "discountPrice": 385,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-096.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-096.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-100.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 132,
+    "title": "Circuitos Modelo GM-232",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 450,
+    "discountPrice": 428,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-104.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-104.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-108.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 133,
+    "title": "Circuitos Modelo GM-233",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 180,
+    "discountPrice": 171,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-112.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-112.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-116.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 134,
+    "title": "Circuitos Modelo GM-234",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 225,
+    "discountPrice": 214,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-120.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-120.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-124.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 135,
+    "title": "Circuitos Modelo GM-235",
+    "desc": "Circuito de estimulación sensorial y psicomotriz.",
+    "price": 270,
+    "discountPrice": 257,
+    "imgUrl": "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-128.png",
+    "images": [
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-128.png",
+      "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-132.png"
+    ],
+    "category": "Circuitos",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 136,
+    "title": "Escritorios Modelo GM-236",
+    "desc": "Módulo estudiantil compacto con repisas.",
+    "price": 330,
+    "discountPrice": 314,
+    "imgUrl": "/images/catalog/extracted_estudiantiles/img-000.png",
+    "images": [
+      "/images/catalog/extracted_estudiantiles/img-000.png",
+      "/images/catalog/extracted_estudiantiles/img-001.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 137,
+    "title": "Escritorios Modelo GM-237",
+    "desc": "Módulo estudiantil compacto con repisas.",
+    "price": 375,
+    "discountPrice": 356,
+    "imgUrl": "/images/catalog/extracted_estudiantiles/img-002.png",
+    "images": [
+      "/images/catalog/extracted_estudiantiles/img-002.png",
+      "/images/catalog/extracted_estudiantiles/img-003.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 138,
+    "title": "Escritorios Modelo GM-238",
+    "desc": "Módulo estudiantil compacto con repisas.",
+    "price": 420,
+    "discountPrice": 399,
+    "imgUrl": "/images/catalog/extracted_estudiantiles/img-004.png",
+    "images": [
+      "/images/catalog/extracted_estudiantiles/img-004.png",
+      "/images/catalog/extracted_estudiantiles/img-005.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 139,
+    "title": "Escritorios Modelo GM-239",
+    "desc": "Módulo estudiantil compacto con repisas.",
+    "price": 465,
+    "discountPrice": 442,
+    "imgUrl": "/images/catalog/extracted_estudiantiles/img-006.png",
+    "images": [
+      "/images/catalog/extracted_estudiantiles/img-006.png",
+      "/images/catalog/extracted_estudiantiles/img-009.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 140,
+    "title": "Escritorios Modelo GM-240",
+    "desc": "Módulo estudiantil compacto con repisas.",
+    "price": 195,
+    "discountPrice": 185,
+    "imgUrl": "/images/catalog/extracted_estudiantiles/img-012.png",
+    "images": [
+      "/images/catalog/extracted_estudiantiles/img-012.png",
+      "/images/catalog/extracted_estudiantiles/img-015.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 141,
+    "title": "Escritorios Modelo GM-241",
+    "desc": "Módulo estudiantil compacto con repisas.",
+    "price": 240,
+    "discountPrice": 228,
+    "imgUrl": "/images/catalog/extracted_estudiantiles/img-018.png",
+    "images": [
+      "/images/catalog/extracted_estudiantiles/img-018.png",
+      "/images/catalog/extracted_estudiantiles/img-021.png"
+    ],
+    "category": "Escritorios",
+    "priceUnit": "unidad",
+    "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
+    "dimensions": "1.80m x 0.60m x 0.75m",
+    "inStock": true,
+    "featured": false
   }
 ];
 
-export function getProductsByCategory(categoryName: string): Product[] {
-  return ALL_CATALOG_PRODUCTS.filter(p => p.category.toLowerCase() === categoryName.toLowerCase());
+export function getProductsByCategory(category: string): Product[] {
+  if (!category || category === 'Todos') return ALL_CATALOG_PRODUCTS;
+  return ALL_CATALOG_PRODUCTS.filter(
+    (p) => p.category.toLowerCase() === category.toLowerCase()
+  );
+}
+
+export function getFeaturedProducts(): Product[] {
+  return ALL_CATALOG_PRODUCTS.filter((p) => p.featured);
 }

@@ -217,32 +217,50 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
 export function AffiliateBand() {
   return (
     <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-labelledby="afiliados-band-title">
-      <div className="relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 dark:border-stone-800 bg-[#FAF8F5] dark:bg-[#12161A] p-8 sm:p-12 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 dark:border-stone-800 bg-[#FAF8F5] dark:bg-[#12161A] p-6 sm:p-12 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
         {/* Glow sutil */}
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        {/* Vista Móvil (Exclusivamente Imagen Flyer + Botón de Registro) */}
+        <div className="lg:hidden flex flex-col items-center gap-5">
+          <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-stone-300 dark:border-stone-700 shadow-xl">
+            <Image
+              src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
+              alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
+              fill
+              sizes="(max-width: 768px) 100vw, 40vw"
+              className="object-cover"
+            />
+          </div>
+          <Link
+            href="/afiliados"
+            className="w-full max-w-sm inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#1b736b] active:bg-[#155b55] text-white font-bold text-xs sm:text-sm shadow-xl active:scale-95 transition-all text-center"
+          >
+            <span>Regístrate en modularesgm.com/afiliados</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+
+        {/* Vista Escritorio (Dossier Editorial Completo) */}
+        <div className="hidden lg:grid grid-cols-12 gap-14 items-center">
           {/* Columna Izquierda: Información Editorial */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
+          <div className="col-span-7 flex flex-col justify-between">
             <div>
-              {/* Monograma & Identificador */}
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-[10px] sm:text-xs font-mono tracking-[0.25em] uppercase text-stone-500 dark:text-stone-400">
+                <span className="text-xs font-mono tracking-[0.25em] uppercase text-stone-500 dark:text-stone-400">
                   MODULARES GM · COCINAS · CLÓSETS · MUEBLES A MEDIDA
                 </span>
                 <span className="h-px flex-1 max-w-[60px] bg-secondary/40" />
               </div>
 
-              {/* Título en Serif Elegante */}
-              <h2 id="afiliados-band-title" className="font-headline text-3xl sm:text-4xl lg:text-5xl font-normal text-stone-900 dark:text-stone-100 mb-4 leading-[1.12]">
+              <h2 id="afiliados-band-title" className="font-headline text-4xl lg:text-5xl font-normal text-stone-900 dark:text-stone-100 mb-4 leading-[1.12]">
                 Trabaja con nosotros
               </h2>
 
-              <p className="text-stone-600 dark:text-stone-300 text-base sm:text-lg font-light mb-8 max-w-xl">
+              <p className="text-stone-600 dark:text-stone-300 text-lg font-light mb-8 max-w-xl">
                 Recomienda Modulares GM y gana comisión directa por cada venta generada con tu código o enlace.
               </p>
 
-              {/* Pasos Numerados Estilo Editorial */}
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-4">
                   <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-stone-100 dark:text-secondary font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
@@ -275,20 +293,18 @@ export function AffiliateBand() {
                 </div>
               </div>
 
-              {/* Caja de Beneficio Mutuo */}
-              <div className="p-4 rounded-2xl border border-secondary/30 bg-secondary/10 flex items-center gap-3 mb-8">
+              <div className="p-4 rounded-2xl border border-stone-300 dark:border-stone-700 bg-stone-100 dark:bg-stone-900 flex items-center gap-3 mb-8">
                 <span className="text-lg">🚪</span>
                 <p className="text-xs sm:text-sm text-stone-800 dark:text-stone-200">
-                  <strong className="font-semibold text-stone-900 dark:text-white">Sin inventario ni inversión previa.</strong> Tu contacto recibe un <span className="font-bold text-secondary">5% de descuento</span> al usar tu código.
+                  <strong className="font-semibold text-stone-900 dark:text-white">Sin inventario ni inversión previa.</strong> Tu contacto recibe un <span className="font-extrabold text-emerald-700 dark:text-emerald-400">5% de descuento</span> al usar tu código.
                 </p>
               </div>
             </div>
 
-            {/* Botón de Registro */}
             <div>
               <Link
                 href="/afiliados"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#1b736b] hover:bg-[#155b55] text-white font-bold text-xs sm:text-sm shadow-lg transition-all duration-200 active:scale-95 group"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#1b736b] hover:bg-[#155b55] text-white font-bold text-sm shadow-lg transition-all duration-200 active:scale-95 group"
               >
                 <span>Regístrate en modularesgm.com/afiliados</span>
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -297,27 +313,15 @@ export function AffiliateBand() {
           </div>
 
           {/* Columna Derecha: Tarjeta Fotográfica con Arco */}
-          <div className="lg:col-span-5 relative flex justify-center mt-10 lg:mt-0">
+          <div className="col-span-5 relative flex justify-center">
             <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-secondary/30 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
-              <div className="w-full h-full relative">
-                 <Image
-                    src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
-                    alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 40vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-              <div className="absolute bottom-5 left-5 right-5 z-10 flex flex-col items-center justify-between text-white lg:hidden">
-                <Link
-                  href="/afiliados"
-                  className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#1b736b] text-white font-bold text-sm shadow-lg active:scale-95"
-                >
-                  <span>Regístrate en modularesgm.com/afiliados</span>
-                </Link>
-              </div>
+              <Image
+                src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
+                alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
+                fill
+                sizes="40vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
             </div>
           </div>
         </div>
