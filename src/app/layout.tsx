@@ -8,6 +8,9 @@ import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/cart-provider';
 import { SEOStructuredData } from '@/components/shared/seo-structured-data';
 
+/** ID de medición GA4 (flujo web «modularesgm»). Es público; la variable de entorno lo puede reemplazar. */
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-2LKR039L8Y';
+
 const fontBody = Inter({
   subsets: ['latin'],
   variable: '--font-body',
@@ -124,14 +127,14 @@ export default function RootLayout({
         </ThemeProvider>
         
         {/* Analytics Diferida (Zero-Blocking) */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
+        {GA_ID && (
           <Script
             id="google-analytics"
             strategy="lazyOnload"
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           />
         )}
-        {process.env.NEXT_PUBLIC_GA_ID && (
+        {GA_ID && (
           <Script
             id="google-analytics-init"
             strategy="lazyOnload"
@@ -140,7 +143,7 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                gtag('config', '${GA_ID}', {
                   send_page_view: true
                 });
               `,
