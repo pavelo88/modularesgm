@@ -1,37 +1,39 @@
-import { CatalogPage } from '@/components/catalog/catalog-page';
-import { catalogSections, catalogData } from '@/lib/catalog-data';
-import { notFound } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
+
+const SLUG_MAP: Record<string, string> = {
+  escritorios: '/escritorios',
+  cocinas: '/cocinas',
+  closets: '/closets',
+  bano: '/muebles-bano',
+  'muebles-bano': '/muebles-bano',
+  gamer: '/gamer',
+  oficina: '/muebles-oficina',
+  'muebles-oficina': '/muebles-oficina',
+  puertas: '/puertas',
+  estimulacion: '/contacto',
+};
 
 export function generateStaticParams() {
-  return catalogSections.map((section) => ({
-    category: section.id,
-  }));
+  return [
+    { category: 'escritorios' },
+    { category: 'cocinas' },
+    { category: 'closets' },
+    { category: 'bano' },
+    { category: 'muebles-bano' },
+    { category: 'gamer' },
+    { category: 'oficina' },
+    { category: 'muebles-oficina' },
+    { category: 'puertas' },
+    { category: 'estimulacion' },
+  ];
 }
 
-export async function generateMetadata({ params }: { params: { category: string } }) {
-  const section = catalogSections.find((s) => s.id === params.category);
-  if (!section) return {};
-
-  return {
-    title: `${section.label} | Modulares GM`,
-    description: `Catálogo de ${section.label.toLowerCase()}. Diseños personalizados y fabricación a medida.`,
-  };
-}
-
-export default function CategoryPage({ params }: { params: { category: string } }) {
-  const section = catalogSections.find((s) => s.id === params.category);
-  const products = catalogData[params.category];
-
-  if (!section || !products) {
-    notFound();
-  }
-
-  return (
-    <CatalogPage
-      title={section.label}
-      description="Explora nuestros diseños en esta categoría. Todos personalizables según tus necesidades."
-      products={products}
-      backHref="/catalogo"
-    />
-  );
+export default async function DynamicCategoryRedirectPage({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const { category } = await params;
+  const target = SLUG_MAP[category.toLowerCase()] || '/catalogo';
+  permanentRedirect(target);
 }

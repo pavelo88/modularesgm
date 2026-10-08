@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Plus, Ruler, Package, Eye, MessageCircle, Check, X } from 'lucide-react';
+import { Plus, Ruler, Package, Eye, MessageCircle, Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -20,6 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const [isHovered, setIsHovered] = useState(false);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const [cardImageIdx, setCardImageIdx] = useState(0);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [addedAnimation, setAddedAnimation] = useState(false);
 
@@ -30,6 +31,27 @@ export function ProductCard({ product }: { product: Product }) {
   // Colección de todas las imágenes disponibles para el producto (foto principal + ángulos secundarios)
   const allImages = [product.imgUrl, ...(product.images || [])].filter(Boolean);
   const hasSecondaryAngle = allImages.length > 1;
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCardImageIdx((prev) => (prev > 0 ? prev - 1 : allImages.length - 1));
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCardImageIdx((prev) => (prev < allImages.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleSelectImage = (e: React.MouseEvent, idx: number) => {
+    e.stopPropagation();
+    setCardImageIdx(idx);
+  };
+
+  const openQuickView = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setActiveImageIdx(cardImageIdx);
+    setIsQuickViewOpen(true);
+  };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -57,61 +79,83 @@ export function ProductCard({ product }: { product: Product }) {
           isOutOfStock && "opacity-60"
         )}
       >
-        {/* Contenedor de la Imagen con Transición de Ángulo (Hover) */}
+        {/* Contenedor de la Imagen con Carousel de Ángulos */}
         <div 
-          onClick={() => setIsQuickViewOpen(true)}
-          className="relative aspect-[4/3] w-full overflow-hidden bg-muted/40 cursor-pointer"
+          onClick={openQuickView}
+          className="relative aspect-[4/3] w-full overflow-hidden bg-muted/40 cursor-pointer select-none"
         >
-          {/* Imagen Primaria */}
+          {/* Imagen Activa del Carousel */}
           <Image
-            src={allImages[0]}
-            alt={product.title}
+            src={allImages[cardImageIdx] || allImages[0]}
+            alt={`${product.title} - Foto ${cardImageIdx + 1}`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className={cn(
-              "object-cover transition-all duration-700",
-              hasSecondaryAngle && isHovered ? "opacity-0 scale-105" : "opacity-100 group-hover:scale-105"
-            )}
+            className="object-cover transition-all duration-500 group-hover:scale-105"
             priority={false}
           />
-
-          {/* Imagen Secundaria (Segundo ángulo en Hover) */}
-          {hasSecondaryAngle && (
-            <Image
-              src={allImages[1]}
-              alt={`${product.title} - Ángulo alternativo`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className={cn(
-                "object-cover transition-all duration-700 absolute inset-0",
-                isHovered ? "opacity-100 scale-105" : "opacity-0 scale-100 pointer-events-none"
-              )}
-            />
-          )}
 
           {/* Overlay de gradiente sutil estilo Apple */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
           {/* Badges superiores */}
-          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
+          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-10">
             <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-background/80 dark:bg-black/60 backdrop-blur-md text-foreground border border-white/10 shadow-sm">
               {product.category}
             </span>
             {hasSecondaryAngle && (
               <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-primary/20 backdrop-blur-md text-primary font-bold border border-primary/30 flex items-center gap-1">
-                +2 ángulos
+                {cardImageIdx + 1}/{allImages.length} fotos
               </span>
             )}
           </div>
 
+          {/* Controles del Carrusel (Flechas Anterior y Siguiente) */}
+          {hasSecondaryAngle && (
+            <>
+              <button
+                type="button"
+                onClick={handlePrevImage}
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
+                title="Foto anterior"
+                aria-label="Ver foto anterior"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={handleNextImage}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
+                title="Siguiente foto"
+                aria-label="Ver siguiente foto"
+              >
+                <ChevronRight size={16} />
+              </button>
+
+              {/* Indicadores de Puntos (Dots) */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 pointer-events-auto bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+                {allImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={(e) => handleSelectImage(e, idx)}
+                    aria-label={`Ver foto ${idx + 1}`}
+                    className={cn(
+                      "h-1.5 rounded-full transition-all duration-300 active:scale-90",
+                      cardImageIdx === idx 
+                        ? "w-4 bg-primary shadow-sm" 
+                        : "w-1.5 bg-white/60 hover:bg-white"
+                    )}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
           {/* Botón Flotante de Vista Rápida */}
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsQuickViewOpen(true);
-            }}
-            className="absolute bottom-3 right-3 p-2.5 rounded-full bg-background/80 dark:bg-black/70 backdrop-blur-md text-foreground border border-white/15 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg"
+            onClick={openQuickView}
+            className="absolute bottom-3 right-3 z-20 p-2.5 rounded-full bg-background/80 dark:bg-black/70 backdrop-blur-md text-foreground border border-white/15 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg"
             title="Vista rápida y detalles"
             aria-label="Ver detalles del producto"
           >
@@ -128,7 +172,7 @@ export function ProductCard({ product }: { product: Product }) {
               </p>
             )}
             <h3 
-              onClick={() => setIsQuickViewOpen(true)}
+              onClick={openQuickView}
               className="text-base md:text-lg font-bold text-foreground line-clamp-2 cursor-pointer hover:text-primary transition-colors"
             >
               {product.title}

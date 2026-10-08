@@ -4,73 +4,73 @@
 
 @layer base {
   :root {
-    /* MODO CLARO - LIMPIO Y CRISTALINO */
-    --background: 43 15% 99%; /* Blanco puro #FDFCF8 */
-    --foreground: 193 42% 10%; /* Azul Teal casi negro */
+    /* MODO CLARO - BLANCO ARQUITECTÓNICO PURO Y TIPOGRAFÍA NÍTIDA */
+    --background: 0 0% 100%; /* Blanco puro #FFFFFF */
+    --foreground: 220 20% 10%; /* Carbón oscuro nítido #14171F */
     --card: 0 0% 100%;
-    --card-foreground: 193 42% 10%;
+    --card-foreground: 220 20% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 193 42% 10%;
-    --primary: 193 42% 30%; /* Azul Teal Intenso */
-    --primary-foreground: 43 15% 98%;
-    --secondary: 38 46% 49%; /* Dorado/Bronce */
-    --secondary-foreground: 43 15% 98%;
-    --muted: 193 15% 96%;
-    --muted-foreground: 193 15% 40%;
-    --accent: 193 42% 30%;
-    --accent-foreground: 43 15% 98%;
+    --popover-foreground: 220 20% 10%;
+    --primary: 36 78% 46%; /* Bronce dorado de autor #D28E1B */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%; /* Gris neutro suave */
+    --secondary-foreground: 220 20% 10%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%; /* Contraste accesible WCAG AA */
+    --accent: 36 78% 46%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 193 15% 94%;
-    --input: 193 15% 94%;
-    --ring: 193 42% 30%;
-    --radius: 0.75rem;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 36 78% 46%;
+    --radius: 0.85rem;
 
-    --sidebar-background: 43 15% 99%;
-    --sidebar-foreground: 193 42% 10%;
-    --sidebar-primary: 193 42% 30%;
-    --sidebar-primary-foreground: 43 15% 98%;
-    --sidebar-accent: 38 46% 49%;
-    --sidebar-accent-foreground: 43 15% 98%;
-    --sidebar-border: 193 15% 94%;
-    --sidebar-ring: 193 42% 30%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 20% 10%;
+    --sidebar-primary: 36 78% 46%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 20% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 36 78% 46%;
 
-    /* ANIMATION & EASING TOKENS */
+    /* ANIMATION & EASING TOKENS (Emil Kowalski) */
     --ease-out-emil: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out-emil: cubic-bezier(0.77, 0, 0.175, 1);
     --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .dark {
-    /* MODO OSCURO - CARBÓN SÓLIDO Y DORADO (RESTAURADO) */
-    --background: 207 28% 14%; /* Carbón oscuro #19242D */
-    --foreground: 43 44% 93%; /* Crema */
-    --card: 207 28% 18%;
-    --card-foreground: 43 44% 93%;
-    --popover: 207 28% 16%;
-    --popover-foreground: 43 44% 93%;
-    --primary: 38 46% 49%; /* Dorado como primario en oscuro */
-    --primary-foreground: 207 28% 10%;
-    --secondary: 193 42% 40%; /* Teal como secundario */
-    --secondary-foreground: 43 44% 93%;
-    --muted: 207 28% 22%;
-    --muted-foreground: 207 15% 70%;
-    --accent: 38 46% 49%;
-    --accent-foreground: 207 28% 10%;
+    /* MODO OSCURO - NEGRO PROFUNDO OLED & ORO CUARZO (Apple High-End) */
+    --background: 222 22% 6%; /* Negro profundo espacial #0B0D12 */
+    --foreground: 210 20% 98%; /* Blanco marfil ultra nítido #F7F9FC */
+    --card: 222 20% 9%; /* Pizarra grafito #10141D */
+    --card-foreground: 210 20% 98%;
+    --popover: 222 20% 9%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 36 84% 52%; /* Oro cuarzo vibrante #E8A222 */
+    --primary-foreground: 222 22% 6%;
+    --secondary: 222 16% 14%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 222 16% 14%;
+    --muted-foreground: 218 12% 65%;
+    --accent: 36 84% 52%;
+    --accent-foreground: 222 22% 6%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 43 44% 93%;
-    --border: 207 28% 25%;
-    --input: 207 28% 25%;
-    --ring: 38 46% 49%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 222 14% 17%;
+    --input: 222 14% 17%;
+    --ring: 36 84% 52%;
 
-    --sidebar-background: 207 28% 14%;
-    --sidebar-foreground: 43 44% 93%;
-    --sidebar-primary: 38 46% 49%;
-    --sidebar-primary-foreground: 207 28% 10%;
-    --sidebar-accent: 207 28% 22%;
-    --sidebar-accent-foreground: 43 44% 93%;
-    --sidebar-border: 207 28% 25%;
-    --sidebar-ring: 38 46% 49%;
+    --sidebar-background: 222 22% 6%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 36 84% 52%;
+    --sidebar-primary-foreground: 222 22% 6%;
+    --sidebar-accent: 222 16% 14%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 222 14% 17%;
+    --sidebar-ring: 36 84% 52%;
   }
 }
 
@@ -166,9 +166,24 @@
     display: flex;
     width: max-content;
   }
+
+  .announcement-ticker-track {
+    animation: ticker 36s linear infinite;
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .announcement-ticker-track:hover {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes ticker {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }

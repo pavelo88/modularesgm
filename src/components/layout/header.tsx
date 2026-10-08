@@ -42,13 +42,11 @@ export function Header() {
   const cartCount = getCartCount();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [topOffset, setTopOffset] = useState(36);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setTopOffset(Math.max(0, 36 - window.scrollY));
-      setScrolled(window.scrollY > 24);
+      setScrolled(window.scrollY > 20);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -122,13 +120,13 @@ export function Header() {
 
   return (
     <header
-      style={{ top: topOffset }}
       data-over-hero={overHero}
       className={cn(
-        'fixed w-full z-50 h-20 flex items-center transition-[background-color,box-shadow,backdrop-filter] duration-300',
+        'fixed w-full z-50 h-20 flex items-center transition-[top,background-color,box-shadow,backdrop-filter] duration-300',
+        scrolled ? 'top-0' : 'top-9',
         overHero
           ? 'bg-transparent'
-          : 'bg-white/70 dark:bg-[#111c24]/70 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.08)]'
+          : 'bg-white/80 dark:bg-[#111316]/85 backdrop-blur-xl border-b border-stone-200/50 dark:border-stone-800/60 shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.25)]'
       )}>
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">

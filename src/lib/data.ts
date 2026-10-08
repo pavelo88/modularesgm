@@ -56,11 +56,11 @@ export const defaultSiteContent: SiteContent = {
     linkedin: ''
   },
   theme: {
-    primary: '#2C5F6D',
-    secondary: '#B88E44',
-    background: '#19242D',
-    foreground: '#F5F1E5',
-    accent: '#B88E44'
+    primary: '#252A32',
+    secondary: '#AD823B',
+    background: '#111316',
+    foreground: '#F6F4ED',
+    accent: '#AD823B'
   },
   seo: {
     title: 'Modulares GM | Muebles, Diseño y Construcción',

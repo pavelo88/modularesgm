@@ -1,1 +1,10 @@
-﻿# Diseño Premium y Micro-interacciones`n`nEste documento detalla la inyección de la metodología de diseño Apple y las directrices de Emil Kowalski (Design Engineering) en Modulares GM.`n`n## Implementaciones Base`n`n- **Físicas de Movimiento:** Se establecieron curvas de Bezier exactas en `globals.css` (`--ease-out-emil`, `--ease-in-out-emil`, `--ease-spring`) para dotar a la interfaz de aceleración física real.`n- **Tacto (Tactile Feedback):** Los botones ahora utilizan la clase utilitaria global `.active-press` la cual reduce la escala exactamente a `0.97` en estado `:active` e invoca un rebote interpolado.`n- **Rendimiento SEO/LCP:** Se eliminó la dependencia de `<Skeleton />` en la portada principal para asegurar renderizado puro del DOM para rastreadores y Googlebot, mejorando los Core Web Vitals.`n- **Hero Animado:** Tags escalonados con un delay de `60ms` (`animation-delay`) y transiciones de fondo aceleradas por GPU (`duration-[1200ms]`).`n`n```mermaid`ngraph LR`n    A[Usuario toca botón] --> B(Escala 0.97 + Blur)`n    B --> C{Emil Out Curve}`n    C --> D[Recuperación a 1.0]`n```
+# Diseño Premium y Micro-interacciones`n`nEste documento detalla la inyección de la metodología de diseño Apple y las directrices de Emil Kowalski (Design Engineering) en Modulares GM.`n`n## Implementaciones Base`n`n- **Físicas de Movimiento:** Se establecieron curvas de Bezier exactas en `globals.css` (`--ease-out-emil`, `--ease-in-out-emil`, `--ease-spring`) para dotar a la interfaz de aceleración física real.`n- **Tacto (Tactile Feedback):** Los botones ahora utilizan la clase utilitaria global `.active-press` la cual reduce la escala exactamente a `0.97` en estado `:active` e invoca un rebote interpolado.`n- **Rendimiento SEO/LCP:** Se eliminó la dependencia de `<Skeleton />` en la portada principal para asegurar renderizado puro del DOM para rastreadores y Googlebot, mejorando los Core Web Vitals.`n- **Hero Animado:** Tags escalonados con un delay de `60ms` (`animation-delay`) y transiciones de fondo aceleradas por GPU (`duration-[1200ms]`).
+
+Ver también: [[07_Architectural_Luxury_Redesign]] para el sistema visual de arquitectura y la marquesina interactiva.
+
+```mermaid
+graph LR
+    A[Usuario toca botón] --> B(Escala 0.97 + Blur)
+    B --> C{Emil Out Curve}
+    C --> D[Recuperación a 1.0]
+```

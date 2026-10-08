@@ -1,0 +1,1633 @@
+{
+  "heroTitle": "Diseño y Construcción de Espacios Únicos",
+  "heroSubtitle": "Expertos en muebles modulares, cocinas modernas y topes de cuarzo. Transformamos tus ideas en realidad con calidad y elegancia en todo el Ecuador.",
+  "heroMediaUrl": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=2000",
+  "ctaText": "Solicitar Cotización",
+  "formTitle": "Cotiza tu Proyecto a Medida",
+  "formSubtitle": "Déjenos sus datos y un experto se pondrá en contacto para asesorarle en su próximo proyecto.",
+  "whatsappNumber": "0963064374",
+  "address": "Rosa Yeira 420 y Serpaio Japeravi, Quito, Ecuador",
+  "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7796588557444!2d-78.5347701!3d-0.2522322999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5991c8015c583%3A0x4766de73906f7d5f!2sRosa%20Yeira%20420%2C%20Quito%20170148!5e0!3m2!1ses-419!2sec!4v1772991627819!5m2!1ses-419!2sec",
+  "socialUrls": {
+    "instagram": "https://instagram.com/modularesgm",
+    "facebook": "https://facebook.com/modularesgm",
+    "linkedin": ""
+  },
+  "theme": {
+    "primary": "#1c93be",
+    "secondary": "#1c93be",
+    "background": "#ece9dd",
+    "foreground": "#212d3c",
+    "accent": "#d7d0ba"
+  },
+  "seo": {
+    "description": "Expertos en cocinas modulares, cuarzos, clósets y remodelación en Quito y todo el Ecuador.",
+    "title": "Modulares GM | Muebles, Diseño y Construcción",
+    "keywords": "Muebles modulares, Cocinas modernas, Cuarzo, Diseño de interiores, Remodelación, Quito, Ecuador, Modulares GM"
+  },
+  "services": [
+    {
+      "id": 1,
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mgm-68c65.firebasestorage.app/o/services%2F1776736587030-IMG_0320.jpeg?alt=media&token=eb4e0106-5bcb-4856-a55f-c83bc6ba2895",
+      "title": "Diseño de Cocinas",
+      "desc": "Cocinas modulares a medida con acabados premium, herrajes de cierre lento y optimización de espacios.",
+      "catalogUrl": "",
+      "icon": "Home"
+    },
+    {
+      "catalogUrl": "",
+      "icon": "Grid",
+      "imgUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+      "desc": "Instalación de mesones en cuarzo, granito y mármol para cocinas y baños con cortes precisos.",
+      "title": "Topes de Cuarzo y Granito",
+      "id": 2
+    },
+    {
+      "imgUrl": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&q=80&w=800",
+      "desc": "Armarios, walk-in closets y organizadores personalizados para maximizar el almacenamiento.",
+      "title": "Clósets y Vestidores",
+      "catalogUrl": "",
+      "icon": "LayoutGrid",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "icon": "Hammer",
+      "catalogUrl": "",
+      "title": "Construcción y Remodelación",
+      "imgUrl": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800",
+      "desc": "Obras civiles menores, gypsum, pintura y adecuaciones completas de espacios residenciales y comerciales."
+    },
+    {
+      "id": 5,
+      "title": "Muebles de Baño (Vanities)",
+      "desc": "Muebles resistentes a la humedad, lavabos y espejos modernos para renovar tu cuarto de baño.",
+      "imgUrl": "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&q=80&w=800",
+      "catalogUrl": "",
+      "icon": "Briefcase"
+    },
+    {
+      "icon": "MonitorPlay",
+      "catalogUrl": "",
+      "title": "Centros de Entretenimiento",
+      "imgUrl": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
+      "desc": "Paneles de TV a medida con iluminación LED integrada, repisas flotantes y paso de cables oculto.",
+      "id": 6
+    },
+    {
+      "desc": "Suministro e instalación de pisos laminados, vinílicos y SPC de alto tráfico y resistencia al agua.",
+      "imgUrl": "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=800",
+      "title": "Pisos Flotantes y SPC",
+      "catalogUrl": "",
+      "icon": "Palette",
+      "id": 7
+    },
+    {
+      "id": 8,
+      "icon": "Sofa",
+      "catalogUrl": "",
+      "desc": "Renders fotorrealistas y planos técnicos para visualizar tu proyecto antes de la fabricación.",
+      "title": "Asesoría y Diseño 3D",
+      "imgUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      "id": 9,
+      "catalogUrl": "",
+      "icon": "Store",
+      "imgUrl": "https://images.unsplash.com/photo-1556761175-b413da4b248b?auto=format&fit=crop&q=80&w=800",
+      "desc": "Soluciones para locales, oficinas y restaurantes: mostradores, estanterías y estaciones de trabajo.",
+      "title": "Mobiliario Comercial"
+    }
+  ],
+  "stats": [
+    {
+      "icon": "Globe",
+      "id": 1,
+      "value": "10+",
+      "label": "AÑOS EXP."
+    },
+    {
+      "icon": "Home",
+      "label": "PROYECTOS",
+      "value": "1000+",
+      "id": 2
+    },
+    {
+      "icon": "Ruler",
+      "id": 3,
+      "label": "PERSONALIZADO",
+      "value": "100%"
+    },
+    {
+      "icon": "MapPin",
+      "value": "EC",
+      "label": "NIVEL NACIONAL",
+      "id": 4
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "url": "https://images.squarespace-cdn.com/content/v1/657a358b4134183f81a43eab/1722361668270-YQ7R06OODR20I2P5P4P6/Logo_Novopan_Color.png",
+      "name": "NOVOPAN"
+    },
+    {
+      "name": "PELIKANO",
+      "url": "https://www.pelikano.com/wp-content/uploads/2021/09/logo-pelikano.png",
+      "id": 2
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Blum_logo.svg",
+      "name": "BLUM",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "HAFELE",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/H%C3%A4fele_GmbH_%26_Co_KG_Logo.svg"
+    },
+    {
+      "id": 5,
+      "name": "SILESTONE",
+      "url": "https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg"
+    },
+    {
+      "id": 6,
+      "url": "https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg",
+      "name": "DEKTON"
+    },
+    {
+      "id": 7,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_Teka_svg.svg",
+      "name": "TEKA"
+    },
+    {
+      "url": "https://www.briggsec.com/wp-content/uploads/2020/12/logo-briggs-web-01-e1608316773418.png",
+      "name": "BRIGGS",
+      "id": 8
+    },
+    {
+      "id": 9,
+      "name": "COSENTINO",
+      "url": "https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg"
+    }
+  ],
+  "products": [
+    {
+      "title": "Prueba",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mgm-68c65.firebasestorage.app/o/products%2F1777159638052-1000099291.jpg?alt=media&token=a6b77c8f-439a-46d0-9155-c56575976171&v=1777159641598",
+      "desc": "Descripción comercial del producto...",
+      "discountPrice": 50,
+      "id": 1777159620435,
+      "price": 100,
+      "category": "General"
+    },
+    {
+      "id": 101,
+      "category": "Cocinas",
+      "price": 250,
+      "discountPrice": null,
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mgm-68c65.firebasestorage.app/o/products%2F1776788494657-IMG_0320.jpeg?alt=media&token=1efb7b5d-7800-4ccd-a943-fbbe0a68f229",
+      "desc": "Muebles altos y bajos en melamina RH, incluye herrajes estándar.",
+      "title": "Cocina Modular Básica (Metro Lineal)"
+    },
+    {
+      "id": 102,
+      "price": 950,
+      "category": "Cocinas",
+      "desc": "Isla central con almacenamiento inferior y acabado premium.",
+      "imgUrl": "https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&q=80&w=800",
+      "title": "Isla de Cocina con Tope de Cuarzo",
+      "discountPrice": 650
+    },
+    {
+      "id": 103,
+      "category": "Baños",
+      "price": 350,
+      "discountPrice": 290,
+      "desc": "Mueble resistente a la humedad con tope de cuarzo moderno.",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mgm-68c65.firebasestorage.app/o/products%2F1777169459347-IMG_0398.jpeg?alt=media&token=76df3955-3534-4226-aee5-00b1bd705c91&v=1777169462386",
+      "title": "Mueble de Baño Flotante (Vanity)"
+    },
+    {
+      "price": 480,
+      "category": "Salas",
+      "id": 104,
+      "discountPrice": 420,
+      "title": "Centro de Entretenimiento TV 65\"",
+      "desc": "Panel ranurado Pelikano con iluminación LED integrada.",
+      "imgUrl": "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      "discountPrice": 150,
+      "title": "Clóset Modular Estándar",
+      "imgUrl": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&q=80&w=800",
+      "desc": "Módulo interno con cajoneras y tubos colgadores.",
+      "id": 105,
+      "category": "Dormitorios",
+      "price": 180
+    },
+    {
+      "price": 1500,
+      "category": "Dormitorios",
+      "id": 106,
+      "title": "Walk-in Closet Premium",
+      "desc": "Diseño amplio con herrajes Blum y cajones iluminados.",
+      "imgUrl": "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&q=80&w=800",
+      "discountPrice": 1200
+    },
+    {
+      "price": 180,
+      "category": "Oficina",
+      "id": 107,
+      "title": "Escritorio Corporativo",
+      "desc": "Escritorio minimalista con estructura metálica.",
+      "imgUrl": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=800",
+      "discountPrice": 150
+    },
+    {
+      "title": "Mesa de Centro Industrial",
+      "imgUrl": "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=800",
+      "desc": "Mesa rústica con bases de acero negro mate.",
+      "discountPrice": 90,
+      "id": 108,
+      "price": 120,
+      "category": "Salas"
+    },
+    {
+      "desc": "Repisas con soportes invisibles ideales para decoración.",
+      "title": "Set de Repisas Flotantes",
+      "imgUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800",
+      "discountPrice": 45,
+      "id": 109,
+      "price": 60,
+      "category": "Decoración"
+    },
+    {
+      "category": "Cocinas",
+      "price": 400,
+      "id": 110,
+      "discountPrice": 350,
+      "imgUrl": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800",
+      "desc": "Ideal para dividir espacios con elegancia.",
+      "title": "Barra Desayunadora Moderna"
+    },
+    {
+      "id": 1777159620436,
+      "title": "Modelo de Closets - Diseño 1",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-01.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620437,
+      "title": "Modelo de Closets - Diseño 2",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-02.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620438,
+      "title": "Modelo de Closets - Diseño 3",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-03.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620439,
+      "title": "Modelo de Closets - Diseño 4",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-04.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620440,
+      "title": "Modelo de Closets - Diseño 5",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-05.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620441,
+      "title": "Modelo de Closets - Diseño 6",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-06.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620442,
+      "title": "Modelo de Closets - Diseño 7",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-07.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620443,
+      "title": "Modelo de Closets - Diseño 8",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-08.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620444,
+      "title": "Modelo de Closets - Diseño 9",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-09.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620445,
+      "title": "Modelo de Closets - Diseño 10",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-10.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620446,
+      "title": "Modelo de Closets - Diseño 11",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-11.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620447,
+      "title": "Modelo de Closets - Diseño 12",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-12.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620448,
+      "title": "Modelo de Closets - Diseño 13",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 13). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-13.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620449,
+      "title": "Modelo de Closets - Diseño 14",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 14). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-14.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620450,
+      "title": "Modelo de Closets - Diseño 15",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 15). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-15.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620451,
+      "title": "Modelo de Closets - Diseño 16",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 16). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-16.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620452,
+      "title": "Modelo de Closets - Diseño 17",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 17). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-17.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620453,
+      "title": "Modelo de Closets - Diseño 18",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 18). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-18.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620454,
+      "title": "Modelo de Closets - Diseño 19",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 19). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-19.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620455,
+      "title": "Modelo de Closets - Diseño 20",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 20). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-20.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620456,
+      "title": "Modelo de Closets - Diseño 21",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 21). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-21.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620457,
+      "title": "Modelo de Closets - Diseño 22",
+      "desc": "Modelo de closets del catálogo Modulares GM (página 22). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/closets/page-22.webp",
+      "category": "Closets",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620458,
+      "title": "Modelo de Cocinas - Diseño 1",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-01.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620459,
+      "title": "Modelo de Cocinas - Diseño 2",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-02.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620460,
+      "title": "Modelo de Cocinas - Diseño 3",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-03.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620461,
+      "title": "Modelo de Cocinas - Diseño 4",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-04.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620462,
+      "title": "Modelo de Cocinas - Diseño 5",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-05.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620463,
+      "title": "Modelo de Cocinas - Diseño 6",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-06.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620464,
+      "title": "Modelo de Cocinas - Diseño 7",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-07.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620465,
+      "title": "Modelo de Cocinas - Diseño 8",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-08.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620466,
+      "title": "Modelo de Cocinas - Diseño 9",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-09.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620467,
+      "title": "Modelo de Cocinas - Diseño 10",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-10.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620468,
+      "title": "Modelo de Cocinas - Diseño 11",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-11.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620469,
+      "title": "Modelo de Cocinas - Diseño 12",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-12.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620470,
+      "title": "Modelo de Cocinas - Diseño 13",
+      "desc": "Modelo de cocinas del catálogo Modulares GM (página 13). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/cocinas/page-13.webp",
+      "category": "Cocinas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620471,
+      "title": "Modelo de Oficina - Diseño 1",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-01.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620472,
+      "title": "Modelo de Oficina - Diseño 2",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-02.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620473,
+      "title": "Modelo de Oficina - Diseño 3",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-03.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620474,
+      "title": "Modelo de Oficina - Diseño 4",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-04.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620475,
+      "title": "Modelo de Oficina - Diseño 5",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-05.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620476,
+      "title": "Modelo de Oficina - Diseño 6",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-06.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620477,
+      "title": "Modelo de Oficina - Diseño 7",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-07.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620478,
+      "title": "Modelo de Oficina - Diseño 8",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-08.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620479,
+      "title": "Modelo de Oficina - Diseño 9",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-09.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620480,
+      "title": "Modelo de Oficina - Diseño 10",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-10.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620481,
+      "title": "Modelo de Oficina - Diseño 11",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-11.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620482,
+      "title": "Modelo de Oficina - Diseño 12",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-12.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620483,
+      "title": "Modelo de Oficina - Diseño 13",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 13). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-13.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620484,
+      "title": "Modelo de Oficina - Diseño 14",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 14). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-14.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620485,
+      "title": "Modelo de Oficina - Diseño 15",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 15). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-15.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620486,
+      "title": "Modelo de Oficina - Diseño 16",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 16). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-16.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620487,
+      "title": "Modelo de Oficina - Diseño 17",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 17). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-17.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620488,
+      "title": "Modelo de Oficina - Diseño 18",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 18). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-18.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620489,
+      "title": "Modelo de Oficina - Diseño 19",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 19). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-19.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620490,
+      "title": "Modelo de Oficina - Diseño 20",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 20). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-20.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620491,
+      "title": "Modelo de Oficina - Diseño 21",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 21). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-21.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620492,
+      "title": "Modelo de Oficina - Diseño 22",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 22). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-22.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620493,
+      "title": "Modelo de Oficina - Diseño 23",
+      "desc": "Modelo de oficina del catálogo Modulares GM (página 23). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/oficina/page-23.webp",
+      "category": "Oficina",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620494,
+      "title": "Modelo de Gamer - Diseño 1",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-01.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620495,
+      "title": "Modelo de Gamer - Diseño 2",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-02.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620496,
+      "title": "Modelo de Gamer - Diseño 3",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-03.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620497,
+      "title": "Modelo de Gamer - Diseño 4",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-04.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620498,
+      "title": "Modelo de Gamer - Diseño 5",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-05.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620499,
+      "title": "Modelo de Gamer - Diseño 6",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-06.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620500,
+      "title": "Modelo de Gamer - Diseño 7",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-07.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620501,
+      "title": "Modelo de Gamer - Diseño 8",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-08.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620502,
+      "title": "Modelo de Gamer - Diseño 9",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-09.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620503,
+      "title": "Modelo de Gamer - Diseño 10",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-10.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620504,
+      "title": "Modelo de Gamer - Diseño 11",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-11.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620505,
+      "title": "Modelo de Gamer - Diseño 12",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-12.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620506,
+      "title": "Modelo de Gamer - Diseño 13",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 13). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-13.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620507,
+      "title": "Modelo de Gamer - Diseño 14",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 14). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-14.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620508,
+      "title": "Modelo de Gamer - Diseño 15",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 15). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-15.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620509,
+      "title": "Modelo de Gamer - Diseño 16",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 16). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-16.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620510,
+      "title": "Modelo de Gamer - Diseño 17",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 17). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-17.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620511,
+      "title": "Modelo de Gamer - Diseño 18",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 18). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-18.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620512,
+      "title": "Modelo de Gamer - Diseño 19",
+      "desc": "Modelo de gamer del catálogo Modulares GM (página 19). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/gamer/page-19.webp",
+      "category": "Gamer",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620513,
+      "title": "Modelo de Baño - Diseño 1",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-01.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620514,
+      "title": "Modelo de Baño - Diseño 2",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-02.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620515,
+      "title": "Modelo de Baño - Diseño 3",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-03.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620516,
+      "title": "Modelo de Baño - Diseño 4",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-04.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620517,
+      "title": "Modelo de Baño - Diseño 5",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-05.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620518,
+      "title": "Modelo de Baño - Diseño 6",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-06.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620519,
+      "title": "Modelo de Baño - Diseño 7",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-07.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620520,
+      "title": "Modelo de Baño - Diseño 8",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-08.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620521,
+      "title": "Modelo de Baño - Diseño 9",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-09.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620522,
+      "title": "Modelo de Baño - Diseño 10",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-10.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620523,
+      "title": "Modelo de Baño - Diseño 11",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-11.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620524,
+      "title": "Modelo de Baño - Diseño 12",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-12.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620525,
+      "title": "Modelo de Baño - Diseño 13",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 13). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-13.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620526,
+      "title": "Modelo de Baño - Diseño 14",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 14). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-14.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620527,
+      "title": "Modelo de Baño - Diseño 15",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 15). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-15.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620528,
+      "title": "Modelo de Baño - Diseño 16",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 16). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-16.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620529,
+      "title": "Modelo de Baño - Diseño 17",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 17). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-17.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620530,
+      "title": "Modelo de Baño - Diseño 18",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 18). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-18.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620531,
+      "title": "Modelo de Baño - Diseño 19",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 19). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-19.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620532,
+      "title": "Modelo de Baño - Diseño 20",
+      "desc": "Modelo de baño del catálogo Modulares GM (página 20). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/bano/page-20.webp",
+      "category": "Baño",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620533,
+      "title": "Modelo de Puertas - Diseño 1",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-01.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620534,
+      "title": "Modelo de Puertas - Diseño 2",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-02.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620535,
+      "title": "Modelo de Puertas - Diseño 3",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-03.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620536,
+      "title": "Modelo de Puertas - Diseño 4",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-04.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620537,
+      "title": "Modelo de Puertas - Diseño 5",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-05.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620538,
+      "title": "Modelo de Puertas - Diseño 6",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-06.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620539,
+      "title": "Modelo de Puertas - Diseño 7",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-07.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620540,
+      "title": "Modelo de Puertas - Diseño 8",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-08.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620541,
+      "title": "Modelo de Puertas - Diseño 9",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-09.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620542,
+      "title": "Modelo de Puertas - Diseño 10",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-10.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620543,
+      "title": "Modelo de Puertas - Diseño 11",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-11.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620544,
+      "title": "Modelo de Puertas - Diseño 12",
+      "desc": "Modelo de puertas del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/puertas/page-12.webp",
+      "category": "Puertas",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620545,
+      "title": "Modelo de Estimulación - Diseño 1",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-01.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620546,
+      "title": "Modelo de Estimulación - Diseño 2",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-02.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620547,
+      "title": "Modelo de Estimulación - Diseño 3",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 3). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-03.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620548,
+      "title": "Modelo de Estimulación - Diseño 4",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 4). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-04.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620549,
+      "title": "Modelo de Estimulación - Diseño 5",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 5). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-05.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620550,
+      "title": "Modelo de Estimulación - Diseño 6",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 6). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-06.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620551,
+      "title": "Modelo de Estimulación - Diseño 7",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 7). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-07.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620552,
+      "title": "Modelo de Estimulación - Diseño 8",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 8). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-08.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620553,
+      "title": "Modelo de Estimulación - Diseño 9",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 9). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-09.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620554,
+      "title": "Modelo de Estimulación - Diseño 10",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 10). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-10.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620555,
+      "title": "Modelo de Estimulación - Diseño 11",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 11). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-11.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620556,
+      "title": "Modelo de Estimulación - Diseño 12",
+      "desc": "Modelo de estimulación del catálogo Modulares GM (página 12). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/estimulacion/page-12.webp",
+      "category": "Estimulación",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620557,
+      "title": "Modelo de Escritorios - Diseño 1",
+      "desc": "Modelo de escritorios del catálogo Modulares GM (página 1). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/escritorios/page-01.webp",
+      "category": "Escritorios",
+      "inStock": false,
+      "featured": false
+    },
+    {
+      "id": 1777159620558,
+      "title": "Modelo de Escritorios - Diseño 2",
+      "desc": "Modelo de escritorios del catálogo Modulares GM (página 2). Consulta precio y medidas.",
+      "price": 0,
+      "discountPrice": null,
+      "imgUrl": "https://storage.googleapis.com/mgm-68c65.firebasestorage.app/catalog/escritorios/page-02.webp",
+      "category": "Escritorios",
+      "inStock": false,
+      "featured": false
+    }
+  ],
+  "updatedAt": {
+    "_seconds": 1791068652,
+    "_nanoseconds": 575000000
+  }
+}
