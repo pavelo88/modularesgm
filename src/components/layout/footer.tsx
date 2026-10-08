@@ -40,8 +40,11 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
         </div>
 
         <div className="flex flex-col items-center">
-          <Link href="/afiliados" className="mb-6 text-sm font-bold text-primary underline underline-offset-4">
+          <Link href="/afiliados" className="mb-3 text-sm font-bold text-primary underline underline-offset-4">
             Trabaja con nosotros · Programa de afiliados
+          </Link>
+          <Link href="/precios" className="mb-6 text-sm font-bold text-primary underline underline-offset-4">
+            Precios de cocinas y muebles
           </Link>
           <p className="text-xs font-bold uppercase tracking-widest mb-4 text-primary/60 dark:text-muted-foreground">
             Síguenos
