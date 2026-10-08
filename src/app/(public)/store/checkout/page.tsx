@@ -19,6 +19,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { handleCheckout } from '@/lib/actions';
+import { track } from '@/lib/analytics';
 import { Alert } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ProductCard } from '@/components/store/product-card';
@@ -94,6 +95,7 @@ export default function CheckoutPage() {
         setPayOrder({ id: result.orderId, total: result.total ?? 0 });
         return;
       }
+      track('purchase', { value: result.total ?? 0, currency: 'USD', payment_type: data.paymentMethod });
       clearCart();
       form.reset();
       setIsSuccess(true);
@@ -101,11 +103,12 @@ export default function CheckoutPage() {
   };
 
   const handlePaid = useCallback(() => {
+    track('purchase', { value: payOrder?.total ?? 0, currency: 'USD', payment_type: 'paypal' });
     clearCart();
     form.reset();
     setPayOrder(null);
     setIsSuccess(true);
-  }, [clearCart, form]);
+  }, [clearCart, form, payOrder]);
 
   const handlePayError = useCallback((description: string) => {
     toast({ variant: 'destructive', title: 'Pago no completado', description });

@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useTransition } from 'react';
+import { useContext, useState, useTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,7 +18,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { handleLeadSubmit } from '@/lib/actions';
-import { Loader2 } from 'lucide-react';
+import { track } from '@/lib/analytics';
+import { SITE, whatsappHref } from '@/lib/site';
+import { SiteContentContext } from '@/context/site-content-provider';
+import { Loader2, MessageCircle } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'El nombre es requerido.' }),
@@ -30,6 +33,10 @@ const formSchema = z.object({
 export function ContactForm() {
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
+  // Contexto opcional: el editor visual del admin muestra este formulario fuera del proveedor.
+  const whatsappNumber = useContext(SiteContentContext)?.siteContent?.whatsappNumber || SITE.phone;
+  /** Tras enviar, el cliente puede seguir por WhatsApp con su pedido ya escrito: respuesta inmediata. */
+  const [whatsappFollowUp, setWhatsappFollowUp] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,10 +52,17 @@ export function ContactForm() {
     startTransition(async () => {
       const result = await handleLeadSubmit(values);
       if (result.success) {
+        track('generate_lead', { form: 'cotizacion' });
         toast({
           title: '¡Solicitud Enviada!',
           description: 'Gracias, hemos recibido su solicitud. Nos contactaremos pronto.',
         });
+        setWhatsappFollowUp(
+          whatsappHref(
+            whatsappNumber,
+            `Hola Modulares GM, soy ${values.name}. Acabo de pedir una cotización en la web: ${values.message}`
+          )
+        );
         form.reset();
       } else {
         toast({
@@ -143,6 +157,18 @@ export function ContactForm() {
               </FormItem>
             )}
           />
+          {whatsappFollowUp && (
+            <a
+              href={whatsappFollowUp}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('whatsapp_click', { location: 'formulario_enviado' })}
+              className="flex items-center justify-center gap-2 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 p-4 text-sm font-bold text-foreground transition hover:bg-[#25D366]/20"
+            >
+              <MessageCircle size={18} className="text-[#25D366]" />
+              ¡Recibido! ¿Quieres respuesta inmediata? Continúa por WhatsApp
+            </a>
+          )}
           <div className="pt-2">
             <Button 
               type="submit" 
