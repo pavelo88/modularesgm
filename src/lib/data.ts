@@ -34,7 +34,7 @@ export const defaultBrands: Brand[] = [
 
 
 export const defaultStats: Stat[] = [
-  { id: 1, value: '10+', label: 'AÑOS EXP.', icon: 'Globe' },
+  { id: 1, value: '18+', label: 'AÑOS EXP.', icon: 'Globe' },
   { id: 2, value: '1000+', label: 'PROYECTOS', icon: 'Home' },
   { id: 3, value: '100%', label: 'PERSONALIZADO', icon: 'Ruler' },
   { id: 4, value: 'EC', label: 'NIVEL NACIONAL', icon: 'MapPin' }

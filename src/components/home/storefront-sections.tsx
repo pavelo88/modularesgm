@@ -162,13 +162,13 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
 
             {/* Descripción y botón */}
             <div className="p-6 flex-1 flex flex-col justify-between gap-4">
-              <p className="text-xs sm:text-sm text-muted-foreground font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-light leading-relaxed">
                 {cat.desc}
               </p>
 
-              <div className="pt-4 border-t border-border/40 flex items-center justify-between text-xs font-bold text-secondary group-hover:text-secondary/90 transition-colors">
+              <div className="pt-4 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-200 group-hover:text-primary transition-colors">
                 <span className="uppercase tracking-wider">Explorar Colección & Modelos</span>
-                <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-secondary/15 text-secondary group-hover:bg-secondary group-hover:text-secondary-foreground transition-all duration-300">
+                <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-stone-200/50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
                 </span>
               </div>
@@ -297,30 +297,25 @@ export function AffiliateBand() {
           </div>
 
           {/* Columna Derecha: Tarjeta Fotográfica con Arco */}
-          <div className="lg:col-span-5 relative flex justify-center">
+          <div className="lg:col-span-5 relative flex justify-center mt-10 lg:mt-0">
             <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-secondary/30 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
-              <Image
-                src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
-                alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              <div className="w-full h-full relative">
+                 <Image
+                    src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
+                    alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-              <div className="absolute bottom-5 left-5 right-5 z-10 flex items-center justify-between text-white">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary block">
-                    Comisiones Directas
-                  </span>
-                  <span className="text-xs font-light">Para arquitectos, instaladores y promotores</span>
-                </div>
+              <div className="absolute bottom-5 left-5 right-5 z-10 flex flex-col items-center justify-between text-white lg:hidden">
                 <Link
                   href="/afiliados"
-                  className="h-10 w-10 rounded-full bg-secondary text-stone-950 flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-md shrink-0"
-                  title="Ir al Portal de Afiliados"
+                  className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#1b736b] text-white font-bold text-sm shadow-lg active:scale-95"
                 >
-                  <ArrowRight size={16} />
+                  <span>Regístrate en modularesgm.com/afiliados</span>
                 </Link>
               </div>
             </div>

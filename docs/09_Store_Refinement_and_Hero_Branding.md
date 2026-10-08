@@ -10,7 +10,7 @@ Este documento registra la arquitectura de la tienda, optimización del Hero sli
 graph TD
     A[Usuario entra a Modulares GM] --> B{Ruta Seleccionada}
     B -->|Home /| C[Hero Slider con Fotos de Catálogo Oficial]
-    C --> D[AnimatedCounter: 0 -> 10+, 1000+, 100%]
+    C --> D[AnimatedCounter: 0 -> 18+, 1000+, 100%]
     D --> E[BrandsCarousel: SVGs y WebPs en Monocromo Luxury]
     E --> F[FeaturedProducts: Tarjetas Compactas 4-cols lg:basis-1/4]
     
@@ -56,4 +56,4 @@ Renderizado con filtro monocromo sutil (`grayscale opacity-60 hover:grayscale-0 
 
 ## ⚡ 5. Contador Animado de Estadísticas (`AnimatedCounter`)
 
-Se implementó el componente con `IntersectionObserver` y easing cúbico de Emil Kowalski (`1 - Math.pow(1 - progress, 3)`), garantizando un conteo suave de 0 al valor objetivo (`10+`, `1000+`, `100%`) en cuanto la franja entra en el viewport del usuario.
+Se implementó el componente con `IntersectionObserver` y easing cúbico de Emil Kowalski (`1 - Math.pow(1 - progress, 3)`), garantizando un conteo suave de 0 al valor objetivo (`18+`, `1000+`, `100%`) en cuanto la franja entra en el viewport del usuario.

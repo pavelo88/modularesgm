@@ -26,27 +26,27 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
            <div className="flex items-center gap-3 mb-4">
              <Image src="/logo.png" alt="Modulares GM Logo" width={48} height={48} className="w-12 h-12 object-contain drop-shadow-md" />
             <div className="flex flex-col">
-                <span className="block text-xl font-bold tracking-tight text-primary">
+                <span className="block text-xl font-bold tracking-tight text-stone-900 dark:text-white">
                     MODULARES GM
                 </span>
-                 <p className="text-xs font-medium text-primary/80 dark:text-muted-foreground -mt-1 leading-tight">
+                 <p className="text-xs font-medium text-stone-600 dark:text-muted-foreground -mt-1 leading-tight">
                     Cocinas y Cuarzos
                 </p>
             </div>
           </div>
-          <p className="text-primary/70 dark:text-muted-foreground text-sm font-headline max-w-xs font-medium">
+          <p className="text-stone-700 dark:text-muted-foreground text-sm font-headline max-w-xs font-medium">
             Muebles • Diseño • Construcción. Creando espacios excepcionales.
           </p>
         </div>
 
         <div className="flex flex-col items-center">
-          <Link href="/afiliados" className="mb-3 text-sm font-bold text-primary underline underline-offset-4">
+          <Link href="/afiliados" className="mb-3 text-sm font-bold text-stone-900 dark:text-white underline underline-offset-4">
             Trabaja con nosotros · Programa de afiliados
           </Link>
-          <Link href="/precios" className="mb-6 text-sm font-bold text-primary underline underline-offset-4">
+          <Link href="/precios" className="mb-6 text-sm font-bold text-stone-900 dark:text-white underline underline-offset-4">
             Precios de cocinas y muebles
           </Link>
-          <p className="text-xs font-bold uppercase tracking-widest mb-4 text-primary/60 dark:text-muted-foreground">
+          <p className="text-xs font-bold uppercase tracking-widest mb-4 text-stone-600 dark:text-muted-foreground">
             Síguenos
           </p>
           <div className="flex gap-4">
@@ -74,18 +74,18 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center md:items-end text-sm space-y-2 font-headline text-primary/70 dark:text-muted-foreground font-medium">
+        <div className="flex flex-col items-center md:items-end text-sm space-y-2 font-headline text-stone-700 dark:text-muted-foreground font-medium">
           <p>{address}</p>
           <p>Ecuador</p>
           <p>{whatsappNumber}</p>
           <div className="text-sm font-sans flex items-center justify-center gap-[2px]">
             <span>info</span>
-            <span className="text-primary">&#64;</span>
+            <span className="text-stone-900 dark:text-white">&#64;</span>
             <span>modularesgm.com</span>
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 text-center border-t border-primary/10 pt-8 text-primary/50 dark:text-muted-foreground">
+      <div className="max-w-7xl mx-auto px-6 text-center border-t border-stone-200 dark:border-stone-800 pt-8 text-stone-500 dark:text-muted-foreground">
         <p className="text-xs font-sans">
           &copy; {new Date().getFullYear()} MODULARES GM. Todos los derechos reservados.
         </p>

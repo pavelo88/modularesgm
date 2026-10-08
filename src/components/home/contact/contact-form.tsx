@@ -99,7 +99,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="flex h-full flex-col justify-between rounded-[2rem] border border-stone-200/80 bg-white/90 p-6 sm:p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.03)] backdrop-blur-xl dark:border-stone-800/80 dark:bg-stone-900/60">
+    <div className="flex h-full flex-col justify-between rounded-[2rem] border border-stone-200/80 bg-white/90 p-4 sm:p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.03)] backdrop-blur-xl dark:border-stone-800/80 dark:bg-stone-900/60">
       <div>
         {/* Cabecera del Formulario */}
         <div className="pb-4 border-b border-stone-200/80 dark:border-stone-800 mb-6">
@@ -120,32 +120,7 @@ export function ContactForm() {
           </p>
         </div>
 
-        {/* Selector de Tipo de Proyecto (Chips interactivos) */}
-        <div className="mb-6">
-          <label className="block text-[10px] font-bold uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400 mb-2.5">
-            Tipo de Proyecto o Superficie
-          </label>
-          <div className="flex flex-wrap gap-2">
-            {PROJECT_TYPES.map((type) => {
-              const isSelected = selectedType === type;
-              return (
-                <button
-                  key={type}
-                  type="button"
-                  onClick={() => handleTypeSelect(type)}
-                  className={cn(
-                    'text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all duration-200 select-none active:scale-95',
-                    isSelected
-                      ? 'border-secondary bg-secondary text-stone-950 font-semibold shadow-sm ring-2 ring-secondary/30'
-                      : 'border-stone-200 bg-stone-50/80 text-stone-700 hover:border-stone-300 hover:bg-stone-100 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-300 dark:hover:border-stone-700'
-                  )}
-                >
-                  {type}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+
 
         {/* Formulario */}
         <Form {...form}>
@@ -235,7 +210,7 @@ export function ContactForm() {
                   <FormControl>
                     <Textarea
                       placeholder="Indíquenos las dimensiones tentativas, ubicación en Ecuador, materiales de preferencia (ej. cuarzo Calacatta Gold, melamina hidrófuga) o si ya cuenta con planos arquitectónicos..."
-                      className="min-h-[110px] resize-none rounded-xl border-stone-200 bg-stone-50/50 p-3.5 text-stone-900 transition-all focus-visible:border-secondary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-secondary/50 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-100 dark:focus-visible:border-secondary dark:focus-visible:bg-stone-950"
+                      className="min-h-[80px] resize-none rounded-xl border-stone-200 bg-stone-50/50 p-3.5 text-stone-900 transition-all focus-visible:border-secondary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-secondary/50 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-100 dark:focus-visible:border-secondary dark:focus-visible:bg-stone-950"
                       data-webmcp-input="projectDetails"
                       {...field}
                     />

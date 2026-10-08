@@ -74,6 +74,7 @@ export interface SiteContent {
   stats: Stat[];
   brands: Brand[];
   products: Product[];
+  tickerMessages?: { id: string; text: string; href?: string; highlight?: boolean }[];
 }
 
 export interface Lead {

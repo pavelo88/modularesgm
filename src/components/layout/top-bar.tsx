@@ -36,8 +36,13 @@ const TICKER_MESSAGES = [
   },
 ];
 
+import { useSiteContent } from '@/context/site-content-provider';
+
 export function TopBar() {
   const { code, affiliateName, discountPercent, clearCode } = useAffiliate();
+  const { siteContent } = useSiteContent();
+
+  const tickerMessages = siteContent?.tickerMessages || TICKER_MESSAGES;
 
   return (
     <div
@@ -76,10 +81,10 @@ export function TopBar() {
 
           {/* Track continuo doble para rotación infinita sin cortes */}
           <div className="announcement-ticker-track flex items-center py-1 group-hover:[animation-play-state:paused]">
-            {[...TICKER_MESSAGES, ...TICKER_MESSAGES].map((item, idx) => (
+            {[...tickerMessages, ...tickerMessages].map((item, idx) => (
               <span key={`${item.id}-${idx}`} className="inline-flex items-center gap-3 shrink-0 px-4">
                 <Link
-                  href={item.href}
+                  href={item.href || '#'}
                   className="font-medium tracking-wide transition-all duration-200 hover:text-secondary hover:underline underline-offset-4 flex items-center gap-1.5 text-stone-200 hover:text-white"
                 >
                   <span>{item.text}</span>

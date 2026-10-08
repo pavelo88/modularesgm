@@ -41,10 +41,10 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
           </div>
         </div>
 
-        {/* Estructura en Proporciones Áureas: Dossier del Atelier (5) + Formulario Esculpido (7) */}
+        {/* Estructura en Proporciones Áureas: Dossier del Atelier (6) + Formulario Esculpido (6) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* Columna Izquierda: Atelier, Canales Directos, Estándares & Mapa */}
-          <div className="lg:col-span-5 flex flex-col">
+          <div className="lg:col-span-6 flex flex-col">
             <ContactInfo
               whatsappNumber={siteContent.whatsappNumber}
               address={siteContent.address}
@@ -54,7 +54,7 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
           </div>
 
           {/* Columna Derecha: Formulario Esculpido de Alta Precisión */}
-          <div className="lg:col-span-7 flex flex-col">
+          <div className="lg:col-span-6 flex flex-col">
             <ContactForm />
           </div>
         </div>
