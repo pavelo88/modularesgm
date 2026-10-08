@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, ChevronRight, Handshake, Ruler, ShieldCheck, Sparkles, Truck } from 'lucide-react';
@@ -215,6 +216,15 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
 
 /** Invitación al programa de afiliados inspirada directamente en el flyer editorial de Claude */
 export function AffiliateBand() {
+  const [activeCategoryIdx, setActiveCategoryIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveCategoryIdx((prev) => (prev + 1) % ARCHITECTURAL_CATEGORIES.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-labelledby="afiliados-band-title">
       <div className="relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 dark:border-stone-800 bg-[#FAF8F5] dark:bg-[#12161A] p-6 sm:p-12 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
@@ -241,7 +251,7 @@ export function AffiliateBand() {
           </Link>
         </div>
 
-        {/* Vista Escritorio (Dossier Editorial Completo) */}
+        {/* Vista Escritorio (Dossier Editorial Completo con Carrusel a la Derecha) */}
         <div className="hidden lg:grid grid-cols-12 gap-14 items-center">
           {/* Columna Izquierda: Información Editorial */}
           <div className="col-span-7 flex flex-col justify-between">
@@ -312,16 +322,61 @@ export function AffiliateBand() {
             </div>
           </div>
 
-          {/* Columna Derecha: Tarjeta Fotográfica con Arco */}
-          <div className="col-span-5 relative flex justify-center">
-            <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-secondary/30 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
-              <Image
-                src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
-                alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
-                fill
-                sizes="40vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+          {/* Columna Derecha: Carrusel Dinámico de 1 Sola Tarjeta con las Categorías Reales */}
+          <div className="col-span-5 relative flex flex-col items-center">
+            <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-secondary/30 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
+              {ARCHITECTURAL_CATEGORIES.map((cat, idx) => (
+                <div
+                  key={cat.href}
+                  className={`absolute inset-0 transition-opacity duration-1000 ${
+                    idx === activeCategoryIdx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+                >
+                  <Image
+                    src={cat.imgUrl}
+                    alt={cat.title}
+                    fill
+                    sizes="40vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
+                      {cat.tag}
+                    </span>
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                      {cat.models}
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-5 left-5 right-5 z-20 text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary block mb-1">
+                      Línea Destacada #{idx + 1}
+                    </span>
+                    <h3 className="text-xl font-headline font-normal tracking-tight leading-snug">
+                      {cat.title}
+                    </h3>
+                    <p className="text-xs text-stone-300 font-light mt-1 line-clamp-2">
+                      {cat.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Controles discretos del carrusel */}
+            <div className="flex items-center gap-1.5 mt-4">
+              {ARCHITECTURAL_CATEGORIES.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveCategoryIdx(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    idx === activeCategoryIdx ? 'w-6 bg-secondary' : 'w-2 bg-stone-300 dark:bg-stone-700'
+                  }`}
+                  aria-label={`Ir a diapositiva ${idx + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
