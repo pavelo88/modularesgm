@@ -1,0 +1,42 @@
+{
+  "scene_seconds": 2.8,
+  "scenes": [
+    {
+      "photo": "public/images/catalog/extracted_DE_COCINAS/img-007.jpg",
+      "eyebrow": "Navidad 2026",
+      "title": "¿Cocina nueva para Navidad?",
+      "say": "¿Quieres estrenar cocina esta Navidad?"
+    },
+    {
+      "photo": "public/images/catalog/extracted_DE_COCINAS/img-017.png",
+      "eyebrow": "Diseño a medida",
+      "title": "Tu cocina en 3D antes de fabricar",
+      "say": "Te mostramos tu cocina en 3D antes de fabricarla."
+    },
+    {
+      "photo": "public/images/catalog/extracted_DE_COCINAS/img-015.png",
+      "eyebrow": "Acabados",
+      "title": "Mesones de cuarzo y granito",
+      "say": "Mesones de cuarzo y granito, hechos a tu medida."
+    },
+    {
+      "photo": "public/images/catalog/extracted_DE_COCINAS/img-026.png",
+      "eyebrow": "Quito y valles",
+      "title": "Medición gratis en tu casa",
+      "say": "Vamos a medir gratis a tu casa, en Quito y los valles."
+    }
+  ],
+  "end": {
+    "title": "Aprueba tu diseño hasta el 13 de noviembre",
+    "subtitle": "y la instalamos antes de Navidad",
+    "cta": "WhatsApp 096 306 4374",
+    "footer": "modularesgm.com · Modulares GM",
+    "say": "Aprueba tu diseño hasta el trece de noviembre y la instalamos antes de Navidad. Escríbenos por WhatsApp."
+  },
+  "audio": {
+    "voice": "es-MX-JorgeNeural",
+    "rate": "+5%",
+    "music": "auto",
+    "music_volume": 0.35
+  }
+}

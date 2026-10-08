@@ -48,3 +48,9 @@ firestore-debug.log.env
 *service-account*.json
 
 !.env.example
+
+# videos generados con la skill videos (.claude/skills/videos)
+/videos-out/
+
+# Python
+__pycache__/
