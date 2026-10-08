@@ -78,7 +78,7 @@ export function HomeSeoContent() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            ¿Buscas algo específico? Revisa la <Link href="/store" className="font-bold text-primary underline underline-offset-4">tienda</Link> o pide tu cotización en la sección de contacto.
+            ¿Buscas algo específico? Revisa la <Link href="/store" className="font-bold text-primary underline underline-offset-4">tienda</Link>, mira los <Link href="/precios" className="font-bold text-primary underline underline-offset-4">precios de referencia</Link> o pide tu cotización en la sección de contacto.
           </p>
         </div>
       </section>

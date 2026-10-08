@@ -13,6 +13,7 @@ import {
   Zap,
   Palette,
   Handshake,
+  LineChart,
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -36,6 +37,7 @@ import { CmsThemeForm } from './cms-theme-form';
 import { LeadsManager } from './leads-manager';
 import { OrdersManager } from './orders-manager';
 import { AffiliatesManager } from './affiliates-manager';
+import { AnalyticsDashboard } from './analytics-dashboard';
 import { logout } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -44,16 +46,18 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { doc, onSnapshot } from 'firebase/firestore';
 
-type AdminTab = 'general' | 'theme' | 'services' | 'products' | 'brands' | 'leads' | 'orders' | 'affiliates';
+type AdminTab = 'analytics' | 'general' | 'theme' | 'services' | 'products' | 'brands' | 'leads' | 'orders' | 'affiliates';
 
 const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
+  { id: 'analytics', label: 'Analítica', icon: <LineChart /> },
   { id: 'general', label: 'Inicio y Contacto', icon: <Settings /> },
   { id: 'theme', label: 'Apariencia y Colores', icon: <Palette /> },
   { id: 'services', label: 'Servicios', icon: <LayoutGrid /> },
   { id: 'products', label: 'Tienda Online', icon: <ShoppingBag /> },
   { id: 'brands', label: 'Marcas y Stats', icon: <Zap /> },
   { id: 'leads', label: 'Leads (Contactos)', icon: <MessageSquare /> },
-  { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },  { id: 'affiliates', label: 'Afiliados', icon: <Handshake /> },
+  { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },
+  { id: 'affiliates', label: 'Afiliados', icon: <Handshake /> },
 ];
 
 function NavItem({ item, activeTab, setActiveTab }: { item: any, activeTab: AdminTab, setActiveTab: (tab: AdminTab) => void }) {
@@ -77,7 +81,7 @@ function NavItem({ item, activeTab, setActiveTab }: { item: any, activeTab: Admi
 }
 
 export function AdminDashboardClient() {
-  const [activeTab, setActiveTab] = useState<AdminTab>('general');
+  const [activeTab, setActiveTab] = useState<AdminTab>('analytics');
   const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
   const [loading, setLoading] = useState(true);
   const [authReady, setAuthReady] = useState(false);
@@ -138,6 +142,8 @@ export function AdminDashboardClient() {
     };
 
     switch (activeTab) {
+      case 'analytics':
+        return <AnalyticsDashboard />;
       case 'general':
         return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'theme':

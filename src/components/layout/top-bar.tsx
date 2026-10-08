@@ -4,8 +4,15 @@ import Link from 'next/link';
 import { BadgePercent, Facebook, Instagram, MessageCircle, Phone, Sparkles, X } from 'lucide-react';
 import { useAffiliate } from '@/context/affiliate-provider';
 import { SITE, formatPhone } from '@/lib/site';
+import { CAMPAIGN } from '@/lib/campaign';
 
 const TICKER_MESSAGES = [
+  {
+    id: 'campaign',
+    text: `🎄 Campaña Navidad 2026: ¿Cocina nueva? Aprueba tu diseño hasta el 13 de nov.`,
+    href: '/cocinas',
+    highlight: true,
+  },
   {
     id: 'referral',
     text: '🎉 5% de descuento en tus compras si alguien te recomendó la web',

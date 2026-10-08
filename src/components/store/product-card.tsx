@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Image from 'next/image';
 import { Plus, Ruler, Package, Eye, MessageCircle, Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Product } from '@/lib/types';
@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/context/cart-provider';
 import { cn } from '@/lib/utils';
+import { SITE, whatsappHref } from '@/lib/site';
+import { track } from '@/lib/analytics';
+import { SiteContentContext } from '@/context/site-content-provider';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const PRICE_UNIT_LABEL: Record<string, string> = {
@@ -18,6 +21,7 @@ const PRICE_UNIT_LABEL: Record<string, string> = {
 
 export function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
+  const whatsappNumber = useContext(SiteContentContext)?.siteContent?.whatsappNumber || SITE.phone;
   const [isHovered, setIsHovered] = useState(false);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [cardImageIdx, setCardImageIdx] = useState(0);
@@ -62,10 +66,9 @@ export function ProductCard({ product }: { product: Product }) {
 
   const handleWhatsAppQuote = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const message = encodeURIComponent(
-      `¡Hola Modulares GM! Me interesa solicitar una cotización personalizada del producto: *${product.title}*${product.dimensions ? ` (Medidas: ${product.dimensions})` : ''}. ¿Me podrían dar asesoría?`
-    );
-    window.open(`https://wa.me/593964193357?text=${message}`, '_blank');
+    const message = `¡Hola Modulares GM! Me interesa solicitar una cotización personalizada del producto: *${product.title}*${product.dimensions ? ` (Medidas: ${product.dimensions})` : ''}. ¿Me podrían dar asesoría?`;
+    track('whatsapp_click', { location: 'producto', item_name: product.title });
+    window.open(whatsappHref(whatsappNumber, message), '_blank');
   };
 
   return (

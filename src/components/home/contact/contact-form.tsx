@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -18,8 +18,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { handleLeadSubmit } from '@/lib/actions';
-import { ArrowRight, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2, Sparkles, MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { track } from '@/lib/analytics';
+import { SITE, whatsappHref } from '@/lib/site';
+import { SiteContentContext } from '@/context/site-content-provider';
 
 const PROJECT_TYPES = [
   'Cocina Integral',
@@ -41,6 +44,8 @@ export function ContactForm() {
   const [isPending, startTransition] = useTransition();
   const [selectedType, setSelectedType] = useState<string>('Cocina Integral');
   const { toast } = useToast();
+  const whatsappNumber = useContext(SiteContentContext)?.siteContent?.whatsappNumber || SITE.phone;
+  const [whatsappFollowUp, setWhatsappFollowUp] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -60,7 +65,6 @@ export function ContactForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      // Formateamos el mensaje consolidando el tipo de proyecto seleccionado
       const typePrefix = values.projectType ? `[Proyecto: ${values.projectType}]\n` : '';
       const consolidatedPayload = {
         name: values.name,
@@ -71,10 +75,17 @@ export function ContactForm() {
 
       const result = await handleLeadSubmit(consolidatedPayload);
       if (result.success) {
+        track('generate_lead', { form: 'cotizacion' });
         toast({
           title: '¡Solicitud Arquitectónica Registrada!',
           description: 'Gracias. Un asesor técnico revisará sus requerimientos y se comunicará en menos de 24h.',
         });
+        setWhatsappFollowUp(
+          whatsappHref(
+            whatsappNumber,
+            `Hola Modulares GM, soy ${values.name}. Acabo de pedir una cotización en la web: ${values.message}`
+          )
+        );
         form.reset();
         setSelectedType('Cocina Integral');
       } else {
@@ -233,6 +244,20 @@ export function ContactForm() {
                 </FormItem>
               )}
             />
+
+            {/* Seguimiento Inmediato por WhatsApp */}
+            {whatsappFollowUp && (
+              <a
+                href={whatsappFollowUp}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track('whatsapp_click', { location: 'formulario_enviado' })}
+                className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 text-xs sm:text-sm font-bold text-foreground transition-all hover:bg-emerald-500/20 active:scale-[0.98]"
+              >
+                <MessageCircle size={18} className="text-emerald-500 shrink-0" />
+                <span>¡Recibido! ¿Desea atención inmediata? Continúe por WhatsApp</span>
+              </a>
+            )}
 
             {/* Botón de Envío con Micro-interacción */}
             <div className="pt-2">

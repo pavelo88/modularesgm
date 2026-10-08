@@ -8,6 +8,9 @@ import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/cart-provider';
 import { SEOStructuredData } from '@/components/shared/seo-structured-data';
 
+/** ID de medición GA4 (flujo web «modularesgm»). Es público; la variable de entorno lo puede reemplazar. */
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-2LKR039L8Y';
+
 const fontBody = Inter({
   subsets: ['latin'],
   variable: '--font-body',
@@ -124,14 +127,14 @@ export default function RootLayout({
         </ThemeProvider>
         
         {/* Analytics Diferida (Zero-Blocking) */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
+        {GA_ID && (
           <Script
             id="google-analytics"
             strategy="lazyOnload"
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           />
         )}
-        {process.env.NEXT_PUBLIC_GA_ID && (
+        {GA_ID && (
           <Script
             id="google-analytics-init"
             strategy="lazyOnload"
@@ -140,9 +143,34 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                gtag('config', '${GA_ID}', {
                   send_page_view: true
                 });
+              `,
+            }}
+          />
+        )}
+        {/* Ahrefs Web Analytics (proyecto modularesgm.com) */}
+        <Script
+          id="ahrefs-analytics"
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="nxZ46GgcTfj/BPSFcmmgKw"
+          strategy="afterInteractive"
+        />
+        {/* Píxel de Meta: necesario para optimizar anuncios de Facebook/Instagram por conversiones */}
+        {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
+          <Script
+            id="meta-pixel"
+            strategy="lazyOnload"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+                n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+                document,'script','https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
+                fbq('track', 'PageView');
               `,
             }}
           />

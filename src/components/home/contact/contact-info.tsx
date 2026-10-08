@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { formatPhone, whatsappHref } from '@/lib/site';
+import { track } from '@/lib/analytics';
 
 interface ContactInfoProps {
   whatsappNumber: string;
@@ -96,6 +97,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
             href={prefilledWhatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('whatsapp_click', { location: 'seccion_contacto' })}
             className="group flex items-center justify-between p-3.5 rounded-xl border border-stone-200/80 bg-stone-50/70 hover:bg-white hover:border-secondary/60 hover:shadow-md transition-all active:scale-[0.98] dark:border-stone-800 dark:bg-stone-950/40 dark:hover:bg-stone-900"
           >
             <div className="flex items-center gap-3">
@@ -137,7 +139,6 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
               </div>
               <div className="overflow-hidden">
                 <p className="text-[10px] uppercase tracking-wider font-semibold text-stone-500">Email Proyectos</p>
-                {/* Email Ofuscado estrictamente conforme a Regla 4 */}
                 <p className="text-xs font-medium truncate">
                   <span>info</span>
                   <span className="text-secondary font-bold">&#64;</span>

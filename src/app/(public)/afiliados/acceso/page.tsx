@@ -37,6 +37,7 @@ import {
   resolveLoginEmail,
   sendCustomVerificationEmail,
 } from '@/lib/affiliate-actions';
+import { track } from '@/lib/analytics';
 import { normalizeUsername } from '@/lib/affiliate-core';
 import { REF_STORAGE_KEY } from '@/context/affiliate-provider';
 import { PasswordSetupDialog } from '@/components/affiliates/password-setup-dialog';
@@ -316,6 +317,8 @@ function AffiliatesAuthContent() {
         setLoading(false);
         return;
       }
+
+      track('sign_up', { method: 'afiliado' });
 
       // 3. Enviar correo de notificación por Nodemailer
       await sendCustomVerificationEmail(cleanEmail, `${window.location.origin}/afiliados/acceso`);
