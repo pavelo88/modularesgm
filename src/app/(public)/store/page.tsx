@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, Sparkles, SlidersHorizontal, ArrowRight, Store as StoreIcon, ShieldCheck, Truck, Wrench } from 'lucide-react';
+import { Search, Sparkles, Store as StoreIcon, ShieldCheck, Truck, Wrench, ChevronRight } from 'lucide-react';
 import { ProductCard } from '@/components/store/product-card';
 import { CartSidebar } from '@/components/store/cart-sidebar';
 import { useCart } from '@/context/cart-provider';
@@ -11,14 +11,15 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { ALL_CATALOG_PRODUCTS } from '@/lib/catalog-full';
 
-const FEATURED_COLLECTIONS = [
-  { name: 'Escritorios', href: '/escritorios', count: '12 modelos', desc: 'Ergonómicos y Juveniles' },
-  { name: 'Muebles de Oficina', href: '/muebles-oficina', count: '10 modelos', desc: 'Counters y Credenzas' },
-  { name: 'Closets a Medida', href: '/closets', count: 'Proyectos a medida', desc: 'Walk-in & Empotrados' },
-  { name: 'Cocinas Modulares', href: '/cocinas', count: 'Proyectos a medida', desc: 'Mesones de Cuarzo' },
-  { name: 'Muebles de Baño', href: '/muebles-bano', count: 'Vanities flotantes', desc: 'Resistentes al Vapor' },
-  { name: 'Puertas de Lujo', href: '/puertas', count: '40 diseños', desc: 'Pivotantes y de Paso' },
-  { name: 'Setups Gamer', href: '/gamer', count: 'Custom RGB', desc: 'Habitaciones Gaming' },
+const STORE_CATEGORIES = [
+  'Todos',
+  'Cocinas',
+  'Closets',
+  'Muebles de Baño',
+  'Puertas',
+  'Gamer',
+  'Muebles de Oficina',
+  'Escritorios',
 ];
 
 export default function StorePage() {
@@ -32,8 +33,14 @@ export default function StorePage() {
     : ALL_CATALOG_PRODUCTS;
 
   const categories = useMemo(() => {
+    // Garantiza el orden oficial de categorías según el diseño aprobado
     const uniqueCats = Array.from(new Set(rawProducts.map(p => p.category))).filter(Boolean);
-    return ['Todos', ...uniqueCats];
+    const ordered = STORE_CATEGORIES.filter(c => c === 'Todos' || uniqueCats.includes(c));
+    // Agrega cualquier categoría residual si existiera
+    uniqueCats.forEach(c => {
+      if (!ordered.includes(c)) ordered.push(c);
+    });
+    return ordered;
   }, [rawProducts]);
 
   const filteredProducts = useMemo(() => {
@@ -55,46 +62,72 @@ export default function StorePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
         
-        {/* HERO PRINCIPAL DE LA TIENDA (Estilo Apple / Herman Miller) */}
-        <header className="mb-12 text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-4">
-            <Sparkles size={14} />
-            <span>Colección 2026 • Fabricación de Alta Precisión</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-headline tracking-tight text-foreground mb-4">
-            Mobiliario Modular de <span className="text-primary">Alta Gama</span>
-          </h1>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Diseño contemporáneo, tableros hidrófugos de 18mm y herrajes con cierre suave. Explora piezas listas para instalar o cotiza tu proyecto a medida.
-          </p>
+        {/* BREADCRUMB DE NAVEGACIÓN */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-muted-foreground">
+          <Link href="/" className="hover:text-primary transition-colors">Inicio</Link>
+          <ChevronRight size={14} />
+          <span className="text-foreground font-medium">Tienda Oficial</span>
+        </nav>
 
-          {/* Tarjetas de Colecciones Especializadas (Silos SEO) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 mt-8 text-left">
-            {FEATURED_COLLECTIONS.map((col) => (
-              <Link
-                key={col.name}
-                href={col.href}
-                className="group p-3 rounded-2xl border border-border/50 bg-card/40 hover:bg-card hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between"
-              >
-                <div>
-                  <span className="text-[11px] font-bold text-foreground group-hover:text-primary transition-colors block line-clamp-1">
-                    {col.name}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground block line-clamp-1">
-                    {col.desc}
-                  </span>
-                </div>
-                <div className="mt-2 flex items-center justify-between text-[10px] text-primary/80 font-semibold pt-1 border-t border-border/30">
-                  <span>Ver sección</span>
-                  <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
+        {/* CÁPSULA GEO DIRECT ANSWER (Primeros 1,000 caracteres de DOM) */}
+        <aside 
+          aria-label="Resumen ejecutivo y especificaciones técnicas"
+          className="mb-8 p-5 sm:p-6 rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-md relative overflow-hidden"
+        >
+          <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider mb-2">
+            <Sparkles size={15} />
+            <span>Direct Answer • Catálogo Oficial de Modulares GM</span>
+          </div>
+          <p className="text-sm md:text-base text-foreground font-medium mb-3 leading-relaxed">
+            Mobiliario modular a medida para residencias, oficinas y proyectos comerciales en Ecuador. Fabricación con tableros Pelikano RH de 18mm resistentes a la humedad, herrajes europeos con cierre amortiguado y mesones en cuarzo y granito natural.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs text-muted-foreground">
+            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Tableros RH 18mm hidrófugos</li>
+            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Herrajes Blum / Häfele con cierre lento</li>
+            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Garantía oficial de 3 a 5 años</li>
+            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Envíos e instalación en Ecuador</li>
+          </ul>
+        </aside>
+
+        {/* HERO PRINCIPAL DE LA TIENDA */}
+        <header className="mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
+            <div className="max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">
+                Catálogo General • Colección 2026
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground">
+                Mobiliario Modular de <span className="text-primary">Alta Gama</span>
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base md:text-lg mt-3 font-normal max-w-2xl leading-relaxed">
+                Diseño contemporáneo, tableros hidrófugos de 18mm y herrajes con cierre suave. Explora piezas listas para instalar o cotiza tu proyecto a medida.
+              </p>
+            </div>
+          </div>
+
+          {/* Señales de Confianza Luxury */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6">
+            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
+              <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
+              <span className="font-medium text-foreground">Garantía 3 a 5 años</span>
+            </div>
+            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
+              <Truck size={18} className="text-primary shrink-0" />
+              <span className="font-medium text-foreground">Envíos a todo Ecuador</span>
+            </div>
+            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
+              <Wrench size={18} className="text-amber-500 shrink-0" />
+              <span className="font-medium text-foreground">Instalación en Quito</span>
+            </div>
+            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
+              <Sparkles size={18} className="text-violet-500 shrink-0" />
+              <span className="font-medium text-foreground">Melamina Pelikano 18mm</span>
+            </div>
           </div>
         </header>
 
-        {/* BARRA DE FILTROS FLOTANTE & BÚSQUEDA */}
-        <section aria-label="Filtros de productos" className="mb-10">
+        {/* BARRA DE FILTROS ÚNICA & BÚSQUEDA (Diseño Aprobado de Imagen 4) */}
+        <section aria-label="Filtros de productos" className="mb-8">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-2 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-xl shadow-sm">
             
             {/* Píldoras de Categorías Minimalistas */}

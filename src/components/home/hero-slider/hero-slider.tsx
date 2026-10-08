@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, Sparkles, Store } from 'lucide-react';
@@ -15,7 +16,65 @@ interface HeroSliderProps {
   stats?: Stat[];
 }
 
-const hiRes = (url: string) => url.replace('w=900', 'w=1600').replace('q=65', 'q=72');
+const hiRes = (url: string) => {
+  if (url.startsWith('/')) return url;
+  return url.replace('w=900', 'w=1600').replace('q=65', 'q=72');
+};
+
+/** Contador animado con easing fluido de Emil Kowalski que se activa al entrar en viewport */
+function AnimatedCounter({ value }: { value: string }) {
+  const [displayValue, setDisplayValue] = useState('0');
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const match = value.match(/^(\d+)(.*)$/);
+    if (!match) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const targetNumber = parseInt(match[1], 10);
+    const suffix = match[2];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const duration = 1800; // ms
+          const startTime = performance.now();
+
+          const update = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic: 1 - (1 - progress)^3
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(easeProgress * targetNumber);
+            setDisplayValue(`${current}${suffix}`);
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              setDisplayValue(value);
+            }
+          };
+
+          requestAnimationFrame(update);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [value]);
+
+  return <span ref={elementRef}>{displayValue}</span>;
+}
 
 const RAIL_ITEMS: RailItem[] = HERO_SLIDES.map((s) => ({
   id: String(s.id),
@@ -47,7 +106,7 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
               fill
               priority={i === 0}
               sizes="100vw"
-              className={cn('object-cover transition-all duration-[1200ms] ease-emil-in-out', i === rail.active ? 'opacity-100' : 'opacity-0')}
+              className={cn('object-cover transition-all duration-1000 ease-emil-in-out', i === rail.active ? 'opacity-100' : 'opacity-0')}
             />
           ))}
         </div>
@@ -101,11 +160,13 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
       </div>
 
       {/* Franja de estadísticas justo bajo el hero */}
-      <div className="border-t border-white/10 bg-[#0f1a21] text-white">
+      <div className="border-t border-white/10 bg-[#0A0C10] text-white">
         <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-white/10 sm:grid-cols-4 sm:divide-x">
           {(stats || []).map((stat) => (
             <div key={stat.id} className="flex flex-col items-center justify-center px-4 py-4 text-center sm:h-[91px]">
-              <dd className="order-1 font-sans text-2xl font-bold leading-none text-secondary sm:text-3xl">{stat.value}</dd>
+              <dd className="order-1 font-sans text-2xl font-bold leading-none text-secondary sm:text-3xl">
+                <AnimatedCounter value={stat.value} />
+              </dd>
               <dt className="order-2 mt-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400 sm:text-xs">{stat.label}</dt>
             </div>
           ))}

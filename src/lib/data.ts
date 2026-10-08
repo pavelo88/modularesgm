@@ -21,15 +21,15 @@ export const defaultProducts: Product[] = ALL_CATALOG_PRODUCTS;
 
 
 export const defaultBrands: Brand[] = [
-  { id: 1, name: 'NOVOPAN', url: '' },
-  { id: 2, name: 'PELIKANO', url: '' },
-  { id: 3, name: 'BLUM', url: '' },
-  { id: 4, name: 'HAFELE', url: '' },
-  { id: 5, name: 'SILESTONE', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Silestone-menu.svg' },
-  { id: 6, name: 'DEKTON', url: 'https://www.cosentino.com/wp-content/uploads/2023/05/Logo-Dekton-menu.svg' },
-  { id: 7, name: 'TEKA', url: '' },
-  { id: 8, name: 'BRIGGS', url: '' },
-  { id: 9, name: 'COSENTINO', url: 'https://www.cosentino.com/wp-content/themes/b2c-child/img/logo-cosentino-white.svg' }
+  { id: 1, name: 'NOVOPAN', url: '/brands/novopan.webp' },
+  { id: 2, name: 'PELIKANO', url: '/brands/pelikano.webp' },
+  { id: 3, name: 'BLUM', url: '/brands/blum.svg' },
+  { id: 4, name: 'HAFELE', url: '/brands/hafele.svg' },
+  { id: 5, name: 'SILESTONE', url: '/brands/silestone.svg' },
+  { id: 6, name: 'DEKTON', url: '/brands/dekton.svg' },
+  { id: 7, name: 'TEKA', url: '/brands/teka.svg' },
+  { id: 8, name: 'BRIGGS', url: '/brands/briggs.webp' },
+  { id: 9, name: 'COSENTINO', url: '/brands/cosentino.svg' }
 ];
 
 

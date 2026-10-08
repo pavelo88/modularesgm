@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    /* MODO CLARO - BLANCO ARQUITECTÓNICO PURO Y TIPOGRAFÍA NÍTIDA */
-    --background: 0 0% 100%; /* Blanco puro #FFFFFF */
-    --foreground: 220 20% 10%; /* Carbón oscuro nítido #14171F */
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    /* MODO CLARO - GRANITO ARQUITECTÓNICO CÁLIDO & BRONCE DE AUTOR */
+    --background: 40 20% 97%; /* Granito caliza cálido #FAF8F5 */
+    --foreground: 222 25% 10%; /* Carbón grafito nítido #14171F */
+    --card: 0 0% 100%; /* Blanco puro para tarjetas elevadas */
+    --card-foreground: 222 25% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 222 25% 10%;
     --primary: 36 78% 46%; /* Bronce dorado de autor #D28E1B */
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 14% 96%; /* Gris neutro suave */
-    --secondary-foreground: 220 20% 10%;
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 46%; /* Contraste accesible WCAG AA */
+    --secondary: 40 16% 93%; /* Granito arena suave #F2EFE9 */
+    --secondary-foreground: 222 25% 10%;
+    --muted: 40 16% 93%;
+    --muted-foreground: 220 12% 44%; /* Contraste accesible WCAG 2.2 AA */
     --accent: 36 78% 46%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 38 15% 88%; /* Borde de piedra caliza #E6E3DC */
+    --input: 38 15% 88%;
     --ring: 36 78% 46%;
     --radius: 0.85rem;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 220 20% 10%;
+    --sidebar-background: 40 20% 97%;
+    --sidebar-foreground: 222 25% 10%;
     --sidebar-primary: 36 78% 46%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 96%;
-    --sidebar-accent-foreground: 220 20% 10%;
-    --sidebar-border: 220 13% 91%;
+    --sidebar-accent: 40 16% 93%;
+    --sidebar-accent-foreground: 222 25% 10%;
+    --sidebar-border: 38 15% 88%;
     --sidebar-ring: 36 78% 46%;
 
     /* ANIMATION & EASING TOKENS (Emil Kowalski) */
@@ -42,34 +42,34 @@
   }
 
   .dark {
-    /* MODO OSCURO - NEGRO PROFUNDO OLED & ORO CUARZO (Apple High-End) */
-    --background: 222 22% 6%; /* Negro profundo espacial #0B0D12 */
-    --foreground: 210 20% 98%; /* Blanco marfil ultra nítido #F7F9FC */
-    --card: 222 20% 9%; /* Pizarra grafito #10141D */
+    /* MODO OSCURO - NEGRO PROFUNDO ARQUITECTÓNICO & ORO CUARZO */
+    --background: 225 24% 4.8%; /* Negro obsidiana profundo #0A0C10 */
+    --foreground: 210 20% 98%; /* Marfil blanco nítido #F7F9FC */
+    --card: 224 20% 7.8%; /* Pizarra grafito profundo #0F1218 */
     --card-foreground: 210 20% 98%;
-    --popover: 222 20% 9%;
+    --popover: 224 20% 7.8%;
     --popover-foreground: 210 20% 98%;
     --primary: 36 84% 52%; /* Oro cuarzo vibrante #E8A222 */
-    --primary-foreground: 222 22% 6%;
-    --secondary: 222 16% 14%;
+    --primary-foreground: 225 24% 4.8%;
+    --secondary: 224 16% 12%; /* Carbón mate secundario */
     --secondary-foreground: 210 20% 98%;
-    --muted: 222 16% 14%;
-    --muted-foreground: 218 12% 65%;
+    --muted: 224 16% 12%;
+    --muted-foreground: 218 14% 64%;
     --accent: 36 84% 52%;
-    --accent-foreground: 222 22% 6%;
+    --accent-foreground: 225 24% 4.8%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
-    --border: 222 14% 17%;
-    --input: 222 14% 17%;
+    --border: 222 15% 15%; /* Borde ultra sutil #191D25 */
+    --input: 222 15% 15%;
     --ring: 36 84% 52%;
 
-    --sidebar-background: 222 22% 6%;
+    --sidebar-background: 225 24% 4.8%;
     --sidebar-foreground: 210 20% 98%;
     --sidebar-primary: 36 84% 52%;
-    --sidebar-primary-foreground: 222 22% 6%;
-    --sidebar-accent: 222 16% 14%;
+    --sidebar-primary-foreground: 225 24% 4.8%;
+    --sidebar-accent: 224 16% 12%;
     --sidebar-accent-foreground: 210 20% 98%;
-    --sidebar-border: 222 14% 17%;
+    --sidebar-border: 222 15% 15%;
     --sidebar-ring: 36 84% 52%;
   }
 }

@@ -85,14 +85,14 @@ export function ProductCard({ product }: { product: Product }) {
         {/* Contenedor de la Imagen con Carousel de Ángulos */}
         <div 
           onClick={openQuickView}
-          className="relative aspect-[4/3] w-full overflow-hidden bg-muted/40 cursor-pointer select-none"
+          className="relative aspect-[16/10] w-full overflow-hidden bg-muted/40 cursor-pointer select-none"
         >
           {/* Imagen Activa del Carousel */}
           <Image
             src={allImages[cardImageIdx] || allImages[0]}
             alt={`${product.title} - Foto ${cardImageIdx + 1}`}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             className="object-cover transition-all duration-500 group-hover:scale-105"
             priority={false}
           />
@@ -101,12 +101,12 @@ export function ProductCard({ product }: { product: Product }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
           {/* Badges superiores */}
-          <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none z-10">
-            <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-background/80 dark:bg-black/60 backdrop-blur-md text-foreground border border-white/10 shadow-sm">
+          <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none z-10">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-background/80 dark:bg-black/60 backdrop-blur-md text-foreground border border-white/10 shadow-sm">
               {product.category}
             </span>
             {hasSecondaryAngle && (
-              <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-primary/20 backdrop-blur-md text-primary font-bold border border-primary/30 flex items-center gap-1">
+              <span className="text-[9px] px-2 py-0.5 rounded-full bg-primary/20 backdrop-blur-md text-primary font-bold border border-primary/30 flex items-center gap-1">
                 {cardImageIdx + 1}/{allImages.length} fotos
               </span>
             )}
@@ -118,24 +118,24 @@ export function ProductCard({ product }: { product: Product }) {
               <button
                 type="button"
                 onClick={handlePrevImage}
-                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
                 title="Foto anterior"
                 aria-label="Ver foto anterior"
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={14} />
               </button>
               <button
                 type="button"
                 onClick={handleNextImage}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-black/60 hover:bg-black/85 text-white backdrop-blur-md opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
                 title="Siguiente foto"
                 aria-label="Ver siguiente foto"
               >
-                <ChevronRight size={16} />
+                <ChevronRight size={14} />
               </button>
 
               {/* Indicadores de Puntos (Dots) */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 pointer-events-auto bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+              <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 pointer-events-auto bg-black/40 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10">
                 {allImages.map((_, idx) => (
                   <button
                     key={idx}
@@ -143,10 +143,10 @@ export function ProductCard({ product }: { product: Product }) {
                     onClick={(e) => handleSelectImage(e, idx)}
                     aria-label={`Ver foto ${idx + 1}`}
                     className={cn(
-                      "h-1.5 rounded-full transition-all duration-300 active:scale-90",
+                      "h-1 rounded-full transition-all duration-300 active:scale-90",
                       cardImageIdx === idx 
-                        ? "w-4 bg-primary shadow-sm" 
-                        : "w-1.5 bg-white/60 hover:bg-white"
+                        ? "w-3 bg-primary shadow-sm" 
+                        : "w-1 bg-white/60 hover:bg-white"
                     )}
                   />
                 ))}
@@ -158,43 +158,43 @@ export function ProductCard({ product }: { product: Product }) {
           <button
             type="button"
             onClick={openQuickView}
-            className="absolute bottom-3 right-3 z-20 p-2.5 rounded-full bg-background/80 dark:bg-black/70 backdrop-blur-md text-foreground border border-white/15 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg"
+            className="absolute bottom-2.5 right-2.5 z-20 p-2 rounded-full bg-background/80 dark:bg-black/70 backdrop-blur-md text-foreground border border-white/15 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg"
             title="Vista rápida y detalles"
             aria-label="Ver detalles del producto"
           >
-            <Eye size={16} />
+            <Eye size={14} />
           </button>
         </div>
 
-        {/* Contenido / Información */}
-        <div className="p-5 flex-1 flex flex-col justify-between gap-4">
+        {/* Contenido / Información Proporcional */}
+        <div className="p-4 flex-1 flex flex-col justify-between gap-3">
           <div>
             {product.subcategory && (
-              <p className="text-[11px] font-bold uppercase tracking-wider text-primary mb-1">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-primary mb-0.5">
                 {product.subcategory}
               </p>
             )}
             <h3 
               onClick={openQuickView}
-              className="text-base md:text-lg font-bold text-foreground line-clamp-2 cursor-pointer hover:text-primary transition-colors"
+              className="text-sm sm:text-base font-semibold text-foreground line-clamp-1 cursor-pointer hover:text-primary transition-colors"
             >
               {product.title}
             </h3>
-            <p className="text-xs text-muted-foreground mt-1 line-clamp-2 font-normal">
+            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1 font-light">
               {product.desc}
             </p>
 
             {/* Ficha técnica compacta */}
-            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-border/40">
+            <div className="flex flex-wrap items-center gap-1.5 mt-2.5 pt-2.5 border-t border-border/40">
               {product.dimensions && (
-                <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-md font-mono">
-                  <Ruler size={11} className="text-primary shrink-0" />
+                <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-md font-mono">
+                  <Ruler size={10} className="text-primary shrink-0" />
                   {product.dimensions}
                 </span>
               )}
               {product.material && (
-                <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-md line-clamp-1 max-w-[200px]">
-                  <Package size={11} className="text-primary shrink-0" />
+                <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-md line-clamp-1 max-w-[170px]">
+                  <Package size={10} className="text-primary shrink-0" />
                   {product.material}
                 </span>
               )}
@@ -202,25 +202,25 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
 
           {/* Footer de Precio y Acción */}
-          <div className="flex items-center justify-between pt-3 border-t border-border/40">
+          <div className="flex items-center justify-between pt-2.5 border-t border-border/40">
             <div>
               {isCustomQuote ? (
                 <div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-primary block">
-                    Fabricación a Medida
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-primary block">
+                    A Medida
                   </span>
-                  <span className="text-xs text-muted-foreground">
-                    Cotización sin costo
+                  <span className="text-[10px] text-muted-foreground">
+                    Cotización directa
                   </span>
                 </div>
               ) : (
                 <div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground block">
+                  <span className="text-[9px] uppercase font-bold tracking-wider text-muted-foreground block">
                     Precio Directo
                   </span>
-                  <p className="text-2xl font-black text-foreground tracking-tight">
+                  <p className="text-lg font-black text-foreground tracking-tight">
                     ${product.price}
-                    {unitLabel && <span className="text-xs font-normal text-muted-foreground ml-1">{unitLabel}</span>}
+                    {unitLabel && <span className="text-[10px] font-normal text-muted-foreground ml-1">{unitLabel}</span>}
                   </p>
                 </div>
               )}
@@ -231,9 +231,9 @@ export function ProductCard({ product }: { product: Product }) {
               <Button
                 size="sm"
                 onClick={handleWhatsAppQuote}
-                className="rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2 flex items-center gap-1.5 active:scale-95 transition-all shadow-md"
+                className="h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-3 py-1 flex items-center gap-1 active:scale-95 transition-all shadow-sm"
               >
-                <MessageCircle size={15} />
+                <MessageCircle size={13} />
                 <span>Cotizar</span>
               </Button>
             ) : (
@@ -242,7 +242,7 @@ export function ProductCard({ product }: { product: Product }) {
                 onClick={handleAddToCart}
                 disabled={isOutOfStock}
                 className={cn(
-                  "rounded-full font-semibold text-xs px-4 py-2 flex items-center gap-1.5 active:scale-95 transition-all shadow-md",
+                  "h-8 rounded-full font-semibold text-xs px-3 py-1 flex items-center gap-1 active:scale-95 transition-all shadow-sm",
                   addedAnimation
                     ? "bg-emerald-600 text-white"
                     : "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -251,12 +251,12 @@ export function ProductCard({ product }: { product: Product }) {
               >
                 {addedAnimation ? (
                   <>
-                    <Check size={15} />
-                    <span>Agregado</span>
+                    <Check size={13} />
+                    <span>Listo</span>
                   </>
                 ) : (
                   <>
-                    <Plus size={15} />
+                    <Plus size={13} />
                     <span>Agregar</span>
                   </>
                 )}
