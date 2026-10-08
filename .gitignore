@@ -49,8 +49,5 @@ firestore-debug.log.env
 
 !.env.example
 
-# videos generados con la skill videos (.claude/skills/videos)
-/videos-out/
-
 # Python
 __pycache__/
