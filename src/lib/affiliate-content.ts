@@ -36,6 +36,8 @@ export const AFFILIATE_FAQ = [
 ];
 
 export const AFFILIATE_AUDIENCES = [
+  { title: 'Cualquier persona con WhatsApp', text: 'Estudiantes, amas de casa, jubilados o quien busque un ingreso extra. Si conoces gente que va a cambiar su cocina o sus clósets, ya puedes ganar.' },
+  { title: 'Vendedores por catálogo y emprendedores', text: 'Suma muebles a medida a lo que ya ofreces. Tus clientes reciben descuento y tú cobras comisión sin tener stock.' },
   { title: 'Arquitectos y diseñadores de interiores', text: 'Recomienda fabricación a medida, cuarzo e instalación a los clientes de tus proyectos y recibe ingresos adicionales por cada cierre.' },
   { title: 'Constructores y maestros de obra', text: 'Cuando una obra llega a la etapa de cocina o clósets, tienes un proveedor confiable para sugerir y una comisión por hacerlo.' },
   { title: 'Inmobiliarias y corredores', text: 'Quien compra una vivienda casi siempre remodela. Comparte tu enlace con nuevos propietarios y aprovecha ese momento.' },

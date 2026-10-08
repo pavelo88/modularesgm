@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Facebook, Instagram, Linkedin, Phone, MapPin } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { formatPhone, whatsappHref } from '@/lib/site';
+import { track } from '@/lib/analytics';
 
 interface ContactInfoProps {
   whatsappNumber: string;
@@ -40,9 +41,10 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
       {/* Phone & Socials */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <a
-          href={whatsappHref(whatsappNumber)}
+          href={whatsappHref(whatsappNumber, 'Hola Modulares GM, quiero cotizar un proyecto.')}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track('whatsapp_click', { location: 'seccion_contacto' })}
           className="flex items-center gap-2 font-bold text-lg hover:underline text-foreground"
         >
           <Phone size={20} className="text-primary" />

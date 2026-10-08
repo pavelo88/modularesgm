@@ -43,6 +43,33 @@ const LeadSchema = z.object({
   message: z.string().min(10),
 });
 
+const escapeHtml = (v: string) =>
+  v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
+/**
+ * Aviso por correo de cada cotización nueva, para que ningún lead se quede sin respuesta.
+ * Solo se envía si SMTP_USER y SMTP_PASS están configurados; LEADS_NOTIFY_EMAIL define el destino.
+ */
+async function notifyNewLead(lead: z.infer<typeof LeadSchema>) {
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!user || !pass) return;
+  try {
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport({ host: 'smtp.hostinger.com', port: 465, secure: true, auth: { user, pass } });
+    await transporter.sendMail({
+      from: `"Web Modulares GM" <${user}>`,
+      to: process.env.LEADS_NOTIFY_EMAIL || user,
+      replyTo: lead.email,
+      subject: `Nueva cotización: ${lead.name}`,
+      text: `Nombre: ${lead.name}\nTeléfono: ${lead.phone}\nCorreo: ${lead.email}\n\n${lead.message}\n\nResponde en menos de 15 minutos: los leads se enfrían rápido.`,
+      html: `<p><strong>Nombre:</strong> ${escapeHtml(lead.name)}<br><strong>Teléfono:</strong> ${escapeHtml(lead.phone)}<br><strong>Correo:</strong> ${escapeHtml(lead.email)}</p><p>${escapeHtml(lead.message)}</p><p><em>Responde en menos de 15 minutos: los leads se enfrían rápido.</em></p>`,
+    });
+  } catch (err) {
+    console.error('[lead-notify]', err);
+  }
+}
+
 export async function handleLeadSubmit(values: z.infer<typeof LeadSchema>) {
   const parsed = LeadSchema.safeParse(values);
   if (!parsed.success) return { success: false, error: 'Datos inválidos.' };
@@ -52,6 +79,7 @@ export async function handleLeadSubmit(values: z.infer<typeof LeadSchema>) {
       status: 'Nuevo',
       createdAt: Date.now(),
     });
+    await notifyNewLead(parsed.data);
     return { success: true };
   } catch (error) {
     console.error(error);
