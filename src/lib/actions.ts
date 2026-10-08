@@ -8,6 +8,7 @@ import { clearAdminSession, createAdminSession, requireAdmin } from '@/lib/admin
 import { applyOrderStatus, getSettings, priceCart, resolveAttribution } from '@/lib/affiliate-server';
 import { priceWithDiscount } from '@/lib/affiliate-core';
 import type { CartItem, SiteContent } from './types';
+import { fetchAnalyticsReport, type AnalyticsDays } from '@/lib/ga-report';
 
 // AI Flow Imports
 import { publicAIChatbot } from '@/ai/flows/public-ai-chatbot-flow';
@@ -255,4 +256,12 @@ export async function getSeoSuggestions(heroTitle: string, heroSubtitle: string)
   } catch (error) {
     return { success: false, error: 'AI SEO generation failed.' };
   }
+}
+
+// --- Analítica (Google Analytics 4) ---
+
+export async function getAnalyticsReport(days: AnalyticsDays) {
+  await requireAdmin();
+  const safeDays: AnalyticsDays = days === 7 || days === 90 ? days : 28;
+  return fetchAnalyticsReport(safeDays);
 }
