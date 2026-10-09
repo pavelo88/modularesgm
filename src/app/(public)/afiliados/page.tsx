@@ -66,13 +66,48 @@ export default function AffiliatesLandingPage() {
 
       <AffiliateHero cards={heroCards} />
 
-      <aside aria-label="Resumen rápido" className="relative z-10 border-b bg-background">
-        <div className="mx-auto max-w-4xl px-6 py-10 text-center">
-          <p className="text-lg leading-relaxed text-foreground/90 md:text-xl">
-            El programa de afiliados de Modulares GM te permite ganar comisiones recomendando cocinas modulares, mesones de cuarzo, clósets y muebles a medida en Ecuador. Te registras gratis, recibes un enlace y un código personales, y ves tus ventas, tu red y tus retiros en un portal propio.
+      {/* Top High-Converting Call to Action Banner */}
+      <section aria-label="Llamado a la acción principal" className="relative z-10 border-b border-stone-200 dark:border-stone-800 bg-background/95 backdrop-blur-md">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-14 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-5">
+            ✨ Registro 100% Gratuito en 60 Segundos
+          </div>
+          <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground max-w-3xl mx-auto leading-tight">
+            Monetiza tus recomendaciones con la marca líder de mobiliario modular en Ecuador
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+            Gana comisiones directas recomendando cocinas a medida, mesones de cuarzo y clósets de alta gama. Sin stock, sin costos y con panel de seguimiento en tiempo real.
           </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/afiliados/acceso?tab=registro"
+              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold px-8 text-base shadow-lg shadow-amber-500/25 transition active:scale-95"
+            >
+              <span>Registrarme Gratis como Afiliado GM</span>
+              <ArrowRight size={19} />
+            </Link>
+            <Link
+              href="/afiliados/acceso?tab=login"
+              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-2xl border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-card px-6 text-sm font-semibold text-foreground transition active:scale-95"
+            >
+              ¿Ya tienes cuenta? Iniciar Sesión
+            </Link>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-muted-foreground">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-amber-500 font-bold">✓</span> Cero inversión o inventario
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-amber-500 font-bold">✓</span> Enlace y código rastreados
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-amber-500 font-bold">✓</span> Pagos directos a tu banco
+            </div>
+          </div>
         </div>
-      </aside>
+      </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20" aria-labelledby="como-funciona">
         <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Tres pasos</p>
@@ -100,22 +135,35 @@ export default function AffiliatesLandingPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20" aria-labelledby="para-quien">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Perfil ideal</p>
-            <h2 id="para-quien" className="font-headline text-3xl font-bold md:text-4xl">Para quién es este programa</h2>
-            <p className="mt-4 text-muted-foreground">Si tu trabajo te pone frente a personas que construyen, compran o remodelan, ya tienes la audiencia. Solo falta tu enlace.</p>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-8">
-            {AFFILIATE_AUDIENCES.map((a) => (
-              <article key={a.title} className="rounded-2xl border bg-card p-6">
-                <h3 className="mb-2 font-bold">{a.title}</h3>
-                <p className="text-sm text-muted-foreground">{a.text}</p>
-              </article>
-            ))}
-          </div>
+      {/* Para quién es este programa - Carrusel Infinito */}
+      <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-20" aria-labelledby="para-quien">
+        <div className="mb-10 text-center max-w-3xl mx-auto">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Perfil ideal</p>
+          <h2 id="para-quien" className="font-headline text-3xl font-bold md:text-4xl">Para quién es este programa</h2>
+          <p className="mt-3 text-muted-foreground text-base sm:text-lg">
+            Si tu trabajo o tu red te ponen frente a personas que construyen, compran o remodelan, ya tienes la audiencia. Solo necesitas compartir tu enlace personal.
+          </p>
         </div>
+
+        <CardSlider label="Perfiles de afiliados" slideClassName="basis-[86%] sm:basis-[320px] lg:basis-[360px]" autoplay={true}>
+          {AFFILIATE_AUDIENCES.map((a, idx) => (
+            <article key={a.title} className="group relative flex h-full min-h-[220px] flex-col justify-between rounded-3xl border border-stone-200 dark:border-stone-800 bg-card/90 backdrop-blur p-7 shadow-sm transition hover:shadow-md hover:border-primary/40">
+              <div>
+                <span className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-sm">
+                  0{idx + 1}
+                </span>
+                <h3 className="mb-2 font-headline text-lg sm:text-xl font-bold text-foreground">{a.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{a.text}</p>
+              </div>
+              <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-primary group-hover:underline">
+                <Link href="/afiliados/acceso?tab=registro" className="inline-flex items-center gap-1.5">
+                  <span>Comenzar ahora</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </CardSlider>
       </section>
 
       <section className="relative z-10 bg-foreground text-background" aria-labelledby="herramientas">
@@ -148,17 +196,34 @@ export default function AffiliatesLandingPage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-5xl px-6 pb-24">
-        <div className="relative overflow-hidden rounded-3xl bg-primary p-10 text-center text-primary-foreground md:p-16">
-          <Handshake className="absolute -bottom-8 -left-8 h-56 w-56 opacity-10" aria-hidden />
-          <h2 className="relative font-headline text-3xl font-bold md:text-4xl">Empieza hoy con tu enlace personal</h2>
-          <p className="relative mx-auto mt-4 max-w-xl opacity-90">Crear tu cuenta toma un minuto y no tiene costo.</p>
-          <Link
-            href="/afiliados/acceso?tab=registro"
-            className="relative mt-8 inline-flex h-14 items-center gap-2 rounded-xl bg-amber-400 px-8 font-bold text-stone-950 transition hover:bg-amber-300 active-press shadow-lg shadow-amber-950/20"
-          >
-            Crear mi cuenta de afiliado <ArrowRight size={18} />
-          </Link>
+      {/* Bottom Final High-Converting CTA Banner */}
+      <section className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pb-24" aria-label="Registro final">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-stone-900 via-stone-850 to-stone-950 p-8 sm:p-12 md:p-16 text-center text-white border border-stone-800 shadow-2xl">
+          <Handshake className="absolute -bottom-8 -left-8 h-56 w-56 opacity-5 pointer-events-none" aria-hidden />
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-400 mb-4">
+            🚀 Únete a la red Modulares GM
+          </div>
+          <h2 className="relative font-headline text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            Empieza hoy a generar comisiones con tu enlace personal
+          </h2>
+          <p className="relative mx-auto mt-4 max-w-xl text-stone-300 text-base sm:text-lg">
+            Crear tu cuenta toma menos de un minuto. Recibe tu código de afiliado y empieza a compartirlo de inmediato.
+          </p>
+          <div className="relative mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/afiliados/acceso?tab=registro"
+              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-2xl bg-amber-400 hover:bg-amber-300 px-8 font-bold text-stone-950 text-base transition active:scale-95 shadow-lg shadow-amber-500/20"
+            >
+              <span>Crear Mi Cuenta Gratis Ahora</span>
+              <ArrowRight size={19} />
+            </Link>
+            <Link
+              href="/afiliados/acceso?tab=login"
+              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-2xl border border-stone-700 bg-stone-800/80 hover:bg-stone-800 px-7 font-semibold text-white text-sm transition active:scale-95"
+            >
+              Ya soy afiliado · Acceder
+            </Link>
+          </div>
         </div>
       </section>
     </>

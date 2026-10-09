@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { 
   Search, 
   Sparkles, 
@@ -27,14 +28,41 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { ALL_CATALOG_PRODUCTS } from '@/lib/catalog-full';
 
+function normalizeCategoryName(raw?: string | null): string {
+  if (!raw) return 'Todos';
+  const s = raw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  if (s === 'todos' || !s) return 'Todos';
+  if (s.includes('bano') || s.includes('vanit') || s.includes('lavaman')) return 'Baño';
+  if (s.includes('oficina') || s.includes('corporativ')) return 'Oficina';
+  if (s.includes('cocina')) return 'Cocinas';
+  if (s.includes('closet') || s.includes('armario') || s.includes('vestidor')) return 'Closets';
+  if (s.includes('escritorio')) return 'Escritorios';
+  if (s.includes('puerta')) return 'Puertas';
+  if (s.includes('gamer')) return 'Gamer';
+  if (s.includes('estimula') || s.includes('infantil')) return 'Estimulación';
+  return raw;
+}
+
+const CATEGORY_LABELS: Record<string, string> = {
+  Todos: 'Todas las Colecciones',
+  Cocinas: 'Cocinas Integrales & Cuarzo',
+  Closets: 'Clósets & Vestidores',
+  'Baño': 'Muebles de Baño & Vanities',
+  Escritorios: 'Escritorios & Home Office',
+  Oficina: 'Muebles de Oficina & Corporativo',
+  Puertas: 'Puertas Pivotantes & de Paso',
+  Gamer: 'Setups Gamer & Streaming',
+  'Estimulación': 'Circuitos de Estimulación',
+};
+
 const STORE_CATEGORIES = [
   'Todos',
   'Cocinas',
   'Closets',
-  'Muebles de Baño',
+  'Baño',
   'Puertas',
   'Gamer',
-  'Muebles de Oficina',
+  'Oficina',
   'Escritorios',
   'Estimulación',
 ];
@@ -43,31 +71,41 @@ const STORE_CIRCULAR_CATEGORIES = [
   { id: 'Todos', label: 'Todos', imgUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp' },
   { id: 'Cocinas', label: 'Cocinas', imgUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp' },
   { id: 'Closets', label: 'Clósets', imgUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp' },
-  { id: 'Muebles de Baño', label: 'Baños', imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp' },
+  { id: 'Baño', label: 'Baños', imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp' },
   { id: 'Escritorios', label: 'Escritorios', imgUrl: '/images/catalog/extracted_estudiantiles/img-000.webp' },
-  { id: 'Muebles de Oficina', label: 'Oficina', imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp' },
+  { id: 'Oficina', label: 'Oficina', imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp' },
   { id: 'Puertas', label: 'Puertas', imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp' },
   { id: 'Gamer', label: 'Gamer', imgUrl: '/images/catalog/extracted_MUEBLES_GAMER_2/img-004.webp' },
   { id: 'Estimulación', label: 'Estimulación', imgUrl: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp' },
 ];
 
-export default function StorePage() {
+function StoreContent() {
   const { siteContent, loading } = useSiteContent();
   const { selectedCategory, setSelectedCategory } = useCart();
   const [searchQuery, setSearchQuery] = useState('');
+  const searchParams = useSearchParams();
+
+  // Sincronizar automáticamente categoría desde query params (ej: /store?category=bano o /store?category=oficina)
+  useEffect(() => {
+    const catQuery = searchParams?.get('category');
+    if (catQuery) {
+      const normalized = normalizeCategoryName(catQuery);
+      setSelectedCategory(normalized);
+    }
+  }, [searchParams, setSelectedCategory]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
+    loop: true,
     align: 'start',
     dragFree: true,
-    containScroll: 'trimSnaps',
   });
 
   const scrollPrev = () => emblaApi?.scrollPrev();
   const scrollNext = () => emblaApi?.scrollNext();
 
   const handleCategorySelect = (catId: string) => {
-    setSelectedCategory(catId);
+    const normalized = normalizeCategoryName(catId);
+    setSelectedCategory(normalized);
     if (typeof window !== 'undefined') {
       const el = document.getElementById('store-controls');
       if (el) {
@@ -86,7 +124,7 @@ export default function StorePage() {
 
   const categories = useMemo(() => {
     // Garantiza el orden oficial de categorías según el diseño aprobado
-    const uniqueCats = Array.from(new Set(rawProducts.map(p => p.category))).filter(Boolean);
+    const uniqueCats = Array.from(new Set(rawProducts.map(p => normalizeCategoryName(p.category)))).filter(Boolean);
     const ordered = STORE_CATEGORIES.filter(c => c === 'Todos' || uniqueCats.includes(c));
     // Agrega cualquier categoría residual si existiera
     uniqueCats.forEach(c => {
@@ -96,8 +134,10 @@ export default function StorePage() {
   }, [rawProducts]);
 
   const filteredProducts = useMemo(() => {
+    const normSelected = normalizeCategoryName(selectedCategory);
     return rawProducts.filter(product => {
-      const matchesCategory = selectedCategory === 'Todos' || product.category === selectedCategory;
+      const prodCat = normalizeCategoryName(product.category);
+      const matchesCategory = normSelected === 'Todos' || prodCat === normSelected;
       const matchesSearch = 
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -110,37 +150,37 @@ export default function StorePage() {
 
   return (
     <>
-      <div id="top" className="h-0 pt-2 sm:pt-4"></div>
+      <div id="top" className="h-0 pt-20 sm:pt-24"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-20 relative z-10">
         
         {/* BREADCRUMB DE NAVEGACIÓN */}
-        <nav aria-label="Breadcrumb" className="mb-2.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+        <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-primary transition-colors">Inicio</Link>
           <ChevronRight size={13} />
           <span className="text-foreground font-medium">Tienda Oficial GM</span>
         </nav>
 
-        {/* HERO EDITORIAL DE LA TIENDA: 2 COLUMNAS COMPACTAS (Un solo golpe de vista) */}
-        <header className="mb-4 pb-4 border-b border-border/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+        {/* HERO EDITORIAL DE LA TIENDA: 2 COLUMNAS */}
+        <header className="mb-6 pb-6 border-b border-border/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Columna Izquierda: Información y Acciones */}
             <div className="lg:col-span-7">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-1 block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block">
                 Catálogo Oficial GM • Fabricación de Autor
               </span>
-              <h1 className="text-2xl sm:text-3xl lg:text-3xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
                 Tienda & Catálogo de Mobiliario Modular
               </h1>
-              <p className="text-muted-foreground text-xs sm:text-sm mt-1.5 font-normal max-w-xl leading-relaxed line-clamp-2">
+              <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed">
                 Módulos listos para cotizar o comprar directamente. Melamina Pelikano RH 18mm hidrófuga, herrajes alemanes Blum y superficies nobles a medida.
               </p>
 
               {/* Botón de acceso a Catálogos Detallados */}
-              <div className="mt-3 flex items-center gap-2.5">
+              <div className="mt-4 flex items-center gap-3">
                 <Link
                   href="/catalogo"
-                  className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
                 >
                   <BookOpen size={14} className="text-primary" />
                   <span>Ver Catálogos Completos de Autor</span>
@@ -149,45 +189,45 @@ export default function StorePage() {
               </div>
             </div>
 
-            {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad Compacto */}
+            {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad */}
             <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck size={16} className="text-emerald-500 shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Garantía 3 a 5 Años</span>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Cobertura directa en herrajes y tableros.
                   </p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <Truck size={16} className="text-amber-500 shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Envíos a Todo Ecuador</span>
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <Truck size={18} className="text-amber-500 shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Envíos a Todo Ecuador</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Quito, Guayaquil, Cuenca y más.
                   </p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles size={16} className="text-primary shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Pelikano RH 18mm</span>
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={18} className="text-primary shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Pelikano RH 18mm</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Melamina antibacterial resistente.
                   </p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-blue-500 shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Blum & Häfele</span>
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={18} className="text-blue-500 shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Blum & Häfele</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Sistemas alemanes de cierre suave.
                   </p>
                 </div>
@@ -196,31 +236,41 @@ export default function StorePage() {
           </div>
         </header>
 
-        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Todas visibles en un solo golpe de vista) */}
-        <section aria-label="Categorías de la Tienda" className="hidden md:block mb-5 py-3 px-3 rounded-2xl border border-border/60 bg-card/30 backdrop-blur-md">
-          <div className="flex items-center justify-between mb-2 px-2">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles size={13} className="text-primary" /> Explorar por Categoría
-            </h2>
-            <span className="text-[11px] text-muted-foreground">
-              Haga clic para filtrar productos y posicionar el catálogo
-            </span>
+        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Carrusel Infinito con Imágenes Grandes y Detalladas) */}
+        <section aria-label="Categorías de la Tienda" className="hidden md:block mb-8 py-5 px-6 rounded-3xl border border-border/60 bg-card/40 backdrop-blur-md shadow-sm">
+          <div className="flex items-center justify-between mb-4 px-1">
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-wider text-foreground flex items-center gap-2">
+                <Sparkles size={15} className="text-primary" /> Explorar por Categoría
+              </h2>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Deslice para explorar y haga clic para filtrar productos y posicionar el catálogo
+              </p>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={scrollPrev}
+                className="w-8 h-8 rounded-full bg-card border border-border/80 shadow-sm flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+                aria-label="Categorías anteriores"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={scrollNext}
+                className="w-8 h-8 rounded-full bg-card border border-border/80 shadow-sm flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+                aria-label="Siguientes categorías"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-6">
-            {/* Flecha Izquierda */}
-            <button
-              type="button"
-              onClick={scrollPrev}
-              className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
-              aria-label="Categorías anteriores"
-            >
-              <ChevronLeft size={15} />
-            </button>
-
-            {/* Viewport del Carrusel */}
-            <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex items-center justify-between gap-2 lg:gap-3 py-1 w-full">
+          <div className="relative">
+            {/* Viewport del Carrusel Infinito */}
+            <div className="overflow-hidden cursor-grab active:cursor-grabbing px-1" ref={emblaRef}>
+              <div className="flex gap-6 sm:gap-7 items-center py-2">
                 {STORE_CIRCULAR_CATEGORIES.map((cat) => {
                   const isActive = selectedCategory === cat.id;
                   return (
@@ -228,13 +278,13 @@ export default function StorePage() {
                       key={cat.id}
                       type="button"
                       onClick={() => handleCategorySelect(cat.id)}
-                      className="group flex flex-col items-center gap-1.5 transition-all focus:outline-none shrink-0"
+                      className="group flex flex-col items-center gap-2.5 transition-all focus:outline-none shrink-0"
                     >
                       <div
                         className={cn(
-                          "relative w-14 h-14 sm:w-15 sm:h-15 lg:w-16 lg:h-16 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-sm group-hover:scale-105 group-hover:shadow-md",
+                          "relative w-20 h-20 sm:w-22 sm:h-22 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-md group-hover:scale-105 group-hover:shadow-lg",
                           isActive
-                            ? "border-primary ring-3 ring-primary/25 scale-105 shadow-md"
+                            ? "border-primary ring-4 ring-primary/20 scale-105 shadow-xl"
                             : "border-border/80 group-hover:border-primary/60"
                         )}
                       >
@@ -242,7 +292,7 @@ export default function StorePage() {
                           src={cat.imgUrl}
                           alt={cat.label}
                           fill
-                          sizes="64px"
+                          sizes="96px"
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         {isActive && (
@@ -251,7 +301,7 @@ export default function StorePage() {
                       </div>
                       <span
                         className={cn(
-                          "text-[11px] font-semibold tracking-tight transition-colors whitespace-nowrap",
+                          "text-xs font-semibold tracking-tight transition-colors whitespace-nowrap",
                           isActive ? "text-primary font-bold" : "text-stone-700 dark:text-stone-300 group-hover:text-foreground"
                         )}
                       >
@@ -262,16 +312,6 @@ export default function StorePage() {
                 })}
               </div>
             </div>
-
-            {/* Flecha Derecha */}
-            <button
-              type="button"
-              onClick={scrollNext}
-              className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
-              aria-label="Siguientes categorías"
-            >
-              <ChevronRight size={15} />
-            </button>
           </div>
         </section>
 
@@ -288,13 +328,13 @@ export default function StorePage() {
                 </div>
                 <select
                   id="store-category-select"
-                  value={selectedCategory}
+                  value={normalizeCategoryName(selectedCategory)}
                   onChange={(e) => handleCategorySelect(e.target.value)}
                   className="w-full h-11 pl-10 pr-10 text-xs font-bold rounded-full bg-background border border-border/80 text-foreground appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer"
                 >
                   {categories.map((category) => (
                     <option key={category} value={category} className="bg-background text-foreground py-2 font-medium">
-                      {category === 'Todos' ? '📂 Todas las categorías' : `✨ ${category}`}
+                      {category === 'Todos' ? '📂 Todas las colecciones' : `✨ ${CATEGORY_LABELS[category] || category}`}
                     </option>
                   ))}
                 </select>
@@ -306,9 +346,9 @@ export default function StorePage() {
             <div className="hidden md:flex items-center gap-2.5 px-3 py-1 text-xs">
               <span className="text-muted-foreground font-medium">Línea seleccionada:</span>
               <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold">
-                {selectedCategory === 'Todos' ? 'Todas las Categorías' : selectedCategory}
+                {CATEGORY_LABELS[normalizeCategoryName(selectedCategory)] || selectedCategory}
               </span>
-              {selectedCategory !== 'Todos' && (
+              {normalizeCategoryName(selectedCategory) !== 'Todos' && (
                 <button
                   type="button"
                   onClick={() => setSelectedCategory('Todos')}
@@ -431,5 +471,17 @@ export default function StorePage() {
 
       <CartSidebar />
     </>
+  );
+}
+
+export default function StorePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen pt-28 text-center text-muted-foreground text-sm">
+        Cargando catálogo oficial...
+      </div>
+    }>
+      <StoreContent />
+    </Suspense>
   );
 }

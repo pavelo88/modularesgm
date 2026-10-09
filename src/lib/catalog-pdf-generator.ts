@@ -1,30 +1,6 @@
 import jsPDF from 'jspdf';
-
-/**
- * Convierte una imagen a Base64 JPEG usando canvas en el navegador
- */
-async function toBase64Jpeg(url: string): Promise<string | null> {
-  if (typeof window === 'undefined') return null;
-  return new Promise((resolve) => {
-    const img = new window.Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = () => {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth || img.width;
-        canvas.height = img.naturalHeight || img.height;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return resolve(null);
-        ctx.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL('image/jpeg', 0.88));
-      } catch {
-        resolve(null);
-      }
-    };
-    img.onerror = () => resolve(null);
-    img.src = url;
-  });
-}
+import { ALL_CATALOG_PRODUCTS } from './catalog-full';
+import type { Product } from './types';
 
 interface ImageBase64Info {
   data: string;
@@ -34,7 +10,46 @@ interface ImageBase64Info {
 }
 
 /**
- * Convierte una imagen a Base64 PNG preservando canal alfa y dimensiones naturales (para logotipos sin deformación)
+ * Convierte una imagen a Base64 JPEG usando canvas en el navegador,
+ * limitando el tamaño a maxDim para optimizar memoria y tiempo de generación.
+ */
+async function toBase64Jpeg(url: string, maxDim = 1200): Promise<string | null> {
+  if (typeof window === 'undefined') return null;
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        let w = img.naturalWidth || img.width || 800;
+        let h = img.naturalHeight || img.height || 600;
+        if (w > maxDim || h > maxDim) {
+          if (w > h) {
+            h = Math.round(h * (maxDim / w));
+            w = maxDim;
+          } else {
+            w = Math.round(w * (maxDim / h));
+            h = maxDim;
+          }
+        }
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return resolve(null);
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.82));
+      } catch {
+        resolve(null);
+      }
+    };
+    img.onerror = () => resolve(null);
+    img.src = url;
+  });
+}
+
+/**
+ * Convierte una imagen a Base64 PNG preservando canal alfa y relación de aspecto natural
+ * (para logotipos y sellos sin deformación vertical).
  */
 async function toBase64PngInfo(url: string): Promise<ImageBase64Info | null> {
   if (typeof window === 'undefined') return null;
@@ -66,182 +81,141 @@ async function toBase64PngInfo(url: string): Promise<ImageBase64Info | null> {
   });
 }
 
-export interface CatalogCategoryPdfData {
-  id: string;
+export interface CategoryMetadata {
+  key: string;
   title: string;
   tag: string;
   subtitle: string;
-  desc: string;
-  img: string;
-  gallery?: string[];
-  specs: string[];
+  coverHero: string;
+  layoutType: 'kitchen' | 'doors_office' | 'bath_closet';
+  itemsPerPage: number;
 }
 
-export const ALL_CATALOG_CATEGORIES_PDF: CatalogCategoryPdfData[] = [
-  {
-    id: 'cocinas',
-    title: 'Cocinas Integrales con Cuarzo',
-    tag: 'LÍNEA DE AUTOR 01',
-    subtitle: 'Islas de cuarzo Calacatta, acabados hidrófugos RH 18mm y herrajes Blum.',
-    desc: 'Nuestras cocinas integrales están concebidas bajo estrictos principios de ergonomía y durabilidad arquitectónica. Cada módulo es fabricado con tableros Pelikano RH de 18mm resistentes a la humedad y al calor, con cantos rígidos aplicados con tecnología PUR libre de juntas visibles. Las encimeras en cuarzo antibacterial garantizan superficies higiénicas y de fácil mantenimiento con garantía directa.',
-    img: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
-    gallery: [
-      '/images/catalog/extracted_DE_COCINAS/img-004.webp',
-      '/images/catalog/extracted_DE_COCINAS/img-005.webp',
-      '/images/catalog/extracted_DE_COCINAS/img-007.webp',
-    ],
-    specs: [
-      'Estructura: Melamina Pelikano RH 18mm hidrófuga',
-      'Mesón: Cuarzo pulido antibacteriano a medida',
-      'Herrajes: Bisagras y rieles Blum con cierre amortiguado',
-      'Garantía: 3 a 5 años directa de fábrica',
-    ],
+export const CATEGORY_CATALOG_CONFIG: Record<string, CategoryMetadata> = {
+  Cocinas: {
+    key: 'Cocinas',
+    title: 'Cocinas Integrales & Cuarzo',
+    tag: 'LÍNEA DE AUTOR 01 • COCINAS',
+    subtitle: 'Islas de cuarzo Calacatta Gold, melamina RH 18mm hidrófuga y herrajes alemanes Blum.',
+    coverHero: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    layoutType: 'kitchen',
+    itemsPerPage: 1, // 1 cocina por hoja
   },
-  {
-    id: 'closets',
+  Closets: {
+    key: 'Closets',
     title: 'Walk-in Closets & Vestidores',
-    tag: 'LÍNEA DE AUTOR 02',
-    subtitle: 'Diseños de piso a techo con iluminación LED oculta y puertas vitrina.',
-    desc: 'Optimizamos cada centímetro cúbico para que la organización de prendas sea una experiencia placentera. Módulos configurables con zapateras extraíbles de gran capacidad, cajoneras de terciopelo con división para joyas y pantaloneros de extracción total. Iluminación lineal cálida de encendido automático por sensor de proximidad.',
-    img: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
-    gallery: [
-      '/images/catalog/extracted_CLOSETS_1/img-004.webp',
-      '/images/catalog/extracted_CLOSETS_1/img-005.webp',
-      '/images/catalog/extracted_CLOSETS_1/img-006.webp',
-    ],
-    specs: [
-      'Sistemas: Puertas corredizas colgantes y perfiles de aluminio',
-      'Interiores: Módulos personalizados con pantaloneros telescópicos',
-      'Iluminación: Tiras LED 3000K con perfiles difusores empotrados',
-      'Herrajes: Rieles de extracción total oculta',
-    ],
+    tag: 'LÍNEA DE AUTOR 02 • CLÓSETS',
+    subtitle: 'Diseños de piso a techo con iluminación LED integrada, pantaloneros y vitrinas templadas.',
+    coverHero: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    layoutType: 'bath_closet',
+    itemsPerPage: 2, // 2 closets por hoja
   },
-  {
-    id: 'bano',
-    title: 'Vanities & Muebles de Baño',
-    tag: 'LÍNEA DE AUTOR 03',
-    subtitle: 'Muebles flotantes antibacteriales con encimera de cuarzo y espejos LED.',
-    desc: 'Diseñados para resistir ambientes de alta humedad continua sin deformaciones ni desprendimientos. La combinación de frentes con texturas sincronizadas y mesones de cuarzo macizo protege contra salpicaduras y químicos de aseo personal. Ensamblados con tornillería oculta y sellado perimetral antihongos.',
-    img: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
-    gallery: [
-      '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-005.webp',
-      '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-006.webp',
-      '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-007.webp',
-    ],
-    specs: [
-      'Resistencia: Protección total antihongos y vapor',
-      'Fijación: Soportes invisibles de alta carga (hasta 120 kg)',
-      'Lavamanos: Compatibilidad con pozos bajo tope o de sobreponer',
-      'Grifería: Planimetría de desagüe y tomas de agua oculta',
-    ],
+  'Baño': {
+    key: 'Baño',
+    title: 'Vanities & Muebles de Baño Flotantes',
+    tag: 'LÍNEA DE AUTOR 03 • BAÑOS',
+    subtitle: 'Resistencia total al vapor y humedad, tableros marinos y encimeras de cuarzo macizo.',
+    coverHero: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
+    layoutType: 'bath_closet',
+    itemsPerPage: 2, // 2 muebles de baño por hoja
   },
-  {
-    id: 'escritorios',
-    title: 'Escritorios Estudiantiles & Home Office',
-    tag: 'LÍNEA DE AUTOR 04',
-    subtitle: 'Superficies amplias con pasacables ocultos, repisas flotantes y cajoneras.',
-    desc: 'El mobiliario esencial para teletrabajo y estudio de alta productividad. Diseñados siguiendo los estándares internacionales de ergonomía para postura correcta en jornadas prolongadas. Incorporan bandejas pasacables bajo cubierta y cajoneras de seguridad con cerraduras de alta fidelidad.',
-    img: '/images/catalog/extracted_estudiantiles/img-000.webp',
-    gallery: [
-      '/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-001.webp',
-      '/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-002.webp',
-      '/images/catalog/extracted_ESCRITORIOS_ESTUDIANTILES_1/img-003.webp',
-    ],
-    specs: [
-      'Cubierta: Melamina 25mm de alta resistencia al rayado',
-      'Gestión Eléctrica: Pasacables metálicos y bandejas de soporte',
-      'Cajoneras: Rieles de cierre suave y tiradores embutidos',
-      'Medidas: Opciones estándar y personalizadas a tu espacio',
-    ],
+  Escritorios: {
+    key: 'Escritorios',
+    title: 'Escritorios & Estaciones Home Office',
+    tag: 'LÍNEA DE AUTOR 04 • ESCRITORIOS',
+    subtitle: 'Ergonomía superior, pasacables integrados, cajoneras con llave y superficies antirrayas.',
+    coverHero: '/images/catalog/extracted_estudiantiles/img-000.webp',
+    layoutType: 'doors_office',
+    itemsPerPage: 3, // 3 escritorios por hoja alternando
   },
-  {
-    id: 'oficina',
+  Oficina: {
+    key: 'Oficina',
     title: 'Mobiliario Corporativo & Oficinas',
-    tag: 'LÍNEA DE AUTOR 05',
-    subtitle: 'Reuniones ejecutivas, counter de recepción y estaciones multipuesto.',
-    desc: 'Proyectamos la solidez de tu empresa mediante acabados limpios y arquitectura contemporánea. Mesas de directorio con cajas de conectividad integradas para HDMI, USB y red; counters de bienvenida con iluminación indirecta y perfiles metálicos termolacados con pintura electrostática.',
-    img: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
-    gallery: [
-      '/images/catalog/extracted_MUEBLES_OFICINA/img-004.webp',
-      '/images/catalog/extracted_MUEBLES_OFICINA/img-005.webp',
-      '/images/catalog/extracted_MUEBLES_OFICINA/img-006.webp',
-    ],
-    specs: [
-      'Tipologías: Recepciones, directorios y puestos modulares',
-      'Conectividad: Cajas de conexiones rebatibles en aluminio',
-      'Durabilidad: Tapas termoformadas de 25mm y cantos de 2mm',
-      'Instalación: Logística nocturna disponible para corporativos',
-    ],
+    tag: 'LÍNEA DE AUTOR 05 • OFICINAS',
+    subtitle: 'Counters de recepción monolíticos, mesas de directorio y estaciones modulares ejecutivas.',
+    coverHero: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
+    layoutType: 'doors_office',
+    itemsPerPage: 3, // 3 de oficina por hoja alternando
   },
-  {
-    id: 'puertas',
-    title: 'Puertas Pivotantes & Puertas de Paso',
-    tag: 'LÍNEA DE AUTOR 06',
-    subtitle: 'Acceso monumental de hasta 3 metros con pivotante de acero y núcleo aislante.',
-    desc: 'Puertas de ingreso principal monumentales con sistema pivotante axial de alta capacidad de carga. Núcleo con aislante acústico y térmico, acabados en láminas de roble natural, melaminas sincronizadas o lacado mate. Marcos envolventes y cerraduras digitales biométricas opcionales.',
-    img: '/images/catalog/extracted_DE_PUERTAS/img-004.webp',
-    gallery: [
-      '/images/catalog/extracted_DE_PUERTAS/img-005.webp',
-      '/images/catalog/extracted_DE_PUERTAS/img-006.webp',
-      '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
-    ],
-    specs: [
-      'Sistema: Pivote axial reforzado de acero inoxidable 304',
-      'Dimensiones: Alturas monumentales de 2.40m hasta 3.00m',
-      'Núcleo: Aislamiento termoacústico de alta densidad',
-      'Seguridad: Compatibilidad con cerraduras biométricas',
-    ],
+  Puertas: {
+    key: 'Puertas',
+    title: 'Puertas Pivotantes & de Paso',
+    tag: 'LÍNEA DE AUTOR 06 • PUERTAS',
+    subtitle: 'Ingresos de hasta 3 metros de altura con sistema pivotante de acero y cerradura digital.',
+    coverHero: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+    layoutType: 'doors_office',
+    itemsPerPage: 3, // 3 puertas por hoja alternando
   },
-  {
-    id: 'gamer',
-    title: 'Setups Gamer & Streaming',
-    tag: 'LÍNEA DE AUTOR 07',
-    subtitle: 'Canalización oculta al 100%, soporte multipantalla y perfiles LED RGB.',
-    desc: 'El equilibrio entre rendimiento térmico, estética inmersiva y resistencia estructural. Capaces de albergar torres de gran volumen con flujo de aire optimizado, brazos neumáticos de monitor y sistemas de control para tiras LED direccionables ARGB.',
-    img: '/images/catalog/extracted_MUEBLES_GAMER_2/img-004.webp',
-    gallery: [
-      '/images/catalog/extracted_MUEBLES_GAMER_2/img-005.webp',
-      '/images/catalog/extracted_MUEBLES_GAMER_2/img-006.webp',
-      '/images/catalog/extracted_MUEBLES_GAMER_2/img-007.webp',
-    ],
-    specs: [
-      'Capacidad: Refuerzo inferior con travesaños de acero',
-      'Cables: Ruteo 100% ciego de punta a punta',
-      'Iluminación: Difusor negro para perfil LED integrado',
-      'Acabado: Carbono texturizado y negro mate antihuella',
-    ],
+  Gamer: {
+    key: 'Gamer',
+    title: 'Setups Gamer & Centros de Streaming',
+    tag: 'LÍNEA DE AUTOR 07 • GAMER',
+    subtitle: 'Soporte multipantalla reforzado, ruteo ciego de cables e iluminación RGB oculta.',
+    coverHero: '/images/catalog/extracted_MUEBLES_GAMER_2/img-004.webp',
+    layoutType: 'bath_closet',
+    itemsPerPage: 2, // 2 gamer por hoja
   },
-  {
-    id: 'estimulacion',
-    title: 'Circuitos de Estimulación & Espacios Infantiles',
-    tag: 'LÍNEA DE AUTOR 08',
-    subtitle: 'Módulos sensoriales y psicomotrices con diseño Montessori y bordes seguros.',
-    desc: 'Espacios didácticos para desarrollo motor y estimulación sensorial temprana. Fabricados con maderas seleccionadas y melaminas no tóxicas, con aristas boleadas para máxima seguridad de los niños. Módulos de trepada, rampas de equilibrio y estanterías Montessori de baja altura para autonomía infantil.',
-    img: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp',
-    gallery: [
-      '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-004.webp',
-      '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-008.webp',
-      '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-012.webp',
-    ],
-    specs: [
-      'Seguridad: Aristas y bordes totalmente boleados y sellados',
-      'Materiales: Tableros antibacterianos certificados libres de emisiones',
-      'Pedagogía: Diseños bajo metodología Montessori y motricidad libre',
-      'Resistencia: Ensambles reforzados para uso intensivo en centros infantiles',
-    ],
+  'Estimulación': {
+    key: 'Estimulación',
+    title: 'Circuitos de Estimulación Infantil',
+    tag: 'LÍNEA DE AUTOR 08 • ESTIMULACIÓN',
+    subtitle: 'Módulos psicomotrices Montessori con acabados boleados no tóxicos para máxima seguridad.',
+    coverHero: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp',
+    layoutType: 'bath_closet',
+    itemsPerPage: 2, // 2 de estimulación por hoja
   },
-];
+};
+
+/**
+ * Resuelve el identificador de categoría ingresado hacia la clave normalizada
+ */
+export function resolveCategoryKey(catId?: string | null): string {
+  if (!catId || catId === 'todos') return 'todos';
+  const c = catId.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  if (c.includes('cocina')) return 'Cocinas';
+  if (c.includes('closet')) return 'Closets';
+  if (c.includes('bano') || c.includes('vanit')) return 'Baño';
+  if (c.includes('escritorio')) return 'Escritorios';
+  if (c.includes('oficina') || c.includes('corporativ')) return 'Oficina';
+  if (c.includes('puerta')) return 'Puertas';
+  if (c.includes('gamer')) return 'Gamer';
+  if (c.includes('estimula')) return 'Estimulación';
+  return catId;
+}
+
+/**
+ * Obtiene la fotografía del producto asegurando que NUNCA repita la portada en la primera página
+ */
+function getProductPhoto(product: Product, coverHeroUrl?: string): string {
+  if (!coverHeroUrl || product.imgUrl !== coverHeroUrl) {
+    return product.imgUrl;
+  }
+  // Si la foto principal coincide con la portada, usar el ángulo secundario
+  if (product.images && product.images.length > 1) {
+    const alternate = product.images.find((img: string) => img !== coverHeroUrl);
+    if (alternate) return alternate;
+  }
+  return product.imgUrl;
+}
 
 /**
  * Genera el Catálogo PDF Editorial de Lujo estilo Revista de Arquitectura
- * Si categoryId está presente, genera el catálogo especializado de esa categoría.
- * Si categoryId no se proporciona o es 'todos', genera el catálogo completo oficial.
+ * Cumple estrictamente con las reglas:
+ * - Cocinas: 1 por hoja, modelos únicos sin repetir fotos
+ * - Puertas: 3 por hoja alternando derecha-izq-derecha / izq-der-izq
+ * - Oficina: 3 por hoja alternando
+ * - Escritorios: 3 por hoja alternando
+ * - Muebles de Baño: 2 por hoja alternando
+ * - Clósets: 2 por hoja alternando
+ * - Gamer & Estimulación: 2 por hoja alternando
+ * - Saludo/Portada al inicio y Despedida/Contraportada al final
+ * - Cero duplicación de la foto de portada en la primera hoja interior
  */
 export async function generateLuxuryCatalogPdf(
   categoryId?: string,
   onProgress?: (msg: string) => void
 ) {
-  onProgress?.('Preparando maquetación de autor...');
+  onProgress?.('Preparando maquetación arquitectónica...');
 
   const doc = new jsPDF({
     orientation: 'portrait',
@@ -255,23 +229,23 @@ export async function generateLuxuryCatalogPdf(
   // Cargar logotipo preservando relación de aspecto natural
   const logoInfo = await toBase64PngInfo('/logo.png');
 
-  // Función para estampar la marca de agua translúcida proporcional en el centro
+  // Marca de agua central sin deformación
   const applyWatermark = () => {
     if (!logoInfo) return;
     try {
       const gStateClass = (doc as any).GState;
       if (typeof gStateClass === 'function' && typeof (doc as any).setGState === 'function') {
-        (doc as any).setGState(new gStateClass({ opacity: 0.07 }));
+        (doc as any).setGState(new gStateClass({ opacity: 0.06 }));
       }
-      const wmWidth = 110;
-      const wmHeight = wmWidth / logoInfo.aspect; // Proporción exacta, cero distorsión vertical
+      const wmW = 110;
+      const wmH = wmW / logoInfo.aspect;
       doc.addImage(
         logoInfo.data,
         'PNG',
-        (pageWidth - wmWidth) / 2,
-        (pageHeight - wmHeight) / 2,
-        wmWidth,
-        wmHeight,
+        (pageWidth - wmW) / 2,
+        (pageHeight - wmH) / 2,
+        wmW,
+        wmH,
         undefined,
         'FAST'
       );
@@ -279,288 +253,547 @@ export async function generateLuxuryCatalogPdf(
         (doc as any).setGState(new gStateClass({ opacity: 1.0 }));
       }
     } catch {
-      // Ignorar si falla el estado gráfico
+      // Ignorar fallback
     }
   };
 
-  // Filtrar categorías a incluir
-  const isSingle = Boolean(categoryId && categoryId !== 'todos');
-  const targetCategories = isSingle
-    ? ALL_CATALOG_CATEGORIES_PDF.filter((c) => c.id.toLowerCase() === categoryId!.toLowerCase())
-    : ALL_CATALOG_CATEGORIES_PDF;
+  const drawHeader = (tag: string, categoryTitle: string) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.setTextColor(140, 110, 60);
+    doc.text(tag, 18, 14);
 
-  const currentCategory = isSingle && targetCategories.length > 0 ? targetCategories[0] : null;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(150, 145, 140);
+    doc.text('MODULARES GM • CATÁLOGO ARQUITECTÓNICO 2026', pageWidth - 18, 14, { align: 'right' });
+
+    doc.setDrawColor(215, 210, 200);
+    doc.setLineWidth(0.3);
+    doc.line(18, 17, pageWidth - 18, 17);
+  };
+
+  const drawFooter = (pageNum: number) => {
+    doc.setDrawColor(220, 215, 205);
+    doc.setLineWidth(0.3);
+    doc.line(18, 282, pageWidth - 18, 282);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(140, 135, 130);
+    doc.text('Cotizaciones & Planimetría 3D: info@modularesgm.com | WhatsApp: +593 96 306 4374', 18, 287);
+    doc.text(`Página ${pageNum}`, pageWidth - 18, 287, { align: 'right' });
+  };
+
+  // Determinar categorías a procesar
+  const targetKey = resolveCategoryKey(categoryId);
+  const isSingle = targetKey !== 'todos';
+
+  const categoryEntries = isSingle && CATEGORY_CATALOG_CONFIG[targetKey]
+    ? [CATEGORY_CATALOG_CONFIG[targetKey]]
+    : Object.values(CATEGORY_CATALOG_CONFIG);
+
+  const mainCategory = isSingle ? CATEGORY_CATALOG_CONFIG[targetKey] : null;
 
   // ─────────────────────────────────────────────────────────────
-  // PÁGINA 1: PORTADA EDITORIAL (ESTILO REVISTA LUXURY)
+  // PÁGINA 1: SALUDO & PORTADA EDITORIAL (REVISTA DE ARQUITECTURA)
   // ─────────────────────────────────────────────────────────────
   onProgress?.('Diseñando portada de autor...');
 
-  // Fondo cálido arquitectónico (tono piedra / marfil)
+  // Fondo cálido arquitectónico (marfil / piedra)
   doc.setFillColor(250, 248, 245);
   doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
-  // Marco perimetral fino editorial
-  doc.setDrawColor(210, 205, 195);
+  // Marco perimetral fino editorial doble
+  doc.setDrawColor(215, 208, 198);
   doc.setLineWidth(0.5);
+  doc.rect(10, 10, pageWidth - 20, pageHeight - 20);
+  doc.setLineWidth(0.25);
   doc.rect(12, 12, pageWidth - 24, pageHeight - 24);
 
-  // Marca de agua central
   applyWatermark();
 
-  // Logotipo en cabecera de portada CON PROPORCIÓN EXACTA (no estirado verticalmente)
+  // Logotipo de cabecera con proporción natural
   if (logoInfo) {
-    const logoW = 38;
-    const logoH = logoW / logoInfo.aspect; // Proporción natural perfecta
-    doc.addImage(logoInfo.data, 'PNG', (pageWidth - logoW) / 2, 23, logoW, logoH);
+    const logoW = 36;
+    const logoH = logoW / logoInfo.aspect;
+    doc.addImage(logoInfo.data, 'PNG', (pageWidth - logoW) / 2, 20, logoW, logoH);
   }
 
-  // Textos de Portada
+  // Título de la marca
   doc.setTextColor(30, 25, 20);
   doc.setFont('times', 'bold');
-  doc.setFontSize(26);
-  doc.text('MODULARES GM', pageWidth / 2, 63, { align: 'center' });
+  doc.setFontSize(24);
+  doc.text('MODULARES GM', pageWidth / 2, 56, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(8.5);
   doc.setTextColor(140, 110, 60);
-  doc.text('COCINAS DE AUTOR • MESONES DE CUARZO • MOBILIARIO MODULAR', pageWidth / 2, 70, { align: 'center' });
+  doc.text('COCINAS DE AUTOR • MESONES DE CUARZO • MOBILIARIO MODULAR A MEDIDA', pageWidth / 2, 63, { align: 'center' });
 
-  // Línea divisoria elegante
   doc.setDrawColor(180, 150, 90);
   doc.setLineWidth(0.4);
-  doc.line(pageWidth / 2 - 40, 75, pageWidth / 2 + 40, 75);
+  doc.line(pageWidth / 2 - 35, 67, pageWidth / 2 + 35, 67);
 
   // Título de la Edición
   doc.setFont('times', 'italic');
-  doc.setFontSize(18);
+  doc.setFontSize(17);
   doc.setTextColor(40, 35, 30);
-  const editionTitle = currentCategory
-    ? `Catálogo Especializado: ${currentCategory.title} 2026`
-    : 'Catálogo Oficial de Colecciones 2026';
-  doc.text(editionTitle, pageWidth / 2, 88, { align: 'center' });
+  const editionTitle = mainCategory
+    ? `Catálogo Editorial: ${mainCategory.title} 2026`
+    : 'Catálogo Oficial de Colecciones GM 2026';
+  doc.text(editionTitle, pageWidth / 2, 78, { align: 'center' });
 
-  // Fotografía de Portada de Alta Gama
-  const coverImgUrl = currentCategory ? currentCategory.img : '/images/catalog/extracted_DE_COCINAS/img-004.webp';
-  const coverImg = await toBase64Jpeg(coverImgUrl);
+  // Fotografía de Portada de Alta Gama (Dedidada)
+  const coverHeroUrl = mainCategory
+    ? mainCategory.coverHero
+    : '/images/catalog/extracted_DE_COCINAS/img-006.webp';
+  const coverImg = await toBase64Jpeg(coverHeroUrl, 1400);
   if (coverImg) {
-    doc.addImage(coverImg, 'JPEG', 24, 98, pageWidth - 48, 122);
+    doc.addImage(coverImg, 'JPEG', 20, 86, pageWidth - 40, 134);
+    doc.setDrawColor(210, 205, 195);
+    doc.setLineWidth(0.3);
+    doc.rect(20, 86, pageWidth - 40, 134);
   }
 
-  // Cuadro de estándares al pie de portada
+  // Cuadro de estándares y certificaciones al pie de portada
   doc.setFillColor(255, 255, 255);
   doc.setDrawColor(220, 215, 205);
-  doc.roundedRect(24, 228, pageWidth - 48, 38, 3, 3, 'FD');
+  doc.roundedRect(20, 226, pageWidth - 40, 42, 2.5, 2.5, 'FD');
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(40, 35, 30);
-  doc.text('ESTÁNDAR DE FABRICACIÓN CERTIFICADO GM', pageWidth / 2, 236, { align: 'center' });
+  doc.setFontSize(8.5);
+  doc.setTextColor(35, 30, 25);
+  doc.text('ESTÁNDAR DE FABRICACIÓN CERTIFICADO & COMPROMISO GM', pageWidth / 2, 234, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(90, 85, 80);
-  doc.text('• Tableros Pelikano RH Hidrófugo 18mm con protección antibacterial', 32, 244);
-  doc.text('• Herrajes alemanes Blum y Häfele con amortiguación de cierre suave', 32, 250);
-  doc.text('• Mesones en Cuarzo Calacatta antibacterial, Silestone y Granito San Gabriel', 32, 256);
+  doc.setFontSize(7.8);
+  doc.setTextColor(80, 75, 70);
+  doc.text('• Tableros Pelikano RH Hidrófugo 18mm con protección antibacterial certificada', 26, 242);
+  doc.text('• Herrajes europeos Blum con bisagras clip-top y sistemas de elevación amortiguados', 26, 248);
+  doc.text('• Mesones en Cuarzo Calacatta Gold antibacterial, Silestone y Granito San Gabriel', 26, 254);
+  doc.text('• Garantía directa de 10 años en superficies de cuarzo y 5 años en estructura modular', 26, 260);
 
-  // Pie de página de portada
+  // Pie de portada
   doc.setFontSize(8);
   doc.setTextColor(130, 125, 120);
-  doc.text('Quito, Ecuador • www.modularesgm.com • WhatsApp: +593 96 306 4374', pageWidth / 2, 278, { align: 'center' });
+  doc.text('Quito, Ecuador • www.modularesgm.com • WhatsApp: +593 96 306 4374', pageWidth / 2, 279, { align: 'center' });
 
   // ─────────────────────────────────────────────────────────────
-  // PÁGINAS DE CONTENIDO POR CATEGORÍA (EDITORIAL SPREADS)
+  // PÁGINAS DE CONTENIDO: ITERACIÓN POR CATEGORÍA
   // ─────────────────────────────────────────────────────────────
-  for (let i = 0; i < targetCategories.length; i++) {
-    const item = targetCategories[i];
-    onProgress?.(`Compilando página ${i + 2}: ${item.title}...`);
+  let totalProcessed = 0;
 
-    doc.addPage();
-    applyWatermark();
+  for (const catConfig of categoryEntries) {
+    const categoryProducts = ALL_CATALOG_PRODUCTS.filter(
+      (p) => p.category.toLowerCase() === catConfig.key.toLowerCase()
+    );
 
-    // Encabezado de página
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8);
-    doc.setTextColor(140, 110, 60);
-    doc.text(item.tag, 20, 18);
+    if (categoryProducts.length === 0) continue;
 
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(150, 150, 150);
-    doc.text('MODULARES GM • CATÁLOGO ARQUITECTÓNICO 2026', pageWidth - 20, 18, { align: 'right' });
+    onProgress?.(`Procesando colección ${catConfig.title}...`);
 
-    doc.setDrawColor(220, 215, 205);
-    doc.setLineWidth(0.3);
-    doc.line(20, 21, pageWidth - 20, 21);
+    // ─────────────────────────────────────────────────────────
+    // CASO 1: COCINAS (1 cocina por hoja, modelos únicos)
+    // ─────────────────────────────────────────────────────────
+    if (catConfig.layoutType === 'kitchen') {
+      for (let i = 0; i < categoryProducts.length; i++) {
+        const prod = categoryProducts[i];
+        totalProcessed++;
+        onProgress?.(`Cocinas: Modelo ${i + 1} de ${categoryProducts.length}...`);
 
-    // Título de la categoría
-    doc.setFont('times', 'bold');
-    doc.setFontSize(19);
-    doc.setTextColor(30, 25, 20);
-    doc.text(item.title, 20, 31);
+        doc.addPage();
+        applyWatermark();
+        const currentPageNum = doc.getNumberOfPages();
+        drawHeader(catConfig.tag, catConfig.title);
 
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(8.5);
-    doc.setTextColor(100, 95, 90);
-    doc.text(item.subtitle, 20, 37);
+        // Título del modelo
+        doc.setFont('times', 'bold');
+        doc.setFontSize(18);
+        doc.setTextColor(30, 25, 20);
+        doc.text(prod.title, 18, 26);
 
-    // Fotografía principal del producto
-    const catImg = await toBase64Jpeg(item.img);
-    if (catImg) {
-      doc.addImage(catImg, 'JPEG', 20, 42, pageWidth - 40, 95);
-    }
+        // Subtítulo editorial
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(8.5);
+        doc.setTextColor(140, 110, 60);
+        doc.text(
+          `Línea de Autor • Acabado Pelikano RH 18mm & Herrajes Blum • ${prod.dimensions || 'A medida'}`,
+          18,
+          31
+        );
 
-    // Texto Justificado Editorial
-    doc.setFont('times', 'normal');
-    doc.setFontSize(9.5);
-    doc.setTextColor(45, 40, 35);
-    const splitDesc = doc.splitTextToSize(item.desc, pageWidth - 40);
-    doc.text(splitDesc, 20, 147, { align: 'justify', maxWidth: pageWidth - 40 });
+        // Fotografía principal del modelo (Evitando duplicar la foto de la portada)
+        const photoUrl = getProductPhoto(prod, catConfig.coverHero);
+        const mainImg = await toBase64Jpeg(photoUrl, 1400);
 
-    // Cuadro de Especificaciones Técnicas
-    doc.setFillColor(248, 246, 242);
-    doc.setDrawColor(215, 210, 200);
-    doc.roundedRect(20, 184, pageWidth - 40, 64, 2, 2, 'FD');
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.setTextColor(35, 30, 25);
-    doc.text('ESPECIFICACIONES TÉCNICAS Y GARANTÍA', 28, 195);
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(70, 65, 60);
-
-    let specY = 205;
-    for (const spec of item.specs) {
-      doc.text(`✓  ${spec}`, 28, specY);
-      specY += 9;
-    }
-
-    // Si es un catálogo individual y tiene fotos secundarias, agregar página de galería
-    if (isSingle && item.gallery && item.gallery.length > 0) {
-      doc.addPage();
-      applyWatermark();
-
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(8);
-      doc.setTextColor(140, 110, 60);
-      doc.text(`${item.tag} • GALERÍA DE PROYECTOS`, 20, 18);
-
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(150, 150, 150);
-      doc.text('MODULARES GM • FABRICACIÓN DE AUTOR', pageWidth - 20, 18, { align: 'right' });
-
-      doc.setDrawColor(220, 215, 205);
-      doc.setLineWidth(0.3);
-      doc.line(20, 21, pageWidth - 20, 21);
-
-      doc.setFont('times', 'bold');
-      doc.setFontSize(18);
-      doc.setTextColor(30, 25, 20);
-      doc.text(`Modelos & Acabados en ${item.title}`, 20, 31);
-
-      // Renderizar 2 o 3 fotos de galería
-      let galY = 38;
-      for (const galPhoto of item.gallery.slice(0, 2)) {
-        const galImg = await toBase64Jpeg(galPhoto);
-        if (galImg) {
-          doc.addImage(galImg, 'JPEG', 20, galY, pageWidth - 40, 95);
-          galY += 105;
+        if (mainImg) {
+          doc.addImage(mainImg, 'JPEG', 18, 36, pageWidth - 36, 118);
+          doc.setDrawColor(215, 210, 200);
+          doc.setLineWidth(0.3);
+          doc.rect(18, 36, pageWidth - 36, 118);
         }
-      }
 
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(150, 150, 150);
-      doc.text('Cotizaciones y Planimetría 3D: info@modularesgm.com | +593 96 306 4374', 20, 285);
+        // Párrafo descriptivo justificado
+        doc.setFont('times', 'normal');
+        doc.setFontSize(9.5);
+        doc.setTextColor(45, 40, 35);
+        const descText =
+          prod.desc ||
+          'Cocina integral diseñada bajo rigurosos criterios de ergonomía arquitectónica. Módulos altos y bajos estructurados en melamina RH de 18mm con herrajes alemanes de extracción total y mesón de cuarzo macizo pulido.';
+        const splitDesc = doc.splitTextToSize(descText, pageWidth - 36);
+        doc.text(splitDesc, 18, 162, { align: 'justify', maxWidth: pageWidth - 36 });
+
+        // Ficha técnica y foto secundaria (si existe)
+        const secondaryPhoto =
+          prod.images && prod.images.length > 1 && prod.images[1] !== photoUrl
+            ? prod.images[1]
+            : null;
+
+        const cardY = 176;
+        const cardH = 98;
+        doc.setFillColor(250, 248, 244);
+        doc.setDrawColor(220, 215, 205);
+        doc.roundedRect(18, cardY, pageWidth - 36, cardH, 2.5, 2.5, 'FD');
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        doc.setTextColor(35, 30, 25);
+        doc.text('ESPECIFICACIONES TÉCNICAS Y EQUIPAMIENTO', 25, cardY + 9);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(70, 65, 60);
+
+        let specY = cardY + 18;
+        const specs = [
+          'Estructura: Melamina Pelikano RH 18mm hidrófuga antibacterial',
+          'Herrajes: Bisagras y rieles Blum Clip-Top Blumotion con cierre suave',
+          'Encimera: Cuarzo pulido antibacteriano de 20mm con zócalo y copete',
+          'Almacenaje: Caceroleros de extracción total, especiero y torre de hornos',
+          'Garantía: 10 años en superficies de cuarzo y 5 años en estructura',
+          'Cotización referencial: $' + prod.price + ' USD (o según metraje exacto)',
+        ];
+
+        const textWidthLimit = secondaryPhoto ? 95 : pageWidth - 55;
+        for (const spec of specs) {
+          doc.text(`✓  ${spec}`, 25, specY, { maxWidth: textWidthLimit });
+          specY += 9;
+        }
+
+        // Renderizar ángulo secundario / detalle de la misma cocina si existe
+        if (secondaryPhoto) {
+          const secImg = await toBase64Jpeg(secondaryPhoto, 800);
+          if (secImg) {
+            const secX = pageWidth - 18 - 65;
+            const secY = cardY + 14;
+            doc.addImage(secImg, 'JPEG', secX, secY, 58, 68);
+            doc.setDrawColor(200, 195, 185);
+            doc.setLineWidth(0.3);
+            doc.rect(secX, secY, 58, 68);
+
+            doc.setFont('helvetica', 'italic');
+            doc.setFontSize(7);
+            doc.setTextColor(130, 125, 120);
+            doc.text('Detalle interior / Ángulo de módulos', secX + 29, secY + 73, { align: 'center' });
+          }
+        }
+
+        drawFooter(currentPageNum);
+      }
     }
 
-    // Pie de página de contenido
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(150, 150, 150);
-    doc.text(`Página ${doc.getNumberOfPages()}`, pageWidth / 2, 285, { align: 'center' });
-    doc.text('Cotizaciones y Planimetría 3D: info@modularesgm.com | +593 96 306 4374', 20, 285);
+    // ─────────────────────────────────────────────────────────
+    // CASO 2: PUERTAS, OFICINA, ESCRITORIOS (3 por hoja alternando)
+    // "puertas 3 por hoja alternando derecha izq derecha, en la otra izq der iz"
+    // ─────────────────────────────────────────────────────────
+    else if (catConfig.layoutType === 'doors_office') {
+      const itemsPerPage = 3;
+      const totalPages = Math.ceil(categoryProducts.length / itemsPerPage);
+
+      for (let pageIdx = 0; pageIdx < totalPages; pageIdx++) {
+        doc.addPage();
+        applyWatermark();
+        const currentPageNum = doc.getNumberOfPages();
+        drawHeader(catConfig.tag, catConfig.title);
+
+        const pageProducts = categoryProducts.slice(
+          pageIdx * itemsPerPage,
+          (pageIdx + 1) * itemsPerPage
+        );
+
+        // Coordenadas de los 3 slots verticales
+        const slotHeights = [
+          { y: 22, h: 82 },
+          { y: 108, h: 82 },
+          { y: 194, h: 82 },
+        ];
+
+        for (let slotIdx = 0; slotIdx < pageProducts.length; slotIdx++) {
+          const prod = pageProducts[slotIdx];
+          const slot = slotHeights[slotIdx];
+          totalProcessed++;
+
+          // Lógica de alternancia solicitada:
+          // En página par (0, 2, ...): Slot 0 = Izq, Slot 1 = Der, Slot 2 = Izq
+          // En página impar (1, 3, ...): Slot 0 = Der, Slot 1 = Izq, Slot 2 = Der
+          const isEvenPage = pageIdx % 2 === 0;
+          const imageOnLeft = isEvenPage ? slotIdx % 2 === 0 : slotIdx % 2 !== 0;
+
+          const imgW = 70;
+          const imgH = 74;
+          const imgX = imageOnLeft ? 18 : pageWidth - 18 - imgW;
+          const textX = imageOnLeft ? 94 : 18;
+          const textW = pageWidth - 36 - imgW - 8;
+
+          // Fotografía
+          const photoUrl = getProductPhoto(prod, catConfig.coverHero);
+          const itemImg = await toBase64Jpeg(photoUrl, 900);
+          if (itemImg) {
+            doc.addImage(itemImg, 'JPEG', imgX, slot.y + 4, imgW, imgH);
+            doc.setDrawColor(215, 210, 200);
+            doc.setLineWidth(0.3);
+            doc.rect(imgX, slot.y + 4, imgW, imgH);
+          }
+
+          // Textos & Especificaciones
+          doc.setFont('times', 'bold');
+          doc.setFontSize(13);
+          doc.setTextColor(30, 25, 20);
+          doc.text(prod.title, textX, slot.y + 11);
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(7.5);
+          doc.setTextColor(140, 110, 60);
+          doc.text(`CATEGORÍA: ${prod.subcategory || catConfig.title.toUpperCase()}`, textX, slot.y + 17);
+
+          doc.setFont('times', 'normal');
+          doc.setFontSize(8.5);
+          doc.setTextColor(50, 45, 40);
+          const splitDesc = doc.splitTextToSize(
+            prod.desc || 'Fabricación a medida con melamina de alta resistencia RH y componentes de ensamble oculto.',
+            textW
+          );
+          doc.text(splitDesc.slice(0, 2), textX, slot.y + 24);
+
+          // Ficha técnica compacta
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(80, 75, 70);
+          doc.text(`• Material: ${prod.material || 'Melamina Pelikano RH 18mm'}`, textX, slot.y + 41);
+          doc.text(`• Medidas: ${prod.dimensions || 'Personalizables a su espacio'}`, textX, slot.y + 47);
+          doc.text('• Herrajes: Cierre amortiguado y rodamientos reforzados', textX, slot.y + 53);
+
+          // Precio
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8.5);
+          doc.setTextColor(30, 25, 20);
+          doc.text(`Inversión referencial: $${prod.price} USD`, textX, slot.y + 63);
+
+          // Línea divisoria entre slots
+          if (slotIdx < 2 && slotIdx < pageProducts.length - 1) {
+            doc.setDrawColor(230, 225, 218);
+            doc.setLineWidth(0.2);
+            doc.line(18, slot.y + slot.h + 2, pageWidth - 18, slot.y + slot.h + 2);
+          }
+        }
+
+        drawFooter(currentPageNum);
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────
+    // CASO 3: BAÑOS, CLÓSETS, GAMER, ESTIMULACIÓN (2 por hoja alternando)
+    // "muebles de baño 2, closets dos"
+    // ─────────────────────────────────────────────────────────
+    else if (catConfig.layoutType === 'bath_closet') {
+      const itemsPerPage = 2;
+      const totalPages = Math.ceil(categoryProducts.length / itemsPerPage);
+
+      for (let pageIdx = 0; pageIdx < totalPages; pageIdx++) {
+        doc.addPage();
+        applyWatermark();
+        const currentPageNum = doc.getNumberOfPages();
+        drawHeader(catConfig.tag, catConfig.title);
+
+        const pageProducts = categoryProducts.slice(
+          pageIdx * itemsPerPage,
+          (pageIdx + 1) * itemsPerPage
+        );
+
+        // 2 slots verticales generosos
+        const slotHeights = [
+          { y: 24, h: 124 },
+          { y: 153, h: 124 },
+        ];
+
+        for (let slotIdx = 0; slotIdx < pageProducts.length; slotIdx++) {
+          const prod = pageProducts[slotIdx];
+          const slot = slotHeights[slotIdx];
+          totalProcessed++;
+
+          // Alternancia:
+          // Pag par: Slot 0 = Izq, Slot 1 = Der
+          // Pag impar: Slot 0 = Der, Slot 1 = Izq
+          const isEvenPage = pageIdx % 2 === 0;
+          const imageOnLeft = isEvenPage ? slotIdx === 0 : slotIdx !== 0;
+
+          const imgW = 86;
+          const imgH = 114;
+          const imgX = imageOnLeft ? 18 : pageWidth - 18 - imgW;
+          const textX = imageOnLeft ? 110 : 18;
+          const textW = pageWidth - 36 - imgW - 8;
+
+          // Fotografía
+          const photoUrl = getProductPhoto(prod, catConfig.coverHero);
+          const itemImg = await toBase64Jpeg(photoUrl, 1000);
+          if (itemImg) {
+            doc.addImage(itemImg, 'JPEG', imgX, slot.y + 4, imgW, imgH);
+            doc.setDrawColor(215, 210, 200);
+            doc.setLineWidth(0.3);
+            doc.rect(imgX, slot.y + 4, imgW, imgH);
+          }
+
+          // Textos
+          doc.setFont('times', 'bold');
+          doc.setFontSize(15);
+          doc.setTextColor(30, 25, 20);
+          doc.text(prod.title, textX, slot.y + 14);
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8);
+          doc.setTextColor(140, 110, 60);
+          doc.text(`COLECCIÓN: ${catConfig.title.toUpperCase()}`, textX, slot.y + 22);
+
+          doc.setFont('times', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(45, 40, 35);
+          const splitDesc = doc.splitTextToSize(
+            prod.desc || 'Mobiliario modular fabricado a medida bajo estándares de alta resistencia y durabilidad.',
+            textW
+          );
+          doc.text(splitDesc, textX, slot.y + 31, { align: 'justify', maxWidth: textW });
+
+          // Caja de especificaciones técnicas
+          const specBoxY = slot.y + 54;
+          doc.setFillColor(250, 248, 244);
+          doc.setDrawColor(220, 215, 205);
+          doc.roundedRect(textX, specBoxY, textW, 46, 2, 2, 'FD');
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8);
+          doc.setTextColor(35, 30, 25);
+          doc.text('FICHA TÉCNICA', textX + 6, specBoxY + 8);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(75, 70, 65);
+          doc.text(`• Material: ${prod.material || 'Melamina Pelikano RH 18mm'}`, textX + 6, specBoxY + 16);
+          doc.text(`• Medidas: ${prod.dimensions || 'Adaptables al plano de obra'}`, textX + 6, specBoxY + 23);
+          doc.text('• Acabados: Cantos rígidos termo-adheridos sin juntas', textX + 6, specBoxY + 30);
+          doc.text('• Resistencia: Protección antihumedad e impacto', textX + 6, specBoxY + 37);
+
+          // Precio
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9.5);
+          doc.setTextColor(30, 25, 20);
+          doc.text(`Inversión referencial: $${prod.price} USD`, textX, slot.y + 115);
+
+          // Divisor entre slots
+          if (slotIdx === 0 && pageProducts.length > 1) {
+            doc.setDrawColor(225, 220, 210);
+            doc.setLineWidth(0.3);
+            doc.line(18, slot.y + slot.h + 2, pageWidth - 18, slot.y + slot.h + 2);
+          }
+        }
+
+        drawFooter(currentPageNum);
+      }
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
-  // PÁGINA FINAL: CONTRAPORTADA Y CONTACTO DIRECTO
+  // PÁGINA FINAL: DESPEDIDA, ATELIER & GARANTÍA DIRECTA
   // ─────────────────────────────────────────────────────────────
   onProgress?.('Generando contraportada y sellos de garantía...');
 
   doc.addPage();
-  doc.setFillColor(26, 22, 18);
+  doc.setFillColor(26, 22, 18); // Tono pizarra oscura de lujo
   doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
-  // Marca de agua central en blanco/translúcido
   applyWatermark();
+
+  // Marco perimetral fino dorado
+  doc.setDrawColor(180, 150, 90);
+  doc.setLineWidth(0.4);
+  doc.rect(12, 12, pageWidth - 24, pageHeight - 24);
 
   if (logoInfo) {
     const backLogoW = 38;
-    const backLogoH = backLogoW / logoInfo.aspect; // Proporción natural
-    doc.addImage(logoInfo.data, 'PNG', (pageWidth - backLogoW) / 2, 42, backLogoW, backLogoH);
+    const backLogoH = backLogoW / logoInfo.aspect;
+    doc.addImage(logoInfo.data, 'PNG', (pageWidth - backLogoW) / 2, 38, backLogoW, backLogoH);
   }
 
   doc.setFont('times', 'bold');
-  doc.setFontSize(24);
+  doc.setFontSize(23);
   doc.setTextColor(255, 255, 255);
-  doc.text('MODULARES GM', pageWidth / 2, 86, { align: 'center' });
+  doc.text('MODULARES GM', pageWidth / 2, 80, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
+  doc.setFontSize(9.5);
   doc.setTextColor(200, 170, 110);
-  doc.text('EXCELENCIA PLANIMÉTRICA & FABRICACIÓN DE AUTOR', pageWidth / 2, 94, { align: 'center' });
+  doc.text('EXCELENCIA PLANIMÉTRICA & FABRICACIÓN DE AUTOR', pageWidth / 2, 88, { align: 'center' });
 
   doc.setDrawColor(200, 170, 110);
   doc.setLineWidth(0.4);
-  doc.line(pageWidth / 2 - 30, 101, pageWidth / 2 + 30, 101);
+  doc.line(pageWidth / 2 - 35, 95, pageWidth / 2 + 35, 95);
 
-  // Información del Atelier
+  // Información del Atelier & Showroom
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
-  doc.setTextColor(230, 230, 230);
-  doc.text('Atelier & Showroom:', pageWidth / 2, 120, { align: 'center' });
+  doc.setFontSize(10.5);
+  doc.setTextColor(220, 215, 210);
+  doc.text('Atelier Central & Planta de Fabricación:', pageWidth / 2, 114, { align: 'center' });
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10);
   doc.setTextColor(255, 255, 255);
-  doc.text('Rosa Yeira 420 y Serpaio Japeravi', pageWidth / 2, 128, { align: 'center' });
-  doc.text('Quito • Pichincha • Ecuador', pageWidth / 2, 135, { align: 'center' });
+  doc.text('Rosa Yeira 420 y Serpaio Japeravi', pageWidth / 2, 122, { align: 'center' });
+  doc.text('Quito • Pichincha • Ecuador', pageWidth / 2, 129, { align: 'center' });
 
-  // Canales de Atención Directa
+  // Canales de Atención
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(190, 190, 190);
-  doc.text('WhatsApp Oficial: +593 96 306 4374', pageWidth / 2, 155, { align: 'center' });
-  doc.text('Correo Electrónico: info@modularesgm.com', pageWidth / 2, 163, { align: 'center' });
-  doc.text('Plataforma Web: https://www.modularesgm.com', pageWidth / 2, 171, { align: 'center' });
+  doc.setFontSize(9.5);
+  doc.setTextColor(190, 185, 180);
+  doc.text('WhatsApp Oficial: +593 96 306 4374', pageWidth / 2, 148, { align: 'center' });
+  doc.text('Correo Electrónico: info@modularesgm.com', pageWidth / 2, 156, { align: 'center' });
+  doc.text('Sitio Web Oficial: https://www.modularesgm.com', pageWidth / 2, 164, { align: 'center' });
 
-  // Cuadro de Cobertura Nacional
-  doc.setFillColor(36, 32, 28);
-  doc.setDrawColor(60, 55, 50);
-  doc.roundedRect(30, 195, pageWidth - 60, 45, 3, 3, 'FD');
+  // Cuadro de Cobertura y Garantías
+  doc.setFillColor(36, 31, 26);
+  doc.setDrawColor(65, 58, 50);
+  doc.roundedRect(26, 188, pageWidth - 52, 50, 3, 3, 'FD');
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10);
+  doc.setFontSize(9.5);
   doc.setTextColor(200, 170, 110);
-  doc.text('COBERTURA DE ENTREGA E INSTALACIÓN', pageWidth / 2, 207, { align: 'center' });
+  doc.text('COBERTURA NACIONAL & SERVICIO LLAVE EN MANO', pageWidth / 2, 199, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  doc.setTextColor(210, 210, 210);
-  doc.text('Personal técnico especializado con cobertura en Quito, Guayaquil,', pageWidth / 2, 217, { align: 'center' });
-  doc.text('Cuenca, Manta, Ambato y envíos asegurados a todo el territorio ecuatoriano.', pageWidth / 2, 224, { align: 'center' });
-  doc.text('Diseño planimétrico 3D previo sin costo al contratar tu proyecto.', pageWidth / 2, 231, { align: 'center' });
+  doc.setFontSize(8.2);
+  doc.setTextColor(215, 210, 205);
+  doc.text('• Personal técnico especializado con cobertura en Quito, Guayaquil, Cuenca, Manta y Ambato', 32, 209);
+  doc.text('• Envíos asegurados y protegidos a todas las provincias del territorio ecuatoriano', 32, 216);
+  doc.text('• Levantamiento planimétrico y renderizado 3D fotorrealista sin costo con tu contratación', 32, 223);
+  doc.text('• Garantía total de fábrica respaldada por contrato y factura legal', 32, 230);
 
+  // Copyright
   doc.setFontSize(8);
-  doc.setTextColor(130, 130, 130);
-  doc.text('© 2026 MODULARES GM. Todos los derechos reservados.', pageWidth / 2, 272, { align: 'center' });
+  doc.setTextColor(130, 125, 120);
+  doc.text('© 2026 MODULARES GM. Todos los derechos reservados.', pageWidth / 2, 274, { align: 'center' });
 
-  onProgress?.('¡Catálogo generado! Descargando archivo...');
+  onProgress?.('¡Catálogo generado con éxito! Descargando archivo...');
 
-  const fileName = isSingle && currentCategory
-    ? `Catalogo_${currentCategory.id.toUpperCase()}_Modulares_GM_2026.pdf`
+  const fileName = isSingle && mainCategory
+    ? `Catalogo_${mainCategory.key.toUpperCase()}_Modulares_GM_2026.pdf`
     : 'Catalogo_Oficial_Modulares_GM_2026.pdf';
 
   doc.save(fileName);

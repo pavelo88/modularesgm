@@ -22,8 +22,7 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
   return (
     <section
       aria-label="Programa de afiliados de Modulares GM"
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-black pb-12 pt-36 text-white lg:pt-32"
-     
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-black pb-12 pt-28 sm:pt-36 text-white lg:pt-32 w-full max-w-[100vw] overflow-x-hidden"
     >
       <div className="absolute inset-0 -z-20">
         {cards.map((card, i) => (
@@ -41,29 +40,29 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/25" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-transparent to-black/50" />
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:px-10">
-        <div className="lg:col-span-6">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-8 sm:gap-10 px-4 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:px-10">
+        <div className="lg:col-span-6 max-w-full">
+          <p className="mb-4 sm:mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md">
             <Sparkles size={14} className="text-amber-400" /> Programa de afiliados
           </p>
-          <h1 className="font-headline text-4xl font-bold leading-[1.06] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] sm:text-5xl xl:text-6xl">
+          <h1 className="font-headline text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] break-words">
             Trabaja con Modulares GM y gana comisiones por cada venta
           </h1>
-          <p className="mt-6 max-w-xl text-base text-white/85 sm:text-lg">
+          <p className="mt-4 sm:mt-6 max-w-xl text-sm sm:text-base lg:text-lg text-white/85 leading-relaxed">
             Recibe tu enlace y código personal, comparte con quien remodela su casa y sigue tus ventas en un panel propio. Sin inversión ni inventario.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
             <Link
               href="/afiliados/acceso?tab=registro"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-amber-400 px-8 text-base font-bold text-stone-950 shadow-[0_0_35px_rgba(251,191,36,0.35)] transition hover:bg-amber-300 active-press"
+              className="inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-xl bg-amber-400 px-6 sm:px-8 text-sm sm:text-base font-bold text-stone-950 shadow-[0_0_35px_rgba(251,191,36,0.35)] transition hover:bg-amber-300 active:scale-95 w-full sm:w-auto"
             >
-              Quiero ser afiliado <ArrowRight size={18} />
+              Quiero ser afiliado <ArrowRight size={16} />
             </Link>
             <Link
               href="/afiliados/acceso"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold backdrop-blur-md transition hover:bg-white/20 active-press"
+              className="inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 sm:px-8 text-sm sm:text-base font-bold backdrop-blur-md transition hover:bg-white/20 active:scale-95 w-full sm:w-auto"
             >
-              <LogIn size={18} /> Ya tengo cuenta
+              <LogIn size={16} /> Ya tengo cuenta
             </Link>
           </div>
         </div>

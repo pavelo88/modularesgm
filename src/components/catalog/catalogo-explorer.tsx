@@ -67,10 +67,9 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
   const [pdfStatus, setPdfStatus] = useState<string | null>(null);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
+    loop: true,
     align: 'start',
     dragFree: true,
-    containScroll: 'trimSnaps',
   });
 
   const scrollPrev = () => emblaApi?.scrollPrev();
@@ -133,10 +132,10 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
   }, [rows, selectedCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen pt-4 sm:pt-6 pb-16 bg-background text-foreground">
+    <div className="min-h-screen pt-20 sm:pt-24 pb-20 bg-background text-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-2.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+        <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-primary transition-colors">
             Inicio
           </Link>
@@ -144,35 +143,35 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
           <span className="text-foreground font-medium">Catálogo Oficial GM</span>
         </nav>
 
-        {/* HERO EDITORIAL: 2 COLUMNAS COMPACTAS (Entra en un solo golpe de vista) */}
-        <header className="mb-4 pb-4 border-b border-border/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+        {/* HERO EDITORIAL: 2 COLUMNAS (Texto a la izquierda, Señales de Calidad a la derecha) */}
+        <header className="mb-6 pb-6 border-b border-border/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Columna Izquierda: Títulos y Descripción */}
             <div className="lg:col-span-7">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-1 block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block">
                 Catálogo General • Colecciones de Autor 2026
               </span>
-              <h1 className="text-2xl sm:text-3xl lg:text-3xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
                 Catálogos de Muebles Modulares y Espacios a Medida
               </h1>
-              <p className="text-muted-foreground text-xs sm:text-sm mt-1.5 font-normal max-w-xl leading-relaxed line-clamp-2">
+              <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed">
                 Diseño arquitectónico con tableros hidrófugos Pelikano RH 18mm, herrajes alemanes Blum y mesones en cuarzo y granito. Seleccione una línea o descargue el catálogo.
               </p>
 
               {/* Botones de Acción de Autor en Hero */}
-              <div className="mt-3 flex flex-wrap items-center gap-2.5">
+              <div className="mt-4 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={() => handleDownloadPdf()}
                   disabled={isGeneratingPdf}
-                  className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-sm active:scale-95 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 disabled:opacity-50"
                 >
                   <FileDown size={14} className={cn("text-primary", isGeneratingPdf && "animate-bounce")} />
                   <span>{isGeneratingPdf ? (pdfStatus || 'Generando...') : 'Descargar Catálogo'}</span>
                 </button>
                 <Link
                   href="/store"
-                  className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
                 >
                   <Store size={14} className="text-primary" />
                   <span>Explorar Tienda Online</span>
@@ -181,45 +180,45 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
               </div>
             </div>
 
-            {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad Compacto */}
+            {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad */}
             <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck size={16} className="text-emerald-500 shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Garantía 3 a 5 Años</span>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Cobertura de fábrica en herrajes y tableros.
                   </p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <Truck size={16} className="text-amber-500 shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Envíos a Todo Ecuador</span>
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <Truck size={18} className="text-amber-500 shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Envíos a Todo Ecuador</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Quito, Guayaquil, Cuenca y más.
                   </p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles size={16} className="text-primary shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Pelikano RH 18mm</span>
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={18} className="text-primary shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Pelikano RH 18mm</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Melamina antibacterial hidrófuga.
                   </p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-blue-500 shrink-0" />
-                    <span className="font-bold text-[11px] text-foreground">Blum & Häfele</span>
+                <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={18} className="text-blue-500 shrink-0" />
+                    <span className="font-bold text-xs text-foreground">Blum & Häfele</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground leading-tight">
+                  <p className="text-[11px] text-muted-foreground leading-tight">
                     Herrajes con cierre suave amortiguado.
                   </p>
                 </div>
@@ -228,31 +227,41 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
           </div>
         </header>
 
-        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Todas visibles en un solo golpe de vista sin cortes) */}
-        <section aria-label="Nuestras Categorías" className="hidden md:block mb-5 py-3 px-3 rounded-2xl border border-border/60 bg-card/30 backdrop-blur-md">
-          <div className="flex items-center justify-between mb-2 px-2">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles size={13} className="text-primary" /> Colecciones GM
-            </h2>
-            <span className="text-[11px] text-muted-foreground">
-              Haga clic para saltar directamente a la colección
-            </span>
+        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Carrusel Infinito con Imágenes Grandes y Detalladas) */}
+        <section aria-label="Nuestras Categorías" className="hidden md:block mb-8 py-5 px-6 rounded-3xl border border-border/60 bg-card/40 backdrop-blur-md shadow-sm">
+          <div className="flex items-center justify-between mb-4 px-1">
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-wider text-foreground flex items-center gap-2">
+                <Sparkles size={15} className="text-primary" /> Colecciones GM de Autor
+              </h2>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Deslice para explorar y haga clic para saltar directamente a la línea de catálogo
+              </p>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={scrollPrev}
+                className="w-8 h-8 rounded-full bg-card border border-border/80 shadow-sm flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+                aria-label="Categorías anteriores"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={scrollNext}
+                className="w-8 h-8 rounded-full bg-card border border-border/80 shadow-sm flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+                aria-label="Siguientes categorías"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-6">
-            {/* Flecha Izquierda */}
-            <button
-              type="button"
-              onClick={scrollPrev}
-              className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
-              aria-label="Categorías anteriores"
-            >
-              <ChevronLeft size={15} />
-            </button>
-
-            {/* Viewport del Carrusel */}
-            <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex items-center justify-between gap-2 lg:gap-3 py-1 w-full">
+          <div className="relative">
+            {/* Viewport del Carrusel Infinito */}
+            <div className="overflow-hidden cursor-grab active:cursor-grabbing px-1" ref={emblaRef}>
+              <div className="flex gap-6 sm:gap-7 items-center py-2">
                 {DESKTOP_CIRCULAR_CATEGORIES.map((cat) => {
                   const isActive = selectedCategory === cat.id;
                   return (
@@ -260,13 +269,13 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                       key={cat.id}
                       type="button"
                       onClick={() => handleCategoryClick(cat.id)}
-                      className="group flex flex-col items-center gap-1.5 transition-all focus:outline-none shrink-0"
+                      className="group flex flex-col items-center gap-2.5 transition-all focus:outline-none shrink-0"
                     >
                       <div
                         className={cn(
-                          "relative w-14 h-14 sm:w-15 sm:h-15 lg:w-16 lg:h-16 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-sm group-hover:scale-105 group-hover:shadow-md",
+                          "relative w-20 h-20 sm:w-22 sm:h-22 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-md group-hover:scale-105 group-hover:shadow-lg",
                           isActive
-                            ? "border-primary ring-3 ring-primary/25 scale-105 shadow-md"
+                            ? "border-primary ring-4 ring-primary/20 scale-105 shadow-xl"
                             : "border-border/80 group-hover:border-primary/60"
                         )}
                       >
@@ -274,7 +283,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                           src={cat.imgUrl}
                           alt={cat.label}
                           fill
-                          sizes="64px"
+                          sizes="96px"
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         {isActive && (
@@ -283,7 +292,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                       </div>
                       <span
                         className={cn(
-                          "text-[11px] font-semibold tracking-tight transition-colors whitespace-nowrap",
+                          "text-xs font-semibold tracking-tight transition-colors whitespace-nowrap",
                           isActive ? "text-primary font-bold" : "text-stone-700 dark:text-stone-300 group-hover:text-foreground"
                         )}
                       >
@@ -294,16 +303,6 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                 })}
               </div>
             </div>
-
-            {/* Flecha Derecha */}
-            <button
-              type="button"
-              onClick={scrollNext}
-              className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
-              aria-label="Siguientes categorías"
-            >
-              <ChevronRight size={15} />
-            </button>
           </div>
         </section>
 

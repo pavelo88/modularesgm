@@ -8,10 +8,10 @@ import { track } from '@/lib/analytics';
 import { SITE, whatsappHref } from '@/lib/site';
 
 const KITCHEN_SLIDES = [
-  { img: '/images/catalog/extracted_DE_COCINAS/img-004.jpg', title: 'Cocina Luxury Cappuccino', desc: 'Isla central y mesón de cuarzo blanco' },
-  { img: '/images/catalog/extracted_DE_COCINAS/img-025.png', title: 'Isla Waterfall en Cuarzo Calacatta', desc: 'Acabados amaderados y luz cálida' },
-  { img: '/images/catalog/extracted_DE_COCINAS/img-006.jpg', title: 'Cocina Antracita & Roble', desc: 'Vitrinas aéreos iluminadas y torre de hornos' },
-  { img: '/images/catalog/extracted_DE_COCINAS/img-007.jpg', title: 'Cocina Integral Minimalista', desc: 'Herrajes Blum con cierre amortiguado' },
+  { img: '/images/catalog/extracted_DE_COCINAS/img-004.webp', title: 'Cocina Luxury Cappuccino', desc: 'Isla central y mesón de cuarzo blanco' },
+  { img: '/images/catalog/extracted_DE_COCINAS/img-025.webp', title: 'Isla Waterfall en Cuarzo Calacatta', desc: 'Acabados amaderados y luz cálida' },
+  { img: '/images/catalog/extracted_DE_COCINAS/img-006.webp', title: 'Cocina Antracita & Roble', desc: 'Vitrinas aéreos iluminadas y torre de hornos' },
+  { img: '/images/catalog/extracted_DE_COCINAS/img-007.webp', title: 'Cocina Integral Minimalista', desc: 'Herrajes Blum con cierre amortiguado' },
 ];
 
 export function CampaignShowcase() {
