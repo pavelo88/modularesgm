@@ -125,65 +125,103 @@ export function CategoryShowcase({ config, products }: CategoryShowcaseProps) {
             <span className="text-foreground font-medium">{config.categoryName}</span>
           </nav>
 
-          {/* HERO SECTION DE LA CATEGORÍA */}
-          <header className="mb-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
-              <div className="max-w-3xl">
+          {/* HERO SECTION DE LA CATEGORÍA: 2 COLUMNAS (Texto a la izquierda, 2x2 Badges a la derecha) */}
+          <header className="mb-10 pb-8 border-b border-border/60">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Columna Izquierda: Información de la Categoría */}
+              <div className="lg:col-span-7">
                 <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-2 block">
                   Catálogo Oficial GM • {config.categoryName}
                 </span>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
                   {config.h1}
                 </h1>
-                <p className="text-muted-foreground text-sm sm:text-base mt-2 font-normal max-w-2xl leading-relaxed">
+                <p className="text-muted-foreground text-sm sm:text-base mt-3 font-normal max-w-2xl leading-relaxed">
                   {config.heroSubtitle}
                 </p>
+                {/* Botón en ESCRITORIO */}
+                <div className="mt-5 hidden lg:flex items-center gap-3">
+                  <Link 
+                    href="/catalogo"
+                    className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors px-4 py-2 rounded-full border border-border/70 bg-card/40 active:scale-95 shadow-sm"
+                  >
+                    <ArrowLeft size={13} />
+                    <span>Ver todos los catálogos</span>
+                  </Link>
+                </div>
               </div>
 
-              {/* Botón Volver a la Tienda Global */}
-              <Link 
-                href="/catalogo"
-                className="inline-flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors px-5 py-2.5 rounded-full border border-border/80 bg-card/60 shrink-0 shadow-sm active:scale-95"
-              >
-                <ArrowLeft size={14} />
-                <span>Ver todos los catálogos</span>
-              </Link>
-            </div>
+              {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad */}
+              <div className="lg:col-span-5">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
+                      <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-tight">
+                      Respaldo directo de fábrica en estructura y herrajes.
+                    </p>
+                  </div>
 
-            {/* Señales de Confianza Luxury */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-              <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-                <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
-                <span className="font-medium text-foreground">Garantía 3 a 5 años</span>
+                  <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
+                    <div className="flex items-center gap-2">
+                      <Truck size={18} className="text-amber-500 shrink-0" />
+                      <span className="font-bold text-xs text-foreground">Envíos a Todo Ecuador</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-tight">
+                      Logística especializada y embalaje de seguridad.
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
+                    <div className="flex items-center gap-2">
+                      <Wrench size={18} className="text-primary shrink-0" />
+                      <span className="font-bold text-xs text-foreground">Instalación en Quito</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-tight">
+                      Técnicos certificados y planimetría 3D previa.
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
+                    <div className="flex items-center gap-2">
+                      <Sparkles size={18} className="text-violet-500 shrink-0" />
+                      <span className="font-bold text-xs text-foreground">Pelikano RH 18mm</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-tight">
+                      Melamina hidrófuga y herrajes Blum de cierre suave.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-                <Truck size={18} className="text-primary shrink-0" />
-                <span className="font-medium text-foreground">Envíos a todo Ecuador</span>
-              </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-                <Wrench size={18} className="text-amber-500 shrink-0" />
-                <span className="font-medium text-foreground">Instalación en Quito</span>
-              </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-                <Sparkles size={18} className="text-violet-500 shrink-0" />
-                <span className="font-medium text-foreground">Melamina Pelikano 18mm</span>
+
+              {/* Botón en MÓVIL (aparece estrictamente DESPUÉS de los stats) */}
+              <div className="lg:hidden flex items-center justify-start pt-1">
+                <Link 
+                  href="/catalogo"
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors px-4 py-2 rounded-full border border-border/70 bg-card/60 active:scale-95 shadow-sm"
+                >
+                  <ArrowLeft size={13} />
+                  <span>Ver todos los catálogos</span>
+                </Link>
               </div>
             </div>
           </header>
 
-          {/* BARRA DE FILTROS & BÚSQUEDA MINIMALISTA */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8">
+          {/* BARRA DE FILTROS & BÚSQUEDA MINIMALISTA + BOTÓN TIENDA */}
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8">
             {/* Píldoras de Subcategorías */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
               {subcategories.map(sub => (
                 <button
                   key={sub}
                   type="button"
                   onClick={() => setSelectedSubcategory(sub)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all shrink-0 active:scale-95 ${
+                  className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 active:scale-95 ${
                     selectedSubcategory === sub
                       ? 'bg-foreground text-background shadow-md'
-                      : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'
+                      : 'bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
                 >
                   {sub}
@@ -191,16 +229,26 @@ export function CategoryShowcase({ config, products }: CategoryShowcaseProps) {
               ))}
             </div>
 
-            {/* Buscador de Producto */}
-            <div className="relative w-full sm:w-72">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar modelo o medidas..."
-                className="pl-9 rounded-full bg-muted/40 border-border/60 text-xs h-10 focus:ring-primary"
-              />
+            {/* Buscador de Producto & Botón Explorar Tienda */}
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="relative flex-1 sm:w-64">
+                <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Buscar modelo o medidas..."
+                  className="pl-9 rounded-full bg-card border-border/70 text-xs h-9 focus:ring-primary"
+                />
+              </div>
+
+              <Link
+                href="/store"
+                className="inline-flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors px-4 py-2 rounded-full border border-border/80 bg-card shadow-sm active:scale-95 shrink-0"
+              >
+                <span>Explorar Tienda</span>
+                <ChevronRight size={14} />
+              </Link>
             </div>
           </div>
 

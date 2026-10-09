@@ -52,6 +52,17 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.documentElement.classList.add('mobile-nav-open');
+    } else {
+      document.documentElement.classList.remove('mobile-nav-open');
+    }
+    return () => {
+      document.documentElement.classList.remove('mobile-nav-open');
+    };
+  }, [isMenuOpen]);
+
   const isStorePage = pathname.startsWith('/store');
   const isAffiliatesPage = pathname.startsWith('/afiliados');
   // Solo las páginas con hero oscuro arrancan transparentes; el resto usa cristal desde el inicio.

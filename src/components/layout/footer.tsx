@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Instagram, Linkedin, MapPin, Phone, MessageCircle, Mail, ArrowUpRight } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, MapPin, Phone, MessageCircle, Mail, ArrowUpRight, ChevronDown } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { formatPhone, whatsappHref } from '@/lib/site';
+import { cn } from '@/lib/utils';
 
 interface FooterProps {
   address: string;
@@ -15,6 +17,8 @@ interface FooterProps {
 
 export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const [coleccionesOpen, setColeccionesOpen] = useState(false);
+  const [empresaOpen, setEmpresaOpen] = useState(false);
 
   return (
     <footer className="relative z-10 border-t border-stone-300/80 dark:border-stone-800/80 bg-[#FAF8F5] dark:bg-[#0c0e12] transition-colors duration-300">
@@ -75,8 +79,117 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
             </div>
           </div>
 
-          {/* Col 2: Colecciones (3 cols) */}
-          <div className="lg:col-span-3">
+          {/* Acordeones desplegables solo en móviles */}
+          <div className="md:hidden space-y-3">
+            {/* Acordeón Colecciones */}
+            <div className="border border-stone-300/80 dark:border-stone-800 rounded-2xl bg-white/70 dark:bg-stone-900/60 overflow-hidden shadow-sm">
+              <button
+                type="button"
+                onClick={() => setColeccionesOpen(!coleccionesOpen)}
+                className="w-full flex items-center justify-between p-4 text-xs font-extrabold uppercase tracking-[0.18em] text-stone-950 dark:text-white active:bg-stone-100 dark:active:bg-stone-800/50 transition-colors"
+                aria-expanded={coleccionesOpen}
+              >
+                <span>Colecciones GM</span>
+                <ChevronDown
+                  size={16}
+                  className={cn("transition-transform duration-300 text-stone-600 dark:text-stone-400", coleccionesOpen && "rotate-180 text-primary")}
+                />
+              </button>
+              {coleccionesOpen && (
+                <ul className="px-4 pb-4 space-y-2.5 text-sm border-t border-stone-200/70 dark:border-stone-800/70 pt-3">
+                  <li>
+                    <Link href="/cocinas" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Cocinas Integrales con Cuarzo
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/closets" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Walk-in Closets & Vestidores
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/muebles-bano" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Vanities & Muebles de Baño
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/puertas" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Puertas Pivotantes Monumentales
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/escritorios" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Escritorios Estudiantiles & Home Office
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/muebles-oficina" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Mobiliario Corporativo
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/gamer" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Setups Gamer
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </div>
+
+            {/* Acordeón Empresa */}
+            <div className="border border-stone-300/80 dark:border-stone-800 rounded-2xl bg-white/70 dark:bg-stone-900/60 overflow-hidden shadow-sm">
+              <button
+                type="button"
+                onClick={() => setEmpresaOpen(!empresaOpen)}
+                className="w-full flex items-center justify-between p-4 text-xs font-extrabold uppercase tracking-[0.18em] text-stone-950 dark:text-white active:bg-stone-100 dark:active:bg-stone-800/50 transition-colors"
+                aria-expanded={empresaOpen}
+              >
+                <span>Empresa</span>
+                <ChevronDown
+                  size={16}
+                  className={cn("transition-transform duration-300 text-stone-600 dark:text-stone-400", empresaOpen && "rotate-180 text-primary")}
+                />
+              </button>
+              {empresaOpen && (
+                <ul className="px-4 pb-4 space-y-2.5 text-sm border-t border-stone-200/70 dark:border-stone-800/70 pt-3">
+                  <li>
+                    <Link href="/afiliados" className="text-emerald-700 dark:text-emerald-400 hover:underline font-bold transition-colors inline-flex items-center gap-1 py-0.5">
+                      <span>Trabaja con nosotros</span>
+                      <ArrowUpRight size={13} />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/catalogo" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Catálogo Digital
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/store" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Tienda Online
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/precios" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Precios & Modelos
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#contacto" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors block py-0.5">
+                      Cotización Directa
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/admin" className="text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 text-xs font-medium transition-colors block py-0.5">
+                      Acceso Administrativo
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </div>
+          </div>
+
+          {/* Col 2: Colecciones (3 cols) - Solo Escritorio */}
+          <div className="hidden md:block lg:col-span-3">
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-stone-950 dark:text-white mb-4">
               Colecciones GM
             </p>
@@ -119,8 +232,8 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
             </ul>
           </div>
 
-          {/* Col 3: Empresa y Portal de Afiliados (2 cols) */}
-          <div className="lg:col-span-2">
+          {/* Col 3: Empresa y Portal de Afiliados (2 cols) - Solo Escritorio */}
+          <div className="hidden md:block lg:col-span-2">
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-stone-950 dark:text-white mb-4">
               Empresa
             </p>

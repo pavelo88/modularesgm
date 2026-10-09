@@ -14,7 +14,11 @@ import {
   Palette,
   Handshake,
   LineChart,
+  Sun,
+  Moon,
 } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
 import {
   SidebarProvider,
   Sidebar,
@@ -54,7 +58,7 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'theme', label: 'Apariencia y Colores', icon: <Palette /> },
   { id: 'services', label: 'Servicios', icon: <LayoutGrid /> },
   { id: 'products', label: 'Tienda Online', icon: <ShoppingBag /> },
-  { id: 'brands', label: 'Marcas y Stats', icon: <Zap /> },
+  { id: 'brands', label: 'Marcas y Experiencia (Stats)', icon: <Zap /> },
   { id: 'leads', label: 'Leads (Contactos)', icon: <MessageSquare /> },
   { id: 'orders', label: 'Órdenes de Compra', icon: <FileCode /> },
   { id: 'affiliates', label: 'Afiliados', icon: <Handshake /> },
@@ -85,7 +89,13 @@ export function AdminDashboardClient() {
   const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
   const [loading, setLoading] = useState(true);
   const [authReady, setAuthReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Las reglas de Firestore exigen sesión de Firebase: sin ella volvemos al login.
   useEffect(() => {
@@ -201,10 +211,33 @@ export function AdminDashboardClient() {
       </Sidebar>
       <SidebarInset className="bg-muted/40 overflow-hidden">
         <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-4 border-b bg-background/95 backdrop-blur-sm">
-           <SidebarTrigger />
-           <h1 className="text-xl font-semibold">
-              {menuItems.find(item => item.id === activeTab)?.label}
-           </h1>
+           <div className="flex items-center gap-3">
+             <SidebarTrigger />
+             <h1 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
+                {menuItems.find(item => item.id === activeTab)?.label}
+             </h1>
+           </div>
+           {mounted && (
+             <Button
+               variant="outline"
+               size="sm"
+               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+               className="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full border border-border/70 hover:bg-accent transition-all active:scale-95 shadow-sm"
+               title="Alternar Modo Claro / Oscuro"
+             >
+               {theme === 'dark' ? (
+                 <>
+                   <Sun className="h-4 w-4 text-amber-500" />
+                   <span className="hidden sm:inline">Modo Claro</span>
+                 </>
+               ) : (
+                 <>
+                   <Moon className="h-4 w-4 text-slate-700" />
+                   <span className="hidden sm:inline">Modo Oscuro</span>
+                 </>
+               )}
+             </Button>
+           )}
         </header>
         {/* FIX: Changed overflow-hidden to overflow-y-auto to allow scrolling */}
         <main className="h-[calc(100vh-3.5rem)] overflow-y-auto">

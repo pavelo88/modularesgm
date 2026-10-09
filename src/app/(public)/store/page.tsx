@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, Sparkles, Store as StoreIcon, ShieldCheck, Truck, Wrench, ChevronRight } from 'lucide-react';
+import { Search, Sparkles, Store as StoreIcon, ShieldCheck, Truck, Wrench, ChevronRight, ChevronDown } from 'lucide-react';
 import { ProductCard } from '@/components/store/product-card';
 import { CartSidebar } from '@/components/store/cart-sidebar';
 import { useCart } from '@/context/cart-provider';
@@ -96,8 +96,28 @@ export default function StorePage() {
         <section aria-label="Filtros de productos" className="mb-8">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-2 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-xl shadow-sm">
             
-            {/* Píldoras de Categorías Minimalistas */}
-            <div className="flex items-center gap-1.5 overflow-x-auto px-2 py-1 scrollbar-none">
+            {/* Selector desplegable en celulares (Lista Desplegable Cómoda) */}
+            <div className="md:hidden w-full px-2 pt-1 pb-1">
+              <label htmlFor="store-category-select" className="sr-only">Seleccionar Categoría</label>
+              <div className="relative">
+                <select
+                  id="store-category-select"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full h-11 px-4 pr-10 text-xs font-bold rounded-full bg-background border border-border/80 text-foreground appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer"
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category} className="bg-background text-foreground py-2 font-medium">
+                      {category === 'Todos' ? '📂 Todas las categorías' : `✨ ${category}`}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+            </div>
+
+            {/* Píldoras de Categorías en Pantallas Medianas y Grandes */}
+            <div className="hidden md:flex items-center gap-1.5 overflow-x-auto px-2 py-1 scrollbar-none">
               {categories.map((category) => (
                 <button
                   key={category}

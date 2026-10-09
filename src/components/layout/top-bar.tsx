@@ -48,7 +48,7 @@ export function TopBar() {
     <div
       role="region"
       aria-label="Cinta de promociones y anuncios arquitectónicos"
-      className="h-9 bg-[#111316] text-stone-200 border-b border-stone-800/60 text-[11px] sm:text-xs relative z-[60] select-none overflow-hidden"
+      className="h-9 bg-[#111316] text-stone-200 border-b border-stone-800/60 text-[11px] sm:text-xs relative z-40 select-none overflow-hidden [[html.mobile-nav-open_&]]:hidden"
     >
       <div className="max-w-7xl mx-auto h-full px-3 sm:px-6 flex items-center justify-between gap-3">
         {/* Lado izquierdo: Contacto directo / Atelier */}

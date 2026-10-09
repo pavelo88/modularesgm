@@ -95,6 +95,51 @@ const ARCHITECTURAL_CATEGORIES = [
   },
 ];
 
+function CategoryCard({ cat }: { cat: (typeof ARCHITECTURAL_CATEGORIES)[0] }) {
+  return (
+    <Link
+      href={cat.href}
+      className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md transition-all duration-500 hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-xl hover:-translate-y-1.5 h-full"
+    >
+      <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
+        <Image
+          src={cat.imgUrl}
+          alt={cat.title}
+          fill
+          sizes="(max-width: 768px) 85vw, 33vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
+
+        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+          <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-black/75 backdrop-blur-md text-white border border-white/20">
+            {cat.tag}
+          </span>
+          <span className="text-[11px] px-3 py-1 rounded-full bg-stone-900/80 backdrop-blur-md text-amber-300 font-bold border border-amber-500/30">
+            {cat.models}
+          </span>
+        </div>
+
+        <div className="absolute bottom-4 left-4 right-4 z-10">
+          <h4 className="text-xl font-headline font-semibold text-white leading-snug">
+            {cat.title}
+          </h4>
+        </div>
+      </div>
+
+      <div className="p-5 flex-1 flex flex-col justify-between gap-3">
+        <p className="text-xs text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
+          {cat.desc}
+        </p>
+        <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
+          <span className="uppercase tracking-wider">Explorar Catálogo</span>
+          <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-primary" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function CatalogSection({ services, products }: { services?: Service[]; products?: Product[] }) {
   const row1 = ARCHITECTURAL_CATEGORIES.slice(0, 3);
   const row2 = ARCHITECTURAL_CATEGORIES.slice(3);
@@ -123,59 +168,25 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
         </Link>
       </div>
 
-      {/* 2 Carruseles Horizontales en celulares / Grilla arquitectónica en escritorio */}
+      {/* 2 Carruseles Infinitos en celulares / Grilla arquitectónica en escritorio */}
       <div className="space-y-12">
         {/* Fila 1: Líneas Residenciales */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">Líneas Residenciales</h3>
-            <span className="md:hidden text-[11px] font-semibold text-stone-500 flex items-center gap-1">
-              Deslizar ➔
-            </span>
           </div>
-          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+          {/* Carrusel infinito en móvil */}
+          <div className="md:hidden">
+            <CardSlider label="Líneas Residenciales" slideClassName="basis-[84vw] sm:basis-[320px]">
+              {row1.map((cat) => (
+                <CategoryCard key={cat.href} cat={cat} />
+              ))}
+            </CardSlider>
+          </div>
+          {/* Grilla en escritorio */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
             {row1.map((cat) => (
-              <Link
-                key={cat.href}
-                href={cat.href}
-                className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md transition-all duration-500 hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-xl hover:-translate-y-1.5 min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-start shrink-0 md:shrink"
-              >
-                <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
-                  <Image
-                    src={cat.imgUrl}
-                    alt={cat.title}
-                    fill
-                    sizes="(max-width: 768px) 85vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
-
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-black/75 backdrop-blur-md text-white border border-white/20">
-                      {cat.tag}
-                    </span>
-                    <span className="text-[11px] px-3 py-1 rounded-full bg-stone-900/80 backdrop-blur-md text-amber-300 font-bold border border-amber-500/30">
-                      {cat.models}
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <h4 className="text-xl font-headline font-semibold text-white leading-snug">
-                      {cat.title}
-                    </h4>
-                  </div>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between gap-3">
-                  <p className="text-xs text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
-                    {cat.desc}
-                  </p>
-                  <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
-                    <span className="uppercase tracking-wider">Explorar Catálogo</span>
-                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-primary" />
-                  </div>
-                </div>
-              </Link>
+              <CategoryCard key={cat.href} cat={cat} />
             ))}
           </div>
         </div>
@@ -184,53 +195,19 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">Líneas Especializadas & Corporativas</h3>
-            <span className="md:hidden text-[11px] font-semibold text-stone-500 flex items-center gap-1">
-              Deslizar ➔
-            </span>
           </div>
-          <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+          {/* Carrusel infinito en móvil */}
+          <div className="md:hidden">
+            <CardSlider label="Líneas Especializadas & Corporativas" slideClassName="basis-[84vw] sm:basis-[300px]">
+              {row2.map((cat) => (
+                <CategoryCard key={cat.href} cat={cat} />
+              ))}
+            </CardSlider>
+          </div>
+          {/* Grilla en escritorio */}
+          <div className="hidden md:grid md:grid-cols-4 gap-6">
             {row2.map((cat) => (
-              <Link
-                key={cat.href}
-                href={cat.href}
-                className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md transition-all duration-500 hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-xl hover:-translate-y-1.5 min-w-[85vw] sm:min-w-[280px] md:min-w-0 snap-start shrink-0 md:shrink"
-              >
-                <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
-                  <Image
-                    src={cat.imgUrl}
-                    alt={cat.title}
-                    fill
-                    sizes="(max-width: 768px) 85vw, 25vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
-
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-black/75 backdrop-blur-md text-white border border-white/20">
-                      {cat.tag}
-                    </span>
-                    <span className="text-[11px] px-3 py-1 rounded-full bg-stone-900/80 backdrop-blur-md text-amber-300 font-bold border border-amber-500/30">
-                      {cat.models}
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <h4 className="text-xl font-headline font-semibold text-white leading-snug">
-                      {cat.title}
-                    </h4>
-                  </div>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between gap-3">
-                  <p className="text-xs text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
-                    {cat.desc}
-                  </p>
-                  <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
-                    <span className="uppercase tracking-wider">Explorar Catálogo</span>
-                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-primary" />
-                  </div>
-                </div>
-              </Link>
+              <CategoryCard key={cat.href} cat={cat} />
             ))}
           </div>
         </div>
