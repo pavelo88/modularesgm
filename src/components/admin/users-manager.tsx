@@ -497,7 +497,7 @@ export function UsersManager() {
 
       {/* Modal: Crear Usuario */}
       <Dialog open={createModalOpen} onOpenChange={setCreateModalOpen}>
-        <DialogContent className="sm:max-w-md rounded-3xl border border-stone-200 dark:border-stone-800 bg-white/95 dark:bg-stone-900/95 backdrop-blur-2xl p-6 sm:p-8">
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto rounded-3xl border border-stone-200 dark:border-stone-800 bg-white/95 dark:bg-stone-900/95 backdrop-blur-2xl p-6 sm:p-8">
           <DialogHeader>
             <DialogTitle className="text-xl font-headline font-bold text-stone-950 dark:text-white flex items-center gap-2">
               <UserPlus size={20} className="text-primary" />
@@ -555,40 +555,23 @@ export function UsersManager() {
               />
             </div>
 
+            {/* Selector de Rol Compacto en Lista Desplegable (Garantiza visibilidad del botón Guardar) */}
             <div className="space-y-1.5">
-              <Label className="text-xs font-bold text-stone-700 dark:text-stone-300">Rol del Usuario</Label>
-              <div className="grid grid-cols-1 gap-2 pt-1">
-                {(Object.keys(ROLE_INFO) as AdminUserRecord['rol'][]).map((rKey) => {
-                  const meta = ROLE_INFO[rKey];
-                  const isSelected = rol === rKey;
-                  return (
-                    <button
-                      type="button"
-                      key={rKey}
-                      onClick={() => setRol(rKey)}
-                      className={cn(
-                        'flex items-center justify-between p-3 rounded-2xl border text-left transition-all active:scale-[0.98]',
-                        isSelected
-                          ? 'border-stone-900 dark:border-white bg-stone-100 dark:bg-stone-800 shadow-sm'
-                          : 'border-stone-200 dark:border-stone-800 hover:border-stone-300'
-                      )}
-                    >
-                      <div>
-                        <p className="text-xs font-bold text-stone-950 dark:text-white">{meta.label}</p>
-                        <p className="text-[11px] text-stone-500 leading-tight mt-0.5">{meta.desc}</p>
-                      </div>
-                      <div
-                        className={cn(
-                          'w-4 h-4 rounded-full border flex items-center justify-center shrink-0',
-                          isSelected ? 'border-primary bg-primary text-white' : 'border-stone-400'
-                        )}
-                      >
-                        {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+              <Label htmlFor="create-user-role-select" className="text-xs font-bold text-stone-700 dark:text-stone-300">
+                Rol del Usuario
+              </Label>
+              <select
+                id="create-user-role-select"
+                value={rol}
+                onChange={(e) => setRol(e.target.value as AdminUserRecord['rol'])}
+                className="w-full h-11 px-3.5 rounded-xl border border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 text-sm font-semibold text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer shadow-xs"
+              >
+                {(Object.keys(ROLE_INFO) as AdminUserRecord['rol'][]).map((rKey) => (
+                  <option key={rKey} value={rKey} className="py-2 bg-white dark:bg-stone-800 text-stone-900 dark:text-white">
+                    {ROLE_INFO[rKey].label} ({ROLE_INFO[rKey].desc})
+                  </option>
+                ))}
+              </select>
             </div>
 
             <DialogFooter className="pt-4 flex sm:justify-end gap-2">
@@ -672,7 +655,7 @@ export function UsersManager() {
 
       {/* Modal: Editar Usuario */}
       <Dialog open={editModalOpen} onOpenChange={setEditModalOpen}>
-        <DialogContent className="sm:max-w-md rounded-3xl border border-stone-200 dark:border-stone-800 bg-white/95 dark:bg-stone-900/95 backdrop-blur-2xl p-6 sm:p-8">
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto rounded-3xl border border-stone-200 dark:border-stone-800 bg-white/95 dark:bg-stone-900/95 backdrop-blur-2xl p-6 sm:p-8">
           <DialogHeader>
             <DialogTitle className="text-xl font-headline font-bold text-stone-950 dark:text-white flex items-center gap-2">
               <Edit2 size={20} className="text-primary" />

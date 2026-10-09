@@ -36,6 +36,7 @@ const STORE_CATEGORIES = [
   'Gamer',
   'Muebles de Oficina',
   'Escritorios',
+  'Estimulación',
 ];
 
 const STORE_CIRCULAR_CATEGORIES = [
@@ -47,7 +48,7 @@ const STORE_CIRCULAR_CATEGORIES = [
   { id: 'Muebles de Oficina', label: 'Oficina', imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp' },
   { id: 'Puertas', label: 'Puertas', imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp' },
   { id: 'Gamer', label: 'Gamer', imgUrl: '/images/catalog/extracted_MUEBLES_GAMER_2/img-004.webp' },
-  { id: 'Circuitos de Estimulación Temprana', label: 'Estimulación', imgUrl: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp' },
+  { id: 'Estimulación', label: 'Estimulación', imgUrl: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp' },
 ];
 
 export default function StorePage() {
@@ -56,10 +57,10 @@ export default function StorePage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
+    loop: false,
     align: 'start',
     dragFree: true,
-    containScroll: false,
+    containScroll: 'trimSnaps',
   });
 
   const scrollPrev = () => emblaApi?.scrollPrev();
@@ -67,9 +68,14 @@ export default function StorePage() {
 
   const handleCategorySelect = (catId: string) => {
     setSelectedCategory(catId);
-    const el = document.getElementById('store-grid');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof window !== 'undefined') {
+      const el = document.getElementById('store-controls');
+      if (el) {
+        // Sticky header is 64px. Giving 80px offset places the filter bar right below the navbar cleanly
+        const headerOffset = 80;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
     }
   };
 
@@ -104,85 +110,85 @@ export default function StorePage() {
 
   return (
     <>
-      <div id="top" className="h-0 pt-20"></div>
+      <div id="top" className="h-0 pt-2 sm:pt-4"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
         
         {/* BREADCRUMB DE NAVEGACIÓN */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-muted-foreground">
+        <nav aria-label="Breadcrumb" className="mb-2.5 flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-primary transition-colors">Inicio</Link>
-          <ChevronRight size={14} />
+          <ChevronRight size={13} />
           <span className="text-foreground font-medium">Tienda Oficial GM</span>
         </nav>
 
-        {/* HERO EDITORIAL DE LA TIENDA: 2 COLUMNAS (Texto a la izquierda, 2x2 Badges a la derecha) */}
-        <header className="mb-10 pb-8 border-b border-border/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* HERO EDITORIAL DE LA TIENDA: 2 COLUMNAS COMPACTAS (Un solo golpe de vista) */}
+        <header className="mb-4 pb-4 border-b border-border/60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
             {/* Columna Izquierda: Información y Acciones */}
             <div className="lg:col-span-7">
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-2 block">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-1 block">
                 Catálogo Oficial GM • Fabricación de Autor
               </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
+              <h1 className="text-2xl sm:text-3xl lg:text-3xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
                 Tienda & Catálogo de Mobiliario Modular
               </h1>
-              <p className="text-muted-foreground text-sm sm:text-base mt-3 font-normal max-w-2xl leading-relaxed">
+              <p className="text-muted-foreground text-xs sm:text-sm mt-1.5 font-normal max-w-xl leading-relaxed line-clamp-2">
                 Módulos listos para cotizar o comprar directamente. Melamina Pelikano RH 18mm hidrófuga, herrajes alemanes Blum y superficies nobles a medida.
               </p>
 
               {/* Botón de acceso a Catálogos Detallados */}
-              <div className="mt-5 flex items-center gap-3">
+              <div className="mt-3 flex items-center gap-2.5">
                 <Link
                   href="/catalogo"
-                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
                 >
-                  <BookOpen size={15} className="text-primary" />
+                  <BookOpen size={14} className="text-primary" />
                   <span>Ver Catálogos Completos de Autor</span>
-                  <ArrowRight size={13} />
+                  <ArrowRight size={12} />
                 </Link>
               </div>
             </div>
 
-            {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad */}
+            {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad Compacto */}
             <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
-                    <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck size={16} className="text-emerald-500 shrink-0" />
+                    <span className="font-bold text-[11px] text-foreground">Garantía 3 a 5 Años</span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground leading-tight">
-                    Cobertura directa de fábrica en herrajes y tableros.
+                  <p className="text-[10px] text-muted-foreground leading-tight">
+                    Cobertura directa en herrajes y tableros.
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <Truck size={18} className="text-amber-500 shrink-0" />
-                    <span className="font-bold text-xs text-foreground">Envíos a Todo Ecuador</span>
+                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-1.5">
+                    <Truck size={16} className="text-amber-500 shrink-0" />
+                    <span className="font-bold text-[11px] text-foreground">Envíos a Todo Ecuador</span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground leading-tight">
-                    Logística profesional a Quito, Guayaquil, Cuenca y más.
+                  <p className="text-[10px] text-muted-foreground leading-tight">
+                    Quito, Guayaquil, Cuenca y más.
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <Sparkles size={18} className="text-primary shrink-0" />
-                    <span className="font-bold text-xs text-foreground">Pelikano RH 18mm</span>
+                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles size={16} className="text-primary shrink-0" />
+                    <span className="font-bold text-[11px] text-foreground">Pelikano RH 18mm</span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground leading-tight">
-                    Melamina antibacterial resistente a humedad y calor.
+                  <p className="text-[10px] text-muted-foreground leading-tight">
+                    Melamina antibacterial resistente.
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={18} className="text-blue-500 shrink-0" />
-                    <span className="font-bold text-xs text-foreground">Herrajes Blum & Häfele</span>
+                <div className="p-2.5 rounded-xl bg-card border border-border/70 shadow-sm flex flex-col gap-0.5 transition-all hover:border-primary/40">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 size={16} className="text-blue-500 shrink-0" />
+                    <span className="font-bold text-[11px] text-foreground">Blum & Häfele</span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground leading-tight">
-                    Sistemas alemanes con cierre suave y alta durabilidad.
+                  <p className="text-[10px] text-muted-foreground leading-tight">
+                    Sistemas alemanes de cierre suave.
                   </p>
                 </div>
               </div>
@@ -190,31 +196,31 @@ export default function StorePage() {
           </div>
         </header>
 
-        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Carrusel Infinito con Filtro y Scroll a Tienda) */}
-        <section aria-label="Categorías de la Tienda" className="hidden md:block mb-10 py-6 px-4 rounded-3xl border border-border/60 bg-card/30 backdrop-blur-md">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold font-headline tracking-tight text-foreground">
-              Explorar por Categoría
+        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Todas visibles en un solo golpe de vista) */}
+        <section aria-label="Categorías de la Tienda" className="hidden md:block mb-5 py-3 px-3 rounded-2xl border border-border/60 bg-card/30 backdrop-blur-md">
+          <div className="flex items-center justify-between mb-2 px-2">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+              <Sparkles size={13} className="text-primary" /> Explorar por Categoría
             </h2>
-            <p className="text-xs text-muted-foreground mt-1">
-              Haga clic en una categoría para filtrar productos y desplazarse directamente al catálogo
-            </p>
+            <span className="text-[11px] text-muted-foreground">
+              Haga clic para filtrar productos y posicionar el catálogo
+            </span>
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-10">
+          <div className="relative max-w-5xl mx-auto px-6">
             {/* Flecha Izquierda */}
             <button
               type="button"
               onClick={scrollPrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+              className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
               aria-label="Categorías anteriores"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={15} />
             </button>
 
-            {/* Viewport del Carrusel Infinito */}
+            {/* Viewport del Carrusel */}
             <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex gap-6 sm:gap-7 items-center py-2">
+              <div className="flex items-center justify-between gap-2 lg:gap-3 py-1 w-full">
                 {STORE_CIRCULAR_CATEGORIES.map((cat) => {
                   const isActive = selectedCategory === cat.id;
                   return (
@@ -222,13 +228,13 @@ export default function StorePage() {
                       key={cat.id}
                       type="button"
                       onClick={() => handleCategorySelect(cat.id)}
-                      className="group flex flex-col items-center gap-2.5 transition-all focus:outline-none shrink-0"
+                      className="group flex flex-col items-center gap-1.5 transition-all focus:outline-none shrink-0"
                     >
                       <div
                         className={cn(
-                          "relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-sm group-hover:scale-105 group-hover:shadow-md",
+                          "relative w-14 h-14 sm:w-15 sm:h-15 lg:w-16 lg:h-16 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-sm group-hover:scale-105 group-hover:shadow-md",
                           isActive
-                            ? "border-primary ring-4 ring-primary/20 scale-105 shadow-lg"
+                            ? "border-primary ring-3 ring-primary/25 scale-105 shadow-md"
                             : "border-border/80 group-hover:border-primary/60"
                         )}
                       >
@@ -236,7 +242,7 @@ export default function StorePage() {
                           src={cat.imgUrl}
                           alt={cat.label}
                           fill
-                          sizes="96px"
+                          sizes="64px"
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         {isActive && (
@@ -245,7 +251,7 @@ export default function StorePage() {
                       </div>
                       <span
                         className={cn(
-                          "text-xs font-semibold tracking-tight transition-colors whitespace-nowrap",
+                          "text-[11px] font-semibold tracking-tight transition-colors whitespace-nowrap",
                           isActive ? "text-primary font-bold" : "text-stone-700 dark:text-stone-300 group-hover:text-foreground"
                         )}
                       >
@@ -261,16 +267,16 @@ export default function StorePage() {
             <button
               type="button"
               onClick={scrollNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+              className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
               aria-label="Siguientes categorías"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={15} />
             </button>
           </div>
         </section>
 
-        {/* BARRA DE FILTROS ÚNICA & BÚSQUEDA */}
-        <section aria-label="Filtros de productos" className="mb-8">
+        {/* BARRA DE FILTROS & BÚSQUEDA */}
+        <section id="store-controls" aria-label="Filtros de productos" className="mb-6 scroll-mt-24">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-2 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-xl shadow-sm">
             
             {/* Selector desplegable en celulares (Lista Desplegable Cómoda & Elegante) */}
@@ -296,23 +302,21 @@ export default function StorePage() {
               </div>
             </div>
 
-            {/* Píldoras de Categorías en Pantallas Medianas y Grandes */}
-            <div className="hidden md:flex items-center gap-1.5 overflow-x-auto px-2 py-1 scrollbar-none">
-              {categories.map((category) => (
+            {/* Estado de Categoría Activa en Pantallas Grandes (Sin duplicar píldoras) */}
+            <div className="hidden md:flex items-center gap-2.5 px-3 py-1 text-xs">
+              <span className="text-muted-foreground font-medium">Línea seleccionada:</span>
+              <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold">
+                {selectedCategory === 'Todos' ? 'Todas las Categorías' : selectedCategory}
+              </span>
+              {selectedCategory !== 'Todos' && (
                 <button
-                  key={category}
                   type="button"
-                  onClick={() => handleCategorySelect(category)}
-                  className={cn(
-                    "px-4 py-2 rounded-full text-xs font-semibold transition-all shrink-0 active:scale-95",
-                    selectedCategory === category
-                      ? "bg-foreground text-background shadow-md font-bold"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                  )}
+                  onClick={() => setSelectedCategory('Todos')}
+                  className="text-xs text-muted-foreground hover:text-foreground underline transition-colors ml-1"
                 >
-                  {category}
+                  Ver todas
                 </button>
-              ))}
+              )}
             </div>
 
             {/* Buscador Rápido */}
@@ -346,7 +350,7 @@ export default function StorePage() {
         </section>
 
         {/* CUADRÍCULA DE PRODUCTOS (LUXURY CARDS CON HOVER DE ÁNGULOS) */}
-        <main id="store-grid">
+        <main id="store-grid" className="scroll-mt-36">
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
               {Array.from({ length: 8 }).map((_, i) => (

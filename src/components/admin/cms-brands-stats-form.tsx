@@ -122,21 +122,79 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
       </div>
 
       <div className="grid grid-cols-1 gap-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
+        {/* 1. ESTADÍSTICAS (EXPERIENCIA) PRIMERO */}
+        <Card className="rounded-2xl border-stone-200 dark:border-stone-800 shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between pb-4">
             <div>
-              <CardTitle>Marcas Aliadas</CardTitle>
-              <CardDescription>Logos que aparecen en el carrusel principal.</CardDescription>
+              <CardTitle className="text-lg font-bold font-headline">Estadísticas (Experiencia)</CardTitle>
+              <CardDescription className="text-xs">Tarjetas de métricas oficiales que se muestran en el Hero.</CardDescription>
             </div>
-            <Button variant="outline" size="sm" onClick={handleAddBrand}>
-              <Plus className="mr-2 h-4 w-4" /> Añadir Marca
+            <Button variant="outline" size="sm" onClick={handleAddStat} className="rounded-full text-xs font-semibold">
+              <Plus className="mr-1.5 h-3.5 w-3.5" /> Añadir Stat
             </Button>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {siteContent.stats.map(stat => (
+                <div key={stat.id} className="p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-card/60 backdrop-blur-sm flex flex-col gap-3 shadow-xs">
+                  <div className="flex justify-between items-start">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                      {getIconComponent(stat.icon as any, { size: 18 })}
+                    </div>
+                    <Button variant="ghost" size="icon" className="text-destructive h-7 w-7 hover:bg-destructive/10" onClick={() => handleDeleteItem('stats', stat.id)}>
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="space-y-1">
+                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Valor</Label>
+                        <Input 
+                          value={stat.value || ''} 
+                          onChange={e => handleStatChange(stat.id, 'value', e.target.value)} 
+                          className="h-9 text-xs font-bold rounded-lg"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Icono</Label>
+                        <Input 
+                          value={stat.icon || ''} 
+                          onChange={e => handleStatChange(stat.id, 'icon', e.target.value)} 
+                          className="h-9 text-xs font-mono rounded-lg"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-[10px] uppercase font-bold text-muted-foreground">Etiqueta</Label>
+                      <Input 
+                        value={stat.label || ''} 
+                        onChange={e => handleStatChange(stat.id, 'label', e.target.value)} 
+                        className="h-9 text-xs font-medium rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 2. MARCAS ALIADAS (4 POR FILA, IMÁGENES PEQUEÑAS) */}
+        <Card className="rounded-2xl border-stone-200 dark:border-stone-800 shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between pb-4">
+            <div>
+              <CardTitle className="text-lg font-bold font-headline">Marcas Aliadas</CardTitle>
+              <CardDescription className="text-xs">Logotipos oficiales de proveedores y aliados estratégicos (4 por fila).</CardDescription>
+            </div>
+            <Button variant="outline" size="sm" onClick={handleAddBrand} className="rounded-full text-xs font-semibold">
+              <Plus className="mr-1.5 h-3.5 w-3.5" /> Añadir Marca
+            </Button>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {siteContent.brands.map(brand => (
-                <div key={brand.id} className="flex flex-col gap-4 p-4 rounded-xl border bg-muted/20">
-                  <div className="bg-white rounded-lg p-2 border shadow-inner">
+                <div key={brand.id} className="flex flex-col gap-3 p-3.5 rounded-2xl border border-stone-200 dark:border-stone-800 bg-card/60 backdrop-blur-sm shadow-xs">
+                  <div className="bg-white dark:bg-stone-900/90 rounded-xl p-2.5 border border-stone-200/80 dark:border-stone-700/80 flex items-center justify-center h-24 overflow-hidden shadow-inner">
                     <ImageUploader
                       currentUrl={brand.url}
                       onUpload={(url) => handleBrandChange(brand.id, 'url', url)}
@@ -145,70 +203,28 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
                         handleBrandChange(brand.id, 'url', defaultUrl);
                       }}
                       folder="brands"
-                      label="Logo de la Marca"
+                      label=""
+                      className="w-full space-y-1"
                     />
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <div className="space-y-1">
                       <Label className="text-[10px] uppercase font-bold text-muted-foreground">Nombre</Label>
                       <Input 
                         value={brand.name || ''} 
                         onChange={e => handleBrandChange(brand.id, 'name', e.target.value)} 
                         placeholder="Ej: Novopan"
+                        className="h-8 text-xs font-bold rounded-lg"
                       />
                     </div>
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="text-destructive w-full hover:bg-destructive/10" 
+                      className="text-destructive w-full h-7 text-[11px] hover:bg-destructive/10 rounded-lg" 
                       onClick={() => handleDeleteItem('brands', brand.id)}
                     >
-                      <Trash2 className="mr-2 h-4 w-4" /> Eliminar Marca
+                      <Trash2 className="mr-1.5 h-3 w-3" /> Eliminar
                     </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <div>
-              <CardTitle>Estadísticas (Experiencia)</CardTitle>
-              <CardDescription>Tarjetas de datos que se muestran en el Hero.</CardDescription>
-            </div>
-            <Button variant="outline" size="sm" onClick={handleAddStat}>
-              <Plus className="mr-2 h-4 w-4" /> Añadir Stat
-            </Button>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {siteContent.stats.map(stat => (
-                <div key={stat.id} className="p-4 rounded-xl border bg-muted/20 flex flex-col gap-3">
-                  <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
-                        {getIconComponent(stat.icon as any, { size: 20 })}
-                    </div>
-                    <Button variant="ghost" size="icon" className="text-destructive h-8 w-8" onClick={() => handleDeleteItem('stats', stat.id)}>
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="space-y-1">
-                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Valor</Label>
-                        <Input value={stat.value || ''} onChange={e => handleStatChange(stat.id, 'value', e.target.value)} />
-                      </div>
-                      <div className="space-y-1">
-                        <Label className="text-[10px] uppercase font-bold text-muted-foreground">Icono</Label>
-                        <Input value={stat.icon || ''} onChange={e => handleStatChange(stat.id, 'icon', e.target.value)} />
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <Label className="text-[10px] uppercase font-bold text-muted-foreground">Etiqueta</Label>
-                      <Input value={stat.label || ''} onChange={e => handleStatChange(stat.id, 'label', e.target.value)} />
-                    </div>
                   </div>
                 </div>
               ))}

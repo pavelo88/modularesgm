@@ -86,13 +86,13 @@ export const defaultProducts: Product[] = ALL_CATALOG_PRODUCTS;
 export const defaultBrands: Brand[] = [
   { id: 1, name: 'NOVOPAN', url: '/brands/novopan.webp' },
   { id: 2, name: 'PELIKANO', url: '/brands/pelikano.webp' },
-  { id: 3, name: 'BLUM', url: '/brands/blum.svg' },
-  { id: 4, name: 'HAFELE', url: '/brands/hafele.svg' },
-  { id: 5, name: 'SILESTONE', url: '/brands/silestone.svg' },
-  { id: 6, name: 'DEKTON', url: '/brands/dekton.svg' },
-  { id: 7, name: 'TEKA', url: '/brands/teka.svg' },
+  { id: 3, name: 'BLUM', url: '/brands/blum.webp' },
+  { id: 4, name: 'HÄFELE', url: '/brands/hafele.webp' },
+  { id: 5, name: 'SILESTONE', url: '/brands/silestone.webp' },
+  { id: 6, name: 'DEKTON', url: '/brands/dekton.webp' },
+  { id: 7, name: 'TEKA', url: '/brands/teka.webp' },
   { id: 8, name: 'BRIGGS', url: '/brands/briggs.webp' },
-  { id: 9, name: 'COSENTINO', url: '/brands/cosentino.svg' }
+  { id: 9, name: 'COSENTINO', url: '/brands/cosentino.webp' }
 ];
 
 
