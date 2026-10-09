@@ -96,6 +96,9 @@ const ARCHITECTURAL_CATEGORIES = [
 ];
 
 export function CatalogSection({ services, products }: { services?: Service[]; products?: Product[] }) {
+  const row1 = ARCHITECTURAL_CATEGORIES.slice(0, 3);
+  const row2 = ARCHITECTURAL_CATEGORIES.slice(3);
+
   return (
     <section id="catalogo" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-28" aria-labelledby="catalogo-title">
       <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
@@ -104,78 +107,123 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
             <Sparkles size={13} />
             <span>Líneas Oficiales GM</span>
           </div>
-          <h2 id="catalogo-title" className="font-headline text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-foreground">
+          <h2 id="catalogo-title" className="font-headline text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-stone-900 dark:text-stone-100">
             Mobiliario Modular por Categoría
           </h2>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base text-muted-foreground font-light leading-relaxed">
+          <p className="mt-3 max-w-2xl text-sm sm:text-base text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
             De la cocina de alta gama a la habitación gamer y oficinas corporativas. Cada espacio cuenta con su catálogo dedicado con cotización directa y carrito de compra.
           </p>
         </div>
         <Link
           href="/catalogo"
-          className="inline-flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-primary transition-colors px-5 py-2.5 rounded-full border border-border/60 hover:border-primary/40 bg-card/40 shrink-0 active:scale-95"
+          className="inline-flex items-center gap-2 text-xs font-bold text-stone-900 dark:text-stone-100 hover:text-primary transition-colors px-5 py-2.5 rounded-full border border-stone-300 dark:border-stone-700 bg-card/60 shrink-0 active:scale-95"
         >
           <span>Ver Índice de Catálogos</span>
           <ArrowRight size={14} />
         </Link>
       </div>
 
-      {/* Grid Editorial de Categorías estilo Siiimple & OH Architecture */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {ARCHITECTURAL_CATEGORIES.map((cat, idx) => (
-          <Link
-            key={cat.href}
-            href={cat.href}
-            className={`group relative flex flex-col rounded-3xl border border-border/60 overflow-hidden bg-card/60 backdrop-blur-md transition-all duration-500 hover:border-secondary/50 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] hover:-translate-y-1.5 ${
-              idx === 0 ? 'md:col-span-2 lg:col-span-2' : ''
-            }`}
-          >
-            {/* Imagen con zoom y overlay cinematográfico */}
-            <div className={`relative w-full overflow-hidden bg-muted/40 ${
-              idx === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'
-            }`}>
-              <Image
-                src={cat.imgUrl}
-                alt={cat.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
+      {/* 2 Carruseles Horizontales en lugar de grilla vertical interminable */}
+      <div className="space-y-10">
+        {/* Fila 1 */}
+        <div>
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-4">Líneas Residenciales</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {row1.map((cat) => (
+              <Link
+                key={cat.href}
+                href={cat.href}
+                className="group relative flex flex-col rounded-3xl border border-border/60 overflow-hidden bg-card/60 backdrop-blur-md transition-all duration-500 hover:border-secondary/50 hover:shadow-xl hover:-translate-y-1.5"
+              >
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
+                  <Image
+                    src={cat.imgUrl}
+                    alt={cat.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
 
-              {/* Badges superiores */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-background/80 dark:bg-black/60 backdrop-blur-md text-foreground border border-white/10 shadow-sm">
-                  {cat.tag}
-                </span>
-                <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/25 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
-                  {cat.models}
-                </span>
-              </div>
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/10">
+                      {cat.tag}
+                    </span>
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                      {cat.models}
+                    </span>
+                  </div>
 
-              {/* Título e info en overlay */}
-              <div className="absolute bottom-4 left-4 right-4 z-10">
-                <h3 className="text-xl sm:text-2xl font-normal font-headline text-white tracking-tight leading-snug">
-                  {cat.title}
-                </h3>
-              </div>
-            </div>
+                  <div className="absolute bottom-4 left-4 right-4 z-10">
+                    <h4 className="text-xl font-headline font-normal text-white leading-snug">
+                      {cat.title}
+                    </h4>
+                  </div>
+                </div>
 
-            {/* Descripción y botón */}
-            <div className="p-6 flex-1 flex flex-col justify-between gap-4">
-              <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-light leading-relaxed">
-                {cat.desc}
-              </p>
+                <div className="p-5 flex-1 flex flex-col justify-between gap-3">
+                  <p className="text-xs text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
+                    {cat.desc}
+                  </p>
+                  <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
+                    <span className="uppercase tracking-wider">Explorar Catálogo</span>
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-secondary" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
 
-              <div className="pt-4 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-200 group-hover:text-primary transition-colors">
-                <span className="uppercase tracking-wider">Explorar Colección & Modelos</span>
-                <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-stone-200/50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        ))}
+        {/* Fila 2 */}
+        <div>
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-4">Líneas Especializadas & Corporativas</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {row2.map((cat) => (
+              <Link
+                key={cat.href}
+                href={cat.href}
+                className="group relative flex flex-col rounded-3xl border border-border/60 overflow-hidden bg-card/60 backdrop-blur-md transition-all duration-500 hover:border-secondary/50 hover:shadow-xl hover:-translate-y-1.5"
+              >
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
+                  <Image
+                    src={cat.imgUrl}
+                    alt={cat.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
+
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/10">
+                      {cat.tag}
+                    </span>
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                      {cat.models}
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 right-4 z-10">
+                    <h4 className="text-xl font-headline font-normal text-white leading-snug">
+                      {cat.title}
+                    </h4>
+                  </div>
+                </div>
+
+                <div className="p-5 flex-1 flex flex-col justify-between gap-3">
+                  <p className="text-xs text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
+                    {cat.desc}
+                  </p>
+                  <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
+                    <span className="uppercase tracking-wider">Explorar Catálogo</span>
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-secondary" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -231,29 +279,92 @@ export function AffiliateBand() {
         {/* Glow sutil */}
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
-        {/* Vista Móvil (Exclusivamente Imagen Flyer + Botón de Registro) */}
-        <div className="lg:hidden flex flex-col items-center gap-5">
-          <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-stone-300 dark:border-stone-700 shadow-xl">
+        {/* Vista Móvil (Imagen Flyer Alta + Botón Superpuesto Encima) */}
+        <div className="lg:hidden flex flex-col items-center">
+          <div className="relative w-full max-w-sm aspect-[3/4.8] rounded-3xl overflow-hidden border border-stone-300 dark:border-stone-700 shadow-2xl">
             <Image
               src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
               alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
               fill
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="100vw"
               className="object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
+
+            {/* Botón Verde Superpuesto sobre la imagen en la parte inferior */}
+            <div className="absolute bottom-5 left-4 right-4 z-20">
+              <Link
+                href="/afiliados"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-[#1b736b] active:bg-[#155b55] text-white font-bold text-xs shadow-xl active:scale-95 transition-all text-center"
+              >
+                <span>Regístrate en modularesgm.com/afiliados</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
-          <Link
-            href="/afiliados"
-            className="w-full max-w-sm inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#1b736b] active:bg-[#155b55] text-white font-bold text-xs sm:text-sm shadow-xl active:scale-95 transition-all text-center"
-          >
-            <span>Regístrate en modularesgm.com/afiliados</span>
-            <ArrowRight size={16} />
-          </Link>
         </div>
 
-        {/* Vista Escritorio (Dossier Editorial Completo con Carrusel a la Derecha) */}
+        {/* Vista Escritorio (Carrusel a la IZQUIERDA, Textos a la DERECHA) */}
         <div className="hidden lg:grid grid-cols-12 gap-14 items-center">
-          {/* Columna Izquierda: Información Editorial */}
+          {/* Columna Izquierda: Carrusel Dinámico de 1 Sola Tarjeta con las Categorías Reales */}
+          <div className="col-span-5 relative flex flex-col items-center">
+            <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-secondary/30 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
+              {ARCHITECTURAL_CATEGORIES.map((cat, idx) => (
+                <div
+                  key={cat.href}
+                  className={`absolute inset-0 transition-opacity duration-1000 ${
+                    idx === activeCategoryIdx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+                >
+                  <Image
+                    src={cat.imgUrl}
+                    alt={cat.title}
+                    fill
+                    sizes="40vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
+                      {cat.tag}
+                    </span>
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                      {cat.models}
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-5 left-5 right-5 z-20 text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary block mb-1">
+                      Línea Destacada #{idx + 1}
+                    </span>
+                    <h3 className="text-xl font-headline font-normal tracking-tight leading-snug">
+                      {cat.title}
+                    </h3>
+                    <p className="text-xs text-stone-300 font-light mt-1 line-clamp-2">
+                      {cat.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Controles discretos del carrusel */}
+            <div className="flex items-center gap-1.5 mt-4">
+              {ARCHITECTURAL_CATEGORIES.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveCategoryIdx(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    idx === activeCategoryIdx ? 'w-6 bg-secondary' : 'w-2 bg-stone-300 dark:bg-stone-700'
+                  }`}
+                  aria-label={`Ir a diapositiva ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Columna Derecha: Información Editorial */}
           <div className="col-span-7 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-4">
@@ -319,64 +430,6 @@ export function AffiliateBand() {
                 <span>Regístrate en modularesgm.com/afiliados</span>
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
-            </div>
-          </div>
-
-          {/* Columna Derecha: Carrusel Dinámico de 1 Sola Tarjeta con las Categorías Reales */}
-          <div className="col-span-5 relative flex flex-col items-center">
-            <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-secondary/30 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
-              {ARCHITECTURAL_CATEGORIES.map((cat, idx) => (
-                <div
-                  key={cat.href}
-                  className={`absolute inset-0 transition-opacity duration-1000 ${
-                    idx === activeCategoryIdx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                  }`}
-                >
-                  <Image
-                    src={cat.imgUrl}
-                    alt={cat.title}
-                    fill
-                    sizes="40vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
-                      {cat.tag}
-                    </span>
-                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
-                      {cat.models}
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-5 left-5 right-5 z-20 text-white">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary block mb-1">
-                      Línea Destacada #{idx + 1}
-                    </span>
-                    <h3 className="text-xl font-headline font-normal tracking-tight leading-snug">
-                      {cat.title}
-                    </h3>
-                    <p className="text-xs text-stone-300 font-light mt-1 line-clamp-2">
-                      {cat.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Controles discretos del carrusel */}
-            <div className="flex items-center gap-1.5 mt-4">
-              {ARCHITECTURAL_CATEGORIES.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveCategoryIdx(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === activeCategoryIdx ? 'w-6 bg-secondary' : 'w-2 bg-stone-300 dark:bg-stone-700'
-                  }`}
-                  aria-label={`Ir a diapositiva ${idx + 1}`}
-                />
-              ))}
             </div>
           </div>
         </div>

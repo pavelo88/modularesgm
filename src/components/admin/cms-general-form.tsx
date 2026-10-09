@@ -95,6 +95,75 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Top Left: Marquesina de Anuncios (TopBar) */}
+        <Card className="border-amber-500/30 bg-amber-500/5">
+            <CardHeader className="bg-amber-500/10 border-b">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-amber-500"/> Marquesina de Anuncios (TopBar)
+                </CardTitle>
+                <CardDescription>
+                  Mensajes promocionales que rotan en la cinta superior del sitio web.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+              {(siteContent.tickerMessages || [
+                { id: '1', text: '🎉 5% de descuento en tus compras si alguien te recomendó la web', href: '/afiliados' },
+                { id: '2', text: '💵 5% de descuento por pagos en efectivo', href: '/store' },
+                { id: '3', text: '✨ 5% de descuento inmediato al registrarte en nuestra plataforma', href: '/store' },
+                { id: '4', text: '🤝 ¿Eres instalador o arquitecto? Visita Trabaja con nosotros', href: '/afiliados' },
+              ]).map((msg, idx) => (
+                <div key={idx} className="p-3 bg-background rounded-lg border space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <Label className="text-xs font-bold">Mensaje #{idx + 1}</Label>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-xs text-red-500 hover:text-red-700 hover:bg-red-50"
+                      onClick={() => {
+                        const newTicker = [...(siteContent.tickerMessages || [])];
+                        newTicker.splice(idx, 1);
+                        setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                      }}
+                    >
+                      Eliminar
+                    </Button>
+                  </div>
+                  <Input
+                    value={msg.text}
+                    onChange={(e) => {
+                      const newTicker = [...(siteContent.tickerMessages || [])];
+                      newTicker[idx] = { ...newTicker[idx], text: e.target.value };
+                      setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                    }}
+                    placeholder="Texto del anuncio..."
+                  />
+                  <Input
+                    value={msg.href || ''}
+                    onChange={(e) => {
+                      const newTicker = [...(siteContent.tickerMessages || [])];
+                      newTicker[idx] = { ...newTicker[idx], href: e.target.value };
+                      setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                    }}
+                    placeholder="Enlace (ej. /afiliados o /store)"
+                    className="text-xs font-mono"
+                  />
+                </div>
+              ))}
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full"
+                onClick={() => {
+                  const newTicker = [...(siteContent.tickerMessages || []), { id: String(Date.now()), text: 'Nuevo Anuncio Promocional', href: '/store' }];
+                  setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
+                }}
+              >
+                + Agregar Nuevo Anuncio
+              </Button>
+            </CardContent>
+        </Card>
+
+        {/* Top Right: Sección Hero (Banner Principal) */}
         <Card className="shadow-lg border-primary/10 overflow-hidden">
             <CardHeader className="bg-primary/5 border-b">
                 <CardTitle className="text-lg">Sección Hero (Banner Principal)</CardTitle>
@@ -125,113 +194,45 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
             </CardContent>
         </Card>
 
-        <div className="space-y-8">
-            <Card>
-                <CardHeader className="bg-secondary/5 border-b">
-                    <CardTitle className="text-lg flex items-center gap-2"><Phone className="h-4 w-4"/> Contacto y Ubicación</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6 space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="whatsappNumber">WhatsApp (Sin +)</Label>
-                            <Input id="whatsappNumber" name="whatsappNumber" value={siteContent.whatsappNumber || ''} onChange={handleInputChange} />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="address">Dirección Física</Label>
-                            <Input id="address" name="address" value={siteContent.address || ''} onChange={handleInputChange} />
-                        </div>
+        {/* Bottom Left: Contacto y Ubicación */}
+        <Card>
+            <CardHeader className="bg-secondary/5 border-b">
+                <CardTitle className="text-lg flex items-center gap-2"><Phone className="h-4 w-4"/> Contacto y Ubicación</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="whatsappNumber">WhatsApp (Sin +)</Label>
+                        <Input id="whatsappNumber" name="whatsappNumber" value={siteContent.whatsappNumber || ''} onChange={handleInputChange} />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="mapUrl">Google Maps Embed URL (Iframe src)</Label>
-                        <Textarea id="mapUrl" name="mapUrl" value={siteContent.mapUrl || ''} onChange={handleInputChange} className="h-24 text-xs font-mono"/>
+                        <Label htmlFor="address">Dirección Física</Label>
+                        <Input id="address" name="address" value={siteContent.address || ''} onChange={handleInputChange} />
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="mapUrl">Google Maps Embed URL (Iframe src)</Label>
+                    <Textarea id="mapUrl" name="mapUrl" value={siteContent.mapUrl || ''} onChange={handleInputChange} className="h-24 text-xs font-mono"/>
+                </div>
+            </CardContent>
+        </Card>
 
-            <Card>
-                <CardHeader className="bg-muted/50 border-b">
-                    <CardTitle className="text-lg flex items-center gap-2"><Share2 className="h-4 w-4"/> Redes Sociales</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6 space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="socialUrls.facebook">Facebook URL</Label>
-                        <Input id="socialUrls.facebook" name="socialUrls.facebook" value={siteContent.socialUrls?.facebook || ''} onChange={handleInputChange} placeholder="https://..." />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="socialUrls.instagram">Instagram URL</Label>
-                        <Input id="socialUrls.instagram" name="socialUrls.instagram" value={siteContent.socialUrls?.instagram || ''} onChange={handleInputChange} placeholder="https://..." />
-                    </div>
-                </CardContent>
-            </Card>
-
-            {/* Marquesina de Anuncios y Promociones Superior */}
-            <Card className="border-amber-500/30 bg-amber-500/5">
-                <CardHeader className="bg-amber-500/10 border-b">
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-amber-500"/> Marquesina de Anuncios (TopBar)
-                    </CardTitle>
-                    <CardDescription>
-                      Mensajes promocionales que rotan en la cinta superior del sitio web.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="p-6 space-y-4">
-                  {(siteContent.tickerMessages || [
-                    { id: '1', text: '🎉 5% de descuento en tus compras si alguien te recomendó la web', href: '/afiliados' },
-                    { id: '2', text: '💵 5% de descuento por pagos en efectivo', href: '/store' },
-                    { id: '3', text: '✨ 5% de descuento inmediato al registrarte en nuestra plataforma', href: '/store' },
-                    { id: '4', text: '🤝 ¿Eres instalador o arquitecto? Visita Trabaja con nosotros', href: '/afiliados' },
-                  ]).map((msg, idx) => (
-                    <div key={idx} className="p-3 bg-background rounded-lg border space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <Label className="text-xs font-bold">Mensaje #{idx + 1}</Label>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-7 text-xs text-red-500 hover:text-red-700 hover:bg-red-50"
-                          onClick={() => {
-                            const newTicker = [...(siteContent.tickerMessages || [])];
-                            newTicker.splice(idx, 1);
-                            setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
-                          }}
-                        >
-                          Eliminar
-                        </Button>
-                      </div>
-                      <Input
-                        value={msg.text}
-                        onChange={(e) => {
-                          const newTicker = [...(siteContent.tickerMessages || [])];
-                          newTicker[idx] = { ...newTicker[idx], text: e.target.value };
-                          setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
-                        }}
-                        placeholder="Texto del anuncio..."
-                      />
-                      <Input
-                        value={msg.href || ''}
-                        onChange={(e) => {
-                          const newTicker = [...(siteContent.tickerMessages || [])];
-                          newTicker[idx] = { ...newTicker[idx], href: e.target.value };
-                          setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
-                        }}
-                        placeholder="Enlace (ej. /afiliados o /store)"
-                        className="text-xs font-mono"
-                      />
-                    </div>
-                  ))}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                    onClick={() => {
-                      const newTicker = [...(siteContent.tickerMessages || []), { id: String(Date.now()), text: 'Nuevo Anuncio Promocional', href: '/store' }];
-                      setSiteContent(prev => ({ ...prev, tickerMessages: newTicker }));
-                    }}
-                  >
-                    + Agregar Nuevo Anuncio
-                  </Button>
-                </CardContent>
-            </Card>
-        </div>
+        {/* Bottom Right: Redes Sociales */}
+        <Card>
+            <CardHeader className="bg-muted/50 border-b">
+                <CardTitle className="text-lg flex items-center gap-2"><Share2 className="h-4 w-4"/> Redes Sociales</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+                <div className="space-y-2">
+                    <Label htmlFor="socialUrls.facebook">Facebook URL</Label>
+                    <Input id="socialUrls.facebook" name="socialUrls.facebook" value={siteContent.socialUrls?.facebook || ''} onChange={handleInputChange} placeholder="https://..." />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="socialUrls.instagram">Instagram URL</Label>
+                    <Input id="socialUrls.instagram" name="socialUrls.instagram" value={siteContent.socialUrls?.instagram || ''} onChange={handleInputChange} placeholder="https://..." />
+                </div>
+            </CardContent>
+        </Card>
       </div>
 
       <Card className="border-primary/20 bg-primary/5">

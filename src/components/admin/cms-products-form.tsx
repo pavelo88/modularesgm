@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useTransition, useMemo } from 'react';
 import type { SiteContent, Product } from '@/lib/types';
@@ -124,6 +124,20 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
     return list;
   }, [siteContent.products, activeCategory, search]);
 
+  const [categories, setCategories] = useState<string[]>(CATALOG_CATEGORIES);
+
+  const handleAddCategory = () => {
+    const newCat = prompt('Ingrese el nombre de la nueva categoría:');
+    if (newCat && newCat.trim()) {
+      const formatted = newCat.trim();
+      if (!categories.includes(formatted)) {
+        setCategories(prev => [...prev, formatted]);
+        setActiveCategory(formatted);
+        toast({ title: 'Categoría añadida', description: `Categoría "${formatted}" lista para asignar.` });
+      }
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header sticky */}
@@ -138,8 +152,11 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
           <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
             <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
           </Button>
+          <Button variant="outline" size="sm" onClick={handleAddCategory}>
+            <Plus className="mr-2 h-4 w-4" /> Añadir Categoría
+          </Button>
           <Button variant="outline" size="sm" onClick={handleAddProduct}>
-            <Plus className="mr-2 h-4 w-4" /> Añadir
+            <Plus className="mr-2 h-4 w-4" /> Añadir Producto
           </Button>
           <Button size="sm" onClick={handleSave} disabled={isSaving}>
             {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
@@ -160,7 +177,7 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
           />
         </div>
         <div className="flex flex-wrap gap-1.5">
-          {CATALOG_CATEGORIES.map(cat => (
+          {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}

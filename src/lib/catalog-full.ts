@@ -3,9 +3,9 @@ import type { Product } from './types';
 export interface CategorySEO {
   slug: string;
   categoryName: string;
-  title: string;          // 50-60 chars
-  metaDescription: string;// 120-160 chars
-  h1: string;             // 45-65 chars
+  title: string;
+  metaDescription: string;
+  h1: string;
   heroSubtitle: string;
   directAnswerCapsule: {
     definition: string;
@@ -39,14 +39,6 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       {
         question: '¿Qué materiales utilizan en los escritorios?',
         answer: 'Fabricamos con tableros melamínicos de 18mm Pelikano y Novopan de alta densidad con cantos termoencolados para evitar humedad y despostilladuras.'
-      },
-      {
-        question: '¿Tienen entrega e instalación en Quito y valles?',
-        answer: 'Sí, disponemos de servicio de transporte, armado e instalación profesional en todo Quito, Cumbayá, Tumbaco y Valle de los Chillos.'
-      },
-      {
-        question: '¿Se pueden fabricar escritorios a medida exacta?',
-        answer: 'Totalmente. Puedes solicitar dimensiones especiales o configuraciones con repisas superiores y cajones según tu espacio.'
       }
     ]
   },
@@ -68,12 +60,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       priceRange: 'Cotización personalizada por proyecto o módulo',
       warranty: '5 años de garantía corporativa'
     },
-    faqs: [
-      {
-        question: '¿Realizan proyectos de mobiliario para oficinas completas?',
-        answer: 'Sí, nos encargamos de todo el equipamiento: desde el counter de recepción hasta puestos operativos, salas de reuniones y credenzas.'
-      }
-    ]
+    faqs: []
   },
   closets: {
     slug: 'closets',
@@ -93,12 +80,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       priceRange: 'Desde $380 por módulo / Cotización a medida',
       warranty: '5 años de garantía en carpintería'
     },
-    faqs: [
-      {
-        question: '¿Pueden adaptar el clóset a espacios pequeños o abuhardillados?',
-        answer: 'Absolutamente. Diseñamos cada módulo milímetro a milímetro para aprovechar nichos, esquinas y alturas especiales.'
-      }
-    ]
+    faqs: []
   },
   cocinas: {
     slug: 'cocinas',
@@ -118,16 +100,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       priceRange: 'Desde $250 por metro lineal base / Cotización integral llave en mano',
       warranty: '10 años de garantía en mesones y 5 años en carpintería'
     },
-    faqs: [
-      {
-        question: '¿Qué incluye la cotización de una cocina integral?',
-        answer: 'Incluye levantamiento de medidas, diseño 3D, fabricación de muebles altos/bajos, mesón en cuarzo/granito, herrajes, transporte e instalación completa.'
-      },
-      {
-        question: '¿Cuánto tiempo tarda la fabricación e instalación?',
-        answer: 'El tiempo promedio de entrega es de 15 a 20 días hábiles desde la aprobación final de los planos 3D.'
-      }
-    ]
+    faqs: []
   },
   'muebles-bano': {
     slug: 'muebles-bano',
@@ -147,12 +120,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       priceRange: 'Desde $180 hasta $450 USD según dimensiones',
       warranty: '5 años de garantía contra humedad'
     },
-    faqs: [
-      {
-        question: '¿El mueble se deforma o hincha con el vapor de la ducha?',
-        answer: 'No. Empleamos exclusivamente tableros con certificación RH de alta densidad y cantos sellados con poliuretano impermeable.'
-      }
-    ]
+    faqs: []
   },
   puertas: {
     slug: 'puertas',
@@ -172,12 +140,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       priceRange: 'Desde $160 (interior) hasta $850 (pivotantes de lujo)',
       warranty: '3 años de garantía en funcionamiento mecánico'
     },
-    faqs: [
-      {
-        question: '¿Qué es una puerta pivotante?',
-        answer: 'Es una puerta que no usa bisagras laterales tradicionales, sino pernos en la parte superior e inferior, permitiendo paneles gigantes y giros elegantes.'
-      }
-    ]
+    faqs: []
   },
   gamer: {
     slug: 'gamer',
@@ -185,7 +148,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
     title: 'Habitaciones y Setups Gamer a Medida en Quito | GM',
     metaDescription: 'Diseño y fabricación de cuartos gamer y escritorios gaming en Quito. Iluminación RGB integrada, paneles acústicos y soporte multipantalla.',
     h1: 'Habitaciones Gamer y Setups Profesionales a Medida',
-    heroSubtitle: 'Lleva tu experiencia de juego y streaming al siguiente nivel con escritorios reforzados, iluminación inteligente y paneles ranurados.',
+    heroSubtitle: 'Lleva tu experiencia de juego y streaming al siguiente nivel con escritorios reinforced, iluminación inteligente y paneles ranurados.',
     directAnswerCapsule: {
       definition: 'Mobiliario gamer profesional creado por Modulares GM con ergonomía para largas sesiones de juego y canalización integral de cables.',
       keyTakeaways: [
@@ -197,12 +160,7 @@ export const CATEGORIES_SEO: Record<string, CategorySEO> = {
       priceRange: 'Diseño integral personalizado a medida',
       warranty: '3 años de garantía total'
     },
-    faqs: [
-      {
-        question: '¿Pueden fabricar un escritorio gamer para 3 o 4 monitores?',
-        answer: 'Sí, reforzamos la estructura interna con perfiles metálicos ocultos para soportar brazos hidráulicos y múltiples monitores sin vibración.'
-      }
-    ]
+    faqs: []
   }
 };
 
@@ -729,7 +687,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 30,
-    "title": "Muebles de Oficina Modelo GM-130",
+    "title": "Oficina Modelo GM-130",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 570,
     "discountPrice": 542,
@@ -738,7 +696,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-004.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-005.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -747,7 +705,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 31,
-    "title": "Muebles de Oficina Modelo GM-131",
+    "title": "Oficina Modelo GM-131",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 615,
     "discountPrice": 584,
@@ -756,7 +714,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-006.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-007.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -765,7 +723,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 32,
-    "title": "Muebles de Oficina Modelo GM-132",
+    "title": "Oficina Modelo GM-132",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 660,
     "discountPrice": 627,
@@ -774,7 +732,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-010.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-011.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -783,7 +741,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 33,
-    "title": "Muebles de Oficina Modelo GM-133",
+    "title": "Oficina Modelo GM-133",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 705,
     "discountPrice": 670,
@@ -792,7 +750,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-012.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-014.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -801,7 +759,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 34,
-    "title": "Muebles de Oficina Modelo GM-134",
+    "title": "Oficina Modelo GM-134",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 750,
     "discountPrice": 713,
@@ -810,7 +768,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-015.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-016.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -819,7 +777,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 35,
-    "title": "Muebles de Oficina Modelo GM-135",
+    "title": "Oficina Modelo GM-135",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 480,
     "discountPrice": 456,
@@ -828,7 +786,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-017.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-019.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -837,7 +795,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 36,
-    "title": "Muebles de Oficina Modelo GM-136",
+    "title": "Oficina Modelo GM-136",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 525,
     "discountPrice": 499,
@@ -846,7 +804,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-020.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-021.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -855,7 +813,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 37,
-    "title": "Muebles de Oficina Modelo GM-137",
+    "title": "Oficina Modelo GM-137",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 570,
     "discountPrice": 542,
@@ -864,7 +822,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-023.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-024.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -873,7 +831,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 38,
-    "title": "Muebles de Oficina Modelo GM-138",
+    "title": "Oficina Modelo GM-138",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 615,
     "discountPrice": 584,
@@ -882,7 +840,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-025.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-026.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -891,7 +849,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 39,
-    "title": "Muebles de Oficina Modelo GM-139",
+    "title": "Oficina Modelo GM-139",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 660,
     "discountPrice": 627,
@@ -900,7 +858,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-028.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-029.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -909,7 +867,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 40,
-    "title": "Muebles de Oficina Modelo GM-140",
+    "title": "Oficina Modelo GM-140",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 705,
     "discountPrice": 670,
@@ -918,7 +876,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-030.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-031.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -927,7 +885,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 41,
-    "title": "Muebles de Oficina Modelo GM-141",
+    "title": "Oficina Modelo GM-141",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 750,
     "discountPrice": 713,
@@ -936,7 +894,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-033.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-034.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -945,7 +903,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 42,
-    "title": "Muebles de Oficina Modelo GM-142",
+    "title": "Oficina Modelo GM-142",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 480,
     "discountPrice": 456,
@@ -954,7 +912,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-035.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-036.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -963,7 +921,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 43,
-    "title": "Muebles de Oficina Modelo GM-143",
+    "title": "Oficina Modelo GM-143",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 525,
     "discountPrice": 499,
@@ -972,7 +930,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-037.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-039.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -981,7 +939,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 44,
-    "title": "Muebles de Oficina Modelo GM-144",
+    "title": "Oficina Modelo GM-144",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 570,
     "discountPrice": 542,
@@ -990,7 +948,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-040.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-041.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -999,7 +957,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 45,
-    "title": "Muebles de Oficina Modelo GM-145",
+    "title": "Oficina Modelo GM-145",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 615,
     "discountPrice": 584,
@@ -1008,7 +966,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-043.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-044.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1017,7 +975,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 46,
-    "title": "Muebles de Oficina Modelo GM-146",
+    "title": "Oficina Modelo GM-146",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 660,
     "discountPrice": 627,
@@ -1026,7 +984,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-045.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-046.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1035,7 +993,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 47,
-    "title": "Muebles de Oficina Modelo GM-147",
+    "title": "Oficina Modelo GM-147",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 705,
     "discountPrice": 670,
@@ -1044,7 +1002,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-048.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-049.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1053,7 +1011,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 48,
-    "title": "Muebles de Oficina Modelo GM-148",
+    "title": "Oficina Modelo GM-148",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 750,
     "discountPrice": 713,
@@ -1062,7 +1020,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-050.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-053.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1071,7 +1029,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 49,
-    "title": "Muebles de Oficina Modelo GM-149",
+    "title": "Oficina Modelo GM-149",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 480,
     "discountPrice": 456,
@@ -1080,7 +1038,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-054.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-055.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1089,7 +1047,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 50,
-    "title": "Muebles de Oficina Modelo GM-150",
+    "title": "Oficina Modelo GM-150",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 525,
     "discountPrice": 499,
@@ -1098,7 +1056,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-057.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-058.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1107,7 +1065,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 51,
-    "title": "Muebles de Oficina Modelo GM-151",
+    "title": "Oficina Modelo GM-151",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 570,
     "discountPrice": 542,
@@ -1116,7 +1074,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-059.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-060.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1125,7 +1083,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 52,
-    "title": "Muebles de Oficina Modelo GM-152",
+    "title": "Oficina Modelo GM-152",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 615,
     "discountPrice": 584,
@@ -1134,7 +1092,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-061.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-063.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1143,7 +1101,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 53,
-    "title": "Muebles de Oficina Modelo GM-153",
+    "title": "Oficina Modelo GM-153",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 660,
     "discountPrice": 627,
@@ -1152,7 +1110,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-064.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-065.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1161,7 +1119,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 54,
-    "title": "Muebles de Oficina Modelo GM-154",
+    "title": "Oficina Modelo GM-154",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 705,
     "discountPrice": 670,
@@ -1170,7 +1128,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-067.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-068.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1179,7 +1137,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 55,
-    "title": "Muebles de Oficina Modelo GM-155",
+    "title": "Oficina Modelo GM-155",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 750,
     "discountPrice": 713,
@@ -1188,7 +1146,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-069.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-071.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1197,7 +1155,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 56,
-    "title": "Muebles de Oficina Modelo GM-156",
+    "title": "Oficina Modelo GM-156",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 480,
     "discountPrice": 456,
@@ -1206,7 +1164,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-072.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-074.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1215,7 +1173,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 57,
-    "title": "Muebles de Oficina Modelo GM-157",
+    "title": "Oficina Modelo GM-157",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 525,
     "discountPrice": 499,
@@ -1224,7 +1182,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-075.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-076.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1233,7 +1191,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 58,
-    "title": "Muebles de Oficina Modelo GM-158",
+    "title": "Oficina Modelo GM-158",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 570,
     "discountPrice": 542,
@@ -1242,7 +1200,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-077.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-079.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1251,7 +1209,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 59,
-    "title": "Muebles de Oficina Modelo GM-159",
+    "title": "Oficina Modelo GM-159",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 615,
     "discountPrice": 584,
@@ -1260,7 +1218,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-080.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-081.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1269,7 +1227,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 60,
-    "title": "Muebles de Oficina Modelo GM-160",
+    "title": "Oficina Modelo GM-160",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 660,
     "discountPrice": 627,
@@ -1278,7 +1236,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-084.png",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-085.png"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1287,7 +1245,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 61,
-    "title": "Muebles de Oficina Modelo GM-161",
+    "title": "Oficina Modelo GM-161",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 705,
     "discountPrice": 670,
@@ -1296,7 +1254,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-086.png",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-088.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1305,7 +1263,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 62,
-    "title": "Muebles de Oficina Modelo GM-162",
+    "title": "Oficina Modelo GM-162",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 750,
     "discountPrice": 713,
@@ -1314,7 +1272,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-089.jpg",
       "/images/catalog/extracted_MUEBLES_OFICINA/img-091.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1323,7 +1281,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 63,
-    "title": "Muebles de Oficina Modelo GM-163",
+    "title": "Oficina Modelo GM-163",
     "desc": "Credenza ejecutiva y counter de recepción modular.",
     "price": 480,
     "discountPrice": 456,
@@ -1331,7 +1289,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
     "images": [
       "/images/catalog/extracted_MUEBLES_OFICINA/img-092.jpg"
     ],
-    "category": "Muebles de Oficina",
+    "category": "Oficina",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1340,7 +1298,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 64,
-    "title": "Baños Modelo GM-164",
+    "title": "Baño Modelo GM-164",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 425,
     "discountPrice": 404,
@@ -1349,7 +1307,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-005.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1358,7 +1316,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 65,
-    "title": "Baños Modelo GM-165",
+    "title": "Baño Modelo GM-165",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 470,
     "discountPrice": 447,
@@ -1367,7 +1325,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-006.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-007.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1376,7 +1334,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 66,
-    "title": "Baños Modelo GM-166",
+    "title": "Baño Modelo GM-166",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 515,
     "discountPrice": 489,
@@ -1385,7 +1343,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-008.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-009.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1394,7 +1352,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 67,
-    "title": "Baños Modelo GM-167",
+    "title": "Baño Modelo GM-167",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 560,
     "discountPrice": 532,
@@ -1403,7 +1361,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-010.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-011.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1412,7 +1370,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 68,
-    "title": "Baños Modelo GM-168",
+    "title": "Baño Modelo GM-168",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 605,
     "discountPrice": 575,
@@ -1421,7 +1379,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-012.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-013.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1430,7 +1388,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 69,
-    "title": "Baños Modelo GM-169",
+    "title": "Baño Modelo GM-169",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 650,
     "discountPrice": 618,
@@ -1439,7 +1397,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-014.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-015.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1448,7 +1406,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 70,
-    "title": "Baños Modelo GM-170",
+    "title": "Baño Modelo GM-170",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 380,
     "discountPrice": 361,
@@ -1457,7 +1415,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-016.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-017.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1466,7 +1424,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 71,
-    "title": "Baños Modelo GM-171",
+    "title": "Baño Modelo GM-171",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 425,
     "discountPrice": 404,
@@ -1475,7 +1433,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-018.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-019.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1484,7 +1442,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 72,
-    "title": "Baños Modelo GM-172",
+    "title": "Baño Modelo GM-172",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 470,
     "discountPrice": 447,
@@ -1493,7 +1451,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-020.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-021.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1502,7 +1460,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 73,
-    "title": "Baños Modelo GM-173",
+    "title": "Baño Modelo GM-173",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 515,
     "discountPrice": 489,
@@ -1511,7 +1469,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-022.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-023.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1520,7 +1478,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 74,
-    "title": "Baños Modelo GM-174",
+    "title": "Baño Modelo GM-174",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 560,
     "discountPrice": 532,
@@ -1529,7 +1487,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-024.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-025.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1538,7 +1496,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 75,
-    "title": "Baños Modelo GM-175",
+    "title": "Baño Modelo GM-175",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 605,
     "discountPrice": 575,
@@ -1547,7 +1505,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-026.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-027.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1556,7 +1514,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 76,
-    "title": "Baños Modelo GM-176",
+    "title": "Baño Modelo GM-176",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 650,
     "discountPrice": 618,
@@ -1565,7 +1523,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-028.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-029.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1574,7 +1532,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 77,
-    "title": "Baños Modelo GM-177",
+    "title": "Baño Modelo GM-177",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 380,
     "discountPrice": 361,
@@ -1583,7 +1541,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-030.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-031.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1592,7 +1550,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 78,
-    "title": "Baños Modelo GM-178",
+    "title": "Baño Modelo GM-178",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 425,
     "discountPrice": 404,
@@ -1601,7 +1559,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-032.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-033.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1610,7 +1568,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 79,
-    "title": "Baños Modelo GM-179",
+    "title": "Baño Modelo GM-179",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 470,
     "discountPrice": 447,
@@ -1619,7 +1577,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-034.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-035.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1628,7 +1586,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 80,
-    "title": "Baños Modelo GM-180",
+    "title": "Baño Modelo GM-180",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 515,
     "discountPrice": 489,
@@ -1637,7 +1595,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-036.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-037.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -1646,7 +1604,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 81,
-    "title": "Baños Modelo GM-181",
+    "title": "Baño Modelo GM-181",
     "desc": "Mueble de baño flotante resistente a humedad con cuarzo.",
     "price": 560,
     "discountPrice": 532,
@@ -1655,7 +1613,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-038.jpg",
       "/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-039.jpg"
     ],
-    "category": "Baños",
+    "category": "Baño",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2329,7 +2287,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 119,
-    "title": "Circuitos Modelo GM-219",
+    "title": "Estimulación Modelo GM-219",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 180,
     "discountPrice": 171,
@@ -2338,7 +2296,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-004.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2347,7 +2305,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 120,
-    "title": "Circuitos Modelo GM-220",
+    "title": "Estimulación Modelo GM-220",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 225,
     "discountPrice": 214,
@@ -2356,7 +2314,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-008.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-012.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2365,7 +2323,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 121,
-    "title": "Circuitos Modelo GM-221",
+    "title": "Estimulación Modelo GM-221",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 270,
     "discountPrice": 257,
@@ -2374,7 +2332,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-016.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-020.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2383,7 +2341,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 122,
-    "title": "Circuitos Modelo GM-222",
+    "title": "Estimulación Modelo GM-222",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 315,
     "discountPrice": 299,
@@ -2392,7 +2350,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-024.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-028.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2401,7 +2359,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 123,
-    "title": "Circuitos Modelo GM-223",
+    "title": "Estimulación Modelo GM-223",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 360,
     "discountPrice": 342,
@@ -2410,7 +2368,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-032.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-036.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2419,7 +2377,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 124,
-    "title": "Circuitos Modelo GM-224",
+    "title": "Estimulación Modelo GM-224",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 405,
     "discountPrice": 385,
@@ -2428,7 +2386,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-040.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-044.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2437,7 +2395,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 125,
-    "title": "Circuitos Modelo GM-225",
+    "title": "Estimulación Modelo GM-225",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 450,
     "discountPrice": 428,
@@ -2446,7 +2404,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-048.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-052.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2455,7 +2413,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 126,
-    "title": "Circuitos Modelo GM-226",
+    "title": "Estimulación Modelo GM-226",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 180,
     "discountPrice": 171,
@@ -2464,7 +2422,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-056.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-060.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2473,7 +2431,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 127,
-    "title": "Circuitos Modelo GM-227",
+    "title": "Estimulación Modelo GM-227",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 225,
     "discountPrice": 214,
@@ -2482,7 +2440,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-064.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-068.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2491,7 +2449,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 128,
-    "title": "Circuitos Modelo GM-228",
+    "title": "Estimulación Modelo GM-228",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 270,
     "discountPrice": 257,
@@ -2500,7 +2458,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-072.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-076.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2509,7 +2467,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 129,
-    "title": "Circuitos Modelo GM-229",
+    "title": "Estimulación Modelo GM-229",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 315,
     "discountPrice": 299,
@@ -2518,7 +2476,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-080.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-084.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2527,7 +2485,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 130,
-    "title": "Circuitos Modelo GM-230",
+    "title": "Estimulación Modelo GM-230",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 360,
     "discountPrice": 342,
@@ -2536,7 +2494,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-088.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-092.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2545,7 +2503,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 131,
-    "title": "Circuitos Modelo GM-231",
+    "title": "Estimulación Modelo GM-231",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 405,
     "discountPrice": 385,
@@ -2554,7 +2512,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-096.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-100.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2563,7 +2521,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 132,
-    "title": "Circuitos Modelo GM-232",
+    "title": "Estimulación Modelo GM-232",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 450,
     "discountPrice": 428,
@@ -2572,7 +2530,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-104.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-108.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2581,7 +2539,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 133,
-    "title": "Circuitos Modelo GM-233",
+    "title": "Estimulación Modelo GM-233",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 180,
     "discountPrice": 171,
@@ -2590,7 +2548,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-112.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-116.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2599,7 +2557,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 134,
-    "title": "Circuitos Modelo GM-234",
+    "title": "Estimulación Modelo GM-234",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 225,
     "discountPrice": 214,
@@ -2608,7 +2566,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-120.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-124.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
@@ -2617,7 +2575,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
   },
   {
     "id": 135,
-    "title": "Circuitos Modelo GM-235",
+    "title": "Estimulación Modelo GM-235",
     "desc": "Circuito de estimulación sensorial y psicomotriz.",
     "price": 270,
     "discountPrice": 257,
@@ -2626,7 +2584,7 @@ export const ALL_CATALOG_PRODUCTS: Product[] = [
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-128.png",
       "/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-132.png"
     ],
-    "category": "Circuitos",
+    "category": "Estimulación",
     "priceUnit": "unidad",
     "material": "Melamina Pelikano RH 18mm & Herrajes Blum",
     "dimensions": "1.80m x 0.60m x 0.75m",
