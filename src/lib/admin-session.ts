@@ -4,7 +4,7 @@ import { ROOT_EMAIL } from './affiliate-core';
 
 export const SESSION_COOKIE = 'modulares-gm-session';
 const SESSION_MAX_AGE_MS = 1000 * 60 * 60 * 24 * 5;
-const STAFF_ROLES = ['super', 'admin', 'financial', 'sales'];
+const STAFF_ROLES = ['super', 'admin', 'financial', 'sales', 'vendedor', 'disenador', 'instalador', 'afiliado_vip', 'moderador'];
 
 const founderEmails = () =>
   [ROOT_EMAIL, 'info@modularesgm.com', ...(process.env.ADMIN_EMAILS || '').split(',')]
@@ -24,8 +24,10 @@ async function resolveAdmin(uid: string, email: string | undefined): Promise<Adm
   
   if (!mail) return null;
   const snap = await adminDb().collection('usuarios').doc(mail).get();
-  const role = String(snap.data()?.role || '').toLowerCase();
-  if (snap.exists && STAFF_ROLES.includes(role) && snap.data()?.active !== false) {
+  const data = snap.data();
+  const role = String(data?.role || data?.rol || '').toLowerCase();
+  const isActive = data?.active !== false && data?.activo !== false;
+  if (snap.exists && STAFF_ROLES.includes(role) && isActive) {
     return { uid, email: mail, role };
   }
   return null;

@@ -4,77 +4,77 @@ import { PlaceHolderImages } from './placeholder-images';
 const getImage = (id: string) => PlaceHolderImages.find(p => p.id === id)?.imageUrl || '';
 
 export const defaultServices: Service[] = [
-  { 
-    id: 1, 
-    title: 'Cocinas Integrales & Mesones de Cuarzo', 
-    desc: 'Cocinas modulares a medida con tableros hidrófugos Pelikano RH de 18mm, herrajes Blum con cierre lento e islas con cuarzo Calacatta.', 
-    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp', 
-    icon: 'Home', 
-    catalogUrl: '/cocinas' 
+  {
+    id: 1,
+    title: 'Cocinas Integrales & Mesones de Cuarzo',
+    desc: 'Cocinas modulares a medida con tableros hidrófugos Pelikano RH de 18mm, herrajes Blum con cierre lento e islas con cuarzo Calacatta.',
+    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    icon: 'Home',
+    catalogUrl: '/cocinas'
   },
-  { 
-    id: 2, 
-    title: 'Topes de Cuarzo, Granito & Dekton', 
-    desc: 'Cortes CNC computarizados de alta precisión, cascadas ingleteadas y superficies antibacterianas para mesones de cocina y baño.', 
-    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp', 
-    icon: 'Grid', 
-    catalogUrl: '/catalogo' 
+  {
+    id: 2,
+    title: 'Topes de Cuarzo, Granito & Dekton',
+    desc: 'Cortes CNC computarizados de alta precisión, cascadas ingleteadas y superficies antibacterianas para mesones de cocina y baño.',
+    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+    icon: 'Grid',
+    catalogUrl: '/catalogo'
   },
-  { 
-    id: 3, 
-    title: 'Clósets, Armarios & Walk-in Closets', 
-    desc: 'Vestidores personalizados con pantaloneras extraíbles, zapateras deslizables, iluminación LED 3000K y puertas en vidrio templado.', 
-    imgUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp', 
-    icon: 'LayoutGrid', 
-    catalogUrl: '/closets' 
+  {
+    id: 3,
+    title: 'Clósets, Armarios & Walk-in Closets',
+    desc: 'Vestidores personalizados con pantaloneras extraíbles, zapateras deslizables, iluminación LED 3000K y puertas en vidrio templado.',
+    imgUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    icon: 'LayoutGrid',
+    catalogUrl: '/closets'
   },
-  { 
-    id: 4, 
-    title: 'Vanities & Muebles de Baño', 
-    desc: 'Muebles de baño flotantes en melamina marina RH resistente a la condensación, con mesones en cuarzo y espejos táctiles retroiluminados.', 
-    imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp', 
-    icon: 'Briefcase', 
-    catalogUrl: '/muebles-bano' 
+  {
+    id: 4,
+    title: 'Vanities & Muebles de Baño',
+    desc: 'Muebles de baño flotantes en melamina marina RH resistente a la condensación, con mesones en cuarzo y espejos táctiles retroiluminados.',
+    imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
+    icon: 'Briefcase',
+    catalogUrl: '/muebles-bano'
   },
-  { 
-    id: 5, 
-    title: 'Puertas Pivotantes Monumentales', 
-    desc: 'Puertas de ingreso principal de hasta 3 metros de altura con pivotes axiales inoxidables de alto tonelaje y cerraduras inteligentes.', 
-    imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp', 
-    icon: 'Shield', 
-    catalogUrl: '/puertas' 
+  {
+    id: 5,
+    title: 'Puertas Pivotantes Monumentales',
+    desc: 'Puertas de ingreso principal de hasta 3 metros de altura con pivotes axiales inoxidables de alto tonelaje y cerraduras inteligentes.',
+    imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+    icon: 'Shield',
+    catalogUrl: '/puertas'
   },
-  { 
-    id: 6, 
-    title: 'Centros de TV & Mobiliario Gamer', 
-    desc: 'Paneles de TV flotantes con repisas retroiluminadas, ranurado acústico y organizadores de periféricos con cableado 100% oculto.', 
-    imgUrl: '/images/catalog/extracted_MUEBLES_GAMER_2/img-004.webp', 
-    icon: 'MonitorPlay', 
-    catalogUrl: '/gamer' 
+  {
+    id: 6,
+    title: 'Centros de TV & Mobiliario Gamer',
+    desc: 'Paneles de TV flotantes con repisas retroiluminadas, ranurado acústico y organizadores de periféricos con cableado 100% oculto.',
+    imgUrl: '/images/catalog/extracted_MUEBLES_GAMER_2/img-004.webp',
+    icon: 'MonitorPlay',
+    catalogUrl: '/gamer'
   },
-  { 
-    id: 7, 
-    title: 'Mobiliario Corporativo & Oficinas', 
-    desc: 'Counters de recepción monolíticos, estaciones de trabajo modulares para equipos, credenzas ejecutivas y mesas de reuniones.', 
-    imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp', 
-    icon: 'Store', 
-    catalogUrl: '/muebles-oficina' 
+  {
+    id: 7,
+    title: 'Mobiliario Corporativo & Oficinas',
+    desc: 'Counters de recepción monolíticos, estaciones de trabajo modulares para equipos, credenzas ejecutivas y mesas de reuniones.',
+    imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
+    icon: 'Store',
+    catalogUrl: '/muebles-oficina'
   },
-  { 
-    id: 8, 
-    title: 'Escritorios Estudiantiles & Ergonomía', 
-    desc: 'Estaciones de estudio y teletrabajo con tableros antirrayas de 18mm, pasacables de diseño y cajoneras móviles con cerradura.', 
-    imgUrl: '/images/catalog/extracted_estudiantiles/img-000.webp', 
-    icon: 'Palette', 
-    catalogUrl: '/escritorios' 
+  {
+    id: 8,
+    title: 'Escritorios Estudiantiles & Ergonomía',
+    desc: 'Estaciones de estudio y teletrabajo con tableros antirrayas de 18mm, pasacables de diseño y cajoneras móviles con cerradura.',
+    imgUrl: '/images/catalog/extracted_estudiantiles/img-000.webp',
+    icon: 'Palette',
+    catalogUrl: '/escritorios'
   },
-  { 
-    id: 9, 
-    title: 'Circuitos de Estimulación Infantil', 
-    desc: 'Módulos psicomotrices en madera y melamina segura, estanterías Montessori y adecuaciones para guarderías y espacios de estimulación temprana.', 
-    imgUrl: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp', 
-    icon: 'Sparkles', 
-    catalogUrl: '/store' 
+  {
+    id: 9,
+    title: 'Circuitos de Estimulación Infantil',
+    desc: 'Módulos psicomotrices en madera y melamina segura, estanterías Montessori y adecuaciones para guarderías y espacios de estimulación temprana.',
+    imgUrl: '/images/catalog/extracted_CIRCUITOS_DE_ESTIMULACION_CLIENTES_GM/img-000.webp',
+    icon: 'Sparkles',
+    catalogUrl: '/store'
   }
 ];
 
@@ -98,7 +98,7 @@ export const defaultBrands: Brand[] = [
 
 export const defaultStats: Stat[] = [
   { id: 1, value: '18+', label: 'AÑOS EXP.', icon: 'Globe' },
-  { id: 2, value: '1000+', label: 'PROYECTOS', icon: 'Home' },
+  { id: 2, value: '980+', label: 'PROYECTOS', icon: 'Home' },
   { id: 3, value: '100%', label: 'PERSONALIZADO', icon: 'Ruler' },
   { id: 4, value: 'EC', label: 'NIVEL NACIONAL', icon: 'MapPin' }
 ];

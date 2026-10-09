@@ -13,10 +13,14 @@ import {
   Search, 
   Store,
   Layers,
-  ChevronLeft
+  ChevronLeft,
+  ChevronDown,
+  FileDown
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import useEmblaCarousel from 'embla-carousel-react';
+import { generateLuxuryCatalogPdf } from '@/lib/catalog-pdf-generator';
 
 export interface CatalogRow {
   id: string;
@@ -58,6 +62,40 @@ const DESKTOP_CIRCULAR_CATEGORIES = [
 export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
   const [selectedCategory, setSelectedCategory] = useState('todos');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [pdfStatus, setPdfStatus] = useState<string | null>(null);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    dragFree: true,
+    containScroll: false,
+  });
+
+  const scrollPrev = () => emblaApi?.scrollPrev();
+  const scrollNext = () => emblaApi?.scrollNext();
+
+  const handleCategoryClick = (catId: string) => {
+    setSelectedCategory(catId);
+    if (catId !== 'todos') {
+      const el = document.getElementById(catId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const handleDownloadPdf = async () => {
+    try {
+      setIsGeneratingPdf(true);
+      await generateLuxuryCatalogPdf((msg) => setPdfStatus(msg));
+    } catch (err) {
+      console.error('Error al generar catálogo PDF:', err);
+    } finally {
+      setIsGeneratingPdf(false);
+      setPdfStatus(null);
+    }
+  };
 
   const filteredRows = useMemo(() => {
     return rows.filter((row) => {
@@ -105,6 +143,27 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                 Cada ambiente concebido con rigor planimétrico, materiales hidrófugos de alta densidad y superficies nobles.
                 Seleccione una línea para explorar todos sus modelos o filtre directamente según su requerimiento.
               </p>
+
+              {/* Botones de Acción de Autor en Hero */}
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleDownloadPdf}
+                  disabled={isGeneratingPdf}
+                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 disabled:opacity-50"
+                >
+                  <FileDown size={15} className={cn("text-primary", isGeneratingPdf && "animate-bounce")} />
+                  <span>{isGeneratingPdf ? (pdfStatus || 'Generando...') : 'Descargar Catálogo'}</span>
+                </button>
+                <Link
+                  href="/store"
+                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
+                >
+                  <Store size={15} className="text-primary" />
+                  <span>Explorar Tienda Online</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
             </div>
 
             {/* Columna Derecha: Grid 2x2 de Señales de Confianza y Calidad */}
@@ -154,87 +213,117 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
           </div>
         </header>
 
-        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Idéntico a referencia) */}
+        {/* FILTRO CIRCULAR DE CATEGORÍAS (EXCLUSIVO ESCRITORIO - Carrusel Infinito con Scroll Directo a Sección) */}
         <section aria-label="Nuestras Categorías" className="hidden md:block mb-10 py-6 px-4 rounded-3xl border border-border/60 bg-card/30 backdrop-blur-md">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold font-headline tracking-tight text-foreground">
               Nuestras Categorías
             </h2>
             <p className="text-xs text-muted-foreground mt-1">
-              Seleccione una categoría para explorar colecciones de autor y especificaciones técnicas
+              Haga clic en una categoría para explorar sus modelos y desplazarse directamente a la sección
             </p>
           </div>
 
-          <div className="relative max-w-5xl mx-auto flex items-center justify-center gap-5 sm:gap-7 flex-wrap">
-            {DESKTOP_CIRCULAR_CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className="group flex flex-col items-center gap-2.5 transition-all focus:outline-none"
-                >
-                  <div
-                    className={cn(
-                      "relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-sm group-hover:scale-105 group-hover:shadow-md",
-                      isActive
-                        ? "border-primary ring-4 ring-primary/20 scale-105 shadow-lg"
-                        : "border-border/80 group-hover:border-primary/60"
-                    )}
-                  >
-                    <Image
-                      src={cat.imgUrl}
-                      alt={cat.label}
-                      fill
-                      sizes="96px"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    {isActive && (
-                      <div className="absolute inset-0 bg-primary/10 border-2 border-primary rounded-full pointer-events-none" />
-                    )}
-                  </div>
-                  <span
-                    className={cn(
-                      "text-xs font-semibold tracking-tight transition-colors",
-                      isActive ? "text-primary font-bold" : "text-stone-700 dark:text-stone-300 group-hover:text-foreground"
-                    )}
-                  >
-                    {cat.label}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="relative max-w-5xl mx-auto px-10">
+            {/* Flecha Izquierda */}
+            <button
+              type="button"
+              onClick={scrollPrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+              aria-label="Categorías anteriores"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            {/* Viewport del Carrusel Infinito */}
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-6 sm:gap-7 items-center py-2">
+                {DESKTOP_CIRCULAR_CATEGORIES.map((cat) => {
+                  const isActive = selectedCategory === cat.id;
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => handleCategoryClick(cat.id)}
+                      className="group flex flex-col items-center gap-2.5 transition-all focus:outline-none shrink-0"
+                    >
+                      <div
+                        className={cn(
+                          "relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 transition-all duration-300 shadow-sm group-hover:scale-105 group-hover:shadow-md",
+                          isActive
+                            ? "border-primary ring-4 ring-primary/20 scale-105 shadow-lg"
+                            : "border-border/80 group-hover:border-primary/60"
+                        )}
+                      >
+                        <Image
+                          src={cat.imgUrl}
+                          alt={cat.label}
+                          fill
+                          sizes="96px"
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        {isActive && (
+                          <div className="absolute inset-0 bg-primary/10 border-2 border-primary rounded-full pointer-events-none" />
+                        )}
+                      </div>
+                      <span
+                        className={cn(
+                          "text-xs font-semibold tracking-tight transition-colors whitespace-nowrap",
+                          isActive ? "text-primary font-bold" : "text-stone-700 dark:text-stone-300 group-hover:text-foreground"
+                        )}
+                      >
+                        {cat.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Flecha Derecha */}
+            <button
+              type="button"
+              onClick={scrollNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-card/90 border border-border/80 shadow-md flex items-center justify-center text-foreground hover:bg-primary hover:text-white transition-all active:scale-95"
+              aria-label="Siguientes categorías"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
         </section>
 
-        {/* BARRA DE FILTROS EN CELULARES & BUSCADOR + TIENDA EN TODO DISPOSITIVO */}
+        {/* BARRA DE FILTROS EN CELULARES (LISTA DESPLEGABLE) & BUSCADOR + TIENDA EN TODO DISPOSITIVO */}
         <section className="mb-10 sticky top-16 z-20 py-3 bg-background/95 backdrop-blur-md border-b border-border/50">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            {/* Píldoras de Filtros en Celulares (Para no sobrecargar la pantalla chica) */}
-            <div className="md:hidden flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
-              {CATEGORY_FILTERS.map((cat) => {
-                const isActive = selectedCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all active:scale-95 ${
-                      isActive
-                        ? 'bg-foreground text-background shadow-sm'
-                        : 'bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground'
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                );
-              })}
+            {/* Lista Desplegable en Celulares (Reemplaza píldoras horizontales según solicitud estricta) */}
+            <div className="md:hidden w-full pb-1">
+              <label htmlFor="catalog-mobile-category-select" className="sr-only">Seleccionar Categoría del Catálogo</label>
+              <div className="relative">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1.5 text-primary">
+                  <Layers size={15} />
+                </div>
+                <select
+                  id="catalog-mobile-category-select"
+                  value={selectedCategory}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    handleCategoryClick(val);
+                  }}
+                  className="w-full h-11 pl-10 pr-10 text-xs font-bold rounded-full bg-card border border-border/80 text-foreground appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer"
+                >
+                  {CATEGORY_FILTERS.map((cat) => (
+                    <option key={cat.id} value={cat.id} className="bg-background text-foreground py-2 font-medium">
+                      {cat.id === 'todos' ? '📂 Todos los Catálogos' : `✨ ${cat.label}`}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
             </div>
 
-            {/* Buscador en Vivo & Botón Tienda */}
-            <div className="flex items-center gap-3 w-full lg:w-auto">
-              <div className="relative flex-1 sm:w-80">
+            {/* Buscador en Vivo & Botones de Acción (Tienda & Descargar Catálogo) */}
+            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+              <div className="relative flex-1 sm:w-72">
                 <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="text"
@@ -244,6 +333,17 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                   className="pl-9 h-10 text-xs rounded-full bg-card border-border/80 focus-visible:ring-1 focus-visible:ring-primary w-full"
                 />
               </div>
+
+              {/* Botón Descargar Catálogo (Estricto como pide el usuario) */}
+              <button
+                type="button"
+                onClick={handleDownloadPdf}
+                disabled={isGeneratingPdf}
+                className="inline-flex items-center gap-2 text-xs font-bold text-background bg-foreground hover:opacity-90 transition-all px-4 py-2.5 rounded-full shadow-sm active:scale-95 shrink-0 disabled:opacity-50"
+              >
+                <FileDown size={14} className={cn("text-primary", isGeneratingPdf && "animate-bounce")} />
+                <span>{isGeneratingPdf ? 'Generando...' : 'Descargar Catálogo'}</span>
+              </button>
 
               <Link
                 href="/store"
@@ -309,7 +409,15 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 shrink-0 self-start lg:self-center">
+                  <div className="flex flex-wrap items-center gap-2.5 shrink-0 self-start lg:self-center">
+                    <Link
+                      href={`/store?category=${encodeURIComponent(row.categoryTag || row.id)}`}
+                      className="inline-flex items-center gap-2 text-xs font-bold px-4 py-3 rounded-full border border-primary/40 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all shadow-sm active:scale-95"
+                    >
+                      <Store size={14} className="shrink-0" />
+                      <span>Ver en Tienda</span>
+                    </Link>
+
                     <Link
                       href={row.href}
                       className="inline-flex items-center gap-2 text-xs font-bold px-5 py-3 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 group"

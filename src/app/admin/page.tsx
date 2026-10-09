@@ -4,9 +4,10 @@ import { useState, useTransition } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { ArrowLeft, Eye, EyeOff, Loader2, Lock, Mail, ShieldAlert, Sparkles, CheckCircle2 } from 'lucide-react';
-import { auth } from '@/lib/firebase';
+import { signInWithEmailAndPassword, sendPasswordResetEmail, signOut, updatePassword } from 'firebase/auth';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { ArrowLeft, Eye, EyeOff, Loader2, Lock, Mail, ShieldAlert, Sparkles, CheckCircle2, KeyRound } from 'lucide-react';
+import { auth, db } from '@/lib/firebase';
 import { loginAdmin } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,12 +23,40 @@ export default function AdminLoginPage() {
   const [resetSent, setResetSent] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
 
+  // Flujo de Primer Ingreso (cédula -> cambio obligatorio)
+  const [firstLoginUser, setFirstLoginUser] = useState<{
+    nombre: string;
+    email: string;
+    user: any;
+  } | null>(null);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showNew, setShowNew] = useState(false);
+  const [changingPass, setChangingPass] = useState(false);
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     startTransition(async () => {
       try {
-        const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
+        const cleanEmail = email.trim().toLowerCase();
+        const cred = await signInWithEmailAndPassword(auth, cleanEmail, password);
+
+        // Verificar si es primer ingreso en 'usuarios'
+        try {
+          const userDocSnap = await getDoc(doc(db, 'usuarios', cleanEmail));
+          if (userDocSnap.exists() && userDocSnap.data()?.primerIngreso === true) {
+            setFirstLoginUser({
+              nombre: userDocSnap.data()?.nombre || 'Usuario',
+              email: cleanEmail,
+              user: cred.user,
+            });
+            return;
+          }
+        } catch (checkErr) {
+          console.warn('[first-login-check] Lookup skipped:', checkErr);
+        }
+
         const result = await loginAdmin(await cred.user.getIdToken());
         if ('error' in result) {
           await signOut(auth);
@@ -36,8 +65,6 @@ export default function AdminLoginPage() {
         }
         router.push('/admin/dashboard');
       } catch (err) {
-        // Solo los errores de Firebase Auth significan credenciales malas; cualquier
-        // otro fallo (p. ej. el servidor al abrir la sesión) se informa como lo que es.
         const code = (err as { code?: string })?.code ?? '';
         console.error('[admin-login]', err);
         setError(
@@ -47,6 +74,46 @@ export default function AdminLoginPage() {
         );
       }
     });
+  };
+
+  const handleFirstPasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstLoginUser) return;
+    setError('');
+
+    if (newPassword.length < 6) {
+      setError('La nueva contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError('Las contraseñas no coinciden. Por favor, verifica.');
+      return;
+    }
+
+    setChangingPass(true);
+    try {
+      await updatePassword(firstLoginUser.user, newPassword);
+      try {
+        await updateDoc(doc(db, 'usuarios', firstLoginUser.email), {
+          primerIngreso: false,
+          passwordUpdatedAt: new Date().toISOString(),
+        });
+      } catch (docErr) {
+        console.warn('[first-login-doc-update]', docErr);
+      }
+
+      const result = await loginAdmin(await firstLoginUser.user.getIdToken());
+      if ('error' in result) {
+        setError(result.error ?? 'Error al establecer sesión.');
+        setChangingPass(false);
+        return;
+      }
+      router.push('/admin/dashboard');
+    } catch (err: any) {
+      console.error('[first-login-password-change]', err);
+      setError(err.message || 'No se pudo actualizar la contraseña. Inténtalo de nuevo.');
+      setChangingPass(false);
+    }
   };
 
   const handleResetPassword = async () => {
@@ -91,7 +158,80 @@ export default function AdminLoginPage() {
         <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#0f1318]/90 p-8 sm:p-10 shadow-2xl backdrop-blur-2xl">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
-          {resetSent ? (
+          {firstLoginUser ? (
+            <div className="space-y-6 animate-in fade-in zoom-in-95 duration-500">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-inner">
+                  <KeyRound size={30} />
+                </div>
+                <h3 className="text-xl font-bold text-white font-headline">Primer Ingreso al Sistema</h3>
+                <p className="mt-2 text-xs text-zinc-400 leading-relaxed max-w-xs">
+                  Hola <strong className="text-white font-semibold">{firstLoginUser.nombre}</strong>. Has ingresado con tu cédula. Por seguridad, define una contraseña personal definitiva para activar tu cuenta.
+                </p>
+              </div>
+
+              <form onSubmit={handleFirstPasswordChange} className="space-y-4">
+                <div className="space-y-1.5">
+                  <Label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                    Nueva Contraseña
+                  </Label>
+                  <div className="relative">
+                    <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                    <Input
+                      type={showNew ? 'text' : 'password'}
+                      required
+                      minLength={6}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Mínimo 6 caracteres"
+                      className="h-13 rounded-xl border-white/10 bg-black/40 pl-11 pr-11 text-base text-white placeholder:text-zinc-600 focus-visible:border-primary/50"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNew(!showNew)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                    >
+                      {showNew ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                    Confirmar Contraseña
+                  </Label>
+                  <div className="relative">
+                    <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                    <Input
+                      type={showNew ? 'text' : 'password'}
+                      required
+                      minLength={6}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Repite la contraseña"
+                      className="h-13 rounded-xl border-white/10 bg-black/40 pl-11 text-base text-white placeholder:text-zinc-600 focus-visible:border-primary/50"
+                    />
+                  </div>
+                </div>
+
+                {error && (
+                  <div role="alert" className="flex items-start gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-3.5 text-xs text-red-200">
+                    <ShieldAlert size={16} className="text-red-400 shrink-0 mt-0.5" />
+                    <p className="leading-relaxed">{error}</p>
+                  </div>
+                )}
+
+                <Button
+                  type="submit"
+                  disabled={changingPass}
+                  className="mt-2 h-14 w-full rounded-xl bg-white text-base font-bold text-black shadow-lg hover:bg-zinc-200 transition-all active:scale-[0.98]"
+                >
+                  {changingPass ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Sparkles className="mr-2 h-5 w-5" />}
+                  {changingPass ? 'Guardando...' : 'Activar Cuenta & Acceder'}
+                </Button>
+              </form>
+            </div>
+          ) : resetSent ? (
             <div className="flex flex-col items-center py-6 text-center animate-in fade-in zoom-in-95 duration-500">
               <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
                 <CheckCircle2 size={32} />

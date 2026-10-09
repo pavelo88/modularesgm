@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, Sparkles, ShieldCheck, Truck, Wrench, ChevronRight, HelpCircle, ArrowLeft } from 'lucide-react';
+import { Search, Sparkles, ShieldCheck, Truck, Wrench, ChevronRight, ChevronDown, Layers, HelpCircle, ArrowLeft } from 'lucide-react';
 import type { Product } from '@/lib/types';
 import type { CategorySEO } from '@/lib/catalog-full';
 import { ProductCard } from '@/components/store/product-card';
@@ -211,8 +211,31 @@ export function CategoryShowcase({ config, products }: CategoryShowcaseProps) {
 
           {/* BARRA DE FILTROS & BÚSQUEDA MINIMALISTA + BOTÓN TIENDA */}
           <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8">
-            {/* Píldoras de Subcategorías */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+            {/* Lista Desplegable en Celulares (Reemplaza píldoras según estándar) */}
+            <div className="lg:hidden w-full">
+              <label htmlFor="subcategory-mobile-select" className="sr-only">Seleccionar Línea o Tipología</label>
+              <div className="relative">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1.5 text-primary">
+                  <Layers size={15} />
+                </div>
+                <select
+                  id="subcategory-mobile-select"
+                  value={selectedSubcategory}
+                  onChange={(e) => setSelectedSubcategory(e.target.value)}
+                  className="w-full h-11 pl-10 pr-10 text-xs font-bold rounded-full bg-card border border-border/80 text-foreground appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer"
+                >
+                  {subcategories.map(sub => (
+                    <option key={sub} value={sub} className="bg-background text-foreground py-2 font-medium">
+                      {sub === 'Todos' ? `📂 Todos los modelos (${config.categoryName})` : `✨ ${sub}`}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+            </div>
+
+            {/* Píldoras de Subcategorías en Pantallas Grandes */}
+            <div className="hidden lg:flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
               {subcategories.map(sub => (
                 <button
                   key={sub}
