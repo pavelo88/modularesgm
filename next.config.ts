@@ -94,6 +94,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: '/banos', destination: '/muebles-bano', permanent: true },
+      { source: '/ba%C3%B1os', destination: '/muebles-bano', permanent: true },
+      { source: '/bano', destination: '/muebles-bano', permanent: true },
+      { source: '/cocina', destination: '/cocinas', permanent: true },
+      { source: '/closet', destination: '/closets', permanent: true },
+      { source: '/oficina', destination: '/muebles-oficina', permanent: true },
+      { source: '/puerta', destination: '/puertas', permanent: true },
+      { source: '/escritorio', destination: '/escritorios', permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

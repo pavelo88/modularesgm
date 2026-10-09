@@ -150,7 +150,45 @@ export async function handleCheckout(
   }
 }
 
-export async function handleSendChatMessage(userMessage: string, siteContent: SiteContent, history: any[] = []) {
+function nativeSalesAdvisorResponse(message: string, siteContent: SiteContent): string {
+  const q = message.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  if (q.includes('cocina') || q.includes('meson') || q.includes('cuarzo') || q.includes('isla')) {
+    return '¡Hola! Con mucho gusto te asesoro sobre nuestras **Cocinas Integrales de Alta Gama** 🍳. Fabricamos a medida con tableros Pelikano RH de 18mm (100% resistentes a la humedad y vapor), herrajes alemanes Blum con cierre amortiguado y mesones en cuarzo Calacatta, Silestone o granito natural.\n\nPuedes explorar nuestros diseños y modelos destacados en nuestro [Catálogo de Cocinas](/cocinas).\n\n¿Qué tipo de distribución tienes en mente (en L, lineal, con isla central)? Déjanos tu número de WhatsApp para coordinar una visita técnica y render 3D sin costo en Quito y valles.';
+  }
+
+  if (q.includes('closet') || q.includes('vestidor') || q.includes('ropa') || q.includes('armario')) {
+    return '¡Excelente! Nuestros **Clósets y Walk-in Closets** 🚪 son fabricados a medida para aprovechar al máximo cada espacio. Incluyen iluminación LED integrada, pantaloneros extraíbles, zapateras deslizables y frentes en vidrio templado o melamina Pelikano RH de 18mm.\n\nPuedes ver fotos reales y proyectos en nuestro [Catálogo de Clósets](/closets).\n\n¿De cuántos metros de ancho dispones para tu clóset? Déjanos tu WhatsApp y te enviamos una cotización preliminar de inmediato.';
+  }
+
+  if (q.includes('bano') || q.includes('vanity') || q.includes('lavamanos')) {
+    return 'Nuestros **Muebles de Baño y Vanities Flotantes** 🚿 combinan tableros marinos RH antihumedad con elegantes mesones de cuarzo antibacterial y espejos con iluminación LED táctil.\n\nPuedes conocer nuestras colecciones en el [Catálogo de Muebles de Baño](/muebles-bano).\n\n¿Deseas que un diseñador te visite en obra para tomar medidas exactas? Déjanos tu teléfono para coordinar.';
+  }
+
+  if (q.includes('precio') || q.includes('costo') || q.includes('cuanto') || q.includes('cotiz')) {
+    return 'En **Modulares GM** fabricamos 100% a medida. Las cocinas modulares inician desde **$220 por metro lineal** en melamina Pelikano RH y los mesones de cuarzo desde **$140 el metro lineal**. Puedes revisar la lista detallada en nuestra página de [Precios y Cotizaciones](/precios) o visitar la [Tienda Oficial](/store).\n\nSi nos dejas tu número de WhatsApp y las dimensiones aproximadas, un arquitecto te contacta en minutos para cotizarte sin compromiso.';
+  }
+
+  if (q.includes('escritorio') || q.includes('oficina') || q.includes('estudio') || q.includes('counter')) {
+    return 'Diseñamos **Escritorios Ergonómicos y Mobiliario Corporativo** 💻 con melamina de alta densidad, pasacables integrados y cajoneras con cerradura. Ideales para teletrabajo, estudios o counters de recepción ejecutivos.\n\nExplora los modelos en nuestro [Catálogo de Escritorios](/escritorios) o [Mobiliario de Oficina](/muebles-oficina).\n\n¿Buscas para hogar o para empresa? Déjanos tus datos para brindarte asesoría.';
+  }
+
+  if (q.includes('puerta') || q.includes('pivotante')) {
+    return 'Fabricamos **Puertas Pivotantes Monumentales** 🚪 de hasta 3 metros de altura con pivote axial y núcleo aislante, además de puertas de interior con marcos envolventes en acabado madera noble o lacado.\n\nPuedes ver nuestros modelos en el [Catálogo de Puertas](/puertas).\n\n¿Para qué tipo de entrada la necesitas? Déjanos tu contacto para asesorarte.';
+  }
+
+  if (q.includes('afiliado') || q.includes('trabaj') || q.includes('comision') || q.includes('arquitecto')) {
+    return '¡Bienvenido! En nuestro **Programa de Afiliados GM** puedes ganar entre el 5% y 10% de comisión directa por cada proyecto cerrado con tu recomendación. Además tus clientes reciben un 5% de descuento.\n\nPuedes registrarte gratis en [modularesgm.com/afiliados](/afiliados) o ingresar a tu panel en [Acceso de Afiliados](/afiliados/acceso).';
+  }
+
+  return '¡Hola! Soy el ✨ **Asesor de Ventas y Diseño de Modulares GM**. Con más de 12 años de experiencia en Quito, fabricamos cocinas integrales, clósets, muebles de baño, escritorios y puertas a medida con tableros Pelikano RH de 18mm y garantía oficial de 3 a 5 años.\n\nPuedes revisar todos nuestros espacios en el [Índice de Catálogos](/catalogo) o indicarme qué ambiente te gustaría renovar para guiarte paso a paso.';
+}
+
+export async function handleSendChatMessage(
+  userMessage: string,
+  siteContent: SiteContent,
+  history: any[] = []
+): Promise<{ success: true; data: string } | { success: false; error: string }> {
   try {
     const servicesContext = siteContent.services.map(s => s.title).join(', ');
     const productsContext = siteContent.products.map(p => `${p.title} ($${p.price})`).join(', ');
@@ -177,8 +215,27 @@ export async function handleSendChatMessage(userMessage: string, siteContent: Si
 
     return { success: true, data: response.botResponse };
   } catch (error) {
-    console.error(error);
-    return { success: false, error: 'AI service is unavailable.' };
+    console.warn('[AI fallback activation]:', error);
+    // Asesor nativo inteligente en caso de que el proveedor de IA esté desconectado
+    const botResponse = nativeSalesAdvisorResponse(userMessage, siteContent);
+
+    // Detección básica de teléfono/lead en el mensaje
+    const phoneMatch = userMessage.match(/(\+?593|0)[\d\s-]{8,12}/);
+    if (phoneMatch) {
+      try {
+        await adminDb().collection('leads').add({
+          name: 'Cliente Chat Web',
+          email: 'contacto-web@modularesgm.com',
+          phone: phoneMatch[0].replace(/\s+/g, ''),
+          message: `Consulta: ${userMessage}`,
+          address: 'Quito / Ecuador',
+          status: 'Nuevo (Chat)',
+          createdAt: Date.now(),
+        });
+      } catch {}
+    }
+
+    return { success: true, data: botResponse };
   }
 }
 

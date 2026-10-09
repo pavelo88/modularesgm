@@ -39,7 +39,7 @@ export function HomeSeoContent() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20" aria-labelledby="proceso-title">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-secondary">Nuestro proceso</p>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-400">Nuestro proceso</p>
             <h2 id="proceso-title" className="font-headline text-3xl font-bold md:text-4xl">Cómo fabricamos tu cocina, clósets y muebles a medida</h2>
             <p className="mt-5 text-muted-foreground">
               Modulares GM es una empresa de Quito especializada en cocinas modulares, mesones de cuarzo y granito, clósets, vestidores, muebles de baño y mobiliario comercial. Cada proyecto se diseña, fabrica e instala con un proceso claro, para que sepas qué esperar en cada etapa.
@@ -71,7 +71,7 @@ export function HomeSeoContent() {
               <details key={f.q} className="group p-5 [&_summary::-webkit-details-marker]:hidden">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
                   {f.q}
-                  <span className="text-secondary transition-transform group-open:rotate-45" aria-hidden>+</span>
+                  <span className="text-primary transition-transform group-open:rotate-45" aria-hidden>+</span>
                 </summary>
                 <p className="mt-3 text-sm text-muted-foreground">{f.a}</p>
               </details>

@@ -7,8 +7,7 @@ import { Footer } from '@/components/layout/footer';
 import { TopBar } from '@/components/layout/top-bar';
 import { AffiliateProvider } from '@/context/affiliate-provider';
 import { BackgroundDecor, HeroBackground } from '@/components/shared/background-decor';
-import { WhatsAppFAB } from '@/components/shared/whatsapp-fab';
-import { ChatbotWidget } from '@/components/shared/chatbot/chatbot-widget';
+import { ConciergeFAB } from '@/components/shared/concierge-fab';
 import type { SiteContent } from '@/lib/types';
 import { SiteContentContext } from '@/context/site-content-provider';
 import { db } from '@/lib/firebase';
@@ -116,8 +115,7 @@ export function PublicLayoutClient({
           whatsappNumber={siteContent.whatsappNumber}
           socialUrls={siteContent.socialUrls}
         />
-        <WhatsAppFAB phoneNumber={siteContent.whatsappNumber} />
-        {siteContent && <ChatbotWidget siteContent={siteContent} />}
+        {siteContent && <ConciergeFAB siteContent={siteContent} />}
       </div>
      </AffiliateProvider>
     </SiteContentContext.Provider>

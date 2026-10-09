@@ -91,7 +91,7 @@ export default function PricesPage() {
         <nav aria-label="Breadcrumb" className="mb-6 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-primary">Inicio</Link> <span aria-hidden>/</span> <span>Precios</span>
         </nav>
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-secondary">Precios de referencia 2026</p>
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Precios de referencia 2026</p>
         <h1 id="precios-title" className="font-headline text-4xl font-bold leading-tight md:text-5xl">
           ¿Cuánto cuesta una cocina modular en Quito?
         </h1>
@@ -166,7 +166,7 @@ export default function PricesPage() {
             <details key={f.q} className="group p-5 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
                 {f.q}
-                <span className="text-secondary transition-transform group-open:rotate-45" aria-hidden>+</span>
+                <span className="text-primary transition-transform group-open:rotate-45" aria-hidden>+</span>
               </summary>
               <p className="mt-3 text-sm text-muted-foreground">{f.a}</p>
             </details>

@@ -50,7 +50,7 @@ export function ChatWindow({
         siteContent,
         history
       );
-      if (result.success && result.data) {
+      if (result.success) {
         setMessages((prev) => [...prev, { role: 'bot', text: result.data }]);
       } else {
         toast({

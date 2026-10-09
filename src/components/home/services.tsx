@@ -30,10 +30,10 @@ export function Services({ services }: { services: Service[] }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#19242D] via-[#19242D]/40 to-transparent"></div>
       <CardContent className="relative z-10 p-6 h-full flex flex-col justify-end">
-        <div className="w-12 h-12 rounded-lg bg-white/10 backdrop-blur-md shadow-md border border-secondary/50 flex items-center justify-center mb-4 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+        <div className="w-12 h-12 rounded-lg bg-white/10 backdrop-blur-md shadow-md border border-amber-500/50 flex items-center justify-center mb-4 text-amber-400 group-hover:bg-primary group-hover:text-white transition-colors">
           {getIconComponent(service.icon as IconName, { size: 24 })}
         </div>
-        <h3 className='font-bold mb-2 group-hover:text-secondary transition-colors text-[#F5F1E5] text-xl font-headline'>
+        <h3 className='font-bold mb-2 group-hover:text-amber-400 transition-colors text-[#F5F1E5] text-xl font-headline'>
           {service.title}
         </h3>
         <p className="text-[#F5F1E5]/70 text-sm font-headline line-clamp-3 transition-colors">

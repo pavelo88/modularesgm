@@ -44,7 +44,7 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:px-10">
         <div className="lg:col-span-6">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md">
-            <Sparkles size={14} className="text-secondary" /> Programa de afiliados
+            <Sparkles size={14} className="text-amber-400" /> Programa de afiliados
           </p>
           <h1 className="font-headline text-4xl font-bold leading-[1.06] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] sm:text-5xl xl:text-6xl">
             Trabaja con Modulares GM y gana comisiones por cada venta
@@ -55,7 +55,7 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/afiliados/acceso?tab=registro"
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active-press"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-amber-400 px-8 text-base font-bold text-stone-950 shadow-[0_0_35px_rgba(251,191,36,0.35)] transition hover:bg-amber-300 active-press"
             >
               Quiero ser afiliado <ArrowRight size={18} />
             </Link>

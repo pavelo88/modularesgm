@@ -25,7 +25,7 @@ export function ChatbotWidget({ siteContent }: { siteContent: SiteContent }) {
         )}
         aria-label={isChatOpen ? 'Close AI Assistant' : 'Open AI Assistant'}
       >
-        <Sparkles className="text-secondary" size={24} />
+        <Sparkles className="text-amber-400" size={24} />
         <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 font-bold text-sm hidden md:inline-block text-background">
           Asesor IA
         </span>

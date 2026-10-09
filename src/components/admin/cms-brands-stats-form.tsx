@@ -187,7 +187,7 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
               {siteContent.stats.map(stat => (
                 <div key={stat.id} className="p-4 rounded-xl border bg-muted/20 flex flex-col gap-3">
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
                         {getIconComponent(stat.icon as any, { size: 20 })}
                     </div>
                     <Button variant="ghost" size="icon" className="text-destructive h-8 w-8" onClick={() => handleDeleteItem('stats', stat.id)}>

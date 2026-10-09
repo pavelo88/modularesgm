@@ -116,7 +116,7 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
           <div className="lg:col-span-6">
             <p className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:text-xs">
-              <Sparkles size={14} className="shrink-0 text-secondary" />
+              <Sparkles size={14} className="shrink-0 text-amber-400" />
               <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
             </p>
 
@@ -125,12 +125,12 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
             </h1>
 
             <div key={slide.id} className="mt-5 animate-in fade-in slide-in-from-bottom-2 duration-700">
-              <p className="font-headline text-xl font-semibold text-secondary sm:text-2xl">{slide.title}</p>
+              <p className="font-headline text-xl font-semibold text-amber-400 sm:text-2xl">{slide.title}</p>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base">{slide.description || heroSubtitle}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {slide.tags.map((tag, i) => (
                   <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className="animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md sm:text-xs">
-                    <CheckCircle2 size={12} className="text-secondary" /> {tag}
+                    <CheckCircle2 size={12} className="text-amber-400" /> {tag}
                   </li>
                 ))}
               </ul>
@@ -139,7 +139,7 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-secondary px-8 text-base font-bold text-secondary-foreground shadow-[0_0_40px_hsl(var(--secondary)/0.45)] transition hover:brightness-110 active-press"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press"
               >
                 {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
               </Link>
@@ -164,7 +164,7 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
         <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-white/10 sm:grid-cols-4 sm:divide-x">
           {(stats || []).map((stat) => (
             <div key={stat.id} className="flex flex-col items-center justify-center px-4 py-4 text-center sm:h-[91px]">
-              <dd className="order-1 font-sans text-2xl font-bold leading-none text-secondary sm:text-3xl">
+              <dd className="order-1 font-sans text-2xl font-bold leading-none text-amber-400 sm:text-3xl">
                 <AnimatedCounter value={stat.value} />
               </dd>
               <dt className="order-2 mt-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-400 sm:text-xs">{stat.label}</dt>

@@ -96,7 +96,7 @@ export function CatalogPage({ title, description, products, backHref = '/catalog
 
                 {/* Product Info */}
                 <div className="p-4">
-                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-1">{product.sku}</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-1">{product.sku}</p>
                   <h3 className="font-headline font-bold text-sm leading-tight mb-1">{product.nombre}</h3>
                   {product.descripcion && (
                     <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{product.descripcion}</p>
@@ -112,7 +112,7 @@ export function CatalogPage({ title, description, products, backHref = '/catalog
                     <div className="flex items-baseline gap-2 mb-4">
                       {product.precioDescuento ? (
                         <>
-                          <span className="text-lg font-bold text-secondary">${product.precioDescuento}</span>
+                          <span className="text-lg font-bold text-primary">${product.precioDescuento}</span>
                           <span className="text-sm line-through text-muted-foreground">${product.precio}</span>
                         </>
                       ) : (

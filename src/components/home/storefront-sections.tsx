@@ -22,7 +22,7 @@ export function ValueProps() {
       <div className="max-w-7xl mx-auto px-6 py-10 grid sm:grid-cols-3 gap-8">
         {valueProps.map((v) => (
           <div key={v.title} className="flex items-center gap-4">
-            <span className="w-12 h-12 shrink-0 rounded-2xl bg-secondary/15 text-secondary border border-secondary/25 grid place-items-center">
+            <span className="w-12 h-12 shrink-0 rounded-2xl bg-primary/10 text-primary border border-primary/20 grid place-items-center">
               <v.icon size={22} />
             </span>
             <div>
@@ -103,7 +103,7 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
     <section id="catalogo" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-28" aria-labelledby="catalogo-title">
       <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/30 bg-secondary/10 text-secondary text-[11px] font-semibold uppercase tracking-[0.2em] mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
             <Sparkles size={13} />
             <span>Líneas Oficiales GM</span>
           </div>
@@ -124,16 +124,16 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
       </div>
 
       {/* 2 Carruseles Horizontales en celulares / Grilla arquitectónica en escritorio */}
-      <div className="space-y-10">
+      <div className="space-y-12">
         {/* Fila 1: Líneas Residenciales */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">Líneas Residenciales</h3>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">Líneas Residenciales</h3>
             <span className="md:hidden text-[11px] font-semibold text-stone-500 flex items-center gap-1">
               Deslizar ➔
             </span>
           </div>
-          <div className="flex md:grid md:grid-cols-3 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+          <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
             {row1.map((cat) => (
               <Link
                 key={cat.href}
@@ -172,7 +172,7 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
                   </p>
                   <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
                     <span className="uppercase tracking-wider">Explorar Catálogo</span>
-                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-secondary" />
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-primary" />
                   </div>
                 </div>
               </Link>
@@ -183,12 +183,12 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
         {/* Fila 2: Líneas Especializadas & Corporativas */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">Líneas Especializadas & Corporativas</h3>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">Líneas Especializadas & Corporativas</h3>
             <span className="md:hidden text-[11px] font-semibold text-stone-500 flex items-center gap-1">
               Deslizar ➔
             </span>
           </div>
-          <div className="flex md:grid md:grid-cols-4 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+          <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
             {row2.map((cat) => (
               <Link
                 key={cat.href}
@@ -227,7 +227,7 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
                   </p>
                   <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
                     <span className="uppercase tracking-wider">Explorar Catálogo</span>
-                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-secondary" />
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-primary" />
                   </div>
                 </div>
               </Link>
@@ -246,7 +246,7 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/60">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/30 bg-secondary/10 text-secondary text-[11px] font-semibold uppercase tracking-[0.2em] mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-2">
               <Sparkles size={13} />
               <span>Proyectos de Autor</span>
             </div>
@@ -257,12 +257,12 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
               Deslice para explorar ángulos fotográficos reales directamente en cada tarjeta.
             </p>
           </div>
-          <Button asChild variant="outline" className="rounded-full border-border/60 hover:border-secondary text-xs font-semibold px-5">
+          <Button asChild variant="outline" className="rounded-full border-border/60 hover:border-primary text-xs font-semibold px-5">
             <Link href="/store">Explorar Tienda Completa</Link>
           </Button>
         </div>
 
-        <CardSlider label="Productos destacados" slideClassName="basis-[75%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+        <CardSlider label="Productos destacados" slideClassName="basis-[85%] sm:basis-1/2 lg:basis-1/3">
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
@@ -345,7 +345,7 @@ export function AffiliateBand() {
                   </div>
 
                   <div className="absolute bottom-5 left-5 right-5 z-20 text-white">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary block mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300 block mb-1">
                       Línea Destacada #{idx + 1}
                     </span>
                     <h3 className="text-xl font-headline font-normal tracking-tight leading-snug">
@@ -366,7 +366,7 @@ export function AffiliateBand() {
                   key={idx}
                   onClick={() => setActiveCategoryIdx(idx)}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === activeCategoryIdx ? 'w-6 bg-secondary' : 'w-2 bg-stone-300 dark:bg-stone-700'
+                    idx === activeCategoryIdx ? 'w-6 bg-primary' : 'w-2 bg-stone-300 dark:bg-stone-700'
                   }`}
                   aria-label={`Ir a diapositiva ${idx + 1}`}
                 />
@@ -381,7 +381,7 @@ export function AffiliateBand() {
                 <span className="text-xs font-mono tracking-[0.25em] uppercase text-stone-500 dark:text-stone-400">
                   MODULARES GM · COCINAS · CLÓSETS · MUEBLES A MEDIDA
                 </span>
-                <span className="h-px flex-1 max-w-[60px] bg-secondary/40" />
+                <span className="h-px flex-1 max-w-[60px] bg-primary/40" />
               </div>
 
               <h2 id="afiliados-band-title" className="font-headline text-4xl lg:text-5xl font-normal text-stone-900 dark:text-stone-100 mb-4 leading-[1.12]">
@@ -394,7 +394,7 @@ export function AffiliateBand() {
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-4">
-                  <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-stone-100 dark:text-secondary font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                  <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     1
                   </span>
                   <div>
@@ -404,7 +404,7 @@ export function AffiliateBand() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-stone-100 dark:text-secondary font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                  <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     2
                   </span>
                   <div>
@@ -414,7 +414,7 @@ export function AffiliateBand() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-stone-100 dark:text-secondary font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                  <span className="h-8 w-8 rounded-full bg-stone-900 dark:bg-stone-800 text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                     3
                   </span>
                   <div>

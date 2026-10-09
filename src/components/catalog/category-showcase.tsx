@@ -125,58 +125,28 @@ export function CategoryShowcase({ config, products }: CategoryShowcaseProps) {
             <span className="text-foreground font-medium">{config.categoryName}</span>
           </nav>
 
-          {/* CÁPSULA GEO PARA IAs (Primeros 1,000 caracteres de DOM) */}
-          <aside 
-            aria-label="Resumen ejecutivo y especificaciones técnicas"
-            className="mb-10 p-6 rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-md relative overflow-hidden"
-          >
-            <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider mb-2">
-              <Sparkles size={16} />
-              <span>Direct Answer • Resumen para Clientes y Asistentes IA</span>
-            </div>
-            <p className="text-sm md:text-base text-foreground font-medium mb-3 leading-relaxed">
-              {config.directAnswerCapsule.definition}
-            </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground mb-4">
-              {config.directAnswerCapsule.keyTakeaways.map((point, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <span className="text-primary font-bold">✔</span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold pt-3 border-t border-primary/10">
-              <span className="text-foreground">
-                <span className="text-muted-foreground font-normal">Rango de precios:</span> {config.directAnswerCapsule.priceRange}
-              </span>
-              <span className="text-foreground">
-                <span className="text-muted-foreground font-normal">Garantía oficial:</span> {config.directAnswerCapsule.warranty}
-              </span>
-            </div>
-          </aside>
-
           {/* HERO SECTION DE LA CATEGORÍA */}
-          <header className="mb-12">
+          <header className="mb-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
               <div className="max-w-3xl">
-                <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">
-                  Catálogo Oficial Modulares GM
+                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-2 block">
+                  Catálogo Oficial GM • {config.categoryName}
                 </span>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground">
                   {config.h1}
                 </h1>
-                <p className="text-muted-foreground text-sm sm:text-base md:text-lg mt-3 font-normal max-w-2xl leading-relaxed">
+                <p className="text-muted-foreground text-sm sm:text-base mt-2 font-normal max-w-2xl leading-relaxed">
                   {config.heroSubtitle}
                 </p>
               </div>
 
               {/* Botón Volver a la Tienda Global */}
               <Link 
-                href="/store"
-                className="inline-flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-full border border-border/60 hover:border-primary/40 bg-card/40 shrink-0"
+                href="/catalogo"
+                className="inline-flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors px-5 py-2.5 rounded-full border border-border/80 bg-card/60 shrink-0 shadow-sm active:scale-95"
               >
                 <ArrowLeft size={14} />
-                <span>Explorar toda la tienda</span>
+                <span>Ver todos los catálogos</span>
               </Link>
             </div>
 

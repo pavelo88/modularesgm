@@ -69,60 +69,26 @@ export default function StorePage() {
           <span className="text-foreground font-medium">Tienda Oficial</span>
         </nav>
 
-        {/* CÁPSULA GEO DIRECT ANSWER (Primeros 1,000 caracteres de DOM) */}
-        <aside 
-          aria-label="Resumen ejecutivo y especificaciones técnicas"
-          className="mb-8 p-5 sm:p-6 rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-md relative overflow-hidden"
-        >
-          <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider mb-2">
-            <Sparkles size={15} />
-            <span>Direct Answer • Catálogo Oficial de Modulares GM</span>
+        {/* HEADER EDITORIAL MINIMALISTA DE LA TIENDA */}
+        <header className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-border/50">
+          <div>
+            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-1 block">
+              Catálogo Oficial GM • Fabricación de Autor
+            </span>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-bold tracking-tight text-foreground">
+              Tienda & Catálogo de Mobiliario
+            </h1>
+            <p className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-xl font-normal leading-relaxed">
+              Módulos listos para cotizar o comprar directamente. Melamina Pelikano RH 18mm, herrajes Blum y mesones de cuarzo.
+            </p>
           </div>
-          <p className="text-sm md:text-base text-foreground font-medium mb-3 leading-relaxed">
-            Mobiliario modular a medida para residencias, oficinas y proyectos comerciales en Ecuador. Fabricación con tableros Pelikano RH de 18mm resistentes a la humedad, herrajes europeos con cierre amortiguado y mesones en cuarzo y granito natural.
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs text-muted-foreground">
-            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Tableros RH 18mm hidrófugos</li>
-            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Herrajes Blum / Häfele con cierre lento</li>
-            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Garantía oficial de 3 a 5 años</li>
-            <li className="flex items-center gap-1.5"><span className="text-primary font-bold">✔</span> Envíos e instalación en Ecuador</li>
-          </ul>
-        </aside>
-
-        {/* HERO PRINCIPAL DE LA TIENDA */}
-        <header className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
-            <div className="max-w-3xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">
-                Catálogo General • Colección 2026
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground">
-                Mobiliario Modular de <span className="text-primary">Alta Gama</span>
-              </h1>
-              <p className="text-muted-foreground text-sm sm:text-base md:text-lg mt-3 font-normal max-w-2xl leading-relaxed">
-                Diseño contemporáneo, tableros hidrófugos de 18mm y herrajes con cierre suave. Explora piezas listas para instalar o cotiza tu proyecto a medida.
-              </p>
-            </div>
-          </div>
-
-          {/* Señales de Confianza Luxury */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6">
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-              <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
-              <span className="font-medium text-foreground">Garantía 3 a 5 años</span>
-            </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-              <Truck size={18} className="text-primary shrink-0" />
-              <span className="font-medium text-foreground">Envíos a todo Ecuador</span>
-            </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-              <Wrench size={18} className="text-amber-500 shrink-0" />
-              <span className="font-medium text-foreground">Instalación en Quito</span>
-            </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-card/40 border border-border/40 text-xs">
-              <Sparkles size={18} className="text-violet-500 shrink-0" />
-              <span className="font-medium text-foreground">Melamina Pelikano 18mm</span>
-            </div>
+          <div className="flex items-center gap-2 text-xs font-medium">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px]">
+              <ShieldCheck size={13} /> Garantía 3 a 5 años
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-[11px]">
+              <Truck size={13} /> Envíos Ecuador
+            </span>
           </div>
         </header>
 

@@ -55,10 +55,10 @@ export function TopBar() {
         <div className="hidden lg:flex items-center gap-3 shrink-0 text-stone-400">
           <a
             href={`tel:${SITE.phoneIntl}`}
-            className="flex items-center gap-1.5 hover:text-secondary transition-colors"
+            className="flex items-center gap-1.5 hover:text-amber-300 transition-colors"
             title="Línea directa de atención"
           >
-            <Phone size={12} className="text-secondary" />
+            <Phone size={12} className="text-amber-400" />
             <span className="tracking-wider">{formatPhone(SITE.phone)}</span>
           </a>
           <span className="text-stone-700">|</span>
@@ -66,9 +66,9 @@ export function TopBar() {
             href={`https://wa.me/${SITE.phoneIntl.replace('+', '')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-secondary transition-colors"
+            className="flex items-center gap-1 hover:text-emerald-300 transition-colors"
           >
-            <MessageCircle size={12} className="text-secondary" />
+            <MessageCircle size={12} className="text-emerald-400" />
             <span>WhatsApp</span>
           </a>
         </div>
@@ -85,11 +85,11 @@ export function TopBar() {
               <span key={`${item.id}-${idx}`} className="inline-flex items-center gap-3 shrink-0 px-4">
                 <Link
                   href={item.href || '#'}
-                  className="font-medium tracking-wide transition-all duration-200 hover:text-secondary hover:underline underline-offset-4 flex items-center gap-1.5 text-stone-200 hover:text-white"
+                  className="font-medium tracking-wide transition-all duration-200 hover:text-white hover:underline underline-offset-4 flex items-center gap-1.5 text-stone-200"
                 >
                   <span>{item.text}</span>
                 </Link>
-                <span className="text-secondary/70 text-[9px] select-none" aria-hidden="true">
+                <span className="text-amber-400/80 text-[9px] select-none" aria-hidden="true">
                   ✦
                 </span>
               </span>
@@ -100,7 +100,7 @@ export function TopBar() {
         {/* Lado derecho: Código de afiliado activo o Redes Sociales */}
         <div className="flex items-center gap-3 shrink-0">
           {code ? (
-            <div className="flex items-center gap-1.5 bg-secondary/15 text-secondary border border-secondary/30 px-2 py-0.5 rounded-full font-medium text-[10px] sm:text-[11px] animate-pulse">
+            <div className="flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full font-medium text-[10px] sm:text-[11px] animate-pulse">
               <BadgePercent size={12} className="shrink-0" />
               <span className="truncate max-w-[130px] sm:max-w-none">
                 {code}: <strong>{discountPercent}% OFF</strong>
@@ -110,7 +110,7 @@ export function TopBar() {
                 type="button"
                 onClick={clearCode}
                 aria-label="Quitar código"
-                className="opacity-70 hover:opacity-100 transition-opacity ml-0.5"
+                className="opacity-70 hover:opacity-100 transition-opacity ml-0.5 text-stone-300 hover:text-white"
               >
                 <X size={12} />
               </button>
@@ -125,7 +125,7 @@ export function TopBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="hover:text-secondary transition-colors"
+                className="hover:text-white transition-colors"
               >
                 <Facebook size={13} />
               </a>
@@ -134,7 +134,7 @@ export function TopBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="hover:text-secondary transition-colors"
+                className="hover:text-white transition-colors"
               >
                 <Instagram size={13} />
               </a>

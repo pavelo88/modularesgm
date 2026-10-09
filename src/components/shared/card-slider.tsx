@@ -36,8 +36,8 @@ export function CardSlider({
   useEffect(() => {
     if (!autoplay) return;
     const t = setTimeout(
-      () => setPlugins([Autoplay({ delay: 4500, stopOnInteraction: true, stopOnMouseEnter: true })]),
-      6000
+      () => setPlugins([Autoplay({ delay: 3500, stopOnInteraction: false, stopOnMouseEnter: true })]),
+      800
     );
     return () => clearTimeout(t);
   }, [autoplay]);
@@ -77,7 +77,7 @@ export function CardSlider({
               type="button"
               tabIndex={-1}
               onClick={() => emblaApi?.scrollTo(i)}
-              className={cn('h-1.5 rounded-full transition-all duration-300', i === selected ? 'w-8 bg-secondary' : 'w-3 bg-foreground/20')}
+              className={cn('h-1.5 rounded-full transition-all duration-300', i === selected ? 'w-8 bg-primary shadow-sm' : 'w-3 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400')}
             />
           ))}
         </div>
@@ -86,7 +86,7 @@ export function CardSlider({
             type="button"
             onClick={() => emblaApi?.scrollPrev()}
             aria-label="Anterior"
-            className="grid h-11 w-11 place-items-center rounded-xl border border-foreground/10 bg-background/70 backdrop-blur-md transition hover:bg-secondary hover:text-secondary-foreground active-press"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-stone-300 dark:border-stone-700 bg-background/80 text-foreground backdrop-blur-md transition hover:bg-primary hover:text-white hover:border-primary active:scale-95 shadow-sm"
           >
             <ChevronLeft size={20} />
           </button>
@@ -94,7 +94,7 @@ export function CardSlider({
             type="button"
             onClick={() => emblaApi?.scrollNext()}
             aria-label="Siguiente"
-            className="grid h-11 w-11 place-items-center rounded-xl border border-foreground/10 bg-background/70 backdrop-blur-md transition hover:bg-secondary hover:text-secondary-foreground active-press"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-stone-300 dark:border-stone-700 bg-background/80 text-foreground backdrop-blur-md transition hover:bg-primary hover:text-white hover:border-primary active:scale-95 shadow-sm"
           >
             <ChevronRight size={20} />
           </button>
@@ -138,13 +138,13 @@ export function MediaCard({ image, title, eyebrow, description, href, cta = 'Ver
           {eyebrow}
         </span>
       )}
-      <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-md transition-all group-hover:bg-secondary group-hover:opacity-100">
+      <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-md transition-all group-hover:bg-primary group-hover:text-primary-foreground group-hover:opacity-100">
         <ArrowUpRight size={18} />
       </span>
       <div className="absolute inset-x-0 bottom-0 p-5 text-white">
         <p className="font-headline text-xl font-bold leading-tight">{title}</p>
         {description && <p className="mt-2 line-clamp-2 text-sm text-white/75">{description}</p>}
-        <p className="mt-3 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-secondary">
+        <p className="mt-3 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-amber-400">
           {cta}
         </p>
       </div>

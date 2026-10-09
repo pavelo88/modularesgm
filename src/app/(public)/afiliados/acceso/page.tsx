@@ -472,7 +472,7 @@ function AffiliatesAuthContent() {
               </div>
 
               <div className="flex items-start gap-3.5 p-3.5 rounded-2xl border border-border/70 bg-card/60 backdrop-blur-md">
-                <div className="h-9 w-9 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center shrink-0 mt-0.5">
+                <div className="h-9 w-9 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                   <ShieldCheck size={18} />
                 </div>
                 <div>

@@ -221,7 +221,7 @@ export function LeadsManager() {
                       
                       <div className="space-y-4">
                         <div className="flex justify-between items-center border-b pb-2">
-                          <h4 className="font-bold text-sm flex items-center gap-2"><FileText size={16} className="text-secondary"/> Propuesta Formal</h4>
+                          <h4 className="font-bold text-sm flex items-center gap-2"><FileText size={16} className="text-primary"/> Propuesta Formal</h4>
                           <Button size="sm" variant="outline" onClick={() => handleGenerateProposal(lead)} disabled={generatingId}>
                              {generatingId && proposals[lead.id] === undefined ? <Loader2 className="mr-2 h-4 w-4 animate-spin"/> : null}
                             Generar Propuesta

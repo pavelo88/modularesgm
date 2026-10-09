@@ -75,7 +75,7 @@ export default function AffiliatesLandingPage() {
       </aside>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20" aria-labelledby="como-funciona">
-        <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-secondary">Tres pasos</p>
+        <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Tres pasos</p>
         <h2 id="como-funciona" className="mb-12 text-center font-headline text-3xl font-bold md:text-4xl">Cómo funciona el programa de afiliados</h2>
         <ol className="grid gap-6 md:grid-cols-3">
           {AFFILIATE_STEPS.map((s, i) => (
@@ -90,7 +90,7 @@ export default function AffiliatesLandingPage() {
 
       <section className="relative z-10 bg-muted/50" aria-labelledby="que-recomendar">
         <div className="mx-auto max-w-7xl px-6 py-20">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-secondary">Catálogo</p>
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Catálogo</p>
           <h2 id="que-recomendar" className="mb-10 font-headline text-3xl font-bold md:text-4xl">Qué puedes recomendar a tus clientes</h2>
           <CardSlider label="Servicios que puedes recomendar" slideClassName="basis-[78%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
             {defaultServices.map((s) => (
@@ -103,7 +103,7 @@ export default function AffiliatesLandingPage() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20" aria-labelledby="para-quien">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-secondary">Perfil ideal</p>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Perfil ideal</p>
             <h2 id="para-quien" className="font-headline text-3xl font-bold md:text-4xl">Para quién es este programa</h2>
             <p className="mt-4 text-muted-foreground">Si tu trabajo te pone frente a personas que construyen, compran o remodelan, ya tienes la audiencia. Solo falta tu enlace.</p>
           </div>
@@ -124,7 +124,7 @@ export default function AffiliatesLandingPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {benefits.map((b) => (
               <div key={b.title} className="rounded-2xl border border-background/15 bg-background/5 p-6">
-                <b.icon className="mb-4 text-secondary" size={22} />
+                <b.icon className="mb-4 text-amber-400" size={22} />
                 <h3 className="mb-2 font-bold">{b.title}</h3>
                 <p className="text-sm opacity-75">{b.text}</p>
               </div>
@@ -140,7 +140,7 @@ export default function AffiliatesLandingPage() {
             <details key={f.q} className="group p-5 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
                 {f.q}
-                <span className="text-secondary transition-transform group-open:rotate-45" aria-hidden>+</span>
+                <span className="text-primary transition-transform group-open:rotate-45" aria-hidden>+</span>
               </summary>
               <p className="mt-3 text-sm text-muted-foreground">{f.a}</p>
             </details>
@@ -155,7 +155,7 @@ export default function AffiliatesLandingPage() {
           <p className="relative mx-auto mt-4 max-w-xl opacity-90">Crear tu cuenta toma un minuto y no tiene costo.</p>
           <Link
             href="/afiliados/acceso?tab=registro"
-            className="relative mt-8 inline-flex h-14 items-center gap-2 rounded-xl bg-secondary px-8 font-bold text-secondary-foreground transition hover:brightness-110 active-press"
+            className="relative mt-8 inline-flex h-14 items-center gap-2 rounded-xl bg-amber-400 px-8 font-bold text-stone-950 transition hover:bg-amber-300 active-press shadow-lg shadow-amber-950/20"
           >
             Crear mi cuenta de afiliado <ArrowRight size={18} />
           </Link>

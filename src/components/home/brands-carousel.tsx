@@ -4,12 +4,12 @@ import { useState } from 'react';
 import type { Brand } from '@/lib/types';
 
 const BRAND_LOGOS: Record<string, string> = {
-  blum: '/brands/blum.svg',
-  hafele: '/brands/hafele.svg',
-  cosentino: '/brands/cosentino.svg',
-  dekton: '/brands/dekton.svg',
-  silestone: '/brands/silestone.svg',
-  teka: '/brands/teka.svg',
+  blum: '/brands/blum.webp',
+  hafele: '/brands/hafele.webp',
+  cosentino: '/brands/cosentino.webp',
+  dekton: '/brands/dekton.webp',
+  silestone: '/brands/silestone.webp',
+  teka: '/brands/teka.webp',
   pelikano: '/brands/pelikano.webp',
   novopan: '/brands/novopan.webp',
   briggs: '/brands/briggs.webp',
@@ -21,7 +21,7 @@ function BrandLogo({ brand }: { brand: Brand }) {
 
   if (!logoPath) {
     return (
-      <span className="font-mono text-xs font-bold tracking-[0.2em] text-muted-foreground/70 uppercase">
+      <span className="font-mono text-xs font-bold tracking-[0.2em] text-stone-700 uppercase">
         {brand.name}
       </span>
     );
@@ -32,35 +32,35 @@ function BrandLogo({ brand }: { brand: Brand }) {
     <img
       src={logoPath}
       alt={`Logotipo oficial ${brand.name}`}
-      width={130}
-      height={40}
+      width={140}
+      height={45}
       loading="lazy"
       decoding="async"
-      className="max-h-9 w-auto max-w-[130px] object-contain transition-all duration-300 filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 dark:opacity-70 dark:brightness-200 dark:contrast-125 dark:hover:opacity-100 transform group-hover:scale-105"
+      className="max-h-9 w-auto max-w-[140px] object-contain transition-all duration-300 opacity-85 hover:opacity-100 transform group-hover:scale-105"
     />
   );
 }
 
-/** Banda de marcas de calidad certificada con desplazamiento continuo y desvanecimientos cinematográficos */
+/** Banda de marcas con fondo blanco garantizado tanto en modo claro como en modo oscuro */
 export function BrandsCarousel({ brands }: { brands: Brand[] }) {
   if (!brands || brands.length === 0) return null;
   const track = [...brands, ...brands, ...brands, ...brands];
 
   return (
     <section 
-      className="relative z-10 flex flex-col gap-5 border-y border-stone-200/70 dark:border-white/5 bg-[#FAF8F5]/80 dark:bg-[#0B0D11] py-10 transition-colors" 
+      className="relative z-10 flex flex-col gap-5 border-y border-stone-200 bg-white py-10 shadow-sm" 
       aria-labelledby="marcas-title"
     >
       <div className="px-6 text-center">
-        <h2 id="marcas-title" className="text-[11px] font-mono tracking-[0.25em] uppercase text-stone-500 dark:text-stone-400 font-semibold">
+        <h2 id="marcas-title" className="text-[11px] font-mono tracking-[0.25em] uppercase text-stone-600 font-semibold">
           Materiales y herrajes de calidad certificada
         </h2>
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl overflow-hidden py-2">
-        {/* Máscaras de desvanecimiento lateral adaptables a dark/light mode */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#FAF8F5] dark:from-[#0B0D11] to-transparent md:w-40 transition-colors" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#FAF8F5] dark:from-[#0B0D11] to-transparent md:w-40 transition-colors" />
+        {/* Máscaras de desvanecimiento lateral en blanco puro constante */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent md:w-40" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent md:w-40" />
 
         <ul className="brand-carousel-track items-center">
           {track.map((brand, idx) => (

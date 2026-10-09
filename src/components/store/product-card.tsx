@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import { useContext, useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Plus, Ruler, Package, Eye, MessageCircle, Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Product } from '@/lib/types';
@@ -32,9 +32,22 @@ export function ProductCard({ product }: { product: Product }) {
   const isOutOfStock = product.inStock === false;
   const isCustomQuote = !product.price || product.price === 0;
 
-  // Colección de todas las imágenes disponibles para el producto (foto principal + ángulos secundarios)
-  const allImages = [product.imgUrl, ...(product.images || [])].filter(Boolean);
+  // Colección deduplicada de imágenes disponibles para el producto (sin repetir fotos)
+  const allImages = useMemo(() => {
+    const list = [product.imgUrl, ...(product.images || [])].filter(Boolean) as string[];
+    return Array.from(new Set(list));
+  }, [product.imgUrl, product.images]);
+
   const hasSecondaryAngle = allImages.length > 1;
+
+  // Auto-carrusel suave al pasar el cursor (hover) para ver los ángulos
+  useEffect(() => {
+    if (!isHovered || !hasSecondaryAngle) return;
+    const interval = setInterval(() => {
+      setCardImageIdx((prev) => (prev + 1) % allImages.length);
+    }, 2400);
+    return () => clearInterval(interval);
+  }, [isHovered, hasSecondaryAngle, allImages.length]);
 
   const handlePrevImage = (e: React.MouseEvent) => {
     e.stopPropagation();

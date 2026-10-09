@@ -79,14 +79,14 @@ export function HeroCardRail({ items, active, onSelect, className }: RailProps) 
             key={item.id}
             className={cn(
               'relative shrink-0 overflow-hidden rounded-2xl border shadow-xl transition-all duration-700 ease-out animate-in fade-in slide-in-from-right-4',
-              isNext ? 'h-[110px] w-[190px] border-secondary/70 lg:h-[130px] lg:w-[230px]' : 'h-[70px] w-[60px] border-white/20 opacity-80 hover:opacity-100 lg:h-[80px] lg:w-[70px]'
+              isNext ? 'h-[110px] w-[190px] border-amber-400/80 shadow-amber-500/20 lg:h-[130px] lg:w-[230px]' : 'h-[70px] w-[60px] border-white/20 opacity-80 hover:opacity-100 lg:h-[80px] lg:w-[70px]'
             )}
           >
             <button type="button" onClick={() => onSelect(index)} aria-label={`Ver ${item.title}`} className="absolute inset-0 z-10 h-full w-full cursor-pointer" />
             <Image src={item.image} alt="" fill sizes={isNext ? '230px' : '70px'} className="object-cover transition-transform duration-700 hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
             {isNext && (
-              <span className="absolute left-2.5 top-2.5 rounded-full border border-white/20 bg-black/45 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-secondary backdrop-blur-md">
+              <span className="absolute left-2.5 top-2.5 rounded-full border border-white/20 bg-black/45 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-amber-400 backdrop-blur-md">
                 Siguiente
               </span>
             )}

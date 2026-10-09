@@ -8,13 +8,14 @@
  * - sign_up         → nuevo afiliado registrado (Meta: CompleteRegistration)
  * - purchase        → pedido confirmado en la tienda (Meta: Purchase)
  */
-type EventName = 'whatsapp_click' | 'generate_lead' | 'sign_up' | 'purchase';
+type EventName = 'whatsapp_click' | 'generate_lead' | 'sign_up' | 'purchase' | 'ai_chat_open';
 
 const META_EVENT: Record<EventName, string> = {
   whatsapp_click: 'Contact',
   generate_lead: 'Lead',
   sign_up: 'CompleteRegistration',
   purchase: 'Purchase',
+  ai_chat_open: 'Contact',
 };
 
 type Params = Record<string, string | number | undefined>;
