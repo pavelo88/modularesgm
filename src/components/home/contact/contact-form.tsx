@@ -99,28 +99,26 @@ export function ContactForm() {
   }
 
   return (
-    <div className="flex h-full flex-col justify-between rounded-[2rem] border border-stone-200/80 bg-white/90 p-4 sm:p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.03)] backdrop-blur-xl dark:border-stone-800/80 dark:bg-stone-900/60">
+    <div className="flex h-full flex-col justify-between rounded-[2rem] border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#12161A] p-5 sm:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl">
       <div>
         {/* Cabecera del Formulario */}
-        <div className="pb-4 border-b border-stone-200/80 dark:border-stone-800 mb-6">
+        <div className="pb-4 border-b border-stone-200 dark:border-stone-800 mb-5">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">
               Cotización & Asesoría
             </span>
-            <span className="text-stone-300 dark:text-stone-700">·</span>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500">
+            <span className="text-stone-400 dark:text-stone-600">·</span>
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-stone-700 dark:text-stone-300">
               Sin Costo
             </span>
           </div>
-          <h3 className="font-headline text-2xl font-semibold text-stone-900 dark:text-stone-100 mt-1">
+          <h3 className="font-headline text-2xl font-semibold text-stone-950 dark:text-white mt-1">
             Inicie su Proyecto
           </h3>
-          <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+          <p className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mt-1">
             Seleccione el tipo de proyecto y compártanos sus medidas o ideas iniciales.
           </p>
         </div>
-
-
 
         {/* Formulario */}
         <Form {...form}>
@@ -136,13 +134,13 @@ export function ContactForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400">
+                  <FormLabel className="text-xs font-bold uppercase tracking-[0.14em] text-stone-950 dark:text-stone-100">
                     Nombre y Apellido *
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Ej. Arq. Carolina Morales"
-                      className="h-11 sm:h-12 rounded-xl border-stone-200 bg-stone-50/50 px-3.5 text-stone-900 transition-all focus-visible:border-secondary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-secondary/50 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-100 dark:focus-visible:border-secondary dark:focus-visible:bg-stone-950"
+                      className="h-11 sm:h-12 rounded-xl border-stone-300 bg-stone-50/70 px-3.5 text-stone-950 font-medium placeholder:text-stone-500 transition-all focus-visible:border-stone-900 focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-stone-900 dark:border-stone-700 dark:bg-stone-950/60 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus-visible:border-white dark:focus-visible:bg-stone-950"
                       data-webmcp-input="fullName"
                       {...field}
                     />
@@ -159,14 +157,14 @@ export function ContactForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400">
+                    <FormLabel className="text-xs font-bold uppercase tracking-[0.14em] text-stone-950 dark:text-stone-100">
                       Correo Electrónico *
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="email"
                         placeholder="ejemplo@correo.com"
-                        className="h-11 sm:h-12 rounded-xl border-stone-200 bg-stone-50/50 px-3.5 text-stone-900 transition-all focus-visible:border-secondary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-secondary/50 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-100 dark:focus-visible:border-secondary dark:focus-visible:bg-stone-950"
+                        className="h-11 sm:h-12 rounded-xl border-stone-300 bg-stone-50/70 px-3.5 text-stone-950 font-medium placeholder:text-stone-500 transition-all focus-visible:border-stone-900 focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-stone-900 dark:border-stone-700 dark:bg-stone-950/60 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus-visible:border-white dark:focus-visible:bg-stone-950"
                         data-webmcp-input="emailAddress"
                         {...field}
                       />
@@ -181,13 +179,13 @@ export function ContactForm() {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400">
+                    <FormLabel className="text-xs font-bold uppercase tracking-[0.14em] text-stone-950 dark:text-stone-100">
                       Teléfono o WhatsApp *
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Ej. 099 123 4567"
-                        className="h-11 sm:h-12 rounded-xl border-stone-200 bg-stone-50/50 px-3.5 text-stone-900 transition-all focus-visible:border-secondary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-secondary/50 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-100 dark:focus-visible:border-secondary dark:focus-visible:bg-stone-950"
+                        className="h-11 sm:h-12 rounded-xl border-stone-300 bg-stone-50/70 px-3.5 text-stone-950 font-medium placeholder:text-stone-500 transition-all focus-visible:border-stone-900 focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-stone-900 dark:border-stone-700 dark:bg-stone-950/60 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus-visible:border-white dark:focus-visible:bg-stone-950"
                         data-webmcp-input="phoneNumber"
                         {...field}
                       />
@@ -204,13 +202,13 @@ export function ContactForm() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400">
+                  <FormLabel className="text-xs font-bold uppercase tracking-[0.14em] text-stone-950 dark:text-stone-100">
                     Descripción del Espacio o Proyecto *
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Indíquenos las dimensiones tentativas, ubicación en Ecuador, materiales de preferencia (ej. cuarzo Calacatta Gold, melamina hidrófuga) o si ya cuenta con planos arquitectónicos..."
-                      className="min-h-[80px] resize-none rounded-xl border-stone-200 bg-stone-50/50 p-3.5 text-stone-900 transition-all focus-visible:border-secondary focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-secondary/50 dark:border-stone-800 dark:bg-stone-950/40 dark:text-stone-100 dark:focus-visible:border-secondary dark:focus-visible:bg-stone-950"
+                      className="min-h-[85px] resize-none rounded-xl border-stone-300 bg-stone-50/70 p-3.5 text-stone-950 font-medium placeholder:text-stone-500 transition-all focus-visible:border-stone-900 focus-visible:bg-white focus-visible:ring-1 focus-visible:ring-stone-900 dark:border-stone-700 dark:bg-stone-950/60 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus-visible:border-white dark:focus-visible:bg-stone-950"
                       data-webmcp-input="projectDetails"
                       {...field}
                     />
@@ -227,19 +225,19 @@ export function ContactForm() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track('whatsapp_click', { location: 'formulario_enviado' })}
-                className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 text-xs sm:text-sm font-bold text-foreground transition-all hover:bg-emerald-500/20 active:scale-[0.98]"
+                className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 text-xs sm:text-sm font-bold text-stone-950 dark:text-white transition-all hover:bg-emerald-500/20 active:scale-[0.98]"
               >
-                <MessageCircle size={18} className="text-emerald-500 shrink-0" />
+                <MessageCircle size={18} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>¡Recibido! ¿Desea atención inmediata? Continúe por WhatsApp</span>
               </a>
             )}
 
-            {/* Botón de Envío con Micro-interacción */}
+            {/* Botón de Envío de Alto Contraste */}
             <div className="pt-2">
               <Button
                 type="submit"
                 disabled={isPending}
-                className="h-12 sm:h-13 w-full rounded-xl bg-stone-900 text-sm font-semibold tracking-wide text-white shadow-md transition-all duration-200 hover:bg-stone-800 active:scale-[0.98] dark:bg-secondary dark:text-stone-950 dark:hover:bg-secondary/90 flex items-center justify-center gap-2"
+                className="h-12 sm:h-13 w-full rounded-xl bg-stone-950 hover:bg-stone-800 text-white font-bold text-sm tracking-wide shadow-md active:scale-[0.98] transition-all dark:bg-white dark:text-stone-950 dark:hover:bg-stone-200 flex items-center justify-center gap-2"
               >
                 {isPending ? (
                   <>
@@ -259,17 +257,17 @@ export function ContactForm() {
       </div>
 
       {/* Indicadores de Confianza & Compromiso al pie del formulario */}
-      <div className="mt-6 pt-4 border-t border-stone-200/80 dark:border-stone-800 flex flex-wrap items-center justify-between gap-3 text-[11px] text-stone-500 dark:text-stone-400">
+      <div className="mt-5 pt-3.5 border-t border-stone-200 dark:border-stone-800 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-stone-800 dark:text-stone-200">
         <span className="inline-flex items-center gap-1.5">
-          <CheckCircle2 size={13} className="text-secondary shrink-0" />
+          <CheckCircle2 size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>Sin compromiso comercial</span>
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Sparkles size={13} className="text-secondary shrink-0" />
+          <Sparkles size={14} className="text-amber-600 dark:text-amber-400 shrink-0" />
           <span>Respuesta técnica en 24h</span>
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          <span className="h-2 w-2 rounded-full bg-emerald-500" />
           <span>Atención a nivel nacional</span>
         </span>
       </div>

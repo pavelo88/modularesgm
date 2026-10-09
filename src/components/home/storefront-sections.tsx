@@ -123,39 +123,44 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
         </Link>
       </div>
 
-      {/* 2 Carruseles Horizontales en lugar de grilla vertical interminable */}
+      {/* 2 Carruseles Horizontales en celulares / Grilla arquitectónica en escritorio */}
       <div className="space-y-10">
-        {/* Fila 1 */}
+        {/* Fila 1: Líneas Residenciales */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-4">Líneas Residenciales</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">Líneas Residenciales</h3>
+            <span className="md:hidden text-[11px] font-semibold text-stone-500 flex items-center gap-1">
+              Deslizar ➔
+            </span>
+          </div>
+          <div className="flex md:grid md:grid-cols-3 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
             {row1.map((cat) => (
               <Link
                 key={cat.href}
                 href={cat.href}
-                className="group relative flex flex-col rounded-3xl border border-border/60 overflow-hidden bg-card/60 backdrop-blur-md transition-all duration-500 hover:border-secondary/50 hover:shadow-xl hover:-translate-y-1.5"
+                className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md transition-all duration-500 hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-xl hover:-translate-y-1.5 min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-start shrink-0 md:shrink"
               >
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
                   <Image
                     src={cat.imgUrl}
                     alt={cat.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 85vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
 
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/10">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-black/75 backdrop-blur-md text-white border border-white/20">
                       {cat.tag}
                     </span>
-                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-stone-900/80 backdrop-blur-md text-amber-300 font-bold border border-amber-500/30">
                       {cat.models}
                     </span>
                   </div>
 
                   <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <h4 className="text-xl font-headline font-normal text-white leading-snug">
+                    <h4 className="text-xl font-headline font-semibold text-white leading-snug">
                       {cat.title}
                     </h4>
                   </div>
@@ -175,37 +180,42 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
           </div>
         </div>
 
-        {/* Fila 2 */}
+        {/* Fila 2: Líneas Especializadas & Corporativas */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-4">Líneas Especializadas & Corporativas</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">Líneas Especializadas & Corporativas</h3>
+            <span className="md:hidden text-[11px] font-semibold text-stone-500 flex items-center gap-1">
+              Deslizar ➔
+            </span>
+          </div>
+          <div className="flex md:grid md:grid-cols-4 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
             {row2.map((cat) => (
               <Link
                 key={cat.href}
                 href={cat.href}
-                className="group relative flex flex-col rounded-3xl border border-border/60 overflow-hidden bg-card/60 backdrop-blur-md transition-all duration-500 hover:border-secondary/50 hover:shadow-xl hover:-translate-y-1.5"
+                className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md transition-all duration-500 hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-xl hover:-translate-y-1.5 min-w-[85vw] sm:min-w-[280px] md:min-w-0 snap-start shrink-0 md:shrink"
               >
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
                   <Image
                     src={cat.imgUrl}
                     alt={cat.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 85vw, 25vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
 
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/10">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-black/75 backdrop-blur-md text-white border border-white/20">
                       {cat.tag}
                     </span>
-                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-stone-900/80 backdrop-blur-md text-amber-300 font-bold border border-amber-500/30">
                       {cat.models}
                     </span>
                   </div>
 
                   <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <h4 className="text-xl font-headline font-normal text-white leading-snug">
+                    <h4 className="text-xl font-headline font-semibold text-white leading-snug">
                       {cat.title}
                     </h4>
                   </div>
@@ -279,23 +289,23 @@ export function AffiliateBand() {
         {/* Glow sutil */}
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
-        {/* Vista Móvil (Imagen Flyer Alta + Botón Superpuesto Encima) */}
+        {/* Vista Móvil (Imagen Flyer Alta + Botón Superpuesto Encima en la base extendida) */}
         <div className="lg:hidden flex flex-col items-center">
-          <div className="relative w-full max-w-sm aspect-[3/4.8] rounded-3xl overflow-hidden border border-stone-300 dark:border-stone-700 shadow-2xl">
+          <div className="relative w-full max-w-sm aspect-[768/1164] rounded-3xl overflow-hidden border border-stone-300 dark:border-stone-700 shadow-2xl bg-[#f8f4e9]">
             <Image
-              src="/images/campaign/flyer-afiliados-trabaja-con-nosotros.jpg"
+              src="/images/campaign/flyer-afiliados-mobile-extended.webp"
               alt="Trabaja con nosotros - Modulares GM Programa de Afiliados"
               fill
-              sizes="100vw"
-              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 384px"
+              className="object-contain"
+              priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
 
             {/* Botón Verde Superpuesto sobre la imagen en la parte inferior */}
-            <div className="absolute bottom-5 left-4 right-4 z-20">
+            <div className="absolute bottom-4 left-4 right-4 z-20">
               <Link
                 href="/afiliados"
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-[#1b736b] active:bg-[#155b55] text-white font-bold text-xs shadow-xl active:scale-95 transition-all text-center"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-[#1b736b] hover:bg-[#155b55] active:bg-[#114b46] text-white font-bold text-xs sm:text-sm shadow-xl active:scale-95 transition-all text-center"
               >
                 <span>Regístrate en modularesgm.com/afiliados</span>
                 <ArrowRight size={14} />

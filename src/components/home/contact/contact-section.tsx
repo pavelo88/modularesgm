@@ -14,27 +14,27 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
 
       <div className="mx-auto max-w-7xl">
         {/* Cabecera Editorial de la Sección */}
-        <div className="mb-14 sm:mb-20 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-stone-300/80 bg-white/70 dark:border-stone-800 dark:bg-stone-900/60 backdrop-blur-md mb-4 shadow-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-700 dark:text-stone-300">
+        <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-stone-300 bg-white/90 dark:border-stone-800 dark:bg-stone-900/80 backdrop-blur-md mb-3 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">
               Atelier & Asesoría Arquitectónica
             </span>
           </div>
 
-          <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-stone-900 dark:text-stone-100 mb-5 leading-[1.15]">
+          <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-stone-950 dark:text-white mb-3 leading-[1.15]">
             {siteContent.formTitle || 'Hablemos de su Próximo Espacio'}
           </h2>
 
-          <p className="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-stone-800 dark:text-stone-200 font-normal leading-relaxed max-w-2xl mx-auto">
             {siteContent.formSubtitle ||
               'De la concepción planimétrica a la instalación milimétrica de cuarzos y mobiliario modular. Permítanos materializar su visión.'}
           </p>
 
           {/* Regla arquitectónica con detalles de precisión */}
-          <div className="mt-8 flex items-center justify-center gap-3 text-stone-300 dark:text-stone-800">
+          <div className="mt-5 flex items-center justify-center gap-3 text-stone-400 dark:text-stone-600">
             <span className="h-px w-16 bg-current" />
-            <span className="text-[10px] uppercase tracking-widest font-mono text-stone-400 dark:text-stone-600">
+            <span className="text-[10px] uppercase tracking-widest font-mono font-bold text-stone-700 dark:text-stone-300">
               01 // CONSULTA TÉCNICA
             </span>
             <span className="h-px w-16 bg-current" />

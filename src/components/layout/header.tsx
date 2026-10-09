@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import {
-  Lock,
   Menu,
   Moon,
   ShoppingCart,
@@ -77,8 +76,10 @@ export function Header() {
       <Link
         href={href}
         className={cn(
-          'flex items-center gap-1 transition-colors font-medium',
-          isActive ? 'text-primary hdr-fg font-extrabold' : 'text-primary hdr-fg font-bold hover:text-primary dark:text-muted-foreground dark:hover:text-primary'
+          'flex items-center gap-1.5 transition-colors font-medium text-sm',
+          overHero
+            ? (isActive ? 'text-white font-extrabold' : 'text-white/85 hover:text-white')
+            : (isActive ? 'text-stone-950 dark:text-white font-extrabold' : 'text-stone-700 hover:text-stone-950 dark:text-stone-300 dark:hover:text-white')
         )}
       >
         {icon}
@@ -94,8 +95,8 @@ export function Header() {
        <Link
          href={href}
          onClick={() => setIsMenuOpen(false)}
-         className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base",
-            isActive ? "bg-muted text-primary" : "text-foreground hover:bg-muted"
+         className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base transition-colors",
+            isActive ? "bg-stone-200/70 dark:bg-stone-800 text-stone-950 dark:text-white font-bold" : "text-stone-800 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800/60"
          )}
        >
         {icon}
@@ -126,16 +127,22 @@ export function Header() {
         scrolled ? 'top-0' : 'top-9',
         overHero
           ? 'bg-transparent'
-          : 'bg-white/80 dark:bg-[#111316]/85 backdrop-blur-xl border-b border-stone-200/50 dark:border-stone-800/60 shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.25)]'
+          : 'bg-white/95 dark:bg-[#0c0e12]/95 backdrop-blur-xl border-b border-stone-200/80 dark:border-stone-800/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.4)]'
       )}>
       <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
           <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" priority />
           <div className="flex flex-col">
-            <span className="block text-base font-bold tracking-tight text-primary hdr-fg dark:text-white">
+            <span className={cn(
+              "block text-base font-bold tracking-tight transition-colors",
+              overHero ? "text-white" : "text-stone-950 dark:text-white"
+            )}>
               MODULARES GM
             </span>
-            <p className="text-[10px] font-medium text-primary hdr-fg/80 dark:text-muted-foreground -mt-1 leading-tight">
+            <p className={cn(
+              "text-[10px] font-semibold transition-colors -mt-1 leading-tight",
+              overHero ? "text-white/80" : "text-stone-600 dark:text-stone-400"
+            )}>
               Cocinas y Cuarzos
             </p>
           </div>
@@ -148,27 +155,28 @@ export function Header() {
           )}
         </nav>
         <div className="hidden md:flex items-center gap-2">
-            <div className="h-6 w-px bg-primary/20 mx-2"></div>
+            <div className={cn("h-6 w-px mx-2 transition-colors", overHero ? "bg-white/20" : "bg-stone-300 dark:bg-stone-700")}></div>
             <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsCartOpen(true)}
-                className="relative text-primary hdr-fg"
+                className={cn(
+                  "relative transition-colors",
+                  overHero ? "text-white hover:text-white" : "text-stone-800 hover:text-stone-950 dark:text-stone-200 dark:hover:text-white"
+                )}
                 aria-label="Open shopping cart"
             >
                 <ShoppingCart size={20} />
                 {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
+                <span className="absolute top-0 right-0 w-4 h-4 bg-emerald-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
                     {cartCount}
                 </span>
                 )}
             </Button>
-            <ThemeToggleButton className="text-primary hdr-fg" />
-            <Button asChild variant="outline" size="sm" className="border-primary/50 text-primary hdr-fg hover:bg-primary hover:text-primary-foreground transition-all">
-                <Link href="/admin">
-                <Lock size={16} /> Admin
-                </Link>
-            </Button>
+            <ThemeToggleButton className={cn(
+              "transition-colors",
+              overHero ? "text-white hover:text-white" : "text-stone-800 hover:text-stone-950 dark:text-stone-200 dark:hover:text-white"
+            )} />
         </div>
 
         <div className="md:hidden flex items-center gap-1">
@@ -176,36 +184,50 @@ export function Header() {
             variant="ghost"
             size="icon"
             onClick={() => setIsCartOpen(true)}
-            className="relative text-primary hdr-fg"
+            className={cn(
+              "relative transition-colors",
+              overHero ? "text-white" : "text-stone-800 dark:text-stone-200"
+            )}
             aria-label="Open shopping cart"
           >
             <ShoppingCart size={24} />
             {cartCount > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
+              <span className="absolute top-0 right-0 w-4 h-4 bg-emerald-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
                 {cartCount}
               </span>
             )}
           </Button>
           
-          <ThemeToggleButton className="text-primary hdr-fg" />
+          <ThemeToggleButton className={cn(
+            "transition-colors",
+            overHero ? "text-white" : "text-stone-800 dark:text-stone-200"
+          )} />
 
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-primary hdr-fg" aria-label="Toggle menu">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  "transition-colors",
+                  overHero ? "text-white" : "text-stone-800 dark:text-stone-200"
+                )}
+                aria-label="Toggle menu"
+              >
                 <Menu size={28} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0">
-              <SheetHeader className="border-b p-4">
+            <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0 bg-white dark:bg-[#0c0e12] border-r border-stone-200 dark:border-stone-800">
+              <SheetHeader className="border-b border-stone-200 dark:border-stone-800 p-4">
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                  <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
                 <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
                   <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" />
                   <div className="flex flex-col">
-                    <span className="block text-base font-bold tracking-tight text-primary hdr-fg dark:text-white">
+                    <span className="block text-base font-bold tracking-tight text-stone-950 dark:text-white">
                       MODULARES GM
                     </span>
-                    <p className="text-[10px] font-medium text-primary hdr-fg/80 dark:text-muted-foreground -mt-1 leading-tight">
+                    <p className="text-[10px] font-semibold text-stone-600 dark:text-stone-400 -mt-1 leading-tight">
                       Cocinas y Cuarzos
                     </p>
                   </div>
@@ -223,8 +245,8 @@ export function Header() {
                           setSelectedCategory(category);
                           setIsMenuOpen(false);
                         }}
-                        className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base",
-                          selectedCategory === category ? "bg-muted text-primary hdr-fg" : "text-foreground hover:bg-muted"
+                        className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base transition-colors",
+                          selectedCategory === category ? "bg-stone-200 dark:bg-stone-800 text-stone-950 dark:text-white font-bold" : "text-stone-800 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800/60"
                         )}
                       >
                         <span>{category}</span>
@@ -255,9 +277,6 @@ export function Header() {
                           </a>
                       </Button>
                   </div>
-                  <Button asChild className="w-full" variant="outline">
-                      <Link href="/admin" onClick={() => setIsMenuOpen(false)}><Lock size={16} /> Admin</Link>
-                  </Button>
               </div>
             </SheetContent>
           </Sheet>
