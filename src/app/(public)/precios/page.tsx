@@ -7,7 +7,7 @@ import { WhatsAppCta } from '@/components/shared/whatsapp-cta';
 
 const TITLE = 'Precios de Cocinas Modulares en Quito 2026 | Modulares GM';
 const DESCRIPTION =
-  'Cuánto cuesta una cocina modular, un clóset o un mueble de baño en Quito. Precios de referencia desde $250 por metro lineal, qué influye en el valor y cómo cotizar gratis.';
+  'Cuánto cuesta una cocina modular, un clóset o un mueble de baño en Quito. Precios desde $250 por metro lineal y cómo cotizar gratis.';
 
 export const metadata: Metadata = {
   title: TITLE,

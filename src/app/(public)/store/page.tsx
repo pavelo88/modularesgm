@@ -488,6 +488,12 @@ export default function StorePage() {
           escritorios, muebles de oficina, puertas y setups gamer fabricados a medida en Quito.
           Melamina Pelikano RH 18mm hidrófuga y herrajes Blum de cierre suave.
         </p>
+        <p className="text-muted-foreground text-sm mt-3 leading-relaxed">
+          Cada pieza se fabrica en Quito con garantía de 3 a 5 años, entrega en 7 a 15 días hábiles
+          y cobertura en todo el Ecuador. Puedes pagar con tarjeta de crédito, transferencia bancaria
+          o con un anticipo del 50 %. Elige una categoría, revisa precios por metro lineal o por unidad
+          y cotiza por WhatsApp con asesoría técnica para tu proyecto.
+        </p>
         <nav aria-label="Categorías" className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
           <Link href="/cocinas">Cocinas</Link>
           <Link href="/closets">Clósets</Link>
