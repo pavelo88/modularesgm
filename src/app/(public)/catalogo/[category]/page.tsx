@@ -10,7 +10,7 @@ const SLUG_MAP: Record<string, string> = {
   oficina: '/muebles-oficina',
   'muebles-oficina': '/muebles-oficina',
   puertas: '/puertas',
-  estimulacion: '/contacto',
+  estimulacion: '/store?category=estimulacion',
 };
 
 export function generateStaticParams() {

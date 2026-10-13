@@ -476,9 +476,28 @@ function StoreContent() {
 
 export default function StorePage() {
   return (
+    // El fallback se renderiza en el servidor: es lo que ven los rastreadores
+    // en el HTML inicial (StoreContent usa useSearchParams y es solo cliente).
     <Suspense fallback={
-      <div className="min-h-screen pt-28 text-center text-muted-foreground text-sm">
-        Cargando catálogo oficial...
+      <div className="min-h-screen pt-28 px-4 max-w-3xl mx-auto text-center">
+        <h1 className="text-3xl sm:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
+          Tienda & Catálogo de Mobiliario Modular
+        </h1>
+        <p className="text-muted-foreground text-sm mt-3 leading-relaxed">
+          Cocinas integrales con mesones de cuarzo, clósets y vestidores, muebles de baño,
+          escritorios, muebles de oficina, puertas y setups gamer fabricados a medida en Quito.
+          Melamina Pelikano RH 18mm hidrófuga y herrajes Blum de cierre suave.
+        </p>
+        <nav aria-label="Categorías" className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
+          <Link href="/cocinas">Cocinas</Link>
+          <Link href="/closets">Clósets</Link>
+          <Link href="/muebles-bano">Muebles de baño</Link>
+          <Link href="/escritorios">Escritorios</Link>
+          <Link href="/muebles-oficina">Muebles de oficina</Link>
+          <Link href="/puertas">Puertas</Link>
+          <Link href="/gamer">Gamer</Link>
+        </nav>
+        <p className="text-muted-foreground text-xs mt-6">Cargando catálogo oficial...</p>
       </div>
     }>
       <StoreContent />

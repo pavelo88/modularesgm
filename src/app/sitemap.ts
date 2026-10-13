@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { catalogSections } from '@/lib/catalog-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.modularesgm.com';
@@ -79,11 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    ...catalogSections.map((section) => ({
-      url: `${baseUrl}/catalogo/${section.id}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    })),
+    // Nota: /catalogo/{id} redirige (308) a los silos de arriba, por lo que
+    // no va en el sitemap: solo deben listarse URLs que respondan 200.
   ];
 }
