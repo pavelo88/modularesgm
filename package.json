@@ -14,7 +14,9 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "create-founder": "node --env-file=.env scripts/create-founder.mjs",
-    "selftest": "tsx scripts/selftest.ts"
+    "selftest": "tsx scripts/selftest.ts",
+    "seo-audit": "node scripts/seo-audit.mjs",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "@genkit-ai/google-genai": "^1.28.0",

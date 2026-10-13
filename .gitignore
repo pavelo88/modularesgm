@@ -48,3 +48,6 @@ firestore-debug.log.env
 *service-account*.json
 
 !.env.example
+
+# informes del auditor SEO
+seo-reports/

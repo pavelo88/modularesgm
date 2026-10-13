@@ -1,0 +1,24 @@
+#!/bin/sh
+# Pre-commit: corre el auditor SEO si se tocaron archivos que afectan al SEO.
+# - Necesita el dev server en http://localhost:9002; si no está, avisa y NO bloquea.
+# - Saltar el hook en un caso puntual:  git commit --no-verify
+
+SEO_PATHS='^(src/app/|src/components/|next\.config\.ts|src/middleware\.ts)'
+BASE="${SEO_AUDIT_BASE:-http://localhost:9002}"
+
+if ! git diff --cached --name-only | grep -Eq "$SEO_PATHS"; then
+  exit 0
+fi
+
+if ! curl -s -o /dev/null --max-time 3 "$BASE/robots.txt"; then
+  echo "⚠ seo-audit: no hay servidor en $BASE; omito la auditoría (levanta 'npm run dev' para activarla)."
+  exit 0
+fi
+
+echo "→ seo-audit contra $BASE …"
+if ! node scripts/seo-audit.mjs --base "$BASE"; then
+  echo ""
+  echo "✖ Commit bloqueado: corrige los errores SEO de arriba (informe: seo-reports/latest.md)."
+  echo "  Para saltarlo conscientemente: git commit --no-verify"
+  exit 1
+fi
