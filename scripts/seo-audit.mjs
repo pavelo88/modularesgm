@@ -63,19 +63,25 @@ const ISSUES = {
  *  - 'info'  → solo aparece en el informe.
  */
 function severityOf(code) {
-  // TODO(human): decide qué incidencias bloquean un commit ('error') y cuáles solo avisan ('warn').
-  // Criterio sugerido: 'error' si perjudica la indexación directa (sitemap roto, noindex en
-  // sitemap, enlaces rotos, canonical mal, H1 ausente); 'warn' para calidad (títulos largos,
-  // contenido delgado, alt faltante). Ajusta la tabla DEFAULT_SEVERITY o reescribe la lógica.
-  return DEFAULT_SEVERITY[code] ?? 'warn';
+  // Criterio: 'error' si impide o perjudica la indexación directa; 'warn' para calidad.
+  // Si los agentes empiezan a usar --no-verify, la tabla bloquea demasiado: afloja aquí.
+  return SEVERITY[code] ?? 'warn';
 }
 
-const DEFAULT_SEVERITY = {
+const SEVERITY = {
+  // Bloquean el commit
   SITEMAP_NOT_200: 'error',
   NOINDEX_IN_SITEMAP: 'error',
   BROKEN_LINK: 'error',
-  H1_MISSING: 'warn',
+  H1_MISSING: 'error',
+  TITLE_MISSING: 'error',
+  META_MISSING: 'error',
+  CANONICAL_MISSING: 'error',
+  // Solo avisan (el resto cae en 'warn' por defecto)
   CANONICAL_NOT_SELF: 'warn',
+  // Informativas
+  NOT_IN_SITEMAP: 'info',
+  H1_MULTIPLE: 'info', // en `next dev` suele ser falso positivo por el streaming
 };
 
 // ─────────────────────────────── Utilidades ───────────────────────────────
