@@ -1,125 +1,111 @@
 /**
- * Script para crear/actualizar el usuario Super Admin de Modulares GM.
- * 
- * Nombre: Administracion Modulares GM
- * Correo: info@modularesgm.com
- * Clave inicial: Modulares2026
- * 
- * Uso: node scripts/create-super-admin.mjs
+ * Crea o actualiza el usuario Super Admin de Modulares GM.
+ *
+ * La contraseña NUNCA va escrita en este archivo (el repositorio es público).
+ * Pásala por variable de entorno, solo en tu terminal:
+ *
+ *   PowerShell:  $env:SUPER_ADMIN_PASSWORD="<clave-larga-y-unica>"; node --env-file=.env scripts/create-super-admin.mjs
+ *   Bash:        SUPER_ADMIN_PASSWORD='<clave-larga-y-unica>' node --env-file=.env scripts/create-super-admin.mjs
+ *
+ * Opcional: SUPER_ADMIN_EMAIL (por defecto info@modularesgm.com).
+ * La clave no se imprime ni se guarda en Firestore; el usuario debe cambiarla en el primer acceso.
  */
 
 import { initializeApp, getApps } from 'firebase/app';
-import { 
-  getAuth, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   updateProfile,
-  signOut
+  signOut,
 } from 'firebase/auth';
-import { 
-  getFirestore, 
-  doc, 
-  setDoc 
-} from 'firebase/firestore';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCdk1dBSIja_ynTEF8qwvFk66Dl3zjox-8",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "mgm-68c65.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "mgm-68c65",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "mgm-68c65.firebasestorage.app",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "812491736447",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:812491736447:web:39d6f3f4cce2487475c64a",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
+const EMAIL = process.env.SUPER_ADMIN_EMAIL || 'info@modularesgm.com';
+const PASSWORD = process.env.SUPER_ADMIN_PASSWORD;
+const NAME = 'Administracion Modulares GM';
+const USERNAME = 'admin_modulares';
+
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+  console.error('❌ Faltan las variables NEXT_PUBLIC_FIREBASE_* (usa --env-file=.env).');
+  process.exit(1);
+}
+if (!PASSWORD || PASSWORD.length < 12) {
+  console.error('❌ Define SUPER_ADMIN_PASSWORD (mínimo 12 caracteres) solo en tu terminal. Ver cabecera del archivo.');
+  process.exit(1);
+}
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const EMAIL = 'info@modularesgm.com';
-const PASSWORD = 'Modulares2026';
-const NAME = 'Administracion Modulares GM';
-const USERNAME = 'admin_modulares';
-
 async function main() {
-  console.log('🚀 Iniciando creación de Super Admin...');
+  console.log(`→ Preparando super admin ${EMAIL}…`);
   let userCred;
-  let isNew = false;
 
   try {
     userCred = await signInWithEmailAndPassword(auth, EMAIL, PASSWORD);
-    console.log('✔ Sesión iniciada con usuario existente en Firebase Auth.');
+    console.log('✔ Usuario existente: sesión iniciada.');
   } catch (err) {
     if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
       try {
         userCred = await createUserWithEmailAndPassword(auth, EMAIL, PASSWORD);
-        isNew = true;
-        console.log('✔ Nuevo usuario creado en Firebase Auth.');
+        console.log('✔ Usuario creado en Firebase Auth.');
       } catch (createErr) {
         if (createErr.code === 'auth/email-already-in-use') {
-          console.log('ℹ El correo ya existe. Intentando actualizar perfil...');
-          userCred = await signInWithEmailAndPassword(auth, EMAIL, PASSWORD).catch(() => null);
-        } else {
-          throw createErr;
+          console.error('❌ El correo ya existe con otra clave. Cámbiala desde Firebase Console > Authentication.');
+          process.exit(1);
         }
+        throw createErr;
       }
     } else {
       throw err;
     }
   }
 
-  if (userCred?.user) {
-    const user = userCred.user;
-    await updateProfile(user, { displayName: NAME }).catch(() => {});
+  const user = userCred.user;
+  await updateProfile(user, { displayName: NAME }).catch(() => {});
 
-    // Guardar en colección de usuarios admin
-    await setDoc(doc(db, 'usuarios', user.uid), {
-      uid: user.uid,
-      name: NAME,
-      email: EMAIL,
-      role: 'super',
-      cedula: PASSWORD,
-      active: true,
-      forcePasswordChange: true,
-      updatedAt: new Date().toISOString()
-    }, { merge: true });
+  // Perfil de equipo. No se guarda ninguna clave ni se usa la cédula como contraseña.
+  await setDoc(doc(db, 'usuarios', user.uid), {
+    uid: user.uid,
+    name: NAME,
+    email: EMAIL,
+    role: 'super',
+    active: true,
+    forcePasswordChange: true,
+    updatedAt: new Date().toISOString(),
+  }, { merge: true });
 
-    // Guardar en colección de índice de usuarios
-    await setDoc(doc(db, 'userIndex', user.uid), {
-      username: USERNAME,
-      email: EMAIL,
-    }, { merge: true });
+  await setDoc(doc(db, 'userIndex', user.uid), { username: USERNAME, email: EMAIL }, { merge: true });
 
-    // Guardar en colección de afiliados para compatibilidad
-    await setDoc(doc(db, 'affiliates', USERNAME), {
-      id: USERNAME,
-      username: USERNAME,
-      email: EMAIL,
-      name: NAME,
-      cedula: PASSWORD,
-      role: 'super',
-      rank: 'Administrador',
-      status: 'active',
-      forcePasswordChange: true,
-      authUid: user.uid,
-      createdAt: new Date().toISOString()
-    }, { merge: true });
+  await setDoc(doc(db, 'affiliates', USERNAME), {
+    id: USERNAME,
+    username: USERNAME,
+    email: EMAIL,
+    name: NAME,
+    role: 'super',
+    rank: 'Administrador',
+    status: 'active',
+    forcePasswordChange: true,
+    authUid: user.uid,
+    updatedAt: new Date().toISOString(),
+  }, { merge: true });
 
-    console.log('==================================================');
-    console.log('✅ SUPER ADMIN CREADO / CONFIGURADO CON ÉXITO');
-    console.log(`📌 Correo:      ${EMAIL}`);
-    console.log(`📌 Contraseña:  ${PASSWORD}`);
-    console.log(`📌 Nombre:      ${NAME}`);
-    console.log(`📌 Rol:         super`);
-    console.log('📌 Cambio de clave obligatorio: SI (forcePasswordChange: true)');
-    console.log('==================================================');
-
-    await signOut(auth).catch(() => {});
-  } else {
-    console.error('❌ No se pudo autenticar/crear el usuario en Firebase Auth.');
-  }
+  console.log(`✔ Super admin listo: ${EMAIL} (rol super). La clave no se muestra.`);
+  await signOut(auth).catch(() => {});
 }
 
 main().catch((err) => {
-  console.error('❌ Error en script:', err);
+  console.error('❌ Error en script:', err?.code || err?.message || err);
   process.exit(1);
 });

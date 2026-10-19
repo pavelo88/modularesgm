@@ -1,6 +1,8 @@
-// In a real application, these values should be stored in .env.local and accessed via process.env
-// For this example, we are hardcoding them here.
-
+/**
+ * Configuración pública del SDK web de Firebase. Todas las claves salen de variables de entorno
+ * NEXT_PUBLIC_* (son públicas por diseño). Nunca pongas contraseñas ni secretos en este archivo:
+ * el repositorio es visible en GitHub.
+ */
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -9,10 +11,3 @@ export const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
-
-// This value is not used anymore but kept for reference.
-export const appId = 'mgm-68c65-v1';
-
-// IMPORTANT: In a production environment, use a secure way to store and access secrets.
-// Do not hardcode passwords. This is for demonstration purposes only.
-export const ADMIN_PASSWORD = 'Modulares2026';

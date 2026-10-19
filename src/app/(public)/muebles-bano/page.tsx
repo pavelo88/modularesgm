@@ -21,6 +21,6 @@ export const metadata: Metadata = {
 };
 
 export default function MueblesBanoPage() {
-  const products = getProductsByCategory('Muebles de Baño');
+  const products = getProductsByCategory('Baño');
   return <CategoryShowcase config={config} products={products} />;
 }

@@ -21,6 +21,6 @@ export const metadata: Metadata = {
 };
 
 export default function MueblesOficinaPage() {
-  const products = getProductsByCategory('Muebles de Oficina');
+  const products = getProductsByCategory('Oficina');
   return <CategoryShowcase config={config} products={products} />;
 }

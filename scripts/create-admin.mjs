@@ -28,9 +28,11 @@ const db = getFirestore(app);
 async function createAdminUser() {
   const email = "info@modularesgm.com";
   
+  // La cédula real se pasa por variable de entorno (ADMIN_CEDULA); nunca se escribe en el repo.
+  const cedula = process.env.ADMIN_CEDULA || '';
   const userData = {
     authUid: email, // El usuario pidió que fuera el correo
-    cedula: "Modulares2026",
+    cedula,
     createdAt: "2026-09-22T02:52:04.674Z",
     email: email,
     forcePasswordChange: true,
