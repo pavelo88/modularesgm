@@ -16,7 +16,8 @@
     "create-founder": "node --env-file=.env scripts/create-founder.mjs",
     "selftest": "tsx scripts/selftest.ts",
     "seo-audit": "node scripts/seo-audit.mjs",
-    "prepare": "git config core.hooksPath .githooks || true"
+    "prepare": "git config core.hooksPath .githooks || true",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@genkit-ai/google-genai": "^1.28.0",

@@ -106,11 +106,13 @@ export function Header() {
        <Link
          href={href}
          onClick={() => setIsMenuOpen(false)}
-         className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base transition-colors",
-            isActive ? "bg-stone-200/70 dark:bg-stone-800 text-stone-950 dark:text-white font-bold" : "text-stone-800 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800/60"
+         className={cn("flex items-center justify-center gap-3 p-3.5 rounded-2xl font-semibold text-sm transition-all text-center active:scale-95",
+            isActive 
+              ? "bg-primary text-primary-foreground font-bold shadow-md" 
+              : "text-foreground hover:bg-muted/70 bg-card/60 border border-border/40"
          )}
        >
-        {icon}
+        <span className="shrink-0">{icon}</span>
         <span>{label}</span>
        </Link>
      );
@@ -228,51 +230,57 @@ export function Header() {
                 <Menu size={28} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-full max-w-xs flex flex-col p-0 bg-white dark:bg-[#0c0e12] border-r border-stone-200 dark:border-stone-800">
-              <SheetHeader className="border-b border-stone-200 dark:border-stone-800 p-4">
+            <SheetContent side="left" className="w-[85vw] max-w-sm flex flex-col p-0 bg-background/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl border-r border-border/70 rounded-r-3xl shadow-2xl">
+              <SheetHeader className="border-b border-border/60 p-5 flex flex-col items-center text-center">
                 <SheetTitle className="sr-only">Menu</SheetTitle>
-                 <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
-                <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 group">
-                  <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" />
-                  <div className="flex flex-col">
-                    <span className="block text-base font-bold tracking-tight text-stone-950 dark:text-white">
+                 <SheetDescription className="sr-only">Navegación principal de Modulares GM</SheetDescription>
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex flex-col items-center gap-2 group">
+                  <Image src="/logo.png" alt="Modulares GM Logo" width={48} height={48} className="w-12 h-12 object-contain drop-shadow-md" />
+                  <div className="flex flex-col items-center text-center">
+                    <span className="block text-base font-black tracking-tight text-foreground font-headline">
                       MODULARES GM
                     </span>
-                    <p className="text-[10px] font-semibold text-stone-600 dark:text-stone-400 -mt-1 leading-tight">
-                      Cocinas y Cuarzos
+                    <p className="text-[10px] font-semibold text-muted-foreground -mt-0.5 leading-tight tracking-wider uppercase">
+                      Cocinas y Cuarzos Ecuador
                     </p>
                   </div>
                 </Link>
               </SheetHeader>
-              <nav className="flex flex-col gap-1 p-4 flex-1">
+              <nav className="flex flex-col gap-2 p-5 flex-1 overflow-y-auto">
                 {isStorePage ? (
                    <>
-                    <p className="px-3 text-sm font-semibold text-muted-foreground">Categorías</p>
-                    {storeCategories.map(category => (
-                      <Link
-                        href="/store"
-                        key={category}
-                        onClick={() => {
-                          setSelectedCategory(category);
-                          setIsMenuOpen(false);
-                        }}
-                        className={cn("flex items-center gap-3 p-3 rounded-lg font-medium text-base transition-colors",
-                          selectedCategory === category ? "bg-stone-200 dark:bg-stone-800 text-stone-950 dark:text-white font-bold" : "text-stone-800 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800/60"
-                        )}
-                      >
-                        <span>{category}</span>
-                      </Link>
-                    ))}
-                    <div className="my-2 border-t"></div>
-                    <MobileNavLink href="/#top" label="Volver al Inicio" publicOnly={false} icon={<Home size={20} />} />
-                    <MobileNavLink href="/afiliados" label="Trabaja con nosotros" publicOnly={false} icon={<Handshake size={20} />} />
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest text-center mb-1">Categorías de Tienda</p>
+                    <div className="grid grid-cols-1 gap-1.5">
+                      {storeCategories.map(category => (
+                        <Link
+                          href="/store"
+                          key={category}
+                          onClick={() => {
+                            setSelectedCategory(category);
+                            setIsMenuOpen(false);
+                          }}
+                          className={cn("flex items-center justify-center p-3 rounded-2xl font-medium text-sm transition-all text-center",
+                            selectedCategory === category 
+                              ? "bg-primary text-primary-foreground font-bold shadow-sm" 
+                              : "text-foreground hover:bg-muted/70 bg-card/40 border border-border/30"
+                          )}
+                        >
+                          <span>{category}</span>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="my-3 border-t border-border/50"></div>
+                    <MobileNavLink href="/#top" label="Volver al Inicio" publicOnly={false} icon={<Home size={18} />} />
+                    <MobileNavLink href="/afiliados" label="Trabaja con nosotros" publicOnly={false} icon={<Handshake size={18} />} />
                   </>
                 ) : isAffiliatesPage ? (
                   <>
-                    <MobileNavLink href="/store" label="Ir a la Tienda" publicOnly={false} icon={<Store size={20} />} />
+                    <MobileNavLink href="/store" label="Ir a la Tienda" publicOnly={false} icon={<Store size={18} />} />
                   </>
                 ) : (
-                  navLinks.map(link => <MobileNavLink key={link.href} {...link} />)
+                  <div className="flex flex-col gap-2">
+                    {navLinks.map(link => <MobileNavLink key={link.href} {...link} />)}
+                  </div>
                 )}
               </nav>
               <div className="mt-auto border-t p-4 space-y-4">

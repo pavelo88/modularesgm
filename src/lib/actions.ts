@@ -247,9 +247,11 @@ export async function saveSiteContent(content: SiteContent) {
   try {
     // Ensure nested objects aren't lost if they are undefined
     const cleanContent = JSON.parse(JSON.stringify(content));
-    await adminDb().doc('siteContent/main').set(cleanContent);
+    await adminDb().doc('siteContent/main').set(cleanContent, { merge: true });
     revalidatePath('/');
     revalidatePath('/store');
+    revalidatePath('/catalogo');
+    revalidatePath('/', 'layout');
     return { success: true };
   } catch (error) {
     console.error(error);
@@ -338,6 +340,23 @@ export interface AdminUserRecord {
   updatedAt?: string;
 }
 
+function toIsoDateString(val: any): string | undefined {
+  if (!val) return undefined;
+  if (typeof val === 'string') return val;
+  if (typeof val?.toDate === 'function') {
+    try {
+      return val.toDate().toISOString();
+    } catch {
+      return undefined;
+    }
+  }
+  if (typeof val?._seconds === 'number') {
+    return new Date(val._seconds * 1000).toISOString();
+  }
+  if (val instanceof Date) return val.toISOString();
+  return undefined;
+}
+
 export async function listAdminUsersAction(): Promise<{ success: boolean; users?: AdminUserRecord[]; error?: string }> {
   await requireAdmin();
   try {
@@ -365,8 +384,8 @@ export async function listAdminUsersAction(): Promise<{ success: boolean; users?
         rol: validRol,
         activo: data.activo !== false && data.active !== false,
         primerIngreso: data.primerIngreso === true,
-        createdAt: data.createdAt || new Date().toISOString(),
-        updatedAt: data.updatedAt,
+        createdAt: toIsoDateString(data.createdAt) || new Date().toISOString(),
+        updatedAt: toIsoDateString(data.updatedAt),
       };
     });
     return { success: true, users };

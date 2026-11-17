@@ -79,7 +79,11 @@ export function ProductCard({ product }: { product: Product }) {
 
   const handleWhatsAppQuote = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const message = `¡Hola Modulares GM! Me interesa solicitar una cotización personalizada del producto: *${product.title}*${product.dimensions ? ` (Medidas: ${product.dimensions})` : ''}. ¿Me podrían dar asesoría?`;
+    const priceText = product.price ? ` (Precio: $${product.price})` : '';
+    const dimText = product.dimensions ? ` - Medidas: ${product.dimensions}` : '';
+    const message = isCustomQuote
+      ? `¡Hola Modulares GM! Me interesa cotizar a medida el proyecto: *${product.title}*${dimText}. ¿Podrían agendar una visita técnica o asesorarme?`
+      : `¡Hola Modulares GM! Me interesa el producto: *${product.title}*${priceText}${dimText}. ¿Tienen disponibilidad o entrega e instalación en Quito?`;
     track('whatsapp_click', { location: 'producto', item_name: product.title });
     window.open(whatsappHref(whatsappNumber, message), '_blank');
   };
@@ -250,101 +254,140 @@ export function ProductCard({ product }: { product: Product }) {
                 <span>Cotizar</span>
               </Button>
             ) : (
-              <Button
-                size="sm"
-                onClick={handleAddToCart}
-                disabled={isOutOfStock}
-                className={cn(
-                  "h-8 rounded-full font-semibold text-xs px-3 py-1 flex items-center gap-1 active:scale-95 transition-all shadow-sm",
-                  addedAnimation
-                    ? "bg-emerald-600 text-white"
-                    : "bg-primary text-primary-foreground hover:bg-primary/90"
-                )}
-                aria-label={`Agregar ${product.title} al carrito`}
-              >
-                {addedAnimation ? (
-                  <>
-                    <Check size={13} />
-                    <span>Listo</span>
-                  </>
-                ) : (
-                  <>
-                    <Plus size={13} />
-                    <span>Agregar</span>
-                  </>
-                )}
-              </Button>
+              <div className="flex items-center gap-1.5">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleWhatsAppQuote}
+                  className="h-8 w-8 p-0 rounded-full border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-600 text-emerald-600 hover:text-white transition-all active:scale-95 shadow-sm"
+                  title="Consultar disponibilidad por WhatsApp"
+                  aria-label={`Consultar ${product.title} por WhatsApp`}
+                >
+                  <MessageCircle size={14} />
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={handleAddToCart}
+                  disabled={isOutOfStock}
+                  className={cn(
+                    "h-8 rounded-full font-semibold text-xs px-3 py-1 flex items-center gap-1 active:scale-95 transition-all shadow-sm",
+                    addedAnimation
+                      ? "bg-emerald-600 text-white"
+                      : "bg-primary text-primary-foreground hover:bg-primary/90"
+                  )}
+                  aria-label={`Agregar ${product.title} al carrito`}
+                >
+                  {addedAnimation ? (
+                    <>
+                      <Check size={13} />
+                      <span>Listo</span>
+                    </>
+                  ) : (
+                    <>
+                      <Plus size={13} />
+                      <span>Agregar</span>
+                    </>
+                  )}
+                </Button>
+              </div>
             )}
           </div>
         </div>
       </article>
 
-      {/* Modal de Vista Rápida ("Quick View" & Galería de Ángulos) */}
+      {/* Modal de Vista Rápida ("Quick View" & Galería de Ángulos - Mismo estándar de Catálogo) */}
       <Dialog open={isQuickViewOpen} onOpenChange={setIsQuickViewOpen}>
-        <DialogContent className="max-w-3xl rounded-3xl p-0 overflow-hidden bg-background/95 backdrop-blur-xl border-border/60">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            {/* Galería de Fotos del Producto */}
-            <div className="relative bg-muted/30 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-border/50">
-              <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-background/50 border border-border/40 shadow-inner">
-                <Image
-                  src={allImages[activeImageIdx] || allImages[0]}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                />
+        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-3xl bg-background/95 backdrop-blur-2xl border border-border/80 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+            {/* Columna Izquierda: Galería y Fotos del Producto */}
+            <div className="lg:col-span-6 bg-muted/20 p-5 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-border/60">
+              <div>
+                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-background border border-border/60 shadow-md">
+                  <Image
+                    src={allImages[activeImageIdx] || allImages[0]}
+                    alt={product.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 500px"
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full border border-white/10 shadow-sm">
+                    {product.category} • Ref GM-{product.id}
+                  </div>
+                </div>
+
+                {/* Miniaturas de los ángulos */}
+                {allImages.length > 1 && (
+                  <div className="flex items-center gap-2 mt-3 overflow-x-auto pb-1">
+                    {allImages.map((img, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveImageIdx(idx)}
+                        className={cn(
+                          "relative w-16 h-12 rounded-xl overflow-hidden border-2 transition-all shrink-0 active:scale-95",
+                          activeImageIdx === idx ? "border-primary scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"
+                        )}
+                      >
+                        <Image src={img} alt={`Ángulo ${idx + 1}`} fill className="object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Miniaturas de los ángulos */}
-              {allImages.length > 1 && (
-                <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-1">
-                  {allImages.map((img, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setActiveImageIdx(idx)}
-                      className={cn(
-                        "relative w-16 h-12 rounded-xl overflow-hidden border-2 transition-all shrink-0",
-                        activeImageIdx === idx ? "border-primary scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"
-                      )}
-                    >
-                      <Image src={img} alt={`Ángulo ${idx + 1}`} fill className="object-cover" />
-                    </button>
-                  ))}
+              {/* Sellos de Confianza de Fábrica GM */}
+              <div className="grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-border/60 text-center">
+                <div className="p-2 rounded-xl bg-card border border-border/50">
+                  <span className="text-[10px] font-bold text-foreground block">3 a 5 Años</span>
+                  <span className="text-[9px] text-muted-foreground block leading-tight">Garantía directa</span>
                 </div>
-              )}
+                <div className="p-2 rounded-xl bg-card border border-border/50">
+                  <span className="text-[10px] font-bold text-foreground block">Envíos Ecuador</span>
+                  <span className="text-[9px] text-muted-foreground block leading-tight">Quito y valles</span>
+                </div>
+                <div className="p-2 rounded-xl bg-card border border-border/50">
+                  <span className="text-[10px] font-bold text-foreground block">Pelikano RH</span>
+                  <span className="text-[9px] text-muted-foreground block leading-tight">18mm hidrófugo</span>
+                </div>
+              </div>
             </div>
 
-            {/* Información Técnica y Compra */}
-            <div className="p-6 md:p-8 flex flex-col justify-between">
+            {/* Columna Derecha: Información Técnica y Compra */}
+            <div className="lg:col-span-6 p-5 sm:p-8 flex flex-col justify-between gap-5 text-left">
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <Badge variant="outline" className="text-primary border-primary/30 text-xs">
-                    {product.category}
+                  <Badge variant="outline" className="text-primary border-primary/30 text-xs font-bold uppercase tracking-wider">
+                    {product.subcategory || product.category}
                   </Badge>
-                  {product.dimensions && (
-                    <span className="text-xs font-mono text-muted-foreground">
-                      {product.dimensions}
-                    </span>
-                  )}
+                  <span className="text-xs font-mono font-bold text-muted-foreground">
+                    SKU: GM-{product.id}
+                  </span>
                 </div>
 
-                <DialogTitle className="text-2xl font-bold font-headline mb-2">
+                <DialogTitle className="text-xl sm:text-2xl font-bold font-headline text-foreground leading-tight">
                   {product.title}
                 </DialogTitle>
 
-                <DialogDescription className="text-sm text-muted-foreground mb-4">
+                <DialogDescription className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed">
                   {product.desc}
                 </DialogDescription>
 
-                <div className="space-y-2 bg-muted/40 p-4 rounded-2xl border border-border/40 mb-6 text-xs text-foreground">
-                  <div className="flex justify-between py-1 border-b border-border/30">
+                <div className="mt-4 space-y-2 bg-muted/40 p-3.5 rounded-2xl border border-border/60 text-xs text-foreground">
+                  <div className="flex justify-between py-1 border-b border-border/40">
                     <span className="text-muted-foreground">Material:</span>
-                    <span className="font-semibold">{product.material || 'Melamina RH 18mm Pelikano'}</span>
+                    <span className="font-semibold text-right">{product.material || 'Melamina RH 18mm Pelikano'}</span>
                   </div>
-                  <div className="flex justify-between py-1 border-b border-border/30">
+                  <div className="flex justify-between py-1 border-b border-border/40">
                     <span className="text-muted-foreground">Garantía:</span>
                     <span className="font-semibold text-emerald-500">3 años contra defectos</span>
                   </div>
+                  {product.dimensions && (
+                    <div className="flex justify-between py-1 border-b border-border/40">
+                      <span className="text-muted-foreground">Dimensiones:</span>
+                      <span className="font-semibold">{product.dimensions}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between py-1">
                     <span className="text-muted-foreground">Instalación:</span>
                     <span className="font-semibold">Quito y valles (disponible)</span>
@@ -353,35 +396,55 @@ export function ProductCard({ product }: { product: Product }) {
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <span className="text-[11px] uppercase font-bold text-muted-foreground block">
-                      {isCustomQuote ? 'Presupuesto' : 'Precio Oficial'}
-                    </span>
-                    <span className="text-3xl font-black text-foreground">
+                <div className="p-3.5 rounded-2xl border border-primary/20 bg-primary/5 mb-4">
+                  <span className="text-[10px] uppercase font-bold text-muted-foreground block">
+                    {isCustomQuote ? 'Presupuesto' : 'Precio Oficial'}
+                  </span>
+                  <div className="flex items-baseline gap-2 mt-0.5">
+                    <span className="text-2xl sm:text-3xl font-black text-foreground">
                       {isCustomQuote ? 'A Medida' : `$${product.price}`}
                     </span>
-                    {unitLabel && <span className="text-xs text-muted-foreground ml-1">{unitLabel}</span>}
+                    {unitLabel && <span className="text-xs text-muted-foreground font-semibold">{unitLabel}</span>}
                   </div>
                 </div>
 
-                {isCustomQuote ? (
+                <div className="flex flex-col gap-2.5">
                   <Button
                     onClick={handleWhatsAppQuote}
-                    className="w-full rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-6 text-base shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
+                    className="w-full rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-5 sm:py-6 text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all"
                   >
-                    <MessageCircle size={20} />
-                    <span>Cotizar este modelo por WhatsApp</span>
+                    <MessageCircle size={18} />
+                    <span>
+                      {isCustomQuote 
+                        ? 'Cotizar por WhatsApp & Render 3D' 
+                        : 'Comprar / Cotizar por WhatsApp'}
+                    </span>
                   </Button>
-                ) : (
-                  <Button
-                    onClick={handleAddToCart}
-                    className="w-full rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 text-base shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
-                  >
-                    <Plus size={20} />
-                    <span>Agregar al Carrito</span>
-                  </Button>
-                )}
+
+                  {!isCustomQuote && (
+                    <Button
+                      variant="outline"
+                      onClick={handleAddToCart}
+                      disabled={isOutOfStock}
+                      className={cn(
+                        "w-full rounded-2xl border-border/80 hover:bg-muted font-semibold py-4 sm:py-5 text-xs sm:text-sm flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm",
+                        addedAnimation && "bg-emerald-600 text-white border-emerald-600"
+                      )}
+                    >
+                      {addedAnimation ? (
+                        <>
+                          <Check size={16} />
+                          <span>¡Agregado al Carrito!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Plus size={16} />
+                          <span>Agregar al Carrito</span>
+                        </>
+                      )}
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
           </div>

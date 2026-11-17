@@ -15,6 +15,8 @@ interface CardSliderProps {
   slideClassName?: string;
   autoplay?: boolean;
   className?: string;
+  direction?: 'ltr' | 'rtl';
+  delay?: number;
 }
 
 /**
@@ -24,23 +26,28 @@ interface CardSliderProps {
 export function CardSlider({
   label,
   children,
-  slideClassName = 'basis-[82%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4',
+  slideClassName = 'basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4',
   autoplay = true,
   className,
+  direction = 'ltr',
+  delay = 3000,
 }: CardSliderProps) {
   const [plugins, setPlugins] = useState<ReturnType<typeof Autoplay>[]>([]);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', skipSnaps: false }, plugins);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: 'start', skipSnaps: false, direction: direction },
+    plugins
+  );
   const [selected, setSelected] = useState(0);
   const [snaps, setSnaps] = useState<number[]>([]);
 
   useEffect(() => {
     if (!autoplay) return;
     const t = setTimeout(
-      () => setPlugins([Autoplay({ delay: 3500, stopOnInteraction: false, stopOnMouseEnter: true })]),
+      () => setPlugins([Autoplay({ delay: delay, stopOnInteraction: false, stopOnMouseEnter: true })]),
       800
     );
     return () => clearTimeout(t);
-  }, [autoplay]);
+  }, [autoplay, delay]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;

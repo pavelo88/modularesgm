@@ -34,6 +34,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { generateLuxuryCatalogPdf } from '@/lib/catalog-pdf-generator';
 import { ALL_CATALOG_PRODUCTS } from '@/lib/catalog-full';
 import type { Product } from '@/lib/types';
+import { CardSlider } from '@/components/shared/card-slider';
 import { useCart } from '@/context/cart-provider';
 import { useSiteContent } from '@/context/site-content-provider';
 import { SITE, whatsappHref } from '@/lib/site';
@@ -123,7 +124,7 @@ function CatalogProductCard({
         }
       }}
       className={cn(
-        "group relative w-[285px] sm:w-[320px] md:w-[340px] shrink-0 rounded-3xl border border-border/70 bg-card/85 backdrop-blur-md overflow-hidden cursor-pointer transition-all duration-300",
+        "group relative w-full sm:w-[320px] md:w-[340px] shrink-0 rounded-3xl border border-border/70 bg-card/85 backdrop-blur-md overflow-hidden cursor-pointer transition-all duration-300",
         "hover:border-primary/60 hover:shadow-[0_20px_45px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_20px_45px_rgba(0,0,0,0.45)] hover:-translate-y-2 active:scale-[0.98] select-none flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-primary/40"
       )}
     >
@@ -133,7 +134,7 @@ function CatalogProductCard({
           src={product.imgUrl}
           alt={`${product.title} - ${row.title}`}
           fill
-          sizes="(max-width: 640px) 285px, 340px"
+          sizes="(max-width: 640px) 100vw, 340px"
           className="object-cover transition-transform duration-700 ease-emil-out group-hover:scale-108"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
@@ -166,9 +167,9 @@ function CatalogProductCard({
       </div>
 
       {/* Body Info */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3">
-        <div>
-          <div className="flex items-center justify-between gap-2 mb-1">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-3 text-center sm:text-left items-center sm:items-stretch">
+        <div className="w-full">
+          <div className="flex items-center justify-center sm:justify-between gap-2 mb-1">
             <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
               {product.category} • GM-{product.id}
             </span>
@@ -188,7 +189,7 @@ function CatalogProductCard({
           </p>
 
           {product.material && (
-            <div className="mt-2.5 flex items-center gap-1 text-[10px] text-muted-foreground/90 bg-muted/50 px-2.5 py-1 rounded-md border border-border/40">
+            <div className="mt-2.5 flex items-center justify-center sm:justify-start gap-1 text-[10px] text-muted-foreground/90 bg-muted/50 px-2.5 py-1 rounded-md border border-border/40">
               <Sparkles size={10} className="text-primary shrink-0" />
               <span className="line-clamp-1">{product.material}</span>
             </div>
@@ -196,12 +197,12 @@ function CatalogProductCard({
         </div>
 
         {/* Footer with Price & Purchase Action */}
-        <div className="pt-3 border-t border-border/50 flex items-center justify-between gap-2">
-          <div>
+        <div className="w-full pt-3 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-center sm:text-left">
             <span className="text-[9px] uppercase font-bold tracking-wider text-muted-foreground block">
               {isCustomQuote ? 'Presupuesto' : 'Precio Directo'}
             </span>
-            <div className="flex items-baseline gap-1">
+            <div className="flex items-baseline justify-center sm:justify-start gap-1">
               <span className="text-base sm:text-lg font-black text-foreground tracking-tight">
                 {isCustomQuote ? 'A Medida' : `$${product.price.toLocaleString('es-EC')}`}
               </span>
@@ -217,7 +218,7 @@ function CatalogProductCard({
               e.stopPropagation();
               onOpenModal();
             }}
-            className="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/30 transition-all active:scale-95 shadow-sm"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/30 transition-all active:scale-95 shadow-sm"
           >
             <ShoppingBag size={13} />
             <span>Comprar</span>
@@ -344,32 +345,26 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
   return (
     <div className="min-h-screen pt-20 sm:pt-24 pb-20 bg-background text-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-primary transition-colors">
-            Inicio
-          </Link>
-          <ChevronRight size={13} />
-          <span className="text-foreground font-medium">Catálogo Oficial GM</span>
-        </nav>
+        {/* Espacio en blanco para preservar la altura sin el texto de inicio catálogo */}
+        <div className="h-6 mb-3" aria-hidden="true" />
 
-        {/* HERO EDITORIAL: 2 COLUMNAS */}
-        <header className="mb-6 pb-6 border-b border-border/60">
+        {/* HERO EDITORIAL: 2 COLUMNAS (Centrado en celulares) */}
+        <header className="mb-6 pb-6 border-b border-border/60 text-center lg:text-left">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Columna Izquierda: Títulos y Descripción */}
-            <div className="lg:col-span-7">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block">
+            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block text-center lg:text-left">
                 Catálogo General • Colecciones de Autor 2026
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15] text-center lg:text-left">
                 Catálogos de Muebles Modulares y Espacios a Medida
               </h1>
-              <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed">
+              <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed text-center lg:text-left">
                 Diseño arquitectónico con tableros hidrófugos Pelikano RH 18mm, herrajes alemanes Blum y mesones en cuarzo y granito. Explore las tarjetas interactivas de cada diseño para cotizar o comprar directamente.
               </p>
 
               {/* Botones de Acción de Autor en Hero */}
-              <div className="mt-4 flex flex-wrap items-center gap-3">
+              <div className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <button
                   type="button"
                   onClick={() => handleDownloadPdf()}
@@ -629,10 +624,10 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                   id={row.id}
                   className="relative scroll-mt-36 sm:scroll-mt-40 rounded-3xl border border-border/60 bg-card/40 backdrop-blur-md p-6 sm:p-8 lg:p-10 transition-all duration-300 hover:border-border/90 hover:shadow-xl"
                 >
-                  {/* Cabecera de la Sección / Fila */}
-                  <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-8">
-                    <div className="max-w-2xl">
-                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                  {/* Cabecera de la Sección / Fila (Centrado en móviles) */}
+                  <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-8 text-center lg:text-left items-center lg:items-start">
+                    <div className="max-w-2xl flex flex-col items-center lg:items-start">
+                      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-2">
                         <span className="font-mono text-xs font-bold text-primary tracking-widest">{row.num}</span>
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
                           {row.badge}
@@ -640,17 +635,17 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-muted text-foreground border border-border/50">
                           {displayedProducts.length} Diseños Disponibles
                         </span>
-                        <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground/80 px-2.5 py-0.5 rounded-full bg-background/60 border border-border/40">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground/80 px-2.5 py-0.5 rounded-full bg-background/60 border border-border/40">
                           {isEven ? <ArrowRight size={11} className="text-primary" /> : <ArrowLeft size={11} className="text-primary" />}
                           <span>{directionLabel}</span>
                         </span>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl font-headline font-bold text-foreground tracking-tight">
+                      <h2 className="text-2xl sm:text-3xl font-headline font-bold text-foreground tracking-tight text-center lg:text-left">
                         {row.title}
                       </h2>
-                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">{row.desc}</p>
+                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed text-center lg:text-left">{row.desc}</p>
                       
-                      <div className="flex flex-wrap gap-2 mt-4">
+                      <div className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4">
                         {row.specs.map((spec, i) => (
                           <span
                             key={i}
@@ -663,13 +658,13 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                     </div>
 
                     {/* Acciones de la Sección: Pausar/Reanudar, Tienda y Descargar PDF de la línea */}
-                    <div className="flex flex-wrap items-center gap-2.5 shrink-0 self-start lg:self-center">
+                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 shrink-0 self-center lg:self-start">
                       {/* Botón para Pausar o Reanudar el movimiento del carrusel */}
                       {displayedProducts.length > 3 && (
                         <button
                           type="button"
                           onClick={() => togglePauseRow(row.id)}
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded-full border border-border/80 bg-card hover:bg-muted text-foreground transition-all shadow-sm active:scale-95"
+                          className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded-full border border-border/80 bg-card hover:bg-muted text-foreground transition-all shadow-sm active:scale-95"
                           title={isPaused ? "Reanudar desplazamiento automático" : "Pausar desplazamiento"}
                         >
                           {isPaused ? (
@@ -711,11 +706,6 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                     </div>
                   </div>
 
-                  {/* CARRUSEL INFINITO ALTERNADO CON TARJETAS DE PRODUCTOS:
-                      - Pasa de Izquierda a Derecha en filas pares
-                      - Pasa de Derecha a Izquierda en filas impares
-                      - Se pausa automáticamente al pasar el cursor o tocar (hover/active)
-                      - Máscara de gradiente suave en los bordes para acabado de lujo */}
                   {displayedProducts.length === 0 ? (
                     <div className="py-8 text-center bg-card/20 rounded-2xl border border-dashed border-border/60">
                       <p className="text-xs text-muted-foreground">
@@ -723,7 +713,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                       </p>
                     </div>
                   ) : displayedProducts.length <= 3 ? (
-                    /* Si hay 3 o menos modelos (ej. por filtro de búsqueda), mostramos grilla estática elegante */
+                    /* Si hay 3 o menos modelos (ej. por filtro de búsqueda), mostramos grilla */
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                       {displayedProducts.map((product) => (
                         <CatalogProductCard
@@ -735,45 +725,64 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                       ))}
                     </div>
                   ) : (
-                    /* Carrusel Infinito con Track Duplicado para Bucle Continuo Matemático */
-                    <div className="relative overflow-hidden marquee-mask py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                      <div
-                        className={cn(
-                          marqueeAnimationClass,
-                          "flex items-stretch gap-5",
-                          isPaused && "marquee-paused"
-                        )}
-                      >
-                        {/* Primera pasada */}
-                        {displayedProducts.map((product, pIdx) => (
-                          <CatalogProductCard
-                            key={`orig-${product.id}-${pIdx}`}
-                            product={product}
-                            row={row}
-                            onOpenModal={() => handleOpenPurchaseModal(product, row)}
-                          />
-                        ))}
-                        {/* Segunda pasada duplicada para costura infinita sin cortes */}
-                        {displayedProducts.map((product, pIdx) => (
-                          <CatalogProductCard
-                            key={`dup-${product.id}-${pIdx}`}
-                            product={product}
-                            row={row}
-                            aria-hidden={true}
-                            onOpenModal={() => handleOpenPurchaseModal(product, row)}
-                          />
-                        ))}
+                    <>
+                      {/* EN CELULARES: Carrusel tarjeta por tarjeta cambiando cada 3 segundos automáticamente, alternando dirección */}
+                      <div className="md:hidden">
+                        <CardSlider
+                          label={row.title}
+                          slideClassName="basis-full"
+                          direction={isEven ? 'ltr' : 'rtl'}
+                          delay={3000}
+                        >
+                          {displayedProducts.map((product, pIdx) => (
+                            <CatalogProductCard
+                              key={`mob-${product.id}-${pIdx}`}
+                              product={product}
+                              row={row}
+                              onOpenModal={() => handleOpenPurchaseModal(product, row)}
+                            />
+                          ))}
+                        </CardSlider>
                       </div>
-                    </div>
+
+                      {/* EN ESCRITORIO: Carrusel Marquee suave alternado */}
+                      <div className="hidden md:block relative overflow-hidden marquee-mask py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                        <div
+                          className={cn(
+                            marqueeAnimationClass,
+                            "flex items-stretch gap-5",
+                            isPaused && "marquee-paused"
+                          )}
+                        >
+                          {displayedProducts.map((product, pIdx) => (
+                            <CatalogProductCard
+                              key={`orig-${product.id}-${pIdx}`}
+                              product={product}
+                              row={row}
+                              onOpenModal={() => handleOpenPurchaseModal(product, row)}
+                            />
+                          ))}
+                          {displayedProducts.map((product, pIdx) => (
+                            <CatalogProductCard
+                              key={`dup-${product.id}-${pIdx}`}
+                              product={product}
+                              row={row}
+                              aria-hidden={true}
+                              onOpenModal={() => handleOpenPurchaseModal(product, row)}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </>
                   )}
 
                   {/* Nota al pie de la sección informando al usuario sobre la interacción */}
-                  <div className="mt-4 flex items-center justify-between text-[11px] text-muted-foreground px-1">
+                  <div className="mt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-muted-foreground px-1 gap-2 text-center sm:text-left">
                     <span className="flex items-center gap-1.5">
-                      <Sparkles size={12} className="text-primary" />
-                      Pase el cursor o presione cualquier tarjeta para pausar y abrir los detalles de compra.
+                      <Sparkles size={12} className="text-primary shrink-0" />
+                      Toque cualquier tarjeta para ver fotos en alta definición y opciones de compra directa.
                     </span>
-                    <span className="hidden sm:inline font-mono text-[10px]">
+                    <span className="font-mono text-[10px]">
                       Pelikano RH 18mm • Herrajes Blum
                     </span>
                   </div>

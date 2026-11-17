@@ -6,6 +6,8 @@ import { HomeSeoContent } from '@/components/home/home-seo-content';
 import { AffiliateBand, CatalogSection, FeaturedProducts } from '@/components/home/storefront-sections';
 import { CampaignShowcase } from '@/components/home/campaign-showcase';
 import { ContactSection } from '@/components/home/contact/contact-section';
+import { TrustGuaranteeSection } from '@/components/home/trust-guarantee-section';
+import { SocialProofReviews } from '@/components/home/social-proof-reviews';
 import { useSiteContent } from '@/context/site-content-provider';
 import { defaultSiteContent } from '@/lib/data';
 
@@ -22,12 +24,14 @@ export default function HomePage() {
         ctaText={content.ctaText}
         stats={content.stats}
       />
+      <TrustGuaranteeSection />
       <CatalogSection services={content.services} products={content.products} />
       <CampaignShowcase />
       <BrandsCarousel brands={content.brands} />
       <FeaturedProducts products={content.products} />
+      <SocialProofReviews />
       <AffiliateBand />
-      <HomeSeoContent />
+      <HomeSeoContent whatsappNumber={content.whatsappNumber} />
       <ContactSection siteContent={content} />
     </>
   );

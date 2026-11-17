@@ -201,17 +201,17 @@ export function AdminDashboardClient() {
   return (
     <SidebarProvider>
       <Sidebar className="border-r border-stone-200/80 dark:border-stone-800/80 bg-stone-50/70 dark:bg-[#0c0e12]/70 backdrop-blur-2xl">
-        <SidebarHeader className="p-4 border-b border-stone-200/60 dark:border-stone-800/60">
-          <div className="flex items-center gap-3 p-1">
-            <div className="relative w-9 h-9 overflow-hidden rounded-2xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 p-1 shadow-sm shrink-0">
-              <Image src="/logo.png" alt="Modulares GM" fill className="object-contain p-1" />
+        <SidebarHeader className="h-16 px-4 py-0 border-b border-stone-200/60 dark:border-stone-800/60 flex items-center justify-center">
+          <div className="flex items-center gap-3 w-full">
+            <div className="relative w-8 h-8 overflow-hidden rounded-xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 p-1 shadow-sm shrink-0">
+              <Image src="/logo.png" alt="Modulares GM" fill className="object-contain p-0.5" />
             </div>
-            <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+            <div className="flex flex-col group-data-[collapsible=icon]:hidden leading-none">
               <div className="flex items-center gap-1.5">
-                <span className="text-sm font-bold tracking-tight text-stone-950 dark:text-white font-headline">Modulares GM</span>
-                <span className="px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-300">HQ</span>
+                <span className="text-xs font-bold tracking-tight text-stone-950 dark:text-white font-headline">Modulares GM</span>
+                <span className="px-1.5 py-0.5 rounded-full text-[8px] font-extrabold bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-300">HQ</span>
               </div>
-              <span className="text-[11px] text-stone-500 font-medium">Panel Administrativo</span>
+              <span className="text-[10px] text-stone-500 font-medium mt-0.5">Panel Administrativo</span>
             </div>
           </div>
         </SidebarHeader>

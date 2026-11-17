@@ -89,7 +89,7 @@ const RAIL_ITEMS: RailItem[] = HERO_SLIDES.map((s) => ({
  * Hero + franja de estadísticas en una sola pantalla.
  * El H1 es estático (SEO); lo que cambia con cada tarjeta es el fondo, la frase y las etiquetas.
  */
-export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
+export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSliderProps) {
   const rail = useRail(HERO_SLIDES.length);
   const slide = HERO_SLIDES[rail.active];
 
@@ -114,20 +114,22 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left">
             <p className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:text-xs">
               <Sparkles size={14} className="shrink-0 text-amber-400" />
               <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
             </p>
 
-            <h1 className="font-headline text-4xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] sm:text-5xl xl:text-6xl">
-              Cocinas modulares, cuarzo y muebles a medida en Ecuador
+            <h1 className="font-headline text-4xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] sm:text-5xl xl:text-6xl text-center sm:text-left">
+              {heroTitle || 'Cocinas modulares, cuarzo y muebles a medida en Ecuador'}
             </h1>
 
-            <div key={slide.id} className="mt-5 animate-in fade-in slide-in-from-bottom-2 duration-700">
-              <p className="font-headline text-xl font-semibold text-amber-400 sm:text-2xl">{slide.title}</p>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base">{slide.description || heroSubtitle}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
+            <div key={slide.id} className="mt-5 animate-in fade-in slide-in-from-bottom-2 duration-700 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <p className="font-headline text-xl font-semibold text-amber-400 sm:text-2xl text-center sm:text-left">{slide.title}</p>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base text-center sm:text-left">
+                {(rail.active === 0 && heroSubtitle) ? heroSubtitle : (slide.description || heroSubtitle)}
+              </p>
+              <ul className="mt-5 flex flex-wrap justify-center sm:justify-start gap-2">
                 {slide.tags.map((tag, i) => (
                   <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className="animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md sm:text-xs">
                     <CheckCircle2 size={12} className="text-amber-400" /> {tag}
@@ -136,16 +138,16 @@ export function HeroSlider({ heroSubtitle, ctaText, stats }: HeroSliderProps) {
               </ul>
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col w-full sm:w-auto gap-3 sm:flex-row justify-center sm:justify-start">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press w-full sm:w-auto"
               >
                 {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
               </Link>
               <Link
                 href={slide.ctaSecondary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press w-full sm:w-auto"
               >
                 <Store size={18} /> {slide.ctaSecondary.text}
               </Link>

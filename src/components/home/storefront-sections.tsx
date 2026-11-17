@@ -221,16 +221,16 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
   return (
     <section className="relative z-10 bg-muted/30 py-20" aria-labelledby="destacados-title">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/60">
-          <div>
+        <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/60 text-center sm:text-left items-center sm:items-end">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-2">
               <Sparkles size={13} />
               <span>Proyectos de Autor</span>
             </div>
-            <h2 id="destacados-title" className="font-headline text-3xl sm:text-4xl font-normal tracking-tight text-foreground">
+            <h2 id="destacados-title" className="font-headline text-3xl sm:text-4xl font-normal tracking-tight text-foreground text-center sm:text-left">
               Diseños Destacados & Fabricaciones
             </h2>
-            <p className="text-muted-foreground text-xs sm:text-sm font-light mt-1">
+            <p className="text-muted-foreground text-xs sm:text-sm font-light mt-1 text-center sm:text-left">
               Deslice para explorar ángulos fotográficos reales directamente en cada tarjeta.
             </p>
           </div>
@@ -239,7 +239,7 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
           </Button>
         </div>
 
-        <CardSlider label="Productos destacados" slideClassName="basis-[85%] sm:basis-1/2 lg:basis-1/3">
+        <CardSlider label="Productos destacados" slideClassName="basis-full sm:basis-1/2 lg:basis-1/3" delay={3000}>
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

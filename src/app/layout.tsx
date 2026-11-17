@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/context/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/cart-provider';
 import { SEOStructuredData } from '@/components/shared/seo-structured-data';
+import { WhatsAppAnalyticsTracker } from '@/components/shared/whatsapp-analytics-tracker';
 
 /** ID de medición GA4 (flujo web «modularesgm»). Es público; la variable de entorno lo puede reemplazar. */
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-2LKR039L8Y';
@@ -121,6 +122,7 @@ export default function RootLayout({
         >
           <CartProvider>
             <SEOStructuredData />
+            <WhatsAppAnalyticsTracker />
             {children}
             <Toaster />
           </CartProvider>

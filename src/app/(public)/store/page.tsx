@@ -154,30 +154,26 @@ function StoreContent() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-20 relative z-10">
         
-        {/* BREADCRUMB DE NAVEGACIÓN */}
-        <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-primary transition-colors">Inicio</Link>
-          <ChevronRight size={13} />
-          <span className="text-foreground font-medium">Tienda Oficial GM</span>
-        </nav>
+        {/* Espacio en blanco para preservar la altura sin el texto de breadcrumb */}
+        <div className="h-6 mb-3" aria-hidden="true" />
 
-        {/* HERO EDITORIAL DE LA TIENDA: 2 COLUMNAS */}
-        <header className="mb-6 pb-6 border-b border-border/60">
+        {/* HERO EDITORIAL DE LA TIENDA: 2 COLUMNAS (Centrado en móviles) */}
+        <header className="mb-6 pb-6 border-b border-border/60 text-center lg:text-left">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Columna Izquierda: Información y Acciones */}
-            <div className="lg:col-span-7">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block">
+            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block text-center lg:text-left">
                 Catálogo Oficial GM • Fabricación de Autor
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15] text-center lg:text-left">
                 Tienda & Catálogo de Mobiliario Modular
               </h1>
-              <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed">
+              <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed text-center lg:text-left">
                 Módulos listos para cotizar o comprar directamente. Melamina Pelikano RH 18mm hidrófuga, herrajes alemanes Blum y superficies nobles a medida.
               </p>
 
               {/* Botón de acceso a Catálogos Detallados */}
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-4 flex items-center justify-center lg:justify-start gap-3">
                 <Link
                   href="/catalogo"
                   className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"

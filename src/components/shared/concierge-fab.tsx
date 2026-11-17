@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { MessageCircle, Sparkles, Phone, X, Bot, ArrowRight, ChevronUp } from 'lucide-react';
-import { whatsappHref } from '@/lib/site';
+import { whatsappHref, formatPhone, toWhatsAppNumber } from '@/lib/site';
 import { track } from '@/lib/analytics';
 import type { SiteContent } from '@/lib/types';
 import { ChatWindow } from './chatbot/chat-window';
@@ -34,8 +34,8 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
   const activeMessage = routeMatch ? routeMatch[2] : DEFAULT_MESSAGE;
   const phoneNumber = siteContent.whatsappNumber || '+593963064374';
 
-  const handleOpenWhatsApp = () => {
-    track('whatsapp_click', { location: 'concierge_fab', page: pathname, topic: activeTopic });
+  const handleOpenWhatsApp = (loc = 'concierge_fab') => {
+    track('whatsapp_click', { location: loc, page: pathname, topic: activeTopic });
     window.open(whatsappHref(phoneNumber, activeMessage), '_blank', 'noopener,noreferrer');
     setIsOpen(false);
   };
@@ -47,7 +47,7 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
+    <div className="hidden md:flex fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex-col items-end">
       {/* Ventana Flotante del Asistente IA */}
       {isChatWindowOpen && (
         <div className="mb-3 animate-in slide-in-from-bottom-5">
@@ -90,7 +90,8 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
             {/* Opción 1: WhatsApp Humano */}
             <button
               type="button"
-              onClick={handleOpenWhatsApp}
+              onClick={() => handleOpenWhatsApp('concierge_menu')}
+              data-location="concierge_menu"
               className="w-full group flex items-start gap-3 p-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 active:scale-[0.98] transition-all text-left"
             >
               <div className="h-9 w-9 rounded-xl bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
@@ -131,11 +132,11 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
 
             {/* Opción 3: Llamar Directo */}
             <a
-              href="tel:+593963064374"
+              href={`tel:+${toWhatsAppNumber(phoneNumber)}`}
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border border-stone-200 dark:border-stone-800 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 text-xs font-medium text-muted-foreground hover:text-foreground transition-all"
             >
               <Phone size={14} className="text-stone-700 dark:text-stone-300" />
-              <span>Llamar a taller / oficina: +593 96 306 4374</span>
+              <span>Llamar a taller / oficina: {formatPhone(phoneNumber)}</span>
             </a>
           </div>
         </div>

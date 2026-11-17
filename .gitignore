@@ -51,3 +51,12 @@ firestore-debug.log.env
 
 # informes del auditor SEO
 seo-reports/
+
+# 3D Assets & Blender Heavy Files
+*.blend
+*.blend1
+polyhaven_hdris/
+assets_3d/
+render_*.png
+*.mp4
+scripts/

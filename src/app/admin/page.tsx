@@ -64,12 +64,16 @@ export default function AdminLoginPage() {
           return;
         }
         router.push('/admin/dashboard');
-      } catch (err) {
+      } catch (err: any) {
         const code = (err as { code?: string })?.code ?? '';
-        console.error('[admin-login]', err);
+        if (!code.startsWith('auth/')) {
+          console.error('[admin-login]', err);
+        } else {
+          console.warn('[admin-login] Credencial inválida o error auth:', code);
+        }
         setError(
           code.startsWith('auth/')
-            ? 'Correo o contraseña incorrectos.'
+            ? 'Correo o contraseña incorrectos. Verifica tus datos o solicita restablecimiento.'
             : 'Tus credenciales son correctas, pero el servidor no pudo abrir la sesión. Avisa al administrador técnico.'
         );
       }

@@ -14,7 +14,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
-import { formatPhone, whatsappHref } from '@/lib/site';
+import { formatPhone, whatsappHref, toWhatsAppNumber } from '@/lib/site';
 import { track } from '@/lib/analytics';
 
 interface ContactInfoProps {
@@ -46,9 +46,10 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
     return () => observer.disconnect();
   }, []);
 
-  const prefilledWhatsappUrl = `${whatsappHref(whatsappNumber)}?text=${encodeURIComponent(
+  const prefilledWhatsappUrl = whatsappHref(
+    whatsappNumber,
     'Hola Modulares GM, me comunico desde la web para solicitar asesoría técnica y cotización para un proyecto modular/cuarzo.'
-  )}`;
+  );
 
   return (
     <div className="flex flex-col h-full justify-between space-y-5 rounded-[2rem] border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#12161A] p-5 sm:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl">
@@ -123,7 +124,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
                 <span>WhatsApp</span>
               </a>
               <a
-                href={`tel:${whatsappNumber}`}
+                href={`tel:+${toWhatsAppNumber(whatsappNumber)}`}
                 className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-bold text-xs shadow-sm active:scale-95 transition-all text-center"
               >
                 <Phone size={14} />

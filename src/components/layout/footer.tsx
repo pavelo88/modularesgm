@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Facebook, Instagram, Linkedin, MapPin, Phone, MessageCircle, Mail, ArrowUpRight, ChevronDown } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { formatPhone, whatsappHref } from '@/lib/site';
+import { formatPhone, whatsappHref, toWhatsAppNumber } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
 interface FooterProps {
@@ -287,7 +287,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
 
               <div className="flex items-center gap-2.5 text-stone-800 dark:text-stone-300">
                 <Phone size={16} className="text-stone-950 dark:text-white shrink-0" />
-                <a href={`tel:${whatsappNumber}`} className="text-xs font-bold hover:underline">
+                <a href={`tel:+${toWhatsAppNumber(whatsappNumber)}`} className="text-xs font-bold hover:underline">
                   {formatPhone(whatsappNumber)}
                 </a>
               </div>
@@ -298,6 +298,8 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
                   href={whatsappHref(whatsappNumber, 'Hola Modulares GM, me comunico desde la web.')}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-location="footer"
+                  data-label="Footer WhatsApp Link"
                   className="text-xs font-bold hover:underline"
                 >
                   WhatsApp: {formatPhone(whatsappNumber)}

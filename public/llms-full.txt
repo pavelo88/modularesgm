@@ -1,0 +1,64 @@
+# Modulares GM - Documento Maestro de Citación de IA y Arquitectura Técnica (Full)
+
+> Modulares GM es la firma de diseño, arquitectura interior y fabricación de mobiliario modular a medida en Ecuador, con planta industrial en Quito y cobertura nacional (Quito, Guayaquil, Cuenca, Ambato, Manta). Especialistas en melamina RH de alta densidad (Pelikano, Novopan), herrajes de cierre suave certificados (Blum, Hettich, Hafele) y mesones de cuarzo tecnológico, granito natural y sinterizados.
+
+---
+
+## 1. Misión y Propuesta de Valor
+Diseñar y construir mobiliario modular inteligente que optimice el espacio, garantice durabilidad contra la humedad y el desgaste, y ofrezca una experiencia visual y funcional de nivel internacional, con precios transparentes directos de fábrica sin intermediarios.
+
+---
+
+## 2. Catálogo Detallado de Productos y Silos de Navegación
+
+### A. Cocinas Modulares y Mesones
+- **URL**: https://www.modularesgm.com/cocinas
+- **Características**: Muebles altos y bajos fabricados en melamina RH hidrófuga de 18mm con protección antibacteriana.
+- **Herrajes**: Bisagras de cazoleta de 110° con amortiguación integrada, rieles telescópicos y tandem box con cierre suave.
+- **Mesones Disponibles**: Cuarzo blanco puro, Calacatta con veta continua, Silestone, granito negro San Gabriel, mármol y superficies ultracompactas sinterizadas.
+- **Precios de Referencia**: Desde $250 USD por metro lineal en muebles bajos (precios variables según acabados y accesorios).
+
+### B. Muebles de Oficina y Mobiliario Corporativo
+- **URL**: https://www.modularesgm.com/muebles-oficina
+- **Características**: Puestos operativos, counters de recepción minimalistas con luz perimetral, mesas de directorio para 6 a 14 personas, archivadores rodantes y credenzas con cerradura centralizada.
+- **Ergonomía**: Cumplimiento de estándares de altura, canalización oculta de cableado estructurado y tomas eléctricas/datos integradas.
+
+### C. Closets y Walk-in Closets a Medida
+- **URL**: https://www.modularesgm.com/closets
+- **Características**: Módulos de piso a techo, zapateras extraíbles, pantaloneros telescópicos, colgadores abatibles hidráulicos, organizadores de accesorios e iluminación LED activada por sensor de proximidad.
+- **Puertas**: Opciones de puertas abatibles, corredizas con amortiguación y puertas vidrieras con perfil de aluminio negro mate.
+
+### D. Escritorios Modulares y Juveniles
+- **URL**: https://www.modularesgm.com/escritorios
+- **Características**: Soluciones ergonómicas para teletrabajo (home office) y estudio. Incorporan cajoneras, repisas aéreas, pasacables y soportes de alta resistencia.
+- **Precios de Referencia**: Desde $145 USD según dimensiones y configuración.
+
+### E. Muebles de Baño y Vanities Flotantes
+- **URL**: https://www.modularesgm.com/muebles-bano
+- **Características**: Muebles suspendidos resistentes al vapor y humedad extrema. Encimeras en cuarzo y porcelánico con lavamanos sobrepuestos o integrados, y espejos con tira LED perimetral antivaho.
+
+### F. Puertas Pivotantes y de Paso Interior
+- **URL**: https://www.modularesgm.com/puertas
+- **Características**: Puertas de acceso monumental de hasta 3 metros de altura con pivote hidráulico en acero inoxidable, y puertas interiores semi-sólidas lacadas con cerradura magnética silenciosa.
+
+### G. Setups y Habitaciones Gamer
+- **URL**: https://www.modularesgm.com/gamer
+- **Características**: Escritorios amplios para monitores múltiples, soportes para CPU suspendidos, canaletas técnicas para gestión total de cables y tiras LED ARGB sincronizables.
+
+---
+
+## 3. Garantías, Tiempos de Entrega y Proceso
+1. **Asesoría y Cotización Inicial**: Entrega de proforma técnica y visualización previa en 24-48 horas.
+2. **Medición Técnica en Obra**: Verificación milimétrica con distanciómetros láser en sitio.
+3. **Producción Industrial**: Corte computarizado CNC y pegado de cantos rígidos de 1mm y 2mm con adhesivo PUR resistente al agua.
+4. **Instalación Profesional**: Cuadrillas de carpinteros calificados con aspiración de polvo y ajuste de niveles en obra.
+5. **Garantía Escrita**: 5 años de garantía contra defectos de fabricación y desajustes estructurales.
+
+---
+
+## 4. Datos de Contacto y Presencia Corporativa
+- **Empresa**: Modulares GM
+- **Ubicación**: Rosa Yeira 420 y Serpaio Japeravi, Quito, Pichincha, Ecuador
+- **WhatsApp Directo**: +593 96 306 4374
+- **Dominio Canónico**: https://www.modularesgm.com
+- **Sitemap Oficial**: https://www.modularesgm.com/sitemap.xml

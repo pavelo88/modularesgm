@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Calendar, CheckCircle2, Clock, MessageCircle, Sparkles } from 'lucide-react';
 import { track } from '@/lib/analytics';
-import { SITE, whatsappHref } from '@/lib/site';
+import { SITE, whatsappHref, formatPhone } from '@/lib/site';
+import { useSiteContent } from '@/context/site-content-provider';
 
 const KITCHEN_SLIDES = [
   { img: '/images/catalog/extracted_DE_COCINAS/img-004.webp', title: 'Cocina Luxury Cappuccino', desc: 'Isla central y mesón de cuarzo blanco' },
@@ -16,6 +17,8 @@ const KITCHEN_SLIDES = [
 
 export function CampaignShowcase() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const { siteContent } = useSiteContent();
+  const contactPhone = siteContent?.whatsappNumber || SITE.phone;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -25,7 +28,7 @@ export function CampaignShowcase() {
   }, []);
 
   const whatsappUrl = whatsappHref(
-    SITE.phone,
+    contactPhone,
     '¡Hola Modulares GM! Me interesa la Campaña Navidad 2026 para renovar mi cocina. Quisiera asesoría técnica y cotización.'
   );
 
@@ -96,10 +99,13 @@ export function CampaignShowcase() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-location="campaign_showcase_mobile"
+              data-label="Campaña Navidad WhatsApp Móvil"
+              onClick={() => track('whatsapp_click', { location: 'campana_navidad_showcase_mobile' })}
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#1b736b] active:bg-[#155b55] text-white text-xs font-bold shadow-lg"
             >
               <MessageCircle size={16} className="text-emerald-300" />
-              <span>Escríbenos por WhatsApp 096 306 4374</span>
+              <span>Escríbenos por WhatsApp</span>
             </a>
             <Link
               href="/cocinas"
@@ -168,7 +174,7 @@ export function CampaignShowcase() {
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-[#1b736b] hover:bg-[#155b55] text-white text-sm font-bold shadow-lg transition-all active:scale-95 group"
               >
                 <MessageCircle size={18} className="text-emerald-300" />
-                <span>Escríbenos por WhatsApp 096 306 4374</span>
+                <span>Escríbenos por WhatsApp</span>
               </a>
 
               <Link

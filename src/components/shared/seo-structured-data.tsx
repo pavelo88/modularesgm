@@ -1,6 +1,8 @@
 import React from 'react';
+import { toWhatsAppNumber } from '@/lib/site';
 
-export function SEOStructuredData() {
+export function SEOStructuredData({ phone }: { phone?: string } = {}) {
+  const telephone = phone ? `+${toWhatsAppNumber(phone)}` : '+593963064374';
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -11,7 +13,7 @@ export function SEOStructuredData() {
         "url": "https://www.modularesgm.com",
         "image": "https://www.modularesgm.com/logo.png",
         "logo": "https://www.modularesgm.com/logo.png",
-        "telephone": "+593963064374",
+        "telephone": telephone,
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",

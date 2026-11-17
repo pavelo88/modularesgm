@@ -3,7 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        // Imágenes del catálogo GM subidas a Storage como objetos públicos (catalog/...).
+        // ImÃ¡genes del catÃ¡logo GM subidas a Storage como objetos pÃºblicos (catalog/...).
         protocol: 'https',
         hostname: 'storage.googleapis.com',
         port: '',

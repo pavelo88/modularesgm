@@ -8,6 +8,7 @@ import { TopBar } from '@/components/layout/top-bar';
 import { AffiliateProvider } from '@/context/affiliate-provider';
 import { BackgroundDecor, HeroBackground } from '@/components/shared/background-decor';
 import { ConciergeFAB } from '@/components/shared/concierge-fab';
+import { MobileBottomNav } from '@/components/layout/mobile-bottom-nav';
 import type { SiteContent } from '@/lib/types';
 import { SiteContentContext } from '@/context/site-content-provider';
 import { db } from '@/lib/firebase';
@@ -22,6 +23,12 @@ export function PublicLayoutClient({
   initialSiteContent: SiteContent;
 }) {
   const [siteContent, setSiteContent] = useState<SiteContent>(initialSiteContent);
+
+  useEffect(() => {
+    if (initialSiteContent) {
+      setSiteContent(initialSiteContent);
+    }
+  }, [initialSiteContent]);
 
   useEffect(() => {
     let isMounted = true;
@@ -116,6 +123,7 @@ export function PublicLayoutClient({
           socialUrls={siteContent.socialUrls}
         />
         {siteContent && <ConciergeFAB siteContent={siteContent} />}
+        <MobileBottomNav />
       </div>
      </AffiliateProvider>
     </SiteContentContext.Provider>

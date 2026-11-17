@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ClipboardCheck, Hammer, PencilRuler, Truck } from 'lucide-react';
-import { SITE_BASE } from '@/lib/site';
+import { SITE, SITE_BASE, formatPhone } from '@/lib/site';
 
 const PROCESS = [
   { icon: ClipboardCheck, title: 'Medición y asesoría', text: 'Visitamos tu espacio, tomamos medidas y definimos contigo distribución, materiales y presupuesto.' },
@@ -9,29 +9,32 @@ const PROCESS = [
   { icon: Truck, title: 'Entrega e instalación', text: 'Instalamos tus muebles y mesones de cuarzo o granito con cortes precisos y limpieza final.' },
 ];
 
-export const HOME_FAQ = [
+export const getHomeFaq = (phone: string = SITE.phone) => [
   { q: '¿Qué incluye una cocina modular de Modulares GM?', a: 'Diseño y renders 3D, fabricación a medida en melamina resistente a la humedad, herrajes de cierre lento Blum o Hafele e instalación. Puedes sumar mesón de cuarzo o granito, isla y accesorios.' },
   { q: '¿Trabajan solo en Quito?', a: 'Nuestro taller y oficina están en Quito y atendemos proyectos residenciales y comerciales en todo el Ecuador.' },
   { q: '¿La medición tiene costo?', a: 'No. La medición de tu espacio es gratuita y sirve de base para tu diseño y cotización.' },
   { q: '¿Qué materiales y marcas utilizan?', a: 'Trabajamos con tableros Novopan y Pelikano, herrajes Blum y Hafele, superficies Silestone y Dekton de Cosentino, y accesorios Teka, entre otras marcas.' },
   { q: '¿Puedo ver cómo quedará antes de fabricar?', a: 'Sí. Te entregamos renders fotorrealistas y planos técnicos para que apruebes el diseño antes de producir.' },
   { q: '¿Cómo puedo pagar?', a: 'En la tienda puedes pagar con transferencia o depósito, con tarjeta o PayPal, o contra entrega. Para proyectos a medida coordinamos la forma de pago en la cotización.' },
-  { q: '¿Cómo solicito una cotización?', a: 'Completa el formulario de contacto de esta página o escríbenos por WhatsApp al 096 306 4374 y un asesor te contactará.' },
+  { q: '¿Cómo solicito una cotización?', a: `Completa el formulario de contacto de esta página o escríbenos por WhatsApp al ${formatPhone(phone)} y un asesor te contactará.` },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': `${SITE_BASE}/#faq`,
-  mainEntity: HOME_FAQ.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+export const HOME_FAQ = getHomeFaq();
 
 /** Contenido editorial sin hooks: sale en el HTML inicial para buscadores y asistentes de IA. */
-export function HomeSeoContent() {
+export function HomeSeoContent({ whatsappNumber }: { whatsappNumber?: string } = {}) {
+  const faqList = getHomeFaq(whatsappNumber || SITE.phone);
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${SITE_BASE}/#faq`,
+    mainEntity: faqList.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -67,7 +70,7 @@ export function HomeSeoContent() {
         <div className="mx-auto max-w-3xl px-6 py-20">
           <h2 id="preguntas-title" className="mb-10 text-center font-headline text-3xl font-bold md:text-4xl">Preguntas frecuentes sobre cocinas y muebles a medida</h2>
           <div className="divide-y rounded-2xl border bg-card">
-            {HOME_FAQ.map((f) => (
+            {faqList.map((f) => (
               <details key={f.q} className="group p-5 [&_summary::-webkit-details-marker]:hidden">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold">
                   {f.q}

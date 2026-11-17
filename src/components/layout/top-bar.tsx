@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { BadgePercent, Facebook, Instagram, MessageCircle, Phone, Sparkles, X } from 'lucide-react';
 import { useAffiliate } from '@/context/affiliate-provider';
-import { SITE, formatPhone } from '@/lib/site';
+import { SITE, formatPhone, whatsappHref, toWhatsAppNumber } from '@/lib/site';
 import { CAMPAIGN } from '@/lib/campaign';
 
 const TICKER_MESSAGES = [
@@ -43,6 +43,8 @@ export function TopBar() {
   const { siteContent } = useSiteContent();
 
   const tickerMessages = siteContent?.tickerMessages || TICKER_MESSAGES;
+  const contactPhone = siteContent?.whatsappNumber || SITE.phone;
+  const phoneIntl = `+${toWhatsAppNumber(contactPhone)}`;
 
   return (
     <div
@@ -54,18 +56,20 @@ export function TopBar() {
         {/* Lado izquierdo: Contacto directo / Atelier */}
         <div className="hidden lg:flex items-center gap-3 shrink-0 text-stone-400">
           <a
-            href={`tel:${SITE.phoneIntl}`}
+            href={`tel:${phoneIntl}`}
             className="flex items-center gap-1.5 hover:text-amber-300 transition-colors"
             title="Línea directa de atención"
           >
             <Phone size={12} className="text-amber-400" />
-            <span className="tracking-wider">{formatPhone(SITE.phone)}</span>
+            <span className="tracking-wider">{formatPhone(contactPhone)}</span>
           </a>
           <span className="text-stone-700">|</span>
           <a
-            href={`https://wa.me/${SITE.phoneIntl.replace('+', '')}`}
+            href={whatsappHref(contactPhone)}
             target="_blank"
             rel="noopener noreferrer"
+            data-location="top_bar"
+            data-label="TopBar WhatsApp Direct"
             className="flex items-center gap-1 hover:text-emerald-300 transition-colors"
           >
             <MessageCircle size={12} className="text-emerald-400" />

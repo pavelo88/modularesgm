@@ -77,8 +77,8 @@ export function ContactForm() {
       if (result.success) {
         track('generate_lead', { form: 'cotizacion' });
         toast({
-          title: '¡Solicitud Arquitectónica Registrada!',
-          description: 'Gracias. Un asesor técnico revisará sus requerimientos y se comunicará en menos de 24h.',
+          title: '¡Solicitud Registrada con Éxito!',
+          description: 'Gracias. Un asesor técnico se comunicará por WhatsApp en menos de 15 minutos.',
         });
         setWhatsappFollowUp(
           whatsappHref(
@@ -118,6 +118,17 @@ export function ContactForm() {
           <p className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mt-1">
             Seleccione el tipo de proyecto y compártanos sus medidas o ideas iniciales.
           </p>
+          <a
+            href={whatsappHref(whatsappNumber, '¡Hola Modulares GM! Quisiera cotizar un proyecto a medida y recibir asesoría directa.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-location="contact_form_header"
+            data-label="Formulario WhatsApp Directo"
+            className="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 text-xs font-bold transition-all active:scale-95"
+          >
+            <MessageCircle size={14} />
+            <span>¿Prefieres chatear de inmediato? Escríbenos por WhatsApp</span>
+          </a>
         </div>
 
         {/* Formulario */}
@@ -246,7 +257,7 @@ export function ContactForm() {
                   </>
                 ) : (
                   <>
-                    <span>Solicitar Asesoría & Cotización</span>
+                    <span>Enviar Solicitud (Respuesta en 15 min)</span>
                     <ArrowRight size={16} />
                   </>
                 )}
@@ -260,15 +271,15 @@ export function ContactForm() {
       <div className="mt-5 pt-3.5 border-t border-stone-200 dark:border-stone-800 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-stone-800 dark:text-stone-200">
         <span className="inline-flex items-center gap-1.5">
           <CheckCircle2 size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
-          <span>Sin compromiso comercial</span>
+          <span>Sin costo ni compromiso</span>
         </span>
         <span className="inline-flex items-center gap-1.5">
           <Sparkles size={14} className="text-amber-600 dark:text-amber-400 shrink-0" />
-          <span>Respuesta técnica en 24h</span>
+          <span>Respuesta por WhatsApp &lt;15 min</span>
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
-          <span>Atención a nivel nacional</span>
+          <span>Quito, Valles y a nivel nacional</span>
         </span>
       </div>
     </div>
