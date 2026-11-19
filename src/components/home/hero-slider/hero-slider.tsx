@@ -96,7 +96,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
   return (
     <section className="relative z-10 select-none" aria-label="Servicios destacados de Modulares GM">
       {/* Hero: ocupa la pantalla menos la barra superior (36px) y la franja de stats (~92px) */}
-      <div className="relative isolate flex min-h-[calc(100svh-36px)] items-center overflow-hidden bg-black px-0 pt-24 pb-40 lg:min-h-[calc(100svh-36px-92px)] lg:px-0 lg:pt-24 lg:pb-10">
+      <div className="relative isolate flex min-h-[calc(100svh-36px-92px)] items-center overflow-hidden bg-black pt-28 pb-10 lg:pt-24">
         <div className="absolute inset-0 lg:left-[40%] -z-20">
           {HERO_SLIDES.map((s, i) => (
             <Image
@@ -114,7 +114,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
-          <div className="relative min-h-[calc(100svh-36px)] lg:min-h-0 lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left lg:self-stretch lg:justify-center">
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left">
             <p className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:text-xs">
               <Sparkles size={14} className="shrink-0 text-amber-400" />
               <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
@@ -138,7 +138,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
               </ul>
             </div>
 
-            <div className="absolute bottom-24 left-1/2 z-20 flex w-[calc(100%-2rem)] max-w-[360px] -translate-x-1/2 flex-col justify-center gap-3 lg:static lg:mt-auto lg:w-auto lg:max-w-none lg:translate-x-0 lg:flex-row lg:justify-start">
+            <div className="absolute bottom-6 left-1/2 z-20 flex w-[calc(100%-2rem)] max-w-[360px] -translate-x-1/2 flex-col justify-center gap-3 lg:static lg:mt-8 lg:w-auto lg:max-w-none lg:translate-x-0 lg:flex-row lg:justify-start">
               <Link
                 href={slide.ctaPrimary.href}
                 className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press lg:h-14 lg:w-auto lg:px-8 lg:text-base"
