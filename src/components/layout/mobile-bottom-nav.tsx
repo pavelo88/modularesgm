@@ -28,39 +28,39 @@ export function MobileBottomNav() {
   return (
     <nav
       aria-label="Navegación móvil"
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 overflow-visible rounded-t-[1.35rem] border-t border-stone-200/80 bg-white/96 shadow-[0_-10px_32px_rgba(15,23,42,0.16)] backdrop-blur-2xl dark:border-stone-800/80 dark:bg-[#0c0e12]/96 dark:shadow-[0_-10px_34px_rgba(0,0,0,0.65)] [padding-bottom:env(safe-area-inset-bottom)]"
+      className="md:hidden fixed inset-x-3 z-40 overflow-visible rounded-[1.5rem] border border-white/10 bg-[#0b1118]/95 text-white shadow-[0_14px_40px_rgba(0,0,0,0.34)] backdrop-blur-2xl [bottom:calc(env(safe-area-inset-bottom)+0.5rem)]"
     >
-      <div className="mx-auto grid h-[62px] max-w-md grid-cols-5 items-center px-2">
+      <div className="relative mx-auto grid h-[66px] max-w-md grid-cols-5 items-center px-1.5">
         {/* 1. Llamar por Teléfono */}
         <a
           href={telHref}
           onClick={() => track('phone_call_click', { location: 'mobile_bottom_bar', phone: telHref })}
-          className="flex flex-col items-center justify-center py-1 transition-all duration-200 active:scale-90 text-center text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 font-medium"
+          className="flex flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-center text-slate-400 transition-all duration-200 hover:text-white active:scale-90 font-medium"
           aria-label="Llamar a Modulares GM"
         >
-          <div className="flex items-center justify-center w-8 h-8 rounded-full transition-all bg-transparent">
-            <Phone size={19} strokeWidth={1.8} />
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/[0.04]">
+            <Phone size={17} strokeWidth={1.9} />
           </div>
-          <span className="text-[10px] tracking-tight leading-none mt-0.5">Llamar</span>
+          <span className="text-[9px] tracking-wide leading-none">Llamar</span>
         </a>
 
         {/* 2. Catálogo (Antes Tienda) */}
         <Link
           href="/catalogo"
           className={cn(
-            'flex flex-col items-center justify-center py-1 transition-all duration-200 active:scale-90 text-center',
+            'flex flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-center transition-all duration-200 active:scale-90',
             isCatalogo
-              ? 'text-amber-600 dark:text-amber-400 font-semibold'
-              : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 font-medium'
+              ? 'bg-white/10 text-amber-300 font-semibold'
+              : 'text-slate-400 hover:text-white font-medium'
           )}
         >
           <div className={cn(
-            'flex items-center justify-center w-8 h-8 rounded-full transition-all',
-            isCatalogo ? 'bg-amber-500/15 dark:bg-amber-400/15' : 'bg-transparent'
+            'flex h-8 w-8 items-center justify-center rounded-full transition-all',
+            isCatalogo ? 'bg-amber-400/15' : 'bg-white/[0.04]'
           )}>
             <LayoutGrid size={19} strokeWidth={isCatalogo ? 2.2 : 1.8} />
           </div>
-          <span className="text-[10px] tracking-tight leading-none mt-0.5">Catálogo</span>
+          <span className="text-[9px] tracking-wide leading-none">Catálogo</span>
         </Link>
 
         {/* 3. WhatsApp Central Integrado (Apple Style elevado) */}
@@ -68,12 +68,12 @@ export function MobileBottomNav() {
           type="button"
           onClick={handleWhatsAppClick}
           aria-label="Escribir por WhatsApp"
-          className="relative flex flex-col items-center justify-center py-1 transition-all duration-200 active:scale-95 text-center group"
+          className="relative z-10 flex flex-col items-center justify-center text-center transition-all duration-200 active:scale-95 group"
         >
-          <div className="-mt-6 flex h-13 w-13 items-center justify-center rounded-full border-4 border-white bg-[#25D366] text-white shadow-[0_6px_22px_rgba(37,211,102,0.6)] transition-transform group-hover:scale-105 active:scale-95 dark:border-[#0c0e12]">
-            <MessageCircle size={25} strokeWidth={2.4} />
+          <div className="-mt-8 flex h-14 w-14 items-center justify-center rounded-full border-[3px] border-[#0b1118] bg-[#25D366] text-white shadow-[0_7px_24px_rgba(37,211,102,0.5)] transition-transform group-hover:scale-105 active:scale-95">
+            <MessageCircle size={26} strokeWidth={2.35} />
           </div>
-          <span className="mt-1 text-[10px] font-bold tracking-tight leading-none text-[#128C7E] dark:text-[#25D366]">
+          <span className="mt-1.5 text-[9px] font-bold tracking-wide leading-none text-[#6ee7a0]">
             WhatsApp
           </span>
         </button>
@@ -82,38 +82,38 @@ export function MobileBottomNav() {
         <Link
           href="/#contacto"
           className={cn(
-            'flex flex-col items-center justify-center py-1 transition-all duration-200 active:scale-90 text-center',
+            'flex flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-center transition-all duration-200 active:scale-90',
             isContacto
-              ? 'text-amber-600 dark:text-amber-400 font-semibold'
-              : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 font-medium'
+              ? 'bg-white/10 text-amber-300 font-semibold'
+              : 'text-slate-400 hover:text-white font-medium'
           )}
         >
           <div className={cn(
-            'flex items-center justify-center w-8 h-8 rounded-full transition-all',
-            isContacto ? 'bg-amber-500/15 dark:bg-amber-400/15' : 'bg-transparent'
+            'flex h-8 w-8 items-center justify-center rounded-full transition-all',
+            isContacto ? 'bg-amber-400/15' : 'bg-white/[0.04]'
           )}>
             <MessageSquare size={19} strokeWidth={isContacto ? 2.2 : 1.8} />
           </div>
-          <span className="text-[10px] tracking-tight leading-none mt-0.5">Contacto</span>
+          <span className="text-[9px] tracking-wide leading-none">Contacto</span>
         </Link>
 
         {/* 5. Afiliados */}
         <Link
           href="/afiliados"
           className={cn(
-            'flex flex-col items-center justify-center py-1 transition-all duration-200 active:scale-90 text-center',
+            'flex flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-center transition-all duration-200 active:scale-90',
             isAfiliados
-              ? 'text-amber-600 dark:text-amber-400 font-semibold'
-              : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 font-medium'
+              ? 'bg-white/10 text-amber-300 font-semibold'
+              : 'text-slate-400 hover:text-white font-medium'
           )}
         >
           <div className={cn(
-            'flex items-center justify-center w-8 h-8 rounded-full transition-all',
-            isAfiliados ? 'bg-amber-500/15 dark:bg-amber-400/15' : 'bg-transparent'
+            'flex h-8 w-8 items-center justify-center rounded-full transition-all',
+            isAfiliados ? 'bg-amber-400/15' : 'bg-white/[0.04]'
           )}>
             <Handshake size={19} strokeWidth={isAfiliados ? 2.2 : 1.8} />
           </div>
-          <span className="text-[10px] tracking-tight leading-none mt-0.5">Afiliados</span>
+          <span className="text-[9px] tracking-wide leading-none">Afiliados</span>
         </Link>
       </div>
     </nav>
