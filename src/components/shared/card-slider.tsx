@@ -65,7 +65,7 @@ export function CardSlider({
   }, [emblaApi, onSelect]);
 
   return (
-    <div className={cn('relative', className)} role="region" aria-roledescription="carrusel" aria-label={label}>
+    <div dir={direction} className={cn('relative', className)} role="region" aria-roledescription="carrusel" aria-label={label}>
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex -ml-4 touch-pan-y">
           {children.map((child, i) => (
@@ -77,33 +77,31 @@ export function CardSlider({
       </div>
 
       <div className="mt-6 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2" aria-hidden>
-          {snaps.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              tabIndex={-1}
-              onClick={() => emblaApi?.scrollTo(i)}
-              className={cn('h-1.5 rounded-full transition-all duration-300', i === selected ? 'w-8 bg-primary shadow-sm' : 'w-3 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400')}
-            />
-          ))}
+        {/* Indicador numérico editorial limpio para evitar saturación de dots */}
+        <div className="flex items-center gap-2" aria-label={`Diapositiva ${selected + 1} de ${snaps.length || children.length}`}>
+          <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-muted-foreground bg-muted/50 border border-border/50 px-3 py-1 rounded-full backdrop-blur-sm">
+            <span className="text-foreground font-bold">{selected + 1}</span>
+            <span className="mx-1 text-muted-foreground/60">/</span>
+            <span>{snaps.length || children.length}</span>
+          </span>
         </div>
+
         <div className="flex gap-2">
           <button
             type="button"
             onClick={() => emblaApi?.scrollPrev()}
             aria-label="Anterior"
-            className="grid h-11 w-11 place-items-center rounded-xl border border-stone-300 dark:border-stone-700 bg-background/80 text-foreground backdrop-blur-md transition hover:bg-primary hover:text-white hover:border-primary active:scale-95 shadow-sm"
+            className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-xl border border-stone-300 dark:border-stone-700 bg-background/80 text-foreground backdrop-blur-md transition hover:bg-primary hover:text-white hover:border-primary active:scale-95 shadow-sm"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={18} />
           </button>
           <button
             type="button"
             onClick={() => emblaApi?.scrollNext()}
             aria-label="Siguiente"
-            className="grid h-11 w-11 place-items-center rounded-xl border border-stone-300 dark:border-stone-700 bg-background/80 text-foreground backdrop-blur-md transition hover:bg-primary hover:text-white hover:border-primary active:scale-95 shadow-sm"
+            className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-xl border border-stone-300 dark:border-stone-700 bg-background/80 text-foreground backdrop-blur-md transition hover:bg-primary hover:text-white hover:border-primary active:scale-95 shadow-sm"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>

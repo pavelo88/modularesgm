@@ -136,7 +136,7 @@ export function CategoryShowcase({ config, products }: CategoryShowcaseProps) {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground leading-[1.15]">
                   {config.h1}
                 </h1>
-                <p className="text-muted-foreground text-sm sm:text-base mt-3 font-normal max-w-2xl leading-relaxed">
+                <p className="max-w-2xl px-1 text-sm font-normal leading-relaxed text-muted-foreground sm:px-0 sm:text-base mt-3">
                   {config.heroSubtitle}
                 </p>
                 {/* Botón en ESCRITORIO */}
@@ -157,7 +157,7 @@ export function CategoryShowcase({ config, products }: CategoryShowcaseProps) {
                   <div className="p-3.5 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1.5 transition-all hover:border-primary/40 hover:shadow-md">
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
-                      <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
+                      <span className="font-bold text-xs text-foreground">Garantía 3 a 10 Años</span>
                     </div>
                     <p className="text-[11px] text-muted-foreground leading-tight">
                       Respaldo directo de fábrica en estructura y herrajes.

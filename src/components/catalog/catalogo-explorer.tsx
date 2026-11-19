@@ -653,7 +653,6 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
               // Impares (1, 3, 5...) -> Derecha a Izquierda (RTL)
               const isEven = index % 2 === 0;
               const isPaused = !!pausedRows[row.id];
-              const marqueeAnimationClass = isEven ? 'animate-marquee-ltr' : 'animate-marquee-rtl';
               const directionLabel = isEven ? 'Flujo: Izq → Der' : 'Flujo: Der → Izq';
 
               return (
@@ -681,7 +680,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                       <h2 className="text-2xl sm:text-3xl font-headline font-bold text-foreground tracking-tight text-center lg:text-left">
                         {row.title}
                       </h2>
-                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed text-center lg:text-left">{row.desc}</p>
+                      <p className="mt-2 max-w-2xl px-1 text-xs leading-relaxed text-muted-foreground text-center sm:px-0 sm:text-sm lg:text-left">{row.desc}</p>
                       
                       <div className="flex flex-wrap justify-center lg:justify-start gap-2 mt-4">
                         {row.specs.map((spec, i) => (
@@ -764,58 +763,23 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                       ))}
                     </div>
                   ) : (
-                    <>
-                      {/* EN CELULARES: Carrusel tarjeta por tarjeta cambiando cada 3 segundos automáticamente, alternando dirección */}
-                      <div className="md:hidden">
-                        <CardSlider
-                          label={row.title}
-                          slideClassName="basis-full"
-                          direction={isEven ? 'ltr' : 'rtl'}
-                          delay={3000}
-                        >
-                          {displayedProducts.map((product, pIdx) => (
-                            <CatalogProductCard
-                              key={`mob-${product.id}-${pIdx}`}
-                              product={product}
-                              row={row}
-                              whatsappNumber={whatsappNumber}
-                              onOpenModal={() => handleOpenPurchaseModal(product, row)}
-                            />
-                          ))}
-                        </CardSlider>
-                      </div>
-
-                      {/* EN ESCRITORIO: Carrusel Marquee suave alternado */}
-                      <div className="hidden md:block relative overflow-hidden marquee-mask py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                        <div
-                          className={cn(
-                            marqueeAnimationClass,
-                            "flex items-stretch gap-5",
-                            isPaused && "marquee-paused"
-                          )}
-                        >
-                          {displayedProducts.map((product, pIdx) => (
-                            <CatalogProductCard
-                              key={`orig-${product.id}-${pIdx}`}
-                              product={product}
-                              row={row}
-                              whatsappNumber={whatsappNumber}
-                              onOpenModal={() => handleOpenPurchaseModal(product, row)}
-                            />
-                          ))}
-                          {displayedProducts.map((product, pIdx) => (
-                            <CatalogProductCard
-                              key={`dup-${product.id}-${pIdx}`}
-                              product={product}
-                              row={row}
-                              whatsappNumber={whatsappNumber}
-                              aria-hidden={true}
-                              onOpenModal={() => handleOpenPurchaseModal(product, row)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </>
+                    <CardSlider
+                      label={row.title}
+                      slideClassName="basis-[88%] sm:basis-[52%] lg:basis-[32%]"
+                      direction={isEven ? 'ltr' : 'rtl'}
+                      autoplay={!isPaused}
+                      delay={3000}
+                    >
+                      {displayedProducts.map((product, pIdx) => (
+                        <CatalogProductCard
+                          key={`carousel-${product.id}-${pIdx}`}
+                          product={product}
+                          row={row}
+                          whatsappNumber={whatsappNumber}
+                          onOpenModal={() => handleOpenPurchaseModal(product, row)}
+                        />
+                      ))}
+                    </CardSlider>
                   )}
 
                   {/* Nota al pie de la sección informando al usuario sobre la interacción */}
