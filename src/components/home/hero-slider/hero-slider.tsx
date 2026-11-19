@@ -95,8 +95,8 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
 
   return (
     <section className="relative z-10 select-none" aria-label="Servicios destacados de Modulares GM">
-      {/* Hero: ocupa la pantalla completa en móviles para que la franja de estadísticas ('18+') quede 100% debajo del primer scroll */}
-      <div className="relative isolate flex min-h-[calc(100svh-36px-20px)] items-start pt-16 pb-12 sm:items-center sm:pt-24 sm:pb-28 lg:min-h-[calc(100svh-36px-92px)] lg:px-0 lg:pt-24 lg:pb-10 overflow-hidden bg-black px-0">
+      {/* Hero: ocupa la pantalla menos la barra superior (36px) y la franja de stats (~92px) */}
+      <div className="relative isolate flex min-h-[calc(100svh-36px-92px)] items-center overflow-hidden bg-black pt-28 pb-10 lg:pt-24">
         <div className="absolute inset-0 lg:left-[40%] -z-20">
           {HERO_SLIDES.map((s, i) => (
             <Image
@@ -110,51 +110,46 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
             />
           ))}
         </div>
-        {/* Overlay sutil para permitir ver la cocina con gran nitidez en el centro */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/30 to-black/20 lg:from-black lg:via-black/90 lg:to-transparent" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-transparent to-black/30 lg:from-black/50 lg:via-transparent lg:to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-transparent lg:bg-gradient-to-r lg:from-black lg:via-black/90 lg:to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start sm:items-center gap-4 sm:gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
-          <div className="min-w-0 w-full lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left">
-            {/* Pill superior pegado al header en móviles */}
-            <p className="mt-2 mb-2 sm:mt-0 sm:mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:px-4 sm:py-2 sm:text-xs">
-              <Sparkles size={13} className="shrink-0 text-amber-400" />
-              <span key={slide.id} className="animate-in fade-in duration-700">{slide.badge}</span>
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left">
+            <p className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:text-xs">
+              <Sparkles size={14} className="shrink-0 text-amber-400" />
+              <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
             </p>
 
-            {/* H1 ubicado más arriba y compacto en móviles */}
-            <h1 className="font-headline text-3xl font-bold leading-[1.1] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] sm:text-5xl xl:text-6xl text-center sm:text-left">
+            <h1 className="font-headline text-4xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] sm:text-5xl xl:text-6xl text-center sm:text-left">
               {heroTitle || 'Cocinas modulares, cuarzo y muebles a medida en Ecuador'}
             </h1>
 
-            {/* Zona descriptiva y tags */}
-            <div key={slide.id} className="mt-2 animate-in fade-in slide-in-from-bottom-2 duration-700 flex flex-col items-center sm:mt-5 sm:items-start text-center sm:text-left">
-              <p className="font-headline text-lg font-semibold text-amber-400 sm:text-2xl text-center sm:text-left">{slide.title}</p>
-              <p className="mt-1.5 max-w-xl text-xs sm:text-base leading-relaxed text-zinc-200 line-clamp-2 sm:line-clamp-none text-center sm:text-left drop-shadow-sm">
+            <div key={slide.id} className="mt-5 animate-in fade-in slide-in-from-bottom-2 duration-700 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <p className="font-headline text-xl font-semibold text-amber-400 sm:text-2xl text-center sm:text-left">{slide.title}</p>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 sm:text-base text-center sm:text-left">
                 {(rail.active === 0 && heroSubtitle) ? heroSubtitle : (slide.description || heroSubtitle)}
               </p>
-              <ul className="mt-3 sm:mt-5 flex flex-wrap justify-center sm:justify-start gap-1.5 sm:gap-2">
+              <ul className="mt-5 flex flex-wrap justify-center sm:justify-start gap-2">
                 {slide.tags.map((tag, i) => (
-                  <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className="animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/50 px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold text-white backdrop-blur-md">
-                    <CheckCircle2 size={11} className="text-amber-400 shrink-0" /> {tag}
+                  <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className="animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md sm:text-xs">
+                    <CheckCircle2 size={12} className="text-amber-400" /> {tag}
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* CTAs */}
-            <div className="mt-4 flex w-full flex-col items-center justify-center gap-2.5 sm:mt-8 sm:w-auto sm:flex-row sm:items-start sm:justify-start sm:gap-3">
+            <div className="relative z-20 mt-8 flex w-full -translate-y-5 flex-col justify-center gap-3 sm:w-auto sm:translate-y-0 sm:flex-row sm:justify-start">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex h-12 w-[calc(100%-2.5rem)] max-w-[340px] items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press sm:h-14 sm:w-auto sm:max-w-none sm:px-8 sm:text-base"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press w-full sm:w-auto"
               >
-                {ctaText || slide.ctaPrimary.text} <ArrowRight size={16} />
+                {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
               </Link>
               <Link
                 href={slide.ctaSecondary.href}
-                className="inline-flex h-12 w-[calc(100%-2.5rem)] max-w-[340px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-white/30 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press sm:h-14 sm:w-auto sm:max-w-none sm:px-8 sm:text-base"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press w-full sm:w-auto"
               >
-                <Store size={16} /> {slide.ctaSecondary.text}
+                <Store size={18} /> {slide.ctaSecondary.text}
               </Link>
             </div>
           </div>
