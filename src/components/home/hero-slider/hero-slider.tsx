@@ -96,7 +96,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
   return (
     <section className="relative z-10 select-none" aria-label="Servicios destacados de Modulares GM">
       {/* Hero: ocupa la pantalla menos la barra superior (36px) y la franja de stats (~92px) */}
-      <div className="relative isolate flex min-h-[calc(100svh-36px-92px)] items-center overflow-hidden bg-black pt-28 pb-10 lg:pt-24">
+      <div className="relative isolate flex min-h-[calc(100svh-36px)] items-center overflow-hidden bg-black px-0 pt-24 pb-40 lg:min-h-[calc(100svh-36px-92px)] lg:px-0 lg:pt-24 lg:pb-10">
         <div className="absolute inset-0 lg:left-[40%] -z-20">
           {HERO_SLIDES.map((s, i) => (
             <Image
@@ -138,16 +138,16 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
               </ul>
             </div>
 
-            <div className="relative z-20 mt-8 flex w-full -translate-y-5 flex-col justify-center gap-3 sm:w-auto sm:translate-y-0 sm:flex-row sm:justify-start">
+            <div className="absolute bottom-24 left-1/2 z-20 flex w-[calc(100%-2rem)] max-w-[360px] -translate-x-1/2 flex-col justify-center gap-3 lg:static lg:mt-8 lg:w-auto lg:max-w-none lg:translate-x-0 lg:flex-row lg:justify-start">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press w-full sm:w-auto"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active-press lg:h-14 lg:w-auto lg:px-8 lg:text-base"
               >
                 {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
               </Link>
               <Link
                 href={slide.ctaSecondary.href}
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press w-full sm:w-auto"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/20 active-press lg:h-14 lg:w-auto lg:px-8 lg:text-base"
               >
                 <Store size={18} /> {slide.ctaSecondary.text}
               </Link>
