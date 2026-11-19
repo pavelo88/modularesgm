@@ -51,18 +51,25 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
           <p className="mt-4 sm:mt-6 max-w-xl text-sm sm:text-base lg:text-lg text-white/85 leading-relaxed">
             Recibe tu enlace y código personal, comparte con quien remodela su casa y sigue tus ventas en un panel propio. Sin inversión ni inventario.
           </p>
-          <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
+          <div className="mt-6 sm:mt-8 flex flex-col gap-3.5 sm:flex-row w-full sm:w-auto max-w-md sm:max-w-none">
             <Link
               href="/afiliados/acceso?tab=registro"
-              className="inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-xl bg-amber-400 px-6 sm:px-8 text-sm sm:text-base font-bold text-stone-950 shadow-[0_0_35px_rgba(251,191,36,0.35)] transition hover:bg-amber-300 active:scale-95 w-full sm:w-auto"
+              className="group relative inline-flex h-16 items-center justify-center gap-3.5 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 px-8 shadow-[0_10px_25px_-5px_rgba(245,158,11,0.4),0_0_0_1px_rgba(255,255,255,0.35)_inset] transition-all duration-200 active:scale-95 w-full sm:w-auto"
             >
-              Quiero ser afiliado <ArrowRight size={16} />
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+                <span className="text-sm font-extrabold uppercase tracking-wide drop-shadow-xs">Afiliarme Gratis</span>
+                <span className="text-[11px] font-semibold text-stone-900/80">Comisiones directas del 10% · Sin inversión</span>
+              </div>
+              <ArrowRight size={18} className="shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
             <Link
-              href="/afiliados/acceso"
-              className="inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-6 sm:px-8 text-sm sm:text-base font-bold backdrop-blur-md transition hover:bg-white/20 active:scale-95 w-full sm:w-auto"
+              href="/afiliados/acceso?tab=login"
+              className="group relative inline-flex h-16 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl hover:bg-white/15 px-7 text-white shadow-[0_4px_16px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1)_inset] transition-all duration-200 active:scale-95 w-full sm:w-auto"
             >
-              <LogIn size={16} /> Ya tengo cuenta
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+                <span className="text-xs font-semibold text-white/70">¿Ya tienes cuenta?</span>
+                <span className="text-xs font-bold text-white">Iniciar Sesión</span>
+              </div>
             </Link>
           </div>
         </div>

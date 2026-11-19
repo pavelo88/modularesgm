@@ -79,19 +79,26 @@ export default function AffiliatesLandingPage() {
             Gana comisiones directas recomendando cocinas a medida, mesones de cuarzo y clósets de alta gama. Sin stock, sin costos y con panel de seguimiento en tiempo real.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md sm:max-w-none mx-auto">
             <Link
               href="/afiliados/acceso?tab=registro"
-              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold px-8 text-base shadow-lg shadow-amber-500/25 transition active:scale-95"
+              className="group relative inline-flex w-full sm:w-auto h-16 items-center justify-center gap-3.5 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 px-8 shadow-[0_10px_25px_-5px_rgba(245,158,11,0.4),0_0_0_1px_rgba(255,255,255,0.35)_inset] transition-all duration-200 active:scale-95"
             >
-              <span>Registrarme Gratis como Afiliado GM</span>
-              <ArrowRight size={19} />
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+                <span className="text-sm font-extrabold uppercase tracking-wide drop-shadow-xs">Afiliarme Gratis</span>
+                <span className="text-[11px] font-semibold text-stone-900/80">Comisiones directas del 10% · Sin inversión</span>
+              </div>
+              <ArrowRight size={18} className="shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
+
             <Link
               href="/afiliados/acceso?tab=login"
-              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-2xl border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-card px-6 text-sm font-semibold text-foreground transition active:scale-95"
+              className="group relative inline-flex w-full sm:w-auto h-16 items-center justify-center gap-2 rounded-2xl border border-stone-300/80 dark:border-stone-700/80 bg-stone-100/60 dark:bg-stone-900/60 backdrop-blur-xl hover:bg-stone-200/60 dark:hover:bg-stone-800/60 px-7 text-foreground shadow-[0_4px_16px_rgba(0,0,0,0.06),0_0_0_1px_rgba(255,255,255,0.08)_inset] transition-all duration-200 active:scale-95"
             >
-              ¿Ya tienes cuenta? Iniciar Sesión
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+                <span className="text-xs font-semibold text-muted-foreground">¿Ya tienes cuenta?</span>
+                <span className="text-xs font-bold text-foreground">Iniciar Sesión</span>
+              </div>
             </Link>
           </div>
 
@@ -209,19 +216,26 @@ export default function AffiliatesLandingPage() {
           <p className="relative mx-auto mt-4 max-w-xl text-stone-300 text-base sm:text-lg">
             Crear tu cuenta toma menos de un minuto. Recibe tu código de afiliado y empieza a compartirlo de inmediato.
           </p>
-          <div className="relative mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="relative mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md sm:max-w-none mx-auto">
             <Link
               href="/afiliados/acceso?tab=registro"
-              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-2xl bg-amber-400 hover:bg-amber-300 px-8 font-bold text-stone-950 text-base transition active:scale-95 shadow-lg shadow-amber-500/20"
+              className="group relative inline-flex w-full sm:w-auto h-16 items-center justify-center gap-3.5 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 px-8 shadow-[0_10px_25px_-5px_rgba(245,158,11,0.4),0_0_0_1px_rgba(255,255,255,0.35)_inset] transition-all duration-200 active:scale-95"
             >
-              <span>Crear Mi Cuenta Gratis Ahora</span>
-              <ArrowRight size={19} />
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+                <span className="text-sm font-extrabold uppercase tracking-wide drop-shadow-xs">Crear Mi Cuenta Gratis</span>
+                <span className="text-[11px] font-semibold text-stone-900/80">Código y panel listos en 60 segundos</span>
+              </div>
+              <ArrowRight size={18} className="shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
+
             <Link
               href="/afiliados/acceso?tab=login"
-              className="inline-flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-2xl border border-stone-700 bg-stone-800/80 hover:bg-stone-800 px-7 font-semibold text-white text-sm transition active:scale-95"
+              className="group relative inline-flex w-full sm:w-auto h-16 items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl hover:bg-white/15 px-7 text-white shadow-[0_4px_16px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1)_inset] transition-all duration-200 active:scale-95"
             >
-              Ya soy afiliado · Acceder
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left leading-tight">
+                <span className="text-xs font-semibold text-stone-300">¿Ya tienes cuenta?</span>
+                <span className="text-xs font-bold text-white">Iniciar Sesión</span>
+              </div>
             </Link>
           </div>
         </div>

@@ -405,30 +405,6 @@ export function AdminDashboardClient() {
                     <span>+ Añadir</span>
                   </Button>
                 )}
-
-                {isCmsEditableTab && (
-                  <div className="flex items-center gap-1.5">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleGlobalRestore}
-                      title="Restaurar valores de esta sección"
-                      className="rounded-full text-xs font-medium h-9 px-3 border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95"
-                    >
-                      <RotateCcw className="h-3.5 w-3.5 mr-1 text-muted-foreground" />
-                      <span>Restaurar</span>
-                    </Button>
-                    <Button
-                      size="sm"
-                      onClick={handleGlobalSave}
-                      disabled={isSaving}
-                      className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
-                    >
-                      {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
-                      <span>Guardar</span>
-                    </Button>
-                  </div>
-                )}
               </div>
 
               {/* Botón Circular Modo Claro / Oscuro (Sol / Luna) */}
@@ -546,11 +522,11 @@ export function AdminDashboardClient() {
           </div>
         </main>
 
-        {/* Barra de guardado/acciones de TODO EL ANCHO fija en la parte inferior */}
+        {/* Barra de guardado/acciones de TODO EL ANCHO fija en la parte inferior (SOLO EN ESCRITORIO) */}
         {isCmsEditableTab && (
           <footer
             aria-label="Barra de acciones persistente"
-            className="fixed bottom-0 right-0 left-0 md:left-[var(--sidebar-width)] z-40 h-16 border-t border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl transition-[left] duration-200 px-4 sm:px-8 flex items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_25px_rgba(0,0,0,0.5)]"
+            className="hidden md:flex fixed bottom-0 right-0 left-0 md:left-[var(--sidebar-width)] z-40 h-16 border-t border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl transition-[left] duration-200 px-4 sm:px-8 items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_25px_rgba(0,0,0,0.5)]"
           >
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="hidden sm:inline font-medium">Cambios en {headerInfo.title}:</span>

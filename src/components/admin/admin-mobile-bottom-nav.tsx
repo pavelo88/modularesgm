@@ -37,15 +37,11 @@ interface AdminMobileBottomNavProps {
 export function AdminMobileBottomNav({
   activeTab,
   setActiveTab,
-  isCmsEditableTab,
 }: AdminMobileBottomNavProps) {
   return (
     <nav
       aria-label="Navegación móvil del panel"
-      className={cn(
-        'md:hidden fixed z-40 left-0 right-0 border-t border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_25px_rgba(0,0,0,0.5)] transition-all',
-        isCmsEditableTab ? 'bottom-16' : 'bottom-0'
-      )}
+      className="md:hidden fixed z-40 bottom-0 left-0 right-0 border-t border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_25px_rgba(0,0,0,0.5)]"
     >
       <div className="grid grid-cols-5 h-16 max-w-md mx-auto items-center px-1">
         {ADMIN_MOBILE_NAV_ITEMS.map((item) => {
