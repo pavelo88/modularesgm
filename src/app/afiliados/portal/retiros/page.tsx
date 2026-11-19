@@ -80,8 +80,6 @@ export default function WithdrawalsPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Finanzas" title="Retiros" subtitle={`Retira tus ganancias cuando quieras. El mínimo es ${money(settings.minWithdrawal)}.`} />
-
       <div className="mb-6 grid gap-3 sm:grid-cols-2 md:mb-8 md:gap-4">
         <StatCard tone="primary" delay={60} icon={Wallet} label="Disponible para retirar" value={money(affiliate.availableBalance)} />
         <StatCard delay={100} icon={Clock} label="En revisión" value={money(affiliate.pendingBalance)} hint="Solicitudes pendientes de pago" />

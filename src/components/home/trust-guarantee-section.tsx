@@ -15,9 +15,9 @@ const GUARANTEES = [
   },
   {
     icon: Clock,
-    title: 'Entrega Puntual Garantizada por Contrato',
-    subtitle: '15 a 21 días laborables o penalidad a nuestro cargo',
-    desc: 'Erradicamos la informalidad del gremio. Tu fecha de entrega queda firmada bajo contrato notariado: si nos retrasamos un solo día, te bonificamos $50 USD diarios.',
+    title: 'Fecha de Entrega por Escrito',
+    subtitle: 'Entre 15 y 20 días hábiles desde la aprobación del diseño',
+    desc: 'Erradicamos la informalidad del gremio. Tu fecha de entrega queda registrada en el contrato antes de fabricar, para que sepas exactamente cuándo llega tu proyecto.',
     badge: 'Cero Retrasos',
   },
   {
@@ -29,8 +29,8 @@ const GUARANTEES = [
   },
   {
     icon: ShieldCheck,
-    title: 'Garantía Escrita de 5 Años',
-    subtitle: 'Herrajes Blum/Hafele y melamina marina RH',
+    title: 'Garantía Escrita de 3 a 10 Años',
+    subtitle: 'Según el producto. Herrajes Blum/Hafele y melamina RH',
     desc: 'Estructuras reforzadas de 18mm resistentes a la humedad, cantos gruesos termoencolados a presión y bisagras con amortiguación garantizadas de por vida.',
     badge: 'Calidad Certificada',
   },
@@ -58,9 +58,9 @@ export function TrustGuaranteeSection() {
           </div>
 
           <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950 dark:text-white leading-[1.15]">
-            Tranquilidad absoluta para tu hogar.
+            {siteContent?.trustTitle || 'Tranquilidad absoluta para tu hogar.'}
             <span className="block text-primary text-2xl sm:text-3xl lg:text-4xl mt-1">
-              Cero informalidad, cero retrasos y contrato legal.
+              {siteContent?.trustSubtitle || 'Cero informalidad, cero retrasos y contrato legal.'}
             </span>
           </h2>
 

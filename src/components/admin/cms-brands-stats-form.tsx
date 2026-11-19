@@ -105,21 +105,6 @@ export function CmsBrandsStatsForm({ siteContent, setSiteContent }: CmsBrandsSta
 
   return (
     <div className="space-y-8 pb-20">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-card p-4 rounded-xl border">
-        <div>
-          <h2 className="text-xl font-bold">Marcas y Experiencia</h2>
-          <p className="text-sm text-muted-foreground">Gestiona logos de proveedores y datos del Hero.</p>
-        </div>
-        <div className="flex flex-wrap gap-2 [&>button]:flex-1 sm:[&>button]:flex-none">
-          <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
-            <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
-          </Button>
-          <Button onClick={handleSave} disabled={isSaving}>
-            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            Guardar Cambios
-          </Button>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 gap-8">
         {/* 1. ESTADÍSTICAS (EXPERIENCIA) PRIMERO */}

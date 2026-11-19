@@ -23,8 +23,15 @@ const fmt = (n: number) => n.toLocaleString('es-EC');
 const dayLabel = (iso: string, opts: Intl.DateTimeFormatOptions) =>
   new Date(`${iso}T12:00:00Z`).toLocaleDateString('es-EC', { timeZone: 'UTC', ...opts });
 
-export function AnalyticsDashboard() {
-  const [days, setDays] = useState<AnalyticsDays>(28);
+interface AnalyticsDashboardProps {
+  days?: AnalyticsDays;
+  setDays?: (days: AnalyticsDays) => void;
+}
+
+export function AnalyticsDashboard({ days: propDays, setDays: propSetDays }: AnalyticsDashboardProps = {}) {
+  const [internalDays, setInternalDays] = useState<AnalyticsDays>(28);
+  const days = propDays ?? internalDays;
+  const setDays = propSetDays ?? setInternalDays;
   const [data, setData] = useState<AnalyticsReport | AnalyticsSetupError | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -42,33 +49,6 @@ export function AnalyticsDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-semibold">Visitas de modularesgm.com</h2>
-          <p className="text-sm text-muted-foreground">Datos de Google Analytics. Pueden tardar hasta 24 horas en aparecer.</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <div role="group" aria-label="Periodo" className="inline-flex rounded-lg border bg-background p-1">
-            {PERIODS.map((p) => (
-              <button
-                key={p.days}
-                type="button"
-                onClick={() => setDays(p.days)}
-                aria-pressed={days === p.days}
-                className={cn(
-                  'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-                  days === p.days ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-          <Button variant="outline" size="icon" onClick={() => load(days)} disabled={isPending} aria-label="Actualizar">
-            {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
-          </Button>
-        </div>
-      </div>
 
       {!data ? (
         <LoadingState />

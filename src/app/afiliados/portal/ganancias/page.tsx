@@ -46,8 +46,6 @@ export default function EarningsPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Finanzas" title="Mis ganancias" subtitle="Cada comisión que generan tus ventas y las de tu red, en tiempo real." />
-
       <div className="mb-6 grid gap-3 sm:grid-cols-3 md:mb-8 md:gap-4">
         <StatCard tone="primary" delay={60} icon={Wallet} label="Disponible ahora" value={money(affiliate.availableBalance)} />
         <StatCard delay={100} icon={PiggyBank} label="Comisiones acreditadas" value={money(credited)} />

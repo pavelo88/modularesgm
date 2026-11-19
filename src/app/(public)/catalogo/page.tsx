@@ -27,7 +27,7 @@ const CATALOG_ROWS: CatalogRow[] = [
     badge: 'Línea de Autor',
     categoryTag: 'cocinas',
     desc: 'Diseño arquitectónico a medida. Tableros melamínicos Pelikano RH de 18mm resistentes a humedad y calor, herrajes alemanes Blum con cierre amortiguado y mesones en cuarzo Calacatta o granito natural.',
-    specs: ['Tablero Pelikano RH 18mm', 'Cuarzo Antibacterial', 'Herrajes Blum Cierre Suave', 'Garantía 3 a 5 Años'],
+    specs: ['Tablero Pelikano RH 18mm', 'Cuarzo Antibacterial', 'Herrajes Blum Cierre Suave', 'Garantía 3 a 10 Años'],
     href: '/cocinas',
     ctaText: 'Explorar Catálogo de Cocinas',
     photos: [

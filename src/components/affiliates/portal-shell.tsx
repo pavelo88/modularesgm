@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
+import { getPortalHeaderInfo } from './portal-header-utils';
 
 const nav = [
   { href: '/afiliados/portal', label: 'Resumen', short: 'Resumen', icon: LayoutDashboard },
@@ -133,56 +134,72 @@ function PortalShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       <div className="lg:pl-[17rem]">
-        {/* ───────── Encabezado (todas las pantallas) ───────── */}
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-3 bg-background/80 px-4 shadow-[0_1px_0_hsl(var(--border)/0.85)] backdrop-blur-xl md:px-8">
-          <div className="lg:hidden">
-            <Brand compact />
-          </div>
-          <div className="hidden items-center gap-2 text-sm lg:flex">
-            <span className="text-muted-foreground">Portal</span>
-            <span className="text-muted-foreground/50">/</span>
-            <span className="font-semibold">{current.label}</span>
+        {/* ───────── Encabezado estilo /admin (todas las pantallas) ───────── */}
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 px-4 backdrop-blur-2xl transition-[left] duration-200 md:px-8 shadow-xs">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="lg:hidden shrink-0">
+              <Brand compact />
+            </div>
+            <div className="min-w-0 hidden sm:block">
+              <h1 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-foreground font-headline truncate leading-tight">
+                {getPortalHeaderInfo(pathname).title}
+              </h1>
+              <p className="text-[11px] sm:text-xs text-muted-foreground truncate leading-tight mt-0.5 max-w-xl">
+                {getPortalHeaderInfo(pathname).desc}
+              </p>
+            </div>
           </div>
 
-          <div className="ml-auto flex items-center gap-1">
+          <div className="ml-auto flex items-center gap-2 shrink-0">
             <a
               href="/store"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-1.5 rounded-xl px-3 py-2 text-[13px] font-medium text-muted-foreground transition-[background-color,color,transform] duration-150 hover:bg-muted hover:text-foreground active:scale-95 sm:flex"
+              className="hidden items-center gap-1.5 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 px-3.5 py-1.5 text-xs font-semibold text-stone-700 dark:text-stone-300 transition-all hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95 sm:flex shadow-xs"
             >
-              Ver tienda <ExternalLink size={13} />
+              <span>Ver Tienda</span>
+              <ExternalLink size={12} className="text-muted-foreground" />
             </a>
+
             <ThemeToggle />
 
             <DropdownMenu>
               <DropdownMenuTrigger
                 aria-label="Menú de tu cuenta"
-                className="ml-1 flex items-center gap-2 rounded-xl py-1 pl-1 pr-2 transition-[background-color,transform] duration-150 hover:bg-muted active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="ml-1 flex items-center gap-2 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 py-1 pl-1 pr-3 transition-all hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Initials name={affiliate.name} size={34} />
-                <span className="hidden max-w-[7rem] truncate text-sm font-medium md:block">{firstName}</span>
-                <ChevronDown size={15} className="hidden text-muted-foreground md:block" />
+                <Initials name={affiliate.name} size={30} />
+                <span className="hidden max-w-[7rem] truncate text-xs font-bold md:block text-foreground">{firstName}</span>
+                <ChevronDown size={14} className="hidden text-muted-foreground md:block" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-60 rounded-xl p-1.5">
-                <DropdownMenuLabel className="px-2.5 py-2">
-                  <p className="truncate text-sm font-semibold">{affiliate.name}</p>
-                  <p className="truncate text-xs font-normal text-muted-foreground">{affiliate.email}</p>
+              <DropdownMenuContent align="end" className="w-60 rounded-2xl p-1.5 shadow-xl border border-stone-200 dark:border-stone-800 bg-card/95 backdrop-blur-xl">
+                <DropdownMenuLabel className="px-3 py-2.5">
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <p className="truncate text-sm font-bold text-foreground">{affiliate.name}</p>
+                    <StatusPill tone="brand" className="text-[9px] px-1.5 py-0.5">{affiliate.rank}</StatusPill>
+                  </div>
+                  <p className="truncate text-xs font-normal text-muted-foreground">@{affiliate.username}</p>
+                  <p className="truncate text-[11px] font-mono text-stone-400 mt-0.5">{affiliate.email}</p>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2.5 py-2">
+                <DropdownMenuSeparator className="bg-stone-200/80 dark:bg-stone-800/80" />
+                <DropdownMenuItem asChild className="cursor-pointer rounded-xl px-2.5 py-2 text-xs font-medium">
                   <Link href="/afiliados/portal/perfil">
-                    <UserCircle size={16} className="mr-2" /> Mi perfil
+                    <UserCircle size={15} className="mr-2 text-stone-500" /> Mi perfil & Clave
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2.5 py-2">
+                <DropdownMenuItem asChild className="cursor-pointer rounded-xl px-2.5 py-2 text-xs font-medium">
+                  <Link href="/afiliados/portal/recursos">
+                    <BookOpen size={15} className="mr-2 text-stone-500" /> Enlaces & Ganchos
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="cursor-pointer rounded-xl px-2.5 py-2 text-xs font-medium">
                   <a href="/store" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={16} className="mr-2" /> Ver tienda
+                    <ExternalLink size={15} className="mr-2 text-stone-500" /> Ver tienda online
                   </a>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onSelect={signOut} className="cursor-pointer rounded-lg px-2.5 py-2 text-destructive focus:text-destructive">
-                  <LogOut size={16} className="mr-2" /> Cerrar sesión
+                <DropdownMenuSeparator className="bg-stone-200/80 dark:bg-stone-800/80" />
+                <DropdownMenuItem onSelect={signOut} className="cursor-pointer rounded-xl px-2.5 py-2 text-xs font-bold text-destructive focus:text-destructive focus:bg-destructive/10">
+                  <LogOut size={15} className="mr-2" /> Cerrar sesión
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

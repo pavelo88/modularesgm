@@ -191,7 +191,7 @@ function StoreContent() {
                 <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
                   <div className="flex items-center gap-2">
                     <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
-                    <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
+                    <span className="font-bold text-xs text-foreground">Garantía 3 a 10 Años</span>
                   </div>
                   <p className="text-[11px] text-muted-foreground leading-tight">
                     Cobertura directa en herrajes y tableros.
@@ -432,7 +432,7 @@ function StoreContent() {
               <div>
                 <h4 className="font-bold text-base text-foreground mb-1">Garantía Directa de Fábrica</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Todos nuestros muebles modulares cuentan con hasta 5 años de garantía contra defectos de fabricación y desajustes.
+                  Todos nuestros muebles modulares cuentan con garantía de 3 a 10 años según el producto, contra defectos de fabricación y desajustes.
                 </p>
               </div>
             </div>
@@ -485,7 +485,7 @@ export default function StorePage() {
           Melamina Pelikano RH 18mm hidrófuga y herrajes Blum de cierre suave.
         </p>
         <p className="text-muted-foreground text-sm mt-3 leading-relaxed">
-          Cada pieza se fabrica en Quito con garantía de 3 a 5 años, entrega en 7 a 15 días hábiles
+          Cada pieza se fabrica en Quito con garantía de 3 a 10 años según el producto, entrega en 15 a 20 días hábiles
           y cobertura en todo el Ecuador. Puedes pagar con tarjeta de crédito, transferencia bancaria
           o con un anticipo del 50 %. Elige una categoría, revisa precios por metro lineal o por unidad
           y cotiza por WhatsApp con asesoría técnica para tu proyecto.

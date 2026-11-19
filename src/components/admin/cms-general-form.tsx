@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { getSeoSuggestions, saveSiteContent } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Save, Sparkles, Phone, MapPin, Share2, Search, RotateCcw } from 'lucide-react';
+import { Loader2, Save, Sparkles, Phone, MapPin, Share2, Search, RotateCcw, Shield } from 'lucide-react';
 import { ImageUploader } from './image-uploader';
 import { defaultSiteContent } from '@/lib/data';
 
@@ -78,21 +78,6 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-card p-4 rounded-xl border">
-        <div>
-            <h2 className="text-xl font-bold">Configuración de Inicio</h2>
-            <p className="text-sm text-muted-foreground">Modifica el Hero, contacto y SEO del sitio.</p>
-        </div>
-        <div className="flex flex-wrap gap-2 [&>button]:flex-1 sm:[&>button]:flex-none">
-          <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
-            <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
-          </Button>
-          <Button onClick={handleSave} disabled={isSaving}>
-            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            Guardar Cambios
-          </Button>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Top Left: Marquesina de Anuncios (TopBar) */}
@@ -213,6 +198,41 @@ export function CmsGeneralForm({ siteContent, setSiteContent }: CmsGeneralFormPr
                 <div className="space-y-2">
                     <Label htmlFor="mapUrl">Google Maps Embed URL (Iframe src)</Label>
                     <Textarea id="mapUrl" name="mapUrl" value={siteContent.mapUrl || ''} onChange={handleInputChange} className="h-24 text-xs font-mono"/>
+                </div>
+            </CardContent>
+        </Card>
+
+        {/* Bottom Left: Sección Garantías y Confianza */}
+        <Card id="section-trust" className="border-amber-500/20">
+            <CardHeader className="bg-amber-500/5 border-b">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-amber-500"/> Garantías y Diferenciales (Por qué elegir GM)
+                </CardTitle>
+                <CardDescription>
+                  Frase principal y promesa que blindan la confianza del cliente en la Home.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+                <div className="space-y-2">
+                    <Label htmlFor="trustTitle">Título Principal de Garantía</Label>
+                    <Input 
+                      id="trustTitle" 
+                      name="trustTitle" 
+                      value={siteContent.trustTitle ?? 'Tranquilidad absoluta para tu hogar.'} 
+                      onChange={handleInputChange} 
+                      placeholder="Tranquilidad absoluta para tu hogar."
+                      className="font-bold"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="trustSubtitle">Subtítulo Destacado</Label>
+                    <Input 
+                      id="trustSubtitle" 
+                      name="trustSubtitle" 
+                      value={siteContent.trustSubtitle ?? 'Cero informalidad, cero retrasos y contrato legal.'} 
+                      onChange={handleInputChange} 
+                      placeholder="Cero informalidad, cero retrasos y contrato legal."
+                    />
                 </div>
             </CardContent>
         </Card>

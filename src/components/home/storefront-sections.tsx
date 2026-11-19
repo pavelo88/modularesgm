@@ -316,7 +316,7 @@ export function AffiliateBand() {
                     <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
                       {cat.tag}
                     </span>
-                    <span className="text-[11px] px-3 py-1 rounded-full bg-secondary/30 backdrop-blur-md text-stone-100 font-bold border border-secondary/40">
+                    <span className="text-[11px] px-3 py-1 rounded-full bg-stone-900/85 backdrop-blur-md text-amber-300 font-bold border border-amber-500/30">
                       {cat.models}
                     </span>
                   </div>

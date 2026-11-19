@@ -106,8 +106,6 @@ export default function NetworkPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Equipo" title="Mi red" subtitle="Las personas que invitaste y las que ellas invitaron. Ganas una parte de sus ventas." />
-
       <div className="mb-6 grid grid-cols-2 gap-3 md:mb-8 md:gap-4 lg:grid-cols-3">
         <StatCard tone="primary" delay={60} icon={Users} label="Directos (nivel 1)" value={String(level1.length)} />
         <StatCard delay={100} icon={Network} label="Nivel 2" value={String(level2.length)} />

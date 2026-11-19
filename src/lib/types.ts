@@ -75,6 +75,15 @@ export interface SiteContent {
   brands: Brand[];
   products: Product[];
   tickerMessages?: { id: string; text: string; href?: string; highlight?: boolean }[];
+  trustTitle?: string;
+  trustSubtitle?: string;
+  trustGuarantees?: {
+    icon: string;
+    title: string;
+    subtitle: string;
+    desc: string;
+    badge: string;
+  }[];
 }
 
 export interface Lead {

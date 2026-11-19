@@ -46,8 +46,6 @@ export default function ProfilePage() {
 
   return (
     <>
-      <PageHeader eyebrow="Cuenta" title="Mi perfil" subtitle="Tus datos, tu usuario y la seguridad de tu cuenta." />
-
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
         {/* Identidad */}
         <section style={{ animationDelay: '60ms' }} className={cn(surface, enter, 'relative min-w-0 overflow-hidden p-5 md:p-6')}>

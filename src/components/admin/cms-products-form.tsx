@@ -140,30 +140,6 @@ export function CmsProductsForm({ siteContent, setSiteContent }: CmsProductsForm
 
   return (
     <div className="space-y-6">
-      {/* Header sticky */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-card p-4 rounded-xl border sticky top-0 z-10">
-        <div>
-          <h1 className="text-xl font-bold">Catálogo de la Tienda</h1>
-          <p className="text-xs text-muted-foreground">
-            {siteContent.products.length} productos · {filteredProducts.length} visibles
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2 [&>button]:flex-1 sm:[&>button]:flex-none">
-          <Button variant="outline" size="sm" onClick={handleRestoreDefaults}>
-            <RotateCcw className="mr-2 h-4 w-4" /> Restaurar
-          </Button>
-          <Button variant="outline" size="sm" onClick={handleAddCategory}>
-            <Plus className="mr-2 h-4 w-4" /> Añadir Categoría
-          </Button>
-          <Button variant="outline" size="sm" onClick={handleAddProduct}>
-            <Plus className="mr-2 h-4 w-4" /> Añadir Producto
-          </Button>
-          <Button size="sm" onClick={handleSave} disabled={isSaving}>
-            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            Guardar
-          </Button>
-        </div>
-      </div>
 
       {/* Filtro por categoría + búsqueda */}
       <div className="space-y-3">

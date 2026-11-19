@@ -219,8 +219,8 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
 
           {/* Footer de Precio y Acción */}
-          <div className="flex items-center justify-between pt-2.5 border-t border-border/40">
-            <div>
+          <div className="flex flex-col gap-2.5 pt-2.5 border-t border-border/40">
+            <div className="flex items-center justify-between">
               {isCustomQuote ? (
                 <div>
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-primary block">
@@ -243,34 +243,35 @@ export function ProductCard({ product }: { product: Product }) {
               )}
             </div>
 
-            {/* Botón de Acción Principal */}
+            {/* Botones de Acción (WhatsApp + Compra / Cotización) */}
             {isCustomQuote ? (
               <Button
                 size="sm"
                 onClick={handleWhatsAppQuote}
-                className="h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-3 py-1 flex items-center gap-1 active:scale-95 transition-all shadow-sm"
+                className="w-full h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-3 py-1 flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm"
               >
-                <MessageCircle size={13} />
-                <span>Cotizar</span>
+                <MessageCircle size={14} className="shrink-0" />
+                <span>Cotizar por WhatsApp</span>
               </Button>
             ) : (
-              <div className="flex items-center gap-1.5">
+              <div className="grid grid-cols-2 gap-2 w-full">
                 <Button
                   size="sm"
                   variant="outline"
                   onClick={handleWhatsAppQuote}
-                  className="h-8 w-8 p-0 rounded-full border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-600 text-emerald-600 hover:text-white transition-all active:scale-95 shadow-sm"
-                  title="Consultar disponibilidad por WhatsApp"
+                  className="h-8 rounded-full border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-600 text-emerald-600 hover:text-white font-semibold text-xs px-2.5 py-1 flex items-center justify-center gap-1 active:scale-95 transition-all shadow-sm"
+                  title="Consultar por WhatsApp"
                   aria-label={`Consultar ${product.title} por WhatsApp`}
                 >
-                  <MessageCircle size={14} />
+                  <MessageCircle size={13} className="shrink-0" />
+                  <span className="truncate">WhatsApp</span>
                 </Button>
                 <Button
                   size="sm"
                   onClick={handleAddToCart}
                   disabled={isOutOfStock}
                   className={cn(
-                    "h-8 rounded-full font-semibold text-xs px-3 py-1 flex items-center gap-1 active:scale-95 transition-all shadow-sm",
+                    "h-8 rounded-full font-semibold text-xs px-2.5 py-1 flex items-center justify-center gap-1 active:scale-95 transition-all shadow-sm",
                     addedAnimation
                       ? "bg-emerald-600 text-white"
                       : "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -279,13 +280,13 @@ export function ProductCard({ product }: { product: Product }) {
                 >
                   {addedAnimation ? (
                     <>
-                      <Check size={13} />
-                      <span>Listo</span>
+                      <Check size={13} className="shrink-0" />
+                      <span className="truncate">Listo</span>
                     </>
                   ) : (
                     <>
-                      <Plus size={13} />
-                      <span>Agregar</span>
+                      <Plus size={13} className="shrink-0" />
+                      <span className="truncate">Agregar</span>
                     </>
                   )}
                 </Button>
@@ -339,7 +340,7 @@ export function ProductCard({ product }: { product: Product }) {
               {/* Sellos de Confianza de Fábrica GM */}
               <div className="grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-border/60 text-center">
                 <div className="p-2 rounded-xl bg-card border border-border/50">
-                  <span className="text-[10px] font-bold text-foreground block">3 a 5 Años</span>
+                  <span className="text-[10px] font-bold text-foreground block">3 a 10 Años</span>
                   <span className="text-[9px] text-muted-foreground block leading-tight">Garantía directa</span>
                 </div>
                 <div className="p-2 rounded-xl bg-card border border-border/50">

@@ -31,7 +31,7 @@ import {
   deleteAdminUserAction,
   resetAdminUserPasswordAction,
   type AdminUserRecord,
-} from '@/lib/actions';
+} from '@/lib/admin-users-actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -82,7 +82,11 @@ const ROLE_INFO: Record<
   },
 };
 
-export function UsersManager() {
+interface UsersManagerProps {
+  onRegisterCreateUserTrigger?: (trigger: () => void) => void;
+}
+
+export function UsersManager({ onRegisterCreateUserTrigger }: UsersManagerProps = {}) {
   const [users, setUsers] = useState<AdminUserRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -96,6 +100,12 @@ export function UsersManager() {
   const [rol, setRol] = useState<AdminUserRecord['rol']>('vendedor');
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState('');
+
+  useEffect(() => {
+    if (onRegisterCreateUserTrigger) {
+      onRegisterCreateUserTrigger(() => setCreateModalOpen(true));
+    }
+  }, [onRegisterCreateUserTrigger]);
 
   // Modal Éxito con credenciales
   const [successData, setSuccessData] = useState<{ email: string; dni: string; rol: string } | null>(null);
@@ -234,29 +244,6 @@ export function UsersManager() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header Apple Style */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-200/80 dark:border-stone-800/80">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-stone-300 dark:border-stone-700 bg-white/60 dark:bg-stone-900/60 backdrop-blur-md text-[11px] font-bold uppercase tracking-[0.2em] text-stone-800 dark:text-stone-300 mb-2">
-            <Shield size={13} className="text-primary" />
-            <span>Control de Accesos & Seguridad</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-stone-950 dark:text-white tracking-tight">
-            Directorio de Usuarios & Roles
-          </h2>
-          <p className="text-sm text-stone-600 dark:text-stone-400 mt-1 max-w-2xl leading-relaxed">
-            Gestión centralizada del equipo GM. Los usuarios creados ingresan por primera vez con su cédula y el sistema les exige cambio de clave inmediato.
-          </p>
-        </div>
-
-        <Button
-          onClick={() => setCreateModalOpen(true)}
-          className="h-11 px-5 rounded-2xl bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 font-bold shadow-lg shadow-black/5 dark:shadow-white/5 gap-2 transition-all active:scale-95 shrink-0"
-        >
-          <UserPlus size={16} />
-          <span>Añadir Usuario</span>
-        </Button>
-      </div>
 
       {/* Banner de Aviso temporal */}
       {notice && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition, useRef } from 'react';
 import Image from 'next/image';
 import {
   FileCode,
@@ -17,6 +17,12 @@ import {
   Sun,
   Moon,
   Users,
+  UserPlus,
+  Plus,
+  Save,
+  RotateCcw,
+  Loader2,
+  Search,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
@@ -34,7 +40,7 @@ import {
   SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar';
-import type { SiteContent } from '@/lib/types';
+import type { SiteContent, Service, Product, Brand, Stat } from '@/lib/types';
 import { CmsGeneralForm } from './cms-general-form';
 import { CmsServicesForm } from './cms-services-form';
 import { CmsProductsForm } from './cms-products-form';
@@ -45,25 +51,22 @@ import { OrdersManager } from './orders-manager';
 import { AffiliatesManager } from './affiliates-manager';
 import { AnalyticsDashboard } from './analytics-dashboard';
 import { UsersManager } from './users-manager';
-import { logout } from '@/lib/actions';
+import { logout, saveSiteContent } from '@/lib/actions';
 import { defaultSiteContent } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
 import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { doc, onSnapshot } from 'firebase/firestore';
-
-type AdminTab =
-  | 'analytics'
-  | 'users'
-  | 'general'
-  | 'theme'
-  | 'services'
-  | 'products'
-  | 'brands'
-  | 'leads'
-  | 'orders'
-  | 'affiliates';
+import { useToast } from '@/hooks/use-toast';
+import type { AnalyticsDays } from '@/lib/ga-report';
+import {
+  type AdminTab,
+  ANALYTICS_PERIODS,
+  getTabHeaderInfo,
+  findJumpMatch,
+} from './admin-header-utils';
+import { restoreTabDefaults } from './admin-restore-utils';
 
 const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
   { id: 'analytics', label: 'Analítica', icon: <LineChart className="h-4 w-4" /> },
@@ -111,8 +114,14 @@ export function AdminDashboardClient() {
   const [loading, setLoading] = useState(true);
   const [authReady, setAuthReady] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [analyticsDays, setAnalyticsDays] = useState<AnalyticsDays>(28);
+  const [isSaving, startSaving] = useTransition();
   const { theme, setTheme } = useTheme();
+  const { toast } = useToast();
   const router = useRouter();
+
+  // Trigger para abrir el modal de crear usuario desde la barra superior
+  const openCreateUserModalRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -150,6 +159,74 @@ export function AdminDashboardClient() {
     return () => unsubscribe();
   }, []);
 
+  const setSiteContentWrapper = (value: React.SetStateAction<SiteContent>) => {
+    setSiteContent((prev) => {
+      if (typeof value === 'function') {
+        return value(prev || defaultSiteContent);
+      }
+      return value;
+    });
+  };
+
+  const isCmsEditableTab = ['general', 'theme', 'services', 'products', 'brands'].includes(activeTab);
+
+  const handleGlobalSave = () => {
+    startSaving(async () => {
+      const result = await saveSiteContent(siteContent);
+      if (result.success) {
+        toast({ title: 'Éxito', description: 'Cambios guardados correctamente en la web.' });
+      } else {
+        toast({ variant: 'destructive', title: 'Error', description: result.error });
+      }
+    });
+  };
+
+  const handleGlobalRestore = () => {
+    const didRestore = restoreTabDefaults(activeTab, setSiteContentWrapper);
+    if (didRestore) {
+      toast({ title: 'Valores restablecidos', description: 'Guarda los cambios para aplicarlos en vivo.' });
+    }
+  };
+
+  const handleAddService = () => {
+    const newService: Service = {
+      id: Date.now(),
+      title: 'Nuevo Servicio',
+      desc: 'Descripción del nuevo servicio...',
+      imgUrl: defaultSiteContent.services[0]?.imgUrl || '',
+      icon: 'Grid',
+      catalogUrl: ''
+    };
+    setSiteContent(prev => ({
+      ...prev,
+      services: [newService, ...prev.services]
+    }));
+    toast({
+      title: "Servicio añadido",
+      description: "Edita sus datos y guarda los cambios para publicarlo.",
+    });
+  };
+
+  const [adminSearch, setAdminSearch] = useState('');
+
+  const handleGlobalContentSearch = (query: string) => {
+    setAdminSearch(query);
+    const match = findJumpMatch(query);
+    if (!match) return;
+
+    setActiveTab(match.tab);
+    if (match.elementId) {
+      setTimeout(() => {
+        const el = document.getElementById(match.elementId!);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        (el as HTMLElement)?.focus?.();
+      }, 150);
+    }
+    toast({ title: 'Sección localizada', description: match.feedback });
+  };
+
+  const headerInfo = getTabHeaderInfo(activeTab, siteContent.services.length, siteContent.products.length);
+
   const renderContent = () => {
     if (loading || !authReady) {
         return (
@@ -163,20 +240,17 @@ export function AdminDashboardClient() {
         );
     }
     
-    const setSiteContentWrapper = (value: React.SetStateAction<SiteContent>) => {
-        setSiteContent(prev => {
-            if (typeof value === 'function') {
-                return value(prev || defaultSiteContent);
-            }
-            return value;
-        });
-    };
-
     switch (activeTab) {
       case 'analytics':
-        return <AnalyticsDashboard />;
+        return <AnalyticsDashboard days={analyticsDays} setDays={setAnalyticsDays} />;
       case 'users':
-        return <UsersManager />;
+        return (
+          <UsersManager
+            onRegisterCreateUserTrigger={(trigger) => {
+              openCreateUserModalRef.current = trigger;
+            }}
+          />
+        );
       case 'general':
         return <CmsGeneralForm siteContent={siteContent} setSiteContent={setSiteContentWrapper} />;
       case 'theme':
@@ -239,45 +313,170 @@ export function AdminDashboardClient() {
           </form>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="bg-[#FAF8F5]/60 dark:bg-[#080a0d]/60 overflow-hidden">
-        <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-6 border-b border-stone-200/80 dark:border-stone-800/80 bg-background/80 backdrop-blur-xl transition-colors">
-           <div className="flex items-center gap-3">
-             <SidebarTrigger className="h-9 w-9 rounded-xl hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors" />
-             <div>
-               <h1 className="text-base sm:text-lg font-bold tracking-tight text-foreground font-headline">
-                  {menuItems.find(item => item.id === activeTab)?.label}
+      <SidebarInset className="bg-[#FAF8F5]/60 dark:bg-[#080a0d]/60 flex flex-col h-screen overflow-hidden">
+        {/* Único Header Superior 100% FIJO */}
+        <header className="fixed top-0 right-0 left-0 md:left-[var(--sidebar-width)] data-[collapsed=true]:md:left-[var(--sidebar-width-icon)] z-40 flex items-center justify-between h-16 px-4 sm:px-6 border-b border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl transition-[left] duration-200 gap-3">
+           <div className="flex items-center gap-3 min-w-0">
+             <SidebarTrigger className="h-9 w-9 rounded-xl hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors shrink-0" />
+             <div className="min-w-0">
+               <h1 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-foreground font-headline truncate leading-tight">
+                  {headerInfo.title}
                </h1>
+               <p className="text-[11px] sm:text-xs text-muted-foreground truncate leading-tight mt-0.5 max-w-xl">
+                  {headerInfo.desc}
+               </p>
              </div>
            </div>
-           {mounted && (
-             <Button
-               variant="outline"
-               size="sm"
-               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-               className="flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all active:scale-95 shadow-sm"
-               title="Alternar Modo Claro / Oscuro"
-             >
-               {theme === 'dark' ? (
-                 <>
-                   <Sun className="h-3.5 w-3.5 text-amber-500" />
-                   <span className="hidden sm:inline">Modo Claro</span>
-                 </>
-               ) : (
-                 <>
-                   <Moon className="h-3.5 w-3.5 text-slate-700" />
-                   <span className="hidden sm:inline">Modo Oscuro</span>
-                 </>
-               )}
-             </Button>
-           )}
+
+           <div className="flex items-center gap-2.5 shrink-0">
+             {/* Buscador inteligente de contenidos y textos */}
+             <div className="relative hidden lg:block w-72">
+               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-stone-400 pointer-events-none" />
+               <input
+                 type="text"
+                 placeholder="Pegar texto (ej. Tranquilidad absoluta...)"
+                 value={adminSearch}
+                 onChange={(e) => handleGlobalContentSearch(e.target.value)}
+                 className="w-full h-9 pl-9 pr-3 rounded-xl text-xs bg-stone-100 dark:bg-stone-900/80 border border-stone-200 dark:border-stone-800 text-foreground placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
+               />
+             </div>
+             {/* Controles contextuales por pestaña */}
+             {activeTab === 'analytics' && (
+               <div role="group" aria-label="Periodo de analítica" className="inline-flex rounded-xl border border-stone-200 dark:border-stone-800 bg-background/80 p-0.5 shadow-xs">
+                 {ANALYTICS_PERIODS.map((p) => (
+                   <button
+                     key={p.days}
+                     type="button"
+                     onClick={() => setAnalyticsDays(p.days)}
+                     aria-pressed={analyticsDays === p.days}
+                     className={cn(
+                       'rounded-lg px-2.5 py-1 text-xs font-semibold transition-all active:scale-95',
+                       analyticsDays === p.days
+                         ? 'bg-stone-900 text-white dark:bg-white dark:text-stone-950 shadow-xs'
+                         : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white'
+                     )}
+                   >
+                     {p.label}
+                   </button>
+                 ))}
+               </div>
+             )}
+
+             {activeTab === 'users' && (
+               <Button
+                 size="sm"
+                 onClick={() => {
+                   if (openCreateUserModalRef.current) {
+                     openCreateUserModalRef.current();
+                   }
+                 }}
+                 className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
+               >
+                 <UserPlus className="h-3.5 w-3.5" />
+                 <span className="hidden sm:inline">+ Añadir Usuario</span>
+                 <span className="sm:hidden">Añadir</span>
+               </Button>
+             )}
+
+             {activeTab === 'services' && (
+               <Button
+                 size="sm"
+                 variant="outline"
+                 onClick={handleAddService}
+                 className="rounded-full text-xs font-bold h-9 px-3.5 border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 shadow-sm gap-1.5 active:scale-95"
+               >
+                 <Plus className="h-3.5 w-3.5" />
+                 <span>+ Añadir</span>
+               </Button>
+             )}
+
+             {/* Acciones de guardado rápido en cabecera para pestañas editables */}
+             {isCmsEditableTab && (
+               <div className="flex items-center gap-1.5">
+                 <Button
+                   variant="outline"
+                   size="sm"
+                   onClick={handleGlobalRestore}
+                   title="Restaurar valores de esta sección"
+                   className="hidden md:inline-flex rounded-full text-xs font-medium h-9 px-3 border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95"
+                 >
+                   <RotateCcw className="h-3.5 w-3.5 mr-1 text-muted-foreground" />
+                   <span>Restaurar</span>
+                 </Button>
+                 <Button
+                   size="sm"
+                   onClick={handleGlobalSave}
+                   disabled={isSaving}
+                   className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
+                 >
+                   {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
+                   <span>Guardar</span>
+                 </Button>
+               </div>
+             )}
+
+             {/* Botón Circular Modo Claro / Oscuro (sin texto) */}
+             {mounted && (
+               <Button
+                 variant="outline"
+                 size="icon"
+                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                 className="h-9 w-9 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all active:scale-95 shadow-sm shrink-0"
+                 title="Alternar Modo Claro / Oscuro"
+                 aria-label="Alternar modo claro u oscuro"
+               >
+                 {theme === 'dark' ? (
+                   <Sun className="h-4 w-4 text-amber-500" />
+                 ) : (
+                   <Moon className="h-4 w-4 text-slate-700" />
+                 )}
+               </Button>
+             )}
+           </div>
         </header>
+
         {/* Apple Style Main Area */}
-        <main className="h-[calc(100vh-4rem)] overflow-y-auto">
-          <div className="max-w-7xl mx-auto p-4 sm:p-6 md:p-8">
+        <main className="flex-1 overflow-y-auto pt-16">
+          <div className="max-w-7xl mx-auto p-4 sm:p-6 md:p-8 pb-32">
             {renderContent()}
           </div>
         </main>
+
+        {/* Barra de guardado/acciones de TODO EL ANCHO fija en la parte inferior */}
+        {isCmsEditableTab && (
+          <footer
+            aria-label="Barra de acciones persistente"
+            className="fixed bottom-0 right-0 left-0 md:left-[var(--sidebar-width)] z-40 h-16 border-t border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl transition-[left] duration-200 px-4 sm:px-8 flex items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_25px_rgba(0,0,0,0.5)]"
+          >
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="hidden sm:inline font-medium">Cambios en {headerInfo.title}:</span>
+              <span className="text-[11px] text-stone-500">Recuerda guardar para publicar en la web en vivo.</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleGlobalRestore}
+                className="h-10 px-4 rounded-xl text-xs font-semibold border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 active:scale-95 transition-all shadow-xs"
+              >
+                <RotateCcw className="h-3.5 w-3.5 mr-1.5 text-stone-500" />
+                <span>Restaurar</span>
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleGlobalSave}
+                disabled={isSaving}
+                className="h-10 px-6 rounded-xl text-xs font-bold bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-md active:scale-95 transition-all gap-1.5"
+              >
+                {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                <span>Guardar Cambios</span>
+              </Button>
+            </div>
+          </footer>
+        )}
       </SidebarInset>
     </SidebarProvider>
   );
 }
+

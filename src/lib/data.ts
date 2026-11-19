@@ -100,7 +100,7 @@ export const defaultStats: Stat[] = [
   { id: 1, value: '18+', label: 'AÑOS EXP.', icon: 'Globe' },
   { id: 2, value: '980+', label: 'PROYECTOS', icon: 'Home' },
   { id: 3, value: '100%', label: 'PERSONALIZADO', icon: 'Ruler' },
-  { id: 4, value: 'EC', label: 'NIVEL NACIONAL', icon: 'MapPin' }
+  { id: 4, value: 'Ecuador', label: 'COBERTURA', icon: 'MapPin' }
 ];
 
 export const defaultSiteContent: SiteContent = {

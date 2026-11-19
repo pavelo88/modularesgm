@@ -125,3 +125,36 @@ La página está bien construida técnicamente y el SEO base está limpio (audit
 - Análisis de código, no de navegador. No se revisó el resultado renderizado, ni formularios enviándose, ni PayPal.
 - No se verificó qué cliente real respalda cada reseña ni qué garantía cumple la operación. Eso lo sabe el negocio, no el código.
 - No es asesoría legal. B2 y B4 deben revisarse con un abogado en Ecuador.
+
+---
+
+## 9. Cambios aplicados (2026-11-16)
+
+Sin commit. Revisar con `git diff` antes de subir.
+
+- **B1 reseñas:** quitada la sección `SocialProofReviews` de la home y eliminado su componente. Recuperable con `git checkout -- src/components/home/social-proof-reviews.tsx` si se verifican los clientes.
+- **B4 garantía y entrega (decisión tomada, pendiente de confirmar por el negocio):**
+  - Garantía: "3 a 10 años según el producto" (coincide con `src/lib/catalog-full.ts`: 3, 5 y 10 años según categoría). Ya no hay "5 años escritos".
+  - Entrega a medida: "15 a 20 días hábiles" (coincide con precios y campaña). Ya no hay "7 a 15" ni "15 a 21 laborables".
+  - Quitada la penalidad de $50 diarios y la mención a contrato notariado.
+- **Campaña Navidad:** eliminada la fecha caducada ("13 de noviembre") y el texto roto `( (06)13`. Reemplazado por "Agenda tu visita técnica sin costo".
+- **Widget flotante:** etiqueta "WhatsApp 24/7" reemplazada por "Asesoría por WhatsApp" (el horario real es lunes a sábado). Solo se muestra la etiqueta desde `xl`.
+- **Hero móvil:** el grid ahora tiene una columna en móvil y `min-w-0`. El h1 y los CTA quedan dentro del margen de 16 px (antes se salían 8 px). La insignia ya no se corta con "...".
+- **Hero escritorio:** los botones no se parten en dos líneas (`whitespace-nowrap`).
+- **Insignia "7 Soluciones Corporativas":** fondo oscuro para legibilidad.
+
+### Pendiente (no tocado)
+- Estadística "EC / NIVEL NACIONAL": viene de la configuración guardada en el sitio, no de `src/lib/data.ts`. Cambiarla desde el admin.
+- "18+ años de experiencia" (hero) vs "más de 12 años" (chatbot en `src/lib/actions.ts`): confirmar la cifra real.
+- "Respuesta en 15 min" y "WhatsApp <15 min" en el formulario y el bloque de confianza: confirmar que se cumple.
+- Logos de Blum, Häfele, Silestone, Dekton y Teka bajo "calidad certificada": confirmar relación comercial o quitar el encabezado.
+- Hueco vacío encima de la dirección en la sección de contacto (el mapa carga con retraso).
+- Fotos de producto "Línea de autor" con aspecto de obra real y desordenado: revisar cuál usar.
+- Enlace "Acceso Administrativo" visible en el pie público.
+- No hay enlaces a privacidad ni términos (bloqueo B2, requiere contenido legal).
+- Probar en móvil el header durante el desplazamiento: en una captura se vio transparente, probablemente por la transición de 300 ms.
+
+### Continuación (2026-11-16)
+- **Contacto:** la columna de información usaba `justify-between`, que repartía el sobrante en huecos. Ahora usa `justify-start` y el mapa ocupa el espacio restante (`flex-1`, mínimo 9 rem). Verificado: el mapa mide 313 px y no quedan huecos.
+- **Pie:** quitado el enlace "Acceso Administrativo" de ambas versiones del pie. El admin sigue accesible escribiendo `/admin` directamente. Si lo necesitas en algún menú, debe ir en un lugar no público.
+- **Verificación:** typecheck sin errores; auditoría SEO 0 errores, 0 avisos.

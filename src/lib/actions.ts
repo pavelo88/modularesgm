@@ -37,54 +37,142 @@ export async function logout() {
 
 // --- Public Actions ---
 
+import { headers } from 'next/headers';
+
 const LeadSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().min(7),
-  message: z.string().min(10),
+  name: z.string().trim().min(2, 'El nombre debe tener al menos 2 caracteres.').max(100, 'El nombre es demasiado largo.'),
+  email: z.string().trim().email('Correo electrónico inválido.').max(120, 'El correo es demasiado largo.'),
+  phone: z.string().trim().min(7, 'El teléfono debe tener al menos 7 dígitos.').max(30, 'El teléfono es demasiado largo.'),
+  message: z.string().trim().min(10, 'El mensaje debe tener al menos 10 caracteres.').max(2000, 'El mensaje es demasiado largo.'),
+  website_hp: z.string().optional(),
 });
 
 const escapeHtml = (v: string) =>
   v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 
+// Rate Limiter en memoria para envíos de leads (cooldown de 45 segundos por IP)
+const leadRateLimitMap = new Map<string, number>();
+
+function checkLeadRateLimit(clientIp: string): { allowed: boolean; remainingSec: number } {
+  const now = Date.now();
+  const COOLDOWN_MS = 45 * 1000; // 45 segundos de cooldown entre envíos
+
+  // Limpieza preventiva de entradas viejas si el mapa crece
+  if (leadRateLimitMap.size > 2000) {
+    for (const [ip, timestamp] of leadRateLimitMap.entries()) {
+      if (now - timestamp > COOLDOWN_MS) {
+        leadRateLimitMap.delete(ip);
+      }
+    }
+  }
+
+  const lastSubmit = leadRateLimitMap.get(clientIp);
+  if (lastSubmit && now - lastSubmit < COOLDOWN_MS) {
+    const remainingSec = Math.ceil((COOLDOWN_MS - (now - lastSubmit)) / 1000);
+    return { allowed: false, remainingSec };
+  }
+
+  leadRateLimitMap.set(clientIp, now);
+  return { allowed: true, remainingSec: 0 };
+}
+
 /**
  * Aviso por correo de cada cotización nueva, para que ningún lead se quede sin respuesta.
  * Solo se envía si SMTP_USER y SMTP_PASS están configurados; LEADS_NOTIFY_EMAIL define el destino.
+ * Blindado con timeout y try/catch para que un fallo o ataque de red SMTP jamás tumbe la solicitud.
  */
-async function notifyNewLead(lead: z.infer<typeof LeadSchema>) {
+async function notifyNewLead(lead: { name: string; email: string; phone: string; message: string }) {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
   if (!user || !pass) return;
+
   try {
     const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({ host: 'smtp.hostinger.com', port: 465, secure: true, auth: { user, pass } });
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.hostinger.com',
+      port: 465,
+      secure: true,
+      auth: { user, pass },
+      connectionTimeout: 5000, // 5 segundos max
+      greetingTimeout: 5000,
+      socketTimeout: 8000,
+    });
+
+    const sanitizedName = escapeHtml(lead.name);
+    const sanitizedEmail = escapeHtml(lead.email);
+    const sanitizedPhone = escapeHtml(lead.phone);
+    const sanitizedMsg = escapeHtml(lead.message);
+
     await transporter.sendMail({
       from: `"Web Modulares GM" <${user}>`,
       to: process.env.LEADS_NOTIFY_EMAIL || user,
       replyTo: lead.email,
-      subject: `Nueva cotización: ${lead.name}`,
+      subject: `Nueva cotización: ${sanitizedName}`,
       text: `Nombre: ${lead.name}\nTeléfono: ${lead.phone}\nCorreo: ${lead.email}\n\n${lead.message}\n\nResponde en menos de 15 minutos: los leads se enfrían rápido.`,
-      html: `<p><strong>Nombre:</strong> ${escapeHtml(lead.name)}<br><strong>Teléfono:</strong> ${escapeHtml(lead.phone)}<br><strong>Correo:</strong> ${escapeHtml(lead.email)}</p><p>${escapeHtml(lead.message)}</p><p><em>Responde en menos de 15 minutos: los leads se enfrían rápido.</em></p>`,
+      html: `<p><strong>Nombre:</strong> ${sanitizedName}<br><strong>Teléfono:</strong> ${sanitizedPhone}<br><strong>Correo:</strong> ${sanitizedEmail}</p><p>${sanitizedMsg.replace(/\n/g, '<br>')}</p><p><em>Responde en menos de 15 minutos: los leads se enfrían rápido.</em></p>`,
     });
-  } catch (err) {
-    console.error('[lead-notify]', err);
+  } catch (err: any) {
+    // Registro interno seguro sin exponer trazas al cliente
+    console.error('[lead-notify-smtp-warning] Error enviando correo de notificación:', err?.message || err);
   }
 }
 
 export async function handleLeadSubmit(values: z.infer<typeof LeadSchema>) {
+  // 1. Detección y bloqueo inmediato de Honeypot anti-bots
+  if (values.website_hp && values.website_hp.trim() !== '') {
+    console.warn('[honeypot-triggered] Bot detectado rellenando campo trampa invisible.');
+    // Retorno silencioso exitoso para engañar al bot sin procesar nada en Firestore ni SMTP
+    return { success: true };
+  }
+
+  // 2. Validación estricta con Zod y sanitización de longitud
   const parsed = LeadSchema.safeParse(values);
-  if (!parsed.success) return { success: false, error: 'Datos inválidos.' };
+  if (!parsed.success) {
+    const firstError = parsed.error.issues[0]?.message || 'Datos de contacto inválidos.';
+    return { success: false, error: firstError };
+  }
+
+  // 3. Rate limiting por IP del cliente
+  try {
+    const headerList = await headers();
+    const forwardedFor = headerList.get('x-forwarded-for');
+    const realIp = headerList.get('x-real-ip');
+    const clientIp = (forwardedFor ? forwardedFor.split(',')[0].trim() : realIp) || '127.0.0.1';
+
+    const rateCheck = checkLeadRateLimit(clientIp);
+    if (!rateCheck.allowed) {
+      return {
+        success: false,
+        error: `Has enviado una solicitud recientemente. Por favor espera ${rateCheck.remainingSec} segundos antes de enviar otra.`,
+      };
+    }
+  } catch (ipErr) {
+    // Si no se pueden obtener cabeceras (ej: en test runner), permitimos continuar
+    console.warn('[lead-submit-ip-check]', ipErr);
+  }
+
+  const { name, email, phone, message } = parsed.data;
+
+  // 4. Guardado en Firestore
   try {
     await adminDb().collection('leads').add({
-      ...parsed.data,
+      name,
+      email,
+      phone,
+      message,
       status: 'Nuevo',
       createdAt: Date.now(),
     });
-    await notifyNewLead(parsed.data);
+
+    // 5. Notificación SMTP asíncrona y tolerante a fallos
+    notifyNewLead({ name, email, phone, message }).catch((smtpErr) => {
+      console.error('[lead-notify-async-error]', smtpErr);
+    });
+
     return { success: true };
   } catch (error) {
-    console.error(error);
-    return { success: false, error: 'Error de conexión. Intente nuevamente.' };
+    console.error('[handleLeadSubmit-db-error]', error);
+    return { success: false, error: 'Error de conexión. Intente nuevamente en unos instantes.' };
   }
 }
 
@@ -181,7 +269,7 @@ function nativeSalesAdvisorResponse(message: string, siteContent: SiteContent): 
     return '¡Bienvenido! En nuestro **Programa de Afiliados GM** puedes ganar entre el 5% y 10% de comisión directa por cada proyecto cerrado con tu recomendación. Además tus clientes reciben un 5% de descuento.\n\nPuedes registrarte gratis en [modularesgm.com/afiliados](/afiliados) o ingresar a tu panel en [Acceso de Afiliados](/afiliados/acceso).';
   }
 
-  return '¡Hola! Soy el ✨ **Asesor de Ventas y Diseño de Modulares GM**. Con más de 12 años de experiencia en Quito, fabricamos cocinas integrales, clósets, muebles de baño, escritorios y puertas a medida con tableros Pelikano RH de 18mm y garantía oficial de 3 a 5 años.\n\nPuedes revisar todos nuestros espacios en el [Índice de Catálogos](/catalogo) o indicarme qué ambiente te gustaría renovar para guiarte paso a paso.';
+  return '¡Hola! Soy el ✨ **Asesor de Ventas y Diseño de Modulares GM**. Con más de 12 años de experiencia en Quito, fabricamos cocinas integrales, clósets, muebles de baño, escritorios y puertas a medida con tableros Pelikano RH de 18mm y garantía oficial de 3 a 10 años según el producto.\n\nPuedes revisar todos nuestros espacios en el [Índice de Catálogos](/catalogo) o indicarme qué ambiente te gustaría renovar para guiarte paso a paso.';
 }
 
 export async function handleSendChatMessage(
@@ -325,220 +413,3 @@ export async function getAnalyticsReport(days: AnalyticsDays) {
   return fetchAnalyticsReport(safeDays);
 }
 
-// --- Gestión de Usuarios y Roles (Estilo Apple / EnergyEngine) ---
-
-export interface AdminUserRecord {
-  id: string;
-  uid?: string;
-  nombre: string;
-  dni: string;
-  email: string;
-  rol: 'admin' | 'vendedor' | 'disenador' | 'instalador' | 'afiliado_vip';
-  activo: boolean;
-  primerIngreso: boolean;
-  createdAt: string;
-  updatedAt?: string;
-}
-
-function toIsoDateString(val: any): string | undefined {
-  if (!val) return undefined;
-  if (typeof val === 'string') return val;
-  if (typeof val?.toDate === 'function') {
-    try {
-      return val.toDate().toISOString();
-    } catch {
-      return undefined;
-    }
-  }
-  if (typeof val?._seconds === 'number') {
-    return new Date(val._seconds * 1000).toISOString();
-  }
-  if (val instanceof Date) return val.toISOString();
-  return undefined;
-}
-
-export async function listAdminUsersAction(): Promise<{ success: boolean; users?: AdminUserRecord[]; error?: string }> {
-  await requireAdmin();
-  try {
-    const snap = await adminDb().collection('usuarios').get();
-    const users: AdminUserRecord[] = snap.docs.map((docSnap) => {
-      const data = docSnap.data();
-      const rawRol = String(data.rol || data.role || 'vendedor').toLowerCase();
-      const validRol: AdminUserRecord['rol'] =
-        rawRol === 'admin' || rawRol === 'super'
-          ? 'admin'
-          : rawRol === 'disenador' || rawRol === 'designer'
-          ? 'disenador'
-          : rawRol === 'instalador' || rawRol === 'technician'
-          ? 'instalador'
-          : rawRol === 'afiliado_vip'
-          ? 'afiliado_vip'
-          : 'vendedor';
-
-      return {
-        id: docSnap.id,
-        uid: data.uid || docSnap.id,
-        nombre: data.nombre || data.name || '',
-        dni: data.dni || data.cedula || '',
-        email: data.email || docSnap.id,
-        rol: validRol,
-        activo: data.activo !== false && data.active !== false,
-        primerIngreso: data.primerIngreso === true,
-        createdAt: toIsoDateString(data.createdAt) || new Date().toISOString(),
-        updatedAt: toIsoDateString(data.updatedAt),
-      };
-    });
-    return { success: true, users };
-  } catch (error: any) {
-    console.error('[listAdminUsersAction]', error);
-    return { success: false, error: 'No se pudieron cargar los usuarios.' };
-  }
-}
-
-const CreateUserSchema = z.object({
-  nombre: z.string().min(3, 'El nombre debe tener al menos 3 caracteres.'),
-  dni: z.string().min(6, 'La cédula debe tener al menos 6 caracteres para ser usada como clave temporal.'),
-  email: z.string().email('Correo electrónico inválido.'),
-  rol: z.enum(['admin', 'vendedor', 'disenador', 'instalador', 'afiliado_vip']),
-});
-
-export async function createAdminUserAction(data: z.infer<typeof CreateUserSchema>) {
-  await requireAdmin();
-  const parsed = CreateUserSchema.safeParse(data);
-  if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message || 'Datos inválidos.' };
-  }
-
-  const { nombre, dni, email, rol } = parsed.data;
-  const cleanEmail = email.toLowerCase().trim();
-  const cleanDni = dni.trim();
-  const cleanNombre = nombre.trim();
-
-  try {
-    let userUid: string;
-    try {
-      const existingUser = await adminAuth().getUserByEmail(cleanEmail);
-      userUid = existingUser.uid;
-      // Si el usuario ya existe en Auth, actualizamos su clave a la cédula
-      await adminAuth().updateUser(userUid, {
-        password: cleanDni,
-        displayName: cleanNombre,
-      });
-    } catch (authErr: any) {
-      if (authErr.code === 'auth/user-not-found') {
-        const newUser = await adminAuth().createUser({
-          email: cleanEmail,
-          password: cleanDni,
-          displayName: cleanNombre,
-        });
-        userUid = newUser.uid;
-      } else {
-        throw authErr;
-      }
-    }
-
-    const now = new Date().toISOString();
-    await adminDb().collection('usuarios').doc(cleanEmail).set(
-      {
-        uid: userUid,
-        nombre: cleanNombre,
-        name: cleanNombre,
-        dni: cleanDni,
-        cedula: cleanDni,
-        email: cleanEmail,
-        rol,
-        role: rol,
-        activo: true,
-        active: true,
-        primerIngreso: true,
-        createdAt: now,
-        updatedAt: now,
-      },
-      { merge: true }
-    );
-
-    return { success: true, message: `Usuario ${cleanEmail} creado exitosamente con contraseña temporal: ${cleanDni}` };
-  } catch (error: any) {
-    console.error('[createAdminUserAction]', error);
-    return { success: false, error: error.message || 'Error al registrar el usuario en Firebase.' };
-  }
-}
-
-export async function updateAdminUserAction(data: {
-  email: string;
-  nombre: string;
-  dni: string;
-  rol: 'admin' | 'vendedor' | 'disenador' | 'instalador' | 'afiliado_vip';
-  activo: boolean;
-}) {
-  await requireAdmin();
-  const cleanEmail = data.email.toLowerCase().trim();
-  try {
-    const now = new Date().toISOString();
-    await adminDb().collection('usuarios').doc(cleanEmail).set(
-      {
-        nombre: data.nombre.trim(),
-        name: data.nombre.trim(),
-        dni: data.dni.trim(),
-        cedula: data.dni.trim(),
-        rol: data.rol,
-        role: data.rol,
-        activo: data.activo,
-        active: data.activo,
-        updatedAt: now,
-      },
-      { merge: true }
-    );
-    return { success: true };
-  } catch (error: any) {
-    console.error('[updateAdminUserAction]', error);
-    return { success: false, error: 'Error al actualizar usuario.' };
-  }
-}
-
-export async function deleteAdminUserAction(email: string) {
-  await requireAdmin();
-  const cleanEmail = email.toLowerCase().trim();
-  try {
-    try {
-      const user = await adminAuth().getUserByEmail(cleanEmail);
-      if (user?.uid) {
-        await adminAuth().deleteUser(user.uid);
-      }
-    } catch (authErr: any) {
-      console.warn('[deleteAdminUserAction] Auth deletion skipped:', authErr.message);
-    }
-
-    await adminDb().collection('usuarios').doc(cleanEmail).delete();
-    return { success: true };
-  } catch (error: any) {
-    console.error('[deleteAdminUserAction]', error);
-    return { success: false, error: 'Error al eliminar usuario.' };
-  }
-}
-
-export async function resetAdminUserPasswordAction(email: string) {
-  await requireAdmin();
-  const cleanEmail = email.toLowerCase().trim();
-  try {
-    const snap = await adminDb().collection('usuarios').doc(cleanEmail).get();
-    if (!snap.exists) return { success: false, error: 'Usuario no encontrado.' };
-
-    const dni = String(snap.data()?.dni || snap.data()?.cedula || '').trim();
-    if (!dni || dni.length < 6) {
-      return { success: false, error: 'El usuario no tiene una cédula de al menos 6 dígitos registrada.' };
-    }
-
-    const user = await adminAuth().getUserByEmail(cleanEmail);
-    await adminAuth().updateUser(user.uid, { password: dni });
-    await adminDb().collection('usuarios').doc(cleanEmail).update({
-      primerIngreso: true,
-      updatedAt: new Date().toISOString(),
-    });
-
-    return { success: true, message: `Clave restablecida a la cédula (${dni}). Se solicitará cambio al ingresar.` };
-  } catch (error: any) {
-    console.error('[resetAdminUserPasswordAction]', error);
-    return { success: false, error: error.message || 'Error al restablecer clave.' };
-  }
-}

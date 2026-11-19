@@ -34,24 +34,23 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={label}
       title={label}
       className={cn(
-        'relative grid h-10 w-10 place-items-center rounded-xl text-muted-foreground',
-        'transition-[background-color,color,transform] duration-150 ease-emil-out hover:bg-muted hover:text-foreground active:scale-95',
+        'h-9 w-9 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all active:scale-95 shadow-xs shrink-0 grid place-items-center relative',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         className
       )}
     >
       <Sun
-        size={18}
+        size={16}
         className={cn(
-          'absolute transition-[transform,opacity] duration-200 ease-emil-out motion-reduce:transition-none',
-          dark ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-50 opacity-0'
+          'text-amber-500 transition-transform duration-200',
+          dark ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0 absolute'
         )}
       />
       <Moon
-        size={18}
+        size={16}
         className={cn(
-          'absolute transition-[transform,opacity] duration-200 ease-emil-out motion-reduce:transition-none',
-          dark ? 'rotate-90 scale-50 opacity-0' : 'rotate-0 scale-100 opacity-100'
+          'text-slate-700 dark:text-slate-300 transition-transform duration-200',
+          dark ? 'rotate-90 scale-0 opacity-0 absolute' : 'rotate-0 scale-100 opacity-100'
         )}
       />
     </button>

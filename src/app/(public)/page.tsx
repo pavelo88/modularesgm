@@ -7,7 +7,6 @@ import { AffiliateBand, CatalogSection, FeaturedProducts } from '@/components/ho
 import { CampaignShowcase } from '@/components/home/campaign-showcase';
 import { ContactSection } from '@/components/home/contact/contact-section';
 import { TrustGuaranteeSection } from '@/components/home/trust-guarantee-section';
-import { SocialProofReviews } from '@/components/home/social-proof-reviews';
 import { useSiteContent } from '@/context/site-content-provider';
 import { defaultSiteContent } from '@/lib/data';
 
@@ -29,7 +28,6 @@ export default function HomePage() {
       <CampaignShowcase />
       <BrandsCarousel brands={content.brands} />
       <FeaturedProducts products={content.products} />
-      <SocialProofReviews />
       <AffiliateBand />
       <HomeSeoContent whatsappNumber={content.whatsappNumber} />
       <ContactSection siteContent={content} />

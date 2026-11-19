@@ -25,18 +25,18 @@ export default function ResourcesPage() {
   const captions = [
     {
       icon: MessageCircle,
-      title: 'WhatsApp',
-      text: `Hola 👋 Te recomiendo Modulares GM para cocinas, clósets y muebles a medida en Ecuador. Con mi enlace tienes ${settings.customerDiscount}% de descuento: ${url}`,
+      title: 'WhatsApp (Cierre Directo)',
+      text: `¡Hola! 👋 Te escribo como representante comercial de Modulares GM en Ecuador. Si estás planeando remodelar tu cocina, clósets o baños, te consigo diseño 3D personalizado sin costo y un ${settings.customerDiscount}% de descuento directo de fábrica con mi enlace exclusivo:\n👉 ${url}\n\n¿Tienes las medidas o fotos de tu espacio para asesorarte hoy mismo?`,
     },
     {
       icon: Share2,
-      title: 'Instagram / Facebook',
-      text: `¿Renovando tu cocina o clósets? Modulares GM fabrica a medida, con diseño 3D e instalación incluida. Usa mi enlace y obtén ${settings.customerDiscount}% de descuento 👉 ${url}`,
+      title: 'Instagram & TikTok (Gancho Viral / Historias / Reels)',
+      text: `🚨 NO compres tu cocina ni muebles a intermediarios sin ver esto primero. En @modularesgm fabricamos directo de planta con tableros Pelikano RH de 18mm (antihumedad), herrajes alemanes Blum y mesones de cuarzo de por vida.\n\n✨ Como parte del equipo GM, tengo acceso a cupos limitados con ${settings.customerDiscount}% OFF directo + renders 3D gratis para tu proyecto.\n\nToca el enlace de mi perfil o entra directo aquí antes de que se agoten los cupos de fabricación 👉 ${url}`,
     },
     {
       icon: Mail,
-      title: 'Correo',
-      text: `Asunto: Tu proyecto de cocina o clósets\n\nHola, trabajo con Modulares GM, fabricantes de muebles modulares a medida. Si te interesa cotizar, entra por mi enlace y recibe ${settings.customerDiscount}% de descuento: ${url}`,
+      title: 'Correo Formal (Arquitectos / Propietarios)',
+      text: `Asunto: Propuesta y beneficio de fábrica para tu proyecto de remodelación\n\nEstimado/a,\n\nTe contacto como asesor comercial de Modulares GM. Diseñamos y fabricamos cocinas integrales, vestidores y mobiliario corporativo de alta gama en Ecuador, directo de taller sin sobreprecios.\n\nPara tu proyecto, he activado una cortesía exclusiva de ${settings.customerDiscount}% de descuento directo + levantamiento 3D sin costo a través de mi credencial oficial:\n${url}\n\nQuedo a tu disposición para coordinar una asesoría técnica personalizada.`,
     },
   ];
 
@@ -48,9 +48,7 @@ export default function ResourcesPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Herramientas" title="Recursos para vender" subtitle="Enlaces y textos listos para compartir. Cambia el destino y cópialos con un clic." />
-
-      <section style={{ animationDelay: '60ms' }} className={cn(surface, enter, 'relative mb-6 overflow-hidden p-5 md:mb-8 md:p-6')}>
+      <section style={{ animationDelay: '60ms' }} className={cn(surface, enter, 'relative mb-6 overflow-hidden p-5 md:mb-8 md:p-8')}>
         <div aria-hidden className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/12 blur-3xl" />
         <div className="relative space-y-4">
           <SectionTitle icon={Link2} title="Generador de enlaces" hint="Elige a qué página quieres llevar a tu cliente." />

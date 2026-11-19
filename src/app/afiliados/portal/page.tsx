@@ -51,16 +51,6 @@ export default function PortalDashboardPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Resumen"
-        title={`Hola, ${affiliate.name.split(' ')[0]}`}
-        subtitle="Así va tu negocio hoy. Comparte tu enlace y gana por cada venta."
-      >
-        <StatusPill tone="brand" icon={Award} className="px-3 py-1 text-xs">
-          {affiliate.rank}
-        </StatusPill>
-      </PageHeader>
-
       {/* ───────── Enlace personal ───────── */}
       <section style={{ animationDelay: '60ms' }} className={cn(surface, enter, 'relative mb-6 overflow-hidden p-5 md:mb-8 md:p-8')}>
         <div aria-hidden className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />

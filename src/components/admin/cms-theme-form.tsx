@@ -73,21 +73,6 @@ export function CmsThemeForm({ siteContent, setSiteContent }: CmsThemeFormProps)
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-card p-4 rounded-xl border">
-        <div>
-          <h2 className="text-xl font-bold">Identidad Visual</h2>
-          <p className="text-sm text-muted-foreground">Personaliza la paleta de colores de tu marca.</p>
-        </div>
-        <div className="flex flex-wrap gap-2 [&>button]:flex-1 sm:[&>button]:flex-none">
-            <Button variant="outline" size="sm" onClick={handleReset}>
-                <RotateCcw className="mr-2 h-4 w-4" /> Reset
-            </Button>
-            <Button onClick={handleSave} disabled={isSaving}>
-            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            Aplicar Colores
-            </Button>
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <ColorField label="Color Primario (Header, Títulos)" colorKey="primary" />
