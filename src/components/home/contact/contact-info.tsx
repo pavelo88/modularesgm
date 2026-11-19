@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import type { SocialURLs } from '@/lib/types';
 import { formatPhone, whatsappHref, toWhatsAppNumber } from '@/lib/site';
-import { track } from '@/lib/analytics';
 
 interface ContactInfoProps {
   whatsappNumber: string;
@@ -52,7 +51,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
   );
 
   return (
-    <div className="flex flex-col h-full justify-between space-y-5 rounded-[2rem] border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#12161A] p-5 sm:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl">
+    <div className="flex flex-col h-full justify-start space-y-5 rounded-[2rem] border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#12161A] p-5 sm:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl">
       {/* Cabecera del Atelier */}
       <div>
         <div className="flex items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
@@ -117,7 +116,6 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
                 href={prefilledWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track('whatsapp_click', { location: 'seccion_contacto_boton_wa' })}
                 className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#1b736b] hover:bg-[#155b55] text-white font-bold text-xs shadow-sm active:scale-95 transition-all text-center"
               >
                 <MessageCircle size={15} />
@@ -153,7 +151,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
       </div>
 
       {/* Ubicación & Mapa */}
-      <div className="pt-3 border-t border-stone-200 dark:border-stone-800">
+      <div className="pt-3 border-t border-stone-200 dark:border-stone-800 flex flex-col flex-1 min-h-0">
         <div className="flex items-start justify-between gap-3 mb-2.5">
           <div className="flex items-start gap-2">
             <MapPin size={16} className="text-stone-900 dark:text-stone-100 shrink-0 mt-0.5" />
@@ -184,7 +182,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
         {mapUrl && (
           <div
             ref={mapRef}
-            className="w-full h-36 rounded-xl overflow-hidden border border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-stone-950 relative flex items-center justify-center shadow-inner"
+            className="w-full flex-1 min-h-[9rem] rounded-xl overflow-hidden border border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-stone-950 relative flex items-center justify-center shadow-inner"
           >
             {showMap ? (
               <iframe

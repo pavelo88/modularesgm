@@ -20,9 +20,9 @@ import { useToast } from '@/hooks/use-toast';
 import { handleLeadSubmit } from '@/lib/actions';
 import { ArrowRight, CheckCircle2, Loader2, Sparkles, MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { track } from '@/lib/analytics';
 import { SITE, whatsappHref } from '@/lib/site';
 import { SiteContentContext } from '@/context/site-content-provider';
+import { track } from '@/lib/analytics';
 
 const PROJECT_TYPES = [
   'Cocina Integral',
@@ -33,11 +33,12 @@ const PROJECT_TYPES = [
 ] as const;
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Por favor, ingrese su nombre completo.' }),
-  email: z.string().email({ message: 'Ingrese un correo electrónico válido.' }),
-  phone: z.string().min(7, { message: 'Ingrese un teléfono o WhatsApp de contacto.' }),
+  name: z.string().trim().min(2, { message: 'Por favor, ingrese su nombre completo.' }).max(100, { message: 'El nombre es demasiado largo.' }),
+  email: z.string().trim().email({ message: 'Ingrese un correo electrónico válido.' }).max(120, { message: 'El correo es demasiado largo.' }),
+  phone: z.string().trim().min(7, { message: 'Ingrese un teléfono o WhatsApp de contacto.' }).max(30, { message: 'El teléfono es demasiado largo.' }),
   projectType: z.string().optional(),
-  message: z.string().min(10, { message: 'Por favor, detalle brevemente su requerimiento.' }),
+  message: z.string().trim().min(10, { message: 'Por favor, detalle brevemente su requerimiento.' }).max(2000, { message: 'El mensaje no puede exceder los 2000 caracteres.' }),
+  website_hp: z.string().optional(),
 });
 
 export function ContactForm() {
@@ -55,6 +56,7 @@ export function ContactForm() {
       phone: '',
       projectType: 'Cocina Integral',
       message: '',
+      website_hp: '',
     },
   });
 
@@ -71,6 +73,7 @@ export function ContactForm() {
         email: values.email,
         phone: values.phone,
         message: `${typePrefix}${values.message}`,
+        website_hp: values.website_hp,
       };
 
       const result = await handleLeadSubmit(consolidatedPayload);
@@ -139,6 +142,32 @@ export function ContactForm() {
             data-webmcp-name="ContactForm"
             data-webmcp-description="Formulario oficial de cotización arquitectónica para cocinas modulares, cuarzos, clósets y remodelación integral en Ecuador"
           >
+            {/* Honeypot Invisible anti-spam para capturar bots */}
+            <div
+              aria-hidden="true"
+              style={{
+                display: 'none',
+                opacity: 0,
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                height: 0,
+                width: 0,
+                zIndex: -1,
+                pointerEvents: 'none',
+              }}
+              tabIndex={-1}
+            >
+              <label htmlFor="website_hp">Website URL (dejar vacío)</label>
+              <input
+                id="website_hp"
+                type="text"
+                autoComplete="off"
+                tabIndex={-1}
+                {...form.register('website_hp')}
+              />
+            </div>
+
             {/* Campo: Nombre Completo */}
             <FormField
               control={form.control}
@@ -235,7 +264,6 @@ export function ContactForm() {
                 href={whatsappFollowUp}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track('whatsapp_click', { location: 'formulario_enviado' })}
                 className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3.5 text-xs sm:text-sm font-bold text-stone-950 dark:text-white transition-all hover:bg-emerald-500/20 active:scale-[0.98]"
               >
                 <MessageCircle size={18} className="text-emerald-600 dark:text-emerald-400 shrink-0" />

@@ -21,7 +21,8 @@ export type EventName =
   | 'sign_up' 
   | 'purchase' 
   | 'ai_chat_open'
-  | 'outbound_whatsapp';
+  | 'outbound_whatsapp'
+  | 'phone_call_click';
 
 const META_EVENT: Record<EventName, string> = {
   whatsapp_click: 'Contact',
@@ -30,6 +31,7 @@ const META_EVENT: Record<EventName, string> = {
   sign_up: 'CompleteRegistration',
   purchase: 'Purchase',
   ai_chat_open: 'Contact',
+  phone_call_click: 'Contact',
 };
 
 export type EventParams = Record<string, string | number | boolean | undefined>;
@@ -57,6 +59,10 @@ export function track(event: EventName, params: EventParams = {}) {
       traffic_medium: attribution.traffic_medium,
       traffic_campaign: attribution.traffic_campaign,
       traffic_content: attribution.traffic_content,
+      traffic_term: attribution.traffic_term,
+      referrer: attribution.referrer,
+      click_id: attribution.click_id,
+      has_utm: attribution.has_utm,
       landing_page: attribution.landing_page,
       device_type: attribution.device,
       page_path: window.location.pathname,
@@ -70,12 +76,15 @@ export function track(event: EventName, params: EventParams = {}) {
 
       // Si es salida a WhatsApp, enviar también el evento estándar recomendado 'generate_lead' para Google Ads
       if (event === 'whatsapp_click' || event === 'outbound_whatsapp') {
-        window.gtag('event', 'generate_lead', {
+        const leadParams = {
           ...enriched,
           lead_type: 'whatsapp_direct',
           value: params.item_price || params.price || 0,
           currency: 'USD',
-        });
+        };
+        window.gtag('event', 'generate_lead', leadParams);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'generate_lead', ...leadParams });
       }
     }
 

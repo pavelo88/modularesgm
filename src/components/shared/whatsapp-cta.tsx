@@ -3,7 +3,6 @@
 import { useContext } from 'react';
 import { SiteContentContext } from '@/context/site-content-provider';
 import { SITE, whatsappHref } from '@/lib/site';
-import { track } from '@/lib/analytics';
 
 /** Enlace a WhatsApp con mensaje inicial y evento de conversión. Usa el número del CMS si está disponible. */
 export function WhatsAppCta({
@@ -23,7 +22,6 @@ export function WhatsAppCta({
       href={whatsappHref(phone, message)}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => track('whatsapp_click', { location })}
       className={className}
     >
       {children}

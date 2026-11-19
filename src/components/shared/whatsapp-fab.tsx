@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation';
 import { MessageCircle } from 'lucide-react';
 import { whatsappHref } from '@/lib/site';
-import { track } from '@/lib/analytics';
 
 /** Mensaje inicial según la página: el asesor sabe de qué viene a hablar cada cliente. */
 const MESSAGES: Array<[prefix: string, text: string]> = [
@@ -32,7 +31,6 @@ export function WhatsAppFAB({ phoneNumber }: { phoneNumber: string }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escríbenos por WhatsApp"
-        onClick={() => track('whatsapp_click', { location: 'boton_flotante', page: pathname })}
         className="bg-[#25D366] text-white p-4 rounded-full shadow-[0_5px_20px_rgba(37,211,102,0.4)] hover:scale-110 hover:bg-white hover:text-[#25D366] transition-all duration-300 flex items-center justify-center"
       >
         <MessageCircle size={32} />

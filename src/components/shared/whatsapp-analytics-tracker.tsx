@@ -82,13 +82,14 @@ export function WhatsAppAnalyticsTracker() {
       // Extraer datos del producto si el enlace está dentro de una tarjeta
       const card = anchor.closest('article');
       const itemTitle = card?.querySelector('h3')?.textContent?.trim() || '';
+      const itemName = anchor.getAttribute('data-item-name') || itemTitle;
 
       // Disparar evento de conversión enriquecido
       track('whatsapp_click', {
         click_location: location,
         link_url: anchor.href,
         whatsapp_message_preview: whatsappMessage.slice(0, 80),
-        item_name: itemTitle || undefined,
+        item_name: itemName || undefined,
         button_text: anchor.innerText?.trim() || anchor.title || 'WhatsApp',
         page_path: pathname || window.location.pathname,
       });

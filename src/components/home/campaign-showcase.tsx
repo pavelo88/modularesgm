@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Calendar, CheckCircle2, Clock, MessageCircle, Sparkles } from 'lucide-react';
-import { track } from '@/lib/analytics';
 import { SITE, whatsappHref, formatPhone } from '@/lib/site';
 import { useSiteContent } from '@/context/site-content-provider';
 
@@ -75,7 +74,7 @@ export function CampaignShowcase() {
 
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 border border-secondary/40 text-stone-100 text-xs font-medium mb-4 backdrop-blur-md">
               <Calendar size={14} className="text-amber-400 shrink-0" />
-              <span>Aprueba hasta el <strong className="text-amber-400">13 de nov</strong></span>
+              <span>Agenda tu visita técnica <strong className="text-amber-400">sin costo</strong></span>
             </div>
 
             <p className="text-stone-200 text-xs font-light leading-relaxed mb-4">
@@ -101,7 +100,6 @@ export function CampaignShowcase() {
               rel="noopener noreferrer"
               data-location="campaign_showcase_mobile"
               data-label="Campaña Navidad WhatsApp Móvil"
-              onClick={() => track('whatsapp_click', { location: 'campana_navidad_showcase_mobile' })}
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#1b736b] active:bg-[#155b55] text-white text-xs font-bold shadow-lg"
             >
               <MessageCircle size={16} className="text-emerald-300" />
@@ -125,7 +123,7 @@ export function CampaignShowcase() {
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xs font-mono tracking-[0.25em] uppercase text-amber-400/90 flex items-center gap-1.5">
                   <Sparkles size={13} className="text-amber-400" />
-                  ( (06)13 · CAMPAÑA NAVIDAD 2026
+                  CAMPAÑA NAVIDAD 2026
                 </span>
                 <span className="h-px flex-1 max-w-[80px] bg-secondary/30" />
               </div>
@@ -137,7 +135,7 @@ export function CampaignShowcase() {
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-gradient-to-r from-secondary/25 via-secondary/15 to-transparent border border-secondary/40 text-stone-100 text-sm font-medium mb-6 shadow-sm">
                 <Calendar size={16} className="text-amber-400 shrink-0" />
                 <span>
-                  Aprueba tu diseño hasta el <strong className="text-amber-400 font-bold">13 de noviembre</strong>
+                  Agenda tu visita técnica <strong className="text-amber-400 font-bold">sin costo</strong>
                 </span>
               </div>
 
@@ -170,7 +168,6 @@ export function CampaignShowcase() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track('whatsapp_click', { location: 'campana_navidad_showcase' })}
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-[#1b736b] hover:bg-[#155b55] text-white text-sm font-bold shadow-lg transition-all active:scale-95 group"
               >
                 <MessageCircle size={18} className="text-emerald-300" />

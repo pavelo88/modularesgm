@@ -101,6 +101,7 @@ interface CatalogProductCardProps {
   product: Product;
   row: CatalogRow;
   onOpenModal: () => void;
+  whatsappNumber?: string;
   'aria-hidden'?: boolean;
 }
 
@@ -108,9 +109,19 @@ function CatalogProductCard({
   product,
   row,
   onOpenModal,
+  whatsappNumber = SITE.phone,
   'aria-hidden': ariaHidden,
 }: CatalogProductCardProps) {
   const isCustomQuote = !product.price || product.price === 0;
+
+  const handleWhatsAppQuote = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    track('whatsapp_click', { location: 'catalogo_card', item_name: product.title });
+    const priceText = product.price ? ` ($${product.price.toLocaleString('es-EC')})` : '';
+    const dimText = product.dimensions ? ` - Medidas: ${product.dimensions}` : '';
+    const message = `¡Hola Modulares GM! Me interesa cotizar el modelo: *${product.title}* (Ref: GM-${product.id})${priceText}${dimText} del catálogo de ${row.title}. ¿Podrían darme más detalles o asesorarme?`;
+    window.open(whatsappHref(whatsappNumber, message), '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <article
@@ -196,13 +207,13 @@ function CatalogProductCard({
           )}
         </div>
 
-        {/* Footer with Price & Purchase Action */}
-        <div className="w-full pt-3 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-center sm:text-left">
-            <span className="text-[9px] uppercase font-bold tracking-wider text-muted-foreground block">
+        {/* Footer with Price & Actions (WhatsApp + Comprar) */}
+        <div className="w-full pt-3 border-t border-border/50 flex flex-col gap-2.5">
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] uppercase font-bold tracking-wider text-muted-foreground block text-left">
               {isCustomQuote ? 'Presupuesto' : 'Precio Directo'}
             </span>
-            <div className="flex items-baseline justify-center sm:justify-start gap-1">
+            <div className="flex items-baseline gap-1">
               <span className="text-base sm:text-lg font-black text-foreground tracking-tight">
                 {isCustomQuote ? 'A Medida' : `$${product.price.toLocaleString('es-EC')}`}
               </span>
@@ -212,17 +223,31 @@ function CatalogProductCard({
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenModal();
-            }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-xs font-bold px-4 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/30 transition-all active:scale-95 shadow-sm"
-          >
-            <ShoppingBag size={13} />
-            <span>Comprar</span>
-          </button>
+          <div className="grid grid-cols-2 gap-2 w-full">
+            <button
+              type="button"
+              onClick={handleWhatsAppQuote}
+              className="inline-flex items-center justify-center gap-1 text-[11px] font-bold px-2.5 py-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all active:scale-95 shadow-sm"
+              title="Cotizar por WhatsApp"
+              aria-label={`Cotizar ${product.title} por WhatsApp`}
+            >
+              <MessageCircle size={13} className="shrink-0" />
+              <span className="truncate">WhatsApp</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenModal();
+              }}
+              className="inline-flex items-center justify-center gap-1 text-[11px] font-bold px-2.5 py-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/30 transition-all active:scale-95 shadow-sm"
+              aria-label={`Comprar ${product.title}`}
+            >
+              <ShoppingBag size={13} className="shrink-0" />
+              <span className="truncate">Comprar</span>
+            </button>
+          </div>
         </div>
       </div>
     </article>
@@ -364,23 +389,32 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
               </p>
 
               {/* Botones de Acción de Autor en Hero */}
-              <div className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+              <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-full">
                 <button
                   type="button"
                   onClick={() => handleDownloadPdf()}
                   disabled={isGeneratingPdf}
-                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 disabled:opacity-50"
+                  className="w-full sm:w-auto max-w-full inline-flex items-center justify-center gap-2 text-xs font-bold px-4 sm:px-5 py-2.5 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 disabled:opacity-50"
                 >
-                  <FileDown size={14} className={cn("text-primary", isGeneratingPdf && "animate-bounce")} />
-                  <span>{isGeneratingPdf ? (pdfStatus || 'Generando...') : 'Descargar Catálogo Completo en PDF'}</span>
+                  <FileDown size={14} className={cn("text-primary shrink-0", isGeneratingPdf && "animate-bounce")} />
+                  <span className="truncate">
+                    {isGeneratingPdf 
+                      ? (pdfStatus ? (pdfStatus.length > 25 ? 'Generando PDF...' : pdfStatus) : 'Generando...')
+                      : (
+                        <>
+                          <span className="sm:hidden">Descargar Catálogo PDF</span>
+                          <span className="hidden sm:inline">Descargar Catálogo Completo en PDF</span>
+                        </>
+                      )}
+                  </span>
                 </button>
                 <Link
                   href="/store"
-                  className="inline-flex items-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold px-5 py-2.5 rounded-full border border-border/80 bg-card text-foreground hover:text-primary transition-all shadow-sm active:scale-95"
                 >
-                  <Store size={14} className="text-primary" />
+                  <Store size={14} className="text-primary shrink-0" />
                   <span>Explorar Tienda Online</span>
-                  <ArrowRight size={12} />
+                  <ArrowRight size={12} className="shrink-0" />
                 </Link>
               </div>
             </div>
@@ -391,7 +425,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                 <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-sm flex flex-col gap-1 transition-all hover:border-primary/40">
                   <div className="flex items-center gap-2">
                     <ShieldCheck size={18} className="text-emerald-500 shrink-0" />
-                    <span className="font-bold text-xs text-foreground">Garantía 3 a 5 Años</span>
+                    <span className="font-bold text-xs text-foreground">Garantía 3 a 10 Años</span>
                   </div>
                   <p className="text-[11px] text-muted-foreground leading-tight">
                     Cobertura de fábrica en herrajes y tableros.
@@ -557,20 +591,24 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                 type="button"
                 onClick={() => handleDownloadPdf()}
                 disabled={isGeneratingPdf}
-                className="inline-flex items-center gap-2 text-xs font-bold text-background bg-foreground hover:opacity-90 transition-all px-4 py-2.5 rounded-full shadow-sm active:scale-95 shrink-0 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 text-xs font-bold text-background bg-foreground hover:opacity-90 transition-all px-4 py-2.5 rounded-full shadow-sm active:scale-95 shrink-0 max-w-full disabled:opacity-50"
               >
-                <FileDown size={14} className={cn("text-primary", isGeneratingPdf && downloadingCategory === 'todos' && "animate-bounce")} />
-                <span>{isGeneratingPdf && downloadingCategory === 'todos' ? (pdfStatus || 'Generando...') : 'Descargar PDF'}</span>
+                <FileDown size={14} className={cn("text-primary shrink-0", isGeneratingPdf && downloadingCategory === 'todos' && "animate-bounce")} />
+                <span className="truncate max-w-[170px] sm:max-w-none">
+                  {isGeneratingPdf && downloadingCategory === 'todos' 
+                    ? (pdfStatus ? (pdfStatus.length > 20 ? 'Generando PDF...' : pdfStatus) : 'Generando...') 
+                    : 'Descargar PDF'}
+                </span>
               </button>
 
               <Link
                 href="/store"
                 className="inline-flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors px-4 py-2.5 rounded-full border border-border/80 bg-card shadow-sm active:scale-95 shrink-0"
               >
-                <Store size={14} className="text-primary" />
+                <Store size={14} className="text-primary shrink-0" />
                 <span className="hidden sm:inline">Explorar Tienda</span>
                 <span className="sm:hidden">Tienda</span>
-                <ArrowRight size={13} />
+                <ArrowRight size={13} className="shrink-0" />
               </Link>
             </div>
           </div>
@@ -694,12 +732,12 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                         type="button"
                         onClick={() => handleDownloadPdf(row.id)}
                         disabled={isGeneratingPdf}
-                        className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 group disabled:opacity-50 shrink-0"
+                        className="inline-flex items-center justify-center gap-2 text-xs font-bold px-4 py-2.5 rounded-full bg-foreground text-background hover:opacity-90 transition-all shadow-md active:scale-95 group disabled:opacity-50 shrink-0 max-w-full"
                       >
-                        <FileDown size={14} className={cn("text-primary", downloadingCategory === row.id && "animate-bounce")} />
-                        <span>
+                        <FileDown size={14} className={cn("text-primary shrink-0", downloadingCategory === row.id && "animate-bounce")} />
+                        <span className="truncate max-w-[170px] sm:max-w-none">
                           {downloadingCategory === row.id
-                            ? (pdfStatus || 'Descargando...')
+                            ? (pdfStatus ? (pdfStatus.length > 20 ? 'Descargando...' : pdfStatus) : 'Descargando...')
                             : `Descargar PDF`}
                         </span>
                       </button>
@@ -720,6 +758,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                           key={`static-${product.id}`}
                           product={product}
                           row={row}
+                          whatsappNumber={whatsappNumber}
                           onOpenModal={() => handleOpenPurchaseModal(product, row)}
                         />
                       ))}
@@ -739,6 +778,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                               key={`mob-${product.id}-${pIdx}`}
                               product={product}
                               row={row}
+                              whatsappNumber={whatsappNumber}
                               onOpenModal={() => handleOpenPurchaseModal(product, row)}
                             />
                           ))}
@@ -759,6 +799,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                               key={`orig-${product.id}-${pIdx}`}
                               product={product}
                               row={row}
+                              whatsappNumber={whatsappNumber}
                               onOpenModal={() => handleOpenPurchaseModal(product, row)}
                             />
                           ))}
@@ -767,6 +808,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                               key={`dup-${product.id}-${pIdx}`}
                               product={product}
                               row={row}
+                              whatsappNumber={whatsappNumber}
                               aria-hidden={true}
                               onOpenModal={() => handleOpenPurchaseModal(product, row)}
                             />
@@ -841,7 +883,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                 <div className="grid grid-cols-3 gap-2 mt-6 pt-6 border-t border-border/60 text-center">
                   <div className="p-2.5 rounded-xl bg-card border border-border/50">
                     <ShieldCheck size={18} className="text-emerald-500 mx-auto mb-1" />
-                    <span className="text-[10px] font-bold text-foreground block">3 a 5 Años</span>
+                    <span className="text-[10px] font-bold text-foreground block">3 a 10 Años</span>
                     <span className="text-[9px] text-muted-foreground block leading-tight">Garantía directa</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-card border border-border/50">
@@ -913,7 +955,7 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                         <Clock size={12} className="text-amber-500" /> Tiempo de entrega:
                       </span>
                       <span className="font-semibold text-foreground">
-                        7 a 15 días hábiles a medida
+                        15 a 20 días hábiles a medida
                       </span>
                     </div>
                   </div>
@@ -952,7 +994,8 @@ export function CatalogoExplorer({ rows }: { rows: CatalogRow[] }) {
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => track('whatsapp_click', { location: 'catalogo_modal', item_name: selectedProduct.title })}
+                    data-location="catalogo_modal"
+                    data-item-name={selectedProduct.title}
                     className="w-full flex items-center justify-center gap-2 py-3.5 px-5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-md active:scale-95 transition-all text-center"
                   >
                     <MessageCircle size={18} />
