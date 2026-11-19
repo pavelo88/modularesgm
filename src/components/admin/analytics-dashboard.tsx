@@ -64,8 +64,8 @@ export function AnalyticsDashboard({ days: propDays, setDays: propSetDays }: Ana
 function LoadingState() {
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-3">
-        {[0, 1, 2].map((i) => <Skeleton key={i} className="h-24" />)}
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        {[0, 1, 2].map((i) => <Skeleton key={i} className="h-20 sm:h-24" />)}
       </div>
       <Skeleton className="h-72" />
     </div>
@@ -75,10 +75,10 @@ function LoadingState() {
 function Stat({ label, value, hint }: { label: string; value: number; hint?: string }) {
   return (
     <Card>
-      <CardContent className="p-5">
-        <p className="text-sm text-muted-foreground">{label}</p>
-        <p className="mt-1 text-3xl font-bold tabular-nums">{fmt(value)}</p>
-        {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
+      <CardContent className="p-3 sm:p-5">
+        <p className="text-[11px] sm:text-sm text-muted-foreground truncate leading-tight">{label}</p>
+        <p className="mt-1 text-xl sm:text-3xl font-bold tabular-nums leading-none tracking-tight">{fmt(value)}</p>
+        {hint && <p className="mt-1 text-[10px] sm:text-xs text-muted-foreground line-clamp-1">{hint}</p>}
       </CardContent>
     </Card>
   );
@@ -120,7 +120,7 @@ function ReportView({ report }: { report: AnalyticsReport }) {
 
   return (
     <div className="space-y-6">
-      <section aria-label="Tráfico" className="grid gap-4 sm:grid-cols-3">
+      <section aria-label="Tráfico" className="grid grid-cols-3 gap-2 sm:gap-4">
         <Stat label="Visitantes" value={totals.users} />
         <Stat label="Sesiones" value={totals.sessions} />
         <Stat label="Páginas vistas" value={totals.views} />

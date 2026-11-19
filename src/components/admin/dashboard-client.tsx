@@ -23,10 +23,12 @@ import {
   RotateCcw,
   Loader2,
   Search,
+  Menu,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { AdminMobileBottomNav } from './admin-mobile-bottom-nav';
 import {
   SidebarProvider,
   Sidebar,
@@ -315,129 +317,231 @@ export function AdminDashboardClient() {
       </Sidebar>
       <SidebarInset className="bg-[#FAF8F5]/60 dark:bg-[#080a0d]/60 flex flex-col h-screen overflow-hidden">
         {/* Único Header Superior 100% FIJO */}
-        <header className="fixed top-0 right-0 left-0 md:left-[var(--sidebar-width)] data-[collapsed=true]:md:left-[var(--sidebar-width-icon)] z-40 flex items-center justify-between h-16 px-4 sm:px-6 border-b border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl transition-[left] duration-200 gap-3">
-           <div className="flex items-center gap-3 min-w-0">
-             <SidebarTrigger className="h-9 w-9 rounded-xl hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors shrink-0" />
-             <div className="min-w-0">
-               <h1 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-foreground font-headline truncate leading-tight">
+        <header className="fixed top-0 right-0 left-0 md:left-[var(--sidebar-width)] data-[collapsed=true]:md:left-[var(--sidebar-width-icon)] z-40 border-b border-stone-200/90 dark:border-stone-800/90 bg-[#FAF8F5]/95 dark:bg-[#0c0e12]/95 backdrop-blur-2xl transition-[left] duration-200 shadow-xs">
+          {/* Fila principal del header */}
+          <div className="flex items-center justify-between h-16 px-3 sm:px-6 gap-2">
+            <div className="flex items-center gap-2.5 min-w-0">
+              {/* En móviles: Logo GM + Título */}
+              <div className="flex md:hidden items-center gap-2 shrink-0">
+                <div className="relative w-8 h-8 overflow-hidden rounded-xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 p-1 shadow-xs shrink-0">
+                  <Image src="/logo.png" alt="GM" fill className="object-contain p-0.5" />
+                </div>
+              </div>
+
+              {/* En escritorio: SidebarTrigger clásico */}
+              <div className="hidden md:block shrink-0">
+                <SidebarTrigger className="h-9 w-9 rounded-xl hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors shrink-0" />
+              </div>
+
+              <div className="min-w-0">
+                <h1 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-foreground font-headline truncate leading-tight">
                   {headerInfo.title}
-               </h1>
-               <p className="text-[11px] sm:text-xs text-muted-foreground truncate leading-tight mt-0.5 max-w-xl">
+                </h1>
+                <p className="hidden sm:block text-[11px] sm:text-xs text-muted-foreground truncate leading-tight mt-0.5 max-w-xl">
                   {headerInfo.desc}
-               </p>
-             </div>
-           </div>
+                </p>
+              </div>
+            </div>
 
-           <div className="flex items-center gap-2.5 shrink-0">
-             {/* Buscador inteligente de contenidos y textos */}
-             <div className="relative hidden lg:block w-72">
-               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-stone-400 pointer-events-none" />
-               <input
-                 type="text"
-                 placeholder="Pegar texto (ej. Tranquilidad absoluta...)"
-                 value={adminSearch}
-                 onChange={(e) => handleGlobalContentSearch(e.target.value)}
-                 className="w-full h-9 pl-9 pr-3 rounded-xl text-xs bg-stone-100 dark:bg-stone-900/80 border border-stone-200 dark:border-stone-800 text-foreground placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-               />
-             </div>
-             {/* Controles contextuales por pestaña */}
-             {activeTab === 'analytics' && (
-               <div role="group" aria-label="Periodo de analítica" className="inline-flex rounded-xl border border-stone-200 dark:border-stone-800 bg-background/80 p-0.5 shadow-xs">
-                 {ANALYTICS_PERIODS.map((p) => (
-                   <button
-                     key={p.days}
-                     type="button"
-                     onClick={() => setAnalyticsDays(p.days)}
-                     aria-pressed={analyticsDays === p.days}
-                     className={cn(
-                       'rounded-lg px-2.5 py-1 text-xs font-semibold transition-all active:scale-95',
-                       analyticsDays === p.days
-                         ? 'bg-stone-900 text-white dark:bg-white dark:text-stone-950 shadow-xs'
-                         : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white'
-                     )}
-                   >
-                     {p.label}
-                   </button>
-                 ))}
-               </div>
-             )}
+            <div className="flex items-center gap-2 shrink-0">
+              {/* Buscador inteligente en escritorio */}
+              <div className="relative hidden lg:block w-72">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-stone-400 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Pegar texto (ej. Tranquilidad absoluta...)"
+                  value={adminSearch}
+                  onChange={(e) => handleGlobalContentSearch(e.target.value)}
+                  className="w-full h-9 pl-9 pr-3 rounded-xl text-xs bg-stone-100 dark:bg-stone-900/80 border border-stone-200 dark:border-stone-800 text-foreground placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
+                />
+              </div>
 
-             {activeTab === 'users' && (
-               <Button
-                 size="sm"
-                 onClick={() => {
-                   if (openCreateUserModalRef.current) {
-                     openCreateUserModalRef.current();
-                   }
-                 }}
-                 className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
-               >
-                 <UserPlus className="h-3.5 w-3.5" />
-                 <span className="hidden sm:inline">+ Añadir Usuario</span>
-                 <span className="sm:hidden">Añadir</span>
-               </Button>
-             )}
+              {/* Controles contextuales en escritorio (Analytics, Users, Services, Guardar) */}
+              <div className="hidden md:flex items-center gap-2">
+                {activeTab === 'analytics' && (
+                  <div role="group" aria-label="Periodo de analítica" className="inline-flex rounded-xl border border-stone-200 dark:border-stone-800 bg-background/80 p-0.5 shadow-xs">
+                    {ANALYTICS_PERIODS.map((p) => (
+                      <button
+                        key={p.days}
+                        type="button"
+                        onClick={() => setAnalyticsDays(p.days)}
+                        aria-pressed={analyticsDays === p.days}
+                        className={cn(
+                          'rounded-lg px-2.5 py-1 text-xs font-semibold transition-all active:scale-95',
+                          analyticsDays === p.days
+                            ? 'bg-stone-900 text-white dark:bg-white dark:text-stone-950 shadow-xs'
+                            : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-white'
+                        )}
+                      >
+                        {p.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
 
-             {activeTab === 'services' && (
-               <Button
-                 size="sm"
-                 variant="outline"
-                 onClick={handleAddService}
-                 className="rounded-full text-xs font-bold h-9 px-3.5 border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 shadow-sm gap-1.5 active:scale-95"
-               >
-                 <Plus className="h-3.5 w-3.5" />
-                 <span>+ Añadir</span>
-               </Button>
-             )}
+                {activeTab === 'users' && (
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      if (openCreateUserModalRef.current) {
+                        openCreateUserModalRef.current();
+                      }
+                    }}
+                    className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
+                  >
+                    <UserPlus className="h-3.5 w-3.5" />
+                    <span>+ Añadir Usuario</span>
+                  </Button>
+                )}
 
-             {/* Acciones de guardado rápido en cabecera para pestañas editables */}
-             {isCmsEditableTab && (
-               <div className="flex items-center gap-1.5">
-                 <Button
-                   variant="outline"
-                   size="sm"
-                   onClick={handleGlobalRestore}
-                   title="Restaurar valores de esta sección"
-                   className="hidden md:inline-flex rounded-full text-xs font-medium h-9 px-3 border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95"
-                 >
-                   <RotateCcw className="h-3.5 w-3.5 mr-1 text-muted-foreground" />
-                   <span>Restaurar</span>
-                 </Button>
-                 <Button
-                   size="sm"
-                   onClick={handleGlobalSave}
-                   disabled={isSaving}
-                   className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
-                 >
-                   {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
-                   <span>Guardar</span>
-                 </Button>
-               </div>
-             )}
+                {activeTab === 'services' && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={handleAddService}
+                    className="rounded-full text-xs font-bold h-9 px-3.5 border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 shadow-sm gap-1.5 active:scale-95"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    <span>+ Añadir</span>
+                  </Button>
+                )}
 
-             {/* Botón Circular Modo Claro / Oscuro (sin texto) */}
-             {mounted && (
-               <Button
-                 variant="outline"
-                 size="icon"
-                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                 className="h-9 w-9 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all active:scale-95 shadow-sm shrink-0"
-                 title="Alternar Modo Claro / Oscuro"
-                 aria-label="Alternar modo claro u oscuro"
-               >
-                 {theme === 'dark' ? (
-                   <Sun className="h-4 w-4 text-amber-500" />
-                 ) : (
-                   <Moon className="h-4 w-4 text-slate-700" />
-                 )}
-               </Button>
-             )}
-           </div>
+                {isCmsEditableTab && (
+                  <div className="flex items-center gap-1.5">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleGlobalRestore}
+                      title="Restaurar valores de esta sección"
+                      className="rounded-full text-xs font-medium h-9 px-3 border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95"
+                    >
+                      <RotateCcw className="h-3.5 w-3.5 mr-1 text-muted-foreground" />
+                      <span>Restaurar</span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={handleGlobalSave}
+                      disabled={isSaving}
+                      className="rounded-full text-xs font-bold h-9 px-3.5 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
+                    >
+                      {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
+                      <span>Guardar</span>
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              {/* Botón Circular Modo Claro / Oscuro (Sol / Luna) */}
+              {mounted && (
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  className="h-9 w-9 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all active:scale-95 shadow-sm shrink-0"
+                  title="Alternar Modo Claro / Oscuro"
+                  aria-label="Alternar modo claro u oscuro"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="h-4 w-4 text-amber-500" />
+                  ) : (
+                    <Moon className="h-4 w-4 text-slate-700" />
+                  )}
+                </Button>
+              )}
+
+              {/* En móviles: Botón Hamburguesa de la barra lateral */}
+              <div className="md:hidden shrink-0">
+                <SidebarTrigger className="h-9 w-9 rounded-full border border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all active:scale-95 shadow-xs shrink-0">
+                  <Menu className="h-4 w-4 text-foreground" />
+                </SidebarTrigger>
+              </div>
+            </div>
+          </div>
+
+          {/* Fila inferior de botones de control SOLO EN MÓVILES */}
+          <div className="md:hidden flex items-center justify-between px-3 py-2 border-t border-stone-200/70 dark:border-stone-800/70 bg-stone-50/70 dark:bg-stone-950/70 gap-2">
+            {activeTab === 'analytics' && (
+              <div role="group" aria-label="Periodo de analítica" className="w-full grid grid-cols-3 rounded-xl border border-stone-200 dark:border-stone-800 bg-background/90 p-0.5 shadow-xs">
+                {ANALYTICS_PERIODS.map((p) => (
+                  <button
+                    key={p.days}
+                    type="button"
+                    onClick={() => setAnalyticsDays(p.days)}
+                    aria-pressed={analyticsDays === p.days}
+                    className={cn(
+                      'rounded-lg py-1 text-center text-xs font-semibold transition-all active:scale-95',
+                      analyticsDays === p.days
+                        ? 'bg-stone-900 text-white dark:bg-white dark:text-stone-950 shadow-xs font-bold'
+                        : 'text-stone-600 dark:text-stone-400'
+                    )}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'users' && (
+              <Button
+                size="sm"
+                onClick={() => {
+                  if (openCreateUserModalRef.current) {
+                    openCreateUserModalRef.current();
+                  }
+                }}
+                className="w-full rounded-xl text-xs font-bold h-9 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
+              >
+                <UserPlus className="h-3.5 w-3.5" />
+                <span>+ Añadir Usuario</span>
+              </Button>
+            )}
+
+            {activeTab === 'services' && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleAddService}
+                className="w-full rounded-xl text-xs font-bold h-9 border-stone-300 dark:border-stone-700 bg-background/80 hover:bg-stone-100 dark:hover:bg-stone-800 shadow-sm gap-1.5 active:scale-95"
+              >
+                <Plus className="h-3.5 w-3.5" />
+                <span>+ Añadir Servicio</span>
+              </Button>
+            )}
+
+            {isCmsEditableTab && (
+              <div className="w-full flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleGlobalRestore}
+                  className="flex-1 rounded-xl text-xs font-medium h-9 border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-95"
+                >
+                  <RotateCcw className="h-3.5 w-3.5 mr-1 text-muted-foreground" />
+                  <span>Restaurar</span>
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={handleGlobalSave}
+                  disabled={isSaving}
+                  className="flex-1 rounded-xl text-xs font-bold h-9 bg-stone-900 text-white dark:bg-white dark:text-stone-950 hover:bg-stone-800 dark:hover:bg-stone-100 shadow-sm gap-1.5 active:scale-95"
+                >
+                  {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
+                  <span>Guardar</span>
+                </Button>
+              </div>
+            )}
+
+            {!['analytics', 'users', 'services'].includes(activeTab) && !isCmsEditableTab && (
+              <p className="text-[11px] text-muted-foreground truncate w-full text-center">
+                {headerInfo.desc}
+              </p>
+            )}
+          </div>
         </header>
 
         {/* Apple Style Main Area */}
-        <main className="flex-1 overflow-y-auto pt-16">
-          <div className="max-w-7xl mx-auto p-4 sm:p-6 md:p-8 pb-32">
+        <main className="flex-1 overflow-y-auto pt-28 md:pt-16 pb-20 md:pb-8">
+          <div className="max-w-7xl mx-auto p-3 sm:p-6 md:p-8 pb-32">
             {renderContent()}
           </div>
         </main>
@@ -475,6 +579,13 @@ export function AdminDashboardClient() {
             </div>
           </footer>
         )}
+
+        {/* Barra de navegación inferior móvil con los 5 accesos más útiles */}
+        <AdminMobileBottomNav
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isCmsEditableTab={isCmsEditableTab}
+        />
       </SidebarInset>
     </SidebarProvider>
   );
