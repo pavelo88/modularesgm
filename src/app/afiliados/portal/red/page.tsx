@@ -1,7 +1,7 @@
 'use client';
 
-import { useMemo } from 'react';
-import { Network, UserPlus, Users } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Network, UserPlus, Users, Plus } from 'lucide-react';
 import { useAffiliateAccount } from '@/context/affiliate-session';
 import { SITE_BASE } from '@/lib/site';
 import type { AffiliateAccount } from '@/lib/affiliate-core';
@@ -9,7 +9,6 @@ import {
   EmptyState,
   Initials,
   LinkField,
-  PageHeader,
   SectionTitle,
   StatCard,
   StatusPill,
@@ -19,6 +18,8 @@ import {
   surface,
   useUserDocs,
 } from '@/components/affiliates/portal-ui';
+import { Button } from '@/components/ui/button';
+import { AddAffiliateModal } from '@/components/affiliates/add-affiliate-modal';
 import { cn } from '@/lib/utils';
 
 type Member = AffiliateAccount & { id: string };
@@ -31,6 +32,7 @@ const displayName = (full: string) => {
 
 export default function NetworkPage() {
   const { affiliate, settings } = useAffiliateAccount();
+  const [addModalOpen, setAddModalOpen] = useState(false);
   const children = useUserDocs<Member>('affiliates', 'parentId', affiliate.username);
   const grandchildren = useUserDocs<Member>('affiliates', 'granId', affiliate.username);
 
@@ -115,7 +117,21 @@ export default function NetworkPage() {
       <section style={{ animationDelay: '160ms' }} className={cn(surface, enter, 'relative mb-6 overflow-hidden p-5 md:mb-8 md:p-6')}>
         <div aria-hidden className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/12 blur-3xl" />
         <div className="relative">
-          <SectionTitle icon={UserPlus} title="Invita a otros afiliados" hint="Quien se registre con este enlace queda en tu red." />
+          <SectionTitle
+            icon={UserPlus}
+            title="Invita a otros afiliados"
+            hint="Quien se registre con este enlace queda en tu red."
+            action={
+              <Button
+                type="button"
+                onClick={() => setAddModalOpen(true)}
+                className="h-9 gap-1.5 rounded-full px-4 text-xs font-bold shadow-sm active:scale-95 transition-all"
+              >
+                <Plus size={15} />
+                <span>Agregar Afiliado</span>
+              </Button>
+            }
+          />
           <LinkField value={inviteLink} label="Copiar invitación" />
         </div>
       </section>
@@ -124,6 +140,12 @@ export default function NetworkPage() {
         {levelPanel('Nivel 1 · Tus referidos directos', level1, children.loading, settings.parentRate, 200)}
         {levelPanel('Nivel 2 · Referidos de tus referidos', level2, grandchildren.loading, settings.grandparentRate, 240)}
       </div>
+
+      <AddAffiliateModal
+        open={addModalOpen}
+        onOpenChange={setAddModalOpen}
+        sponsorUsername={affiliate.username}
+      />
     </>
   );
 }
