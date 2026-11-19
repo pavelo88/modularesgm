@@ -22,7 +22,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
 
   return (
     <footer className="relative z-10 border-t border-stone-300/80 dark:border-stone-800/80 bg-[#FAF8F5] dark:bg-[#0c0e12] transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 pt-16 pb-20 sm:pb-12">
+      <div className="max-w-7xl mx-auto px-6 pt-16 pb-32 sm:pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-stone-300/70 dark:border-stone-800/80">
           {/* Col 1: Marca y Filosofía (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
@@ -178,11 +178,6 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
                       Cotización Directa
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/admin" className="text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 text-xs font-medium transition-colors block py-0.5">
-                      Acceso Administrativo
-                    </Link>
-                  </li>
                 </ul>
               )}
             </div>
@@ -262,11 +257,6 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
               <li>
                 <Link href="/#contacto" className="text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium transition-colors">
                   Cotización Directa
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin" className="text-stone-500 hover:text-stone-800 dark:hover:text-stone-200 text-xs font-medium transition-colors">
-                  Acceso Administrativo
                 </Link>
               </li>
             </ul>
