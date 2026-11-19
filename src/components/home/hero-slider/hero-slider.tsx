@@ -114,7 +114,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
-          <div className="relative lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left lg:self-stretch lg:justify-center">
+          <div className="relative min-h-[calc(100svh-36px)] lg:min-h-0 lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left lg:self-stretch lg:justify-center">
             <p className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:text-xs">
               <Sparkles size={14} className="shrink-0 text-amber-400" />
               <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
