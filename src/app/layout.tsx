@@ -8,9 +8,11 @@ import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/cart-provider';
 import { SEOStructuredData } from '@/components/shared/seo-structured-data';
 import { WhatsAppAnalyticsTracker } from '@/components/shared/whatsapp-analytics-tracker';
+import { ConsentManager } from '@/components/shared/consent-manager';
 
 /** ID de medición GA4 (flujo web «modularesgm»). Es público; la variable de entorno lo puede reemplazar. */
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-2LKR039L8Y';
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -25,6 +27,7 @@ const fontHeadline = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.modularesgm.com'),
+  applicationName: 'Modulares GM',
   title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
   description: 'Líderes en cocinas modulares, mobiliario de oficina y remodelaciones en Quito. Calidad premium en cuarzo y madera. Servicio técnico 24/7 en Ecuador.',
   keywords: [
@@ -71,6 +74,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Modulares GM' }],
   creator: 'Modulares GM',
   publisher: 'Modulares GM',
+  category: 'Mobiliario, construcción y diseño de interiores',
   formatDetection: {
     email: false,
     address: true,
@@ -145,9 +149,16 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
+                gtag('consent', 'default', {
+                  ad_storage: 'denied',
+                  ad_user_data: 'denied',
+                  ad_personalization: 'denied',
+                  analytics_storage: 'denied'
+                });
                 gtag('config', '${GA_ID}', {
                   send_page_view: true
                 });
+                ${GOOGLE_ADS_ID ? `gtag('config', '${GOOGLE_ADS_ID}');` : ''}
               `,
             }}
           />
@@ -159,24 +170,7 @@ export default function RootLayout({
           data-key="nxZ46GgcTfj/BPSFcmmgKw"
           strategy="afterInteractive"
         />
-        {/* Píxel de Meta: necesario para optimizar anuncios de Facebook/Instagram por conversiones */}
-        {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
-          <Script
-            id="meta-pixel"
-            strategy="lazyOnload"
-            dangerouslySetInnerHTML={{
-              __html: `
-                !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-                n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-                document,'script','https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
-                fbq('track', 'PageView');
-              `,
-            }}
-          />
-        )}
+        <ConsentManager />
       </body>
     </html>
   );
