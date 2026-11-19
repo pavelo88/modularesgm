@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { MessageCircle, Sparkles, Phone, X, Bot, ArrowRight, ChevronUp } from 'lucide-react';
 import { whatsappHref, formatPhone, toWhatsAppNumber } from '@/lib/site';
@@ -27,7 +27,20 @@ const DEFAULT_MESSAGE = '¡Hola Modulares GM! Deseo solicitar asesoría técnica
 export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isChatWindowOpen, setIsChatWindowOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const pathname = usePathname() ?? '/';
+
+  useEffect(() => {
+    const footer = document.getElementById('site-footer');
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsFooterVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   const routeMatch = ROUTE_MESSAGES.find(([prefix]) => pathname.startsWith(prefix));
   const activeTopic = routeMatch ? routeMatch[1] : DEFAULT_TOPIC;
@@ -45,6 +58,8 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
     setIsChatWindowOpen(true);
     setIsOpen(false);
   };
+
+  if (isFooterVisible) return null;
 
   return (
     <div className="hidden md:flex fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex-col items-end">
@@ -172,12 +187,12 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
                 </div>
               </div>
 
-              <div className="text-left hidden sm:block">
+              <div className="text-left hidden xl:block">
                 <span className="block text-[11px] font-bold leading-none tracking-tight text-white">
                   Asesoría & IA
                 </span>
                 <span className="block text-[9px] text-amber-300 font-medium leading-tight mt-0.5">
-                  WhatsApp 24/7
+                  Asesoría por WhatsApp
                 </span>
               </div>
             </>
