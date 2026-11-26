@@ -66,6 +66,7 @@ import {
   type AdminTab,
   ANALYTICS_PERIODS,
   getTabHeaderInfo,
+  getTabNavLabel,
   findJumpMatch,
 } from './admin-header-utils';
 import { restoreTabDefaults } from './admin-restore-utils';
@@ -86,7 +87,7 @@ const menuItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
 function NavItem({ item, activeTab, setActiveTab }: { item: any, activeTab: AdminTab, setActiveTab: (tab: AdminTab) => void }) {
   const { setOpenMobile } = useSidebar();
   const isActive = activeTab === item.id;
-  
+
   return (
     <SidebarMenuItem>
       <SidebarMenuButton
@@ -157,7 +158,7 @@ export function AdminDashboardClient() {
       console.error("Error loading admin content:", error);
       setLoading(false);
     });
-    
+
     return () => unsubscribe();
   }, []);
 
@@ -228,6 +229,7 @@ export function AdminDashboardClient() {
   };
 
   const headerInfo = getTabHeaderInfo(activeTab, siteContent.services.length, siteContent.products.length);
+  const mobileNavLabel = getTabNavLabel(activeTab);
 
   const renderContent = () => {
     if (loading || !authReady) {
@@ -241,7 +243,7 @@ export function AdminDashboardClient() {
           </div>
         );
     }
-    
+
     switch (activeTab) {
       case 'analytics':
         return <AnalyticsDashboard days={analyticsDays} setDays={setAnalyticsDays} />;
@@ -334,12 +336,22 @@ export function AdminDashboardClient() {
               </div>
 
               <div className="min-w-0">
-                <h1 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-foreground font-headline truncate leading-tight">
-                  {headerInfo.title}
-                </h1>
-                <p className="hidden sm:block text-[11px] sm:text-xs text-muted-foreground truncate leading-tight mt-0.5 max-w-xl">
-                  {headerInfo.desc}
-                </p>
+                <div className="md:hidden">
+                  <h1 className="text-sm font-bold tracking-tight text-foreground font-headline truncate leading-tight">
+                    Modulares GM
+                  </h1>
+                  <p className="text-[11px] font-medium text-muted-foreground truncate leading-tight mt-0.5 max-w-[190px]">
+                    {mobileNavLabel}
+                  </p>
+                </div>
+                <div className="hidden md:block">
+                  <h1 className="text-lg font-bold tracking-tight text-foreground font-headline truncate leading-tight">
+                    {headerInfo.title}
+                  </h1>
+                  <p className="text-xs text-muted-foreground truncate leading-tight mt-0.5 max-w-xl">
+                    {headerInfo.desc}
+                  </p>
+                </div>
               </div>
             </div>
 

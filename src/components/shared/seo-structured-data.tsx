@@ -15,6 +15,19 @@ export function SEOStructuredData({ phone }: { phone?: string } = {}) {
         "logo": "https://www.modularesgm.com/logo.png",
         "telephone": telephone,
         "priceRange": "$$",
+        "areaServed": [
+          { "@type": "City", "name": "Quito" },
+          { "@type": "AdministrativeArea", "name": "Pichincha" },
+          { "@type": "Country", "name": "Ecuador" }
+        ],
+        "serviceType": [
+          "Cocinas modulares a medida",
+          "Closets y walk-in closets a medida",
+          "Mesones de cuarzo y granito",
+          "Muebles de oficina y mobiliario corporativo",
+          "Muebles de baño y vanities",
+          "Diseño, fabricación e instalación de muebles"
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Rosa Yeira 420 y Serpaio Japeravi",
@@ -43,7 +56,17 @@ export function SEOStructuredData({ phone }: { phone?: string } = {}) {
           "Instalación de Mesones de Cuarzo, Granito y Mármol",
           "Remodelación Integral de Espacios y Obra Civil",
           "Diseño de Interiores y Planos Renders 3D"
-        ]
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios de mobiliario a medida",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cocinas modulares", "url": "https://www.modularesgm.com/cocinas" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Closets a medida", "url": "https://www.modularesgm.com/closets" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Muebles de oficina", "url": "https://www.modularesgm.com/muebles-oficina" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Muebles de baño", "url": "https://www.modularesgm.com/muebles-bano" } }
+          ]
+        }
       },
       {
         "@type": "WebSite",

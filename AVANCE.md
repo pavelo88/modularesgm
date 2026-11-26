@@ -11,3 +11,43 @@
 **Skills usadas/modificadas:** modularidad-archivos, registrar-avance.
 **Próximos pasos:** Confirmar en GA4 Tiempo real y DebugView una visita con UTMs antes de activar campañas.
 **Archivos modificados:** C:\dev\proyectos\modularesgm\src\lib\analytics.ts; C:\dev\proyectos\modularesgm\src\components\shared\whatsapp-analytics-tracker.tsx; C:\dev\proyectos\modularesgm\src\components\catalog\catalogo-explorer.tsx; componentes de CTA WhatsApp.
+
+## [2026-11-18] - Modulares GM - Codex
+**Qué se hizo:** Corregida la accesibilidad del menú lateral móvil y refinado el encabezado del panel admin para mostrar “Modulares GM” con el nombre claro de cada sección.
+**Resultado:** El warning de Radix desaparece al incluir un `SheetTitle` oculto; el header móvil ya muestra “Analítica”, “Directorio de Usuarios & Roles” y las demás secciones bajo la marca. Se añadieron señales metadata generales para buscadores.
+**Skills usadas/modificadas:** modularidad-archivos, registrar-avance.
+**Próximos pasos:** Verificar el panel en un teléfono real y configurar conversiones/consentimiento antes de activar Google Ads.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\src\components\ui\sidebar.tsx; C:\dev\proyectos\modularesgm\src\components\admin\admin-header-utils.ts; C:\dev\proyectos\modularesgm\src\components\admin\dashboard-client.tsx; C:\dev\proyectos\modularesgm\src\app\layout.tsx.
+
+## [2026-11-19] - Modulares GM - Codex
+**Qué se hizo:** Auditada la separación de cuentas de Google Ads y Google Business para Modulares GM y Vermilion Routes; preparado plan ejecutivo de pauta para ambos proyectos.
+**Resultado:** Modulares GM aparece verificado en Business Profile y vinculado a `3411962066`; `301-085-7341` aparece como Vermilion Routes. Se documentaron arquitectura correcta, permisos, presupuestos de prueba, bloqueos legales/técnicos y decisiones para los jefes.
+**Skills usadas/modificadas:** modularidad-archivos, registrar-avance.
+**Próximos pasos:** Confirmar el nombre real de `3411962066`, corregir la relación GA4-Ads si corresponde y aprobar presupuesto/mercado antes de publicar campañas.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\docs\21_Plan_Pauta_Dos_Proyectos.md.
+
+## [2026-11-19] - Modulares GM - Codex
+**Qué se hizo:** Creado el manual integral de marketing automatizado para ambas marcas.
+**Resultado:** Quedaron documentados Google Ads/Business, Meta Ads, TikTok Ads, SEO/IA, producción de imágenes y videos, CRM, automatizaciones, medición, permisos, presupuestos y roadmap de 90 días.
+**Skills usadas/modificadas:** modularidad-archivos, registrar-avance.
+**Próximos pasos:** Los jefes deben aprobar cuentas, mercados, presupuestos y campañas concretas antes de publicar.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\docs\22_Sistema_Integral_Marketing_Automatizado.md; C:\dev\proyectos\modularesgm\AGENTS.md; C:\dev\proyectos\modularesgm\docs\agent-handoff.md.
+
+## [2026-11-19] - Modulares GM - Codex
+**Qué se hizo:** Preparado el sitio para pauta con consentimiento previo y carga condicionada de Meta Pixel; añadido soporte opcional para Google Ads y eventos de consentimiento.
+**Resultado:** `npx tsc --noEmit` y `npm run build` correctos (25/25 rutas). El Perfil de Negocio de Modulares está verificado; se intentó publicar el catálogo, pero Google exigió una imagen válida y el borrador se descartó sin publicar.
+**Skills usadas/modificadas:** modularidad-archivos, registrar-avance.
+**Próximos pasos:** Definir `NEXT_PUBLIC_GOOGLE_ADS_ID` y `NEXT_PUBLIC_META_PIXEL_ID` en Vercel, conectar TikTok desde `/admin` y publicar el catálogo con una imagen aceptada por Google.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\src\app\layout.tsx; C:\dev\proyectos\modularesgm\src\components\shared\consent-manager.tsx.
+## [2026-11-19] - Modulares GM - Codex
+**Qué se hizo:** Se eliminó la plantilla `.env.example` y se dejó un único archivo `.env` con las variables públicas de analítica y espacios para los identificadores que aún no están disponibles.
+**Resultado:** El valor confirmado de GA4 quedó preparado; no se inventó un `AW-...` porque no existe en el repositorio ni en los datos revisados.
+**Skills usadas/modificadas:** reglas-seguridad, registrar-avance.
+**Próximos pasos:** Obtener en Google Ads la etiqueta de Google con formato `AW-XXXXXXXXXX` y el ID del Meta Pixel; después pegarlos en Vercel.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\.env; C:\dev\proyectos\modularesgm\.env.example; C:\dev\proyectos\modularesgm\AVANCE.md.
+## [2026-11-26] - Modulares GM - Codex
+**Qué se hizo:** Audité el HTML indexable, sitemap, robots, metadatos, JSON-LD y recursos para buscadores/IA; reforcé intención local y categorías de servicio.
+**Resultado:** Auditoría SEO local en 22 URLs con 0 errores y 0 avisos; TypeScript sin errores y build de producción 25/25 rutas.
+**Skills usadas/modificadas:** reglas-seguridad, modularidad-archivos, registrar-avance.
+**Próximos pasos:** Verificar en Search Console y Google Business Profile las áreas atendidas, reseñas y datos reales antes de invertir; revisar términos de búsqueda semanalmente.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\src\app\layout.tsx; C:\dev\proyectos\modularesgm\src\components\home\home-seo-content.tsx; C:\dev\proyectos\modularesgm\src\components\shared\seo-structured-data.tsx; C:\dev\proyectos\modularesgm\public\llms.txt.

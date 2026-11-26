@@ -91,6 +91,21 @@ export interface JumpMatch {
   feedback: string;
 }
 
+export const getTabNavLabel = (activeTab: AdminTab): string => {
+  switch (activeTab) {
+    case 'analytics': return 'Analítica';
+    case 'users': return 'Directorio de Usuarios & Roles';
+    case 'general': return 'Inicio y Contacto';
+    case 'theme': return 'Apariencia y Colores';
+    case 'services': return 'Gestión de Servicios';
+    case 'products': return 'Catálogo de la Tienda Online';
+    case 'brands': return 'Marcas y Experiencia';
+    case 'leads': return 'Leads y Contactos';
+    case 'orders': return 'Órdenes de Compra';
+    case 'affiliates': return 'Sistema de Afiliados';
+  }
+};
+
 export function findJumpMatch(query: string): JumpMatch | null {
   const q = query.trim().toLowerCase();
   if (!q) return null;

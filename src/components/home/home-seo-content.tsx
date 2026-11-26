@@ -85,6 +85,19 @@ export function HomeSeoContent({ whatsappNumber }: { whatsappNumber?: string } =
           </p>
         </div>
       </section>
+
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-16" aria-labelledby="cobertura-title">
+        <div className="rounded-3xl border bg-card p-8 shadow-sm md:p-10">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-700 dark:text-amber-400">Mobiliario a medida en Ecuador</p>
+          <h2 id="cobertura-title" className="font-headline text-3xl font-bold md:text-4xl">Diseñamos, fabricamos e instalamos en Quito y otras ciudades</h2>
+          <p className="mt-4 max-w-4xl text-muted-foreground">
+            Atendemos proyectos de cocinas integrales, closets, mesones de cuarzo, muebles de baño, oficinas y mobiliario comercial desde Quito. Coordinamos cobertura en Pichincha y otras ciudades del Ecuador según el alcance, transporte e instalación de cada proyecto.
+          </p>
+          <p className="mt-3 max-w-4xl text-sm text-muted-foreground">
+            Zonas de referencia: Quito, Cumbayá, Tumbaco, Valle de los Chillos, Puembo, Nayón, Guayaquil, Cuenca, Ambato y Manta. Consulta disponibilidad para tu dirección.
+          </p>
+        </div>
+      </section>
     </>
   );
 }

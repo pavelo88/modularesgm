@@ -29,9 +29,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.modularesgm.com'),
   applicationName: 'Modulares GM',
   title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
-  description: 'Líderes en cocinas modulares, mobiliario de oficina y remodelaciones en Quito. Calidad premium en cuarzo y madera. Servicio técnico 24/7 en Ecuador.',
+  description: 'Diseño, fabricación e instalación de cocinas modulares, closets, muebles de oficina y mesones de cuarzo en Quito y Ecuador. Cotiza tu proyecto a medida.',
   keywords: [
-    'Modulares GM', 'cocinas modulares quito', 'muebles de oficina ecuador', 
+    'Modulares GM', 'cocinas modulares Quito', 'cocinas integrales a medida Quito', 'muebles de cocina a medida Ecuador',
+    'muebles de oficina Ecuador', 'mobiliario corporativo Quito', 'closets a medida Quito', 'walk in closet Quito',
+    'mesones de cuarzo Quito', 'mesones de granito Ecuador', 'remodelación de cocinas Quito',
     'góndolas comerciales', 'estanterías para locales', 'adecuaciones de oficinas', 
     'remodelaciones quito', 'reparación de muebles', 'mesones de cuarzo quito', 
     'granito para cocinas', 'clósets y vestidores', 'construcción de casas ecuador',
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
     'remodelación de baños', 'muebles de cocina a medida', 'vestidores modernos',
     'centros de entretenimiento tv', 'muebles para farmacias', 'mobiliario corporativo', 
     'adecuaciones comerciales quito', 'reparaciones técnicas muebles', 
-    'diseño de interiores ecuador', 'producción de mobiliario modular'
+    'diseño de interiores Ecuador', 'fabricación de muebles a medida Quito', 'muebles modulares Ecuador'
   ],
   alternates: {
     canonical: './',
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
-    description: 'Líderes en cocinas modulares, mobiliario de oficina y remodelaciones en Quito. Calidad premium en cuarzo y madera. Servicio técnico 24/7 en Ecuador.',
+    description: 'Diseño, fabricación e instalación de cocinas modulares, closets, muebles de oficina y mesones de cuarzo en Quito y Ecuador. Cotiza tu proyecto a medida.',
     url: 'https://www.modularesgm.com',
     siteName: 'Modulares GM',
     locale: 'es_EC',
@@ -68,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
-    description: 'Líderes en cocinas modulares, mobiliario de oficina y remodelaciones en Quito. Calidad premium en cuarzo y madera.',
+    description: 'Diseño, fabricación e instalación de cocinas modulares, closets, muebles de oficina y mesones de cuarzo en Quito y Ecuador.',
     images: ['https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1200'],
   },
   authors: [{ name: 'Modulares GM' }],

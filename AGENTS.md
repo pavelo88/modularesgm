@@ -34,3 +34,17 @@ Para auditar producción: `npm run seo-audit`.
 ## Traspaso entre agentes
 Al terminar, añade 2–4 líneas a `docs/agent-handoff.md`: qué hiciste, qué quedó pendiente,
 qué debe revisar el siguiente. Léelo al empezar. Así los agentes "conversan" sin depender de la herramienta.
+
+## Marketing compartido y cuentas publicitarias
+
+Estas reglas son obligatorias para Codex, Antigravity, Claude Code y cualquier otro agente que trabaje en pauta:
+
+- Lee primero [`docs/21_Plan_Pauta_Dos_Proyectos.md`](docs/21_Plan_Pauta_Dos_Proyectos.md) y las últimas entradas de `docs/agent-handoff.md`.
+- Mantén dos operaciones separadas: **Modulares GM** solo para Ecuador y **Vermilion Routes** para EEUU, Reino Unido y Europa. No mezcles nombres, perfiles, propiedades GA4, públicos, conversiones, landings, teléfonos, presupuestos ni campañas.
+- Estado observado el 2026-11-19: el Perfil de Negocio de Modulares GM está verificado y aparece vinculado a Ads `3411962066`; Ads `301-085-7341` aparece como Vermilion Routes. Confirmar el nombre real de `3411962066` antes de cambiar vínculos.
+- No desvincules, vincules, concedas permisos, guardes facturación ni publiques campañas sin autorización explícita de Pablo en el chat para esa acción concreta.
+- Antes de lanzar anuncios, confirma con el jefe de cada proyecto: cuenta Ads, propiedad GA4, mercado, objetivo, presupuesto diario/mensual, coste máximo por lead y responsable de responder.
+- Antes de invertir, valida eventos `generate_lead` y `whatsapp_click`, consentimiento, política de privacidad, términos, landing, teléfono, horarios y promesas comerciales.
+- No presentes hipótesis, simulaciones o testimonios sintéticos como resultados reales. No prometas rendimiento ni afirmes “somos los mejores” como hecho comprobado.
+- El plan ejecutivo y los presupuestos de referencia están en `docs/21_Plan_Pauta_Dos_Proyectos.md`. Es una propuesta para decisión de los jefes, no autorización de gasto.
+- El sistema integral de marketing, contenidos, automatización, producción audiovisual y medición está en `docs/22_Sistema_Integral_Marketing_Automatizado.md`.
