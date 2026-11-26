@@ -78,6 +78,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/empresas`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/privacidad`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/terminos`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
     // Nota: /catalogo/{id} redirige (308) a los silos de arriba, por lo que
     // no va en el sitemap: solo deben listarse URLs que respondan 200.
   ];

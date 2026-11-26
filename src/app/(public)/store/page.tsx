@@ -165,9 +165,9 @@ function StoreContent() {
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-1.5 block text-center lg:text-left">
                 Catálogo Oficial GM • Fabricación de Autor
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15] text-center lg:text-left">
+              <h2 className="text-3xl sm:text-4xl lg:text-4xl font-black font-headline tracking-tight text-foreground leading-[1.15] text-center lg:text-left">
                 Tienda & Catálogo de Mobiliario Modular
-              </h1>
+              </h2>
               <p className="text-muted-foreground text-sm mt-2 font-normal max-w-xl leading-relaxed text-center lg:text-left">
                 Módulos listos para cotizar o comprar directamente. Melamina Pelikano RH 18mm hidrófuga, herrajes alemanes Blum y superficies nobles a medida.
               </p>

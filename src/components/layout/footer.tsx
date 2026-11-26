@@ -311,14 +311,23 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
         {/* Barra Inferior */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-stone-700 dark:text-stone-400">
           <p>
-            &copy; {currentYear} MODULARES GM. Todos los derechos reservados.
+            &copy; {currentYear} MODULARES GM &middot; Desarrollado por <span className="font-semibold text-stone-900 dark:text-stone-200">SinergIA Tech</span>. Todos los derechos reservados.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
+            <Link href="/empresas" className="hover:text-stone-950 dark:hover:text-white transition-colors font-semibold text-primary">
+              Empresas B2B
+            </Link>
+            <Link href="/privacidad" className="hover:text-stone-950 dark:hover:text-white transition-colors">
+              Privacidad &amp; LOPDP
+            </Link>
+            <Link href="/terminos" className="hover:text-stone-950 dark:hover:text-white transition-colors">
+              Términos de Servicio
+            </Link>
             <Link href="/afiliados" className="hover:text-stone-950 dark:hover:text-white transition-colors">
-              Programa de Afiliados
+              Afiliados
             </Link>
             <Link href="/precios" className="hover:text-stone-950 dark:hover:text-white transition-colors">
-              Catálogo de Precios
+              Precios
             </Link>
             <Link href="/#contacto" className="hover:text-stone-950 dark:hover:text-white transition-colors">
               Contacto

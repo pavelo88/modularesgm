@@ -204,6 +204,12 @@
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   }
+
+  /* Muesca Apple Dock Dual-Arc para botón WhatsApp central en barra móvil */
+  .ios-notch-mask {
+    -webkit-mask-image: radial-gradient(circle at 50% 0, transparent 35px, #000 36px);
+    mask-image: radial-gradient(circle at 50% 0, transparent 35px, #000 36px);
+  }
 }
 
 @keyframes scroll {
