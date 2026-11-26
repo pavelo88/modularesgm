@@ -40,8 +40,7 @@ qué debe revisar el siguiente. Léelo al empezar. Así los agentes "conversan" 
 Estas reglas son obligatorias para Codex, Antigravity, Claude Code y cualquier otro agente que trabaje en pauta:
 
 - Lee primero [`docs/21_Plan_Pauta_Dos_Proyectos.md`](docs/21_Plan_Pauta_Dos_Proyectos.md) y las últimas entradas de `docs/agent-handoff.md`.
-- Mantén dos operaciones separadas: **Modulares GM** solo para Ecuador y **Vermilion Routes** para EEUU, Reino Unido y Europa. No mezcles nombres, perfiles, propiedades GA4, públicos, conversiones, landings, teléfonos, presupuestos ni campañas.
-- Estado observado el 2026-11-19: el Perfil de Negocio de Modulares GM está verificado y aparece vinculado a Ads `3411962066`; Ads `301-085-7341` aparece como Vermilion Routes. Confirmar el nombre real de `3411962066` antes de cambiar vínculos.
+- Mantén las operaciones separadas: **Modulares GM** cuenta de Google Ads `301-085-7341` para Ecuador. No publicar campañas sin autorización explícita de Pablo en el chat.
 - No desvincules, vincules, concedas permisos, guardes facturación ni publiques campañas sin autorización explícita de Pablo en el chat para esa acción concreta.
 - Antes de lanzar anuncios, confirma con el jefe de cada proyecto: cuenta Ads, propiedad GA4, mercado, objetivo, presupuesto diario/mensual, coste máximo por lead y responsable de responder.
 - Antes de invertir, valida eventos `generate_lead` y `whatsapp_click`, consentimiento, política de privacidad, términos, landing, teléfono, horarios y promesas comerciales.

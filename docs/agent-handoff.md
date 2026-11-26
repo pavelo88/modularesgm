@@ -1,6 +1,6 @@
 # Traspaso entre agentes
 
-- 2026-11-19 · Codex · Preparado Modulares GM para pauta: consentimiento por defecto denegado, Meta Pixel condicionado a aceptación, soporte opcional de Google Ads y eventos de consentimiento; build correcto 25/25 · Pendiente: configurar IDs en Vercel, conectar TikTok desde `/admin` y publicar el catálogo con imagen válida en Business Profile.
+- 2026-11-26 · Antigravity · Confirmada con Pablo la cuenta oficial de Google Ads para Modulares GM: `301-085-7341`. Queda fijada como la cuenta única para Ecuador sin más confusiones ni cambios.
 
 - 2026-11-19 · Codex · Creado manual integral de marketing para Modulares GM y Vermilion Routes: Google Ads/Business, Meta, TikTok, SEO, contenidos, video/imágenes, CRM, automatizaciones, métricas, permisos y roadmap de 90 días · Pendiente: confirmar cuentas/GA4, mercado de Vermilion y presupuestos antes de publicar o gastar.
 
