@@ -75,6 +75,7 @@
     "@types/react-dom": "^19.2.1",
     "canvas": "^3.2.3",
     "genkit-cli": "^1.28.0",
+    "google-ads-api": "^26.1.0",
     "pdf-to-img": "^7.0.0",
     "pdfjs-dist": "^6.3.289",
     "postcss": "^8",
