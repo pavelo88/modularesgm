@@ -99,7 +99,7 @@ function CategoryCard({ cat }: { cat: (typeof ARCHITECTURAL_CATEGORIES)[0] }) {
   return (
     <Link
       href={cat.href}
-      className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md transition-all duration-500 hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-xl hover:-translate-y-1.5 h-full"
+      className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md spring-card active-press hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-2xl h-full"
     >
       <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
         <Image
@@ -107,7 +107,7 @@ function CategoryCard({ cat }: { cat: (typeof ARCHITECTURAL_CATEGORIES)[0] }) {
           alt={cat.title}
           fill
           sizes="(max-width: 768px) 85vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 pointer-events-none" />
 
@@ -133,7 +133,7 @@ function CategoryCard({ cat }: { cat: (typeof ARCHITECTURAL_CATEGORIES)[0] }) {
         </p>
         <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
           <span className="uppercase tracking-wider">Explorar Catálogo</span>
-          <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-primary" />
+          <ArrowRight size={14} className="transition-transform group-hover:translate-x-1.5 text-primary duration-200" />
         </div>
       </div>
     </Link>

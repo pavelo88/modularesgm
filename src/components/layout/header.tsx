@@ -17,6 +17,7 @@ import {
   Instagram,
   Sun,
   Handshake,
+  Building2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -74,6 +75,7 @@ export function Header() {
   const navLinks = [
     { href: '/#top', label: 'Inicio', publicOnly: false, icon: <Home size={20} /> },
     { href: '/catalogo', label: 'Catálogo', publicOnly: false, icon: <LayoutGrid size={20} /> },
+    { href: '/empresas', label: 'Empresas', publicOnly: false, icon: <Building2 size={20} /> },
     { href: '/#contacto', label: 'Contacto', publicOnly: true, icon: <MessageSquare size={20} /> },
     { href: '/store', label: 'Tienda', publicOnly: false, icon: <Store size={20} /> },
     { href: '/afiliados', label: 'Trabaja con nosotros', publicOnly: false, icon: <Handshake size={20} /> },
@@ -81,7 +83,7 @@ export function Header() {
 
   const NavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
     if (publicOnly && pathname !== '/') return null;
-    const isActive = href === '/afiliados' ? pathname.startsWith('/afiliados') : href === '/store' ? pathname.startsWith('/store') : false;
+    const isActive = href === '/afiliados' ? pathname.startsWith('/afiliados') : href === '/empresas' ? pathname.startsWith('/empresas') : href === '/store' ? pathname.startsWith('/store') : false;
 
     return (
       <Link
@@ -101,7 +103,7 @@ export function Header() {
   
   const MobileNavLink = ({ href, label, publicOnly, icon }: (typeof navLinks)[0]) => {
      if (publicOnly && pathname !== '/') return null;
-     const isActive = href === '/store' ? pathname.startsWith('/store') : href === '/afiliados' ? pathname.startsWith('/afiliados') : (href === '/#top' && pathname === '/');
+     const isActive = href === '/store' ? pathname.startsWith('/store') : href === '/empresas' ? pathname.startsWith('/empresas') : href === '/afiliados' ? pathname.startsWith('/afiliados') : (href === '/#top' && pathname === '/');
      return (
        <Link
          href={href}
@@ -156,10 +158,10 @@ export function Header() {
               MODULARES GM
             </span>
             <p className={cn(
-              "text-[10px] font-semibold transition-colors -mt-1 leading-tight",
-              overHero ? "text-white/80" : "text-stone-600 dark:text-stone-400"
+              "text-[9.5px] font-semibold tracking-wider transition-colors -mt-0.5 leading-tight uppercase",
+              overHero ? "text-amber-300/90" : "text-amber-700 dark:text-amber-400"
             )}>
-              Cocinas y Cuarzos
+              Diseño · Construcción · Mobiliario
             </p>
           </div>
         </Link>
@@ -243,8 +245,8 @@ export function Header() {
                     <span className="block text-base font-black tracking-tight text-foreground font-headline">
                       MODULARES GM
                     </span>
-                    <p className="text-[10px] font-semibold text-muted-foreground -mt-0.5 leading-tight tracking-wider uppercase">
-                      Cocinas y Cuarzos Ecuador
+                    <p className="text-[9.5px] font-semibold text-primary -mt-0.5 leading-tight tracking-wider uppercase">
+                      Diseño · Construcción · Mobiliario
                     </p>
                   </div>
                 </Link>

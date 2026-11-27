@@ -1,24 +1,94 @@
 import Link from 'next/link';
-import { ArrowRight, Handshake, LineChart, Network, ShieldCheck, Wallet } from 'lucide-react';
+import { ArrowRight, Handshake, LineChart, Network, ShieldCheck, Wallet, Sparkles, DollarSign, Award, Gift } from 'lucide-react';
 import { AffiliateHero, type HeroCard } from '@/components/affiliates/affiliate-hero';
+import { CommissionSimulator } from '@/components/affiliates/commission-simulator';
 import { CardSlider, MediaCard } from '@/components/shared/card-slider';
 import { AFFILIATE_AUDIENCES, AFFILIATE_FAQ, AFFILIATE_STEPS } from '@/lib/affiliate-content';
-import { defaultServices } from '@/lib/data';
 import { SITE_BASE } from '@/lib/site';
 
-const hiRes = (url: string) => url.replace('w=500', 'w=1600').replace('q=60', 'q=72');
+// Tarjetas del Hero con ganchos comerciales reales de comisiones y fotografías de proyectos verificados
+const heroCards: HeroCard[] = [
+  {
+    id: '1',
+    title: 'Cocinas Modulares de Alta Gama',
+    image: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    caption: 'Venta promedio: $2,800 a $6,000 → Tu comisión: $280 a $600 por cierre.',
+    href: '/cocinas',
+    cta: 'Ver proyectos',
+  },
+  {
+    id: '2',
+    title: 'Topes e Islas de Cuarzo y Granito',
+    image: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+    caption: 'Venta promedio: $1,200 a $2,500 → Tu comisión: $120 a $250 por mesón.',
+    href: '/catalogo',
+    cta: 'Ver acabados',
+  },
+  {
+    id: '3',
+    title: 'Clósets y Walk-in Closets a Medida',
+    image: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    caption: 'Venta promedio: $1,400 a $3,800 → Tu comisión: $140 a $380 por clóset.',
+    href: '/closets',
+    cta: 'Ver vestidores',
+  },
+  {
+    id: '4',
+    title: 'Mobiliario Corporativo y Recepciones',
+    image: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
+    caption: 'Venta promedio: $2,000 a $7,500 → Tu comisión: $200 a $750 por oficina.',
+    href: '/muebles-oficina',
+    cta: 'Línea corporativa',
+  },
+  {
+    id: '5',
+    title: 'Vanities y Muebles de Baño RH',
+    image: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
+    caption: 'Venta promedio: $800 a $1,800 → Tu comisión: $80 a $180 por baño.',
+    href: '/muebles-bano',
+    cta: 'Ver vanities',
+  },
+];
 
-const PITCHES: Record<number, string> = {
-  1: 'Tus contactos que están por remodelar su cocina son tu mejor oportunidad.',
-  2: 'Mesones de cuarzo y granito: una recomendación natural en cada remodelación.',
-  3: 'Clósets y vestidores a medida para quien estrena o renueva su hogar.',
-  5: 'Baños renovados con muebles resistentes a la humedad.',
-  6: 'Centros de entretenimiento con iluminación LED para salas modernas.',
-};
-
-const heroCards: HeroCard[] = defaultServices
-  .filter((s) => PITCHES[s.id])
-  .map((s) => ({ id: String(s.id), title: s.title, image: hiRes(s.imgUrl), caption: PITCHES[s.id], href: '/store', cta: 'Ver en la tienda' }));
+// Servicios destacados para recomendar en el catálogo
+const recommendedProducts = [
+  {
+    title: 'Cocina Cappuccino Luxury con Isla',
+    desc: 'Melamina Pelikano RH 18mm con mesón en cuarzo blanco. Ticket: $3,400. Tu comisión: $340 USD.',
+    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    href: '/cocinas',
+  },
+  {
+    title: 'Walk-in Closet Boutique con Vidrio Bronce',
+    desc: 'Perfilería de aluminio, iluminación cálida 3000K y pantaloneras. Ticket: $2,600. Tu comisión: $260 USD.',
+    imgUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    href: '/closets',
+  },
+  {
+    title: 'Mesón de Cuarzo Calacatta Gold',
+    desc: 'Cascada ingleteada computarizada CNC con zócalo integrado. Ticket: $1,600. Tu comisión: $160 USD.',
+    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+    href: '/catalogo',
+  },
+  {
+    title: 'Counter de Recepción Corporativo Monolítico',
+    desc: 'Diseño curvo con luces indirectas para empresas e instituciones. Ticket: $2,200. Tu comisión: $220 USD.',
+    imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
+    href: '/muebles-oficina',
+  },
+  {
+    title: 'Vanity Spa Flotante en Roble Gris RH',
+    desc: 'Resistente a humedad y vapor con lavamanos de sobreponer. Ticket: $950. Tu comisión: $95 USD.',
+    imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
+    href: '/muebles-bano',
+  },
+  {
+    title: 'Puerta Monumental Pivotante de 2.80m',
+    desc: 'Pivote axial de acero inoxidable y cerradura digital. Ticket: $1,450. Tu comisión: $145 USD.',
+    imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+    href: '/puertas',
+  },
+];
 
 const benefits = [
   { icon: Network, title: 'Enlace y código únicos', text: 'Cada venta llega atribuida a tu nombre, incluso si el cliente compra días después.' },
@@ -66,6 +136,11 @@ export default function AffiliatesLandingPage() {
 
       <AffiliateHero cards={heroCards} />
 
+      {/* Simulador Interactivo de Comisiones Oficial Plan 10-3-2 */}
+      <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-12 mb-16" aria-label="Simulador de Ganancias">
+        <CommissionSimulator />
+      </section>
+
       {/* Top High-Converting Call to Action Banner */}
       <section aria-label="Llamado a la acción principal" className="relative z-10 border-b border-stone-200 dark:border-stone-800 bg-background/95 backdrop-blur-md">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-14 text-center">
@@ -73,10 +148,10 @@ export default function AffiliatesLandingPage() {
             ✨ Registro 100% Gratuito en 60 Segundos
           </div>
           <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground max-w-3xl mx-auto leading-tight">
-            Monetiza tus recomendaciones con la marca líder de mobiliario modular en Ecuador
+            Monetiza tus contactos con la marca de mobiliario más prestigiosa de Ecuador
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-            Gana comisiones directas recomendando cocinas a medida, mesones de cuarzo y clósets de alta gama. Sin stock, sin costos y con panel de seguimiento en tiempo real.
+            Recomienda cocinas de alta gama, mesones de cuarzo y clósets a medida. Cada venta te acredita el <strong className="text-amber-500 font-semibold">10% directo</strong> y tu cliente ahorra un <strong className="text-emerald-500 font-semibold">5%</strong> con tu código. Sin trámites ni inventario.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md sm:max-w-none mx-auto">
@@ -107,36 +182,45 @@ export default function AffiliatesLandingPage() {
               <span className="text-amber-500 font-bold">✓</span> Cero inversión o inventario
             </div>
             <div className="flex items-center justify-center gap-2">
-              <span className="text-amber-500 font-bold">✓</span> Enlace y código rastreados
+              <span className="text-amber-500 font-bold">✓</span> Enlace y código rastreados 30 días
             </div>
             <div className="flex items-center justify-center gap-2">
-              <span className="text-amber-500 font-bold">✓</span> Pagos directos a tu banco
+              <span className="text-amber-500 font-bold">✓</span> Pagos directos a tu banco en Ecuador
             </div>
           </div>
         </div>
       </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-20" aria-labelledby="como-funciona">
-        <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Tres pasos</p>
-        <h2 id="como-funciona" className="mb-12 text-center font-headline text-3xl font-bold md:text-4xl">Cómo funciona el programa de afiliados</h2>
+        <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Paso a paso</p>
+        <h2 id="como-funciona" className="mb-12 text-center font-headline text-3xl font-bold md:text-4xl">Cómo funciona el sistema de afiliados</h2>
         <ol className="grid gap-6 md:grid-cols-3">
           {AFFILIATE_STEPS.map((s, i) => (
-            <li key={s.title} className="relative rounded-3xl border bg-card p-8 shadow-sm">
+            <li key={s.title} className="relative rounded-3xl border border-stone-200 dark:border-stone-800 bg-card p-8 shadow-sm transition-all hover:shadow-md hover:border-amber-500/30">
               <span className="absolute right-6 top-4 font-headline text-6xl font-bold text-primary/10" aria-hidden>{i + 1}</span>
               <h3 className="mb-3 font-headline text-xl font-bold">{s.title}</h3>
-              <p className="text-sm text-muted-foreground">{s.text}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.text}</p>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="relative z-10 bg-muted/50" aria-labelledby="que-recomendar">
+      {/* Qué puedes recomendar con comisiones reales */}
+      <section className="relative z-10 bg-muted/40 border-y border-stone-200 dark:border-stone-800" aria-labelledby="que-recomendar">
         <div className="mx-auto max-w-7xl px-6 py-20">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Catálogo</p>
-          <h2 id="que-recomendar" className="mb-10 font-headline text-3xl font-bold md:text-4xl">Qué puedes recomendar a tus clientes</h2>
-          <CardSlider label="Servicios que puedes recomendar" slideClassName="basis-[78%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-            {defaultServices.map((s) => (
-              <MediaCard key={s.id} image={s.imgUrl} title={s.title} description={s.desc} href="/store" cta="Ver en la tienda" />
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">Catálogo de Alta Demanda</p>
+              <h2 id="que-recomendar" className="font-headline text-3xl font-bold md:text-4xl">Qué productos puedes recomendar hoy</h2>
+              <p className="mt-2 text-sm text-muted-foreground max-w-xl">
+                Nuestros proyectos tienen un ticket promedio alto ($800 a $6,000 USD), lo que te garantiza comisiones significativas por cada contacto que refieras.
+              </p>
+            </div>
+          </div>
+
+          <CardSlider label="Servicios que puedes recomendar" slideClassName="basis-[82%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/3">
+            {recommendedProducts.map((p) => (
+              <MediaCard key={p.title} image={p.imgUrl} title={p.title} description={p.desc} href={p.href} cta="Ver línea completa" />
             ))}
           </CardSlider>
         </div>

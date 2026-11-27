@@ -2,78 +2,38 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { 
   Building2, 
-  Briefcase, 
   CheckCircle2, 
-  ShieldCheck, 
-  Clock, 
-  Layers, 
-  FileCheck, 
-  Users2, 
   Sparkles, 
   ArrowRight, 
   PhoneCall, 
   MessageCircle,
   Truck,
   HardHat,
-  Ruler
+  Ruler,
+  Layers,
+  Clock,
+  FileCheck
 } from 'lucide-react';
 import { SITE, whatsappHref } from '@/lib/site';
+import { CorporateHero } from '@/components/corporate/corporate-hero';
+import { CorporateSectorsGrid } from '@/components/corporate/corporate-sectors-grid';
 import { B2BForm } from './b2b-form';
 
 export const metadata: Metadata = {
   title: 'Mobiliario para Constructoras y Empresas en Ecuador | Modulares GM',
-  description: 'Fabricación de mobiliario modular a gran escala para constructoras, arquitectos, hoteles, oficinas e instituciones. Capacidad de planta en Quito y cobertura nacional.',
+  description: 'Soluciones integrales de mobiliario modular, diseño y adecuación de espacios para constructoras, arquitectos, empresas e instituciones en Ecuador.',
   alternates: {
     canonical: 'https://www.modularesgm.com/empresas',
   },
   openGraph: {
     title: 'Mobiliario para Constructoras y Empresas en Ecuador | Modulares GM',
-    description: 'Soluciones B2B para edificación, hotelería y proyectos comerciales. Calidad Pelikano RH 18mm y herrajes europeos con garantía legal.',
+    description: 'Diseñamos espacios. Fabricamos oportunidades. Capacidad de planta en Quito y cobertura nacional para proyectos B2B.',
     url: 'https://www.modularesgm.com/empresas',
     siteName: 'Modulares GM',
     locale: 'es_EC',
     type: 'website',
   },
 };
-
-const B2B_SOLUTIONS = [
-  {
-    title: 'Edificios & Constructoras',
-    desc: 'Equipamiento integral en serie de cocinas, closets y vanities para torres residenciales y urbanizaciones con entregas escalonadas y cumplimiento de cronograma.',
-    icon: Building2,
-    badge: 'Proyectos Inmobiliarios',
-  },
-  {
-    title: 'Arquitectos & Diseñadores',
-    desc: 'Alianza técnica para fabricación exacta bajo planos planimétricos con optimización de costos de corte CNC y tarifas preferenciales de gremio.',
-    icon: Ruler,
-    badge: 'Alianza Profesional',
-  },
-  {
-    title: 'Espacios Corporativos & Coworkings',
-    desc: 'Estaciones de trabajo modulares, salas de conferencias, áreas de recepción y divisiones acústicas ergonómicas con cableado oculto.',
-    icon: Briefcase,
-    badge: 'Oficinas & Corporativo',
-  },
-  {
-    title: 'Retail, Supermercados & Fruterías',
-    desc: 'Góndolas metálicas modulares, perchas de alta carga, estanterías comerciales, fruteros y counters de atención al cliente de alto tráfico.',
-    icon: Layers,
-    badge: 'Comercial & Retail',
-  },
-  {
-    title: 'Sector Salud & Odontología',
-    desc: 'Mobiliario clínico, vanities sanitarios con topes antibacterianos en cuarzo y cajoneras médicas asépticas resistentes a desinfectantes y humedad.',
-    icon: ShieldCheck,
-    badge: 'Clínicas & Laboratorios',
-  },
-  {
-    title: 'Institucional & Educativo',
-    desc: 'Lockers modulares con cerradura inteligente, bibliotecas, pupitres ergonómicos y mobiliario robusto para colegios, universidades y entidades.',
-    icon: Users2,
-    badge: 'Educación & Gobierno',
-  },
-];
 
 export default function EmpresasPage() {
   const whatsappUrl = whatsappHref(
@@ -82,7 +42,7 @@ export default function EmpresasPage() {
   );
 
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Schema.org B2B Service */}
       <script
         type="application/ld+json"
@@ -107,174 +67,147 @@ export default function EmpresasPage() {
               '@type': 'Country',
               name: 'Ecuador',
             },
-            description: 'Fabricación y suministro de mobiliario modular a gran escala para constructoras, arquitectos y comercios en Ecuador.',
+            description: 'Fabricación y suministro de mobiliario modular a gran escala para constructoras, arquitectos y empresas en Ecuador.',
           }),
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabecera Hero B2B */}
-        <header className="mb-14 pb-10 border-b border-border/60">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">
-                <Sparkles size={13} className="text-primary" />
-                División Corporativa & Proyectos B2B
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-headline tracking-tight text-foreground leading-[1.12]">
-                Fabricación de Mobiliario a Escala para Constructoras e Instituciones
-              </h1>
-              <p className="mt-4 text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed font-normal">
-                Capacidad industrial directa de taller en Quito para equipamiento de torres de departamentos, hoteles, locales comerciales y oficinas con entregas programadas en todo el Ecuador.
-              </p>
-              
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="#formulario-b2b"
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold px-6 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-md active:scale-95"
-                >
-                  <span>Solicitar Propuesta para Proyecto</span>
-                  <ArrowRight size={16} />
-                </a>
+      {/* 1. Nuevo Hero Cinematográfico Empresarial */}
+      <CorporateHero
+        badge="DIVISIÓN CORPORATIVA · PROYECTOS B2B"
+        title="Diseñamos espacios."
+        highlightedTitle="Fabricamos oportunidades."
+        subtitle="Soluciones integrales de mobiliario, diseño y adecuación de espacios para constructoras, arquitectos, empresas e instituciones en Ecuador."
+        primaryCtaText="Solicitar propuesta empresarial"
+        primaryCtaHref="#formulario-b2b"
+        secondaryCtaText="Explorar soluciones corporativas"
+        secondaryCtaHref="#sectores-corporativos"
+        bgImage="/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp"
+      />
+
+      {/* Franja Editorial de Capacidades Verificadas */}
+      <section className="border-b border-border/70 bg-stone-100/70 dark:bg-[#0c0e12] py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
+            <div className="flex items-center gap-3.5 justify-center sm:justify-start">
+              <div className="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <Clock size={20} />
+              </div>
+              <div>
+                <p className="font-bold text-sm text-foreground">18+ Años en Ecuador</p>
+                <p className="text-xs text-muted-foreground">Trayectoria en manufactura modular</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5 justify-center sm:justify-start">
+              <div className="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <Truck size={20} />
+              </div>
+              <div>
+                <p className="font-bold text-sm text-foreground">Cobertura Nacional</p>
+                <p className="text-xs text-muted-foreground">Instalación técnica en obra</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5 justify-center sm:justify-start">
+              <div className="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <Ruler size={20} />
+              </div>
+              <div>
+                <p className="font-bold text-sm text-foreground">Corte CNC Automatizado</p>
+                <p className="text-xs text-muted-foreground">Tolerancia milimétrica en taller</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5 justify-center sm:justify-start">
+              <div className="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <FileCheck size={20} />
+              </div>
+              <div>
+                <p className="font-bold text-sm text-foreground">Contrato & Garantía</p>
+                <p className="text-xs text-muted-foreground">Cronogramas por escrito sin retrasos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Sección de las Seis Líneas Empresariales con Galería Asimétrica */}
+      <CorporateSectorsGrid />
+
+      {/* 3. Formulario de Contacto Empresarial Equilibrado */}
+      <section id="formulario-b2b" className="py-20 lg:py-28 bg-background scroll-mt-24 border-t border-border/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+            {/* Columna Izquierda: Presentación Comercial y Proceso */}
+            <div className="lg:col-span-5 flex flex-col justify-between p-8 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md shadow-sm">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-4">
+                  Hablemos de tu próximo proyecto
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold font-headline tracking-tight text-foreground mb-3 leading-tight">
+                  Las grandes transformaciones comienzan con una conversación.
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6 font-normal">
+                  Cuéntanos qué necesita tu empresa. Analizaremos el alcance, las características y las posibilidades de fabricación para preparar una propuesta adaptada a tu proyecto.
+                </p>
+
+                <div className="space-y-4 pt-4 border-t border-border/60">
+                  <p className="text-xs font-bold uppercase tracking-wider text-foreground">
+                    ¿Qué sucede después de enviar tu solicitud?
+                  </p>
+                  <ol className="space-y-2.5 text-xs text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <span className="font-bold text-primary font-mono">01.</span>
+                      <span>Revisamos tus requerimientos y alcance.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-bold text-primary font-mono">02.</span>
+                      <span>Analizamos especificaciones y memorias técnicas.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-bold text-primary font-mono">03.</span>
+                      <span>Coordinamos una reunión o visita técnica en obra.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-bold text-primary font-mono">04.</span>
+                      <span>Preparamos una propuesta económica desglosada.</span>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-border/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider block">
+                    Atención Empresarial Directa
+                  </span>
+                  <a href="tel:+593962524311" className="text-sm font-bold text-foreground hover:text-primary transition-colors flex items-center gap-1.5 mt-0.5">
+                    <PhoneCall size={14} className="text-primary" />
+                    <span>+593 96 252 4311</span>
+                  </a>
+                </div>
+
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold px-6 py-3 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition-all active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-all active:scale-95"
                 >
-                  <MessageCircle size={16} />
-                  <span>Atención Ejecutiva B2B</span>
+                  <MessageCircle size={15} />
+                  <span>Hablar con un asesor</span>
                 </a>
               </div>
             </div>
 
-            {/* Badges de Confianza Industrial */}
-            <div className="lg:col-span-4 grid grid-cols-2 gap-3.5">
-              <div className="p-4 rounded-2xl border border-border/80 bg-card/60 backdrop-blur-sm">
-                <div className="h-8 w-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2">
-                  <Clock size={18} />
-                </div>
-                <div className="text-xl font-black text-foreground">18+ Años</div>
-                <div className="text-[11px] text-muted-foreground font-medium">Experiencia productiva</div>
-              </div>
-              <div className="p-4 rounded-2xl border border-border/80 bg-card/60 backdrop-blur-sm">
-                <div className="h-8 w-8 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-2">
-                  <Truck size={18} />
-                </div>
-                <div className="text-xl font-black text-foreground">Nacional</div>
-                <div className="text-[11px] text-muted-foreground font-medium">Cobertura y montaje</div>
-              </div>
-              <div className="p-4 rounded-2xl border border-border/80 bg-card/60 backdrop-blur-sm">
-                <div className="h-8 w-8 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-2">
-                  <FileCheck size={18} />
-                </div>
-                <div className="text-xl font-black text-foreground">Contrato</div>
-                <div className="text-[11px] text-muted-foreground font-medium">Garantía y facturación</div>
-              </div>
-              <div className="p-4 rounded-2xl border border-border/80 bg-card/60 backdrop-blur-sm">
-                <div className="h-8 w-8 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2">
-                  <HardHat size={18} />
-                </div>
-                <div className="text-xl font-black text-foreground">Pelikano RH</div>
-                <div className="text-[11px] text-muted-foreground font-medium">18mm hidrófugo grado pro</div>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Sectores y Soluciones */}
-        <section className="mb-16">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-1">
-              Líneas Industriales Especializadas
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black font-headline tracking-tight text-foreground">
-              Capacidad Técnica Adaptada a cada Industria
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {B2B_SOLUTIONS.map((sol) => {
-              const Icon = sol.icon;
-              return (
-                <div
-                  key={sol.title}
-                  className="p-6 rounded-3xl border border-border/70 bg-card/40 hover:bg-card/80 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-md"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center transition-transform group-hover:scale-105">
-                        <Icon size={20} />
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-full">
-                        {sol.badge}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">
-                      {sol.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal">
-                      {sol.desc}
-                    </p>
-                  </div>
-                  <div className="mt-5 pt-4 border-t border-border/40 flex items-center text-xs font-bold text-primary gap-1 group-hover:underline">
-                    <span>Ver especificaciones con un asesor</span>
-                    <ArrowRight size={13} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Formulario Corporativo B2B */}
-        <section id="formulario-b2b" className="scroll-mt-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="p-8 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md">
-                <h3 className="text-2xl font-black font-headline tracking-tight text-foreground mb-3">
-                  Inicia tu Cotización Corporativa
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6 font-normal">
-                  Completa los datos de tu empresa y requerimiento. Un director técnico asignará prioridad a tu proyecto para revisión de planos, despiece y visita técnica in situ.
-                </p>
-
-                <div className="space-y-4 text-xs font-medium text-muted-foreground">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                    <span>Sin necesidad de registro previo para la consulta inicial.</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                    <span>Precios profesionales confidenciales sujetos a volumen.</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
-                    <span>Registro directo en el CRM comercial con trazabilidad completa.</span>
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-border/60">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2">
-                    Línea Directa de Contratos
-                  </div>
-                  <div className="flex items-center gap-3 text-sm font-bold text-foreground">
-                    <PhoneCall size={16} className="text-primary" />
-                    <a href={`tel:+${SITE.phone.replace(/\D/g, '')}`} className="hover:underline">
-                      {SITE.phone}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Formulario Interactivo */}
-            <div className="lg:col-span-7">
+            {/* Columna Derecha: Formulario Interactivo */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
               <B2BForm />
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
+

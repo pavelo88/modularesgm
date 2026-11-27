@@ -37,7 +37,11 @@ const b2bSchema = z.object({
 
 type B2BFormValues = z.infer<typeof b2bSchema>;
 
-export function B2BForm() {
+interface B2BFormProps {
+  defaultProjectType?: string;
+}
+
+export function B2BForm({ defaultProjectType = 'Torre Residencial (Cocinas & Clósets)' }: B2BFormProps) {
   const [isPending, startTransition] = useTransition();
   const [isSuccess, setIsSuccess] = useState(false);
   const { toast } = useToast();
@@ -52,7 +56,7 @@ export function B2BForm() {
       city: 'Quito',
       phone: '',
       email: '',
-      projectType: 'Torre Residencial (Cocinas & Clósets)',
+      projectType: defaultProjectType,
       estimatedUnits: '',
       estimatedBudget: '',
       details: '',

@@ -249,4 +249,41 @@
   .active-press:active {
     transform: scale(0.97);
   }
+
+  /* Micro-interacciones fluidas Emil Kowalski & Apple Design */
+  .spring-card {
+    transition: transform 300ms var(--ease-out-emil), box-shadow 300ms var(--ease-out-emil), border-color 300ms var(--ease-out-emil);
+  }
+  .spring-card:hover {
+    transform: translateY(-4px) scale(1.008);
+  }
+  .spring-card:active {
+    transform: translateY(-1px) scale(0.985);
+  }
+
+  .reveal-fade-up {
+    animation: revealUp 650ms var(--ease-out-emil) both;
+  }
 }
+
+@keyframes revealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spring-card,
+  .reveal-fade-up,
+  .active-press {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

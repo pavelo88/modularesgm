@@ -39,13 +39,13 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
                   <span className="block text-lg font-bold tracking-tight text-stone-950 dark:text-white">
                     MODULARES GM
                   </span>
-                  <p className="text-[11px] font-semibold text-stone-600 dark:text-stone-400 -mt-1 leading-tight">
-                    Cocinas y Cuarzos
+                  <p className="text-[10px] font-semibold tracking-wider text-amber-700 dark:text-amber-400 -mt-0.5 leading-tight uppercase">
+                    Diseño · Construcción · Mobiliario
                   </p>
                 </div>
               </Link>
               <p className="text-sm text-stone-800 dark:text-stone-300 leading-relaxed max-w-sm mb-5">
-                Diseño planimétrico, fabricación e instalación de mobiliario modular de autor y mesones de cuarzo en Ecuador.
+                Diseño arquitectónico, fabricación de mobiliario modular a medida y equipamiento corporativo para hogares, constructoras y empresas en Ecuador.
               </p>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-300 dark:border-stone-700 bg-white/80 dark:bg-stone-900/80 text-[11px] font-bold text-stone-900 dark:text-stone-200">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
@@ -153,6 +153,12 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
               {empresaOpen && (
                 <ul className="px-4 pb-4 space-y-2.5 text-sm border-t border-stone-200/70 dark:border-stone-800/70 pt-3">
                   <li>
+                    <Link href="/empresas" className="text-amber-700 dark:text-amber-400 hover:underline font-bold transition-colors inline-flex items-center gap-1 py-0.5">
+                      <span>División Empresas B2B</span>
+                      <ArrowUpRight size={13} />
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/afiliados" className="text-emerald-700 dark:text-emerald-400 hover:underline font-bold transition-colors inline-flex items-center gap-1 py-0.5">
                       <span>Trabaja con nosotros</span>
                       <ArrowUpRight size={13} />
@@ -233,6 +239,12 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
               Empresa
             </p>
             <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/empresas" className="text-amber-700 dark:text-amber-400 hover:underline font-bold transition-colors inline-flex items-center gap-1">
+                  <span>División Empresas B2B</span>
+                  <ArrowUpRight size={13} />
+                </Link>
+              </li>
               <li>
                 <Link href="/afiliados" className="text-emerald-700 dark:text-emerald-400 hover:underline font-bold transition-colors inline-flex items-center gap-1">
                   <span>Trabaja con nosotros</span>

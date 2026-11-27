@@ -84,6 +84,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.85,
     },
+    // Páginas Corporativas B2B Especializadas
+    {
+      url: `${baseUrl}/empresas/constructoras`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/empresas/arquitectos-disenadores`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/empresas/oficinas-corporativas`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/empresas/mobiliario-retail`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/empresas/espacios-de-atencion`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/empresas/mobiliario-institucional`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
     {
       url: `${baseUrl}/privacidad`,
       lastModified: now,
