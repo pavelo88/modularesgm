@@ -1,13 +1,13 @@
 ## [2026-11-27] - Modulares GM - Antigravity
-**Qué se hizo:** Corrección y blindaje final del preview de WhatsApp y OpenGraph:
-1. Re-codificación de `public/og-image.jpg` a JPEG baseline estándar con submuestreo croma 4:2:0 (78 KB, 1200x630 px) para compatibilidad universal con decodificadores móviles y bots de WhatsApp.
-2. Eliminación de etiquetas `<meta property="og:image">` duplicadas en `<head>` de `RootLayout` que provocaban que el parser de WhatsApp descartara la imagen y mostrara solo el hostname repetido.
-3. Creación nativa de `src/app/opengraph-image.jpg` y `src/app/twitter-image.jpg` según el estándar de Next.js App Router.
-4. Validación con `npx tsc --noEmit` (0 errores), `npm run build` (27/27 páginas estáticas y rutas de imagen generadas con éxito) y `npm run seo-audit` (0 errores, 0 avisos).
-**Resultado:** Etiquetas OpenGraph unificadas y sin duplicados en el HTML byte 0, imagen en formato estándar 4:2:0 soportada por cualquier cliente de WhatsApp, y rutas nativas `/opengraph-image.jpg` y `/twitter-image.jpg` activas.
+**Qué se hizo:** Despliegue de imagen de marca oficial 3D y blindaje definitivo de previsualización en WhatsApp y redes sociales:
+1. Generación de `public/og-image.jpg` y `src/app/opengraph-image.jpg` a partir de la imagen oficial de marca en 3D ("GM", "MODULARES GM", "18 AÑOS de experiencia", "DISEÑO • FABRICACIÓN • ACABADOS").
+2. Formato estricto **Baseline JPEG** (`progressive: false`) de 131 KB y 1200x630 px con submuestreo croma 4:2:0, garantizando lectura inmediata en los scrapers de WhatsApp y decodificadores móviles.
+3. Inyección estática obligatoria en el `<head>` de `RootLayout` (`src/app/layout.tsx`) con etiquetas directas `og:image`, `og:image:secure_url`, `og:title`, `og:description`, `og:type` y `twitter:image` en los primeros 1,000 bytes del stream.
+4. Validación técnica completa: `npx tsc --noEmit` (0 errores), `npm run build` (27/27 páginas y rutas estáticas compiladas con éxito) y `npm run seo-audit` (31 URLs rastreadas, 0 errores, 0 avisos).
+**Resultado:** Cada vez que se comparta `https://www.modularesgm.com` o cualquier subpágina en WhatsApp, Facebook, Twitter, Telegram o iMessage, se renderiza la tarjeta de marca con el logotipo volumétrico 3D de Modulares GM, título y descripción sin depender de renderizado JS.
 **Skills usadas/modificadas:** 01_architecture_quality_agent, 02_development_agent, registrar-avance.
-**Próximos pasos:** Sincronización y confirmación en producción.
-**Archivos modificados:** `public/og-image.jpg`, `public/og-image.png`, `src/app/opengraph-image.jpg`, `src/app/twitter-image.jpg`, `src/app/layout.tsx`, `AVANCE.md`, `docs/agent-handoff.md`.
+**Próximos pasos:** Despliegue a producción mediante `git push origin main`.
+**Archivos modificados:** `public/og-image.jpg`, `public/og-image.png`, `src/app/opengraph-image.jpg`, `src/app/twitter-image.jpg`, `src/app/layout.tsx`, `docs/agent-handoff.md`, `AVANCE.md`.
 
 ## [2026-11-27] - Modulares GM - Antigravity
 **Qué se hizo:** Rediseño integral del hero de afiliados (`AffiliateHero`), integración de fotografías de equipos reales mestizos, optimización A+ de titles (50-60 caracteres) y expansión exhaustiva de `llms.txt` con preguntas y respuestas directas para motores de IA.

@@ -105,6 +105,20 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
+        <meta property="og:title" content="Modulares GM | Cocinas, Oficinas y Construcción en Ecuador" />
+        <meta property="og:description" content="Diseño, fabricación e instalación de cocinas modulares, closets, muebles de oficina y mesones de cuarzo en Quito y Ecuador. Cotiza tu proyecto a medida." />
+        <meta property="og:image" content="https://www.modularesgm.com/og-image.jpg" />
+        <meta property="og:image:secure_url" content="https://www.modularesgm.com/og-image.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content="https://www.modularesgm.com" />
+        <meta property="og:site_name" content="Modulares GM" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Modulares GM | Cocinas, Oficinas y Construcción en Ecuador" />
+        <meta name="twitter:description" content="Diseño, fabricación e instalación de cocinas modulares, closets, muebles de oficina y mesones de cuarzo en Quito y Ecuador." />
+        <meta name="twitter:image" content="https://www.modularesgm.com/og-image.jpg" />
         <link 
           rel="preload" 
           as="image" 

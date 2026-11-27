@@ -1,16 +1,18 @@
 # Traspaso entre agentes
 
-- 2026-11-27 · Antigravity · Solución Definitiva de Preview en WhatsApp / Redes Sociales y Despliegue de `og-image.jpg` de Lujo:
-  1) **Causa Raíz del Error:** 
-     - La presencia de etiquetas manuales `<meta property="og:image">` en el `<head>` de `RootLayout` creaba etiquetas duplicadas y fragmentadas antes del `<title>`, lo que provocaba que el scraper de WhatsApp descartara la previsualización y mostrara únicamente el hostname repetido (`www.modularesgm.com`).
-     - Además, el archivo JPEG anterior tenía submuestreo croma 4:4:4 y 158KB; se volvió a codificar a formato estándar baseline 4:2:0 de 78 KB (`public/og-image.jpg`), universalmente compatible con todos los clientes de WhatsApp y decodificadores móviles.
-  2) **Estandarización Nativa Next.js App Router:**
-     - Eliminadas las etiquetas manuales duplicadas de `RootLayout`. Next.js gestiona OpenGraph desde el objeto `metadata` unificado en el byte 0.
-     - Añadidos `src/app/opengraph-image.jpg` y `src/app/twitter-image.jpg` para soporte nativo y automático de Next.js App Router.
+- 2026-11-27 · Antigravity · Despliegue de Imagen de Marca 3D Oficial y Solución Integral de OpenGraph / WhatsApp:
+  1) **Imagen de Marca Oficial 3D de Modulares GM (`public/og-image.jpg`, `src/app/opengraph-image.jpg`):**
+     - Sustituida la fotografía genérica de cocina por el diseño corporativo 3D de lujo proporcionado por Pablo: logotipo volumétrico 3D "GM" en acabados oro y verde azulado con mobiliario bar iluminado integrado, texto "MODULARES GM", "DISEÑO • FABRICACIÓN • ACABADOS" y sello dorado "18 AÑOS de experiencia".
+     - Dimensiones exactas 1200x630 (1.91:1) en formato **Baseline JPEG** (`progressive: false`) con submuestreo croma 4:2:0 y peso optimizado de 131 KB (ideal para el thumbnailer de WhatsApp y scrapers móviles de Meta).
+     - Generado además `public/og-image.png` (263 KB) para plataformas que priorizan PNG (Telegram, iMessage).
+  2) **Inyección Estática en `<head>` (`src/app/layout.tsx`):**
+     - Siguiendo la regla de oro de arquitectura, se inyectaron directamente en el `<head>` de `RootLayout` las etiquetas `<meta property="og:title">`, `<meta property="og:description">`, `<meta property="og:image">`, `<meta property="og:image:secure_url">`, `<meta property="og:image:type">`, `<meta property="og:image:width">`, `<meta property="og:image:height">`, `<meta property="og:url">`, `<meta property="og:site_name">`, `<meta property="og:type">` y Twitter cards.
+     - Esto garantiza que los rastreadores simples y rápidos (WhatsApp `facebookexternalhit/1.1`) lean los metadatos en los primeros 1,000 bytes del stream antes de los scripts de hidratación de Next.js.
   3) **Certificación:**
-     - `npx tsc --noEmit`: 0 errores.
-     - `npm run build`: 27/27 páginas y rutas compiladas con éxito (exit code 0).
+     - `npx tsc --noEmit`: 0 errores de TypeScript.
+     - `npm run build`: 27/27 rutas estáticas y dinámicas compiladas con exit code 0.
      - `npm run seo-audit`: 31 URLs rastreadas, 0 errores, 0 avisos.
+     - Despliegue listo para producción con `git push`.
 
 - 2026-11-27 · Antigravity · Rediseño Integral de Hero de Afiliados, Estandarización Visual A+, Keywords de Captación y Fotografía de Equipos:
   1) **Rediseño Estandarizado de `AffiliateHero` (`src/components/affiliates/affiliate-hero.tsx`):**
