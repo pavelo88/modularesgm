@@ -82,33 +82,10 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
             Comparte tu código o enlace: tu recomendado ahorra <strong>5% de descuento</strong> y tú recibes el <strong>10% directo en tu cuenta bancaria</strong>. Sin inventario, sin trámites y con panel en tiempo real.
           </p>
 
-          {/* Garantías de confianza en píldoras */}
+          {/* Botones de acción: ENCIMA de las garantías de confianza */}
           <div
             className={cn(
-              'mt-4 flex flex-wrap items-center gap-3 text-xs text-amber-300 font-semibold transition-all duration-700 delay-300',
-              mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            )}
-          >
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={13} className="text-amber-400" />
-              <span>Registro 100% gratuito</span>
-            </span>
-            <span className="text-white/40">·</span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={13} className="text-amber-400" />
-              <span>Plan oficial 10-3-2</span>
-            </span>
-            <span className="text-white/40">·</span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={13} className="text-amber-400" />
-              <span>Pagos a bancos de Ecuador</span>
-            </span>
-          </div>
-
-          {/* Botones elevados con espaciado óptimo para evitar contacto con bordes de pantalla */}
-          <div
-            className={cn(
-              'mt-7 sm:mt-8 flex flex-col gap-3.5 sm:flex-row w-full sm:w-auto max-w-md sm:max-w-none transition-all duration-700 delay-400',
+              'mt-6 sm:mt-8 flex flex-col gap-3.5 sm:flex-row w-full sm:w-auto max-w-md sm:max-w-none transition-all duration-700 delay-300',
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             )}
           >
@@ -132,6 +109,29 @@ export function AffiliateHero({ cards }: { cards: HeroCard[] }) {
                 <span className="text-xs font-bold text-white">Ingresar a Mi Panel</span>
               </div>
             </Link>
+          </div>
+
+          {/* Garantías de confianza en píldoras: DEBAJO de los botones */}
+          <div
+            className={cn(
+              'mt-4 sm:mt-5 flex flex-wrap items-center gap-3 text-xs text-amber-300 font-semibold transition-all duration-700 delay-400',
+              mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            )}
+          >
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 size={13} className="text-amber-400" />
+              <span>Registro 100% gratuito</span>
+            </span>
+            <span className="text-white/40">·</span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 size={13} className="text-amber-400" />
+              <span>Plan oficial 10-3-2</span>
+            </span>
+            <span className="text-white/40">·</span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 size={13} className="text-amber-400" />
+              <span>Pagos a bancos de Ecuador</span>
+            </span>
           </div>
         </div>
 

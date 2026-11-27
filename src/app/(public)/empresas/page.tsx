@@ -86,7 +86,7 @@ export default function EmpresasPage() {
         secondaryCtaHref="#sectores-corporativos"
         bgImages={[
           '/images/catalog/extracted_DE_COCINAS/img-004.webp',
-          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600',
+          '/images/catalog/extracted_MUEBLES_OFICINA/img-020.webp',
           '/images/catalog/extracted_CLOSETS_1/img-017.webp',
           '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
           '/images/catalog/extracted_DE_COCINAS/img-006.webp',

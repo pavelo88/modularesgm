@@ -97,7 +97,7 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
     <section className="relative z-10 select-none" aria-label="Servicios destacados de Modulares GM">
       {/* Hero: ocupa la pantalla menos la barra superior (36px) y la franja de stats (~92px) */}
       <div className="relative isolate flex min-h-[520px] sm:min-h-[580px] lg:h-[calc(100svh-36px-92px)] lg:min-h-[640px] lg:max-h-[780px] xl:max-h-[820px] items-center overflow-hidden bg-black pt-20 pb-8 sm:pt-28 sm:pb-10 lg:pt-24 lg:pb-10">
-        <div className="absolute inset-0 lg:left-[40%] -z-20">
+        <div className="absolute inset-0 -z-20">
           {HERO_SLIDES.map((s, i) => (
             <Image
               key={s.id}
@@ -110,67 +110,61 @@ export function HeroSlider({ heroTitle, heroSubtitle, ctaText, stats }: HeroSlid
             />
           ))}
         </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-transparent lg:bg-gradient-to-r lg:from-black lg:via-black/90 lg:to-transparent" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 h-full relative">
-          <div className="lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left lg:pb-28">
-            <p className="mb-3 sm:mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md">
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start text-center sm:text-left">
+            <p className="mb-3 sm:mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md">
               <Sparkles size={13} className="shrink-0 text-amber-400" />
               <span key={slide.id} className="truncate animate-in fade-in duration-700">{slide.badge}</span>
             </p>
 
-            <h1 className="font-headline text-3xl sm:text-5xl xl:text-6xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] text-center sm:text-left">
+            <h1 className="font-headline text-3xl sm:text-5xl xl:text-6xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] text-center sm:text-left">
               {heroTitle || 'Cocinas modulares, cuarzo y muebles a medida en Ecuador'}
             </h1>
 
-            <div key={slide.id} className="mt-3 sm:mt-5 animate-in fade-in slide-in-from-bottom-2 duration-700 flex flex-col items-center sm:items-start text-center sm:text-left min-h-0 lg:min-h-[135px]">
+            <div key={slide.id} className="mt-3 sm:mt-4 animate-in fade-in slide-in-from-bottom-2 duration-700 flex flex-col items-center sm:items-start text-center sm:text-left min-h-0 lg:min-h-[100px]">
               <p className="font-headline text-lg sm:text-2xl font-semibold text-amber-400 text-center sm:text-left">{slide.title}</p>
-              <p className="mt-2 sm:mt-3 max-w-xl text-xs sm:text-base leading-relaxed text-zinc-200 text-center sm:text-left line-clamp-2 sm:line-clamp-none">
+              <p className="mt-2 sm:mt-2.5 max-w-xl text-xs sm:text-base leading-relaxed text-zinc-200 text-center sm:text-left line-clamp-2 sm:line-clamp-none">
                 {(rail.active === 0 && heroSubtitle) ? heroSubtitle : (slide.description || heroSubtitle)}
               </p>
-              <ul className="mt-3 sm:mt-5 flex flex-wrap justify-center sm:justify-start gap-1.5 sm:gap-2">
-                {slide.tags.map((tag, i) => (
-                  <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className={cn(
-                    "animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[10px] sm:text-xs font-semibold text-white backdrop-blur-md",
-                    i > 1 && "hidden sm:inline-flex"
-                  )}>
-                    <CheckCircle2 size={12} className="text-amber-400 shrink-0" /> {tag}
-                  </li>
-                ))}
-              </ul>
             </div>
 
-            {/* En móvil se muestra el botón principal aquí abajo de los tags; el botón secundario de catálogo se omite en móviles porque ya está en la barra inferior */}
-            <div className="mt-5 flex w-full justify-center sm:justify-start lg:hidden">
+            {/* Botones de acción: ENCIMA de las tres barras de características */}
+            <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 w-full">
               <Link
                 href={slide.ctaPrimary.href}
-                className="inline-flex h-12 w-full max-w-[320px] sm:max-w-none sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active:scale-95"
+                className="inline-flex h-13 sm:h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-7 sm:px-8 text-sm sm:text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active:scale-95"
               >
-                {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
+                <span>{ctaText || slide.ctaPrimary.text}</span>
+                <ArrowRight size={18} />
+              </Link>
+              <Link
+                href={slide.ctaSecondary.href}
+                className="hidden sm:inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-7 sm:px-8 text-sm sm:text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+              >
+                <Store size={18} />
+                <span>{slide.ctaSecondary.text}</span>
               </Link>
             </div>
+
+            {/* Tres píldoras de características: DEBAJO de los botones */}
+            <ul className="mt-4 sm:mt-5 flex flex-wrap justify-center sm:justify-start gap-1.5 sm:gap-2">
+              {slide.tags.map((tag, i) => (
+                <li key={tag} style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'backwards' }} className={cn(
+                  "animate-in fade-in slide-in-from-bottom-2 duration-500 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[10px] sm:text-xs font-semibold text-white backdrop-blur-md",
+                  i > 2 && "hidden sm:inline-flex"
+                )}>
+                  <CheckCircle2 size={12} className="text-amber-400 shrink-0" /> {tag}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="hidden flex-col items-end justify-end gap-3 md:flex lg:col-span-6 lg:self-end">
             <HeroCardRail items={RAIL_ITEMS} active={rail.active} onSelect={rail.setActive} />
             <RailControls active={rail.active} total={HERO_SLIDES.length} playing={rail.playing} onToggle={rail.togglePlay} onPrev={rail.prev} onNext={rail.next} />
-          </div>
-
-          {/* Botones de escritorio: POSICIÓN FIJA ABSOLUTA independiente de la longitud del texto */}
-          <div className="hidden lg:flex absolute bottom-6 left-10 z-20 items-center gap-4">
-            <Link
-              href={slide.ctaPrimary.href}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active:scale-95"
-            >
-              {ctaText || slide.ctaPrimary.text} <ArrowRight size={18} />
-            </Link>
-            <Link
-              href={slide.ctaSecondary.href}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
-            >
-              <Store size={18} /> {slide.ctaSecondary.text}
-            </Link>
           </div>
         </div>
       </div>

@@ -54,7 +54,7 @@ export function CorporateHero({
       <div className="relative isolate flex min-h-[520px] sm:min-h-[580px] lg:h-[calc(100svh-36px-92px)] lg:min-h-[640px] lg:max-h-[780px] xl:max-h-[820px] items-center overflow-hidden bg-black pt-20 pb-8 sm:pt-28 sm:pb-12 lg:pt-24 lg:pb-10">
         
         {/* Fotografía de fondo con apertura nítida a la derecha (idéntica a la Home) */}
-        <div className="absolute inset-0 lg:left-[40%] -z-20">
+        <div className="absolute inset-0 -z-20">
           {images.map((img, i) => (
             <Image
               key={img}
@@ -71,21 +71,20 @@ export function CorporateHero({
           ))}
         </div>
 
-        {/* Degradados idénticos a la Home: negro a la izquierda para contraste del texto, 100% transparente a la derecha */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-transparent lg:bg-gradient-to-r lg:from-black lg:via-black/90 lg:to-transparent" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 h-full relative">
-          <div className="lg:col-span-7 flex flex-col items-center sm:items-start text-center sm:text-left lg:pb-28">
+          <div className="lg:col-span-8 flex flex-col items-center sm:items-start text-center sm:text-left">
             
             {/* Badge de Sector */}
-            <p className="mb-3 sm:mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md">
+            <p className="mb-3 sm:mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md">
               <Sparkles size={13} className="shrink-0 text-amber-400" />
               <span>{badge}</span>
             </p>
 
             {/* Titular Principal Arquitectónico */}
-            <h1 className="font-headline text-3xl sm:text-5xl xl:text-6xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)] text-center sm:text-left">
+            <h1 className="font-headline text-3xl sm:text-5xl xl:text-6xl font-bold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] text-center sm:text-left">
               {title}
             </h1>
 
@@ -101,15 +100,34 @@ export function CorporateHero({
               {subtitle}
             </p>
 
-            {/* Píldoras con check dorado arriba de los botones */}
+            {/* Botones de Acción: ENCIMA de las tres barras de características */}
+            <div className="mt-6 sm:mt-7 flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 w-full">
+              <Link
+                href={primaryCtaHref}
+                className="inline-flex h-13 sm:h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-7 sm:px-8 text-sm sm:text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active:scale-95"
+              >
+                <span>{primaryCtaText}</span>
+                <ArrowRight size={18} />
+              </Link>
+
+              <Link
+                href={secondaryCtaHref}
+                className="inline-flex h-13 sm:h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-7 sm:px-8 text-sm sm:text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
+              >
+                <Building2 size={18} />
+                <span>{secondaryCtaText}</span>
+              </Link>
+            </div>
+
+            {/* Tres píldoras de características: DEBAJO de los botones */}
             {tags && tags.length > 0 && (
-              <ul className="mt-3 sm:mt-5 flex flex-wrap justify-center sm:justify-start gap-1.5 sm:gap-2">
+              <ul className="mt-4 sm:mt-5 flex flex-wrap justify-center sm:justify-start gap-1.5 sm:gap-2">
                 {tags.map((tag, i) => (
                   <li
                     key={tag}
                     className={cn(
                       "inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/40 px-2.5 py-1 text-[10px] sm:text-xs font-semibold text-white backdrop-blur-md",
-                      i > 1 && "hidden sm:inline-flex"
+                      i > 2 && "hidden sm:inline-flex"
                     )}
                   >
                     <CheckCircle2 size={12} className="text-amber-400 shrink-0" />
@@ -119,36 +137,6 @@ export function CorporateHero({
               </ul>
             )}
 
-            {/* Botón en móvil: solo el primario para no saturar la pantalla */}
-            <div className="mt-5 flex w-full justify-center sm:justify-start lg:hidden">
-              <Link
-                href={primaryCtaHref}
-                className="inline-flex h-12 w-full max-w-[320px] sm:max-w-none sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active:scale-95"
-              >
-                <span>{primaryCtaText}</span>
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-
-          </div>
-
-          {/* Botones de escritorio: POSICIÓN FIJA ABSOLUTA idéntica a la Home y a Arquitectos */}
-          <div className="hidden lg:flex absolute bottom-6 left-10 z-20 items-center gap-4">
-            <Link
-              href={primaryCtaHref}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-primary-foreground shadow-[0_0_40px_rgba(210,142,27,0.45)] transition hover:brightness-110 active:scale-95"
-            >
-              <span>{primaryCtaText}</span>
-              <ArrowRight size={18} />
-            </Link>
-
-            <Link
-              href={secondaryCtaHref}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95"
-            >
-              <Building2 size={18} />
-              <span>{secondaryCtaText}</span>
-            </Link>
           </div>
         </div>
       </div>
