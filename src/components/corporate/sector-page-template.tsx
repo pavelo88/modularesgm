@@ -53,7 +53,7 @@ export function SectorPageTemplate({ sector }: SectorPageTemplateProps) {
       />
 
       {/* 2. Introducción Editorial Asimétrica con ScrollReveal */}
-      <section className="py-20 lg:py-28 bg-stone-100/60 dark:bg-[#0c1014] border-b border-border/60">
+      <section className="art-corporate-surface py-20 lg:py-28 border-b scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <ScrollReveal direction="left" className="lg:col-span-6 space-y-6">
@@ -102,7 +102,7 @@ export function SectorPageTemplate({ sector }: SectorPageTemplateProps) {
       </section>
 
       {/* 3. Soluciones Especializadas con Cascada */}
-      <section id="soluciones-especializadas" className="py-20 lg:py-24 bg-background scroll-mt-24">
+      <section id="soluciones-especializadas" className="art-section-paper py-20 lg:py-24 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-2">
@@ -117,7 +117,7 @@ export function SectorPageTemplate({ sector }: SectorPageTemplateProps) {
             {sector.solutions.map((sol, i) => (
               <div
                 key={sol.title}
-                className="p-7 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md flex flex-col justify-between group hover:border-amber-500/40 hover:shadow-xl transition-all duration-300 spring-card h-full"
+                className="art-panel-paper p-7 rounded-3xl border flex flex-col justify-between group hover:border-amber-500/40 hover:shadow-xl transition-all duration-300 spring-card h-full"
               >
                 <div>
                   <div className="h-10 w-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold font-mono text-sm flex items-center justify-center mb-4 border border-amber-500/20">
@@ -204,7 +204,7 @@ export function SectorPageTemplate({ sector }: SectorPageTemplateProps) {
       </section>
 
       {/* 6. Preguntas Frecuentes de la Industria */}
-      <section className="py-20 bg-stone-100/50 dark:bg-[#0c1014] border-b border-border/60">
+      <section className="art-corporate-surface py-20 border-b">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-2">

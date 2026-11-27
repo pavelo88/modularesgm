@@ -71,8 +71,7 @@ export function CorporateHero({
           ))}
         </div>
 
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="hero-contrast-overlay absolute inset-0 -z-10" aria-hidden="true" />
 
         <div className="mx-auto grid w-full max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 h-full relative">
           <div className="lg:col-span-8 flex flex-col items-center sm:items-start text-center sm:text-left">

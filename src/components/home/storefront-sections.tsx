@@ -58,7 +58,7 @@ const ARCHITECTURAL_CATEGORIES = [
     title: 'Escritorios & Teletrabajo',
     desc: 'Modelos ergonómicos y estudiantiles en melamina Pelikano con pasacables integrados.',
     href: '/escritorios',
-    imgUrl: '/images/heroes/hero-home-integral.webp',
+    imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-092.webp',
     models: '7 Modelos Estudiantiles',
     tag: 'Escritorios',
   },
@@ -74,7 +74,7 @@ const ARCHITECTURAL_CATEGORIES = [
     title: 'Vanities & Muebles de Baño',
     desc: 'Muebles flotantes resistentes al vapor con lavamanos de sobreponer y mesones de cuarzo.',
     href: '/muebles-bano',
-    imgUrl: '/images/heroes/hero-atencion.webp',
+    imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
     models: '4 Colecciones Spa',
     tag: 'Baños',
   },
@@ -82,7 +82,7 @@ const ARCHITECTURAL_CATEGORIES = [
     title: 'Puertas Pivotantes Monumentales',
     desc: 'Puertas de ingreso de hasta 3 metros de altura con apertura suave y puertas de paso.',
     href: '/puertas',
-    imgUrl: '/images/heroes/hero-arquitectos.webp',
+    imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
     models: '4 Estilos Monumentales',
     tag: 'Puertas',
   },
@@ -90,7 +90,7 @@ const ARCHITECTURAL_CATEGORIES = [
     title: 'Setups & Habitaciones Gamer',
     desc: 'Estaciones con ruteo de cables 100% oculto, soporte multipantalla y perfiles LED RGB.',
     href: '/gamer',
-    imgUrl: '/images/heroes/gallery-home-integral-2.webp',
+    imgUrl: '/images/catalog/extracted_MUEBLES_GAMER_2/img-010.webp',
     models: '3 Proyectos Completos',
     tag: 'Gamer',
   },
@@ -100,7 +100,7 @@ function CategoryCard({ cat }: { cat: (typeof ARCHITECTURAL_CATEGORIES)[0] }) {
   return (
     <Link
       href={cat.href}
-      className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 overflow-hidden bg-card/80 backdrop-blur-md spring-card active-press hover:border-stone-400 dark:hover:border-stone-600 hover:shadow-2xl h-full"
+      className="art-panel-paper catalog-category-card group relative flex flex-col rounded-3xl border border-stone-200 overflow-hidden spring-card active-press hover:border-amber-500/50 hover:shadow-2xl h-full"
     >
       <div className="relative w-full aspect-[4/3] overflow-hidden bg-muted/40">
         <Image
@@ -129,10 +129,10 @@ function CategoryCard({ cat }: { cat: (typeof ARCHITECTURAL_CATEGORIES)[0] }) {
       </div>
 
       <div className="p-5 flex-1 flex flex-col justify-between gap-3">
-        <p className="text-xs text-stone-800 dark:text-stone-200 font-normal leading-relaxed">
+        <p className="text-xs text-stone-700 font-normal leading-relaxed">
           {cat.desc}
         </p>
-        <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
+        <div className="pt-3 border-t border-stone-200 flex items-center justify-between text-xs font-bold text-stone-950">
           <span className="uppercase tracking-wider">Explorar Catálogo</span>
           <ArrowRight size={14} className="transition-transform group-hover:translate-x-1.5 text-primary duration-200" />
         </div>

@@ -90,3 +90,9 @@
 **Skills usadas/modificadas:** reglas-seguridad, computer-use, registrar-avance.
 **Próximos pasos:** Si se desea eliminar el indicador “1 Issue”, resolver por separado el conflicto existente entre `public/favicon.ico` y la ruta de favicon de App Router.
 **Archivos modificados:** C:\dev\proyectos\modularesgm\.next (caché generada eliminada y recreada por Next).
+
+## [2026-11-27] - Modulares GM - Codex
+**Qué se hizo:** Ajusté el contraste artístico en héroes, contacto y páginas corporativas: degradado oscuro localizado a la izquierda, imagen visible a la derecha, bandas petróleo/grafito, tarjetas marfil en modo oscuro y footer oscuro permanente. Corregí imágenes de Escritorios, Baños, Puertas y Gamer con assets locales semánticamente adecuados.
+**Resultado:** Verificado en localhost en claro y oscuro: hero home/corporativo, grilla de líneas especializadas, formulario de contacto y footer. TypeScript y SEO audit pasaron: 31 URLs, 0 errores y 0 avisos. No se publicó a producción.
+**Pendiente:** Sigue separado el conflicto existente entre `public/favicon.ico` y `src/app/favicon.ico`, que provoca el indicador “1 Issue” de Next durante desarrollo.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\src\app\globals.css; C:\dev\proyectos\modularesgm\src\components\corporate\corporate-hero.tsx; C:\dev\proyectos\modularesgm\src\components\corporate\corporate-sectors-grid.tsx; C:\dev\proyectos\modularesgm\src\components\corporate\sector-page-template.tsx; C:\dev\proyectos\modularesgm\src\components\home\hero-slider\hero-slider.tsx; C:\dev\proyectos\modularesgm\src\components\home\storefront-sections.tsx.

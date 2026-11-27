@@ -9,7 +9,7 @@ import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reve
 
 export function CorporateSectorsGrid() {
   return (
-    <section id="sectores-corporativos" className="relative z-10 py-20 lg:py-28 bg-stone-50 dark:bg-[#0E1116] border-y border-stone-200 dark:border-stone-800 scroll-mt-24">
+    <section id="sectores-corporativos" className="art-corporate-band relative z-10 py-20 lg:py-28 border-y scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Encabezado Editorial de Sección con ScrollReveal */}
         <ScrollReveal direction="up" className="text-center max-w-3xl mx-auto mb-16">
@@ -18,11 +18,11 @@ export function CorporateSectorsGrid() {
             <span>Soluciones para cada industria</span>
           </div>
 
-          <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-stone-950 dark:text-white leading-[1.12]">
+          <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12]">
             Grandes ideas. Espacios extraordinarios.
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-stone-700 dark:text-stone-300 leading-relaxed font-normal">
+          <p className="mt-4 text-base sm:text-lg text-white/75 leading-relaxed font-normal">
             Cada empresa tiene necesidades diferentes. Diseñamos y fabricamos soluciones adaptadas a la operación, identidad y objetivos de cada proyecto en todo el Ecuador.
           </p>
         </ScrollReveal>
@@ -33,7 +33,7 @@ export function CorporateSectorsGrid() {
             <Link
               key={sector.slug}
               href={sector.href}
-              className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#14181F] overflow-hidden shadow-sm hover:shadow-2xl spring-card active-press hover:border-amber-500/50 transition-all duration-300 h-full"
+              className="art-corporate-card group relative flex flex-col rounded-3xl border border-stone-200 bg-[hsl(var(--surface-paper))] overflow-hidden shadow-sm hover:shadow-2xl spring-card active-press hover:border-amber-500/50 transition-all duration-300 h-full"
             >
               {/* Fotografía Protagonista de Gran Formato */}
               <div className="relative w-full aspect-[16/11] overflow-hidden bg-stone-900 image-zoom-container">
@@ -70,12 +70,12 @@ export function CorporateSectorsGrid() {
                   <p className="text-xs font-semibold text-primary mb-1.5">
                     {sector.concept}
                   </p>
-                  <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-normal leading-relaxed">
+                  <p className="text-xs sm:text-sm text-stone-700 font-normal leading-relaxed">
                     {sector.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-stone-100 dark:border-stone-800/80 flex items-center justify-between text-xs font-bold text-stone-900 dark:text-stone-100">
+                <div className="pt-4 border-t border-stone-200 flex items-center justify-between text-xs font-bold text-stone-950">
                   <span className="uppercase tracking-wider group-hover:text-amber-500 transition-colors">
                     Explorar división completa
                   </span>
