@@ -26,6 +26,14 @@
     --ring: 36 78% 46%;
     --radius: 0.85rem;
 
+    /* DIRECCIÓN ARTÍSTICA — superficies editoriales y verde petróleo */
+    --surface-deep: 225 24% 5%;
+    --surface-deep-raised: 224 20% 8%;
+    --surface-paper: 40 30% 96%;
+    --surface-paper-foreground: 222 25% 10%;
+    --petrol: 193 43% 27%;
+    --petrol-foreground: 0 0% 100%;
+
     --sidebar-background: 40 20% 97%;
     --sidebar-foreground: 222 25% 10%;
     --sidebar-primary: 36 78% 46%;
@@ -62,6 +70,14 @@
     --border: 222 15% 15%; /* Borde ultra sutil #191D25 */
     --input: 222 15% 15%;
     --ring: 36 84% 52%;
+
+    /* El oscuro conserva bolsillos de papel para jerarquía y lectura. */
+    --surface-deep: 225 24% 5%;
+    --surface-deep-raised: 224 20% 8%;
+    --surface-paper: 40 30% 96%;
+    --surface-paper-foreground: 222 25% 10%;
+    --petrol: 193 43% 31%;
+    --petrol-foreground: 0 0% 100%;
 
     --sidebar-background: 225 24% 4.8%;
     --sidebar-foreground: 210 20% 98%;
@@ -148,6 +164,122 @@
 }
 
 @layer utilities {
+  /* Sistema editorial transversal: no depende del modo del sistema. */
+  .art-section-deep {
+    color: hsl(var(--foreground));
+    background:
+      radial-gradient(circle at 88% 12%, hsl(var(--primary) / 0.12), transparent 30%),
+      linear-gradient(135deg, hsl(var(--surface-deep)) 0%, hsl(var(--surface-deep-raised)) 100%);
+    border-color: hsl(var(--border) / 0.8);
+  }
+
+  .art-section-deep [class~="text-foreground"] {
+    color: #f7f9fc !important;
+  }
+
+  .art-section-deep [class~="text-muted-foreground"] {
+    color: #c8cdd5 !important;
+  }
+
+  .art-section-paper {
+    color: hsl(var(--surface-paper-foreground));
+    background:
+      radial-gradient(circle at 12% 0%, hsl(var(--primary) / 0.09), transparent 28%),
+      hsl(var(--surface-paper));
+    border-color: hsl(38 15% 82% / 0.9);
+  }
+
+  .art-panel-paper {
+    color: hsl(var(--surface-paper-foreground));
+    background: hsl(var(--surface-paper) / 0.98);
+    border-color: hsl(38 15% 82% / 0.95);
+    box-shadow: 0 22px 55px -30px rgb(0 0 0 / 0.42);
+  }
+
+  .art-petrol-band {
+    color: hsl(var(--petrol-foreground));
+    background:
+      radial-gradient(circle at 85% 15%, hsl(var(--primary) / 0.16), transparent 32%),
+      linear-gradient(135deg, hsl(var(--petrol)) 0%, hsl(193 42% 20%) 100%);
+  }
+
+  .art-petrol-band [class~="text-foreground"] {
+    color: #ffffff !important;
+  }
+
+  .art-petrol-band [class~="text-muted-foreground"] {
+    color: rgb(255 255 255 / 0.78) !important;
+  }
+
+  .art-eyebrow {
+    color: hsl(var(--primary));
+    letter-spacing: 0.2em;
+  }
+
+  .site-footer-art {
+    color: hsl(40 30% 96%);
+    background:
+      radial-gradient(circle at 88% 0%, hsl(var(--petrol) / 0.3), transparent 28%),
+      linear-gradient(135deg, #0c0e12 0%, #151a21 100%);
+    border-color: rgb(255 255 255 / 0.12);
+  }
+
+  /* El footer es oscuro en ambos modos; se normalizan sus utilidades heredadas. */
+  #site-footer.site-footer-art [class~="text-stone-950"],
+  #site-footer.site-footer-art [class~="text-stone-900"] {
+    color: #f7f9fc !important;
+  }
+
+  #site-footer.site-footer-art [class~="text-stone-800"],
+  #site-footer.site-footer-art [class~="text-stone-700"],
+  #site-footer.site-footer-art [class~="text-stone-600"],
+  #site-footer.site-footer-art [class~="text-stone-300"],
+  #site-footer.site-footer-art [class~="text-stone-400"] {
+    color: #d4d7dc !important;
+  }
+
+  #site-footer.site-footer-art [class~="bg-white"],
+  #site-footer.site-footer-art [class~="bg-white/80"],
+  #site-footer.site-footer-art [class~="bg-white/70"] {
+    background-color: #171c23 !important;
+  }
+
+  #site-footer.site-footer-art [class~="border-stone-300"],
+  #site-footer.site-footer-art [class~="border-stone-300/80"],
+  #site-footer.site-footer-art [class~="border-stone-200"],
+  #site-footer.site-footer-art [class~="border-stone-200/70"] {
+    border-color: rgb(255 255 255 / 0.15) !important;
+  }
+
+  /* Paneles claros controlados dentro del modo oscuro: el contraste es intencional. */
+  .art-panel-paper h1,
+  .art-panel-paper h2,
+  .art-panel-paper h3,
+  .art-panel-paper h4,
+  .art-panel-paper h5,
+  .art-panel-paper h6,
+  .art-panel-paper p,
+  .art-panel-paper label {
+    color: hsl(var(--surface-paper-foreground));
+  }
+
+  .art-panel-paper input,
+  .art-panel-paper textarea,
+  .art-panel-paper select {
+    color: hsl(var(--surface-paper-foreground));
+    background: #fffdf8;
+    border-color: #d9d2c6;
+  }
+
+  .art-panel-paper [class*="text-amber"],
+  .art-panel-paper [class*="text-primary"] {
+    color: hsl(36 78% 39%);
+  }
+
+  .art-panel-paper [class*="text-emerald"] {
+    color: #087f68;
+  }
+
   .tech-grid-bg-dark {
     background-size: 50px 50px;
     background-image: linear-gradient(to right, hsl(var(--primary)) / 0.05 1px, transparent 1px),

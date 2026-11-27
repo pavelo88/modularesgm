@@ -13,10 +13,18 @@ export const metadata: Metadata = {
     canonical: `${SITE_BASE}/empresas/espacios-de-atencion`,
   },
   openGraph: {
-    title: 'Mobiliario para Espacios de Atención y Recepción | Modulares GM',
+    title: 'Mobiliario para Espacios de Atención | Modulares GM',
     description: sector.description,
     url: `${SITE_BASE}/empresas/espacios-de-atencion`,
-    images: [{ url: `${SITE_BASE}${sector.heroImage}` }],
+    images: [
+      {
+        url: `${SITE_BASE}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: 'Modulares GM Espacios de Atención y Recepción',
+      },
+    ],
   },
 };
 

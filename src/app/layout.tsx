@@ -111,12 +111,11 @@ export default function RootLayout({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:image" content="https://www.modularesgm.com/og-image.jpg" />
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link 
           rel="preload" 
           as="image" 
-          href="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=65&w=900&fm=webp" 
+          type="image/webp"
+          href="/images/heroes/hero-home-cocina.webp" 
           fetchPriority="high" 
         />
       </head>

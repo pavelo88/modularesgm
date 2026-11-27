@@ -48,7 +48,7 @@ export function TrustGuaranteeSection() {
   };
 
   return (
-    <section className="relative z-10 py-16 lg:py-24 bg-stone-100/60 dark:bg-[#0c1014] border-y border-stone-200/80 dark:border-stone-800/80" aria-label="Garantías y Diferenciales Oficiales de Modulares GM">
+    <section className="art-section-paper relative z-10 py-16 lg:py-24 border-y" aria-label="Garantías y Diferenciales Oficiales de Modulares GM">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera de la Sección con ScrollReveal */}
@@ -58,14 +58,14 @@ export function TrustGuaranteeSection() {
             <span>Por qué elegir a Modulares GM</span>
           </div>
 
-          <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950 dark:text-white leading-[1.15]">
+          <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-950 leading-[1.15]">
             {siteContent?.trustTitle || 'Tranquilidad absoluta para tu hogar.'}
             <span className="block text-primary text-2xl sm:text-3xl lg:text-4xl mt-1">
               {siteContent?.trustSubtitle || 'Cero informalidad, cero retrasos y contrato legal.'}
             </span>
           </h2>
 
-          <p className="mt-4 text-sm sm:text-base text-stone-700 dark:text-stone-300 leading-relaxed font-normal">
+          <p className="mt-4 text-sm sm:text-base text-stone-700 leading-relaxed font-normal">
             Sabemos que el mayor miedo al mandar a hacer muebles en Ecuador es que te cobren el anticipo y no te cumplan. 
             En Modulares GM blindamos tu inversión con compromisos reales por escrito.
           </p>
@@ -76,7 +76,7 @@ export function TrustGuaranteeSection() {
           {GUARANTEES.map((g) => (
             <div
               key={g.title}
-              className="group relative flex flex-col justify-between rounded-3xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#12161b] p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 h-full"
+              className="art-panel-paper group relative flex flex-col justify-between rounded-3xl border p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 h-full"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -88,13 +88,13 @@ export function TrustGuaranteeSection() {
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-stone-950 dark:text-white leading-snug">
+                <h3 className="text-base font-bold text-stone-950 leading-snug">
                   {g.title}
                 </h3>
                 <p className="text-xs font-semibold text-primary mt-1">
                   {g.subtitle}
                 </p>
-                <p className="text-xs text-stone-600 dark:text-stone-400 mt-2.5 leading-relaxed">
+                <p className="text-xs text-stone-600 mt-2.5 leading-relaxed">
                   {g.desc}
                 </p>
               </div>
@@ -114,10 +114,10 @@ export function TrustGuaranteeSection() {
               <MessageCircle size={24} />
             </div>
             <div>
-              <h4 className="text-base sm:text-lg font-bold text-stone-950 dark:text-white">
+              <h4 className="text-base sm:text-lg font-bold text-stone-950">
                 ¿Quieres saber cuánto costaría tu cocina o clóset?
               </h4>
-              <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300">
+              <p className="text-xs sm:text-sm text-stone-600">
                 Envíanos tus medidas aproximadas o fotos de tu espacio por WhatsApp y recibe asesoría en menos de 15 minutos.
               </p>
             </div>

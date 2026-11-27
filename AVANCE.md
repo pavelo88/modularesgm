@@ -65,3 +65,10 @@
 **Skills usadas/modificadas:** reglas-seguridad, registrar-avance.
 **Próximos pasos:** Convertir el plan aprobado en tokens de superficie, rediseñar el footer oscuro y auditar cada familia de páginas en ambos modos con verificación visual y SEO.
 **Archivos modificados:** C:\dev\proyectos\modularesgm\AVANCE.md; C:\dev\proyectos\modularesgm\docs\agent-handoff.md.
+
+## [2026-11-27] - Modulares GM - Codex
+**Qué se hizo:** Ejecutada la dirección artística local: footer oscuro permanente, tokens editoriales de obsidiana/papel/bronce, nueva banda verde petróleo y alternancia de superficies en home, contacto, garantías, catálogo y destacados.
+**Resultado:** Revisión visual en `http://localhost:9002` en modo claro y oscuro; el footer conserva fondo oscuro en ambos. TypeScript, build y auditoría SEO pasaron correctamente: 31 URLs, 0 errores y 0 avisos; no se publicó a producción.
+**Skills usadas/modificadas:** reglas-seguridad, modularidad-archivos, computer-use, registrar-avance.
+**Próximos pasos:** Revisar con Pablo si desea extender el tratamiento papel/petróleo a más módulos internos del portal de afiliados o admin; el servidor local queda disponible en el puerto 9002.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\src\app\globals.css; C:\dev\proyectos\modularesgm\src\components\layout\footer.tsx; C:\dev\proyectos\modularesgm\src\components\home\contact\contact-section.tsx; C:\dev\proyectos\modularesgm\src\components\home\contact\contact-info.tsx; C:\dev\proyectos\modularesgm\src\components\home\contact\contact-form.tsx; C:\dev\proyectos\modularesgm\src\components\home\services.tsx; C:\dev\proyectos\modularesgm\src\components\home\trust-guarantee-section.tsx; C:\dev\proyectos\modularesgm\src\components\home\storefront-sections.tsx; C:\dev\proyectos\modularesgm\src\components\catalog\catalog-page.tsx.

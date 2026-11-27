@@ -16,7 +16,15 @@ export const metadata: Metadata = {
     title: 'Fabricación para Arquitectos y Diseñadores | Modulares GM',
     description: sector.description,
     url: `${SITE_BASE}/empresas/arquitectos-disenadores`,
-    images: [{ url: `${SITE_BASE}${sector.heroImage}` }],
+    images: [
+      {
+        url: `${SITE_BASE}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: 'Modulares GM Fabricación para Arquitectos',
+      },
+    ],
   },
 };
 

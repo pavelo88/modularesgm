@@ -16,7 +16,15 @@ export const metadata: Metadata = {
     title: 'Mobiliario para Retail y Supermercados | Modulares GM',
     description: sector.description,
     url: `${SITE_BASE}/empresas/mobiliario-retail`,
-    images: [{ url: `${SITE_BASE}${sector.heroImage}` }],
+    images: [
+      {
+        url: `${SITE_BASE}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: 'Modulares GM Mobiliario para Retail',
+      },
+    ],
   },
 };
 

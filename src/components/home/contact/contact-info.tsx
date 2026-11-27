@@ -51,7 +51,7 @@ export function ContactInfo({ whatsappNumber, address, mapUrl, socialUrls }: Con
   );
 
   return (
-    <div className="flex flex-col h-full justify-start space-y-5 rounded-[2rem] border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#12161A] p-5 sm:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl">
+    <div className="art-panel-paper flex flex-col h-full justify-start space-y-5 rounded-[2rem] border p-5 sm:p-7 lg:p-8 backdrop-blur-xl">
       {/* Cabecera del Atelier */}
       <div>
         <div className="flex items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">

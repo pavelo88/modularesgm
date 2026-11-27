@@ -47,22 +47,19 @@ export function Services({ services }: { services: Service[] }) {
     <section id="soluciones" className="py-20 relative z-10 px-4 md:px-0">
       {/* Contenedor Casi Transparente en Claro */}
       <div className={cn(
-        "max-w-7xl mx-auto rounded-[2.5rem] py-16 transition-all duration-500",
-        "bg-primary/5 backdrop-blur-sm border-none shadow-none",
-        "dark:bg-transparent dark:border-transparent dark:backdrop-blur-none dark:shadow-none"
+        "art-section-paper max-w-7xl mx-auto rounded-[2.5rem] py-16 transition-all duration-500",
+        "border border-stone-200/70 shadow-[0_24px_70px_-42px_rgba(0,0,0,0.45)]"
       )}>
         <div className="text-center mb-12 px-6">
           <h2 className={cn(
             "text-4xl md:text-5xl font-headline font-bold mb-6 transition-all",
-            "text-primary drop-shadow-xl",
-            "dark:text-white"
+            "text-stone-950"
           )}>
-            Diseños a <span className="dark:text-primary">Medida</span>
+            Diseños a <span className="text-primary">Medida</span>
           </h2>
           <p className={cn(
             "font-headline text-lg max-w-2xl mx-auto font-bold transition-all",
-            "text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]",
-            "dark:text-muted-foreground dark:drop-shadow-none"
+            "text-stone-700"
           )}>
             Proyectos personalizados para transformar espacios vacíos en ambientes funcionales y llenos de estilo.
           </p>

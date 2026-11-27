@@ -8,7 +8,7 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
   return (
     <section
       id="contacto"
-      className="relative z-10 px-4 py-20 sm:px-6 lg:px-8 bg-stone-50/50 dark:bg-[#0e1013]"
+      className="art-section-deep relative z-10 px-4 py-20 sm:px-6 lg:px-8"
     >
       {/* Luz ambiental sutil inspirada en estudios arquitectónicos */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,_var(--tw-gradient-stops))] from-secondary/5 via-transparent to-transparent pointer-events-none" />

@@ -13,10 +13,18 @@ export const metadata: Metadata = {
     canonical: `${SITE_BASE}/empresas/oficinas-corporativas`,
   },
   openGraph: {
-    title: 'Mobiliario Corporativo y Oficinas | Modulares GM',
+    title: 'Mobiliario para Oficinas Corporativas | Modulares GM',
     description: sector.description,
     url: `${SITE_BASE}/empresas/oficinas-corporativas`,
-    images: [{ url: `${SITE_BASE}${sector.heroImage}` }],
+    images: [
+      {
+        url: `${SITE_BASE}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: 'Modulares GM Mobiliario de Oficinas',
+      },
+    ],
   },
 };
 

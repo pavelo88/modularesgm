@@ -44,7 +44,7 @@ export function CatalogPage({ title, description, products, backHref = '/catalog
   return (
     <main className="min-h-screen bg-background">
       {/* Header */}
-      <div className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur-sm">
+      <div className="art-section-paper sticky top-0 z-40 border-b backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <div className="flex-1">
             <Link href={backHref} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground mb-2">
@@ -76,7 +76,7 @@ export function CatalogPage({ title, description, products, backHref = '/catalog
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="group rounded-2xl overflow-hidden border bg-card shadow-sm hover:shadow-lg transition-shadow">
+              <div key={product.id} className="group rounded-2xl overflow-hidden border bg-card shadow-sm hover:shadow-lg transition-shadow spring-card">
                 {/* Product Image */}
                 <div className="relative w-full aspect-square bg-muted overflow-hidden">
                   <Image

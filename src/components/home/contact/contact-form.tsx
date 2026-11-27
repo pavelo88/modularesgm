@@ -102,7 +102,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="flex h-full flex-col justify-between rounded-[2rem] border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#12161A] p-5 sm:p-7 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl">
+    <div className="art-panel-paper flex h-full flex-col justify-between rounded-[2rem] border p-5 sm:p-7 lg:p-8 backdrop-blur-xl">
       <div>
         {/* Cabecera del Formulario */}
         <div className="pb-4 border-b border-stone-200 dark:border-stone-800 mb-5">

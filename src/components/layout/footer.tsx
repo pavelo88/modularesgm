@@ -21,7 +21,7 @@ export function Footer({ address, whatsappNumber, socialUrls }: FooterProps) {
   const [empresaOpen, setEmpresaOpen] = useState(false);
 
   return (
-    <footer id="site-footer" className="relative z-10 border-t border-stone-300/80 dark:border-stone-800/80 bg-[#FAF8F5] dark:bg-[#0c0e12] transition-colors duration-300">
+    <footer id="site-footer" className="site-footer-art relative z-10 border-t transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-32 sm:pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-stone-300/70 dark:border-stone-800/80">
           {/* Col 1: Marca y Filosofía (4 cols) */}

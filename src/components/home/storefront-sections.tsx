@@ -19,7 +19,7 @@ const valueProps = [
 
 export function ValueProps() {
   return (
-    <section className="relative z-10 border-y border-border/60 bg-card/40 backdrop-blur-md" aria-label="Por qué elegirnos">
+    <section className="art-petrol-band relative z-10 border-y border-white/15 backdrop-blur-md" aria-label="Por qué elegirnos">
       <div className="max-w-7xl mx-auto px-6 py-10 grid sm:grid-cols-3 gap-8">
         {valueProps.map((v) => (
           <div key={v.title} className="flex items-center gap-4">
@@ -220,7 +220,7 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
 export function FeaturedProducts({ products }: { products: Product[] }) {
   const featured = [...products].filter(p => p.featured || p.category === 'Cocinas' || p.category === 'Closets').slice(0, 8);
   return (
-    <section className="relative z-10 bg-muted/30 py-20" aria-labelledby="destacados-title">
+    <section className="art-section-deep relative z-10 py-20" aria-labelledby="destacados-title">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up" className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/60 text-center sm:text-left items-center sm:items-end">
           <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
