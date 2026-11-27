@@ -1,5 +1,13 @@
 # Traspaso entre agentes
 
+- 2026-11-27 · Antigravity · Implementación de Renders Fotorrealistas de Lujo (Home, Corporativo y 6 Sectores):
+  1) **Procesamiento de Renders Ópticos:** Procesadas y convertidas a WebP de alta definición las 20 imágenes de arquitectura interior fotorrealista (óptica 35mm/50mm, bokeh suave, luz natural e iluminación cálida 2800K-3000K) en `public/images/heroes/`.
+  2) **Despliegue en Home HeroSlider:** Actualizados los 5 slides de la Home con las nuevas imágenes maestras (`hero-home-cocina.webp`, `hero-home-closet.webp`, `hero-arquitectos.webp`, `gallery-home-cocina-2.webp`, `hero-home-integral.webp`).
+  3) **Despliegue en Landing Corporativo `/empresas`:** Configurado el carrusel cinematográfico de fondo con `hero-empresas-main.webp`, `hero-oficinas.webp`, `hero-atencion.webp`, `hero-institucional.webp` y `gallery-empresas-main-2.webp`.
+  4) **Despliegue en los 6 Sectores Corporativos:** Actualizados `heroImage` y `galleryImages` en `src/lib/corporate-sectors-data.ts` con imágenes principales y galerías de soporte de alta gama.
+  5) **Servicios y Medios por Defecto:** Actualizados `defaultServices` y `heroMediaUrl` en `src/lib/data.ts`.
+  6) **Certificación:** `npx tsc --noEmit` 0 errores, `npm run seo-audit` 31 URLs con 0 errores y 0 avisos.
+
 - 2026-11-27 · Antigravity · Reordenamiento Maestro de Heroes (Botones sobre Características), Viñeta Suave Translúcida y Fotos Auténticas de Catálogo:
   1) **Jerarquía Exacta de Heroes (`HeroSlider`, `CorporateHero`, `AffiliateHero`):** Reestructurado el layout interno de todos los héroes colocando los botones de acción principales (`Solicitar Cotización` / `Ver Catálogo`, `Solicitar Propuesta` / `Ver Soluciones`) de forma inmediata **ENCIMA** de las 3 barras/píldoras de características y sellos de confianza.
   2) **Fondo 100% Ancho y Viñeta Cinematográfica Suave:** Eliminado el recorte derecho `lg:left-[40%]` y el degradado a negro carbón plano. La fotografía cubre el 100% del fondo y la viñeta translúcida (`from-black/85 via-black/55 to-black/25`) permite apreciar las texturas, frentes y profundidad de los muebles a la izquierda con drop-shadow nítido en tipografías.

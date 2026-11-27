@@ -25,7 +25,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Cocinas Modulares de Alta Gama',
     subtitle: 'Diseño Fotorrealista 3D y Herrajes Cierre Lento',
     description: 'Transformamos tu cocina en el corazón de tu hogar con diseños ergonómicos, melamina RH resistente a la humedad y acabados en cuarzo.',
-    imageUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    imageUrl: '/images/heroes/hero-home-cocina.webp',
     tags: ['Cierre Lento Blum/Hafele', 'Resistente a Humedad', 'Medición Gratis'],
     ctaPrimary: {
       text: 'Cotizar Mi Cocina',
@@ -43,7 +43,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Clósets & Walk-in Boutique',
     subtitle: 'Iluminación LED Integrada y Espacios Optimizados',
     description: 'Maximizamos cada centímetro de tu dormitorio con vestidores boutique, puertas en vidrio bronce, pantaloneras extraíbles y zapateras retroiluminadas.',
-    imageUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    imageUrl: '/images/heroes/hero-home-closet.webp',
     tags: ['Diseño Personalizado', 'Luces LED Ocultas', 'Accesorios Premium'],
     ctaPrimary: {
       text: 'Cotizar Clóset',
@@ -61,7 +61,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Puertas Pivotantes Monumentales',
     subtitle: 'Pivotes de Alta Carga y Diseños Exclusivos',
     description: 'Puertas de ingreso monumentales de hasta 3 metros de altura con apertura suave, cerraduras digitales y acabados en madera maciza y melamina RH.',
-    imageUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+    imageUrl: '/images/heroes/hero-arquitectos.webp',
     tags: ['Pivotes 360°', 'Madera & Melamina RH', 'Seguridad Digital'],
     ctaPrimary: {
       text: 'Cotizar Puerta',
@@ -79,7 +79,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Topes de Cuarzo, Granito y Mármol',
     subtitle: 'Cortes CNC de Alta Precisión e Instalación Limpia',
     description: 'Mesones de cocina y baño con pulidos perfectos, cascadas ingleteadas y alta resistencia a manchas, rayones y calor extremo.',
-    imageUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+    imageUrl: '/images/heroes/gallery-home-cocina-2.webp',
     tags: ['Silestone & Dekton', 'Antibacteriano', 'Cortes CNC'],
     ctaPrimary: {
       text: 'Solicitar Muestras',
@@ -97,7 +97,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     title: 'Remodelación Integral de Espacios',
     subtitle: 'Gypsum, Pintura, Pisos SPC y Electricidad',
     description: 'Nos encargamos de tu proyecto llave en mano. Desde la demolición hasta los últimos detalles de acabado sin estrés ni sobrecostos.',
-    imageUrl: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=65&w=900&fm=webp',
+    imageUrl: '/images/heroes/hero-home-integral.webp',
     tags: ['Llave en Mano', 'Personal Calificado', 'Entrega a Tiempo'],
     ctaPrimary: {
       text: 'Asesoría Gratuita',

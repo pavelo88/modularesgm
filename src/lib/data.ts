@@ -8,7 +8,7 @@ export const defaultServices: Service[] = [
     id: 1,
     title: 'Cocinas Integrales & Mesones de Cuarzo',
     desc: 'Cocinas modulares a medida con tableros hidrófugos Pelikano RH de 18mm, herrajes Blum con cierre lento e islas con cuarzo Calacatta.',
-    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    imgUrl: '/images/heroes/hero-home-cocina.webp',
     icon: 'Home',
     catalogUrl: '/cocinas'
   },
@@ -16,7 +16,7 @@ export const defaultServices: Service[] = [
     id: 2,
     title: 'Topes de Cuarzo, Granito & Dekton',
     desc: 'Cortes CNC computarizados de alta precisión, cascadas ingleteadas y superficies antibacterianas para mesones de cocina y baño.',
-    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+    imgUrl: '/images/heroes/gallery-home-cocina-2.webp',
     icon: 'Grid',
     catalogUrl: '/catalogo'
   },
@@ -24,7 +24,7 @@ export const defaultServices: Service[] = [
     id: 3,
     title: 'Clósets, Armarios & Walk-in Closets',
     desc: 'Vestidores personalizados con pantaloneras extraíbles, zapateras deslizables, iluminación LED 3000K y puertas en vidrio templado.',
-    imgUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    imgUrl: '/images/heroes/hero-home-closet.webp',
     icon: 'LayoutGrid',
     catalogUrl: '/closets'
   },
@@ -40,7 +40,7 @@ export const defaultServices: Service[] = [
     id: 5,
     title: 'Puertas Pivotantes Monumentales',
     desc: 'Puertas de ingreso principal de hasta 3 metros de altura con pivotes axiales inoxidables de alto tonelaje y cerraduras inteligentes.',
-    imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+    imgUrl: '/images/heroes/hero-arquitectos.webp',
     icon: 'Shield',
     catalogUrl: '/puertas'
   },
@@ -56,7 +56,7 @@ export const defaultServices: Service[] = [
     id: 7,
     title: 'Mobiliario Corporativo & Oficinas',
     desc: 'Counters de recepción monolíticos, estaciones de trabajo modulares para equipos, credenzas ejecutivas y mesas de reuniones.',
-    imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
+    imgUrl: '/images/heroes/hero-oficinas.webp',
     icon: 'Store',
     catalogUrl: '/muebles-oficina'
   },
@@ -106,7 +106,7 @@ export const defaultStats: Stat[] = [
 export const defaultSiteContent: SiteContent = {
   heroTitle: 'Diseño y Construcción de Espacios Únicos',
   heroSubtitle: 'Expertos en muebles modulares, cocinas modernas y topes de cuarzo. Transformamos tus ideas en realidad con calidad y elegancia en todo el Ecuador.',
-  heroMediaUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+  heroMediaUrl: '/images/heroes/hero-home-cocina.webp',
   ctaText: 'Solicitar Cotización',
   formTitle: 'Cotiza tu Proyecto a Medida',
   formSubtitle: 'Déjenos sus datos y un experto se pondrá en contacto para asesorarle en su próximo proyecto.',

@@ -85,11 +85,11 @@ export default function EmpresasPage() {
         secondaryCtaText="Ver Soluciones"
         secondaryCtaHref="#sectores-corporativos"
         bgImages={[
-          '/images/catalog/extracted_DE_COCINAS/img-004.webp',
-          '/images/catalog/extracted_MUEBLES_OFICINA/img-020.webp',
-          '/images/catalog/extracted_CLOSETS_1/img-017.webp',
-          '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
-          '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+          '/images/heroes/hero-empresas-main.webp',
+          '/images/heroes/hero-oficinas.webp',
+          '/images/heroes/hero-atencion.webp',
+          '/images/heroes/hero-institucional.webp',
+          '/images/heroes/gallery-empresas-main-2.webp',
         ]}
       />
 
