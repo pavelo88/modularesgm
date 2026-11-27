@@ -59,10 +59,15 @@ export function ConciergeFAB({ siteContent }: { siteContent: SiteContent }) {
     setIsOpen(false);
   };
 
-  if (isFooterVisible) return null;
-
   return (
-    <div className="hidden md:flex fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex-col items-end">
+    <div
+      className={cn(
+        "hidden md:flex fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex-col items-end transition-all duration-300",
+        isFooterVisible
+          ? "opacity-0 pointer-events-none translate-y-3"
+          : "opacity-100 pointer-events-auto translate-y-0"
+      )}
+    >
       {/* Ventana Flotante del Asistente IA */}
       {isChatWindowOpen && (
         <div className="mb-3 animate-in slide-in-from-bottom-5">
