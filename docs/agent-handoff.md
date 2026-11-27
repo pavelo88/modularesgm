@@ -1,10 +1,16 @@
 # Traspaso entre agentes
 
 - 2026-11-27 · Antigravity · Solución Definitiva de Preview en WhatsApp / Redes Sociales y Despliegue de `og-image.jpg` de Lujo:
-  1) **Causa Raíz del Error:** En producción, `https://www.modularesgm.com/og-image.jpg` daba error 404 porque el commit local anterior nunca se había subido a GitHub/Vercel. Además, la imagen de prueba anterior era un recorte vertical 9:16 (576x1024) inadecuado.
-  2) **Generación de `og-image.jpg` Canónico (1200x630):** Creado en formato JPEG (92% de calidad, 158KB) a partir del render fotorrealista de la cocina insignia con isla de cuarzo Calacatta e iluminación cálida 3000K, en proporción exacta 1.91:1.
-  3) **Blindaje en `<head>` y OpenGraph:** Inyectados tags estáticos en `src/app/layout.tsx` y en las 6 páginas de la división corporativa B2B. Reemplazado el preload obsoleto de Unsplash por `/images/heroes/hero-home-cocina.webp`.
-  4) **Verificación en Producción en Vivo:** `https://www.modularesgm.com/` responde HTTP 200 con todos los metatags `<meta property="og:image">` (Type: image/jpeg, 1200x630) y `https://www.modularesgm.com/og-image.jpg` responde HTTP 200 con 158,481 bytes.
+  1) **Causa Raíz del Error:** 
+     - La presencia de etiquetas manuales `<meta property="og:image">` en el `<head>` de `RootLayout` creaba etiquetas duplicadas y fragmentadas antes del `<title>`, lo que provocaba que el scraper de WhatsApp descartara la previsualización y mostrara únicamente el hostname repetido (`www.modularesgm.com`).
+     - Además, el archivo JPEG anterior tenía submuestreo croma 4:4:4 y 158KB; se volvió a codificar a formato estándar baseline 4:2:0 de 78 KB (`public/og-image.jpg`), universalmente compatible con todos los clientes de WhatsApp y decodificadores móviles.
+  2) **Estandarización Nativa Next.js App Router:**
+     - Eliminadas las etiquetas manuales duplicadas de `RootLayout`. Next.js gestiona OpenGraph desde el objeto `metadata` unificado en el byte 0.
+     - Añadidos `src/app/opengraph-image.jpg` y `src/app/twitter-image.jpg` para soporte nativo y automático de Next.js App Router.
+  3) **Certificación:**
+     - `npx tsc --noEmit`: 0 errores.
+     - `npm run build`: 27/27 páginas y rutas compiladas con éxito (exit code 0).
+     - `npm run seo-audit`: 31 URLs rastreadas, 0 errores, 0 avisos.
 
 - 2026-11-27 · Antigravity · Rediseño Integral de Hero de Afiliados, Estandarización Visual A+, Keywords de Captación y Fotografía de Equipos:
   1) **Rediseño Estandarizado de `AffiliateHero` (`src/components/affiliates/affiliate-hero.tsx`):**
@@ -110,3 +116,4 @@ Bitácora corta compartida. Lee las últimas entradas al empezar; añade la tuya
 
 - 2026-11-27 · Codex · Revisó la dirección visual actual para unificar contrastes entre modos y dejar el footer siempre oscuro; propuso una paleta editorial caliza, obsidiana, bronce y verde petróleo, sin tocar aún componentes de producto · Pendiente: ejecutar el plan visual tras aprobación de Pablo y verificar todas las páginas en claro/oscuro.
 - 2026-11-27 · Codex · Ejecutó en localhost la capa artística de contrastes: footer siempre oscuro, superficies papel en oscuro, bandas obsidiana y nueva tonalidad verde petróleo en home/contacto/catálogo; tsc, build y SEO 31/0/0 correctos · Pendiente: revisión de Pablo; no se publicó a producción.
+- 2026-11-27 · Codex · Reparó el localhost tras una colisión entre `next build` y `next dev` que corrompió manifiestos de `.next`; eliminó solo la caché generada y reinició el dev server, home responde 200 · Pendiente: queda aviso independiente por favicon duplicado en el indicador de Next.

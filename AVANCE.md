@@ -1,9 +1,13 @@
 ## [2026-11-27] - Modulares GM - Antigravity
-**Qué se hizo:** Solución definitiva al preview de enlaces e imágenes en WhatsApp/Meta: generado `og-image.jpg` canónico de 1200x630 (JPEG 92%, 158KB) a partir de la cocina de lujo insignia, inyectados metatags en `<head>` y OpenGraph de sectores corporativos, eliminado preload obsoleto de Unsplash y desplegado en vivo a producción.
-**Resultado:** `https://www.modularesgm.com/og-image.jpg` responde 200 OK con tipo `image/jpeg` y tamaño exacto. Al compartir el enlace en WhatsApp o redes sociales, el scraper obtiene la imagen de previsualización de alta definición.
+**Qué se hizo:** Corrección y blindaje final del preview de WhatsApp y OpenGraph:
+1. Re-codificación de `public/og-image.jpg` a JPEG baseline estándar con submuestreo croma 4:2:0 (78 KB, 1200x630 px) para compatibilidad universal con decodificadores móviles y bots de WhatsApp.
+2. Eliminación de etiquetas `<meta property="og:image">` duplicadas en `<head>` de `RootLayout` que provocaban que el parser de WhatsApp descartara la imagen y mostrara solo el hostname repetido.
+3. Creación nativa de `src/app/opengraph-image.jpg` y `src/app/twitter-image.jpg` según el estándar de Next.js App Router.
+4. Validación con `npx tsc --noEmit` (0 errores), `npm run build` (27/27 páginas estáticas y rutas de imagen generadas con éxito) y `npm run seo-audit` (0 errores, 0 avisos).
+**Resultado:** Etiquetas OpenGraph unificadas y sin duplicados en el HTML byte 0, imagen en formato estándar 4:2:0 soportada por cualquier cliente de WhatsApp, y rutas nativas `/opengraph-image.jpg` y `/twitter-image.jpg` activas.
 **Skills usadas/modificadas:** 01_architecture_quality_agent, 02_development_agent, registrar-avance.
-**Próximos pasos:** Ninguno. Todo desplegado y operativo en producción.
-**Archivos modificados:** `public/og-image.jpg`, `public/og-image.png`, `src/app/layout.tsx`, páginas sectoriales B2B, `docs/agent-handoff.md`.
+**Próximos pasos:** Sincronización y confirmación en producción.
+**Archivos modificados:** `public/og-image.jpg`, `public/og-image.png`, `src/app/opengraph-image.jpg`, `src/app/twitter-image.jpg`, `src/app/layout.tsx`, `AVANCE.md`, `docs/agent-handoff.md`.
 
 ## [2026-11-27] - Modulares GM - Antigravity
 **Qué se hizo:** Rediseño integral del hero de afiliados (`AffiliateHero`), integración de fotografías de equipos reales mestizos, optimización A+ de titles (50-60 caracteres) y expansión exhaustiva de `llms.txt` con preguntas y respuestas directas para motores de IA.
@@ -79,3 +83,10 @@
 **Skills usadas/modificadas:** reglas-seguridad, modularidad-archivos, computer-use, registrar-avance.
 **Próximos pasos:** Revisar con Pablo si desea extender el tratamiento papel/petróleo a más módulos internos del portal de afiliados o admin; el servidor local queda disponible en el puerto 9002.
 **Archivos modificados:** C:\dev\proyectos\modularesgm\src\app\globals.css; C:\dev\proyectos\modularesgm\src\components\layout\footer.tsx; C:\dev\proyectos\modularesgm\src\components\home\contact\contact-section.tsx; C:\dev\proyectos\modularesgm\src\components\home\contact\contact-info.tsx; C:\dev\proyectos\modularesgm\src\components\home\contact\contact-form.tsx; C:\dev\proyectos\modularesgm\src\components\home\services.tsx; C:\dev\proyectos\modularesgm\src\components\home\trust-guarantee-section.tsx; C:\dev\proyectos\modularesgm\src\components\home\storefront-sections.tsx; C:\dev\proyectos\modularesgm\src\components\catalog\catalog-page.tsx.
+
+## [2026-11-27] - Modulares GM - Codex
+**Qué se hizo:** Reparé la vista local después de detectar que `next build` y `next dev` habían tocado `.next` simultáneamente, dejando manifiestos de desarrollo incompletos.
+**Resultado:** Se limpió únicamente la caché generada `.next`, se reinició `npm run dev` y `http://localhost:9002/` volvió a responder 200 y mostrar la home. Queda visible solo el aviso conocido de Next por conflicto de `favicon.ico`, ajeno al rediseño.
+**Skills usadas/modificadas:** reglas-seguridad, computer-use, registrar-avance.
+**Próximos pasos:** Si se desea eliminar el indicador “1 Issue”, resolver por separado el conflicto existente entre `public/favicon.ico` y la ruta de favicon de App Router.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\.next (caché generada eliminada y recreada por Next).
