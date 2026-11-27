@@ -1,4 +1,11 @@
 ## [2026-11-27] - Modulares GM - Antigravity
+**Qué se hizo:** Solución definitiva al preview de enlaces e imágenes en WhatsApp/Meta: generado `og-image.jpg` canónico de 1200x630 (JPEG 92%, 158KB) a partir de la cocina de lujo insignia, inyectados metatags en `<head>` y OpenGraph de sectores corporativos, eliminado preload obsoleto de Unsplash y desplegado en vivo a producción.
+**Resultado:** `https://www.modularesgm.com/og-image.jpg` responde 200 OK con tipo `image/jpeg` y tamaño exacto. Al compartir el enlace en WhatsApp o redes sociales, el scraper obtiene la imagen de previsualización de alta definición.
+**Skills usadas/modificadas:** 01_architecture_quality_agent, 02_development_agent, registrar-avance.
+**Próximos pasos:** Ninguno. Todo desplegado y operativo en producción.
+**Archivos modificados:** `public/og-image.jpg`, `public/og-image.png`, `src/app/layout.tsx`, páginas sectoriales B2B, `docs/agent-handoff.md`.
+
+## [2026-11-27] - Modulares GM - Antigravity
 **Qué se hizo:** Rediseño integral del hero de afiliados (`AffiliateHero`), integración de fotografías de equipos reales mestizos, optimización A+ de titles (50-60 caracteres) y expansión exhaustiva de `llms.txt` con preguntas y respuestas directas para motores de IA.
 **Resultado:** Hero de afiliados alineado al estándar corporativo y de la Home: fondo luminoso con viñeta suave (`to-black/25`), eliminado el riel invasivo de tarjetas, selector sutil de fotos en esquina inferior derecha con rotación de los 5 equipos (emprendedores, arquitectos, inmobiliarias, técnicos, diseñadores). Certificado con 0 errores TypeScript, 0 errores/avisos en auditoría SEO y build de producción exitoso.
 **Skills usadas/modificadas:** modularidad-archivos, registrar-avance, agency-aeo-foundations-architect.

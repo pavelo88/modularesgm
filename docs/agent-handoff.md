@@ -1,5 +1,11 @@
 # Traspaso entre agentes
 
+- 2026-11-27 · Antigravity · Solución Definitiva de Preview en WhatsApp / Redes Sociales y Despliegue de `og-image.jpg` de Lujo:
+  1) **Causa Raíz del Error:** En producción, `https://www.modularesgm.com/og-image.jpg` daba error 404 porque el commit local anterior nunca se había subido a GitHub/Vercel. Además, la imagen de prueba anterior era un recorte vertical 9:16 (576x1024) inadecuado.
+  2) **Generación de `og-image.jpg` Canónico (1200x630):** Creado en formato JPEG (92% de calidad, 158KB) a partir del render fotorrealista de la cocina insignia con isla de cuarzo Calacatta e iluminación cálida 3000K, en proporción exacta 1.91:1.
+  3) **Blindaje en `<head>` y OpenGraph:** Inyectados tags estáticos en `src/app/layout.tsx` y en las 6 páginas de la división corporativa B2B. Reemplazado el preload obsoleto de Unsplash por `/images/heroes/hero-home-cocina.webp`.
+  4) **Verificación en Producción en Vivo:** `https://www.modularesgm.com/` responde HTTP 200 con todos los metatags `<meta property="og:image">` (Type: image/jpeg, 1200x630) y `https://www.modularesgm.com/og-image.jpg` responde HTTP 200 con 158,481 bytes.
+
 - 2026-11-27 · Antigravity · Rediseño Integral de Hero de Afiliados, Estandarización Visual A+, Keywords de Captación y Fotografía de Equipos:
   1) **Rediseño Estandarizado de `AffiliateHero` (`src/components/affiliates/affiliate-hero.tsx`):**
      - Eliminado el degradado opaco que oscurecía por completo el fondo; sustituido por la viñeta cinematográfica calibrada (`from-black/90 via-black/60 to-black/25`) que mantiene iluminación y nitidez en las fotos de equipos.
