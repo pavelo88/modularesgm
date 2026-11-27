@@ -9,10 +9,12 @@ interface SiteContentContextType {
 
 export const SiteContentContext = createContext<SiteContentContextType | undefined>(undefined);
 
+const defaultSiteContent: SiteContentContextType = {
+  siteContent: null,
+  loading: false,
+};
+
 export const useSiteContent = () => {
   const context = useContext(SiteContentContext);
-  if (context === undefined) {
-    throw new Error('useSiteContent must be used within a SiteContentProvider');
-  }
-  return context;
+  return context ?? defaultSiteContent;
 };

@@ -7,6 +7,7 @@ import { ArrowRight, CheckCircle2, ChevronRight, Handshake, Ruler, ShieldCheck, 
 import type { Product, Service } from '@/lib/types';
 import { ProductCard } from '@/components/store/product-card';
 import { CardSlider } from '@/components/shared/card-slider';
+import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reveal';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/cart-provider';
 
@@ -146,7 +147,7 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
 
   return (
     <section id="catalogo" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-28" aria-labelledby="catalogo-title">
-      <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
+      <ScrollReveal direction="up" className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/60">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-3">
             <Sparkles size={13} />
@@ -161,12 +162,12 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
         </div>
         <Link
           href="/catalogo"
-          className="inline-flex items-center gap-2 text-xs font-bold text-stone-900 dark:text-stone-100 hover:text-primary transition-colors px-5 py-2.5 rounded-full border border-stone-300 dark:border-stone-700 bg-card/60 shrink-0 active:scale-95"
+          className="inline-flex items-center gap-2 text-xs font-bold text-stone-900 dark:text-stone-100 hover:text-primary transition-colors px-5 py-2.5 rounded-full border border-stone-300 dark:border-stone-700 bg-card/60 shrink-0 active:scale-95 hover:shadow-md"
         >
           <span>Ver Índice de Catálogos</span>
           <ArrowRight size={14} />
         </Link>
-      </div>
+      </ScrollReveal>
 
       {/* 2 Carruseles Infinitos en celulares / Grilla arquitectónica en escritorio */}
       <div className="space-y-12">
@@ -183,12 +184,12 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
               ))}
             </CardSlider>
           </div>
-          {/* Grilla en escritorio */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6">
+          {/* Grilla en escritorio con cascada */}
+          <ScrollRevealGroup staggerMs={80} className="hidden md:grid md:grid-cols-3 gap-6">
             {row1.map((cat) => (
               <CategoryCard key={cat.href} cat={cat} />
             ))}
-          </div>
+          </ScrollRevealGroup>
         </div>
 
         {/* Fila 2: Líneas Especializadas & Corporativas */}
@@ -204,12 +205,12 @@ export function CatalogSection({ services, products }: { services?: Service[]; p
               ))}
             </CardSlider>
           </div>
-          {/* Grilla en escritorio */}
-          <div className="hidden md:grid md:grid-cols-4 gap-6">
+          {/* Grilla en escritorio con cascada */}
+          <ScrollRevealGroup staggerMs={70} className="hidden md:grid md:grid-cols-4 gap-6">
             {row2.map((cat) => (
               <CategoryCard key={cat.href} cat={cat} />
             ))}
-          </div>
+          </ScrollRevealGroup>
         </div>
       </div>
     </section>
@@ -221,7 +222,7 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
   return (
     <section className="relative z-10 bg-muted/30 py-20" aria-labelledby="destacados-title">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/60 text-center sm:text-left items-center sm:items-end">
+        <ScrollReveal direction="up" className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/60 text-center sm:text-left items-center sm:items-end">
           <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-2">
               <Sparkles size={13} />
@@ -237,13 +238,15 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
           <Button asChild variant="outline" className="rounded-full border-border/60 hover:border-primary text-xs font-semibold px-5">
             <Link href="/store">Explorar Tienda Completa</Link>
           </Button>
-        </div>
+        </ScrollReveal>
 
-        <CardSlider label="Productos destacados" slideClassName="basis-full sm:basis-1/2 lg:basis-1/3" delay={3000}>
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </CardSlider>
+        <ScrollReveal direction="up" delay={100}>
+          <CardSlider label="Productos destacados" slideClassName="basis-full sm:basis-1/2 lg:basis-1/3" delay={3000}>
+            {featured.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </CardSlider>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -262,7 +265,7 @@ export function AffiliateBand() {
 
   return (
     <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-labelledby="afiliados-band-title">
-      <div className="relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 dark:border-stone-800 bg-[#FAF8F5] dark:bg-[#12161A] p-6 sm:p-12 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+      <ScrollReveal direction="zoom" className="relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 dark:border-stone-800 bg-[#FAF8F5] dark:bg-[#12161A] p-6 sm:p-12 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
         {/* Glow sutil */}
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
@@ -420,7 +423,7 @@ export function AffiliateBand() {
             </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

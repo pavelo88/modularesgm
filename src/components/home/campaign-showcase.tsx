@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, CheckCircle2, Clock, MessageCircle, Sparkles } from 'lucide-react';
 import { SITE, whatsappHref, formatPhone } from '@/lib/site';
 import { useSiteContent } from '@/context/site-content-provider';
+import { ScrollReveal } from '@/components/shared/scroll-reveal';
 
 const KITCHEN_SLIDES = [
   { img: '/images/catalog/extracted_DE_COCINAS/img-004.webp', title: 'Cocina Luxury Cappuccino', desc: 'Isla central y mesón de cuarzo blanco' },
@@ -36,7 +37,7 @@ export function CampaignShowcase() {
       aria-label="Campaña Exclusiva Navidad 2026"
       className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
-      <div className="relative overflow-hidden rounded-[2.5rem] border border-secondary/30 bg-[#0C1318] p-6 sm:p-12 lg:p-16 text-white shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
+      <ScrollReveal direction="zoom" className="relative overflow-hidden rounded-[2.5rem] border border-secondary/30 bg-[#0C1318] p-6 sm:p-12 lg:p-16 text-white shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
         {/* Glow ambiental dorado */}
         <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-secondary/15 blur-3xl z-10" />
 
@@ -237,7 +238,7 @@ export function CampaignShowcase() {
             </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

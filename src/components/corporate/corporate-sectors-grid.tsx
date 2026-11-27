@@ -5,13 +5,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { CORPORATE_SECTORS } from '@/lib/corporate-sectors-data';
+import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reveal';
 
 export function CorporateSectorsGrid() {
   return (
     <section id="sectores-corporativos" className="relative z-10 py-20 lg:py-28 bg-stone-50 dark:bg-[#0E1116] border-y border-stone-200 dark:border-stone-800 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Encabezado Editorial de Sección */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Encabezado Editorial de Sección con ScrollReveal */}
+        <ScrollReveal direction="up" className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">
             <Sparkles size={13} className="shrink-0" />
             <span>Soluciones para cada industria</span>
@@ -24,18 +25,18 @@ export function CorporateSectorsGrid() {
           <p className="mt-4 text-base sm:text-lg text-stone-700 dark:text-stone-300 leading-relaxed font-normal">
             Cada empresa tiene necesidades diferentes. Diseñamos y fabricamos soluciones adaptadas a la operación, identidad y objetivos de cada proyecto en todo el Ecuador.
           </p>
-        </div>
+        </ScrollReveal>
 
-        {/* Galería Editorial Asimétrica / Bento Grid de 6 Sectores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Galería Editorial Asimétrica con Cascada Animada */}
+        <ScrollRevealGroup staggerMs={80} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {CORPORATE_SECTORS.map((sector, idx) => (
             <Link
               key={sector.slug}
               href={sector.href}
-              className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#14181F] overflow-hidden shadow-sm hover:shadow-2xl spring-card active-press hover:border-amber-500/50 transition-all duration-300"
+              className="group relative flex flex-col rounded-3xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#14181F] overflow-hidden shadow-sm hover:shadow-2xl spring-card active-press hover:border-amber-500/50 transition-all duration-300 h-full"
             >
               {/* Fotografía Protagonista de Gran Formato */}
-              <div className="relative w-full aspect-[16/11] overflow-hidden bg-stone-900">
+              <div className="relative w-full aspect-[16/11] overflow-hidden bg-stone-900 image-zoom-container">
                 <Image
                   src={sector.heroImage}
                   alt={sector.title}
@@ -83,7 +84,7 @@ export function CorporateSectorsGrid() {
               </div>
             </Link>
           ))}
-        </div>
+        </ScrollRevealGroup>
       </div>
     </section>
   );

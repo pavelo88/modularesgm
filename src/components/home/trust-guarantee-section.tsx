@@ -1,9 +1,10 @@
 'use client';
 
-import { ShieldCheck, Clock, Ruler, Award, CheckCircle2, MessageCircle, MapPin, Sparkles } from 'lucide-react';
+import { ShieldCheck, Clock, Ruler, Award, CheckCircle2, MessageCircle, Sparkles } from 'lucide-react';
 import { SITE, whatsappHref } from '@/lib/site';
 import { track } from '@/lib/analytics';
 import { useSiteContent } from '@/context/site-content-provider';
+import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reveal';
 
 const GUARANTEES = [
   {
@@ -50,8 +51,8 @@ export function TrustGuaranteeSection() {
     <section className="relative z-10 py-16 lg:py-24 bg-stone-100/60 dark:bg-[#0c1014] border-y border-stone-200/80 dark:border-stone-800/80" aria-label="Garantías y Diferenciales Oficiales de Modulares GM">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Cabecera de la Sección */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        {/* Cabecera de la Sección con ScrollReveal */}
+        <ScrollReveal direction="up" className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] font-extrabold uppercase tracking-[0.2em] mb-3 backdrop-blur-md">
             <Sparkles size={13} className="shrink-0" />
             <span>Por qué elegir a Modulares GM</span>
@@ -68,14 +69,14 @@ export function TrustGuaranteeSection() {
             Sabemos que el mayor miedo al mandar a hacer muebles en Ecuador es que te cobren el anticipo y no te cumplan. 
             En Modulares GM blindamos tu inversión con compromisos reales por escrito.
           </p>
-        </div>
+        </ScrollReveal>
 
-        {/* Grilla de 4 Garantías Blindadas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Grilla de 4 Garantías Blindadas con Cascada Animada */}
+        <ScrollRevealGroup staggerMs={80} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {GUARANTEES.map((g) => (
             <div
               key={g.title}
-              className="group relative flex flex-col justify-between rounded-3xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#12161b] p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40"
+              className="group relative flex flex-col justify-between rounded-3xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#12161b] p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 h-full"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -104,10 +105,10 @@ export function TrustGuaranteeSection() {
               </div>
             </div>
           ))}
-        </div>
+        </ScrollRevealGroup>
 
-        {/* Barra de Acción Rápida (CTA de Cierre de Fricción) */}
-        <div className="mt-12 rounded-3xl border border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-950/20 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md">
+        {/* Barra de Acción Rápida (CTA de Cierre de Fricción) con ScrollReveal */}
+        <ScrollReveal direction="zoom" delay={120} className="mt-12 rounded-3xl border border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-950/20 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md">
           <div className="flex items-center gap-4 text-left">
             <div className="h-12 w-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
               <MessageCircle size={24} />
@@ -130,7 +131,7 @@ export function TrustGuaranteeSection() {
             <MessageCircle size={18} />
             <span>Agendar Visita & Render 3D Gratis</span>
           </button>
-        </div>
+        </ScrollReveal>
 
       </div>
     </section>

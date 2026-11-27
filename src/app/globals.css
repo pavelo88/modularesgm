@@ -264,6 +264,65 @@
   .reveal-fade-up {
     animation: revealUp 650ms var(--ease-out-emil) both;
   }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SISTEMA DE ANIMACIÓN EN SCROLL — Acelerado por GPU (Apple / Emil Kowalski)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .reveal-init {
+    opacity: 0;
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-timing-function: var(--ease-out-emil);
+  }
+
+  .reveal-init[data-direction='up'] {
+    transform: translate3d(0, 32px, 0);
+  }
+
+  .reveal-init[data-direction='down'] {
+    transform: translate3d(0, -28px, 0);
+  }
+
+  .reveal-init[data-direction='left'] {
+    transform: translate3d(36px, 0, 0);
+  }
+
+  .reveal-init[data-direction='right'] {
+    transform: translate3d(-36px, 0, 0);
+  }
+
+  .reveal-init[data-direction='zoom'] {
+    transform: scale3d(0.94, 0.94, 1);
+  }
+
+  .reveal-init[data-direction='none'] {
+    transform: none;
+  }
+
+  .reveal-init.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+
+  /* Hover de autor para tarjetas de catálogo y sectores */
+  .hover-luxury-lift {
+    transition: transform 450ms var(--ease-out-emil), box-shadow 450ms var(--ease-out-emil), border-color 300ms ease;
+  }
+  .hover-luxury-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Zoom suave en imágenes */
+  .image-zoom-container {
+    overflow: hidden;
+  }
+  .image-zoom-container img {
+    transition: transform 800ms var(--ease-out-emil);
+  }
+  .image-zoom-container:hover img {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes revealUp {
@@ -280,10 +339,14 @@
 @media (prefers-reduced-motion: reduce) {
   .spring-card,
   .reveal-fade-up,
-  .active-press {
+  .active-press,
+  .reveal-init,
+  .hover-luxury-lift,
+  .image-zoom-container img {
     animation: none !important;
     transition: none !important;
     transform: none !important;
+    opacity: 1 !important;
   }
 }
 

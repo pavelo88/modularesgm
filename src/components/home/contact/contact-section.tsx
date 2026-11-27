@@ -1,6 +1,7 @@
 import { ContactForm } from './contact-form';
 import { ContactInfo } from './contact-info';
 import type { SiteContent } from '@/lib/types';
+import { ScrollReveal } from '@/components/shared/scroll-reveal';
 import { cn } from '@/lib/utils';
 
 export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
@@ -13,8 +14,8 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,_var(--tw-gradient-stops))] from-secondary/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="mx-auto max-w-7xl">
-        {/* Cabecera Editorial de la Sección */}
-        <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
+        {/* Cabecera Editorial de la Sección con ScrollReveal */}
+        <ScrollReveal direction="up" className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-stone-300 bg-white/90 dark:border-stone-800 dark:bg-stone-900/80 backdrop-blur-md mb-3 shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
             <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">
@@ -39,24 +40,24 @@ export function ContactSection({ siteContent }: { siteContent: SiteContent }) {
             </span>
             <span className="h-px w-16 bg-current" />
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Estructura en Proporciones Áureas: Dossier del Atelier (6) + Formulario Esculpido (6) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-          {/* Columna Izquierda: Atelier, Canales Directos, Estándares & Mapa */}
-          <div className="lg:col-span-6 flex flex-col">
+          {/* Columna Izquierda: Atelier, Canales Directos, Estándares & Mapa con ScrollReveal */}
+          <ScrollReveal direction="left" className="lg:col-span-6 flex flex-col">
             <ContactInfo
               whatsappNumber={siteContent.whatsappNumber}
               address={siteContent.address}
               mapUrl={siteContent.mapUrl}
               socialUrls={siteContent.socialUrls}
             />
-          </div>
+          </ScrollReveal>
 
-          {/* Columna Derecha: Formulario Esculpido de Alta Precisión */}
-          <div className="lg:col-span-6 flex flex-col">
+          {/* Columna Derecha: Formulario Esculpido con ScrollReveal */}
+          <ScrollReveal direction="right" delay={80} className="lg:col-span-6 flex flex-col">
             <ContactForm />
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

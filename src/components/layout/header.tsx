@@ -66,8 +66,8 @@ export function Header() {
 
   const isStorePage = pathname.startsWith('/store');
   const isAffiliatesPage = pathname.startsWith('/afiliados');
-  // Solo las páginas con hero oscuro arrancan transparentes; el resto usa cristal desde el inicio.
-  const overHero = (pathname === '/' || pathname === '/afiliados') && !scrolled;
+  const hasDarkHero = pathname === '/' || pathname.startsWith('/afiliados') || pathname.startsWith('/empresas');
+  const overHero = hasDarkHero && !scrolled;
 
   const products = siteContent?.products || [];
   const storeCategories = ['Todos', ...Array.from(new Set(products.map(p => p.category)))];
@@ -140,25 +140,26 @@ export function Header() {
   return (
     <header
       data-over-hero={overHero}
+      data-scrolled={scrolled}
       className={cn(
-        'fixed w-full z-50 h-20 flex items-center transition-[top,background-color,box-shadow,backdrop-filter] duration-300',
-        scrolled ? 'top-0' : 'top-9',
+        'fixed w-full z-50 h-16 md:h-20 flex items-center transition-[top,background-color,box-shadow,backdrop-filter] duration-300',
+        scrolled ? 'top-0' : 'top-0 md:top-9',
         overHero
-          ? 'bg-transparent'
+          ? 'bg-[#0c0e12]/85 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none border-b border-white/10 md:border-b-0'
           : 'bg-white/95 dark:bg-[#0c0e12]/95 backdrop-blur-xl border-b border-stone-200/80 dark:border-stone-800/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.4)]'
       )}>
-      <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
-          <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-10 h-10 object-contain drop-shadow-md" priority />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+          <Image src="/logo.png" alt="Modulares GM Logo" width={42} height={42} className="w-9 h-9 md:w-10 md:h-10 object-contain drop-shadow-md" priority />
           <div className="flex flex-col">
             <span className={cn(
-              "block text-base font-bold tracking-tight transition-colors",
+              "block text-sm md:text-base font-bold tracking-tight transition-colors",
               overHero ? "text-white" : "text-stone-950 dark:text-white"
             )}>
               MODULARES GM
             </span>
             <p className={cn(
-              "text-[9.5px] font-semibold tracking-wider transition-colors -mt-0.5 leading-tight uppercase",
+              "text-[8.5px] md:text-[9.5px] font-semibold tracking-wider transition-colors -mt-0.5 leading-tight uppercase",
               overHero ? "text-amber-300/90" : "text-amber-700 dark:text-amber-400"
             )}>
               Diseño · Construcción · Mobiliario

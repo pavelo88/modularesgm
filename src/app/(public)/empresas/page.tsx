@@ -17,6 +17,7 @@ import {
 import { SITE, whatsappHref } from '@/lib/site';
 import { CorporateHero } from '@/components/corporate/corporate-hero';
 import { CorporateSectorsGrid } from '@/components/corporate/corporate-sectors-grid';
+import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reveal';
 import { B2BForm } from './b2b-form';
 
 export const metadata: Metadata = {
@@ -72,23 +73,30 @@ export default function EmpresasPage() {
         }}
       />
 
-      {/* 1. Nuevo Hero Cinematográfico Empresarial */}
+      {/* 1. Nuevo Hero Cinematográfico Empresarial con Slideshow y Botones Idénticos a la Home */}
       <CorporateHero
         badge="DIVISIÓN CORPORATIVA · PROYECTOS B2B"
         title="Diseñamos espacios."
         highlightedTitle="Fabricamos oportunidades."
         subtitle="Soluciones integrales de mobiliario, diseño y adecuación de espacios para constructoras, arquitectos, empresas e instituciones en Ecuador."
-        primaryCtaText="Solicitar propuesta empresarial"
+        tags={['Plantilla técnica en Quito', 'Cortes CNC computarizados', 'Instalación nacional']}
+        primaryCtaText="Solicitar Propuesta"
         primaryCtaHref="#formulario-b2b"
-        secondaryCtaText="Explorar soluciones corporativas"
+        secondaryCtaText="Ver Soluciones"
         secondaryCtaHref="#sectores-corporativos"
-        bgImage="/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp"
+        bgImages={[
+          '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600',
+          '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+          '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+          '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+        ]}
       />
 
-      {/* Franja Editorial de Capacidades Verificadas */}
+      {/* Franja Editorial de Capacidades Verificadas con Stagger */}
       <section className="border-b border-border/70 bg-stone-100/70 dark:bg-[#0c0e12] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
+          <ScrollRevealGroup staggerMs={70} className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
             <div className="flex items-center gap-3.5 justify-center sm:justify-start">
               <div className="h-10 w-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <Clock size={20} />
@@ -128,19 +136,19 @@ export default function EmpresasPage() {
                 <p className="text-xs text-muted-foreground">Cronogramas por escrito sin retrasos</p>
               </div>
             </div>
-          </div>
+          </ScrollRevealGroup>
         </div>
       </section>
 
       {/* 2. Sección de las Seis Líneas Empresariales con Galería Asimétrica */}
       <CorporateSectorsGrid />
 
-      {/* 3. Formulario de Contacto Empresarial Equilibrado */}
+      {/* 3. Formulario de Contacto Empresarial Equilibrado con ScrollReveal */}
       <section id="formulario-b2b" className="py-20 lg:py-28 bg-background scroll-mt-24 border-t border-border/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
             {/* Columna Izquierda: Presentación Comercial y Proceso */}
-            <div className="lg:col-span-5 flex flex-col justify-between p-8 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md shadow-sm">
+            <ScrollReveal direction="left" className="lg:col-span-5 flex flex-col justify-between p-8 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md shadow-sm">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[10px] font-bold uppercase tracking-widest mb-4">
                   Hablemos de tu próximo proyecto
@@ -198,12 +206,12 @@ export default function EmpresasPage() {
                   <span>Hablar con un asesor</span>
                 </a>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Columna Derecha: Formulario Interactivo */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
+            <ScrollReveal direction="right" delay={100} className="lg:col-span-7 flex flex-col justify-center">
               <B2BForm />
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
