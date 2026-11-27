@@ -1,53 +1,33 @@
 import Link from 'next/link';
 import { ArrowRight, Handshake, LineChart, Network, ShieldCheck, Wallet, Sparkles, DollarSign, Award, Gift } from 'lucide-react';
-import { AffiliateHero, type HeroCard } from '@/components/affiliates/affiliate-hero';
+import { AffiliateHero, type PartnerSlide } from '@/components/affiliates/affiliate-hero';
 import { CommissionSimulator } from '@/components/affiliates/commission-simulator';
 import { CardSlider, MediaCard } from '@/components/shared/card-slider';
 import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reveal';
 import { AFFILIATE_AUDIENCES, AFFILIATE_FAQ, AFFILIATE_STEPS } from '@/lib/affiliate-content';
 import { SITE_BASE } from '@/lib/site';
 
-// Tarjetas del Hero con ganchos comerciales reales de comisiones y fotografías de proyectos verificados
-const heroCards: HeroCard[] = [
+// Fotografías de equipos reales de trabajo y aliados profesionales en Ecuador
+const partnerSlides: PartnerSlide[] = [
   {
-    id: '1',
-    title: 'Cocinas Modulares de Alta Gama',
-    image: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
-    caption: '10% de comisión directa por cada proyecto de cocina integral contratado.',
-    href: '/cocinas',
-    cta: 'Ver proyectos',
+    image: '/images/heroes/afiliados-emprendedores.webp',
+    label: 'Emprendedores y Redes de Venta por WhatsApp',
   },
   {
-    id: '2',
-    title: 'Topes e Islas de Cuarzo y Granito',
-    image: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
-    caption: '10% de comisión directa por suministro e instalación de mesones de cuarzo.',
-    href: '/catalogo',
-    cta: 'Ver acabados',
+    image: '/images/heroes/afiliados-arquitectos.webp',
+    label: 'Arquitectos y Diseñadores de Interiores',
   },
   {
-    id: '3',
-    title: 'Clósets y Walk-in Closets a Medida',
-    image: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
-    caption: '10% de comisión directa en vestidores y clósets Pelikano RH 18mm.',
-    href: '/closets',
-    cta: 'Ver vestidores',
+    image: '/images/heroes/afiliados-inmobiliarios.webp',
+    label: 'Inmobiliarias y Corredores de Bienes Raíces',
   },
   {
-    id: '4',
-    title: 'Mobiliario Corporativo y Recepciones',
-    image: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
-    caption: '10% de comisión directa en equipamiento de oficinas y counters comerciales.',
-    href: '/muebles-oficina',
-    cta: 'Línea corporativa',
+    image: '/images/heroes/afiliados-instaladores.webp',
+    label: 'Técnicos e Instalación en Obra',
   },
   {
-    id: '5',
-    title: 'Vanities y Muebles de Baño RH',
-    image: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
-    caption: '10% de comisión directa por cada mueble de baño hidrófugo instalado.',
-    href: '/muebles-bano',
-    cta: 'Ver vanities',
+    image: '/images/heroes/afiliados-arquitectos-studio.webp',
+    label: 'Estudios de Arquitectura Interior',
   },
 ];
 
@@ -56,37 +36,37 @@ const recommendedProducts = [
   {
     title: 'Cocina Cappuccino Luxury con Isla',
     desc: 'Melamina Pelikano RH 18mm con mesón en cuarzo blanco. 10% de comisión directa sobre el proyecto.',
-    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-004.webp',
+    imgUrl: '/images/heroes/hero-home-cocina.webp',
     href: '/cocinas',
   },
   {
     title: 'Walk-in Closet Boutique con Vidrio Bronce',
     desc: 'Perfilería de aluminio, iluminación cálida 3000K y pantaloneras. 10% de comisión directa.',
-    imgUrl: '/images/catalog/extracted_CLOSETS_1/img-017.webp',
+    imgUrl: '/images/heroes/hero-home-closet.webp',
     href: '/closets',
   },
   {
     title: 'Mesón de Cuarzo Calacatta Gold',
     desc: 'Cascada ingleteada computarizada CNC con zócalo integrado. 10% de comisión directa.',
-    imgUrl: '/images/catalog/extracted_DE_COCINAS/img-006.webp',
+    imgUrl: '/images/heroes/gallery-home-cocina-2.webp',
     href: '/catalogo',
   },
   {
     title: 'Counter de Recepción Corporativo Monolítico',
     desc: 'Diseño curvo con luces indirectas para empresas e instituciones. 10% de comisión directa.',
-    imgUrl: '/images/catalog/extracted_MUEBLES_OFICINA/img-007.webp',
+    imgUrl: '/images/heroes/hero-atencion.webp',
     href: '/muebles-oficina',
   },
   {
     title: 'Vanity Spa Flotante en Roble Gris RH',
     desc: 'Resistente a humedad y vapor con lavamanos de sobreponer. 10% de comisión directa.',
-    imgUrl: '/images/catalog/extracted_DE_MUEBLES_DE_BANOS/img-004.webp',
+    imgUrl: '/images/heroes/gallery-atencion-2.webp',
     href: '/muebles-bano',
   },
   {
     title: 'Puerta Monumental Pivotante de 2.80m',
     desc: 'Pivote axial de acero inoxidable y cerradura digital. 10% de comisión directa.',
-    imgUrl: '/images/catalog/extracted_DE_PUERTAS/img-007.webp',
+    imgUrl: '/images/heroes/hero-arquitectos.webp',
     href: '/puertas',
   },
 ];
@@ -135,7 +115,7 @@ export default function AffiliatesLandingPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div id="top" />
 
-      <AffiliateHero cards={heroCards} />
+      <AffiliateHero slides={partnerSlides} />
 
       {/* Simulador Interactivo de Comisiones Oficial Plan 10-3-2 */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-12 mb-16" aria-label="Simulador de Ganancias">

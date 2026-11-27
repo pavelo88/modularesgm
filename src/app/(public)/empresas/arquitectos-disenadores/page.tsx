@@ -7,7 +7,7 @@ import { SITE_BASE } from '@/lib/site';
 const sector = CORPORATE_SECTORS.find((s) => s.slug === 'arquitectos-disenadores')!;
 
 export const metadata: Metadata = {
-  title: 'Fabricación bajo Planos para Arquitectos y Diseñadores | Modulares GM',
+  title: 'Fabricación para Arquitectos y Diseñadores | Modulares GM',
   description: 'Alianza técnica de manufactura CNC para estudios de arquitectura y diseñadores de interiores en Ecuador. Precisión y acabados de autor.',
   alternates: {
     canonical: `${SITE_BASE}/empresas/arquitectos-disenadores`,

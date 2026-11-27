@@ -7,7 +7,7 @@ import { SITE_BASE } from '@/lib/site';
 const sector = CORPORATE_SECTORS.find((s) => s.slug === 'espacios-de-atencion')!;
 
 export const metadata: Metadata = {
-  title: 'Mobiliario para Espacios de Atención y Recepciones | Modulares GM',
+  title: 'Mobiliario para Espacios de Atención | Modulares GM',
   description: 'Mobiliario arquitectónico para recepciones, salas de espera, counters de atención al cliente y áreas administrativas en centros de servicios.',
   alternates: {
     canonical: `${SITE_BASE}/empresas/espacios-de-atencion`,

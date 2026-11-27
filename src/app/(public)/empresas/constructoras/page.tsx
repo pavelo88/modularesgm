@@ -7,7 +7,7 @@ import { SITE_BASE } from '@/lib/site';
 const sector = CORPORATE_SECTORS.find((s) => s.slug === 'constructoras')!;
 
 export const metadata: Metadata = {
-  title: 'Mobiliario para Edificios y Constructoras en Ecuador | Modulares GM',
+  title: 'Mobiliario para Edificios y Constructoras | Modulares GM',
   description: 'Fabricación y suministro de cocinas, clósets y vanities a gran escala para proyectos inmobiliarios y torres residenciales en Quito y Ecuador.',
   alternates: {
     canonical: `${SITE_BASE}/empresas/constructoras`,

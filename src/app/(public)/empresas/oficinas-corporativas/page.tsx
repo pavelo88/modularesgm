@@ -7,7 +7,7 @@ import { SITE_BASE } from '@/lib/site';
 const sector = CORPORATE_SECTORS.find((s) => s.slug === 'oficinas-corporativas')!;
 
 export const metadata: Metadata = {
-  title: 'Mobiliario para Oficinas y Espacios Corporativos | Modulares GM',
+  title: 'Mobiliario para Oficinas Corporativas | Modulares GM',
   description: 'Estaciones de trabajo modulares, salas de reuniones ejecutivas, counters de recepción y divisiones ergonómicas para empresas en Ecuador.',
   alternates: {
     canonical: `${SITE_BASE}/empresas/oficinas-corporativas`,

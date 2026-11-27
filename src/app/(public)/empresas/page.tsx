@@ -21,13 +21,13 @@ import { ScrollReveal, ScrollRevealGroup } from '@/components/shared/scroll-reve
 import { B2BForm } from './b2b-form';
 
 export const metadata: Metadata = {
-  title: 'Mobiliario para Constructoras y Empresas en Ecuador | Modulares GM',
+  title: 'Muebles para Constructoras y Empresas | Modulares GM',
   description: 'Soluciones integrales de mobiliario modular, diseño y adecuación de espacios para constructoras, arquitectos, empresas e instituciones en Ecuador.',
   alternates: {
     canonical: 'https://www.modularesgm.com/empresas',
   },
   openGraph: {
-    title: 'Mobiliario para Constructoras y Empresas en Ecuador | Modulares GM',
+    title: 'Muebles para Constructoras y Empresas | Modulares GM',
     description: 'Diseñamos espacios. Fabricamos oportunidades. Capacidad de planta en Quito y cobertura nacional para proyectos B2B.',
     url: 'https://www.modularesgm.com/empresas',
     siteName: 'Modulares GM',

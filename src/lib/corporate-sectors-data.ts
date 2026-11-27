@@ -35,9 +35,9 @@ export const CORPORATE_SECTORS: CorporateSector[] = [
     heroImage: '/images/heroes/hero-constructoras.webp',
     galleryImages: [
       '/images/heroes/hero-constructoras.webp',
+      '/images/heroes/afiliados-inmobiliarios.webp',
+      '/images/heroes/afiliados-instaladores.webp',
       '/images/heroes/gallery-constructoras-2.webp',
-      '/images/heroes/hero-home-cocina.webp',
-      '/images/heroes/hero-home-closet.webp',
     ],
     ctaText: 'Solicitar propuesta',
     tags: ['Plantilla técnica en Quito', 'Cortes CNC computarizados', 'Instalación a nivel nacional'],
@@ -73,9 +73,9 @@ export const CORPORATE_SECTORS: CorporateSector[] = [
     heroImage: '/images/heroes/hero-arquitectos.webp',
     galleryImages: [
       '/images/heroes/hero-arquitectos.webp',
+      '/images/heroes/afiliados-arquitectos.webp',
+      '/images/heroes/afiliados-arquitectos-studio.webp',
       '/images/heroes/gallery-arquitectos-2.webp',
-      '/images/heroes/hero-home-integral.webp',
-      '/images/heroes/gallery-home-integral-2.webp',
     ],
     ctaText: 'Solicitar propuesta',
     tags: ['Fabricación bajo plano', 'Tolerancias milimétricas', 'Confidencialidad absoluta'],

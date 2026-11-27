@@ -7,7 +7,7 @@ import { SITE_BASE } from '@/lib/site';
 const sector = CORPORATE_SECTORS.find((s) => s.slug === 'mobiliario-retail')!;
 
 export const metadata: Metadata = {
-  title: 'Mobiliario Comercial, Góndolas y Retail en Ecuador | Modulares GM',
+  title: 'Mobiliario para Retail y Supermercados | Modulares GM',
   description: 'Fabricación de góndolas para supermercados, fruteros modulares, estanterías comerciales y counters de cobro resistentes en Quito y Ecuador.',
   alternates: {
     canonical: `${SITE_BASE}/empresas/mobiliario-retail`,

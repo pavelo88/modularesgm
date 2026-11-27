@@ -1,5 +1,22 @@
 # Traspaso entre agentes
 
+- 2026-11-27 · Antigravity · Rediseño Integral de Hero de Afiliados, Estandarización Visual A+, Keywords de Captación y Fotografía de Equipos:
+  1) **Rediseño Estandarizado de `AffiliateHero` (`src/components/affiliates/affiliate-hero.tsx`):**
+     - Eliminado el degradado opaco que oscurecía por completo el fondo; sustituido por la viñeta cinematográfica calibrada (`from-black/90 via-black/60 to-black/25`) que mantiene iluminación y nitidez en las fotos de equipos.
+     - Removido el riel invasivo de tarjetas de la columna derecha (`HeroCardRail`) que desentonaba con el estándar corporativo. Ahora el fondo respira con total claridad y elegancia.
+     - Añadido indicador flotante ultracompacto en la esquina inferior derecha con selector de puntos interactivo y rotación automática cada 5.5s de los 5 equipos aliados.
+     - Botones CTA principales firmemente anclados sobre las 3 píldoras de confianza oficiales.
+  2) **Fotografías de Equipos de Trabajo Ecuatorianos (`public/images/heroes/`):**
+     - Curaduría e integración de 8 fotografías en WebP de alta resolución que muestran equipos reales (arquitectos, diseñadores de interiores, brokers inmobiliarios, emprendedores y cuadrillas técnicas en obra).
+  3) **Keywords y Silos GEO para Motores de IA (`public/llms.txt` y `public/llms-full.txt`):**
+     - Expandido directorio maestro con todas las categorías residenciales, la División Corporativa B2B (6 sectores), el Programa de Afiliados (Plan 10-3-2) y cápsulas de respuesta directa a preguntas frecuentes de alta intención comercial en Ecuador.
+  4) **Calibración de Titles y Metadatos A+ (50-60 caracteres):**
+     - Calibrados titles y metadatos de `/afiliados`, `/empresas` y los 6 sectores corporativos para cumplir estrictamente el rango de 50-60 caracteres y descripciones de 120-160 caracteres.
+  5) **Certificación:**
+     - `npx tsc --noEmit`: 0 errores.
+     - `npm run seo-audit`: 31 URLs rastreadas, 0 errores, 0 avisos.
+     - `npm run build`: Exit code 0 (25/25 rutas estáticas y dinámicas compiladas).
+
 - 2026-11-27 · Antigravity · Implementación de Renders Fotorrealistas de Lujo (Home, Corporativo y 6 Sectores):
   1) **Procesamiento de Renders Ópticos:** Procesadas y convertidas a WebP de alta definición las 20 imágenes de arquitectura interior fotorrealista (óptica 35mm/50mm, bokeh suave, luz natural e iluminación cálida 2800K-3000K) en `public/images/heroes/`.
   2) **Despliegue en Home HeroSlider:** Actualizados los 5 slides de la Home con las nuevas imágenes maestras (`hero-home-cocina.webp`, `hero-home-closet.webp`, `hero-arquitectos.webp`, `gallery-home-cocina-2.webp`, `hero-home-integral.webp`).
@@ -84,3 +101,5 @@ Bitácora corta compartida. Lee las últimas entradas al empezar; añade la tuya
   engrosar `/muebles-oficina` y `/muebles-bano`.
 - 2026-11-19 · Codex · Unificado la configuración local en un único `.env` y eliminada `.env.example`; GA4 quedó confirmado y Ads/Meta quedaron explícitamente pendientes · Pendiente: obtener el `AW-...` real desde Google Ads y el ID del Meta Pixel, sin inventar valores.
 - 2026-11-26 · Codex · Auditado SEO/GEO y reforzado el posicionamiento local: metadatos de intención, cobertura geográfica visible, JSON-LD con servicios/áreas y llms.txt más verificable; SEO 0/0, tsc y build 25/25 correctos · Pendiente: validar en Search Console/Business Profile y no publicar pauta hasta confirmar conversiones, presupuesto y términos de búsqueda.
+
+- 2026-11-27 · Codex · Revisó la dirección visual actual para unificar contrastes entre modos y dejar el footer siempre oscuro; propuso una paleta editorial caliza, obsidiana, bronce y verde petróleo, sin tocar aún componentes de producto · Pendiente: ejecutar el plan visual tras aprobación de Pablo y verificar todas las páginas en claro/oscuro.

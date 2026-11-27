@@ -7,7 +7,7 @@ import { SITE_BASE } from '@/lib/site';
 const sector = CORPORATE_SECTORS.find((s) => s.slug === 'mobiliario-institucional')!;
 
 export const metadata: Metadata = {
-  title: 'Mobiliario Institucional y Educativo en Ecuador | Modulares GM',
+  title: 'Mobiliario Institucional y Educativo | Modulares GM',
   description: 'Fabricación de mobiliario para colegios, universidades, bibliotecas, lockers reforzados y áreas docentes en Quito y todo el Ecuador.',
   alternates: {
     canonical: `${SITE_BASE}/empresas/mobiliario-institucional`,

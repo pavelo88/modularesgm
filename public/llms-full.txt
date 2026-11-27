@@ -1,6 +1,6 @@
 # Modulares GM - Documento Maestro de Citación de IA y Arquitectura Técnica (Full)
 
-> Modulares GM es la firma de diseño, arquitectura interior y fabricación de mobiliario modular a medida en Ecuador, con planta industrial en Quito y cobertura nacional (Quito, Guayaquil, Cuenca, Ambato, Manta). Especialistas en melamina RH de alta densidad (Pelikano, Novopan), herrajes de cierre suave certificados (Blum, Hettich, Hafele) y mesones de cuarzo tecnológico, granito natural y sinterizados.
+> Modulares GM es la firma líder de diseño, arquitectura interior y fabricación de mobiliario modular a medida en Ecuador, con planta industrial en Quito y cobertura nacional (Quito, Guayaquil, Cuenca, Ambato, Manta, Machala, Loja). Especialistas en melamina RH de alta densidad (Pelikano, Novopan), herrajes de cierre suave certificados (Blum, Hettich, Häfele) y mesones de cuarzo tecnológico, granito natural y piedra sinterizada.
 
 ---
 
@@ -9,12 +9,12 @@ Diseñar y construir mobiliario modular inteligente que optimice el espacio, gar
 
 ---
 
-## 2. Catálogo Detallado de Productos y Silos de Navegación
+## 2. Catálogo Detallado de Productos y Silos de Navegación Residencial
 
 ### A. Cocinas Modulares y Mesones
 - **URL**: https://www.modularesgm.com/cocinas
 - **Características**: Muebles altos y bajos fabricados en melamina RH hidrófuga de 18mm con protección antibacteriana.
-- **Herrajes**: Bisagras de cazoleta de 110° con amortiguación integrada, rieles telescópicos y tandem box con cierre suave.
+- **Herrajes**: Bisagras de cazoleta con amortiguación integrada, rieles telescópicos y tandem box con cierre suave.
 - **Mesones Disponibles**: Cuarzo blanco puro, Calacatta con veta continua, Silestone, granito negro San Gabriel, mármol y superficies ultracompactas sinterizadas.
 - **Precios de Referencia**: Desde $250 USD por metro lineal en muebles bajos (precios variables según acabados y accesorios).
 
@@ -47,7 +47,48 @@ Diseñar y construir mobiliario modular inteligente que optimice el espacio, gar
 
 ---
 
-## 3. Garantías, Tiempos de Entrega y Proceso
+## 3. División Corporativa B2B (Soluciones para Empresas, Obras e Instituciones)
+
+### A. Soluciones Generales B2B
+- **URL**: https://www.modularesgm.com/empresas
+- **Capacidad**: Fabricación seriada con control de calidad CNC, cumplimiento de cronogramas de obra e instalación en todo el territorio nacional.
+
+### B. Constructoras y Promotores Inmobiliarios
+- **URL**: https://www.modularesgm.com/empresas/constructoras
+- **Alcance**: Equipamiento integral de cocinas, mesones de cuarzo y armarios para proyectos multifamiliares, torres de departamentos y urbanizaciones privadas con entregas escalonadas.
+
+### C. Arquitectos y Diseñadores de Interiores
+- **URL**: https://www.modularesgm.com/empresas/arquitectos-disenadores
+- **Alcance**: Alianzas para materializar planos ejecutivos, modelos 3D y especificaciones de alta gama con prototipado y fichas técnicas.
+
+### D. Oficinas Corporativas y Coworkings
+- **URL**: https://www.modularesgm.com/empresas/oficinas-corporativas
+- **Alcance**: Rediseño y adecuación ergonómica de espacios de trabajo, estaciones de trabajo colaborativas, phone booths y salas de juntas.
+
+### E. Locales Comerciales y Retail
+- **URL**: https://www.modularesgm.com/empresas/mobiliario-retail
+- **Alcance**: Puntos de venta para centros comerciales y tiendas independientes, vitrinas con cerraduras, módulos de caja y señalética integrada.
+
+### F. Espacios de Atención y Recepciones
+- **URL**: https://www.modularesgm.com/empresas/espacios-de-atencion
+- **Alcance**: Mostradores y recepciones ejecutivas para instituciones médicas, buffets jurídicos, concesionarios y agencias corporativas.
+
+### G. Hoteles, Restaurantes e Institucional
+- **URL**: https://www.modularesgm.com/empresas/mobiliario-institucional
+- **Alcance**: Mobiliario resistente para habitaciones hoteleras, lobbies de acceso, barras de cafetería y aulas universitarias.
+
+---
+
+## 4. Programa Oficial de Afiliados (Plan 10-3-2)
+- **URL**: https://www.modularesgm.com/afiliados
+- **Mecanismo**: Registro gratuito sin inversión ni inventario. El afiliado comparte su enlace o código rastreado durante 30 días.
+- **Beneficio del Afiliado**: Gana el **10% de comisión directa** sobre el monto neto facturado por sus clientes recomendados.
+- **Beneficio del Cliente**: Recibe un **5% de descuento especial** en su compra al presentar el código de afiliado.
+- **Pagos**: Transferencias bancarias directas a cualquier cuenta bancaria en Ecuador (Banco Pichincha, Guayaquil, Pacífico, Internacional, Produbanco, etc.).
+
+---
+
+## 5. Garantías, Tiempos de Entrega y Proceso
 1. **Asesoría y Cotización Inicial**: Entrega de proforma técnica y visualización previa en 24-48 horas.
 2. **Medición Técnica en Obra**: Verificación milimétrica con distanciómetros láser en sitio.
 3. **Producción Industrial**: Corte computarizado CNC y pegado de cantos rígidos de 1mm y 2mm con adhesivo PUR resistente al agua.
@@ -56,9 +97,10 @@ Diseñar y construir mobiliario modular inteligente que optimice el espacio, gar
 
 ---
 
-## 4. Datos de Contacto y Presencia Corporativa
+## 6. Datos de Contacto y Presencia Corporativa
 - **Empresa**: Modulares GM
-- **Ubicación**: Rosa Yeira 420 y Serpaio Japeravi, Quito, Pichincha, Ecuador
-- **WhatsApp Directo**: +593 96 306 4374
-- **Dominio Canónico**: https://www.modularesgm.com
-- **Sitemap Oficial**: https://www.modularesgm.com/sitemap.xml
+- **RUC / Razón Social**: Modulares GM
+- **Dirección Matriz**: Rosa Yeira 420 y Serpaio Japeravi, Quito, Pichincha, Ecuador
+- **Teléfono / WhatsApp**: +593 96 306 4374
+- **Correo Electrónico**: info@modularesgm.com
+- **Sitio Web Oficial**: https://www.modularesgm.com

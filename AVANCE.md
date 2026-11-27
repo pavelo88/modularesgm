@@ -1,3 +1,10 @@
+## [2026-11-27] - Modulares GM - Antigravity
+**Qué se hizo:** Rediseño integral del hero de afiliados (`AffiliateHero`), integración de fotografías de equipos reales mestizos, optimización A+ de titles (50-60 caracteres) y expansión exhaustiva de `llms.txt` con preguntas y respuestas directas para motores de IA.
+**Resultado:** Hero de afiliados alineado al estándar corporativo y de la Home: fondo luminoso con viñeta suave (`to-black/25`), eliminado el riel invasivo de tarjetas, selector sutil de fotos en esquina inferior derecha con rotación de los 5 equipos (emprendedores, arquitectos, inmobiliarias, técnicos, diseñadores). Certificado con 0 errores TypeScript, 0 errores/avisos en auditoría SEO y build de producción exitoso.
+**Skills usadas/modificadas:** modularidad-archivos, registrar-avance, agency-aeo-foundations-architect.
+**Próximos pasos:** Despliegue en producción mediante git push a `main`.
+**Archivos modificados:** `src/components/affiliates/affiliate-hero.tsx`, `src/app/(public)/afiliados/page.tsx`, `src/app/(public)/afiliados/layout.tsx`, `src/app/(public)/empresas/page.tsx`, páginas sectoriales B2B, `public/llms.txt`, `public/llms-full.txt`, `docs/agent-handoff.md`.
+
 ## [2026-11-18] - Modulares GM - Codex
 **Qué se hizo:** Rediseño de la experiencia móvil del hero y la barra inferior.
 **Resultado:** WhatsApp ahora destaca en verde, los stats quedan debajo del primer viewport, el H1 sube y el texto/CTA baja; se aclaró el centro del overlay.
@@ -51,3 +58,10 @@
 **Skills usadas/modificadas:** reglas-seguridad, modularidad-archivos, registrar-avance.
 **Próximos pasos:** Verificar en Search Console y Google Business Profile las áreas atendidas, reseñas y datos reales antes de invertir; revisar términos de búsqueda semanalmente.
 **Archivos modificados:** C:\dev\proyectos\modularesgm\src\app\layout.tsx; C:\dev\proyectos\modularesgm\src\components\home\home-seo-content.tsx; C:\dev\proyectos\modularesgm\src\components\shared\seo-structured-data.tsx; C:\dev\proyectos\modularesgm\public\llms.txt.
+
+## [2026-11-27] - Modulares GM - Codex
+**Qué se hizo:** Preparé una dirección artística para unificar contrastes en modo claro/oscuro y mantener el footer permanentemente oscuro, revisando los tokens globales, el layout público, el footer y las rutas públicas.
+**Resultado:** Detecté una base cromática ya existente de caliza/obsidiana/bronce, pero fragmentada por colores directos; propuse sumar verde petróleo como acento secundario controlado para B2B e información, sin tocar todavía el código visual.
+**Skills usadas/modificadas:** reglas-seguridad, registrar-avance.
+**Próximos pasos:** Convertir el plan aprobado en tokens de superficie, rediseñar el footer oscuro y auditar cada familia de páginas en ambos modos con verificación visual y SEO.
+**Archivos modificados:** C:\dev\proyectos\modularesgm\AVANCE.md; C:\dev\proyectos\modularesgm\docs\agent-handoff.md.
