@@ -60,9 +60,11 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1200',
+        url: 'https://www.modularesgm.com/og-image.jpg',
+        secureUrl: 'https://www.modularesgm.com/og-image.jpg',
         width: 1200,
         height: 630,
+        type: 'image/jpeg',
         alt: 'Modulares GM Cocinas y Cuarzos Ecuador',
       },
     ],
@@ -71,7 +73,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Modulares GM | Cocinas, Oficinas y Construcción en Ecuador',
     description: 'Diseño, fabricación e instalación de cocinas modulares, closets, muebles de oficina y mesones de cuarzo en Quito y Ecuador.',
-    images: ['https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1200'],
+    images: ['https://www.modularesgm.com/og-image.jpg'],
   },
   authors: [{ name: 'Modulares GM' }],
   creator: 'Modulares GM',
@@ -103,6 +105,12 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
+        <meta property="og:image" content="https://www.modularesgm.com/og-image.jpg" />
+        <meta property="og:image:secure_url" content="https://www.modularesgm.com/og-image.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:image" content="https://www.modularesgm.com/og-image.jpg" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link 
